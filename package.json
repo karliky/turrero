@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "puppeteer": "^19.4.0"
+    "nodejs-file-downloader": "^4.10.3",
+    "puppeteer": "^19.4.0",
+    "tall": "^8.0.0"
   }
 }

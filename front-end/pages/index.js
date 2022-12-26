@@ -1,6 +1,8 @@
 import TweetCollection from "../../tweets.json";
 
 export default function Home() {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
   return (<div>
     <div className="head">
       <div className="headerobjectswrapper">
@@ -18,7 +20,7 @@ export default function Home() {
           <div className="head">
             <span className="headline hl3">{tweets[0].tweet.split(' ').slice(0, 7).join(' ')}</span>
             <p>
-              <span className="headline hl4">8:30 AM · Mar 12, 2022</span>
+              <span className="headline hl4">{new Date(tweets[0].time).toLocaleDateString("en-US", options)}</span>
             </p>
           </div>
           <div>

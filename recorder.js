@@ -1,5 +1,4 @@
 const { writeFileSync } = require('fs');
-const { url } = require('inspector');
 
 (async () => {
     const puppeteer = require('puppeteer');
@@ -59,8 +58,12 @@ const { url } = require('inspector');
                 );
                 const currentTweetId = page.url().split("/").slice(-1).pop();
                 const metadata = await extractMetadata(page);
-                console.log("tweetId", tweetId, { tweet, id: currentTweetId, metadata });
-                tweets.push({ tweet, id: currentTweetId, metadata });
+                const time = await page.evaluate(() => {
+                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('time').dateTime;
+                    return el;
+                });
+                console.log("tweetId", tweetId, { tweet, id: currentTweetId, metadata, time });
+                tweets.push({ tweet, id: currentTweetId, metadata, time });
                 const lastTweetFound = await page.evaluate(() => {
                     const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling.children[0].querySelector('div[data-testid]').querySelector("a").href;
                     return el;
