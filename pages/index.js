@@ -1,4 +1,4 @@
-import TweetCollection from "../../tweets.json";
+import TweetCollection from "../tweets.json";
 
 export default function Home() {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };

@@ -87,7 +87,7 @@ const { writeFileSync } = require('fs');
 
     await getAllTweets();
 
-    writeFileSync("./tweets.json", JSON.stringify(tweetLibrary));
+    writeFileSync("../tweets.json", JSON.stringify(tweetLibrary));
     console.log("Bye!")
     await page.close();
     process.exit(0);

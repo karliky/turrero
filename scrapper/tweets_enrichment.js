@@ -1,5 +1,5 @@
 // NODE_TLS_REJECT_UNAUTHORIZED=0
-const tweetsLibrary = require("./tweets.json");
+const tweetsLibrary = require("../tweets.json");
 const fs = require("fs");
 const Downloader = require("nodejs-file-downloader");
 const { tall } = require('tall');
@@ -29,5 +29,5 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             }
         }
     }
-    fs.writeFileSync("./tweets_enriched.json", JSON.stringify(tweetsLibrary));
+    fs.writeFileSync("../tweets_enriched.json", JSON.stringify(tweetsLibrary));
 })()
