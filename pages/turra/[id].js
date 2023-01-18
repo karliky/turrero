@@ -39,7 +39,7 @@ const Post = ({ tweetId, tweets, summary }) => {
     <div className="wrapper">
       <div className='header'>
         <a href="/"><img src="/back.svg" alt="Volver atrás" /></a>
-        <h1>{getTitle(summary.summary)}</h1>
+        <h1>{getTitle(summary.summary || "")}</h1>
         <h2>{`Publicado el ${new Date(tweets[0].time).toLocaleDateString("es-ES")} / ${new Date(tweets[0].time).toLocaleTimeString("es-ES")}`} <a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a></h2>
       </div>
       <div className='flex-container'>
