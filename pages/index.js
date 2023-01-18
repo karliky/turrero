@@ -107,7 +107,7 @@ export default function Turrero() {
     <div className="wrapper">
       <div className="header">
         <h1>El <span className="brand">Turrero Post</span> es la coleción curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h1>
-        <h2>Hay un total de 132 turras, la última actualización fue el {`${new Date().toLocaleDateString("en-US")}`}</h2>
+        <h2>Hay un total de {Tweets.length} turras, la última actualización fue el {`${new Date().toLocaleDateString("es-ES")}`}.</h2>
       </div>
       <div className="columns">
         <div className="column">
@@ -368,6 +368,10 @@ export default function Turrero() {
         }
         /* One-column layout */
         @media (max-width: 770px) {
+          .columns .column .links {
+            height: auto;
+            overflow: hidden;
+          }
           .columns .column {
                 width: 100%;
             }
