@@ -126,10 +126,10 @@ export default function Turrero() {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                 return <div className="link" key={tweet.id + "id-top"}>
                   <div>
-                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
-                    <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
+                    <a href={"/turra/" + tweet.id}>{tweet.summary}</a>
                   </div>
                 </div>
               }
@@ -148,10 +148,10 @@ export default function Turrero() {
                   const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                   return <div className="link" key={tweet.id + "-" + key + "id"}>
                     <div>
-                      <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                      <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                     </div>
                     <div>
-                      <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
+                      <a href={"/turra/" + tweet.id}>{tweet.summary}</a>
                     </div>
                   </div>
                 }
@@ -170,10 +170,10 @@ export default function Turrero() {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                 return <div className="link" key={tweet.id + "most-read"}>
                   <div>
-                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
-                    <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
+                    <a href={"/turra/" + tweet.id}>{tweet.summary}</a>
                   </div>
                 </div>
               }
@@ -190,8 +190,6 @@ export default function Turrero() {
     <style jsx global>
       {`
         @charset "utf-8";
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
-
         /* http://meyerweb.com/eric/tools/css/reset/ 
         v2.0 | 20110126
         License: none (public domain)
