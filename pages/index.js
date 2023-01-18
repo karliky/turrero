@@ -5,17 +5,8 @@ import TweetsSummary from "../tweets_summary.json";
 
 export default function Turrero() {
   // TODO: Añadir bloques de wikipedia y libros. Ordenar bloques for fecha
-  const getCategories = () => {
-    return TweetsMap.reduce((dic, tweets) => {
-      const categories = tweets.categories.split(",");
-      categories.forEach(category => {
-        if (!dic[category]) dic[category] = [];
-      });
-      return dic;
-    }, {})
-  }
 
-  const order = {
+  const blockOrder = {
     "resolucion-de-problemas-complejos": [],
     "sistemas-complejos": [],
     "estrategia": [],
@@ -36,9 +27,6 @@ export default function Turrero() {
     "others": [],
   };
 
-  const categories = getCategories();
-  console.log("getCategories", categories);
-
   function timeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
     let interval = Math.floor(seconds / 31536000);
@@ -55,7 +43,7 @@ export default function Turrero() {
   }
 
   const categorizedTweets = () => {
-    const categories = order;
+    const categories = blockOrder;
     TweetsMap.forEach((tweet) => {
       const categoriesForTweet = tweet.categories.split(",");
       categoriesForTweet.forEach((category) => {
@@ -128,12 +116,12 @@ export default function Turrero() {
             <div className="links">
               {top25.map((tweet) => {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
-                return <div className="link" key={tweet && tweet.id}>
+                return <div className="link" key={tweet.id + "id-top"}>
                   <div>
                     <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
-                    <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                    <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
                   </div>
                 </div>
               }
@@ -142,7 +130,7 @@ export default function Turrero() {
           </div>
         </div>
         {Object.keys(categorizedTweets()).map((key) => {
-          return <div className="column" key={key}>
+          return <div className="column" key={key + "-category"}>
             <div className="spacing">
               <div className="heading">
                 <div className="title">{key.replaceAll("-", " ")}</div>
@@ -150,12 +138,12 @@ export default function Turrero() {
               <div className="links">
                 {tweets[key].map((tweet) => {
                   const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
-                  return <div className="link" key={tweet && tweet.id}>
+                  return <div className="link" key={tweet.id + "id"}>
                     <div>
                       <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                     </div>
                     <div>
-                      <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                      <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
                     </div>
                   </div>
                 }
@@ -172,12 +160,12 @@ export default function Turrero() {
             <div className="links">
               {mostViews.map((tweet) => {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
-                return <div className="link" key={tweet && tweet.id}>
+                return <div className="link" key={tweet.id + "most-read"}>
                   <div>
                     <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
-                    <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                    <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
                   </div>
                 </div>
               }
