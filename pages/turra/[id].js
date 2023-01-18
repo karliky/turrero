@@ -16,7 +16,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       tweetId: tweetId,
-      summary: TweetsSummary.find((_tweet => _tweet.id === tweetId)).summary || "",
+      summary: TweetsSummary.find((_tweet => _tweet.id === tweetId)) || "",
       tweets: tweets.find(tweet => {
         return tweetId === tweet[0].id;
       }) || [],
@@ -25,11 +25,11 @@ export async function getStaticProps(context) {
 }
 
 const Post = ({ tweetId, tweets, summary }) => {
-  console.log("tweets", tweetId, tweets.length, summary);
+  console.log("tweets", tweetId, tweets.length, summary.summary);
   return (
     <div className="wrapper">
       <div className='header'>
-        <h1>{summary}</h1>
+        <h1>{summary.summary}</h1>
         <h2>{tweetId}</h2>
       </div>
       <div className='flex-container'>
