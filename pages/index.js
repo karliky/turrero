@@ -7,7 +7,7 @@ export default function Turrero() {
   // TODO: Añadir bloques de wikipedia y libros. Ordenar bloques for fecha
 
   const blockOrder = {
-    "resolucion-de-problemas-complejos": [],
+    "resolución-de-problemas-complejos": [],
     "sistemas-complejos": [],
     "estrategia": [],
     "factor-x": [],
@@ -17,24 +17,24 @@ export default function Turrero() {
     "marketing": [],
     "trabajo-en-equipo": [],
     "personotecnia": [],
-    "orquestacion-cognitiva": [],
+    "orquestación-cognitiva": [],
     "libros": [],
     "futurismo-de-frontera": [],
-    "sociologia": [],
+    "sociología": [],
     "leyes-y-sesgos": [],
     "el-contexto-manda": [],
     "desarrollo-de-habilidades": [],
-    "others": [],
+    "otras-turras-del-querer": [],
   };
 
   function timeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
     let interval = Math.floor(seconds / 31536000);
-    if (interval >= 1) return interval + "y";
+    if (interval >= 1) return interval + "a";
     interval = Math.floor(seconds / 2592000);
-    if (interval >= 1) return interval + "mo";
+    if (interval >= 1) return interval + "m";
     interval = Math.floor(seconds / 604800);
-    if (interval >= 1) return interval + "w";
+    if (interval >= 1) return interval + "s";
     interval = Math.floor(seconds / 86400);
     if (interval >= 1) return interval + "d";
     interval = Math.floor(seconds / 3600);
@@ -94,6 +94,8 @@ export default function Turrero() {
     });
   }
 
+  const formatTitle = (title) => title.charAt(0).toUpperCase() + title.slice(1)
+
   const tweets = categorizedTweets();
   const top25 = findTopTweets();
   const mostViews = findTopViews();
@@ -104,7 +106,7 @@ export default function Turrero() {
     </Head>
     <div className="wrapper">
       <div className="header">
-        <h1>El <span className="brand">Turrero Post</span> es tu oportunidad de aprender más sobre las ciencias de la complejidad, CPS, Factor-X y demás en el mismo lugar.</h1>
+        <h1>El <span className="brand">Turrero Post</span> es la coleción curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h1>
         <h2>Hay un total de 132 turras, la última actualización fue el {`${new Date().toLocaleDateString("en-US")}`}</h2>
       </div>
       <div className="columns">
@@ -118,7 +120,7 @@ export default function Turrero() {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                 return <div className="link" key={tweet.id + "id-top"}>
                   <div>
-                    <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
                     <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
@@ -133,14 +135,14 @@ export default function Turrero() {
           return <div className="column" key={key + "-category"}>
             <div className="spacing">
               <div className="heading">
-                <div className="title">{key.replaceAll("-", " ")}</div>
+                <div className="title">{formatTitle(key.replaceAll("-", " "))}</div>
               </div>
               <div className="links">
                 {tweets[key].map((tweet) => {
                   const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                   return <div className="link" key={tweet.id + "-" + key + "id"}>
                     <div>
-                      <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                     </div>
                     <div>
                       <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
@@ -162,7 +164,7 @@ export default function Turrero() {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                 return <div className="link" key={tweet.id + "most-read"}>
                   <div>
-                    <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                  <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
                     <a href={"https://twitter.com/Recuenco/status/" + tweet.id}>{tweet.summary}</a>
@@ -175,7 +177,7 @@ export default function Turrero() {
         </div>
       </div>
       <div className="footer">
-        El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">Github</a>.
+        El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">GitHub</a>.
         Si quieres mejorar o cambiar algo también puedes contactarme en <a target="_blank" href="http://www.twitter.com/k4rliky">@k4rliky</a>
       </div>
     </div>
@@ -296,12 +298,10 @@ export default function Turrero() {
           top: 8px;
           left: 12px;
           font-size: 0.9em;
-          text-transform:capitalize;
         }
         .columns .column .heading img {
           width: 50px;
         }
-
         .columns .column .links {
           display: block;
           width: 100%;
@@ -340,7 +340,16 @@ export default function Turrero() {
           width: 40px;
           color: gray;
           font-size: 0.9em;
+          text-decoration: dotted;
+          text-decoration-line: underline;
+          text-decoration-color: #b2b2b2;
+          text-underline-offset: 2px;
         }
+
+        .columns .column .links .link .time {
+          cursor: help;
+        }
+
         a {
           color: #335F8D;
           text-decoration: underline;
