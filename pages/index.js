@@ -15,6 +15,27 @@ export default function Turrero() {
     }, {})
   }
 
+  const order = {
+    "resolucion-de-problemas-complejos": [],
+    "sistemas-complejos": [],
+    "estrategia": [],
+    "factor-x": [],
+    "gaming": [],
+    "lectura-de-señales": [],
+    "gestion-del-talento": [],
+    "marketing": [],
+    "trabajo-en-equipo": [],
+    "personotecnia": [],
+    "orquestacion-cognitiva": [],
+    "libros": [],
+    "futurismo-de-frontera": [],
+    "sociologia": [],
+    "leyes-y-sesgos": [],
+    "el-contexto-manda": [],
+    "desarrollo-de-habilidades": [],
+    "others": [],
+  };
+
   const categories = getCategories();
   console.log("getCategories", categories);
 
@@ -34,7 +55,7 @@ export default function Turrero() {
   }
 
   const categorizedTweets = () => {
-    const categories = getCategories();
+    const categories = order;
     TweetsMap.forEach((tweet) => {
       const categoriesForTweet = tweet.categories.split(",");
       categoriesForTweet.forEach((category) => {
@@ -120,27 +141,6 @@ export default function Turrero() {
             </div>
           </div>
         </div>
-        <div className="column">
-          <div className="spacing">
-            <div className="heading">
-              <div className="title">Las más leídas</div>
-            </div>
-            <div className="links">
-              {mostViews.map((tweet) => {
-                const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
-                return <div className="link" key={tweet && tweet.id}>
-                  <div>
-                    <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
-                  </div>
-                  <div>
-                    <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
-                  </div>
-                </div>
-              }
-              )}
-            </div>
-          </div>
-        </div>
         {Object.keys(categorizedTweets()).map((key) => {
           return <div className="column" key={key}>
             <div className="spacing">
@@ -164,7 +164,27 @@ export default function Turrero() {
             </div>
           </div>
         })}
-
+        <div className="column">
+          <div className="spacing">
+            <div className="heading">
+              <div className="title">Las más leídas</div>
+            </div>
+            <div className="links">
+              {mostViews.map((tweet) => {
+                const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
+                return <div className="link" key={tweet && tweet.id}>
+                  <div>
+                    <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                  </div>
+                  <div>
+                    <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                  </div>
+                </div>
+              }
+              )}
+            </div>
+          </div>
+        </div>
       </div>
       <div className="footer">
         El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">Github</a>.
