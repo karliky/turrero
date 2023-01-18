@@ -25,7 +25,7 @@ export async function getStaticProps(context) {
 }
 
 const Post = ({ tweetId, tweets, summary }) => {
-  console.log("tweets", tweetId, tweets, summary);
+  console.log("tweets", tweetId, tweets.length, summary);
   return (
     <div className="wrapper">
       <div className='header'>
