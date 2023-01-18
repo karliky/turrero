@@ -29,8 +29,9 @@ const Post = ({ tweetId, tweets, summary }) => {
   return (
     <div className="wrapper">
       <div className='header'>
+        <a href="/"><img src="/back.svg" alt="Volver atrás" /></a>
         <h1>{summary.summary}</h1>
-        <h2>{tweetId}</h2>
+        <h2><a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a></h2>
       </div>
       <div className='flex-container'>
         <div  className='flex-left'>{tweets.map(({ tweet, id }) => <p className='tweet' key={id}>{tweet}</p>)}</div>
@@ -109,6 +110,13 @@ const Post = ({ tweetId, tweets, summary }) => {
               margin-top: 1em;
               margin-bottom: 1em;
             }
+            
+        a {
+          color: #335F8D;
+          text-decoration: underline;
+          text-decoration-color: #335f8d14;
+          font-size: 0.9em;
+        }
             h2 {
               font-size: 1rem;
             }
