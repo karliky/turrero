@@ -26,12 +26,21 @@ export async function getStaticProps(context) {
 
 const Post = ({ tweetId, tweets, summary }) => {
   console.log("tweets", tweetId, tweets.length, summary.summary);
+
+  const getTitle = (title) => {
+   const highlightedText = title.split(" ").slice(0, 5).join(" ");
+   const rest = title.split(" ").slice(5, 999).join(" ");
+   return <>
+    <span className="brand">{highlightedText} </span>{rest}
+   </>;
+  }
+
   return (
     <div className="wrapper">
       <div className='header'>
         <a href="/"><img src="/back.svg" alt="Volver atrás" /></a>
-        <h1>{summary.summary}</h1>
-        <h2><a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a></h2>
+        <h1>{getTitle(summary.summary)}</h1>
+        <h2>{`Publicado el ${new Date(tweets[0].time).toLocaleDateString("es-ES")} / ${new Date(tweets[0].time).toLocaleTimeString("es-ES")}`} <a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a></h2>
       </div>
       <div className='flex-container'>
         <div  className='flex-left'>{tweets.map(({ tweet, id }) => <p className='tweet' key={id}>{tweet}</p>)}</div>
