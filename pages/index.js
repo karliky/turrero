@@ -1,371 +1,364 @@
-import TweetCollection from "../tweets.json";
+import Head from "next/head";
+import TweetsMap from "../tweets_map.json";
+import Tweets from "../tweets.json";
+import TweetsSummary from "../tweets_summary.json";
 
-export default function Home() {
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+export default function Turrero() {
+  // TODO: Añadir bloques de wikipedia y libros. Ordenar bloques for fecha
+  const getCategories = () => {
+    return TweetsMap.reduce((dic, tweets) => {
+      const categories = tweets.categories.split(",");
+      categories.forEach(category => {
+        if (!dic[category]) dic[category] = [];
+      });
+      return dic;
+    }, {})
+  }
 
+  const categories = getCategories();
+  console.log("getCategories", categories);
+
+  function timeSince(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval = Math.floor(seconds / 31536000);
+    if (interval >= 1) return interval + "y";
+    interval = Math.floor(seconds / 2592000);
+    if (interval >= 1) return interval + "mo";
+    interval = Math.floor(seconds / 604800);
+    if (interval >= 1) return interval + "w";
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) return interval + "d";
+    interval = Math.floor(seconds / 3600);
+    if (interval >= 1) return interval + "h";
+    return "h";
+  }
+
+  const categorizedTweets = () => {
+    const categories = getCategories();
+    TweetsMap.forEach((tweet) => {
+      const categoriesForTweet = tweet.categories.split(",");
+      categoriesForTweet.forEach((category) => {
+        categories[category].push(TweetsSummary.find((_tweet => _tweet.id === tweet.id)));
+      });
+    });
+    return categories;
+  }
+
+  const unThousand = (n) => (n.replace("K", "")) * 1000
+
+  const getSimpleStats = (stats) => {
+    return Object.keys(stats).reduce((acc, key) => {
+      if (key === "views") return acc;
+      const value = stats[key];
+      if (value.includes("K")) {
+        const num = unThousand(stats[key]);
+        acc += num;
+        return acc;
+      }
+      acc += parseInt(stats[key], 10);
+      return acc;
+    }, 0);
+  }
+
+  const findTopTweets = () => {
+    const top = Tweets.sort(function (a, b) {
+      const statsa = getSimpleStats(a[0].stats);
+      const statsb = getSimpleStats(b[0].stats);
+      return statsb - statsa;
+    });
+    return top.slice(0, 25).map((tweet) => {
+      return TweetsSummary.find((_tweet => _tweet.id === tweet[0].id))
+    });
+  }
+
+  const findTopViews = () => {
+    const top = Tweets
+    .filter((tweets) => !!tweets[0].stats.views)
+    .sort(function (a, b) {
+      if (!a[0].stats.views) return 0;
+      const statsa = unThousand(a[0].stats.views);
+      const statsb = unThousand(b[0].stats.views);
+      return statsb - statsa;
+    });
+    return top.slice(0, 25).map((tweet) => {
+      return TweetsSummary.find((_tweet => _tweet.id === tweet[0].id))
+    });
+  }
+
+  const tweets = categorizedTweets();
+  const top25 = findTopTweets();
+  const mostViews = findTopViews();
   return (<div>
-    <div className="head">
-      <div className="headerobjectswrapper">
-        {/* <div className="weatherforcastbox">
-          <span>Una colección fácilmente accesible de las turras de <a href="https://www.twitter.com/recuenco">@recuenco</a>.</span>
-        </div> */}
-        <header>Turrero Post</header>
+    <Head>
+      <title>Turrero Post</title>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
+    <div className="wrapper">
+      <div className="header">
+        <h1>El <span className="brand">Turrero Post</span> es tu oportunidad de aprender más sobre las ciencias de la complejidad, CPS, Factor-X y demás en el mismo lugar.</h1>
+        <h2>Hay un total de 132 turras, la última actualización fue el {`${new Date().toLocaleDateString("en-US")}`}</h2>
       </div>
-      <div className="subhead">Lunes 26, Diciembre, 2022 - {TweetCollection.length} Turras</div>
-    </div>
-    <main>
-        {TweetCollection.map((tweets) => {
-          console.log(tweets[0].tweet);
-          return <article key={tweets[0].id}>
-          <div className="head">
-            <span className="headline hl3">{tweets[0].tweet.split(' ').slice(0, 7).join(' ')}</span>
-            <p>
-              <span className="headline hl4">{new Date(tweets[0].time).toLocaleDateString("en-US", options)}</span>
-            </p>
-          </div>
-          <div>
-          {tweets.map((tweet, index) => {
-            return <div key={tweets[0].id + index}>
-              <p className="words">{tweet.tweet}</p>
-              {tweet.metadata && <div className="metadata"><img src={tweet.metadata.img}/></div>}
+      <div className="columns">
+        <div className="column">
+          <div className="spacing">
+            <div className="heading">
+              <div className="title">Top 25 turras</div>
             </div>
-          })}
+            <div className="links">
+              {top25.map((tweet) => {
+                const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
+                return <div className="link" key={tweet && tweet.id}>
+                  <div>
+                    <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                  </div>
+                  <div>
+                    <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                  </div>
+                </div>
+              }
+              )}
+            </div>
           </div>
-        </article>
+        </div>
+        <div className="column">
+          <div className="spacing">
+            <div className="heading">
+              <div className="title">Las más leídas</div>
+            </div>
+            <div className="links">
+              {mostViews.map((tweet) => {
+                const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
+                return <div className="link" key={tweet && tweet.id}>
+                  <div>
+                    <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                  </div>
+                  <div>
+                    <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                  </div>
+                </div>
+              }
+              )}
+            </div>
+          </div>
+        </div>
+        {Object.keys(categorizedTweets()).map((key) => {
+          return <div className="column" key={key}>
+            <div className="spacing">
+              <div className="heading">
+                <div className="title">{key.replaceAll("-", " ")}</div>
+              </div>
+              <div className="links">
+                {tweets[key].map((tweet) => {
+                  const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
+                  return <div className="link" key={tweet && tweet.id}>
+                    <div>
+                      <div className="time">{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    </div>
+                    <div>
+                      <a href={tweet && "https://twitter.com/Recuenco/status/" + tweet.id}>{tweet && tweet.summary}</a>
+                    </div>
+                  </div>
+                }
+                )}
+              </div>
+            </div>
+          </div>
         })}
-    </main>
+
+      </div>
+      <div className="footer">
+        El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">Github</a>.
+        Si quieres mejorar o cambiar algo también puedes contactarme en <a target="_blank" href="http://www.twitter.com/k4rliky">@k4rliky</a>
+      </div>
+    </div>
     <style jsx global>
-      {
-        ` body {
-          font-family: 'Droid Serif', serif;
-          font-size: 14px;
-          color: #2f2f2f;
-          background-color: #f9f7f1;
+      {`
+        @charset "utf-8";
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+        v2.0 | 20110126
+        License: none (public domain)
+     */
+     
+     html, body, div, span, applet, object, iframe,
+     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+     a, abbr, acronym, address, big, cite, code,
+     del, dfn, em, img, ins, kbd, q, s, samp,
+     small, strike, strong, sub, sup, tt, var,
+     b, u, i, center,
+     dl, dt, dd, ol, ul, li,
+     fieldset, form, label, legend,
+     table, caption, tbody, tfoot, thead, tr, th, td,
+     article, aside, canvas, details, embed, 
+     figure, figcaption, footer, header, hgroup, 
+     menu, nav, output, ruby, section, summary,
+     time, mark, audio, video {
+       margin: 0;
+       padding: 0;
+       border: 0;
+       font-size: 100%;
+       font: inherit;
+       vertical-align: baseline;
+     }
+     /* HTML5 display-role reset for older browsers */
+     article, aside, details, figcaption, figure, 
+     footer, header, hgroup, menu, nav, section {
+       display: block;
+     }
+     body {
+       line-height: 1;
+     }
+     ol, ul {
+       list-style: none;
+     }
+     blockquote, q {
+       quotes: none;
+     }
+     blockquote:before, blockquote:after,
+     q:before, q:after {
+       content: '';
+       content: none;
+     }
+     table {
+       border-collapse: collapse;
+       border-spacing: 0;
+     }
+
+     * {
+     box-sizing: border-box;
+   }
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+          color: #191817;
+          background-color: #FEFEFD;
         }
-  
-        header {
-          font-family: 'Playfair Display', serif;
-          font-weight: 900;
-          font-size: 80px;
-          text-transform: uppercase;
+        .wrapper {
+          width:75%;
+          margin:0 auto;
+          min-height:64px;
+          position:relative;
+        }
+        .header {
+          font-size: 2.25rem;
+          line-height: 2.5rem;
+          font-weight: 300;
+          margin-top: 1em;
+          margin-bottom: 1em;
+        }
+        h2 {
+          font-size: 1rem;
+        }
+        .brand {
+          color: #a5050b;
+              font-weight: bold;
+        }
+        .footer {
+          font-size: 1.25rem;
+          line-height: 2.5rem;
+          font-weight: 300;
+          margin-top: 1em;
+          margin-bottom: 1em;
+        }
+        .spacing {
+          padding: 6px;
+        }
+        .columns {
+          width: 100%;
+        }
+        .columns .column {
           display: inline-block;
-          line-height: 72px;
-          margin-bottom: 20px;
-        }
-  
-        p {
-          margin-top: 0;
-          margin-bottom: 20px;
-        }
-  
-        .head {
-          text-align: center;
+          width: 50%;
           position: relative;
-        }
-  
-        .headerobjectswrapper {}
-  
-        .subhead {
-          text-transform: uppercase;
-          border-bottom: 2px solid #2f2f2f;
-          border-top: 2px solid #2f2f2f;
-          padding: 12px 0 12px 0;
-        }
-  
-        .weatherforcastbox {
-          position: relative;
-          width: 12%;
-          left: 10px;
-          border: 3px double #2f2f2f;
-          padding: 10px 15px 10px 15px;
-          line-height: 20px;
-          display: inline-block;
-          margin: 0 50px 20px -360px;
-        }
-  
-        .content {
-          font-size: 0;
-          line-height: 0;
-          word-spacing: -.31em;
-          display: inline-block;
-          margin: 30px 2% 0 2%;
-        }
-        .words {
-          word-break: break-all;
-        }
-        .collumns {}
-  
-        {
-          font-size: 14px;
-          line-height: 20px;
-          width: 17.5%;
-          display: inline-block;
-          padding: 0 1% 0 1%;
           vertical-align: top;
-          margin-bottom: 50px;
-          transition: all .7s;
         }
-  
-        .headline {
-          text-align: center;
-          line-height: normal;
-          font-family: 'Playfair Display', serif;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl1 {
-          font-weight: 700;
-          font-size: 30px;
-          text-transform: uppercase;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl2 {
-          font-weight: 400;
-          font-style: italic;
-          font-size: 24px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl2:before {
-          border-top: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 7px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl2:after {
-          border-bottom: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 13px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl3 {
-          font-weight: 400;
-          font-style: italic;
-          font-size: 36px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl4 {
-          font-weight: 700;
-          font-size: 12px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl4:before {
-          border-top: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 7px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl4:after {
-          border-bottom: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 10px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl5 {
-          font-weight: 400;
-          font-size: 42px;
-          text-transform: uppercase;
-          font-style: italic;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl6 {
-          font-weight: 400;
-          font-size: 18px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl6:before {
-          border-top: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 7px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl6:after {
-          border-bottom: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 10px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .headline.hl7 {
-          font-weight: 700;
-          font-size: 12px;
-          box-sizing: border-box;
-          display: block;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl8 {
-          font-weight: 700;
-          font-size: 12px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl9 {
-          font-weight: 700;
-          font-size: 12px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .headline.hl10 {
-          font-weight: 700;
-          font-size: 12px;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-  
-        .citation {
-          font-family: 'Playfair Display', serif;
-          font-size: 36px;
-          line-height: 44px;
-          /*font-style: italic;*/
-          text-align: center;
-          font-weight: 400;
-          display: block;
-          margin: 40px 0 40px 0;
-          font-feature-settings: "liga", "dlig";
-        }
-  
-        .citation:before {
-          border-top: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 16px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .citation:after {
-          border-bottom: 1px solid #2f2f2f;
-          content: '';
-          width: 100px;
-          height: 16px;
-          display: block;
-          margin: 0 auto;
-        }
-  
-        .figure {
-          margin: 0 0 20px;
-        }
-  
-        .figcaption {
-          font-style: italic;
-          font-size: 12px;
-        }
-  
-        .media {
-          -webkit-filter: sepia(80%) contrast(1) opacity(0.8);
-          filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
-          mix-blend-mode: multiply;
+        .columns .column .heading {
           width: 100%;
+          height: 30px;
+          font-weight: bold;
+          background: linear-gradient(to bottom, #fff, #f5f5f5);
+          color: #231f20;
+          box-shadow: inset 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 2px -1px rgb(0 0 0 / 20%);
+          border-radius: 10px;
         }
-  
-        .metadata {
-          width: 100%;
+        .columns .column .heading .title {
+          padding: 5px;
+          display: inline-block;
+          position: absolute;
+          top: 8px;
+          left: 12px;
+          font-size: 0.9em;
+          text-transform:capitalize;
         }
-          
-        .metadata img {
-          filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
-          mix-blend-mode: multiply;
-          width: 100%;
+        .columns .column .heading img {
+          width: 50px;
         }
 
-        /*________________________________________________________________________________________________________________________________*/
-        /*MEDIAQUERIES*/
-        @media only all and (max-width: 1300px) {
-          .weatherforcastbox {
-            display: none;
-          }
+        .columns .column .links {
+          display: block;
+          width: 100%;
+          height: 40vh;
+          overflow: auto;
         }
-  
-        @media only all and (max-width: 1200px) {
-          {
-            width: 31%;
-          }
+      .columns .column .links::-webkit-scrollbar-track
+      {
+        background-color: transparent;
+      }
+
+      .columns .column .links::-webkit-scrollbar
+      {
+        width: 6px;
+        background-color: transparent;
+
+      }
+
+      .columns .column .links::-webkit-scrollbar-thumb
+      {
+        background-color: transparent;
+
+      }
+
+        .columns .column .links .link {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
         }
-  
-        @media only all and (max-width: 900px) {
-          {
-            width: 47%;
-          }
+        .columns .column .links .link > div {
+          padding-top: 5px;
+          padding-left: 5px;
         }
-  
-        @media only all and (max-width: 600px) {
-          {
-            width: 100%;
-          }
-  
-          .collumn+{
-            border-left: none;
-            border-bottom: 1px solid #2f2f2f;
-          }
-  
-          header {
-            max-width: 320px;
-            font-size: 60px;
-            line-height: 54px;
-            overflow: hidden;
-          }
+        .columns .column .links .link .time {
+          display: inline-block;
+          width: 40px;
+          color: gray;
+          font-size: 0.9em;
         }
-        * {
-        box-sizing: border-box;
-      }
-      img {
-        width: 100%;
-      }
-      article {
-        border-left: 1px solid #2f2f2f;
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-      a:link,
-      a:visited {
-        color: black;
-      }
-      h1 {
-          margin-top: 0;
-          margin-left: 0.75rem;
-      }
-      main {
-        columns: 250px;
-        column-gap: 20px; 
-      }
-      article {
-        break-inside: avoid-column;
-        margin-bottom: 1rem; 
-      }
-        `
-      }
+        a {
+          color: #335F8D;
+          text-decoration: underline;
+          text-decoration-color: #335f8d14;
+          font-size: 0.9em;
+        }
+
+        /* Two-column layout */
+        @media (max-width: 1200px) {
+          .columns .column {
+                width: 50%;
+            }
+            .wrapper {
+                width: 85%;
+            }
+        }
+        /* One-column layout */
+        @media (max-width: 770px) {
+          .columns .column {
+                width: 100%;
+            }
+            .wrapper {
+                width: 95%;
+            }
+        }
+      `}
     </style>
-  </div>
-  )
+  </div>)
 }
