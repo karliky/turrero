@@ -19,7 +19,7 @@ export default function Turrero() {
     "factor-x": [],
     "gaming": [],
     "lectura-de-señales": [],
-    "gestion-del-talento": [],
+    "gestión-del-talento": [],
     "marketing": [],
     "trabajo-en-equipo": [],
     "personotecnia": [],
@@ -261,7 +261,9 @@ export default function Turrero() {
           margin-bottom: 1em;
         }
         h2 {
+          margin-top: 3px;
           font-size: 1rem;
+          line-height: 1.3em;
         }
         .brand {
           color: #a5050b;

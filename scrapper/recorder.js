@@ -40,11 +40,13 @@ const csvdata = require('csvdata');
 
     function parseStats(stats) {
         if (!stats) return {};
-        const parsedStats = stats.split("\n");
+        const parsedStats = stats.split("-");
+        parsedStats.pop();
         const result = {};
-        for (let index = 0; index < parsedStats.length; index = index + 2) {
-            const num = parsedStats[index];
-            const category = parsedStats[index + 1];
+        for (let index = 0; index < parsedStats.length; index++) {
+            const label = parsedStats[index].split("\n");
+            const num = label[0];
+            const category = label[1];
             result[category.toLowerCase().replaceAll(" ", "")] = num;
         }
         return result;
@@ -74,7 +76,7 @@ const csvdata = require('csvdata');
                     return el;
                 });
                 const groupStats = await page.evaluate(() => {
-                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[role="group"]').innerText;
+                    const el = Array.from(document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelectorAll('span[data-testid="app-text-transition-container"]')).reduce((acc, value) => acc + value.parentElement.parentElement.innerText+"-", "")
                     return el;
                 });
                 const stats = parseStats(groupStats);

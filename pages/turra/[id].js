@@ -34,7 +34,7 @@ const Post = ({ tweetId, tweets, summary }) => {
     <span className="brand">{highlightedText} </span>{rest}
    </>;
   }
-
+  console.log(tweets)
   return (
     <div className="wrapper">
       <div className='header'>
@@ -144,6 +144,7 @@ const Post = ({ tweetId, tweets, summary }) => {
               font-size: 1.5em;
               margin-bottom: 5px;
               line-height: calc(1ex / 0.32);
+              word-break: break-word;
             }
             .flex-container {
               display: flex;
@@ -154,6 +155,17 @@ const Post = ({ tweetId, tweets, summary }) => {
             }
             .flex-right {
                 width: 25%;
+            }
+            @media (max-width: 1024px) {
+              .flex-container {
+                flex-direction: column;
+              }
+              .flex-left {
+                  width: 100%;
+              }
+              .flex-right {
+                  width: 100%;
+              }
             }
           `}
       </style>
