@@ -8,9 +8,11 @@ import TweetsSummary from "../tweets_summary.json";
 export default function Turrero() {
   // TODO: 
   // Añadir bloques de wikipedia y libros.
+  // Añadir bloque de #preguntaalrecu
   // Ordenar bloques for fecha
   // Añadir buscador
   // Mejor legibilidad en movil
+  // Añadir sitemap
 
   const blockOrder = {
     "resolución-de-problemas-complejos": [],
@@ -184,7 +186,8 @@ export default function Turrero() {
       </div>
       <div className="footer">
         El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">GitHub</a>.
-        Si quieres mejorar o cambiar algo también puedes contactarme en <a target="_blank" href="http://www.twitter.com/k4rliky">@k4rliky</a>
+        Envía tus mejoras a <a target="_blank" href="http://www.twitter.com/k4rliky">@k4rliky</a>.<br></br>
+        <span className="small">Creado con JavaScript y ChatGPT.</span>
       </div>
     </div>
     <style jsx global>
@@ -275,9 +278,13 @@ export default function Turrero() {
           font-weight: 300;
           margin-top: 1em;
           margin-bottom: 1em;
+          text-align: center;
         }
         .spacing {
           padding: 6px;
+        }
+        .small {
+          font-size: 0.6em;
         }
         .columns {
           width: 100%;
