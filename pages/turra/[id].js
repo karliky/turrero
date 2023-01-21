@@ -82,11 +82,11 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
           })}</div>
           <div className='flex-right side-block'>
             {!books.length && !videos.length && <div>No hay información adicional en este hilo.</div>}
-            {videos.length && <div>
+            {!!videos.length && <div>
             <span className='metadata-title'>🎥 Videos relacionados:</span>
               {videos.map(metadata => <a target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
-            {books.length && <div>
+            {!!books.length && <div>
             <span className='metadata-title'>📖 Libros relacionados:</span>
               {books.map(metadata => <a target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
