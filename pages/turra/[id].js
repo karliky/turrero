@@ -32,8 +32,6 @@ export async function getStaticProps(context) {
 }
 
 const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
-  console.log("tweets", tweetId, tweets.length, summary, categories, enrichments);
-
   const getTitle = (title) => {
     const highlightedText = title.split(" ").slice(0, 2).join(" ");
     const rest = title.split(" ").slice(2, 999).join(" ");
@@ -51,6 +49,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
 
   const books = enrichments.filter((tweet) => tweet.media === "goodreads");
   const videos = enrichments.filter((tweet) => tweet.media === "youtube");
+  const linkedin = enrichments.filter((tweet) => tweet.media === "linkedin");
   const formatTitle = (title) => title.charAt(0).toUpperCase() + title.slice(1);
   const unrolledThread = tweets.reduce((acc, { tweet }) => acc + tweet, "");
   return (
@@ -64,14 +63,13 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
                 ${new Date(tweets[0].time).toLocaleDateString("es-ES")} / ${new Date(tweets[0].time).toLocaleTimeString("es-ES")}`}.
             Tiempo de lectura: {readingTime(unrolledThread)}min. <a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a>
           </h2>
-          <div className="categories">Categorías de esta turra: {categories.split(",").map((category) => <span key={category} className="category">{formatTitle(category.replaceAll("-", " "))}</span>)}</div>
+          <div className="categories">Categorías de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
         </div>
         <div className='flex-container'>
           <div className='flex-left'>{tweets.map(({ tweet, id }) => {
             const metadata = enrichments.find(_tweet => id === _tweet.id);
             let tweetText = tweet.replace(/#(\S*)/g, '<a target="_blank" href="https://twitter.com/search?q=%23$1&src=typed_query">#$1</a>');
             tweetText = tweetText.replace(/@(\S*)/g, '<a target="_blank" href="http://twitter.com/$1">@$1</a>');
-            console.log(metadata);
             return <p className='tweet' key={id}>
               {<span dangerouslySetInnerHTML={{ __html: tweetText }} />}
               {metadata && <span className="metadata">
@@ -81,14 +79,18 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
             </p>;
           })}</div>
           <div className='flex-right side-block'>
-            {!books.length && !videos.length && <div>No hay información adicional en este hilo.</div>}
+            {!books.length && !videos.length && !linkedin.length && <div>No hay información adicional en esta turra.</div>}
             {!!videos.length && <div>
-            <span className='metadata-title'>🎥 Videos relacionados:</span>
-              {videos.map(metadata => <a target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
+            <div className='metadata-section'><img className="icon" src="/youtube.svg" alt="Enlaces a youtube"/>Videos relacionados:</div>
+              {videos.map(metadata => <a key={metadata.id + "-video"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
             {!!books.length && <div>
-            <span className='metadata-title'>📖 Libros relacionados:</span>
-              {books.map(metadata => <a target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
+            <div className='metadata-section'><img className="icon" src="/book.svg" alt="Enlaces a Goodreads"/>Libros relacionados:</div>
+              {books.map(metadata => <a key={metadata.id + "-book"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
+            </div>}
+            {!!linkedin.length && <div>
+            <div className='metadata-section'><img className="icon" src="/linkedin.svg" alt="Enlaces a Linkedin"/>Artículos en linkedin relacionados:</div>
+              {linkedin.map(metadata => <a key={metadata.id + "-linkedin"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
           </div>
         </div>
@@ -172,8 +174,15 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
           text-decoration-color: #335f8d14;
           font-size: 0.9em;
         }
+        .category a {
+          color: #fff;
+          font-size: 1em;
+        }
+        
             h2 {
+              margin-top: 3px;
               font-size: 1rem;
+              line-height: 1.3em;
             }
             .brand {
               color: #a5050b;
@@ -207,7 +216,8 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
             }
             .related {
               display: list-item;
-              margin-left: 25px;
+              list-style-type: none;
+              margin-left: 31px;
               margin-bottom: 8px;
               line-height: 1.3em;
             }
@@ -215,10 +225,14 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
               display: block;
               text-align: center;
             }
-            .metadata-title {
+            .metadata-section {
               margin-bottom: 6px;
               margin-top: 4px;
-              display: inline-block;
+              display: flex;
+              align-items: center;
+            }
+            .metadata-section .icon {
+              margin-right: 5px;
             }
             .metadata img {
               max-width:430px;
@@ -240,6 +254,8 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
               padding: 20px;
               padding-left: 25px;
               padding-right: 25px;
+              max-width: 50%;
+              min-width: 35%;
             }
             .categories {
               font-size: 0.5em;
@@ -278,6 +294,10 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
               }
               .footer {
                 padding: 5px;
+              }
+              .side-block {
+                max-width: inherit;
+                min-width: initial;
               }
             }
             .footer {

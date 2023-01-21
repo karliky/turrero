@@ -38,9 +38,16 @@ const tweets = [];
                     const response = await fetch(url);
                     const data = await response.text();
                     const $ = cheerio.load(data);
-                    console.log($('meta[name=description]').attr('content'))
                     tweet.metadata.media = "goodreads";
                     tweet.metadata.title = $('h1').text().trim()
+                }
+                if (url.includes("linkedin.com")) {
+                    const response = await fetch(url);
+                    const data = await response.text();
+                    const $ = cheerio.load(data);
+                    tweet.metadata.media = "linkedin";
+                    tweet.metadata.title = $('h1').text().trim();
+                    tweet.metadata.description = $('meta[name=description]').attr('content');
                 }
                 console.log(tweet.metadata);
                 tweets.push({ id: tweet.id, ...tweet.metadata });

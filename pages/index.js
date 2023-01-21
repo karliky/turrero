@@ -143,7 +143,7 @@ export default function Turrero() {
           return <div className="column" key={key + "-category"}>
             <div className="spacing">
               <div className="heading">
-                <div className="title">{formatTitle(key.replaceAll("-", " "))}</div>
+                <div className="title" id={key}>{formatTitle(key.replaceAll("-", " "))}</div>
               </div>
               <div className="links">
                 {tweets[key].map((tweet) => {
@@ -245,6 +245,18 @@ export default function Turrero() {
      * {
      box-sizing: border-box;
    }
+          :target {
+            -webkit-animation: target-fade 2s;
+            -moz-animation: target-fade 2s;
+            -o-animation: target-fade 2s;
+            animation: target-fade 2s;
+          }
+
+        @keyframes target-fade {
+          from { color: #a5050b; }
+          to { color: #000; }
+        }
+
         body {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
           color: #191817;
