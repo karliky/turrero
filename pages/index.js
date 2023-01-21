@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Script from 'next/script'
 
 import TweetsMap from "../tweets_map.json";
 import Tweets from "../tweets.json";
@@ -187,223 +186,127 @@ export default function Turrero() {
       <div className="footer">
         El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">GitHub</a>.
         Envía tus mejoras a <a target="_blank" href="http://www.twitter.com/k4rliky">@k4rliky</a>.<br></br>
-        <span className="small">Creado con JavaScript y ChatGPT.</span>
+        <span className="small">Creado con Next.js y ChatGPT.</span>
       </div>
     </div>
     <style jsx global>
       {`
-        @charset "utf-8";
-        /* http://meyerweb.com/eric/tools/css/reset/ 
-        v2.0 | 20110126
-        License: none (public domain)
-     */
-     
-     html, body, div, span, applet, object, iframe,
-     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-     a, abbr, acronym, address, big, cite, code,
-     del, dfn, em, img, ins, kbd, q, s, samp,
-     small, strike, strong, sub, sup, tt, var,
-     b, u, i, center,
-     dl, dt, dd, ol, ul, li,
-     fieldset, form, label, legend,
-     table, caption, tbody, tfoot, thead, tr, th, td,
-     article, aside, canvas, details, embed, 
-     figure, figcaption, footer, header, hgroup, 
-     menu, nav, output, ruby, section, summary,
-     time, mark, audio, video {
-       margin: 0;
-       padding: 0;
-       border: 0;
-       font-size: 100%;
-       font: inherit;
-       vertical-align: baseline;
-     }
-     /* HTML5 display-role reset for older browsers */
-     article, aside, details, figcaption, figure, 
-     footer, header, hgroup, menu, nav, section {
-       display: block;
-     }
-     body {
-       line-height: 1;
-     }
-     ol, ul {
-       list-style: none;
-     }
-     blockquote, q {
-       quotes: none;
-     }
-     blockquote:before, blockquote:after,
-     q:before, q:after {
-       content: '';
-       content: none;
-     }
-     table {
-       border-collapse: collapse;
-       border-spacing: 0;
-     }
+.spacing {
+  padding: 6px;
+}
 
-     * {
-     box-sizing: border-box;
-   }
-          :target {
-            -webkit-animation: target-fade 2s;
-            -moz-animation: target-fade 2s;
-            -o-animation: target-fade 2s;
-            animation: target-fade 2s;
-          }
+.small {
+  font-size: 0.6em;
+}
 
-        @keyframes target-fade {
-          from { color: #a5050b; }
-          to { color: #000; }
-        }
+.columns {
+  width: 100%;
+}
 
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-          color: #191817;
-          background-color: #FEFEFD;
-        }
-        .wrapper {
-          width:75%;
-          margin:0 auto;
-          min-height:64px;
-          position:relative;
-        }
-        .header {
-          font-size: 2.25rem;
-          line-height: 2.5rem;
-          font-weight: 300;
-          margin-top: 1em;
-          margin-bottom: 1em;
-        }
-        h2 {
-          margin-top: 3px;
-          font-size: 1rem;
-          line-height: 1.3em;
-        }
-        .brand {
-          color: #a5050b;
-              font-weight: bold;
-        }
-        .footer {
-          font-size: 1.25rem;
-          line-height: 2.5rem;
-          font-weight: 300;
-          margin-top: 1em;
-          margin-bottom: 1em;
-          text-align: center;
-        }
-        .spacing {
-          padding: 6px;
-        }
-        .small {
-          font-size: 0.6em;
-        }
-        .columns {
-          width: 100%;
-        }
-        .columns .column {
-          display: inline-block;
-          width: 50%;
-          position: relative;
-          vertical-align: top;
-        }
-        .columns .column .heading {
-          width: 100%;
-          height: 30px;
-          font-weight: bold;
-          background: linear-gradient(to bottom, #fff, #f5f5f5);
-          color: #231f20;
-          box-shadow: inset 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 2px -1px rgb(0 0 0 / 20%);
-          border-radius: 10px;
-        }
-        .columns .column .heading .title {
-          padding: 5px;
-          display: inline-block;
-          position: absolute;
-          top: 8px;
-          left: 12px;
-          font-size: 0.9em;
-        }
-        .columns .column .heading img {
-          width: 50px;
-        }
-        .columns .column .links {
-          display: block;
-          width: 100%;
-          height: 40vh;
-          overflow: auto;
-        }
-      .columns .column .links::-webkit-scrollbar-track
-      {
-        background-color: transparent;
-      }
+.columns .column {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  vertical-align: top;
+}
 
-      .columns .column .links::-webkit-scrollbar
-      {
-        width: 6px;
-        background-color: transparent;
+.columns .column .heading {
+  width: 100%;
+  height: 30px;
+  font-weight: bold;
+  background: linear-gradient(to bottom, #fff, #f5f5f5);
+  color: #231f20;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 2px -1px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+}
 
-      }
+.columns .column .heading .title {
+  padding: 5px;
+  display: inline-block;
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 0.9em;
+}
 
-      .columns .column .links::-webkit-scrollbar-thumb
-      {
-        background-color: transparent;
+.columns .column .heading img {
+  width: 50px;
+}
 
-      }
+.columns .column .links {
+  display: block;
+  width: 100%;
+  height: 40vh;
+  overflow: auto;
+}
 
-        .columns .column .links .link {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-        }
-        .columns .column .links .link > div {
-          padding-top: 5px;
-          padding-left: 5px;
-        }
-        .columns .column .links .link .time {
-          display: inline-block;
-          width: 40px;
-          color: gray;
-          font-size: 0.9em;
-          text-decoration: dotted;
-          text-decoration-line: underline;
-          text-decoration-color: #b2b2b2;
-          text-underline-offset: 2px;
-        }
+.columns .column .links::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 
-        .columns .column .links .link .time {
-          cursor: help;
-        }
+.columns .column .links::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
 
-        a {
-          color: #335F8D;
-          text-decoration: underline;
-          text-decoration-color: #335f8d14;
-          font-size: 0.9em;
-        }
+}
 
-        /* Two-column layout */
-        @media (max-width: 1200px) {
-          .columns .column {
-                width: 50%;
-            }
-            .wrapper {
-                width: 85%;
-            }
-        }
-        /* One-column layout */
-        @media (max-width: 770px) {
-          .columns .column .links {
-            height: auto;
-            overflow: hidden;
-          }
-          .columns .column {
-                width: 100%;
-            }
-            .wrapper {
-                width: 95%;
-            }
-        }
+.columns .column .links::-webkit-scrollbar-thumb {
+  background-color: transparent;
+
+}
+
+.columns .column .links .link {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.columns .column .links .link>div {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.columns .column .links .link .time {
+  display: inline-block;
+  width: 40px;
+  color: gray;
+  font-size: 0.9em;
+  text-decoration: dotted;
+  text-decoration-line: underline;
+  text-decoration-color: #b2b2b2;
+  text-underline-offset: 2px;
+}
+
+.columns .column .links .link .time {
+  cursor: help;
+}
+
+/* Two-column layout */
+@media (max-width: 1200px) {
+  .columns .column {
+      width: 50%;
+  }
+
+  .wrapper {
+      width: 85%;
+  }
+}
+
+/* One-column layout */
+@media (max-width: 770px) {
+  .columns .column .links {
+      height: auto;
+      overflow: hidden;
+  }
+
+  .columns .column {
+      width: 100%;
+  }
+
+  .wrapper {
+      width: 95%;
+  }
+}
       `}
     </style>
   </div>)

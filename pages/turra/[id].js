@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router';
-
 export async function getStaticPaths() {
   const tweets = require("../../tweets.json");
   const paths = tweets.map((tweet) => ({
@@ -94,231 +92,154 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
             </div>}
           </div>
         </div>
-        <style jsx global>
-          {`
-        @charset "utf-8";
-        /* http://meyerweb.com/eric/tools/css/reset/ 
-        v2.0 | 20110126
-        License: none (public domain)
-        */
-        
-        html, body, div, span, applet, object, iframe,
-        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-        a, abbr, acronym, address, big, cite, code,
-        del, dfn, em, img, ins, kbd, q, s, samp,
-        small, strike, strong, sub, sup, tt, var,
-        b, u, i, center,
-        dl, dt, dd, ol, ul, li,
-        fieldset, form, label, legend,
-        table, caption, tbody, tfoot, thead, tr, th, td,
-        article, aside, canvas, details, embed, 
-        figure, figcaption, footer, header, hgroup, 
-        menu, nav, output, ruby, section, summary,
-        time, mark, audio, video {
-          margin: 0;
-          padding: 0;
-          border: 0;
-          font-size: 100%;
-          font: inherit;
-          vertical-align: baseline;
-        }
-        /* HTML5 display-role reset for older browsers */
-        article, aside, details, figcaption, figure, 
-        footer, header, hgroup, menu, nav, section {
-          display: block;
-        }
-        body {
-          line-height: 1;
-        }
-        ol, ul {
-          list-style: none;
-        }
-        blockquote, q {
-          quotes: none;
-        }
-        blockquote:before, blockquote:after,
-        q:before, q:after {
-          content: '';
-          content: none;
-        }
-        table {
-          border-collapse: collapse;
-          border-spacing: 0;
-        }
-
-        * {
-        box-sizing: border-box;
-      }
-            body {
-              font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-              color: #191817;
-              background-color: #FEFEFD;
-            }
-            .wrapper {
-              width:65%;
-              margin:0 auto;
-              min-height:64px;
-              position:relative;
-            }
-            .header {
-              font-size: 2.25rem;
-              line-height: 2.5rem;
-              font-weight: 300;
-              margin-top: 1em;
-              margin-bottom: 1em;
-            }
-            
-        a {
-          color: #335F8D;
-          text-decoration: underline;
-          text-decoration-color: #335f8d14;
-          font-size: 0.9em;
-        }
-        .category a {
-          color: #fff;
-          font-size: 1em;
-        }
-        
-            h2 {
-              margin-top: 3px;
-              font-size: 1rem;
-              line-height: 1.3em;
-            }
-            .brand {
-              color: #a5050b;
-              font-weight: bold;
-            }
-            .footer {
-              font-size: 1.25rem;
-              line-height: 2.5rem;
-              font-weight: 300;
-              margin-top: 1em;
-              margin-bottom: 1em;
-            }
-            .tweet {
-              font-size: 1.2rem;
-              margin-bottom: 1.125em;
-              line-height: 1.5;
-              word-break: break-word;
-            }
-            .flex-container {
-              display: flex;
-              flex-direction: row;
-            }
-            .flex-left {
-                width: 80ch;
-            }
-            .flex-right {
-                margin-left: 50px;
-                position: sticky;
-                top: 15px;
-                align-self: flex-start;
-            }
-            .related {
-              display: list-item;
-              list-style-type: none;
-              margin-left: 31px;
-              margin-bottom: 8px;
-              line-height: 1.3em;
-            }
-            .metadata {
-              display: block;
-              text-align: center;
-            }
-            .metadata-section {
-              margin-bottom: 6px;
-              margin-top: 4px;
-              display: flex;
-              align-items: center;
-            }
-            .metadata-section .icon {
-              margin-right: 5px;
-            }
-            .metadata img {
-              max-width:430px;
-              max-height:205px;
-              width: auto;
-              height: auto;
-              filter: grayscale(100%);
-            }
-            .metadata img:hover {
-              filter: grayscale(0%);
-            }
-            .metadata .caption {
-              display:block;
-              font-size: 0.5em;
-              font-style: italic;
-            }
-            .side-block {
-              background-color: #F5F5F5;
-              padding: 20px;
-              padding-left: 25px;
-              padding-right: 25px;
-              max-width: 50%;
-              min-width: 35%;
-            }
-            .categories {
-              font-size: 0.5em;
-              border-top: 1px solid #d9d9d9;
-            }
-            .category {
-              display: inline-block;
-              margin-right: 0.5em;
-              padding: 0.0714285714em 0.7142857143em 0.1428571429em;
-              border-radius: 2px;
-              background-color: #78ceef;
-              color: #fff;
-              font-weight: 600;
-              font-size: .7em;
-              line-height: 1.5;
-            }
-            @media (max-width: 1300px) {
-              .wrapper {
-                width: 90%;
-              }
-            }
-            @media (max-width: 1024px) {
-              .wrapper {
-                width: 90%;
-              }
-              .flex-container {
-                flex-direction: column;
-              }
-              .flex-left {
-                  width: 100%;
-              }
-              .flex-right {
-                  width: 100%;
-                  margin-left: 0;
-                  position: relative;
-              }
-              .footer {
-                padding: 5px;
-              }
-              .side-block {
-                max-width: inherit;
-                min-width: initial;
-              }
-            }
-            .footer {
-              font-size: 1.25rem;
-              line-height: 2.5rem;
-              font-weight: 300;
-              margin-top: 1em;
-              margin-bottom: 1em;
-              text-align: center;
-            }
-            .small {
-              font-size: 0.6em;
-            }
-          `}
-        </style>
       </div>
       <div className="footer">
         El código fuente de este proyecto se encuentra en <a target="_blank" href="https://github.com/karliky/turrero">GitHub</a>.
         Envía tus mejoras a <a target="_blank" href="http://www.twitter.com/k4rliky">@k4rliky</a>.<br></br>
-        <span className="small">Creado con JavaScript y ChatGPT.</span>
+        <span className="small">Creado con Next.js y ChatGPT.</span>
       </div>
+      <style jsx global>
+          {`
+.wrapper {
+  width: 65%;
+}
+
+.category a {
+  color: #fff;
+  font-size: 1em;
+}
+
+.tweet {
+  font-size: 1.2rem;
+  margin-bottom: 1.125em;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-left {
+  width: 80ch;
+}
+
+.flex-right {
+  margin-left: 50px;
+  position: sticky;
+  top: 15px;
+  align-self: flex-start;
+}
+
+.related {
+  display: list-item;
+  list-style-type: none;
+  margin-left: 31px;
+  margin-bottom: 8px;
+  line-height: 1.3em;
+}
+
+.metadata {
+  display: block;
+  text-align: center;
+}
+
+.metadata-section {
+  margin-bottom: 6px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.metadata-section .icon {
+  margin-right: 5px;
+}
+
+.metadata img {
+  max-width: 430px;
+  max-height: 205px;
+  width: auto;
+  height: auto;
+  filter: grayscale(100%);
+}
+
+.metadata img:hover {
+  filter: grayscale(0%);
+}
+
+.metadata .caption {
+  display: block;
+  font-size: 0.5em;
+  font-style: italic;
+}
+
+.side-block {
+  background-color: #F5F5F5;
+  padding: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  max-width: 50%;
+  min-width: 35%;
+}
+
+.categories {
+  font-size: 0.5em;
+  border-top: 1px solid #d9d9d9;
+}
+
+.category {
+  display: inline-block;
+  margin-right: 0.5em;
+  padding: 0.0714285714em 0.7142857143em 0.1428571429em;
+  border-radius: 2px;
+  background-color: #78ceef;
+  color: #fff;
+  font-weight: 600;
+  font-size: .7em;
+  line-height: 1.5;
+}
+
+@media (max-width: 1300px) {
+  .wrapper {
+      width: 90%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+      width: 90%;
+  }
+
+  .flex-container {
+      flex-direction: column;
+  }
+
+  .flex-left {
+      width: 100%;
+  }
+
+  .flex-right {
+      width: 100%;
+      margin-left: 0;
+      position: relative;
+  }
+
+  .footer {
+      padding: 5px;
+  }
+
+  .side-block {
+      max-width: inherit;
+      min-width: initial;
+  }
+}
+
+.small {
+  font-size: 0.6em;
+}
+          `}
+        </style>
     </div>
   );
 }
