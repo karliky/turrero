@@ -3,11 +3,11 @@ const csvdata = require('csvdata');
 
 (async () => {
     const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({ })
-    const page = await browser.newPage()
+    const browser = await puppeteer.launch({ slowMo: 250 })
+    const page = await browser.newPage();
 
-    const m = puppeteer.devices['iPhone X']
-    await page.emulate(m)
+    const m = puppeteer.devices['iPhone X'];
+    await page.emulate(m);
 
     const tweets = await csvdata.load("../turras.csv", { parse: false });
     const existingTweets = require("../tweets.json").reduce((acc, tweets) => {
@@ -31,6 +31,16 @@ const csvdata = require('csvdata');
                         img: card.querySelector("img").src,
                         url: card.querySelector("a").href
                     }
+                }
+                const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]").querySelector("time");
+                if (embeddedTweet) {
+                    embeddedTweet.click();
+                    const embed = {
+                        type: "embeddedTweet",
+                        id: window.location.href.split("/").pop()
+                    };
+                    history.back();
+                    return embed;
                 }
             } catch (error) {
                 console.error("Could not get metadata", error);
@@ -65,12 +75,16 @@ const csvdata = require('csvdata');
                 await new Promise(r => setTimeout(r, 100));
                 console.log("Waiting for progress bar");
                 await page.waitForSelector('div[role="progressbar"]', { hidden: true });
-                const tweet = await page.evaluate(() =>
-                    document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="tweetText"]').textContent
-                );
                 const currentTweetId = page.url().split("/").slice(-1).pop();
+                const tweet = await page.evaluate(() => {
+                    const tweetContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
+                    if (tweetContainer.querySelector('div[data-testid="tweetText"]')) return tweetContainer.querySelector('div[data-testid="tweetText"]').textContent;
+                    return "";
+                });
+
                 console.log("currentTweetId", currentTweetId);
                 const metadata = await extractMetadata(page);
+                await new Promise(r => setTimeout(r, 100));
                 const time = await page.evaluate(() => {
                     const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('time').dateTime;
                     return el;
@@ -82,13 +96,17 @@ const csvdata = require('csvdata');
                 const stats = parseStats(groupStats);
                 console.log("tweetId", tweetId, { tweet, id: currentTweetId, metadata, time, stats });
                 tweets.push({ tweet, id: currentTweetId, metadata, time, stats });
+                console.log("finding lastTweetFound");
+                await new Promise(r => setTimeout(r, 100));
                 const lastTweetFound = await page.evaluate(() => {
+                    debugger;
+                    console.log("Evaluating", document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling)
                     if(document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling === null)
                         return 'finished';
                     const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling.children[0].querySelector('div[data-testid]').querySelector("a").href;
                     return el;
                 });
-                console.log(lastTweetFound !== 'https://twitter.com/Recuenco');
+                console.log("lastTweetFound", lastTweetFound !== 'https://twitter.com/Recuenco');
                 if (lastTweetFound !== 'https://twitter.com/Recuenco') {
                     stopped = true;
                     const existingTweets = require("../tweets.json");
