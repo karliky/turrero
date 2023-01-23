@@ -224,6 +224,11 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
       margin-left: 0;
       position: relative;
   }
+  
+  .metadata img {
+    max-width: 230px;
+    max-height: 105px;
+  }
 
   .footer {
       padding: 5px;
