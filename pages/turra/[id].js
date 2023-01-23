@@ -61,7 +61,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
                 ${new Date(tweets[0].time).toLocaleDateString("es-ES")} / ${new Date(tweets[0].time).toLocaleTimeString("es-ES")}`}.
             Tiempo de lectura: {readingTime(unrolledThread)}min. <a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a>
           </h2>
-          <div className="categories">Categorías de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
+          <div className="categories">Categoría(s) de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
         </div>
         <div className='flex-container'>
           <div className='flex-left'>{tweets.map(({ tweet, id }) => {
@@ -226,8 +226,8 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
   }
   
   .metadata img {
-    max-width: 230px;
-    max-height: 105px;
+    max-width: 280px;
+    max-height: 120px;
   }
 
   .footer {
