@@ -70,21 +70,30 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
           <div className="categories">Categoría(s) de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
         </div>
         <div className='flex-container'>
-          <div className='flex-left'>{tweets.map(({ tweet, id }) => {
+          <div className='flex-left'>{tweets.map(({ tweet, id, metadata: embeddedTweet }) => {
             const metadata = enrichments.find(_tweet => id === _tweet.id);
             let tweetText = tweet.replace(/#(\S*)/g, '<a target="_blank" href="https://twitter.com/search?q=%23$1&src=typed_query">#$1</a>');
             tweetText = tweetText.replace(/@(\S*)/g, '<a target="_blank" href="http://twitter.com/$1">@$1</a>');
             tweetText = replaceURLWithHTMLLinks(tweetText);
-            return <p className='tweet' key={id}>
-              {<span dangerouslySetInnerHTML={{ __html: tweetText }} />}
+            return <div className='tweet' key={id}>
+              <p>{<span dangerouslySetInnerHTML={{ __html: tweetText }} />}</p>
               {metadata && metadata.url && <span className="metadata">
                 <a href={metadata.url} target="_blank"><img src={"../" + metadata.img}></img></a>
                 {metadata.title && <span className="caption">{metadata.title}</span>}
               </span>}
-              {metadata && metadata.type === "embeddedTweet" &&  <span className="metadata">
-                <a href="" target="_blank">Embedded tweet: {metadata.id}</a>
-              </span>}
-            </p>;
+              {embeddedTweet && embeddedTweet.type === "embeddedTweet" && <a 
+                href={"https://twitter.com/" + embeddedTweet.author.split("\n").pop().replace("@", "") + "/status/" + embeddedTweet.id }
+                className="static-tweet"
+                target="_blank"
+                >
+                <div className="static-tweet-author">
+                  <div className="icon"></div> {embeddedTweet.author}
+                </div>
+                <p className="static-tweet-text">
+                  {embeddedTweet.tweet}
+                </p>
+              </a>}
+            </div>;
           })}</div>
           <div className='flex-right side-block'>
             {!books.length && !videos.length && !linkedin.length && <div>No hay información adicional en esta turra.</div>}
@@ -208,6 +217,37 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
   font-weight: 600;
   font-size: .7em;
   line-height: 1.5;
+}
+
+.static-tweet {
+  outline: 1px solid #e1e8ed;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+  margin-top: 1.25rem;
+  border-radius: 5px;
+  font-size: 0.9em;
+  display: inline-block;
+  color: inherit;
+  text-decoration: auto;
+}
+
+.static-tweet-text {
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.static-tweet-author {
+  display: flex;
+  align-items: center;
+}
+
+.static-tweet .icon {
+    width: 1.25em;
+    height: 1.25em;
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h72v72H0z%22%2F%3E%3Cpath%20class%3D%22icon%22%20fill%3D%22%231da1f2%22%20d%3D%22M68.812%2015.14c-2.348%201.04-4.87%201.744-7.52%202.06%202.704-1.62%204.78-4.186%205.757-7.243-2.53%201.5-5.33%202.592-8.314%203.176C56.35%2010.59%2052.948%209%2049.182%209c-7.23%200-13.092%205.86-13.092%2013.093%200%201.026.118%202.02.338%202.98C25.543%2024.527%2015.9%2019.318%209.44%2011.396c-1.125%201.936-1.77%204.184-1.77%206.58%200%204.543%202.312%208.552%205.824%2010.9-2.146-.07-4.165-.658-5.93-1.64-.002.056-.002.11-.002.163%200%206.345%204.513%2011.638%2010.504%2012.84-1.1.298-2.256.457-3.45.457-.845%200-1.666-.078-2.464-.23%201.667%205.2%206.5%208.985%2012.23%209.09-4.482%203.51-10.13%205.605-16.26%205.605-1.055%200-2.096-.06-3.122-.184%205.794%203.717%2012.676%205.882%2020.067%205.882%2024.083%200%2037.25-19.95%2037.25-37.25%200-.565-.013-1.133-.038-1.693%202.558-1.847%204.778-4.15%206.532-6.774z%22%2F%3E%3C%2Fsvg%3E);
+}
+
+.static-tweet:hover {
+  outline: 1px solid #ccd6dd;
 }
 
 @media (max-width: 1300px) {
