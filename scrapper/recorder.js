@@ -28,18 +28,19 @@ const csvdata = require('csvdata');
                     if(!card.querySelector("a")) return;
                     return {
                         type: "card",
-                        img: card.querySelector("img").src,
+                        img: card.querySelector("img") ? card.querySelector("img").src : "",
                         url: card.querySelector("a").href
                     }
                 }
                 const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]").querySelector("time");
                 if (embeddedTweet) {
                     embeddedTweet.click();
+                    const tweet =  document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="tweetText"]');
                     const embed = {
                         type: "embeddedTweet",
                         id: window.location.href.split("/").pop(),
                         author: document.querySelector("div[data-testid=User-Names]").innerText,
-                        tweet: document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="tweetText"]').textContent
+                        tweet: tweet || ""
                     };
                     history.back();
                     return embed;
