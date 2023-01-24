@@ -6,10 +6,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "next": "latest",
     "node-fetch": "^3.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-static-tweets": "^2.0.0",
+    "static-tweets": "^2.0.0"
   }
 }

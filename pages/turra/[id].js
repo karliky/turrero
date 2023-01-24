@@ -50,6 +50,12 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
   const linkedin = enrichments.filter((tweet) => tweet.media === "linkedin");
   const formatTitle = (title) => title.charAt(0).toUpperCase() + title.slice(1);
   const unrolledThread = tweets.reduce((acc, { tweet }) => acc + tweet, "");
+
+  const replaceURLWithHTMLLinks = (text) => {
+    var exp = /(\b(https?|ftp|file):\/\/([-A-Z0-9+&@#%?=~_|!:,.;]*)([-A-Z0-9+&@#%?\/=~_|!:,.;]*)[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+  }
+
   return (
     <div>
       <div className="wrapper">
@@ -68,11 +74,15 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
             const metadata = enrichments.find(_tweet => id === _tweet.id);
             let tweetText = tweet.replace(/#(\S*)/g, '<a target="_blank" href="https://twitter.com/search?q=%23$1&src=typed_query">#$1</a>');
             tweetText = tweetText.replace(/@(\S*)/g, '<a target="_blank" href="http://twitter.com/$1">@$1</a>');
+            tweetText = replaceURLWithHTMLLinks(tweetText);
             return <p className='tweet' key={id}>
               {<span dangerouslySetInnerHTML={{ __html: tweetText }} />}
-              {metadata && <span className="metadata">
+              {metadata && metadata.url && <span className="metadata">
                 <a href={metadata.url} target="_blank"><img src={"../" + metadata.img}></img></a>
                 {metadata.title && <span className="caption">{metadata.title}</span>}
+              </span>}
+              {metadata && metadata.type === "embeddedTweet" &&  <span className="metadata">
+                <a href="" target="_blank">Embedded tweet: {metadata.id}</a>
               </span>}
             </p>;
           })}</div>

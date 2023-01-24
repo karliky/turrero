@@ -5,9 +5,9 @@ const Downloader = require("nodejs-file-downloader");
 const { tall } = require('tall');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const enrichments = require("../tweets_enriched.json");
 
 fs.rmSync("./metadata", { recursive: true, force: true });
-fs.rmSync("../tweets_enriched.json", { recursive: true, force: true });
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const tweets = [];
@@ -15,6 +15,15 @@ const tweets = [];
     for (const tweetLibrary of tweetsLibrary) {
         for (const tweet of tweetLibrary) {
             if (!tweet.metadata) continue;
+            if(enrichments.find(_tweet => tweet.id === _tweet.id)) {
+                console.log("Tweet already processed", tweet.id);
+                continue;
+            }
+            if (tweet.metadata.type === "embeddedTweet") {
+                console.log({ id: tweet.id, type: "embeddedTweet", embeddedTweetId: tweet.metadata.id });
+                tweets.push({ id: tweet.id, type: "embeddedTweet", embeddedTweetId: tweet.metadata.id });
+                continue;
+            }
             const { metadata } = tweet;
             const downloader = new Downloader({
                 url: metadata.img,
@@ -49,7 +58,7 @@ const tweets = [];
                     tweet.metadata.title = $('h1').text().trim();
                     tweet.metadata.description = $('meta[name=description]').attr('content');
                 }
-                console.log(tweet.metadata);
+                console.log({ id: tweet.id, ...tweet.metadata });
                 tweets.push({ id: tweet.id, ...tweet.metadata });
             } catch (error) {
                 console.log("Request failed", tweet.metadata, error.message);

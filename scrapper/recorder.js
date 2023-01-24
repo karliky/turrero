@@ -3,7 +3,7 @@ const csvdata = require('csvdata');
 
 (async () => {
     const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({ slowMo: 250 })
+    const browser = await puppeteer.launch({ slowMo: 150 })
     const page = await browser.newPage();
 
     const m = puppeteer.devices['iPhone X'];
@@ -37,7 +37,9 @@ const csvdata = require('csvdata');
                     embeddedTweet.click();
                     const embed = {
                         type: "embeddedTweet",
-                        id: window.location.href.split("/").pop()
+                        id: window.location.href.split("/").pop(),
+                        author: document.querySelector("div[data-testid=User-Names]").innerText,
+                        tweet: document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="tweetText"]').textContent
                     };
                     history.back();
                     return embed;
@@ -99,8 +101,6 @@ const csvdata = require('csvdata');
                 console.log("finding lastTweetFound");
                 await new Promise(r => setTimeout(r, 100));
                 const lastTweetFound = await page.evaluate(() => {
-                    debugger;
-                    console.log("Evaluating", document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling)
                     if(document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling === null)
                         return 'finished';
                     const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling.children[0].querySelector('div[data-testid]').querySelector("a").href;

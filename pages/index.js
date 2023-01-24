@@ -9,7 +9,7 @@ export default function Turrero() {
   // Añadir bloques de wikipedia y libros.
   // Añadir bloque de #preguntaalrecu
   // Ordenar bloques for fecha
-  // Añadir buscador
+  // Añadir buscador https://github.com/olivernn/lunr.js
   // Mejor legibilidad en movil
   // Añadir sitemap
 
