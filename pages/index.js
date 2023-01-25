@@ -108,7 +108,7 @@ export default function Turrero() {
   const mostViews = findTopViews();
   return (<div>
     <Head>
-      <title>Turrero Post</title>
+      <title>El Turrero Post - Las turras de Javier G. Recuenco</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <div className="wrapper">

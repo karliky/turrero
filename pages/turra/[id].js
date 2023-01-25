@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 export async function getStaticPaths() {
   const tweets = require("../../tweets.json");
   const paths = tweets.map((tweet) => ({
@@ -56,7 +58,11 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
     return text.replace(exp, "<a href='$1' target='_blank'>$1</a>");
   }
 
-  return (
+  return (<div>
+    <Head>
+      <title>El Turrero Post - {summary} - Las turras de Javier G. Recuenco</title>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
     <div>
       <div className="wrapper">
         <div className='header'>
@@ -79,14 +85,14 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
               <p dangerouslySetInnerHTML={{ __html: tweetText }}></p>
               {metadata && metadata.url && <span className="metadata">
                 <a href={metadata.url} target="_blank">{metadata.img && <img src={"../" + metadata.img}></img>}
-                {metadata.title && <span className="caption">{metadata.title}</span>}
+                  {metadata.title && <span className="caption">{metadata.title}</span>}
                 </a>
               </span>}
-              {embeddedTweet && embeddedTweet.type === "embeddedTweet" && <a 
-                href={"https://twitter.com/" + embeddedTweet.author.split("\n").pop().replace("@", "") + "/status/" + embeddedTweet.id }
+              {embeddedTweet && embeddedTweet.type === "embeddedTweet" && <a
+                href={"https://twitter.com/" + embeddedTweet.author.split("\n").pop().replace("@", "") + "/status/" + embeddedTweet.id}
                 className="static-tweet"
                 target="_blank"
-                >
+              >
                 <div className="static-tweet-author">
                   <div className="icon"></div> {embeddedTweet.author}
                 </div>
@@ -100,15 +106,15 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
           <div className='flex-right side-block'>
             {!books.length && !videos.length && !linkedin.length && <div>No hay información adicional en esta turra.</div>}
             {!!videos.length && <div>
-            <div className='metadata-section'><img className="icon" src="/youtube.svg" alt="Enlaces a youtube"/>Videos relacionados:</div>
+              <div className='metadata-section'><img className="icon" src="/youtube.svg" alt="Enlaces a youtube" />Videos relacionados:</div>
               {videos.map(metadata => <a key={metadata.id + "-video"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
             {!!books.length && <div>
-            <div className='metadata-section'><img className="icon" src="/book.svg" alt="Enlaces a Goodreads"/>Libros relacionados:</div>
+              <div className='metadata-section'><img className="icon" src="/book.svg" alt="Enlaces a Goodreads" />Libros relacionados:</div>
               {books.map(metadata => <a key={metadata.id + "-book"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
             {!!linkedin.length && <div>
-            <div className='metadata-section'><img className="icon" src="/linkedin.svg" alt="Enlaces a Linkedin"/>Artículos en linkedin relacionados:</div>
+              <div className='metadata-section'><img className="icon" src="/linkedin.svg" alt="Enlaces a Linkedin" />Artículos en linkedin relacionados:</div>
               {linkedin.map(metadata => <a key={metadata.id + "-linkedin"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
             </div>}
           </div>
@@ -120,7 +126,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
         <span className="small">Creado con Next.js y ChatGPT.</span>
       </div>
       <style jsx global>
-          {`
+        {`
 .wrapper {
   width: 65%;
 }
@@ -306,9 +312,9 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
   font-size: 0.6em;
 }
           `}
-        </style>
+      </style>
     </div>
-  );
+  </div>);
 }
 
 export default Post;
