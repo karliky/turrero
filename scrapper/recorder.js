@@ -3,7 +3,7 @@ const csvdata = require('csvdata');
 
 (async () => {
     const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({ slowMo: 150 })
+    const browser = await puppeteer.launch({ slowMo: 200 })
     const page = await browser.newPage();
 
     const m = puppeteer.devices['iPhone X'];
