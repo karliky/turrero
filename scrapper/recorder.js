@@ -10,17 +10,24 @@ const csvdata = require('csvdata');
     await page.emulate(m);
 
     const tweets = await csvdata.load("../turras.csv", { parse: false });
-    const existingTweets = require("../tweets.json").reduce((acc, tweets) => {
+    console.log('Total tweets', tweets.length);
+    const args = process.argv.slice(2);
+
+    let existingTweets = require("../tweets.json").reduce((acc, tweets) => {
         acc.push(tweets[0].id);
         return acc;
     }, []);
+
+    if (args.length === 2) existingTweets = existingTweets.slice(args[0], args[1]);
+    console.log('Processing a total of tweets', existingTweets.length);
+
     const tweetIds = tweets.map((tweet) => tweet.id).reduce((acc, id) => {
         if (existingTweets.find(_id => id === _id)) return acc;
         acc.push(id);
         return acc;
     }, []);
     async function extractMetadata(page) {
-        return page.evaluate(() => {
+        const metadata = await page.evaluate(() => {
             try {
                 const card = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="card.wrapper"]');
                 if (card) {
@@ -32,23 +39,38 @@ const csvdata = require('csvdata');
                         url: card.querySelector("a").href
                     }
                 }
-                const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]").querySelector("time");
-                if (embeddedTweet) {
-                    embeddedTweet.click();
-                    const tweet =  document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="tweetText"]');
-                    const embed = {
-                        type: "embeddedTweet",
-                        id: window.location.href.split("/").pop(),
-                        author: document.querySelector("div[data-testid=User-Names]").innerText,
-                        tweet: tweet || ""
-                    };
-                    history.back();
-                    return embed;
-                }
+                const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
+                if (embeddedTweet && embeddedTweet.querySelector("time")) return { isEmbedTweet: true }
             } catch (error) {
-                console.error("Could not get metadata", error);
+                return { error: "Could not get metadata ", msg: error.message }
             }
         });
+        if (!metadata) return metadata;
+        if (!metadata.isEmbedTweet) return metadata;
+        if(await page.$('div[data-testid="app-bar-close"]') !== null) await page.click('div[data-testid="app-bar-close"]')
+
+        await page.evaluate(() => {
+            const imageContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[data-testid="tweetPhoto"]');
+            if (imageContainer) return imageContainer.remove();
+            return "";
+        }),
+
+        await Promise.all([ 
+            page.waitForNavigation(),
+            page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time') 
+        ]);
+        const embed = {
+            type: "embeddedTweet",
+            id: page.url().split("/").slice(-1).pop(),
+            author:  await page.evaluate(() => document.querySelector("div[data-testid=User-Names]").innerText),
+            tweet: await page.evaluate(() => {
+                const tweetContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
+                if (tweetContainer.querySelector('div[data-testid="tweetText"]')) return tweetContainer.querySelector('div[data-testid="tweetText"]').textContent;
+                return "";
+            })
+        };
+        await Promise.all([ page.waitForNavigation(), page.goBack() ]);
+        return embed;
     }
 
     function parseStats(stats) {
