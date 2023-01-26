@@ -3,7 +3,7 @@ const csvdata = require('csvdata');
 
 (async () => {
     const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({ slowMo: 200 })
+    const browser = await puppeteer.launch({ slowMo: 150 })
     const page = await browser.newPage();
 
     const m = puppeteer.devices['iPhone X'];
@@ -13,40 +13,59 @@ const csvdata = require('csvdata');
     console.log('Total tweets', tweets.length);
     const args = process.argv.slice(2);
 
-    let existingTweets = require("../tweets.json").reduce((acc, tweets) => {
+    const existingTweets = require("../tweets.json").reduce((acc, tweets) => {
         acc.push(tweets[0].id);
         return acc;
     }, []);
 
-    if (args.length === 2) existingTweets = existingTweets.slice(args[0], args[1]);
-    console.log('Processing a total of tweets', existingTweets.length);
-
-    const tweetIds = tweets.map((tweet) => tweet.id).reduce((acc, id) => {
+    let tweetIds = tweets.map((tweet) => tweet.id).reduce((acc, id) => {
         if (existingTweets.find(_id => id === _id)) return acc;
         acc.push(id);
         return acc;
     }, []);
+
+    if (args.length === 2) tweetIds = tweetIds.slice(args[0], args[1]);
+
+    console.log('Processing a total of tweets', tweetIds.length , JSON.stringify(tweetIds.map(t => ({id: t}))));
+
     async function extractMetadata(page) {
         const metadata = await page.evaluate(() => {
             try {
                 const card = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[data-testid="card.wrapper"]');
                 if (card) {
-                    if(!card.querySelector("img")) return;
-                    if(!card.querySelector("a")) return;
                     return {
                         type: "card",
                         img: card.querySelector("img") ? card.querySelector("img").src : "",
-                        url: card.querySelector("a").href
+                        url: card.querySelector("a") ? card.querySelector("a").href : "",
                     }
                 }
-                const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
-                if (embeddedTweet && embeddedTweet.querySelector("time")) return { isEmbedTweet: true }
+
+                const isMediaPresent = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
+                if(isMediaPresent && isMediaPresent.querySelector("div:not([id])") && isMediaPresent.querySelector("div:not([id])").dir !== "ltr") {
+                    const images = Array.from(isMediaPresent.querySelector("div:not([id])").querySelectorAll('div[data-testid="tweetPhoto"]'));
+                    if (images.length !== 0) return {
+                        type: "media",
+                        imgs: images.map((mediaImg) => {
+                            return {
+                                img: mediaImg.querySelector("img") ? mediaImg.querySelector("img").src : "",
+                                url: (mediaImg.querySelector("img").closest("a")) ? mediaImg.querySelector("img").closest("a").href : ""
+                            }
+                        })
+                    }
+                }
             } catch (error) {
                 return { error: "Could not get metadata ", msg: error.message }
             }
         });
-        if (!metadata) return metadata;
-        if (!metadata.isEmbedTweet) return metadata;
+
+        const hasEmbedTweet = await page.evaluate(() => {
+            const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
+            if (embeddedTweet && embeddedTweet.querySelector("time")) return true;
+        });
+
+        if (!hasEmbedTweet && !!metadata) return metadata;
+        if (!hasEmbedTweet) return metadata;
+
         if(await page.$('div[data-testid="app-bar-close"]') !== null) await page.click('div[data-testid="app-bar-close"]')
 
         await page.evaluate(() => {
@@ -60,7 +79,7 @@ const csvdata = require('csvdata');
             page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time') 
         ]);
         const embed = {
-            type: "embeddedTweet",
+            type: "embed",
             id: page.url().split("/").slice(-1).pop(),
             author:  await page.evaluate(() => document.querySelector("div[data-testid=User-Names]").innerText),
             tweet: await page.evaluate(() => {
@@ -70,7 +89,8 @@ const csvdata = require('csvdata');
             })
         };
         await Promise.all([ page.waitForNavigation(), page.goBack() ]);
-        return embed;
+        if (!metadata) return { embed };
+        return { ...metadata, embed };
     }
 
     function parseStats(stats) {
@@ -134,7 +154,7 @@ const csvdata = require('csvdata');
                     stopped = true;
                     const existingTweets = require("../tweets.json");
                     existingTweets.push(tweets);
-                    writeFileSync("../tweets.json", JSON.stringify(existingTweets));
+                    writeFileSync("../tweets" + args.join("-") + ".json", JSON.stringify(existingTweets));
                     continue;
                 }
                 console.log("Navigating to next tweet");
