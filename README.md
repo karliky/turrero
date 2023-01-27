@@ -4,11 +4,10 @@ Welcome to the El Turrero Post project! This website is designed to showcase the
 
 ## Features
 
-- A clean, minimalist design that puts the focus on the professor's tweets
-- Automatic embedding of images and videos from Twitter
+- A clean, minimalist design that puts the focus on the threads
+- Automatic embedding of images and cards from Twitter
 - A simple navigation system that makes it easy to find specific threads
 - The ability to search for specific keywords within the threads
-- A "favorites" feature that allows users to save their favorite threads for later viewing
 
 ## More resources
 
