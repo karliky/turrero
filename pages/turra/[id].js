@@ -85,7 +85,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
     <div>
       <div className="wrapper">
         <div className='header'>
-          <a href="/"><img src="/back.svg" alt="Volver atrás" /></a>
+          <a href="/" className="back"><img src="/back.svg" alt="Volver atrás" />El Turrero Post</a>
           <h1>{getTitle(summary)}</h1>
           <h2>
             {publishedDate}.
@@ -154,6 +154,16 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
       </div>
       <style jsx global>
         {`
+
+.back {
+  font-size: 0.5em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #565656;
+  text-decoration: none;
+}
+
 .wrapper {
   width: 65%;
 }
