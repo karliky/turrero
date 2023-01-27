@@ -36,7 +36,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
             <div>Comparte esta turra con el mundo:</div>
             <div className="sharing">
             <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
-            <div className="social-media linkedin"><a href={"https://www.linkedin.com/sharing/share-offsite/?url=https://turrero.vercel.app/turra/" + tweetId} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
+            <div className="social-media linkedin"><a href={"http://www.linkedin.com/shareArticle?mini=true&url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title="+ encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
             </div>
         </div>
     </div>;
