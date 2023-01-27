@@ -10,8 +10,9 @@ export default function Turrero() {
   // Añadir bloque de #preguntaalrecu
   // Ordenar bloques for fecha
   // Añadir buscador https://github.com/olivernn/lunr.js
-  // Mejor legibilidad en movil
+  // Mejor legibilidad en movil y scroll
   // Añadir sitemap
+  // Mostrar cards en diseño de card
 
   const blockOrder = {
     "resolución-de-problemas-complejos": [],
