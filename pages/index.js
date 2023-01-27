@@ -1,11 +1,51 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
+import elasticlunr from "elasticlunr";
+
 import Footer from "../components/footer";
 
 import TweetsMap from "../tweets_map.json";
 import Tweets from "../tweets.json";
 import TweetsSummary from "../tweets_summary.json";
 
-export default function Turrero() {
+let _index;
+
+export async function getStaticProps() {
+  const index = elasticlunr(function () {
+    this.addField("tweet");
+    this.setRef("id");
+  });
+
+  Tweets.forEach((TweetCollection) => {
+    TweetCollection.forEach(({ id, tweet }) => {
+      index.addDoc({ id: `${TweetCollection[0].id}-${id}`, tweet });
+    });
+  });
+
+  return {
+    props: {
+      indexDump: JSON.stringify(index)
+    }
+  };
+}
+
+export default function Turrero({ indexDump }) {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [hits, setHits] = useState([]);
+
+  useEffect(() => {
+    if (!_index) {
+      _index = elasticlunr.Index.load(JSON.parse(indexDump));
+    }
+
+    setHits(searchQuery ? _index.search(searchQuery) : []);
+  }, [indexDump, searchQuery]);
+
+  function handleChange(event) {
+    setSearchQuery(event.target.value);
+  }
+
   // TODO:
   // Añadir bloque de #preguntaalrecu
   // Añadir buscador https://github.com/olivernn/lunr.js
@@ -121,6 +161,21 @@ export default function Turrero() {
       <meta property="og:image" content="https://turrero.vercel.app/android-chrome-512x512.png"/>
     </Head>
     <div className="wrapper">
+     Search <input
+        onChange={handleChange}
+        placeholder="Search documents"
+        type="search"
+        value={searchQuery}
+      />
+      {hits.length > 0 ? (
+        <ul>
+          {(hits ?? []).map((hit) => (
+            <li key={hit.ref}>{JSON.stringify(hit)}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>{searchQuery ? "No matches" : "Enter a search"}</p>
+      )}
       <div className="header">
         <h1>El <span className="brand">Turrero Post</span> es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h1>
         <h2>Hay un total de {Tweets.length} turras, la última actualización fue el {`${new Date().toLocaleDateString("es-ES")}`}.</h2>

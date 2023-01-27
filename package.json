@@ -14,5 +14,8 @@
     "react-dom": "18.2.0",
     "react-static-tweets": "^2.0.0",
     "static-tweets": "^2.0.0"
+  },
+  "devDependencies": {
+    "elasticlunr": "^0.9.5"
   }
 }
