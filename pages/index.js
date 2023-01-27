@@ -6,14 +6,9 @@ import Tweets from "../tweets.json";
 import TweetsSummary from "../tweets_summary.json";
 
 export default function Turrero() {
-  // TODO: 
-  // Boton de compartir en Twitter
-  // Añadir metas de title y description
+  // TODO:
   // Añadir bloque de #preguntaalrecu
-  // Ordenar bloques for fecha
   // Añadir buscador https://github.com/olivernn/lunr.js
-  // Mejor legibilidad en movil
-  // Añadir sitemap
   // Mostrar cards en diseño de card
   // Algunos enlaces a Goodreads.com tienen "Loading..." como titulo
 
