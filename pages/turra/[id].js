@@ -20,18 +20,21 @@ export async function getStaticProps(context) {
   const thread = Tweets.find(tweet => {
     return tweetId === tweet[0].id;
   }) || [];
+
+  const publishedDate = `Publicado el ${new Date(thread[0].time).toLocaleDateString("es-ES")} / ${new Date(thread[0].time).toLocaleTimeString("es-ES")}`
   return {
     props: {
       tweetId: tweetId,
       summary: summaryResult.summary || "",
       categories: categoriesResult.categories || "",
       tweets: thread,
-      enrichments: TweetsEnriched.filter((_tweet) => thread.find((thread => thread.id === _tweet.id)))
+      enrichments: TweetsEnriched.filter((_tweet) => thread.find((thread => thread.id === _tweet.id))),
+      publishedDate
     }
   }
 }
 
-const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
+const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate }) => {
   const getTitle = (title) => {
     const highlightedText = title.split(" ").slice(0, 2).join(" ");
     const rest = title.split(" ").slice(2, 999).join(" ");
@@ -71,8 +74,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments }) => {
           <a href="/"><img src="/back.svg" alt="Volver atrás" /></a>
           <h1>{getTitle(summary)}</h1>
           <h2>
-            {`Publicado el 
-                ${new Date(tweets[0].time).toLocaleDateString("es-ES")} / ${new Date(tweets[0].time).toLocaleTimeString("es-ES")}`}.
+            {publishedDate}.
             Tiempo de lectura: {readingTime(unrolledThread)}min. <a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a>
           </h2>
           <div className="categories">Categoría(s) de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
