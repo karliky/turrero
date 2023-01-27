@@ -7,7 +7,7 @@ import TweetsSummary from "../tweets_summary.json";
 
 export default function Turrero() {
   // TODO: 
-  // Añadir bloques de wikipedia y libros.
+  // Boton de compartir en Twitter
   // Añadir metas de title y description
   // Añadir bloque de #preguntaalrecu
   // Ordenar bloques for fecha

@@ -1,6 +1,6 @@
 // NODE_TLS_REJECT_UNAUTHORIZED=0
 const tweetsLibrary = require("../tweets.json");
-const { writeFileSync, rmSync } = require("fs");
+const { writeFileSync } = require("fs");
 const Downloader = require("nodejs-file-downloader");
 const { tall } = require('tall');
 const fetch = require('node-fetch');
@@ -30,6 +30,16 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             tweet.metadata.media = "goodreads";
             tweet.metadata.title = title;
         }
+        if (url.includes("wikipedia.org")) {
+            const response = await fetch(url);
+            const data = await response.text();
+            const $ = cheerio.load(data);
+            tweet.metadata.media = "wikipedia";
+            tweet.metadata.title = $('h1').text().trim();
+            tweet.metadata.description = Array.from($("div[id=mw-content-text] p")).slice(0, 2).map(el => $(el).text()).join("").trim()
+            // Prevent ban from Wikipedia servers
+            await new Promise(r => setTimeout(r, 1000));
+        }
         if (url.includes("linkedin.com")) {
             const response = await fetch(url);
             const data = await response.text();
@@ -45,7 +55,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             const url = await tall(tweet.metadata.url);
             tweet.metadata.url = url;
             await processKnownDomain(tweet, url);
-            saveTweet(tweet, existingTweets);
+            saveTweet(tweet);
             return;
         }
         const downloader = new Downloader({
@@ -57,7 +67,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             delete tweet.metadata.embed;
             tweet.metadata.img = filePath;
             tweet.metadata.type = "media";
-            saveTweet(tweet, existingTweets);
+            saveTweet(tweet);
             return;
         }
         const url = await tall(tweet.metadata.url);
@@ -65,7 +75,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
         tweet.metadata.url = url;
         tweet.tweet = undefined;
         await processKnownDomain(tweet, url);
-        saveTweet(tweet, existingTweets);
+        saveTweet(tweet);
     };
 
     for (const tweetLibrary of tweetsLibrary) {
@@ -73,7 +83,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             if (!tweet.metadata) continue;
             const { embed } = tweet.metadata;
             if (enrichments.find(_tweet => tweet.id === _tweet.id || (embed && embed.id === _tweet.id))) {
-                console.log("Tweet already processed", tweet.id);
                 continue;
             }
             if (embed) {
@@ -102,7 +111,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     process.exit(0);
 })()
 
-function saveTweet(tweet, existingTweets) {
+function saveTweet(tweet) {
     console.log({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
     const existingTweets = require("../tweets_enriched.json");

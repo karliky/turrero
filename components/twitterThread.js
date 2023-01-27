@@ -4,6 +4,7 @@ export default function ({ tweets, enrichments, urls }) {
     const books = enrichments.filter((tweet) => tweet.media === "goodreads");
     const videos = enrichments.filter((tweet) => tweet.media === "youtube");
     const linkedin = enrichments.filter((tweet) => tweet.media === "linkedin");
+    const wikipedia = enrichments.filter((tweet) => tweet.media === "wikipedia");
     const replaceURLWithHTMLLinks = (text) => {
         var exp = /(\b(https?|ftp|file):\/\/([-A-Z0-9+&@#%?=~_|!:,.;]*)([-A-Z0-9+&@#%?\/=~_|!:,.;]*)[-A-Z0-9+&@#\/%=~_|])/ig;
         return text.replace(exp, "<a href='$1' target='_blank'>$1</a>");
@@ -17,6 +18,6 @@ export default function ({ tweets, enrichments, urls }) {
             const embed = embeddedTweet ? embeddedTweet.embed : undefined;
             return RenderTweet({ id, tweetText, metadata, embed });
         })}</div>
-        {Sidebar({ books, videos, linkedin, urls })}
+        {Sidebar({ books, videos, linkedin, urls, wikipedia })}
     </div>;
 }

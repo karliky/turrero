@@ -131,6 +131,8 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
 
         .metadata-section .icon {
           margin-right: 5px;
+          width: 24px;
+          height: 24px;
         }
 
         .metadata img {
