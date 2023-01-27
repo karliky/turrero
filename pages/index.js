@@ -13,6 +13,7 @@ export default function Turrero() {
   // Mejor legibilidad en movil y scroll
   // Añadir sitemap
   // Mostrar cards en diseño de card
+  // Algunos enlaces a Goodreads.com tienen "Loading..." como titulo
 
   const blockOrder = {
     "resolución-de-problemas-complejos": [],

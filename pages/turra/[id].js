@@ -1,4 +1,5 @@
 import Head from "next/head";
+const Url = require('node:url');
 
 export async function getStaticPaths() {
   const tweets = require("../../tweets.json");
@@ -21,20 +22,33 @@ export async function getStaticProps(context) {
     return tweetId === tweet[0].id;
   }) || [];
 
-  const publishedDate = `Publicado el ${new Date(thread[0].time).toLocaleDateString("es-ES")} / ${new Date(thread[0].time).toLocaleTimeString("es-ES")}`
+  const enrichments = TweetsEnriched.filter((_tweet) => thread.find((thread => thread.id === _tweet.id)));
+
+  const urlsInThread = thread.reduce((acc, { tweet }) => {
+    const regexp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?!&//=]*)/gi;
+    const matches = tweet.match(regexp);
+    if (matches) matches.forEach((url) => acc.push(url));
+    return acc;
+  }, []);
+  const urlsInEnrichments = enrichments.filter((e) => e.url).map(e => e.url);
+  const duplicatedUrls = urlsInThread.filter(url => urlsInEnrichments.find(_url => Url.parse(_url).path === Url.parse(url).path));
+  const urls = urlsInThread.filter(url => !duplicatedUrls.find(_url => _url === url));
+
+  const publishedDate = `Publicado el ${new Date(thread[0].time).toLocaleDateString("es-ES")} / ${new Date(thread[0].time).toLocaleTimeString("es-ES")}`;
   return {
     props: {
       tweetId: tweetId,
       summary: summaryResult.summary || "",
       categories: categoriesResult.categories || "",
       tweets: thread,
-      enrichments: TweetsEnriched.filter((_tweet) => thread.find((thread => thread.id === _tweet.id))),
+      enrichments,
+      urls,
       publishedDate
     }
   }
 }
 
-const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate }) => {
+const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate, urls }) => {
   const getTitle = (title) => {
     const highlightedText = title.split(" ").slice(0, 2).join(" ");
     const rest = title.split(" ").slice(2, 999).join(" ");
@@ -91,7 +105,11 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
               {metadata && metadata.url && <span className="metadata">
                 <a href={metadata.url} target="_blank" className={`${!metadata.img ? "big-url" : ""}`}>{metadata.img && <img src={"../" + metadata.img}></img>}
                   {metadata.title && <span className="caption">{metadata.title}</span>}
+                  {!metadata.title && <span className="caption">{metadata.url}</span>}
                 </a>
+              </span>}
+              {metadata && !metadata.url && metadata.img && <span className="metadata">
+                <img src={"../" + metadata.img}></img>
               </span>}
               {embed && embed.type === "embed" && <a
                 href={"https://twitter.com/" + embed.author.split("\n").pop().replace("@", "") + "/status/" + embed.id}
@@ -109,7 +127,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
             </div>;
           })}</div>
           <div className='flex-right side-block'>
-            {!books.length && !videos.length && !linkedin.length && <div>No hay información adicional en esta turra.</div>}
+            {!books.length && !videos.length && !linkedin.length && !urls.length && <div>No hay información adicional en esta turra.</div>}
             {!!videos.length && <div>
               <div className='metadata-section'><img className="icon" src="/youtube.svg" alt="Enlaces a youtube" />Videos relacionados:</div>
               {videos.map(metadata => <a key={metadata.id + "-video"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
@@ -121,6 +139,10 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
             {!!linkedin.length && <div>
               <div className='metadata-section'><img className="icon" src="/linkedin.svg" alt="Enlaces a Linkedin" />Artículos en linkedin relacionados:</div>
               {linkedin.map(metadata => <a key={metadata.id + "-linkedin"} target="_blank" className="related" href={metadata.url}>{metadata.title}</a>)}
+            </div>}
+            {!!urls.length && <div>
+              <div className='metadata-section'><img className="icon" src="/link.svg" alt="Índice de URLs" />Índice de URLs:</div>
+              {urls.map((url, key) => <a key={key + "-url"} target="_blank" className="related" href={url}>{url}</a>)}
             </div>}
           </div>
         </div>
@@ -170,6 +192,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
   margin-left: 31px;
   margin-bottom: 8px;
   line-height: 1.3em;
+  word-break: break-word;
 }
 
 .metadata {
@@ -202,7 +225,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
 
 .metadata .caption {
   display: block;
-  font-size: 0.5em;
+  font-size: 0.8em;
   font-style: italic;
 }
 
@@ -274,7 +297,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
 }
 
 .big-url {
-  font-size: 1.9em;
+  font-size: 1em;
 }
 
 @media (max-width: 1300px) {
