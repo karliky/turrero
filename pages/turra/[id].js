@@ -75,7 +75,7 @@ const Post = ({ tweetId, summary, categories, tweets, enrichments, publishedDate
     return text.replace(exp, "<a href='$1' target='_blank'>$1</a>");
   }
 
-  const title = `El Turrero Post - ${summary} - Las turras de Javier G. Recuenco`;
+  const title = `${summary} - El Turrero Post - Las turras de Javier G. Recuenco`;
 
   return (<div>
     <Head>
