@@ -216,10 +216,16 @@ export default function Turrero() {
   width: 100%;
   height: 30px;
   font-weight: bold;
-  background: linear-gradient(to bottom, #fff, #f5f5f5);
   color: #231f20;
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 2px -1px rgb(0 0 0 / 20%);
+
   border-radius: 10px;
+  box-shadow: 0 5px 5px rgb(0 0 0 / 3%), 0 2px 2px rgb(0 0 0 / 3%), 0 0 1px rgb(0 0 0 / 3%);
+  border: 1px solid #e5e7eb;
+
+  --turra-gradient-from: #f9fafb;
+  --turra-gradient-to: rgba(249,250,251,0);
+  --turra-gradient-stops: var(--turra-gradient-from),var(--turra-gradient-to);
+  background-image: linear-gradient(to right,var(--turra-gradient-stops));
 }
 
 .columns .column .heading .title {
@@ -229,6 +235,7 @@ export default function Turrero() {
   top: 8px;
   left: 12px;
   font-size: 0.9em;
+  font-weight: 500;
 }
 
 .columns .column .heading img {
