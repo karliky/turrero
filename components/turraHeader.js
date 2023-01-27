@@ -21,6 +21,6 @@ export default function ({ summary, categories, publishedDate, tweetId, tweets }
             {publishedDate}.
             Tiempo de lectura: {readingTime(unrolledThread)}min. <a href={"https://twitter.com/Recuenco/status/" + tweetId} target="_blank">Leer en Twitter</a>
         </h2>
-        <div className="categories">Categoría(s) de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
+        <div className="categories">Categoría(s) de esta turra: {categories.split(",").map((category) => <span key={category} className="category"><a href={"/#" + category.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}>{formatTitle(category.replaceAll("-", " "))}</a></span>)}</div>
     </div>;
 }

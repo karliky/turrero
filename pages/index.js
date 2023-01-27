@@ -151,7 +151,7 @@ export default function Turrero() {
           return <div className="column" key={key + "-category"}>
             <div className="spacing">
               <div className="heading">
-                <div className="title" id={key}>{formatTitle(key.replaceAll("-", " "))}</div>
+                <div className="title" id={key.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}>{formatTitle(key.replaceAll("-", " "))}</div>
               </div>
               <div className="links">
                 {tweets[key].map(tweet => ({ 
