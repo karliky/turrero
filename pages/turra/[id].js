@@ -58,11 +58,15 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
     <Head>
       <title>{title}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta name="description" content={summary} key="desc" />
+      <meta property="og:title" content="El Turrero Post - Las turras de Javier G. Recuenco" />
+      <meta property="og:description" content={summary} />
+      <meta property="og:image" content="https://turrero.vercel.app/android-chrome-512x512.png"/>
     </Head>
     <div>
       <div className="wrapper">
         {TurraHeader({ summary, categories, publishedDate, tweetId, tweets  })}
-        {TwitterThread({  tweets, enrichments, urls  })}
+        {TwitterThread({  tweets, enrichments, urls, summary, categories, tweetId  })}
       </div>
       <Footer />
       <style jsx global>
@@ -158,7 +162,8 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           padding: 20px;
           padding-left: 25px;
           padding-right: 25px;
-          max-width: 50%;
+          margin-bottom: 10px;
+          width: 100%;
           min-width: 35%;
         }
 
@@ -222,6 +227,31 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
 
         .big-url {
           font-size: 1em;
+        }
+
+        .sharing {
+          display: flex;
+          align-items: center;
+          margin-top: 5px;
+        }
+        .sharing .social-media {
+          display: block;
+          padding: 10px;
+          margin-right: 10px;
+        }
+        .sharing .social-media.twitter {
+          background-color: #00acee;
+        }
+        .sharing .social-media.linkedin {
+          background-color: #0077b5;
+        }
+        .sharing .social-media a img{
+          margin-right: 10px;
+        }
+        .sharing .social-media a {
+          display: flex;
+          align-items: center;
+          color: #fff;
         }
 
         @media (max-width: 1300px) {

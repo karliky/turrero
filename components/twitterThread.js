@@ -1,6 +1,6 @@
 import Sidebar from "./sidebar";
 import RenderTweet from "./renderTweet";
-export default function ({ tweets, enrichments, urls }) {
+export default function ({ tweets, enrichments, urls, summary, categories, tweetId }) {
     const books = enrichments.filter((tweet) => tweet.media === "goodreads");
     const videos = enrichments.filter((tweet) => tweet.media === "youtube");
     const linkedin = enrichments.filter((tweet) => tweet.media === "linkedin");
@@ -18,6 +18,6 @@ export default function ({ tweets, enrichments, urls }) {
             const embed = embeddedTweet ? embeddedTweet.embed : undefined;
             return RenderTweet({ id, tweetText, metadata, embed });
         })}</div>
-        {Sidebar({ books, videos, linkedin, urls, wikipedia })}
+        {Sidebar({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId })}
     </div>;
 }

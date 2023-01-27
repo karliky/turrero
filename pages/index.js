@@ -119,6 +119,11 @@ export default function Turrero() {
     <Head>
       <title>El Turrero Post - Las turras de Javier G. Recuenco</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta property="og:title" content="El Turrero Post - Las turras de Javier G. Recuenco" />
+      <meta name="description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..." key="desc" />
+      <meta property="og:description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..." />
+      <meta property="og:image" content="https://turrero.vercel.app/android-chrome-512x512.png"/>
     </Head>
     <div className="wrapper">
       <div className="header">
