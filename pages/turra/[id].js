@@ -253,7 +253,9 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           align-items: center;
           color: #fff;
         }
-
+        h2 a {
+          margin-left: 5px;
+        }
         @media (max-width: 1300px) {
           .wrapper {
               width: 90%;
