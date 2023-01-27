@@ -1,1 +1,40 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# El Turrero Post
+
+Welcome to the El Turrero Post project! This website is designed to showcase the Twitter threads of Javier G. Recuenco who specializes in complexity science. The goal of the website is to present the he's tweets in a visually pleasing and easy-to-navigate format.
+
+## Features
+
+- A clean, minimalist design that puts the focus on the professor's tweets
+- Automatic embedding of images and videos from Twitter
+- A simple navigation system that makes it easy to find specific threads
+- The ability to search for specific keywords within the threads
+- A "favorites" feature that allows users to save their favorite threads for later viewing
+
+## More resources
+
+- [Javier G. Recuenco](https://twitter.com/Recuenco)
+- [Polymatas: Sabiduría = Conocimiento + Razón + Aprendizaje](https://www.polymatas.com/)
+- [CPS Notebook](https://cps.tonidorta.com)
+
+## Technology Used
+
+The website is built using:
+
+- Next.js for the front-end and server-side rendering
+- Node.js for the back-end and the scraping tools
+- Puppeter for web scraping twitter threads
+
+## Getting Started
+
+The front-end is located at the root of the project folder and the scraping logic is located under the `scrapper` folder on its own package.
+
+To get started with the project, you will need to clone the repository and install the dependencies. Here are the steps:
+
+1. Clone the repository: `git clone https://github.com/username/el-turrero-post.git`
+2. Install the dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Open the website in your browser: `http://localhost:3000`
+
+## Contribution
+
+We welcome contributions to this project. If you find any bugs or have any suggestions for new features, please open an issue or a pull request on the GitHub repository.

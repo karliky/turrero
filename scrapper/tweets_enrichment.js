@@ -92,7 +92,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 writeFileSync("../tweets_enriched.json", JSON.stringify(existingTweets));
             }
-            const { metadata } = tweet;
             if (!tweet.metadata.type) continue;
             try {
                 if (tweet.metadata.type === "card") {
