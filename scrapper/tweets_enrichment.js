@@ -8,6 +8,7 @@ const cheerio = require('cheerio');
 const enrichments = require("../tweets_enriched.json");
 const puppeteer = require('puppeteer');
 
+// We need to set this to avoid SSL errors when downloading images
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 (async () => {
@@ -44,11 +45,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             const url = await tall(tweet.metadata.url);
             tweet.metadata.url = url;
             await processKnownDomain(tweet, url);
-            console.log({ id: tweet.id, ...tweet.metadata });
-            delete tweet.metadata.embed;
-            const existingTweets = require("../tweets_enriched.json");
-            existingTweets.push({ id: tweet.id, ...tweet.metadata });
-            writeFileSync("../tweets_enriched.json", JSON.stringify(existingTweets));
+            saveTweet(tweet, existingTweets);
             return;
         }
         const downloader = new Downloader({
@@ -60,10 +57,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             delete tweet.metadata.embed;
             tweet.metadata.img = filePath;
             tweet.metadata.type = "media";
-            console.log({ id: tweet.id, ...tweet.metadata });
-            const existingTweets = require("../tweets_enriched.json");
-            existingTweets.push({ id: tweet.id, ...tweet.metadata });
-            writeFileSync("../tweets_enriched.json", JSON.stringify(existingTweets));
+            saveTweet(tweet, existingTweets);
             return;
         }
         const url = await tall(tweet.metadata.url);
@@ -71,11 +65,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
         tweet.metadata.url = url;
         tweet.tweet = undefined;
         await processKnownDomain(tweet, url);
-        console.log({ id: tweet.id, ...tweet.metadata });
-        delete tweet.metadata.embed;
-        const existingTweets = require("../tweets_enriched.json");
-        existingTweets.push({ id: tweet.id, ...tweet.metadata });
-        writeFileSync("../tweets_enriched.json", JSON.stringify(existingTweets));
+        saveTweet(tweet, existingTweets);
     };
 
     for (const tweetLibrary of tweetsLibrary) {
@@ -111,3 +101,11 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     console.log("Finished!");
     process.exit(0);
 })()
+
+function saveTweet(tweet, existingTweets) {
+    console.log({ id: tweet.id, ...tweet.metadata });
+    delete tweet.metadata.embed;
+    const existingTweets = require("../tweets_enriched.json");
+    existingTweets.push({ id: tweet.id, ...tweet.metadata });
+    writeFileSync("../tweets_enriched.json", JSON.stringify(existingTweets));
+}
