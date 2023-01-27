@@ -29,7 +29,7 @@ The front-end is located at the root of the project folder and the scraping logi
 
 To get started with the project, you will need to clone the repository and install the dependencies. Here are the steps:
 
-1. Clone the repository: `git clone https://github.com/username/el-turrero-post.git`
+1. Clone the repository: `git clone git@github.com:karliky/turrero.git`
 2. Install the dependencies: `npm install`
 3. Start the development server: `npm run dev`
 4. Open the website in your browser: `http://localhost:3000`
