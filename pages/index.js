@@ -110,10 +110,18 @@ export default function Turrero() {
       <title>El Turrero Post - Las turras de Javier G. Recuenco</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <meta property="og:title" content="El Turrero Post - Las turras de Javier G. Recuenco" />
+
       <meta name="description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..." key="desc" />
+      <meta property='og:url' content='https://turrero.vercel.app/'/>
+      <meta property="og:title" content="El Turrero Post - Las turras de Javier G. Recuenco" />
       <meta property="og:description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..." />
-      <meta property="og:image" content="https://turrero.vercel.app/android-chrome-512x512.png"/>
+      <meta property="og:image" content="https://turrero.vercel.app/promo.png"/>
+      <meta name="twitter:card" content="summary_large_image"/>
+      <meta name="twitter:site" content="@recuenco"/>
+      <meta name="twitter:creator" content="@k4rliky"/>
+      <meta name="twitter:title" content="El Turrero Post - Las turras de Javier G. Recuenco"/>
+      <meta name="twitter:description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..."/>
+      <meta name="twitter:image" content="https://turrero.vercel.app/promo.png"></meta>
     </Head>
     <div className="wrapper">
       <div className="header">
