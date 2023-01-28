@@ -34,6 +34,20 @@ To get started with the project, you will need to clone the repository and insta
 3. Start the development server: `npm run dev`
 4. Open the website in your browser: `http://localhost:3000`
 
+## Adding new threads
+
+The process of adding a new thread is half manual half automated:
+
+1. Manually add the first tweet id to ontop of the turras.csv file
+2. `$ cd scraper`
+3. `$ node recorder.js` // This will scrap it and save it into tweets.json
+4. `$ node scrapper/tweets_enrichment.js`
+5. Move the `scrapper/metadata` content into `public/metadata`
+6. Verify that everything is fine by running `npm run dev` on the root folder
+
+The files `tweets.json, tweets-db.json, tweets_enriched.json` are automatically generated and should not be manually edited.
+The files `tweets_map.json, tweets_summary.json` should be manually edited.
+
 ## Contribution
 
 We welcome contributions to this project. If you find any bugs or have any suggestions for new features, please open an issue or a pull request on the GitHub repository.

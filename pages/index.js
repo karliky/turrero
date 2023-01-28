@@ -10,7 +10,9 @@ export default function Turrero() {
   // TODO:
   // Añadir bloque de #preguntaalrecu
   // Añadir buscador https://github.com/olivernn/lunr.js
+  // Move json files to a folder
   // Mostrar cards en diseño de card
+  // Algunas fechas no están bien, por ejemplo https://twitter.com/Recuenco/status/1614168029876600833
   // Algunos enlaces a Goodreads.com tienen "Loading..." como titulo
 
   const blockOrder = {

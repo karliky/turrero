@@ -72,6 +72,7 @@ function Search() {
             .search {
                 font-size: 1em;
                 position: relative;
+                margin-top: 5px;
             }
             em {
                 background-color: #a5050b;
