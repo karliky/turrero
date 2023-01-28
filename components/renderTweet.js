@@ -1,5 +1,5 @@
 export default function ({ id, tweetText, metadata, embed }) {
-    return <div className='tweet' key={id}>
+    return <div className='tweet' key={id} id={id}>
         <p dangerouslySetInnerHTML={{ __html: tweetText }}></p>
         {metadata && metadata.url && <span className="metadata">
             <a href={metadata.url} target="_blank" className={`${!metadata.img ? "big-url" : ""}`}>{metadata.img && <img src={"../" + metadata.img}></img>}
