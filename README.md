@@ -16,6 +16,7 @@ Welcome to the El Turrero Post project! This website is designed to showcase the
 - Show cards with card design (for those with url)
 - Some dates are incorrectly scraped, example https://twitter.com/Recuenco/status/1614168029876600833
 - Some titles from Goodreads have a "Loading..." text as value
+- Add copy link to every tweet so we can share it, like lexical.dev does on the left of every block
 
 ## More resources
 
