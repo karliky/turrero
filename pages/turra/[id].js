@@ -71,6 +71,25 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
       <Footer />
       <style jsx global>
         {`
+
+        .header h1, .header h2 {
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+        }
+        .header h1 {
+          font-size: 2.3em;
+          line-height: 1.2em;
+        }
+        .header h2 {
+          margin-top: 6px;
+          line-height: 1.3em;
+        }
+        .header {
+          margin-top: 2em;
+          margin-bottom: 2em;
+          text-align: left;
+          font-size: 1em;
+          font-weight: lighter;
+        }
         .back {
           font-size: 0.5em;
           font-weight: bold;
@@ -78,15 +97,12 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           align-items: center;
           color: #565656;
           text-decoration: none;
+          font-size: 1.2em;
+          margin-bottom: 10px;
         }
 
         .wrapper {
           width: 65%;
-        }
-
-        .category a {
-          color: #fff;
-          font-size: 1em;
         }
 
         .tweet {
@@ -168,8 +184,8 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
         }
 
         .categories {
-          font-size: 0.5em;
           border-top: 1px solid #d9d9d9;
+          padding-top: 6px;
         }
 
         .category {
@@ -179,9 +195,13 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           border-radius: 2px;
           background-color: #78ceef;
           color: #fff;
+          padding: 5px 10px 5px 10px;
+        }
+
+        .category a {
+          color: #fff;
           font-weight: 600;
-          font-size: .7em;
-          line-height: 1.5;
+          text-decoration: none;
         }
 
         .static-tweet {

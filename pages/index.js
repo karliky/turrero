@@ -123,8 +123,9 @@ export default function Turrero() {
     </Head>
     <div className="wrapper">
       <div className="header">
-        <h1>El <span className="brand">Turrero Post</span> es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h1>
-        <h2>Hay un total de {Tweets.length} turras, la última actualización fue el {`${new Date().toLocaleDateString("es-ES")}`}.</h2>
+        <h1>El <span className="brand">Turrero Post</span></h1>
+        <h2>La colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h2>
+        <h3>Hay un total de {Tweets.length} turras, la última actualización fue el {`${new Date().toLocaleDateString("es-ES")}`}.</h3>
         <Search />
       </div>
       <div className="columns">
