@@ -134,7 +134,7 @@ export default function Turrero() {
         <div className="column">
           <div className="spacing">
             <div className="heading">
-              <div className="title">Top 25 turras</div>
+              <div className="title tooltip" title="Ordenador por mayor impacto: (retweet + quotetweet + likes) ">Top 25 turras</div>
             </div>
             <div className="links">
               {top25.map((tweet) => {
@@ -206,7 +206,13 @@ export default function Turrero() {
       .spacing {
         padding: 6px;
       }
-
+      .tooltip {
+        cursor: help;
+        text-decoration: dotted;
+        text-decoration-line: underline;
+        text-decoration-color: #b2b2b2;
+        text-underline-offset: 2px;
+      }
       .small {
         font-size: 0.6em;
       }
