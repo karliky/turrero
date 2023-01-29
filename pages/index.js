@@ -108,7 +108,7 @@ export default function Turrero() {
   return (<div>
     <Head>
       <title>El Turrero Post - Las turras de Javier G. Recuenco</title>
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta content="text/html; charset=UTF-8" name="Content-Type" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
       <meta name="description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..." key="desc" />

@@ -57,6 +57,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
   return (<div>
     <Head>
       <title>{title}</title>
+      <meta content="text/html; charset=UTF-8" name="Content-Type" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
       <meta name="description" content={summary} key="desc" />
