@@ -324,6 +324,8 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
               max-width: inherit;
               min-width: initial;
           }
+          .category {
+            margin-top: 5.5px;
         }
 
         .small {
