@@ -54,8 +54,8 @@ The process of adding a new thread is half manual half automated:
 5. Move the `scrapper/metadata` content into `public/metadata`
 6. Verify that everything is fine by running `npm run dev` on the root folder
 
-The files `tweets.json, tweets-db.json, tweets_enriched.json` are automatically generated and should not be manually edited.
-The files `tweets_map.json, tweets_summary.json` should be manually edited.
+The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
+The files `db/tweets_map.json, db/tweets_summary.json` should be manually edited.
 
 ## Contribution
 
