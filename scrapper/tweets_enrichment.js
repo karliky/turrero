@@ -102,7 +102,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                     await downloadTweetMedia({ id: tweet.id, metadata });
                 }));
             } catch (error) {
-                console.log("Request failed", tweet.metadata, error.message);
+                console.log("Request failed", tweet.id, tweet.metadata, error.message);
                 tweet.metadata.url = undefined;
             }
         }

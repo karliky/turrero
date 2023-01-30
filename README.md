@@ -12,7 +12,6 @@ Welcome to the El Turrero Post project! This website is designed to showcase the
 ## Kown bugs or improvements
 
 - Add blocks: #preguntaalrecu y latest 25 cronologic turras 
-- Move json files to a folder
 - Show cards with card design (for those with url)
 - Some dates are incorrectly scraped, example https://twitter.com/Recuenco/status/1614168029876600833
 - Some titles from Goodreads have a "Loading..." text as value
