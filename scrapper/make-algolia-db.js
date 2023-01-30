@@ -3,7 +3,7 @@
  * and then we can manually upload it to Algolia.
  */
 const fs = require("fs");
-const tweets = require(__dirname + "/../tweets.json");
+const tweets = require("../db/tweets.json");
 
 const algoliaTweets = [];
 
@@ -12,4 +12,4 @@ tweets.forEach((thread) => {
     thread.forEach(({ id, tweet }) => algoliaTweets.push({ id: tweetId + "-" + id, tweet: tweet }));
 });
 
-fs.writeFileSync(__dirname + "/../tweets-db.json", JSON.stringify(algoliaTweets));
+fs.writeFileSync("../db/tweets-db.json", JSON.stringify(algoliaTweets));

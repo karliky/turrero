@@ -17,10 +17,10 @@ const {
     const m = puppeteer.devices['iPhone X'];
     await page.emulate(m);
 
-    const tweets = await csvdata.load(__dirname + "/../turras.csv", { parse: false });
+    const tweets = await csvdata.load("../db/turras.csv", { parse: false });
     console.log('Total tweets', tweets.length);
     // Start by processing only the tweets that are not already processed
-    const existingTweets = require(__dirname + "/../tweets.json").reduce((acc, tweets) => {
+    const existingTweets = require("../db/tweets.json").reduce((acc, tweets) => {
         acc.push(tweets[0].id);
         return acc;
     }, []);
@@ -95,9 +95,9 @@ const {
                 console.log("lastTweetFound", lastTweetFound !== 'https://twitter.com/Recuenco');
                 if (lastTweetFound !== 'https://twitter.com/Recuenco') {
                     stopped = true;
-                    const existingTweets = require(__dirname + "/../tweets.json");
+                    const existingTweets = require("../db/tweets.json");
                     existingTweets.push(tweets);
-                    writeFileSync(__dirname + "/../tweets.json", JSON.stringify(existingTweets));
+                    writeFileSync("../db/tweets.json", JSON.stringify(existingTweets));
                     continue;
                 }
                 /**

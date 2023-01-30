@@ -4,21 +4,17 @@ import TurraHeader from "../../components/turraHeader";
 import TwitterThread from "../../components/twitterThread";
 
 const Url = require('node:url');
+const Tweets = require("../../db/tweets.json");
+const TweetsMap = require("../../db/tweets_map.json");
+const TweetsSummary = require("../../db/tweets_summary.json");
+const TweetsEnriched = require("../../db/tweets_enriched.json");
 
 export async function getStaticPaths() {
-  const tweets = require("../../tweets.json");
-  const paths = tweets.map((tweet) => ({
-    params: { id: tweet[0].id },
-  }));
+  const paths = Tweets.map((tweet) => ({ params: { id: tweet[0].id } }));
   return { paths, fallback: false };
 }
 
 export async function getStaticProps(context) {
-  const Tweets = require("../../tweets.json");
-  const TweetsMap = require("../../tweets_map.json");
-  const TweetsSummary = require("../../tweets_summary.json");
-  const TweetsEnriched = require("../../tweets_enriched.json");
-
   const tweetId = context.params.id;
   const summaryResult = TweetsSummary.find((_tweet => _tweet.id === tweetId)) || "";
   const categoriesResult = TweetsMap.find((_tweet => _tweet.id === tweetId)) || "";

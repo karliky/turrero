@@ -2,9 +2,9 @@ import Head from "next/head";
 import Footer from "../components/footer";
 import Search from "../components/search";
 
-import TweetsMap from "../tweets_map.json";
-import Tweets from "../tweets.json";
-import TweetsSummary from "../tweets_summary.json";
+import TweetsMap from "../db/tweets_map.json";
+import Tweets from "../db/tweets.json";
+import TweetsSummary from "../db/tweets_summary.json";
 
 export default function Turrero() {
   const blockOrder = {
