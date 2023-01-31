@@ -1,1 +1,2 @@
 Create a short summar from this text and do it in Spanish, never use these words in your summary: turras, hoy, hilo. Also, answer me in JSON format including the first word from my text which is an id and your summary:
+You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and the options should be as long as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format. 

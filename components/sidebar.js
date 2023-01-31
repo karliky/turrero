@@ -1,4 +1,11 @@
+import { useRef, useState } from "react";
+const ExamQuestions = require("../db/tweets_exam.json");
+
 export default function ({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId }) {
+    const { questions } = ExamQuestions.find(({ id }) => id === tweetId);
+    const hasQuestions = !!questions.length;
+    const questionsRef = useRef();
+    const [showQuestions, setShowQuestions] = useState(false);
     const getTitle = (title) => {
         return {
             highlightedText: title.split(" ").slice(0, 2).join(" "),
@@ -8,6 +15,13 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
     const title = (getTitle(summary).highlightedText + " " + getTitle(summary).rest);
     const categoriesAsText = categories.split(",")[0].replaceAll("-", " ");
     const sharingText = encodeURI("La turra de @recuenco sobre " + categoriesAsText + ":\n" + title + "\nhttps://turrero.vercel.app/turra/" + tweetId);
+
+    const checkExam = () => {
+        const answers = Array.from(questionsRef.current.querySelectorAll("input[type=radio]")).map(input => input.checked);
+        const correctAnswers = ExamQuestions[0].questions.map(({ options, answer }) => options.map( (_, index) => index + 1 === answer)).flat();
+        setShowQuestions(JSON.stringify(answers) === JSON.stringify(correctAnswers))
+    };
+
     return <div className='flex-right'>
         <div className='side-block'>
             {!books.length && !videos.length && !linkedin.length && !urls.length && !wikipedia.length && <div>No hay información adicional en esta turra.</div>}
@@ -35,9 +49,43 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         <div className='side-block'>
             <div>Dale la turra a más gente:</div>
             <div className="sharing">
-            <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
-            <div className="social-media linkedin"><a href={"http://www.linkedin.com/shareArticle?url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title="+ encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
+                <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
+                <div className="social-media linkedin"><a href={"http://www.linkedin.com/shareArticle?url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title=" + encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
             </div>
         </div>
+        {hasQuestions && !showQuestions &&
+            <div className='side-block'>
+                <div>Preguntas de esta turra:</div>
+                <div className="questions" ref={questionsRef}>
+                    {questions.map(({ question, options }, key) => <fieldset key={key + "-question"} className="question">
+                        <div className="question-title">{question}</div>
+                        <ul>
+                            {options.map((option, subKey) => <li key={subKey + "-option"} className="question-option">
+                                <label key={subKey + "-option"} className="radio">
+                                    <input type="radio" name={"option-" + key} value={subKey} />{option}
+                                </label>
+                            </li>)}
+                        </ul>
+                    </fieldset>)}
+                </div>
+                <button onClick={checkExam}>Comprobar</button>
+            </div>}
+            {showQuestions && <div className='side-block'>¡Has acertado todas las preguntas! ¿No serás @Recuenco?</div>}
+        <style jsx>
+            {`
+            .questions {
+                font-size: 0.8em;
+                padding: 5px;
+            }
+            .question-title {
+                font-weight: bold;
+            }
+            .question-option {
+            }
+            input[type=radio] {
+                accent-color : #a5050b;
+            }
+      `}
+        </style>
     </div>;
 }
