@@ -253,7 +253,6 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
         .big-url {
           font-size: 1em;
         }
-
         .sharing {
           display: flex;
           margin-top: 5px;

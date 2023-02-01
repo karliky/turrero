@@ -29,7 +29,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
 
     const Sharing = () => {
         return <div className='side-block'>
-            <div>Dale la turra a más gente:</div>
+            <div className="metadata-section"><img className="icon" src="/share-2.svg" alt="Compartir Turra" />Dale la turra a más gente:</div>
             <div className="sharing">
                 <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
                 <div className="social-media linkedin"><a href={"http://www.linkedin.com/shareArticle?url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title=" + encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
