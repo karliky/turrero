@@ -88,9 +88,9 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                     <button className="submitExam" onClick={checkExam}>Comprobar</button>
                 </div>
             </div>}
-        {hideQuestions && !hasFailed && <div className='side-block center passed'>
-            <div>
-                <div className="title">¡Has acertado todas las preguntas! ¿No serás @Recuenco?</div>
+        {hideQuestions && !hasFailed && <div className='side-block'>
+            <div className="center">
+                <div className="title bold">¡Has acertado todas las preguntas! ¿No serás @Recuenco?</div>
             </div>
             <Sharing />
         </div>}
@@ -101,6 +101,9 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                 display: flex;
                 align-items: center;
                 color: #191817;
+            }
+            .bold {
+                font-weight: bold;
             }
             .title img {
                 margin-right: 5px;
