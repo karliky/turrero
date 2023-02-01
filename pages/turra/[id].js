@@ -318,6 +318,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           .side-block {
               max-width: inherit;
               min-width: initial;
+              padding: 10px;
           }
           .category {
             margin-top: 5.5px;
