@@ -97,8 +97,6 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         <style jsx>
             {`
             .title {
-              
-                font-size: 1.2em;
                 margin-bottom: 8px;
                 display: flex;
                 align-items: center;
