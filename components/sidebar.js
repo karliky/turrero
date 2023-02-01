@@ -28,7 +28,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
     };
 
     const Sharing = () => {
-        return <div className='side-block'>
+        return <div>
             <div className="metadata-section"><img className="icon" src="/share-2.svg" alt="Compartir Turra" />Dale la turra a más gente:</div>
             <div className="sharing">
                 <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
@@ -62,7 +62,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                 {urls.map((url, key) => <a key={key + "-url"} target="_blank" className="related" href={url}>{url}</a>)}
             </div>}
         </div>
-        {!hideQuestions && <Sharing />}
+        {!hideQuestions && <div className='side-block'><Sharing /></div>}
         {hasQuestions && !hideQuestions &&
             <div className='side-block'>
                 <div className="title"><img className="icon" src="/book-open.svg" alt="Exámen de esta turra" />Pon en práctica tu comprensión:</div>
