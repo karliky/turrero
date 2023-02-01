@@ -7,7 +7,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
     const { questions } = ExamQuestions.find(({ id }) => id === tweetId);
     const hasQuestions = !!questions.length;
     const questionsRef = useRef();
-    const [showQuestions, setShowQuestions] = useState(false);
+    const [hideQuestions, setHideQuestions] = useState(false);
     const [hasFailed, setHasFailed] = useState(false);
     const getTitle = (title) => {
         return {
@@ -24,7 +24,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         const correctAnswers = ExamQuestions.find((({id}) => id === tweetId)).questions.map(({ options, answer }) => options.map((_, index) => index + 1 === answer)).flat();
         const result = JSON.stringify(answers) === JSON.stringify(correctAnswers);
         setHasFailed(!result);
-        setShowQuestions(result);
+        setHideQuestions(result);
     };
 
     const Sharing = () => {
@@ -38,6 +38,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
     }
 
     return <div className='flex-right'>
+        {hideQuestions && !hasFailed && <ConfettiExplosion />}
         <div className='side-block'>
             {!books.length && !videos.length && !linkedin.length && !urls.length && !wikipedia.length && <div>No hay información adicional en esta turra.</div>}
             {!!videos.length && <div>
@@ -61,8 +62,8 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                 {urls.map((url, key) => <a key={key + "-url"} target="_blank" className="related" href={url}>{url}</a>)}
             </div>}
         </div>
-        {!showQuestions && <Sharing />}
-        {hasQuestions && !showQuestions &&
+        {!hideQuestions && <Sharing />}
+        {hasQuestions && !hideQuestions &&
             <div className='side-block'>
                 <div className="title"><img className="icon" src="/book-open.svg" alt="Exámen de esta turra" />Pon en práctica tu comprensión:</div>
                 <div className="sub-title">Lee detenidamente esta turra y contesta las preguntas para demostrar tus habilidades:</div>
@@ -87,10 +88,9 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                     <button className="submitExam" onClick={checkExam}>Comprobar</button>
                 </div>
             </div>}
-        {showQuestions && <div className='side-block center'>
+        {hideQuestions && !hasFailed && <div className='side-block center passed'>
             <div>
                 <div className="title">¡Has acertado todas las preguntas! ¿No serás @Recuenco?</div>
-                <ConfettiExplosion />
             </div>
             <Sharing />
         </div>}
