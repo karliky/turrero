@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import ConfettiExplosion from 'react-confetti-explosion';
+
 const ExamQuestions = require("../db/tweets_exam.json");
 
 export default function ({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId }) {
@@ -70,7 +72,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                 </div>
                 <button onClick={checkExam}>Comprobar</button>
             </div>}
-            {showQuestions && <div className='side-block'>¡Has acertado todas las preguntas! ¿No serás @Recuenco?</div>}
+            {showQuestions && <div className='side-block'>¡Has acertado todas las preguntas! ¿No serás @Recuenco?<ConfettiExplosion /></div>}
         <style jsx>
             {`
             .questions {
@@ -79,6 +81,8 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
             }
             .question-title {
                 font-weight: bold;
+                margin-top: 8px;
+                display: inline-block;
             }
             .question-option {
             }
