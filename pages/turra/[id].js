@@ -129,7 +129,6 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
 
         .flex-right {
           margin-left: 50px;
-          position: sticky;
           top: 15px;
           align-self: flex-start;
         }

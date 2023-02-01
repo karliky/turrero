@@ -21,7 +21,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
 
     const checkExam = () => {
         const answers = Array.from(questionsRef.current.querySelectorAll("input[type=radio]")).map(input => input.checked);
-        const correctAnswers = ExamQuestions[0].questions.map(({ options, answer }) => options.map((_, index) => index + 1 === answer)).flat();
+        const correctAnswers = ExamQuestions.find((({id}) => id === tweetId)).questions.map(({ options, answer }) => options.map((_, index) => index + 1 === answer)).flat();
         const result = JSON.stringify(answers) === JSON.stringify(correctAnswers);
         setHasFailed(!result);
         setShowQuestions(result);
@@ -64,7 +64,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         {!showQuestions && <Sharing />}
         {hasQuestions && !showQuestions &&
             <div className='side-block'>
-                <div className="title">Practica tu comprensión:</div>
+                <div className="title">Pon en práctica tu comprensión:</div>
                 <div className="sub-title">Lee detenidamente esta turra y contesta las preguntas para demostrar tus habilidades:</div>
                 <div className="questions" ref={questionsRef}>
                     {questions.map(({ question, options }, key) => <fieldset key={key + "-question"} className="question">
