@@ -64,7 +64,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         {!showQuestions && <Sharing />}
         {hasQuestions && !showQuestions &&
             <div className='side-block'>
-                <div className="title">Pon en práctica tu comprensión:</div>
+                <div className="title"><img className="icon" src="/book-open.svg" alt="Exámen de esta turra" />Pon en práctica tu comprensión:</div>
                 <div className="sub-title">Lee detenidamente esta turra y contesta las preguntas para demostrar tus habilidades:</div>
                 <div className="questions" ref={questionsRef}>
                     {questions.map(({ question, options }, key) => <fieldset key={key + "-question"} className="question">
@@ -97,9 +97,15 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         <style jsx>
             {`
             .title {
-                font-weight: bold;
+              
                 font-size: 1.2em;
                 margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                color: #191817;
+            }
+            .title img {
+                margin-right: 5px;
             }
             .sub-title {
                 font-size: 0.8em;
