@@ -8,6 +8,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
     const hasQuestions = !!questions.length;
     const questionsRef = useRef();
     const [showQuestions, setShowQuestions] = useState(false);
+    const [hasFailed, setHasFailed] = useState(false);
     const getTitle = (title) => {
         return {
             highlightedText: title.split(" ").slice(0, 2).join(" "),
@@ -20,9 +21,21 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
 
     const checkExam = () => {
         const answers = Array.from(questionsRef.current.querySelectorAll("input[type=radio]")).map(input => input.checked);
-        const correctAnswers = ExamQuestions[0].questions.map(({ options, answer }) => options.map( (_, index) => index + 1 === answer)).flat();
-        setShowQuestions(JSON.stringify(answers) === JSON.stringify(correctAnswers))
+        const correctAnswers = ExamQuestions[0].questions.map(({ options, answer }) => options.map((_, index) => index + 1 === answer)).flat();
+        const result = JSON.stringify(answers) === JSON.stringify(correctAnswers);
+        setHasFailed(!result);
+        setShowQuestions(result);
     };
+
+    const Sharing = () => {
+        return <div className='side-block'>
+            <div>Dale la turra a más gente:</div>
+            <div className="sharing">
+                <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
+                <div className="social-media linkedin"><a href={"http://www.linkedin.com/shareArticle?url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title=" + encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
+            </div>
+        </div>
+    }
 
     return <div className='flex-right'>
         <div className='side-block'>
@@ -48,16 +61,11 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                 {urls.map((url, key) => <a key={key + "-url"} target="_blank" className="related" href={url}>{url}</a>)}
             </div>}
         </div>
-        <div className='side-block'>
-            <div>Dale la turra a más gente:</div>
-            <div className="sharing">
-                <div className="social-media twitter"><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className="icon" src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
-                <div className="social-media linkedin"><a href={"http://www.linkedin.com/shareArticle?url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title=" + encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className="icon" src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
-            </div>
-        </div>
+        {!showQuestions && <Sharing />}
         {hasQuestions && !showQuestions &&
             <div className='side-block'>
-                <div>Preguntas de esta turra:</div>
+                <div className="title">Practica tu comprensión:</div>
+                <div className="sub-title">Lee detenidamente esta turra y contesta las preguntas para demostrar tus habilidades:</div>
                 <div className="questions" ref={questionsRef}>
                     {questions.map(({ question, options }, key) => <fieldset key={key + "-question"} className="question">
                         <div className="question-title">{question}</div>
@@ -70,11 +78,33 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                         </ul>
                     </fieldset>)}
                 </div>
-                <button onClick={checkExam}>Comprobar</button>
+                {hasFailed && <div className="center">
+                    <span className="failed-exam">Algunas o todas las respuestas son incorrectas.</span>
+                    <br></br>
+                    <span>¡Vuelve a intentarlo!</span>
+                </div>}
+                <div className="center">
+                    <button className="submitExam" onClick={checkExam}>Comprobar</button>
+                </div>
             </div>}
-            {showQuestions && <div className='side-block'>¡Has acertado todas las preguntas! ¿No serás @Recuenco?<ConfettiExplosion /></div>}
+        {showQuestions && <div className='side-block center'>
+            <div>
+                <div className="title">¡Has acertado todas las preguntas! ¿No serás @Recuenco?</div>
+                <ConfettiExplosion />
+            </div>
+            <Sharing />
+        </div>}
         <style jsx>
             {`
+            .title {
+                font-weight: bold;
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+            .sub-title {
+                font-size: 0.8em;
+                line-height: 1.2em;
+            }
             .questions {
                 font-size: 0.8em;
                 padding: 5px;
@@ -82,12 +112,37 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
             .question-title {
                 font-weight: bold;
                 margin-top: 8px;
+                line-height: 1.3em;
                 display: inline-block;
             }
             .question-option {
+                display: block;
+                padding-left: 10px;
+                padding-right: 5px;
             }
             input[type=radio] {
                 accent-color : #a5050b;
+            }
+            .failed-exam {
+                color : #a5050b;
+            }
+            .submitExam {
+                background-color: transparent;
+                border: 1px solid #a5050b;
+                color: #a5050b;
+                padding: 12px 28px;
+                margin-top: 8px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            .submitExam:hover {
+                background-color: #a5050b;
+                color: white;
+            }
+            .center {
+                text-align: center;
             }
       `}
         </style>

@@ -257,13 +257,14 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
 
         .sharing {
           display: flex;
-          align-items: center;
           margin-top: 5px;
+          justify-content: center;
         }
         .sharing .social-media {
           display: block;
           padding: 10px;
-          margin-right: 10px;
+          margin-left: 5px;
+          margin-right: 5px;
         }
         .sharing .social-media.twitter {
           background-color: #00acee;
