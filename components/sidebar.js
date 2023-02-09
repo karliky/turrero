@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import ConfettiExplosion from 'react-confetti-explosion';
 
+const TweetsPodcast = require("../db/tweets_podcast.json");
 const ExamQuestions = require("../db/tweets_exam.json");
 
 export default function ({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId }) {
     const { questions } = ExamQuestions.find(({ id }) => id === tweetId);
+    const hasPodcast = !!TweetsPodcast.find(({ id }) => id === tweetId);
     const hasQuestions = !!questions.length;
     const questionsRef = useRef();
     const [hideQuestions, setHideQuestions] = useState(false);
@@ -38,6 +40,17 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
     }
 
     return <div className='flex-right'>
+        {hasPodcast && <div className='side-block' id="podcast">
+            <div className='metadata-section'>
+                <img className="icon" src="/volume-2.svg" alt="Escuchar en formato audio" />Escucha esta turra en formato podcast:
+            </div>
+            <div className="player">
+                <audio controls>
+                    <source src={"/podcast/" + tweetId + ".mp3"} type="audio/mpeg" />
+                </audio>
+            </div>
+        </div>
+        }
         {hideQuestions && !hasFailed && <ConfettiExplosion />}
         <div className='side-block'>
             {!books.length && !videos.length && !linkedin.length && !urls.length && !wikipedia.length && <div>No hay información adicional en esta turra.</div>}
@@ -132,6 +145,12 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
             }
             .failed-exam {
                 color : #a5050b;
+            }
+            .player {
+                width: 100%;
+            }
+            .player audio {
+                width: 100%;
             }
             .submitExam {
                 background-color: transparent;

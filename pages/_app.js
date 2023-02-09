@@ -1,7 +1,7 @@
 import '../public/styles.css';
 import { Analytics } from '@vercel/analytics/react';
 
-export default function MyApp({ Component, pageProps }) {
+export default function Turrero({ Component, pageProps }) {
     return <>
     <Component {...pageProps} />
     <Analytics />

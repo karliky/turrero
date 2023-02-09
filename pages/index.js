@@ -4,6 +4,7 @@ import Search from "../components/search";
 
 import TweetsMap from "../db/tweets_map.json";
 import Tweets from "../db/tweets.json";
+import TweetsPodcasts from "../db/tweets_podcast.json";
 import TweetsSummary from "../db/tweets_summary.json";
 
 export default function Turrero() {
@@ -139,12 +140,17 @@ export default function Turrero() {
             <div className="links">
               {top25.map((tweet) => {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
+                const hasAudio = TweetsPodcasts.find(_tweet => _tweet.id === tweet.id);
                 return <div className="link" key={tweet.id + "id-top"}>
                   <div>
                     <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
-                  <div>
-                    <a href={"/turra/" + tweet.id}>{tweet.summary}</a>
+                  <div className="flex">
+                    {hasAudio && 
+                    <a href={"/turra/" + tweet.id + (hasAudio ? "#podcast" : "")}>
+                      <img className="icon-audio" src="/volume-2.svg" alt="Esta turra está disponible en formato podcast" title="Esta turra está disponible en formato podcast" />
+                    </a>}
+                    <a href={"/turra/" + tweet.id} className="flex">{tweet.summary}</a>
                   </div>
                 </div>
               }
@@ -213,8 +219,19 @@ export default function Turrero() {
         text-decoration-color: #b2b2b2;
         text-underline-offset: 2px;
       }
+
       .small {
         font-size: 0.6em;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .icon-audio {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
       }
 
       .columns {

@@ -9,6 +9,7 @@ const TweetsMap = require("../../db/tweets_map.json");
 const TweetsSummary = require("../../db/tweets_summary.json");
 const TweetsEnriched = require("../../db/tweets_enriched.json");
 
+
 export async function getStaticPaths() {
   const paths = Tweets.map((tweet) => ({ params: { id: tweet[0].id } }));
   return { paths, fallback: false };
@@ -131,6 +132,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           margin-left: 50px;
           top: 15px;
           align-self: flex-start;
+          max-width: 40%;
         }
 
         .related {
@@ -186,6 +188,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           margin-bottom: 10px;
           width: 100%;
           min-width: 35%;
+          border-radius: 10px;
         }
 
         .categories {
@@ -304,6 +307,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
               width: 100%;
               margin-left: 0;
               position: relative;
+              max-width: inherit;
           }
           
           .metadata img {
