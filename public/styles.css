@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&family=Open+Sans:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
         v2.0 | 20110126
@@ -159,7 +159,7 @@ table {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
     color: #191817;
     background-color: #FEFEFD;
 }
@@ -182,7 +182,7 @@ body {
 .header h1 {
     margin-bottom: 0.5em;
     font-weight: bold;
-    font-family: 'Old Standard TT', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 3em;
     font-weight: 300;
 }
@@ -194,7 +194,7 @@ body {
 
 h3 {
     margin-top: 8px;
-    color: #666666;
+    color: #757575;
     font-size: .8rem;
     line-height: 1.25;
 }
@@ -214,7 +214,7 @@ h3 {
 }
 
 a {
-    color: #335F8D;
+    color: #3565A9;;
     text-decoration: underline;
     text-decoration-color: #335f8d14;
     font-size: 0.9em;

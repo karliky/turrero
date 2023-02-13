@@ -284,8 +284,14 @@ export default function Turrero() {
         align-items: flex-start;
         width: 100%;
         margin-bottom: 4px;
-        font-size: 15px;
+      }
+
+      .columns .column .links .link a {
+        font-size: 14px;
         line-height: 1.25;
+        font-weight: 300;
+        color: #3565A9;
+        text-decoration: none;
       }
 
       .columns .column .links .link>div {
@@ -296,7 +302,7 @@ export default function Turrero() {
       .columns .column .links .link .time {
         display: inline-block;
         width: 30px;
-        color: #666666;
+        color: #757575;
         font-size: 12px;
         line-height: 16px;
         text-decoration: dotted;

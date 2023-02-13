@@ -78,17 +78,32 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
       <Footer />
       <style jsx global>
         {`
+        .back {
+          display: flex;
+          align-items: center;
+          margin-bottom: 24px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #565656;
+          text-decoration: none;
+        }
+        .back img {
+          height: 16px;
+          margin-right: 4px;
+        }
 
         .header h1, .header h2 {
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+          font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
         }
         .header h1 {
-          font-size: 2.3em;
-          line-height: 1.2em;
+          font-size: 32px;
+          line-height: 1.25em;
         }
         .header h2 {
-          margin-top: 6px;
-          line-height: 1.3em;
+          margin-top: 20px;
+          color: #757575;
+          font-size: 14px;
+          line-height: 1.25;
         }
         .header {
           margin-top: 2em;
@@ -97,15 +112,27 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           font-size: 1em;
           font-weight: lighter;
         }
-        .back {
-          font-size: 0.5em;
-          font-weight: bold;
-          display: flex;
-          align-items: center;
-          color: #565656;
+
+        .categories {
+          margin-top: 8px;
+          color: #757575;
+          font-size: 14px;
+          line-height: 1.25;
+        }
+
+        .category {
+          display: inline-block;
+          background-color: #3972e1;
+          border-radius: 2px;
+          padding: 1px 6px 1px 6px;
+          margin-right: 0.5em;
+          color: #fff;
+        }
+
+        .category a {
+          color: #fff;
+          font-weight: 500;
           text-decoration: none;
-          font-size: 1.2em;
-          margin-bottom: 10px;
         }
 
         .wrapper {
@@ -119,34 +146,56 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           word-break: break-word;
         }
 
+        .tweet > p {
+          font-family: 'Playfair Display', serif;
+          font-size: 20px;
+          line-height: 32px;
+          color: #191817;
+        }
+
         .flex-container {
           display: flex;
           flex-direction: row;
+          justify-content: space-between;
         }
 
         .flex-left {
-          width: 80ch;
+          max-width: 650px;
+          padding-right: 50px;
+          box-sizing: content-box;
         }
 
         .flex-right {
-          margin-left: 50px;
-          top: 15px;
-          align-self: flex-start;
-          max-width: 40%;
+          width: 35%;
+          max-width: 400px;
         }
 
         .related {
           display: list-item;
           list-style-type: none;
-          margin-left: 31px;
+          margin-left: 24px;
           margin-bottom: 8px;
           line-height: 1.3em;
           word-break: break-word;
         }
 
+        .related:last-child {
+          margin-bottom: 20px;
+        }
+
         .metadata {
           display: block;
+          margin-top: 56px;
+          margin-bottom: 40px;
           text-align: center;
+        }
+
+        .metadata a {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
         }
 
         .metadata-section {
@@ -158,8 +207,8 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
 
         .metadata-section .icon {
           margin-right: 5px;
-          width: 24px;
-          height: 24px;
+          width: 18px;
+          height: 18px;
         }
 
         .metadata img {
@@ -167,6 +216,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           max-height: 205px;
           width: auto;
           height: auto;
+          margin-bottom: 8px;
           filter: grayscale(100%);
         }
 
@@ -175,47 +225,27 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
         }
 
         .metadata .caption {
-          display: block;
-          font-size: 0.8em;
-          font-style: italic;
+          font-size: 14px;
+          color: #757575;
+        }
+
+        .metadata a .caption {
+          text-decoration: underline;
+          text-decoration-color: #ddd;
         }
 
         .side-block {
           background-color: #F5F5F5;
-          padding: 20px;
-          padding-left: 25px;
-          padding-right: 25px;
+          padding: 24px 28px 22px 28px;
           margin-bottom: 10px;
           width: 100%;
-          min-width: 35%;
-          border-radius: 10px;
-        }
-
-        .categories {
-          border-top: 1px solid #d9d9d9;
-          padding-top: 6px;
-        }
-
-        .category {
-          display: inline-block;
-          margin-right: 0.5em;
-          padding: 0.0714285714em 0.7142857143em 0.1428571429em;
-          border-radius: 2px;
-          background-color: #78ceef;
-          color: #fff;
-          padding: 5px 10px 5px 10px;
-        }
-
-        .category a {
-          color: #fff;
-          font-weight: 600;
-          text-decoration: none;
+          border-radius: 8px;
         }
 
         .static-tweet {
           outline: 1px solid #e1e8ed;
           padding: 1.25rem 1.25rem 1.25rem 1.25rem;
-          margin-top: 1.25rem;
+          margin-top: 42px;
           border-radius: 5px;
           font-size: 0.9em;
           display: inline-block;
@@ -258,14 +288,15 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
         }
         .sharing {
           display: flex;
-          margin-top: 5px;
           justify-content: center;
+          margin-top: 16px;
         }
         .sharing .social-media {
           display: block;
-          padding: 10px;
+          padding: 4px 10px;
           margin-left: 5px;
           margin-right: 5px;
+          border-radius: 4px;
         }
         .sharing .social-media.twitter {
           background-color: #00acee;
@@ -280,10 +311,16 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           display: flex;
           align-items: center;
           color: #fff;
+          font-size: 13px;
+          line-height: 16px;
         }
         h2 a {
           margin-left: 5px;
         }
+        .small {
+          font-size: 10px;
+        }
+
         @media (max-width: 1300px) {
           .wrapper {
               width: 90%;
@@ -326,10 +363,6 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
           }
           .category {
             margin-top: 5.5px;
-        }
-
-        .small {
-          font-size: 0.6em;
         }
       `}
       </style>

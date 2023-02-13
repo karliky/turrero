@@ -146,7 +146,7 @@ function Search() {
                 border-bottom: 1px solid #eee;
                 font-size: 13px;
                 line-height: 16px;
-                color: #666;
+                color: #757575;
                 text-align: initial;
                 text-overflow: ellipsis;
             }
