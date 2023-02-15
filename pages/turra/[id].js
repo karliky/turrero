@@ -330,6 +330,7 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
         @media (max-width: 1024px) {
           .wrapper {
               width: 90%;
+              padding: 0;
           }
 
           .flex-container {
