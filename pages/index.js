@@ -213,15 +213,15 @@ export default function Turrero() {
         padding: 6px;
       }
       .tooltip {
-        cursor: help;
         text-decoration: dotted;
         text-decoration-line: underline;
         text-decoration-color: #b2b2b2;
         text-underline-offset: 2px;
+        cursor: default;
       }
 
       .small {
-        font-size: 0.6em;
+        font-size: 10px;
       }
 
       .flex {
@@ -229,46 +229,27 @@ export default function Turrero() {
       }
 
       .icon-audio {
-        width: 15px;
-        height: 15px;
-        margin-right: 5px;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
       }
 
       .columns {
         width: 100%;
-      }
-
-      .columns .column {
-        display: inline-block;
-        width: 50%;
-        position: relative;
-        vertical-align: top;
-      }
-
-      .columns .column .heading {
-        width: 100%;
-        height: 30px;
-        font-weight: bold;
-        color: #231f20;
-
-        border-radius: 10px;
-        box-shadow: 0 5px 5px rgb(0 0 0 / 3%), 0 2px 2px rgb(0 0 0 / 3%), 0 0 1px rgb(0 0 0 / 3%);
-        border: 1px solid #e5e7eb;
-
-        --turra-gradient-from: #f9fafb;
-        --turra-gradient-to: rgba(249,250,251,0);
-        --turra-gradient-stops: var(--turra-gradient-from),var(--turra-gradient-to);
-        background-image: linear-gradient(to right,var(--turra-gradient-stops));
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 40px;
       }
 
       .columns .column .heading .title {
-        padding: 5px;
         display: inline-block;
-        position: absolute;
-        top: 8px;
-        left: 12px;
-        font-size: 0.9em;
+        padding: 4px;
+        padding-left: 0;
+        font-size: 12px;
+        line-height: 16px;
         font-weight: 500;
+        color: #231f20;
+        text-transform: uppercase;
       }
 
       .columns .column .heading img {
@@ -276,9 +257,9 @@ export default function Turrero() {
       }
 
       .columns .column .links {
-        display: block;
-        width: 100%;
         height: 40vh;
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
         overflow: auto;
       }
 
@@ -300,7 +281,17 @@ export default function Turrero() {
       .columns .column .links .link {
         display: flex;
         flex-direction: row;
+        align-items: flex-start;
         width: 100%;
+        margin-bottom: 4px;
+      }
+
+      .columns .column .links .link a {
+        font-size: 14px;
+        line-height: 1.25;
+        font-weight: 300;
+        color: #3565A9;
+        text-decoration: none;
       }
 
       .columns .column .links .link>div {
@@ -310,44 +301,40 @@ export default function Turrero() {
 
       .columns .column .links .link .time {
         display: inline-block;
-        width: 40px;
-        color: gray;
-        font-size: 0.9em;
+        width: 30px;
+        color: #757575;
+        font-size: 12px;
+        line-height: 16px;
         text-decoration: dotted;
         text-decoration-line: underline;
         text-decoration-color: #b2b2b2;
         text-underline-offset: 2px;
+        vertical-align: text-top;
+        cursor: default;
       }
 
-      .columns .column .links .link .time {
-        cursor: help;
-      }
-
-      /* Two-column layout */
-      @media (max-width: 1200px) {
-        .columns .column {
-            width: 50%;
+      // @media (max-width: 1200px) {
+        .columns {
+          gap: 30px;
         }
+      // }
 
-        .wrapper {
-            width: 85%;
-        }
-      }
-
-      /* One-column layout */
       @media (max-width: 770px) {
+        .wrapper {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        .columns {
+          gap: 20px;
+        }
+
         .columns .column .links {
             height: auto;
             overflow: hidden;
         }
 
-        .columns .column {
-            width: 100%;
-        }
-
-        .wrapper {
-            width: 95%;
-        }
+       
       }
       `}
     </style>
