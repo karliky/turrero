@@ -17,10 +17,10 @@ const {
     const m = puppeteer.devices['iPhone X'];
     await page.emulate(m);
 
-    const tweets = await csvdata.load("../db/turras.csv", { parse: false });
+    const tweets = await csvdata.load("C:/Users/K4rli/Documents/personal/programming/turrero/db/turras.csv", { parse: false });
     console.log('Total tweets', tweets.length);
     // Start by processing only the tweets that are not already processed
-    const existingTweets = require("../db/tweets.json").reduce((acc, tweets) => {
+    const existingTweets = require("C:/Users/K4rli/Documents/personal/programming/turrero/db/tweets.json").reduce((acc, tweets) => {
         acc.push(tweets[0].id);
         return acc;
     }, []);
@@ -87,17 +87,16 @@ const {
                  * Stop thread scraping if we reach the last tweet
                 */
                 const lastTweetFound = await page.evaluate(() => {
-                    if (document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling === null)
-                        return 'finished';
-                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling.children[0].querySelector('div[data-testid]').querySelector("a").href;
+                    if (document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling === null) return 'finished';
+                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('div[data-testid]').querySelector("a").href;
                     return el;
                 });
                 console.log("lastTweetFound", lastTweetFound !== 'https://twitter.com/Recuenco');
                 if (lastTweetFound !== 'https://twitter.com/Recuenco') {
                     stopped = true;
-                    const existingTweets = require("../db/tweets.json");
+                    const existingTweets = require("C:/Users/K4rli/Documents/personal/programming/turrero/db/tweets.json");
                     existingTweets.push(tweets);
-                    writeFileSync("../db/tweets.json", JSON.stringify(existingTweets));
+                    writeFileSync("C:/Users/K4rli/Documents/personal/programming/turrero/db/tweets.json", JSON.stringify(existingTweets));
                     continue;
                 }
                 /**
@@ -107,7 +106,7 @@ const {
                 await Promise.all([
                     page.waitForSelector('div[role="progressbar"]', { hidden: true }),
                     page.evaluate(() => {
-                        document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').parentElement.parentElement.parentElement.parentElement.nextSibling.nextElementSibling.children[0].querySelector('article[data-testid="tweet"]').click()
+                        document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('article[data-testid="tweet"]').click()
                     }),
                     page.waitForNavigation()
                 ]);

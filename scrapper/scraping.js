@@ -1,5 +1,5 @@
 /*
-    * This file contains all the functions that are used to scrape the data from the twitter page
+* This file contains all the functions that are used to scrape the data from the twitter page
 */
 
 /**
@@ -65,15 +65,16 @@ module.exports.extractMetadata = async (page) => {
         if (imageContainer) return imageContainer.remove();
         return "";
     }),
-        // Navigate to the embedded tweet
-        await Promise.all([
-            page.waitForNavigation(),
-            page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time')
-        ]);
+    // Navigate to the embedded tweet
+    await page.waitForTimeout(50);
+    await Promise.all([
+        page.waitForNavigation(),
+        page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time')
+    ]);
     const embed = {
         type: "embed",
         id: page.url().split("/").slice(-1).pop(),
-        author: await page.evaluate(() => document.querySelector("div[data-testid=User-Names]").innerText),
+        author: await page.evaluate(() => document.querySelector("div[data-testid=User-Name]").innerText),
         tweet: await page.evaluate(getTweetText)
     };
     // Go back to the original tweet so we can continue with the rest of the tweets
