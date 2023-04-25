@@ -7,6 +7,7 @@ import TweetsMap from "../db/tweets_map.json";
 import Tweets from "../db/tweets.json";
 import TweetsPodcasts from "../db/tweets_podcast.json";
 import TweetsSummary from "../db/tweets_summary.json";
+import styles from './index.module.css';
 
 export default function Turrero() {
   const blockOrder = {
@@ -127,26 +128,26 @@ export default function Turrero() {
     </Head>
     <div className="wrapper">
       <Header children={Search} totalTweets={Tweets.length} />
-      <div className="columns">
-        <div className="column">
-          <div className="spacing">
-            <div className="heading">
-              <div className="title tooltip" title="Ordenador por mayor impacto: (retweet + quotetweet + likes) ">Top 25 turras</div>
+      <div className={styles.columns}>
+        <div className={styles.column}>
+          <div className={styles.spacing}>
+            <div className={styles.heading}>
+              <div className={`${styles.title} ${styles.tooltip}`} title="Ordenador por mayor impacto: (retweet + quotetweet + likes) ">Top 25 turras</div>
             </div>
-            <div className="links">
+            <div className={styles.links}>
               {top25.map((tweet) => {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
                 const hasAudio = TweetsPodcasts.find(_tweet => _tweet.id === tweet.id);
-                return <div className="link" key={tweet.id + "id-top"}>
+                return <div className={styles.link} key={tweet.id + "id-top"}>
                   <div>
-                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    <div className={styles.time} title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
-                  <div className="flex">
+                  <div className={styles.flex}>
                     {hasAudio && 
                     <a href={"/turra/" + tweet.id + (hasAudio ? "#podcast" : "")}>
-                      <img className="icon-audio" src="/volume-2.svg" alt="Esta turra está disponible en formato podcast" title="Esta turra está disponible en formato podcast" />
+                      <img className={`${styles['icon-audio']}`} src="/volume-2.svg" alt="Esta turra está disponible en formato podcast" title="Esta turra está disponible en formato podcast" />
                     </a>}
-                    <a href={"/turra/" + tweet.id} className="flex">{tweet.summary}</a>
+                    <a href={"/turra/" + tweet.id} className={styles.flex}>{tweet.summary}</a>
                   </div>
                 </div>
               }
@@ -155,19 +156,19 @@ export default function Turrero() {
           </div>
         </div>
         {Object.keys(tweets).map((key) => {
-          return <div className="column" key={key + "-category"}>
-            <div className="spacing">
-              <div className="heading">
-                <div className="title" id={key.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}>{formatTitle(key.replaceAll("-", " "))}</div>
+          return <div className={styles.column} key={key + "-category"}>
+            <div className={styles.spacing}>
+              <div className={styles.heading}>
+                <div className={styles.title} id={key.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}>{formatTitle(key.replaceAll("-", " "))}</div>
               </div>
-              <div className="links">
+              <div className={styles.links}>
                 {tweets[key].map(tweet => ({ 
                   time: Tweets.find(_tweet => _tweet[0].id === tweet.id)[0].time, 
                   ...tweet 
                 })).sort(orderByDate()).map((tweet) => {
-                  return <div className="link" key={tweet.id + "-" + key + "id"}>
+                  return <div className={styles.link} key={tweet.id + "-" + key + "id"}>
                     <div>
-                      <div className="time" title={`Publicado el ${new Date(tweet.time).toLocaleDateString("es-ES")} / ${new Date(tweet.time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(tweet.time).getTime())}</div>
+                      <div className={styles.time} title={`Publicado el ${new Date(tweet.time).toLocaleDateString("es-ES")} / ${new Date(tweet.time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(tweet.time).getTime())}</div>
                     </div>
                     <div>
                       <a href={"/turra/" + tweet.id}>{tweet.summary}</a>
@@ -179,17 +180,17 @@ export default function Turrero() {
             </div>
           </div>
         })}
-        <div className="column">
-          <div className="spacing">
-            <div className="heading">
-              <div className="title">Las más leídas</div>
+        <div className={styles.column}>
+          <div className={styles.spacing}>
+            <div className={styles.heading}>
+              <div className={styles.title}>Las más leídas</div>
             </div>
-            <div className="links">
+            <div className={styles.links}>
               {mostViews.map((tweet) => {
                 const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
-                return <div className="link" key={tweet.id + "most-read"}>
+                return <div className={styles.link} key={tweet.id + "most-read"}>
                   <div>
-                    <div className="time" title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    <div className={styles.time} title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
                   </div>
                   <div>
                     <a href={"/turra/" + tweet.id}>{tweet.summary}</a>
@@ -203,136 +204,5 @@ export default function Turrero() {
       </div>
       {Footer()}
     </div>
-    <style jsx global>
-      {`
-      .spacing {
-        padding: 6px;
-      }
-      .tooltip {
-        text-decoration: dotted;
-        text-decoration-line: underline;
-        text-decoration-color: #b2b2b2;
-        text-underline-offset: 2px;
-        cursor: default;
-      }
-
-      .small {
-        font-size: 10px;
-      }
-
-      .flex {
-        display: flex;
-      }
-
-      .icon-audio {
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-      }
-
-      .columns {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 40px;
-      }
-
-      .columns .column .heading .title {
-        display: inline-block;
-        padding: 4px;
-        padding-left: 0;
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: 500;
-        color: #231f20;
-        text-transform: uppercase;
-      }
-
-      .columns .column .heading img {
-        width: 50px;
-      }
-
-      .columns .column .links {
-        height: 40vh;
-        border-top: 1px solid #e5e7eb;
-        border-bottom: 1px solid #e5e7eb;
-        overflow: auto;
-      }
-
-      .columns .column .links::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-
-      .columns .column .links::-webkit-scrollbar {
-        width: 6px;
-        background-color: transparent;
-
-      }
-
-      .columns .column .links::-webkit-scrollbar-thumb {
-        background-color: transparent;
-
-      }
-
-      .columns .column .links .link {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        width: 100%;
-        margin-bottom: 4px;
-      }
-
-      .columns .column .links .link a {
-        font-size: 14px;
-        line-height: 1.25;
-        font-weight: 300;
-        color: #3565A9;
-        text-decoration: none;
-      }
-
-      .columns .column .links .link>div {
-        padding-top: 5px;
-        padding-left: 5px;
-      }
-
-      .columns .column .links .link .time {
-        display: inline-block;
-        width: 30px;
-        color: #757575;
-        font-size: 12px;
-        line-height: 16px;
-        text-decoration: dotted;
-        text-decoration-line: underline;
-        text-decoration-color: #b2b2b2;
-        text-underline-offset: 2px;
-        vertical-align: text-top;
-        cursor: default;
-      }
-
-      // @media (max-width: 1200px) {
-        .columns {
-          gap: 30px;
-        }
-      // }
-
-      @media (max-width: 770px) {
-        .wrapper {
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-
-        .columns {
-          gap: 20px;
-        }
-
-        .columns .column .links {
-            height: auto;
-            overflow: hidden;
-        }
-
-       
-      }
-      `}
-    </style>
   </div>)
 }

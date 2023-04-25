@@ -1,0 +1,126 @@
+.spacing {
+    padding: 6px;
+}
+
+.tooltip {
+    text-decoration: dotted;
+    text-decoration-line: underline;
+    text-decoration-color: #b2b2b2;
+    text-underline-offset: 2px;
+    cursor: default;
+}
+
+.small {
+    font-size: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.icon-audio {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+.columns {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.columns .column .heading .title {
+    display: inline-block;
+    padding: 4px;
+    padding-left: 0;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #231f20;
+    text-transform: uppercase;
+}
+
+.columns .column .heading img {
+    width: 50px;
+}
+
+.columns .column .links {
+    height: 40vh;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    overflow: auto;
+}
+
+.columns .column .links::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.columns .column .links::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+
+}
+
+.columns .column .links::-webkit-scrollbar-thumb {
+    background-color: transparent;
+
+}
+
+.columns .column .links .link {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.columns .column .links .link a {
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 300;
+    color: #3565A9;
+    text-decoration: none;
+}
+
+.columns .column .links .link>div {
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.columns .column .links .link .time {
+    display: inline-block;
+    width: 30px;
+    color: #757575;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: dotted;
+    text-decoration-line: underline;
+    text-decoration-color: #b2b2b2;
+    text-underline-offset: 2px;
+    vertical-align: text-top;
+    cursor: default;
+}
+
+.columns {
+    gap: 30px;
+}
+
+@media (max-width: 770px) {
+    .wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .columns {
+        gap: 20px;
+    }
+
+    .columns .column .links {
+        height: auto;
+        overflow: hidden;
+    }
+
+
+}

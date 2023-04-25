@@ -1,5 +1,7 @@
 import Sidebar from "./sidebar";
 import RenderTweet from "./renderTweet";
+import styles from './turra.module.css';
+
 export default function ({ tweets, enrichments, urls, summary, categories, tweetId }) {
     const books = enrichments.filter((tweet) => tweet.media === "goodreads");
     const videos = enrichments.filter((tweet) => tweet.media === "youtube");
@@ -9,8 +11,8 @@ export default function ({ tweets, enrichments, urls, summary, categories, tweet
         var exp = /(\b(https?|ftp|file):\/\/([-A-Z0-9+&@#%?=~_|!:,.;]*)([-A-Z0-9+&@#%?\/=~_|!:,.;]*)[-A-Z0-9+&@#\/%=~_|])/ig;
         return text.replace(exp, "<a href='$1' target='_blank'>$1</a>");
     }
-    return <div className='flex-container'>
-        <div className='flex-left'>{tweets.map(({ tweet, id, metadata: embeddedTweet }) => {
+    return <div className={styles.flexContainer}>
+        <div className={styles.flexLeft}>{tweets.map(({ tweet, id, metadata: embeddedTweet }) => {
             const metadata = enrichments.find(_tweet => id === _tweet.id);
             let tweetText = replaceURLWithHTMLLinks(tweet);
             tweetText = tweetText.replace(/#(\S*)/g, '<a target="_blank" href="https://twitter.com/search?q=%23$1&src=typed_query">#$1</a>');
