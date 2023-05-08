@@ -19,10 +19,10 @@ function Search() {
     const [data, setData] = useState([]);
     const resultsRef = useRef(null);
     const clearRef = useRef(null);
+    const [debounceHandler, setDebounceHandler] = useState();
+    const DEBOUNCE_MIN_MS = 300;
 
-    const onSearch = (e) => {
-        var searchValue = e.target.value.toLowerCase();
-        setInputText(searchValue);
+    const onSearch = (searchValue) => {
         if (searchValue === "") {
             resultsRef.current.style.display = 'none';
             clearRef.current.style.display = 'none';
@@ -34,6 +34,13 @@ function Search() {
             setData(hits);
         });
     };
+
+    const onSearchDebounce = (e) => {
+        var searchValue = e.target.value.toLowerCase();
+        setInputText(searchValue);
+        if (debounceHandler) clearTimeout(debounceHandler);
+        setDebounceHandler(setTimeout(() => onSearch(searchValue), DEBOUNCE_MIN_MS));
+    }
 
     const clearSearch = () => {
         setInputText("");
@@ -57,7 +64,7 @@ function Search() {
     return (
         <div className="search">
             <div>
-                <input className="search-field" type="text" value={inputText} onChange={onSearch} placeholder="Buscar turras..." />
+                <input className="search-field" type="text" value={inputText} onChange={onSearchDebounce} placeholder="Buscar turras..." />
                 <div className="clear-icon" ref={clearRef} onClick={clearSearch} onKeyDown={handleClearKey} tabIndex="0">
                     <svg viewBox="0 0 14 14" className="h-8"><path d="M8.41,7l5.3-5.29A1,1,0,1,0,12.29.29L7,5.59,1.71.29A1,1,0,0,0,.29,1.71L5.59,7,.29,12.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L7,8.41l5.29,5.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"></path></svg>
                 </div>
