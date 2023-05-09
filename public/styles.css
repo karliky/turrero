@@ -210,3 +210,10 @@ a {
     text-decoration-color: #335f8d14;
     font-size: 0.9em;
 }
+
+@media (max-width: 770px) {
+    .wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
