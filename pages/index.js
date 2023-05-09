@@ -147,6 +147,7 @@ export default function Turrero() {
                     <a href={"/turra/" + tweet.id + (hasAudio ? "#podcast" : "")}>
                       <img className={`${styles['icon-audio']}`} src="/volume-2.svg" alt="Esta turra está disponible en formato podcast" title="Esta turra está disponible en formato podcast" />
                     </a>}
+                    {!hasAudio && <img className={`${styles['icon-audio']} ${styles['novisibility']}`} src="/volume-2.svg" /> } 
                     <a href={"/turra/" + tweet.id} className={styles.flex}>{tweet.summary}</a>
                   </div>
                 </div>

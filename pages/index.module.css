@@ -107,6 +107,10 @@
     gap: 30px;
 }
 
+.novisibility {
+    visibility: hidden;
+}
+
 @media (max-width: 770px) {
     .wrapper {
         padding-left: 20px;
@@ -121,6 +125,4 @@
         height: auto;
         overflow: hidden;
     }
-
-
 }
