@@ -36,3 +36,8 @@ button {
   padding: 0.5rem 1rem;
   font-weight: bold;
 }
+
+em {
+  background-color: #a5050b;
+  color: white;
+}
