@@ -19,7 +19,7 @@ function Search() {
     const [data, setData] = useState([]);
     const resultsRef = useRef(null);
     const clearRef = useRef(null);
-    const [debounceHandler, setDebounceHandler] = useState();
+    const debounceRef = useRef();
     const DEBOUNCE_MIN_MS = 300;
 
     const onSearch = (searchValue) => {
@@ -38,8 +38,8 @@ function Search() {
     const onSearchDebounce = (e) => {
         var searchValue = e.target.value.toLowerCase();
         setInputText(searchValue);
-        if (debounceHandler) clearTimeout(debounceHandler);
-        setDebounceHandler(setTimeout(() => onSearch(searchValue), DEBOUNCE_MIN_MS));
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        debounceRef.current = (setTimeout(() => onSearch(searchValue), DEBOUNCE_MIN_MS));
     }
 
     const clearSearch = () => {
