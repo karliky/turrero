@@ -1,3 +1,13 @@
+
+.wrapper {
+    position: relative;
+    min-height: 64px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
 .spacing {
     padding: 6px;
 }

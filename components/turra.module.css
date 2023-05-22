@@ -69,8 +69,20 @@
     text-decoration: none;
 }
 
+.brand {
+    color: #a5050b;
+    font-weight: bold;
+}
+
 .wrapper {
     width: 65%;
+
+    position: relative;
+    min-height: 64px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .tweet {
@@ -187,7 +199,7 @@
 }
 
 .small {
-    font-size: 10px;
+    font-size: 0.9em;
 }
 
 @media (max-width: 1300px) {

@@ -33,7 +33,7 @@ const Turra = ({}) => {
 
     </Head>
     <div>
-      <div className='wrapper'>
+      <div className={styles.wrapper}>
         <Header totalTweets={Tweets.length} />
         <div className={styles.content}>
           <div className={styles.person}>

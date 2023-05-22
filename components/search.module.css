@@ -1,7 +1,8 @@
 .search {
     font-size: 1em;
     position: relative;
-    margin-top: 20px;
+    
+    padding-left: 17px;
 }
 
 .clear-icon {
@@ -57,7 +58,6 @@
     background-repeat: no-repeat;
     background-position: 9px 9px;
     background-size: 20px 20px;
-    border-bottom: 1px solid #C5CBD5;
     width: 100%;
     padding: 0.5em 1em 0.5em 2.5em;
     color: #191817;

@@ -10,7 +10,7 @@ export default function ({ summary, categories, publishedDate, tweetId, tweets }
     const Title = ({ title }) => {
         const { highlightedText, rest } = getTitle(title);
         return <>
-            <span className='brand'>{highlightedText} </span>{rest}
+            <span className={styles.brand}>{highlightedText} </span>{rest}
         </>;
     }
     function readingTime(text = "") {

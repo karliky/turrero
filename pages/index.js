@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import Search from "../components/search";
 
 import TweetsMap from "../db/tweets_map.json";
 import Tweets from "../db/tweets.json";
@@ -126,8 +125,8 @@ export default function Turrero() {
       <meta name="twitter:description" content="El Turrero Post es la colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc..."/>
       <meta name="twitter:image" content="https://turrero.vercel.app/promo.png"></meta>
     </Head>
-    <div className="wrapper">
-      <Header children={Search} totalTweets={Tweets.length} />
+    <div className={styles.wrapper}>
+      <Header totalTweets={Tweets.length} />
       <div className={styles.columns}>
         <div className={styles.column}>
           <div className={styles.spacing}>

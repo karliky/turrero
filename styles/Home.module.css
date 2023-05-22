@@ -79,10 +79,6 @@
   line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
-}
-
 @media (max-width: 600px) {
   .grid {
     width: 100%;
