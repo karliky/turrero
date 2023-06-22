@@ -9,7 +9,7 @@ const algoliaTweets = [];
 
 tweets.forEach((thread) => {
     const tweetId = thread[0].id;
-    thread.forEach(({ id, tweet }) => algoliaTweets.push({ id: tweetId + "-" + id, tweet: tweet }));
+    thread.forEach(({ id, tweet }) => algoliaTweets.push({ id: tweetId + "-" + id, tweet: tweet, time: thread[0].time }));
 });
 
 fs.writeFileSync("../db/tweets-db.json", JSON.stringify(algoliaTweets));

@@ -7,10 +7,15 @@ const client = algoliasearch('WU4KEG8DAS', '7bd2f67692c4d35a0c9a5d7e005deb1e');
 const index = client.initIndex('turras');
 
 function List(props) {
-    return props.data.map((item) => (
+    return props.data
+    .sort ( function (a, b){
+        return new Date(b.time) - new Date(a.time);
+    }).map((item) => (
         <div
             className={styles['search-item']}
-            key={item.id} dangerouslySetInnerHTML={{ __html: item._highlightResult.tweet.value }}
+            key={item.id} dangerouslySetInnerHTML={{ __html: `${item._highlightResult.tweet.value}
+            <br/>
+            Fecha de publicacion: ${new Intl.DateTimeFormat("es").format(new Date(item.time))}` }}
             onClick={() => window.location.href = "/turra/" + item.id.split("-")[0] + "#" + item.id.split("-")[1]}
         ></div>
     ));
@@ -33,6 +38,7 @@ function Search() {
         resultsRef.current.style.display = 'block';
         clearRef.current.style.display = 'block';
         index.search(searchValue).then(({ hits }) => {
+            console.log(hits);
             setSearchResults(hits);
         });
     };
