@@ -2,7 +2,6 @@ import styles from './header.module.css';
 import Search from "../components/search";
 
 export default function Header({ totalTweets }) {
-
   return <div className={styles.wrapper}>
     <div className={styles.header}>
       <div className={styles.header__section}>
@@ -20,14 +19,7 @@ export default function Header({ totalTweets }) {
     </div>
     <div className={styles.information}>
       <h2>Esta es la colección curada y ordenada de las publicaciones de <a className={styles.red__color} href='https://twitter.com/recuenco' target='_blank'>Javier. G. Recuenco</a> sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h2>
-      <h3>Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el {`${new Date().toLocaleDateString("es-ES")}`}.</h3>
+      <h3>Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el 28/10/2023.</h3>
     </div>
-  </div>
-
-  return <div className={styles.header}>
-    <h1 className={styles.h1}><a href="/" className={styles.reset__link}>El <span className={styles.brand}>Turrero Post</span></a></h1>
-    <h2 className={styles.h2}>La colección curada y ordenada de las publicaciones de Javier. G. Recuenco sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h2>
-    <h3 className={styles.h3}>Hay un total de {totalTweets} turras, la última actualización fue el {`${new Date().toLocaleDateString("es-ES")}`}.</h3>
-    {children && children()}
   </div>;
 }

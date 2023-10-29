@@ -6,7 +6,7 @@
         console.log("TweetId: " + TweetId);
         console.log(thread.map(({ tweet, metadata }) => {
             if (metadata && metadata.embed) {
-                return tweet + '\n' + ("Contexto sobre el mensaje: " + metadata.embed.tweet);
+                return tweet + '\n' + ("Contexto sobre el mensaje o tweet asociado a este texto: " + metadata.embed.tweet);
             }
             return tweet;
         }).join('\n'));

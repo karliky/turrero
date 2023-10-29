@@ -1,26 +1,46 @@
+require('dotenv').config();
 const { writeFileSync } = require('fs');
 const csvdata = require('csvdata');
 const { 
     getTweetText,
-    extractMetadata,
-    parseStats } = require('./scraping');
+    extractMetadata } = require('./scraping');
 /**
  * This script is used to download the tweets from a csv file into a json file.
  * It scrapes the tweets from the Twitter Website using Puppeteer and saves the
  * tweets into a json file.
  */
+// Slow down the script to avoid getting banned
+const random = Math.floor(Math.random() * 150) + 150;
 (async () => {
     const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({ slowMo: 150 })
+    const browser = await puppeteer.launch({ slowMo: random })
     const page = await browser.newPage();
+
+    await Promise.all([
+        page.goto('https://twitter.com/login'),
+        page.waitForNavigation()
+    ]);
+
+    const cookies = [
+        { 'name': 'twid', 'value': process.env.twid },
+        { 'name': 'auth_token', 'value': process.env.auth_token },
+        { 'name': 'lang', 'value': process.env.lang },
+        { 'name': 'kdt', 'value': process.env.kdt },
+        { 'name': 'ct0', 'value': process.env.ct0 },
+        { 'name': 'guest_id', 'value': process.env.guest_id },
+        { 'name': 'domain', 'value': "https://twitter.com/" },
+    ];
+
+    console.log('Setting cookies');	
+    await page.setCookie(...cookies);
 
     const m = puppeteer.devices['iPhone X'];
     await page.emulate(m);
 
-    const tweets = await csvdata.load("C:/Users/K4rli/Documents/personal/programming/turrero/db/turras.csv", { parse: false });
+    const tweets = await csvdata.load(__dirname + "/../db/turras.csv", { parse: false });
     console.log('Total tweets', tweets.length);
     // Start by processing only the tweets that are not already processed
-    const existingTweets = require("C:/Users/K4rli/Documents/personal/programming/turrero/db/tweets.json").reduce((acc, tweets) => {
+    const existingTweets = require(__dirname + "/../db/tweets.json").reduce((acc, tweets) => {
         acc.push(tweets[0].id);
         return acc;
     }, []);
@@ -74,11 +94,30 @@ const {
                 /**
                  * Get views, likes, retweets, replies
                 */
-                const groupStats = await page.evaluate(() => {
-                    const el = Array.from(document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelectorAll('span[data-testid="app-text-transition-container"]')).reduce((acc, value) => acc + value.parentElement.parentElement.innerText + "-", "")
-                    return el;
+                const stats = await page.evaluate(() => {
+                    const stats_map = {
+                        like: "likes",
+                        views: "views",
+                        reply: "replies",
+                        retweet: "retweets",
+                        retweets: "retweets",
+                        bookmark: "bookmarks"
+                    };
+                    return Array.from(document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelectorAll('span[data-testid="app-text-transition-container"]')).map(el => {
+                        if (el.parentElement?.nextElementSibling?.tagName === "SPAN") {
+                            return {
+                                [stats_map[el.parentElement?.nextElementSibling?.innerText.toLowerCase()]]: el.innerText
+                            }
+                        }
+                        return {
+                            [stats_map[el.closest("div[data-testid]").getAttribute("data-testid").toLowerCase()]]: el.innerText
+                        }
+                    }).reduce((acc, el) => {
+                        const keys = Object.keys(el);
+                        acc[keys[0]] = el[keys[0]]
+                        return acc;
+                    }, {});
                 });
-                const stats = parseStats(groupStats);
                 console.log("tweetId", tweetId, { tweet, id: currentTweetId, metadata, time, stats });
                 tweets.push({ tweet, id: currentTweetId, metadata, time, stats });
                 console.log("finding lastTweetFound");
@@ -94,9 +133,9 @@ const {
                 console.log("lastTweetFound", lastTweetFound !== 'https://twitter.com/Recuenco');
                 if (lastTweetFound !== 'https://twitter.com/Recuenco') {
                     stopped = true;
-                    const existingTweets = require("C:/Users/K4rli/Documents/personal/programming/turrero/db/tweets.json");
+                    const existingTweets = require(__dirname + "/../db/tweets.json");
                     existingTweets.push(tweets);
-                    writeFileSync("C:/Users/K4rli/Documents/personal/programming/turrero/db/tweets.json", JSON.stringify(existingTweets));
+                    writeFileSync(__dirname + "/../db/tweets.json", JSON.stringify(existingTweets));
                     continue;
                 }
                 /**

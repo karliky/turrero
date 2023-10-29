@@ -83,22 +83,4 @@ module.exports.extractMetadata = async (page) => {
     return { ...metadata, embed };
 }
 
-/**
- * Extracts all stats from a tweet (rts, quotes, likes, replies)
- */
-module.exports.parseStats = (stats) => {
-    if (!stats) return {};
-    const parsedStats = stats.split("-");
-    parsedStats.pop();
-    const result = {};
-    for (let index = 0; index < parsedStats.length; index++) {
-        const label = parsedStats[index].split("\n");
-        const num = label[0];
-        const category = label[1];
-        result[category.toLowerCase().replaceAll(" ", "")] = num;
-    }
-    return result;
-}
-
-
 module.exports.getTweetText = getTweetText;
