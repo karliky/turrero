@@ -60,7 +60,7 @@ const Turra = ({}) => {
             <div className={styles.about__description}>
               El Turrero Post es un proyecto personal de aprendizaje. 
               Las turras de Javier G. Recuenco contienen destellos de la genialidad sobre los que reflexionar.
-              Este lugar está especialmente enfocado en la solución de problemas complejos.
+              Éste lugar está especialmente enfocado en la solución de problemas complejos.
               Como dijo el gran John Lasseter de Pixar: "No podemos cambiar el mundo a menos que entendamos primero cómo funciona".
               El objetivo es ayudarte a comprender mejor el mundo a través de las turras, enlaces y charlas de temas relacionados con la complejidad.
               La mejor forma de ayudarnos es compartiendolo con tus amigos y conocidos.

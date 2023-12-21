@@ -46,11 +46,10 @@ To get started with the project, you will need to clone the repository and insta
 The process of adding a new thread is half manual half automated:
 
 1. Manually add the first tweet id to ontop of the turras.csv file
-2. `$ cd scraper`
-3. `$ node recorder.js` // This will scrap it and save it into tweets.json
-4. `$ node scrapper/tweets_enrichment.js`
-5. Move the `scrapper/metadata` content into `public/metadata`
-6. Verify that everything is fine by running `npm run dev` on the root folder
+2. `$ node ./scrapper/recorder.js` // This will scrap it and save it into tweets.json
+3. `$ node ./scrapper/tweets_enrichment.js`
+4. Move the `./scrapper/metadata` content into `public/metadata`
+5. Verify that everything is fine by running `npm run dev` on the root folder
 
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
 The files `db/tweets_map.json, db/tweets_summary.json` should be manually edited.

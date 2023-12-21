@@ -1,2 +1,22 @@
-Create a short summar from this text and do it in Spanish, never use these words in your summary: turras, hoy, hilo. Also, answer me in JSON format including the first word from my text which is an id and your summary:
-You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and make the options as concised as long as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format following this structure [ { "question": "", "options": [ ], "answer": answerIndex }] where answerIndex is the index of the option from the array of options and the answerIndex starts from 1 and not 0:
+Create a short headline from this text and do it in Spanish, never use these words in your headline: turras, hoy, hilo. Also, answer me in JSON format including the first word from my text which is an id and your headline but the property of the headline should be called "summary":
+You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and make the options as concised as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format following this structure [ { "question": "", "options": [ ], "answer": answerIndex }] where answerIndex is the index of the option from the array of options and the answerIndex starts from 1 and not 0:
+After that, I need you to categorize the text in any of these categories, you should include at least one.
+
+resolución-de-problemas-complejos
+sistemas-complejos
+marketing
+estrategia
+factor-x
+sociología
+gestión-del-talento
+leyes-y-sesgos
+trabajo-en-equipo
+libros
+futurismo-de-frontera
+personotecnia
+orquestación-cognitiva
+gaming
+lectura-de-señales
+el-contexto-manda
+desarrollo-de-habilidades
+otras-turras-del-querer

@@ -10,7 +10,7 @@ const {
  * tweets into a json file.
  */
 // Slow down the script to avoid getting banned
-const random = Math.floor(Math.random() * 150) + 150;
+const random = Math.floor(Math.random() * 150) + 750;
 (async () => {
     const puppeteer = require('puppeteer');
     const browser = await puppeteer.launch({ slowMo: random })
