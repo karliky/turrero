@@ -34,11 +34,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease-in-out;
 }
 
 .book .title {

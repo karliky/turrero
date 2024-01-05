@@ -39,7 +39,7 @@ const Turra = ({ books }) => {
         <div className={styles.content}>
           <div className={styles.heading}>
             <h1 className={styles['text-heading']}>Todos los libros mencionados en las turras.</h1>
-            <div>Hay un total de {books.length} libros.</div>
+            <div>Un total de {books.length} libros.</div>
           </div>
           <div className={styles.books}>
             {books && books.map((book, index) => {
