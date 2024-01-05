@@ -55,7 +55,9 @@ const Turra = ({ books }) => {
                   <h2 clasName={styles.title}>
                     <a href={book.url}>{book.title}</a>
                   </h2>
+                  <div className={styles.separation}></div>
                   <p><a className={styles['secondary-link']} target="_blank" href={"https://twitter.com/Recuenco/status/" + book.id}>Tweet original</a></p>
+                  <p><a className={styles['secondary-link']} href={"/turra/" +  book.turraId + "/#" + book.id}>Turra original</a></p>
                 </div>
               </div>);
             })}

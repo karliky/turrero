@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -53,9 +53,12 @@
     color: #a5050b;
 }
 
+.book .separation {
+    margin-top: 10px;
+}
+
 .book .secondary-link {
     display: inline-block;
-    margin-top: 10px;
     color: #757575;
     font-size: 12px;
     line-height: 16px;
@@ -75,6 +78,7 @@
     height: 200px;
     object-fit: contain;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 .more {
