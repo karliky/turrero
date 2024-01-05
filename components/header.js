@@ -1,7 +1,7 @@
 import styles from './header.module.css';
 import Search from "../components/search";
 
-export default function Header({ totalTweets }) {
+export default function Header({ totalTweets, noHeading }) {
   return <div className={styles.wrapper}>
     <div className={styles.header}>
       <div className={styles.header__section}>
@@ -18,9 +18,9 @@ export default function Header({ totalTweets }) {
         <Search />
       </div>
     </div>
-    <div className={styles.information}>
+    {!noHeading && <div className={styles.information}>
       <h2>Esta es la colección curada y ordenada de las publicaciones de <a className={styles.red__color} href='https://twitter.com/recuenco' target='_blank'>Javier. G. Recuenco</a> sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h2>
       <h3>Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el 01/01/2024.</h3>
-    </div>
+    </div>}
   </div>;
 }

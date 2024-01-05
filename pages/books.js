@@ -2,10 +2,8 @@ import Head from "next/head";
 import Image from 'next/image';
 import Footer from "../components/footer";
 import Header from "../components/header";
-import Tweets from "../db/tweets.json";
 import styles from './books.module.css';
 import books from '../db/books.json';
-
 
 export async function getStaticProps(context) {
   return {
@@ -37,14 +35,18 @@ const Turra = ({ books }) => {
     </Head>
     <div>
       <div className={styles.wrapper}>
-        <Header totalTweets={Tweets.length} />
+        <Header noHeading />
         <div className={styles.content}>
+          <div className={styles.heading}>
+            <h1 className={styles['text-heading']}>Todos los libros mencionados en las turras.</h1>
+            <div>Hay un total de {books.length} libros.</div>
+          </div>
           <div className={styles.books}>
             {books && books.map((book, index) => {
-              const img = book.img.replace('./','/') || `/metadata/SJJzT3AT_6.jpeg`;
+              const img = book.img.replace('./', '/') || `/metadata/SJJzT3AT_6.jpeg`;
               return (<div key={index} className={styles.book}>
-                <Image 
-                  src={img} 
+                <Image
+                  src={img}
                   alt={book.title}
                   width={200}
                   height={300}

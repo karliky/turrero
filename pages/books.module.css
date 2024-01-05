@@ -9,6 +9,18 @@
 
 /* CSS Class for a grid of 5 items */
 
+.text-heading {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32px;
+    color: rgb(25, 24, 23);
+}
+
+.heading {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .books {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -91,5 +103,9 @@
 @media (max-width: 600px) {
     .books {
         grid-template-columns: repeat(1, 1fr);
+    }
+    .wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
