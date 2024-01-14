@@ -1987,5 +1987,41 @@
     "media": "goodreads",
     "title": "Board Talk: 18 crucial conversations that count inside and outside the boardroom",
     "turraId": "1738462543344005507"
+  },
+  {
+    "id": "1746066414375481494",
+    "type": "card",
+    "img": "./metadata/8w5q5vsS.jpeg",
+    "url": "https://www.goodreads.com/book/show/7554096-future-ready",
+    "media": "goodreads",
+    "title": "Future Ready",
+    "turraId": "1746066280782631368"
+  },
+  {
+    "id": "1746066415482798584",
+    "type": "card",
+    "img": "./metadata/3Y5nT3I0.jpeg",
+    "url": "https://www.goodreads.com/book/show/12675109-great-by-choice",
+    "media": "goodreads",
+    "title": "Great by Choice: Uncertainty, Chaos, and Luck—Why Some Thrive Despite Them All",
+    "turraId": "1746066280782631368"
+  },
+  {
+    "id": "1743547779647942977",
+    "type": "card",
+    "img": "./metadata/gkMbIMrD.jpeg",
+    "url": "https://www.goodreads.com/book/show/33585396-side-hustle",
+    "media": "goodreads",
+    "title": "Side Hustle: From Idea to Income in 27 Days",
+    "turraId": "1743547711897342313"
+  },
+  {
+    "id": "1743547780604326103",
+    "type": "card",
+    "img": "./metadata/amEdr0JW.jpeg",
+    "url": "https://www.goodreads.com/book/show/14349045-muay-thai",
+    "media": "goodreads",
+    "title": "Muay Thai",
+    "turraId": "1743547711897342313"
   }
 ]
