@@ -2023,5 +2023,14 @@
     "media": "goodreads",
     "title": "Muay Thai",
     "turraId": "1743547711897342313"
+  },
+  {
+    "id": "1748598371751723318",
+    "type": "card",
+    "img": "./metadata/kvuTd8lR.jpeg",
+    "url": "https://www.goodreads.com/book/show/3047.A_Conflict_of_Visions",
+    "media": "goodreads",
+    "title": "A Conflict of Visions: Ideological Origins of Political Struggles",
+    "turraId": "1748598237563412826"
   }
 ]
