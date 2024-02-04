@@ -7,7 +7,29 @@
     padding-right: 40px;
 }
 
-/* CSS Class for a grid of 5 items */
+.category {
+    display: inline-block;
+    background-color: #3972e1;
+    border-radius: 2px;
+    padding: 3px 6px;
+    margin-right: 0.5em;
+    color: #fff;
+    font-size: 0.9em;
+    margin: 2px;
+}
+
+.categories {
+    max-width: 800px;
+}
+
+.category-selected {
+    background-color: #a5050b;
+}
+
+.category:hover {
+    background-color: #a5050b;
+    cursor: pointer;
+}
 
 .text-heading {
     font-size: 24px;
@@ -18,7 +40,9 @@
 
 .heading {
     margin-bottom: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .books {
@@ -110,5 +134,8 @@
     .wrapper {
         padding-left: 20px;
         padding-right: 20px;
+    }
+    .heading {
+        align-items: start;
     }
 }

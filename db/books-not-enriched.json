@@ -207,15 +207,6 @@
     "turraId": "1581161865035407360"
   },
   {
-    "id": "1581162036725452801",
-    "type": "card",
-    "img": "./metadata/hS0QGjU2.jpeg",
-    "url": "https://www.goodreads.com/author/show/6980.Edward_de_Bono",
-    "media": "goodreads",
-    "title": "\n  \tEdward de Bono\n  ",
-    "turraId": "1581161865035407360"
-  },
-  {
     "id": "1576088835439857664",
     "type": "card",
     "img": "./metadata/brfu2CrW.jpeg",
@@ -258,15 +249,6 @@
     "url": "https://www.goodreads.com/book/show/16002028-primates",
     "media": "goodreads",
     "title": "Primates: The Fearless Science of Jane Goodall, Dian Fossey, and Biruté Galdikas",
-    "turraId": "1568482191230787585"
-  },
-  {
-    "id": "1568482301989847041",
-    "type": "card",
-    "img": "",
-    "url": "https://www.goodreads.com/author/list/112082.Frans_de_Waal",
-    "media": "goodreads",
-    "title": "Books by Frans de Waal",
     "turraId": "1568482191230787585"
   },
   {
@@ -576,15 +558,6 @@
     "turraId": "1472134392361500672"
   },
   {
-    "id": "1469583061830545409",
-    "type": "card",
-    "img": "./metadata/c9nEWbJJ.jpeg",
-    "url": "https://www.goodreads.com/author/show/5376311.Peter_H_Diamandis",
-    "media": "goodreads",
-    "title": "\n  \tPeter H. Diamandis\n  ",
-    "turraId": "1469583058563121153"
-  },
-  {
     "id": "1469583089903063046",
     "type": "card",
     "img": "./metadata/2R13Znp4.jpeg",
@@ -663,15 +636,6 @@
     "url": "https://www.goodreads.com/book/show/866222.Winning",
     "media": "goodreads",
     "title": "Winning",
-    "turraId": "1456867302494834690"
-  },
-  {
-    "id": "1456867319918039041",
-    "type": "card",
-    "img": "",
-    "url": "https://www.goodreads.com/author/list/3770.Jack_Welch",
-    "media": "goodreads",
-    "title": "Books by Jack Welch",
     "turraId": "1456867302494834690"
   },
   {
@@ -756,15 +720,6 @@
     "turraId": "1439130053267316738"
   },
   {
-    "id": "1436601049784201219",
-    "type": "card",
-    "img": "./metadata/9DShnuC7.jpeg",
-    "url": "https://www.goodreads.com/author/show/197770.B_J_Fogg",
-    "media": "goodreads",
-    "title": "\n  \tB.J.  Fogg\n  ",
-    "turraId": "1436601048978890753"
-  },
-  {
     "id": "1436601077529460737",
     "type": "card",
     "img": "./metadata/SJJzT3AT_17.jpeg",
@@ -808,15 +763,6 @@
     "media": "goodreads",
     "title": "Son of a Milkman: My Crazy Life with Tesla",
     "turraId": "1406126552463470593"
-  },
-  {
-    "id": "1403645493524246531",
-    "type": "card",
-    "img": "./metadata/FOG7eJHb.jpeg",
-    "url": "https://www.goodreads.com/author/show/13229.Julia_Cameron",
-    "media": "goodreads",
-    "title": "\n  \tJulia Cameron\n  ",
-    "turraId": "1403645471596453888"
   },
   {
     "id": "1403645500620947461",
@@ -1719,15 +1665,6 @@
     "turraId": "1652189268742209537"
   },
   {
-    "id": "1718136505342783519",
-    "type": "card",
-    "img": "./metadata/u_50x66-632230dc9882b4352d753eedf9396530.png",
-    "url": "https://www.goodreads.com/author/list/118588.Todd_May",
-    "media": "goodreads",
-    "title": "Books by Todd May",
-    "turraId": "1718136430130520294"
-  },
-  {
     "id": "1718136506345312289",
     "type": "card",
     "img": "./metadata/Xumy99n-.jpeg",
@@ -2032,5 +1969,41 @@
     "media": "goodreads",
     "title": "A Conflict of Visions: Ideological Origins of Political Struggles",
     "turraId": "1748598237563412826"
+  },
+  {
+    "id": "1753677776480014575",
+    "type": "card",
+    "img": "./metadata/JLnfIg3I.jpeg",
+    "url": "https://www.goodreads.com/es/book/show/51825715",
+    "media": "goodreads",
+    "title": "Por qué creemos en mierdas: Cómo nos engañamos a nosotros mismos",
+    "turraId": "1753677668996837620"
+  },
+  {
+    "id": "1753677777587347788",
+    "type": "card",
+    "img": "./metadata/PB7UDfLU.jpeg",
+    "url": "https://www.goodreads.com/book/show/1835405.When_Prophecy_Fails?ref=nav_sb_ss_1_10",
+    "media": "goodreads",
+    "title": "When Prophecy Fails: A Social and Psychological Study of a Modern Group that Predicted the Destruction of the World",
+    "turraId": "1753677668996837620"
+  },
+  {
+    "id": "1751155062481588526",
+    "type": "card",
+    "img": "./metadata/_M5-4gqa.jpeg",
+    "url": "https://www.goodreads.com/book/show/1781435.Gretzky",
+    "media": "goodreads",
+    "title": "Gretzky",
+    "turraId": "1751154901659381958"
+  },
+  {
+    "id": "1751155064209658153",
+    "type": "card",
+    "img": "./metadata/6yeEJwL2.jpeg",
+    "url": "https://www.goodreads.com/book/show/10420795-metamaus",
+    "media": "goodreads",
+    "title": "MetaMaus: A Look Inside a Modern Classic, Maus",
+    "turraId": "1751154901659381958"
   }
 ]
