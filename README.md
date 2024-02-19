@@ -32,7 +32,7 @@ The website is built using:
 
 ## Getting Started
 
-The front-end is located at the root of the project folder and the scraping logic is located under the `scrapper` folder on its own package.
+The front-end is located at the root of the project folder and the scraping logic is located under the `scripts` folder on its own package.
 
 To get started with the project, you will need to clone the repository and install the dependencies. Here are the steps:
 
@@ -46,9 +46,9 @@ To get started with the project, you will need to clone the repository and insta
 The process of adding a new thread is half manual half automated:
 
 1. Manually add the first tweet id to ontop of the turras.csv file
-2. `$ node ./scrapper/recorder.js` // This will scrap it and save it into tweets.json
-3. `$ node ./scrapper/tweets_enrichment.js`
-4. Move the `./scrapper/metadata` content into `public/metadata`
+2. `$ node ./scripts/recorder.js` // This will scrap it and save it into tweets.json
+3. `$ node ./scripts/tweets_enrichment.js`
+4. Move the `./scripts/metadata` content into `public/metadata`
 5. Verify that everything is fine by running `npm run dev` on the root folder
 
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
