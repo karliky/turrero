@@ -53,7 +53,7 @@ const HallOfFame = ({}) => {
               </div>
               <div className={styles['hall-of-fame__item']}>
                 <h2 className={styles['hall-of-fame__title']}><span className={styles.hashtag}>#</span>Arquitectura de incentivos</h2>
-                <div className={styles['hall-of-fame__description']}>La "arquitectura de incentivos" es el arte de moldear comportamientos mediante recompensas y castigos. Un buen diseño nos guía hacia el éxito; un paso en falso, y nos perdemos. ¿Quién decide qué nos motiva? En este juego, cada elección es un paso en la danza entre la zanahoria y el palo.</div>
+                <div className={styles['hall-of-fame__description']}>La "arquitectura de incentivos" es el arte de moldear comportamientos mediante recompensas y castigos. Un buen diseño nos guía hacia el éxito; un paso en falso y fracasamos.</div>
                 <ol className={styles['hall-of-fame__list']}>
                   <li className={styles['hall-of-fame__fame__list__item']}><a className={styles['hall-of-fame__fame__list__link']} href="https://turrero.vercel.app/turra/1649673649866113024">Analizando la importancia de los incentivos en el ámbito empresarial y cómo influyen en el éxito o fracaso</a></li>
                   <li className={styles['hall-of-fame__fame__list__item']}><a className={styles['hall-of-fame__fame__list__link']} href="https://turrero.vercel.app/turra/1738462543344005507">Metaincentivos y decisiones en corporaciones (sobre cómo hablar al board)</a></li>
