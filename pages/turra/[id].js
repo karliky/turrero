@@ -62,13 +62,13 @@ const Turra = ({ tweetId, summary, categories, tweets, enrichments, publishedDat
       <meta property='og:url' content='https://turrero.vercel.app/'/>
       <meta property="og:title" content="El Turrero Post - Las turras de Javier G. Recuenco" />
       <meta property="og:description" content={summary} />
-      <meta property="og:image" content="https://turrero.vercel.app/promo.png"/>
+      <meta property="og:image" content={"https://turrero.vercel.app/meta/" + tweetId + ".png"} />
       <meta name="twitter:card" content="summary_large_image"/>
       <meta name="twitter:site" content="@recuenco"/>
       <meta name="twitter:creator" content="@k4rliky"/>
       <meta name="twitter:title" content="El Turrero Post - Las turras de Javier G. Recuenco"/>
       <meta name="twitter:description" content={summary}/>
-      <meta name="twitter:image" content="https://turrero.vercel.app/promo.png"></meta>
+      <meta name="twitter:image" content={"https://turrero.vercel.app/meta/" + tweetId + ".png"}></meta>
 
     </Head>
     <div>

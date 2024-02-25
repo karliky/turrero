@@ -3723,5 +3723,57 @@
       "Biography",
       "Art"
     ]
+  },
+  {
+    "id": "1758760421966713279",
+    "type": "card",
+    "img": "./metadata/_CI0kMNi.jpeg",
+    "url": "https://www.goodreads.com/book/show/16277271-dave-sim",
+    "media": "goodreads",
+    "title": "Dave Sim: Conversations",
+    "turraId": "1758760266068590698",
+    "categories": [
+      "Biography",
+      "Nonfiction"
+    ]
+  },
+  {
+    "id": "1758760422918799591",
+    "type": "card",
+    "img": "./metadata/mmypo6zv.jpeg",
+    "url": "https://www.goodreads.com/es/book/show/201038023",
+    "media": "goodreads",
+    "title": "El abismo del olvido",
+    "turraId": "1758760266068590698",
+    "categories": [
+      "Fiction"
+    ]
+  },
+  {
+    "id": "1758760423996711061",
+    "type": "card",
+    "img": "./metadata/h59sczhH.jpeg",
+    "url": "https://www.goodreads.com/book/show/49127450-nazi-wives",
+    "media": "goodreads",
+    "title": "Nazi Wives: The Women at the Top of Hitler's Germany",
+    "turraId": "1758760266068590698",
+    "categories": [
+      "History",
+      "Biography",
+      "Nonfiction"
+    ]
+  },
+  {
+    "id": "1756234870282461217",
+    "type": "card",
+    "img": "./metadata/0vaHoOBt.jpeg",
+    "url": "https://www.goodreads.com/book/show/588138.The_Hero_With_a_Thousand_Faces",
+    "media": "goodreads",
+    "title": "The Hero With a Thousand Faces",
+    "turraId": "1756234748685373544",
+    "categories": [
+      "Psychology",
+      "Nonfiction"
+    ]
   }
 ]
