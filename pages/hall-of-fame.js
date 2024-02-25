@@ -69,6 +69,7 @@ const HallOfFame = ({}) => {
                   <li className={styles['hall-of-fame__fame__list__item']}><a className={styles['hall-of-fame__fame__list__link']} href="https://turrero.vercel.app/turra/1720721564465823881">Analizando la fusión de Inteligencia Artificial y CPS en el mercado laboral</a></li>
                   <li className={styles['hall-of-fame__fame__list__item']}><a className={styles['hall-of-fame__fame__list__link']} href="https://turrero.vercel.app/turra/1626829061723983872">Creatividad e Inteligencia Artificial: ¿Será la IA la muerte de la creatividad humana?</a></li>
                   <li className={styles['hall-of-fame__fame__list__item']}><a className={styles['hall-of-fame__fame__list__link']} href="https://turrero.vercel.app/turra/1385833074001432576">La inteligencia se puede usar para tender puentes y no para agredir al diferente.</a></li>
+                  <li className={styles['hall-of-fame__fame__list__item']}><a className={styles['hall-of-fame__fame__list__link']} href="https://turrero.vercel.app/turra/1728306256585101618">Finalizando la serie sobre IA y CPS: Reflexiones y Experiencias.</a></li>
                </ol>
               </div>
             </div>

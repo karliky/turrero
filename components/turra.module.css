@@ -33,7 +33,6 @@
 }
 
 .header h2 {
-    margin-top: 20px;
     color: #757575;
     font-size: 14px;
     line-height: 1.25;
@@ -106,7 +105,7 @@
 }
 
 .flexLeft {
-    max-width: 650px;
+    max-width: 850px;
     padding-right: 50px;
     box-sizing: content-box;
 }
@@ -241,5 +240,36 @@
 
     .category {
         margin-top: 5.5px;
+    }
+}
+
+@media print {
+    .back {
+        display: none;
+    }
+    .footer {
+        display: none;
+    }
+    .h1 {
+        font-size: 2em;
+        margin: 0;
+    }	
+    .header h1, .header h2, .categories {
+        margin: 0;
+        padding: 0;
+    }
+    .wrapper {
+        width: 100%;
+        padding: 0;
+    }
+    .tweet>p {
+        font-size: 0.9em;
+        line-height: 1.2em;
+    }
+    .tweet {
+        margin: 0.7em;
+    }
+    .metadata {
+        margin: 0;
     }
 }
