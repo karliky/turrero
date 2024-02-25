@@ -3,7 +3,7 @@
  * and then we can manually upload it to Algolia.
  */
 const fs = require("fs");
-const tweets = require("../db/tweets.json");
+const tweets = require(__dirname + "/../db/tweets.json");
 
 const algoliaTweets = [];
 

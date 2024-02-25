@@ -13,6 +13,7 @@ export default function Header({ totalTweets, noHeading }) {
         <a href="https://cps.tonidorta.com/" target='_blank'>CPS Notebook</a>
         <a href="/about">Sobre esta web</a>
         <a href="/books">Libros</a>
+        <a href="/hall-of-fame">Hall of Fame</a>
       </div>
       <div className={styles.header__section}>
         <Search />

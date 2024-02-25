@@ -3,13 +3,16 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 dotenv.config();
 const Tweets = require('../db/tweets.json');
+const TweetsEnrichements = require('../db/tweets_enriched.json');
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const tweetId = process.argv[2];
 
 const replacements = {
-  WEF : 'Foro Económico Mundial',
-  CPS : 'Complex Problem Solving',
+  WEF: 'Foro Económico Mundial',
+  CPS: 'Complex Problem Solving',
+  "Javier G. Recuenco@Recuenco": 'Javier Recuenco',
+  "Javier G. Recuenco": 'Javier Recuenco',
   "P.D. I:": "Postdata 1:",
   "P.D. II:": "Postdata 2:",
   "P.D. III:": "Postdata 3:"
@@ -44,9 +47,17 @@ const thread = Tweets[tweetIndex].reduce((acc, t) => {
 
   if (t?.metadata?.embed?.type === 'embed') {
     paragraph += `
-    TWEET PARA DAR CONTEXTO. AUTOR ${t.metadata.embed.author.trim().replace(/\n/g, '')}.
-    TWEET: ${t.metadata.embed.tweet}
-    CONTINUA TEXTO ORIGINAL:`;
+      TWEET PARA DAR CONTEXTO. AUTOR ${t.metadata.embed.author.trim().replace(/\n/g, '')}.
+      TWEET: ${t.metadata.embed.tweet}
+      CONTINUA TEXTO ORIGINAL:`;
+  }
+
+  const hasEnrichment = TweetsEnrichements.find((enrichment) => enrichment.id === t.id);
+  if (hasEnrichment && hasEnrichment.type === 'card' && hasEnrichment.media === 'goodreads') {
+    console.log('MEDIA', hasEnrichment);
+    paragraph += `
+      LIBRO PARA DAR CONTEXTO ${hasEnrichment.title}.
+      CONTINUA TEXTO ORIGINAL:`;
   }
 
   return `${acc}\n${paragraph}`;
@@ -63,7 +74,8 @@ const applyReplacements = (text) => {
 const prompt = `
 Considera todos estos pasos:
 - Sobre el texto dado, solo corrige faltas de ortografía, no cambies ninguna otra palabra.
-- Si aparece un TWEET PARA DAR CONTEXTO en el texto debes introducirlo diciendio "{Nombre de la persona} comentó en Twitter:", para que cuando se escuche tenga sentido para quien lo escucha.
+- Si aparece un TWEET PARA DAR CONTEXTO en el texto debes introducirlo diciendio "{Nombre de la persona reescrito de forma audible} comentó en Twitter:", para que cuando se escuche tenga sentido para quien lo escucha.
+- Si aparece un LIBRO PARA DAR CONTEXTO en el texto debes introducirlo como creas oportuno para que cuando se escuche tenga sentido para quien lo escucha.
 - Si aparece algún texto tipo P.D. I, P.D. II, esto quiere decir postdata. Puedes introducirlo sin cambiar el texto.
 - No introduzcas bloques con titulo por cada seccion, tu respuesta solo debe incluir el texto original procesado por las reglas anteriores.
 - No renombres ninguna palabra, solo corrige faltas de ortografía pero no cambies ninguna palabra por otra.
@@ -75,7 +87,7 @@ Aqui tienes el texto:
 const fullText = prompt + thread;
 console.log(fullText);
 async function main() {
-const result = [];
+  const result = [];
   const stream = await openai.beta.chat.completions.stream({
     model: 'gpt-4',
     messages: [{ role: 'user', content: fullText }],

@@ -1,0 +1,93 @@
+.wrapper {
+    position: relative;
+    min-height: 64px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.text-heading {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32px;
+    color: rgb(25, 24, 23);
+}
+
+.heading {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hall-of-fame {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.hall-of-fame__item {
+    margin-bottom: 20px;
+}
+
+.hashtag {
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.hall-of-fame__title {
+    color: #a5050b;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.hall-of-fame__description {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #3b3b3b;
+    margin-bottom: 10px;
+}
+
+.hall-of-fame__fame__list {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #757575;
+
+}
+
+.hall-of-fame__fame__list__item {
+    display: list-item;
+    list-style-type: number;
+    margin-left: 20px;
+    margin-bottom: 4px;
+}
+
+.hall-of-fame__fame__list__link {
+    color: #a5050b;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #a5050b;
+    font-weight: bold;
+}
+
+.hall-of-fame__fame__list__link:hover {
+    color: #a5050ade;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .heading {
+        align-items: start;
+    }
+}
