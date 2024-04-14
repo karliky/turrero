@@ -6,7 +6,7 @@
  * This function is used to extract the text of a tweet from the Twitter Website
  */
 
-const getTweetText = () => {
+export const getTweetText = () => {
     const tweetContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
     if (tweetContainer.querySelector('div[data-testid="tweetText"]'))
         return tweetContainer.querySelector('div[data-testid="tweetText"]').textContent;
@@ -47,7 +47,7 @@ const extractMedia = () => {
 /**
  * Given a existing tweet, it will return the metadata of the tweet (cards, media, embed tweets, etc)
  */
-module.exports.extractMetadata = async (page) => {
+export const extractMetadata  = async (page) => {
     const metadata = await page.evaluate(extractMedia);
     const hasEmbedTweet = await page.evaluate(() => {
         const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
@@ -66,7 +66,7 @@ module.exports.extractMetadata = async (page) => {
         return "";
     }),
     // Navigate to the embedded tweet
-    await page.waitForTimeout(50);
+    //await page.waitForTimeout(50);
     await Promise.all([
         page.waitForNavigation(),
         page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time')
@@ -83,4 +83,4 @@ module.exports.extractMetadata = async (page) => {
     return { ...metadata, embed };
 }
 
-module.exports.getTweetText = getTweetText;
+//module.exports.getTweetText = getTweetText;

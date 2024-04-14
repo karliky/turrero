@@ -1,9 +1,22 @@
-require('dotenv').config();
-const { writeFileSync } = require('fs');
-const csvdata = require('csvdata');
-const { 
-    getTweetText,
-    extractMetadata } = require('./scraping');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import { writeFileSync } from 'fs';
+import csvdata from 'csvdata';
+import { getTweetText, extractMetadata } from './scraping.js';
+
+import puppeteer from 'puppeteer';
+import {KnownDevices} from 'puppeteer';
+import existingTweetsData from '../db/tweets.json' assert { type: 'json' };
+
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const tweets = await csvdata.load(__dirname + "/../db/turras.csv", { parse: false });
+
 /**
  * This script is used to download the tweets from a csv file into a json file.
  * It scrapes the tweets from the Twitter Website using Puppeteer and saves the
@@ -11,9 +24,10 @@ const {
  */
 // Slow down the script to avoid getting banned
 const random = Math.floor(Math.random() * 150) + 750;
+
 (async () => {
-    const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({ slowMo: random })
+    console.log("Launching...");
+    const browser = await puppeteer.launch({ slowMo: random, headless:true})
     const page = await browser.newPage();
 
     await Promise.all([
@@ -33,14 +47,14 @@ const random = Math.floor(Math.random() * 150) + 750;
 
     console.log('Setting cookies');	
     await page.setCookie(...cookies);
-
-    const m = puppeteer.devices['iPhone X'];
+    
+    const m = KnownDevices['iPhone 12'];
     await page.emulate(m);
 
-    const tweets = await csvdata.load(__dirname + "/../db/turras.csv", { parse: false });
+    
     console.log('Total tweets', tweets.length);
     // Start by processing only the tweets that are not already processed
-    const existingTweets = require(__dirname + "/../db/tweets.json").reduce((acc, tweets) => {
+    const existingTweets = existingTweetsData.reduce((acc, tweets) => {
         acc.push(tweets[0].id);
         return acc;
     }, []);
@@ -133,9 +147,9 @@ const random = Math.floor(Math.random() * 150) + 750;
                 console.log("lastTweetFound", lastTweetFound !== 'https://twitter.com/Recuenco');
                 if (lastTweetFound !== 'https://twitter.com/Recuenco') {
                     stopped = true;
-                    const existingTweets = require(__dirname + "/../db/tweets.json");
-                    existingTweets.push(tweets);
-                    writeFileSync(__dirname + "/../db/tweets.json", JSON.stringify(existingTweets));
+                    //const existingTweets = require(__dirname + "/../db/tweets.json");
+                    existingTweetsData.push(tweets);
+                    writeFileSync(__dirname + "/../db/tweets.json", JSON.stringify(existingTweetsData));
                     continue;
                 }
                 /**
