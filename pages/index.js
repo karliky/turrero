@@ -163,7 +163,7 @@ export default function Turrero() {
               </div>
               <div className={styles.links}>
                 {tweets[key].map(tweet => ({ 
-                  time: Tweets.find(_tweet => _tweet[0].id === tweet.id)[0].time, 
+                  time: Tweets.find(_tweet => _tweet && _tweet[0] && _tweet[0].id === tweet?.id)?.[0]?.time,
                   ...tweet 
                 })).sort(orderByDate()).map((tweet) => {
                   return <div className={styles.link} key={tweet.id + "-" + key + "id"}>
