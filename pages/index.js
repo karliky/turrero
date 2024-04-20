@@ -135,21 +135,23 @@ export default function Turrero() {
             </div>
             <div className={styles.links}>
               {top25.map((tweet) => {
-                const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
-                const hasAudio = TweetsPodcasts.find(_tweet => _tweet.id === tweet.id);
-                return <div className={styles.link} key={tweet.id + "id-top"}>
-                  <div>
-                    <div className={styles.time} title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                if (tweet){
+                  const timeAgo = Tweets.find(_tweet => _tweet[0].id === tweet.id);
+                  const hasAudio = TweetsPodcasts.find(_tweet => _tweet.id === tweet.id);
+                  return <div className={styles.link} key={tweet.id + "id-top"}>
+                    <div>
+                      <div className={styles.time} title={`Publicado el ${new Date(timeAgo[0].time).toLocaleDateString("es-ES")} / ${new Date(timeAgo[0].time).toLocaleTimeString("es-ES")}`}>{timeSince(new Date(timeAgo[0].time).getTime())}</div>
+                    </div>
+                    <div className={styles.flex}>
+                      {hasAudio && 
+                      <a href={"/turra/" + tweet.id + (hasAudio ? "#podcast" : "")}>
+                        <img className={`${styles['icon-audio']}`} src="/volume-2.svg" alt="Esta turra está disponible en formato podcast" title="Esta turra está disponible en formato podcast" />
+                      </a>}
+                      {!hasAudio && <img className={`${styles['icon-audio']} ${styles['novisibility']}`} src="/volume-2.svg" /> } 
+                      <a href={"/turra/" + tweet.id} className={styles.flex}>{tweet.summary}</a>
+                    </div>
                   </div>
-                  <div className={styles.flex}>
-                    {hasAudio && 
-                    <a href={"/turra/" + tweet.id + (hasAudio ? "#podcast" : "")}>
-                      <img className={`${styles['icon-audio']}`} src="/volume-2.svg" alt="Esta turra está disponible en formato podcast" title="Esta turra está disponible en formato podcast" />
-                    </a>}
-                    {!hasAudio && <img className={`${styles['icon-audio']} ${styles['novisibility']}`} src="/volume-2.svg" /> } 
-                    <a href={"/turra/" + tweet.id} className={styles.flex}>{tweet.summary}</a>
-                  </div>
-                </div>
+                }
               }
               )}
             </div>
