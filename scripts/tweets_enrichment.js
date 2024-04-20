@@ -1,12 +1,13 @@
 // NODE_TLS_REJECT_UNAUTHORIZED=0
-const tweetsLibrary = require("../db/tweets.json");
-const { writeFileSync } = require("fs");
-const Downloader = require("nodejs-file-downloader");
-const { tall } = require('tall');
-const fetch = require('node-fetch');
-const cheerio = require('cheerio');
-const enrichments = require("../db/tweets_enriched.json");
-const puppeteer = require('puppeteer');
+import Downloader from 'nodejs-file-downloader';
+import { writeFileSync } from 'fs';
+import { tall } from 'tall';
+import enrichments from '../db/tweets_enriched.json' assert { type: 'json' };
+import existingTweets from '../db/tweets_enriched.json' assert { type: 'json' };
+import tweetsLibrary from '../db/tweets.json' assert { type: 'json' };
+import fetch from 'node-fetch';
+import cheerio from 'cheerio';
+import puppeteer from 'puppeteer';
 
 // We need to set this to avoid SSL errors when downloading images
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -87,7 +88,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             }
             if (embed) {
                 console.log({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                const existingTweets = require("../db/tweets_enriched.json");
+                
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 writeFileSync("../db/tweets_enriched.json", JSON.stringify(existingTweets));
             }
@@ -114,7 +115,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 function saveTweet(tweet) {
     console.log({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
-    const existingTweets = require("../db/tweets_enriched.json");
     existingTweets.push({ id: tweet.id, ...tweet.metadata });
     writeFileSync("../db/tweets_enriched.json", JSON.stringify(existingTweets));
 }

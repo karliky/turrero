@@ -16,13 +16,15 @@
     "jimp": "^0.22.10",
     "next": "^14.1.0",
     "node-fetch": "^3.3.0",
+    "nodejs-file-downloader": "^4.12.1",
     "openai": "^4.27.0",
     "puppeteer": "^22.6.4",
     "react": "18.2.0",
     "react-confetti-explosion": "^1.5.1",
     "react-dom": "18.2.0",
     "react-static-tweets": "^2.0.0",
-    "static-tweets": "^2.0.0"
+    "static-tweets": "^2.0.0",
+    "tall": "^8.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
