@@ -1,12 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { writeFileSync } from 'fs';
-import csvdata from 'csvdata';
+import { readFileSync, writeFileSync } from 'fs';
 import { getTweetText, extractMetadata } from './scraping.js';
 
 import puppeteer from 'puppeteer';
-import {KnownDevices} from 'puppeteer';
+import { KnownDevices } from 'puppeteer';
 import existingTweetsData from '../db/tweets.json' assert { type: 'json' };
 
 import { fileURLToPath } from 'url';
@@ -15,19 +14,31 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const tweets = await csvdata.load(__dirname + "/../db/turras.csv", { parse: false });
-
 /**
- * This script is used to download the tweets from a csv file into a json file.
- * It scrapes the tweets from the Twitter Website using Puppeteer and saves the
- * tweets into a json file.
+ * Parse CSV file into an array of objects.
+ * @param {string} filePath Path to the CSV file.
+ * @returns {Array} Array of objects where each object represents a row in the CSV.
  */
-// Slow down the script to avoid getting banned
+function parseCSV(filePath) {
+    const csvContent = readFileSync(filePath, { encoding: 'utf8' });
+    const lines = csvContent.split('\n');
+    const headers = lines[0].split(',');
+    return lines.slice(1).map(line => {
+        const data = line.split(',');
+        return headers.reduce((obj, nextKey, index) => {
+            obj[nextKey.trim()] = data[index].replace(/(^"|"$)/g, '').trim(); // Remove surrounding quotes and trim.
+            return obj;
+        }, {});
+    });
+}
+
+// Replace csvdata.load with custom parseCSV function
+const tweets = parseCSV(__dirname + "/../db/turras.csv");
 const random = Math.floor(Math.random() * 150) + 750;
 
 (async () => {
     console.log("Launching...");
-    const browser = await puppeteer.launch({ slowMo: random, headless:true})
+    const browser = await puppeteer.launch({ slowMo: random, headless:true })
     const page = await browser.newPage();
 
     await Promise.all([
@@ -39,10 +50,14 @@ const random = Math.floor(Math.random() * 150) + 750;
         { 'name': 'twid', 'value': process.env.twid },
         { 'name': 'auth_token', 'value': process.env.auth_token },
         { 'name': 'lang', 'value': process.env.lang },
+        { 'name': 'att', 'value': process.env.att },
+        { 'name': 'd_prefs', 'value': process.env.d_prefs },
+        { 'name': 'gt', 'value': process.env.gt },
         { 'name': 'kdt', 'value': process.env.kdt },
         { 'name': 'ct0', 'value': process.env.ct0 },
         { 'name': 'guest_id', 'value': process.env.guest_id },
-        { 'name': 'domain', 'value': "https://twitter.com/" },
+        { 'name': '_twitter_sess', 'value': process.env._twitter_sess },
+        { 'name': 'domain', 'value': "https://twitter.com/" }
     ];
 
     console.log('Setting cookies');	
