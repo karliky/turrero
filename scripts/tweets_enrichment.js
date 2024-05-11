@@ -90,7 +90,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                 console.log({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                writeFileSync("../db/tweets_enriched.json", JSON.stringify(existingTweets));
+                writeFileSync("./db/tweets_enriched.json", JSON.stringify(existingTweets));
             }
             if (!tweet.metadata.type) continue;
             try {
@@ -116,5 +116,5 @@ function saveTweet(tweet) {
     console.log({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
     existingTweets.push({ id: tweet.id, ...tweet.metadata });
-    writeFileSync("../db/tweets_enriched.json", JSON.stringify(existingTweets));
+    writeFileSync("./db/tweets_enriched.json", JSON.stringify(existingTweets));
 }
