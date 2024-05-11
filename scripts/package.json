@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "csvdata": "^2.0.0",
-    "dotenv": "^16.3.1",
-    "nodejs-file-downloader": "^4.10.3",
-    "pdf-merger-js": "^5.1.1",
-    "puppeteer": "^19.4.0",
-    "tall": "^8.0.0"
+    "cheerio": "1.0.0-rc.12",
+    "csvdata": "2.0.0",
+    "dotenv": "16.3.1",
+    "nodejs-file-downloader": "4.10.3",
+    "pdf-merger-js": "5.1.1",
+    "puppeteer": "19.4.0",
+    "tall": "8.0.0"
   },
   "type": "module"
 }
