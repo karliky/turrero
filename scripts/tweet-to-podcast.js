@@ -1,9 +1,17 @@
-const OpenAI = require('openai');
-const dotenv = require('dotenv');
-const fs = require('fs');
+import dotenv from 'dotenv';
 dotenv.config();
-const Tweets = require('../db/tweets.json');
-const TweetsEnrichements = require('../db/tweets_enriched.json');
+
+import OpenAI from 'openai';
+import fs from 'fs';
+
+import Tweets from '../db/tweets.json' assert { type: 'json' };
+import TweetsEnrichements from '../db/tweets_enriched.json' assert { type: 'json' };
+
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const tweetId = process.argv[2];
