@@ -38,26 +38,19 @@ const random = Math.floor(Math.random() * 150) + 750;
 
 (async () => {
     console.log("Launching...");
-    const browser = await puppeteer.launch({ slowMo: random, headless:true })
+    const browser = await puppeteer.launch({ slowMo: random})
     const page = await browser.newPage();
 
-    await Promise.all([
-        page.goto('https://twitter.com/login'),
-        page.waitForNavigation()
-    ]);
 
     const cookies = [
-        { 'name': 'twid', 'value': process.env.twid },
-        { 'name': 'auth_token', 'value': process.env.auth_token },
-        { 'name': 'lang', 'value': process.env.lang },
-        { 'name': 'att', 'value': process.env.att },
-        { 'name': 'd_prefs', 'value': process.env.d_prefs },
-        { 'name': 'gt', 'value': process.env.gt },
-        { 'name': 'kdt', 'value': process.env.kdt },
-        { 'name': 'ct0', 'value': process.env.ct0 },
-        { 'name': 'guest_id', 'value': process.env.guest_id },
-        { 'name': '_twitter_sess', 'value': process.env._twitter_sess },
-        { 'name': 'domain', 'value': "https://twitter.com/" }
+        { 'name': 'twid', 'value': process.env.twid, 'domain': 'twitter.com' },
+        { 'name': 'auth_token', 'value': process.env.auth_token, 'domain': 'twitter.com'  },
+        { 'name': 'lang', 'value': process.env.lang, 'domain': 'twitter.com'  },
+        { 'name': 'd_prefs', 'value': process.env.d_prefs, 'domain': 'twitter.com'  },
+        { 'name': 'kdt', 'value': process.env.kdt, 'domain': 'twitter.com'  },
+        { 'name': 'ct0', 'value': process.env.ct0, 'domain': 'twitter.com'  },
+        { 'name': 'guest_id', 'value': process.env.guest_id, 'domain': 'twitter.com'  },
+        { 'name': 'domain', 'value': "https://twitter.com/", 'domain': 'twitter.com'  }
     ];
 
     console.log('Setting cookies');	
