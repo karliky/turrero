@@ -1,6 +1,14 @@
-const booksNotEnriched = require('../db/books-not-enriched.json');
-const currentBooks = require('../db/books.json');
-const fs = require('fs');
+import booksNotEnriched from '../db/books-not-enriched.json' assert { type: 'json' };
+import currentBooks from '../db/books.json' assert { type: 'json' };
+import fs from 'fs';
+import puppeteer from 'puppeteer';
+
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const booksToEnrich = booksNotEnriched.filter(book => {
     return currentBooks.find(currentBook => currentBook.id === book.id && (!('categories' in currentBook) || currentBook.categories.length === 0));
 });
@@ -8,7 +16,6 @@ const booksToEnrich = booksNotEnriched.filter(book => {
 console.log('# Pending books to enrich', booksToEnrich.length);
 
 (async () => {
-    const puppeteer = require('puppeteer');
     const browser = await puppeteer.launch({ slowMo: 10 });
     const page = await browser.newPage();
 
