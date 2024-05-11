@@ -9,6 +9,12 @@ import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // We need to set this to avoid SSL errors when downloading images
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -90,7 +96,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                 console.log({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                writeFileSync("./db/tweets_enriched.json", JSON.stringify(existingTweets));
+                writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets));
             }
             if (!tweet.metadata.type) continue;
             try {
@@ -116,5 +122,5 @@ function saveTweet(tweet) {
     console.log({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
     existingTweets.push({ id: tweet.id, ...tweet.metadata });
-    writeFileSync("./db/tweets_enriched.json", JSON.stringify(existingTweets));
+    writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets));
 }
