@@ -7,7 +7,7 @@ Create a short headline from this text and do it in Spanish, never use these wor
 ```
 # Prompt for exams
 ```
-You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and make the options as concised as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format following this structure [ { "question": "", "options": [ ], "answer": answerIndex }] where answerIndex is the index of the option from the array of options and the answerIndex starts from 1 and not 0:
+You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and make the options as concised as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format following this structure { "id":"first word of the text", "questions": [ { "question": "", "options": [ ], "answer": answerIndex }] } where answerIndex is the index of the option from the array of options and the answerIndex starts from 1 and not 0:
 <text>
 
 </text
@@ -48,10 +48,14 @@ otras-turras-del-querer
 
 # Prompt for books categorization
 Categoriza estos libros en alguna de las siguientes categorías, puedes incluir varias si es necesario. Responde solo las categorías por libro, no expliques nada mas, no busques en internet, usa el contexto para llegar a conclusiones, nunca respondas categorias fuera de la lista que te proveo:
-
-Libros:
-
-
+El formato de salida es en formato JSON donde espero este formato como ejemplo:
+<ejemplo>
+"title: "Título del libro aquí",
+"categories": [
+      "Psychology",
+      "Nonfiction"
+    ]
+</ejemplo>
 <Categorias>
 Nonfiction
 Psychology
@@ -68,4 +72,8 @@ Education
 Artificial Intelligence
 Games
 Fiction
-<categorias>
+</categorias>
+
+<libros>
+
+</libros>
