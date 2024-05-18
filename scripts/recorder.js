@@ -14,6 +14,8 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+
 /**
  * Parse CSV file into an array of objects.
  * @param {string} filePath Path to the CSV file.
@@ -82,7 +84,7 @@ const random = Math.floor(Math.random() * 150) + 750;
             /**
              * Go to tweet 
             */
-            await page.goto(`https://twitter.com/Recuenco/status/${tweetId}`)
+            await page.goto(`https://x.com/Recuenco/status/${tweetId}`)
             console.log("Waiting for selector");
             await page.waitForSelector('div[data-testid="tweetText"]')
 
@@ -116,30 +118,49 @@ const random = Math.floor(Math.random() * 150) + 750;
                 /**
                  * Get views, likes, retweets, replies
                 */
+                
                 const stats = await page.evaluate(() => {
-                    const stats_map = {
+                    
+                    const statsKeyMap = {
+                        likes: "likes",
                         like: "likes",
                         views: "views",
+                        view: "views",
+                        replies: "replies",
                         reply: "replies",
-                        retweet: "retweets",
-                        retweets: "retweets",
+                        reposts: "retweets",
+                        repost: "retweets",
+                        bookmarks: "bookmarks",
                         bookmark: "bookmarks"
                     };
-                    return Array.from(document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelectorAll('span[data-testid="app-text-transition-container"]')).map(el => {
-                        if (el.parentElement?.nextElementSibling?.tagName === "SPAN") {
-                            return {
-                                [stats_map[el.parentElement?.nextElementSibling?.innerText.toLowerCase()]]: el.innerText
+                    
+                    function parseStats(text) {
+                        const stats = {};
+                        // Dividir la cadena de texto en segmentos basados en comas
+                        const segments = text.split(',');
+                    
+                        segments.forEach(segment => {
+                            // Extraer el número y la clave de cada segmento
+                            const match = segment.trim().match(/(\d+)\s(\w+)/);
+                            if (match) {
+                                const value = match[1];
+                                const key = match[2];
+                    
+                                // Usar el mapa de claves para convertir la palabra clave a la propiedad del objeto
+                                if (statsKeyMap[key]) {
+                                    stats[statsKeyMap[key]] = value;
+                                }
                             }
-                        }
-                        return {
-                            [stats_map[el.closest("div[data-testid]").getAttribute("data-testid").toLowerCase()]]: el.innerText
-                        }
-                    }).reduce((acc, el) => {
-                        const keys = Object.keys(el);
-                        acc[keys[0]] = el[keys[0]]
-                        return acc;
-                    }, {});
+                        });
+                    
+                        return stats;
+                    }
+
+                    const statsLabel = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[role="group"]').getAttribute("aria-label").toLowerCase();
+                    const stats_map = parseStats(statsLabel);
+                    return stats_map;
                 });
+                
                 console.log("tweetId", tweetId, { tweet, id: currentTweetId, metadata, time, stats });
                 tweets.push({ tweet, id: currentTweetId, metadata, time, stats });
                 console.log("finding lastTweetFound");
@@ -152,8 +173,8 @@ const random = Math.floor(Math.random() * 150) + 750;
                     const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('div[data-testid]').querySelector("a").href;
                     return el;
                 });
-                console.log("lastTweetFound", lastTweetFound !== 'https://twitter.com/Recuenco');
-                if (lastTweetFound !== 'https://twitter.com/Recuenco') {
+                console.log("lastTweetFound", lastTweetFound !== 'https://x.com/Recuenco');
+                if (lastTweetFound !== 'https://x.com/Recuenco') {
                     stopped = true;
                     //const existingTweets = require(__dirname + "/../db/tweets.json");
                     existingTweetsData.push(tweets);
