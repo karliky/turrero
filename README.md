@@ -45,14 +45,19 @@ To get started with the project, you will need to clone the repository and insta
 
 The process of adding a new thread is half manual half automated:
 
-1. Manually add the first tweet id to ontop of the turras.csv file
-2. `$ node ./scripts/recorder.js` // This will scrap it and save it into tweets.json
+1. Manually add the first tweet id and the first tweet text to ontop of the turras.csv file (you can leave the categories empty as "")
+2. `$ node ./scripts/recorder.js`. This will scrap it and save it into tweets.json
 3. `$ node ./scripts/tweets_enrichment.js`
-4. Move the `./scripts/metadata` content into `public/metadata`
-5. Verify that everything is fine by running `npm run dev` on the root folder
+4. `$ node ./scripts/images-card-generator.js`
+5. Move the `./scripts/metadata` content into `public/metadata`, you can use the following command `mv -v ./metadata/* ./public/metadata/`
+6. `$ node ./scripts/make-algolia-db.js` then update the index in the Algolia service, clear the index and fetch the `db/tweets-db.json` file
+7. Use the prompts in the file tweets.prompt to generate the summary, categories and questions to include them in `db/tweets_summary.json`, `db/tweets_map.json` and `db/tweets_exam.json` respectively
+8. `$ node ./scripts/generate-books.js` this will update the `db/books-not-enriched.json`
+9. `$ node ./scripts/book-enrichment.js` this will output the list of books you should use in the last prompt to get the category of books and update the `db/books.json`
+10. Verify that everything is fine by running `npm run dev` on the root folder
 
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
-The files `db/tweets_map.json, db/tweets_summary.json` should be manually edited.
+The files `db/tweets_map.json, db/tweets_summary.json`, `db/tweets_exam.json` should be manually edited.
 
 ## Contribution
 

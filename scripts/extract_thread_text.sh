@@ -21,5 +21,6 @@ resultado=$(jq --raw-output --arg id "$id" '
 if [ -z "$resultado" ]; then
     echo "No se encontró ningún objeto con el ID proporcionado."
 else
+    echo "$id"
     echo "$resultado"
 fi
