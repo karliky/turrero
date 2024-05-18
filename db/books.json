@@ -426,7 +426,9 @@
     "media": "goodreads",
     "title": "Changing the World Is the Only Fit Work for a Grown Man",
     "turraId": "1576087451524907008",
-    "categories": []
+    "categories": [
+      "Biography"
+    ]
   },
   {
     "id": "1573548605528473600",
@@ -705,7 +707,10 @@
     "media": "goodreads",
     "title": "A Chef's Guide to Gelling, Thickening, and Emulsifying Agents",
     "turraId": "1530425616423690244",
-    "categories": []
+    "categories": [
+      "Nonfiction",
+      "Science"
+    ]
   },
   {
     "id": "1527905345909280768",
@@ -729,7 +734,10 @@
     "media": "goodreads",
     "title": "Personalizacion",
     "turraId": "1525356646448381952",
-    "categories": []
+    "categories": [
+      "Business",
+      "Technology"
+    ]
   },
   {
     "id": "1525356660402884608",
@@ -842,7 +850,10 @@
     "media": "goodreads",
     "title": "Asymmetries In Dialogue",
     "turraId": "1515034112725241860",
-    "categories": []
+    "categories": [
+      "Psychology",
+      "Education"
+    ]
   },
   {
     "id": "1510162011631636482",
@@ -1040,7 +1051,10 @@
     "media": "goodreads",
     "title": "Gunpei Yokoi: The Life & Philosophy of Nintendo's God of Toys Tp",
     "turraId": "1469583058563121153",
-    "categories": []
+    "categories": [
+      "Biography",
+      "Games"
+    ]
   },
   {
     "id": "1469583159620743174",
@@ -1443,7 +1457,10 @@
     "media": "goodreads",
     "title": "Climbing The Corporate Ladder",
     "turraId": "1403645471596453888",
-    "categories": []
+    "categories": [
+      "Business",
+      "Personal Development"
+    ]
   },
   {
     "id": "1403645520535556100",
@@ -1489,7 +1506,9 @@
     "media": "goodreads",
     "title": "Migrating Legacy Systems: Gateways, interfaces and the incremental approach",
     "turraId": "1398571638170529792",
-    "categories": []
+    "categories": [
+      "Technology"
+    ]
   },
   {
     "id": "1393484269897588736",
@@ -1598,7 +1617,9 @@
     "media": "goodreads",
     "title": "La traición en la historia de España",
     "turraId": "1388377995233071106",
-    "categories": []
+    "categories": [
+      "History"
+    ]
   },
   {
     "id": "1388378103106490368",
@@ -1801,7 +1822,10 @@
     "media": "goodreads",
     "title": "Decisive Intuition: Use Your Gut Instincts to Make Smart Business Decisions",
     "turraId": "1370628575775367168",
-    "categories": []
+    "categories": [
+      "Business",
+      "Psychology"
+    ]
   },
   {
     "id": "1368127726650032128",
@@ -1829,7 +1853,10 @@
     "media": "goodreads",
     "title": "The Pattern Future: Finding the World’s Great Secrets and Predicting the Future Using Pattern Discovery",
     "turraId": "1368127688343490560",
-    "categories": []
+    "categories": [
+      "Science",
+      "Business"
+    ]
   },
   {
     "id": "1368127733730054145",
@@ -1839,7 +1866,10 @@
     "media": "goodreads",
     "title": "Epiphany Z: Eight Radical Visions for Transforming Your Future",
     "turraId": "1368127688343490560",
-    "categories": []
+    "categories": [
+      "Nonfiction",
+      "Technology"
+    ]
   },
   {
     "id": "1368127734648631296",
@@ -2650,7 +2680,10 @@
     "media": "goodreads",
     "title": "Nacha Pop: Magia y precisión",
     "turraId": "1642053681766883330",
-    "categories": []
+    "categories": [
+      "Biography",
+      "Art"
+    ]
   },
   {
     "id": "1642053785785622530",
@@ -2660,7 +2693,10 @@
     "media": "goodreads",
     "title": "Alan Moore: magia y precisión",
     "turraId": "1642053681766883330",
-    "categories": []
+    "categories": [
+      "Biography",
+      "Art"
+    ]
   },
   {
     "id": "1639529449128591360",
@@ -2966,7 +3002,9 @@
     "media": "goodreads",
     "title": "GILLES LIPOVETSKY: RESÚMENES SELECCIONADOS: COLECCIÓN RESÚMENES UNIVERSITARIOS Nº 62",
     "turraId": "1657283004727738368",
-    "categories": []
+    "categories": [
+      "Education"
+    ]
   },
   {
     "id": "1654727282311790593",
@@ -3574,7 +3612,9 @@
     "media": "goodreads",
     "title": "Board Talk: 18 crucial conversations that count inside and outside the boardroom",
     "turraId": "1738462543344005507",
-    "categories": []
+    "categories": [
+      "Business"
+    ]
   },
   {
     "id": "1746066414375481494",
@@ -3634,7 +3674,10 @@
     "media": "goodreads",
     "title": "Muay Thai",
     "turraId": "1743547711897342313",
-    "categories": []
+    "categories": [
+      "Health",
+      "Sports"
+    ]
   },
   {
     "id": "1748598371751723318",
@@ -3773,6 +3816,99 @@
     "turraId": "1756234748685373544",
     "categories": [
       "Psychology",
+      "Nonfiction"
+    ]
+  },
+  {
+    "id": "1763816818769097069",
+    "type": "card",
+    "img": "./metadata/HIEVp_YX.jpeg",
+    "url": "https://www.goodreads.com/es/book/show/8501578",
+    "media": "goodreads",
+    "title": "El arte de tener siempre la razón y otros ensayos",
+    "turraId": "1763816753929347384",
+    "categories": [
+      "Nonfiction",
+      "Philosophy"
+    ]
+  },
+  {
+    "id": "1763816819863810091",
+    "type": "card",
+    "img": "./metadata/3knNTpS_.jpeg",
+    "url": "https://www.goodreads.com/book/show/357666.A_Mind_of_Its_Own",
+    "media": "goodreads",
+    "title": "A Mind of Its Own: How Your Brain Distorts and Deceives",
+    "turraId": "1763816753929347384",
+    "categories": [
+      "Psychology",
+      "Nonfiction",
+      "Science",
+      "Neuroscience",
+      "Self Help",
+      "Brain",
+      "Mental Health"
+    ]
+  },
+  {
+    "id": "1763816820916552074",
+    "type": "card",
+    "img": "./metadata/jrn0JsNE.jpeg",
+    "url": "https://www.goodreads.com/book/show/1643206.Hieronymus_White",
+    "media": "goodreads",
+    "title": "Hieronymus White: A Bird Who Believed That He Always Was Right",
+    "turraId": "1763816753929347384",
+    "categories": [
+      "Poetry"
+    ]
+  },
+  {
+    "id": "1768900369218777464",
+    "type": "card",
+    "img": "./metadata/3wJFLqki.jpeg",
+    "url": "https://www.goodreads.com/book/show/16130.Alexander_Hamilton",
+    "media": "goodreads",
+    "title": "Alexander Hamilton",
+    "turraId": "1768900222581624896",
+    "categories": [
+      "History",
+      "Biography",
+      "Nonfiction",
+      "American History",
+      "Politics",
+      "Audiobook",
+      "Historical"
+    ]
+  },
+  {
+    "id": "1771433061919375697",
+    "type": "card",
+    "img": "./metadata/ksPOzH7i.jpeg",
+    "url": "https://www.goodreads.com/book/show/39863462-the-power-of-agency",
+    "media": "goodreads",
+    "title": "The Power of Agency: The 7 Principles to Conquer Obstacles, Make Effective Decisions, and Create a Life on Your Own Terms",
+    "turraId": "1771432938288107757",
+    "categories": [
+      "Self Help",
+      "Nonfiction",
+      "Psychology",
+      "Personal Development",
+      "Business",
+      "Leadership",
+      "Health"
+    ]
+  },
+  {
+    "id": "1781573541944561941",
+    "type": "card",
+    "img": "./metadata/BRNfs3K-.jpeg",
+    "url": "https://www.goodreads.com/book/show/173476263-mythmaking",
+    "media": "goodreads",
+    "title": "Mythmaking: Self-Discovery and the Timeless Art of Memoir",
+    "turraId": "1781573444485697867",
+    "categories": [
+      "Writing",
+      "Memoir",
       "Nonfiction"
     ]
   }

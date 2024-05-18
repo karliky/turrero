@@ -2050,5 +2050,59 @@
     "media": "goodreads",
     "title": "\n      “Bernoulli observed that most people dislike risk (the chance of receiving the lowest possible outcome), and if they are offered a choice between a gamble and an amount equal to its expected value they will pick the sure thing. In fact a risk-averse decision maker will choose a sure thing that is less than expected value, in effect paying a premium to avoid the uncertainty.”\n    \n    ",
     "turraId": "1756234748685373544"
+  },
+  {
+    "id": "1763816818769097069",
+    "type": "card",
+    "img": "./metadata/HIEVp_YX.jpeg",
+    "url": "https://www.goodreads.com/es/book/show/8501578",
+    "media": "goodreads",
+    "title": "El arte de tener siempre la razón y otros ensayos",
+    "turraId": "1763816753929347384"
+  },
+  {
+    "id": "1763816819863810091",
+    "type": "card",
+    "img": "./metadata/3knNTpS_.jpeg",
+    "url": "https://www.goodreads.com/book/show/357666.A_Mind_of_Its_Own",
+    "media": "goodreads",
+    "title": "A Mind of Its Own: How Your Brain Distorts and Deceives",
+    "turraId": "1763816753929347384"
+  },
+  {
+    "id": "1763816820916552074",
+    "type": "card",
+    "img": "./metadata/jrn0JsNE.jpeg",
+    "url": "https://www.goodreads.com/book/show/1643206.Hieronymus_White",
+    "media": "goodreads",
+    "title": "Hieronymus White: A Bird Who Believed That He Always Was Right",
+    "turraId": "1763816753929347384"
+  },
+  {
+    "id": "1768900369218777464",
+    "type": "card",
+    "img": "./metadata/3wJFLqki.jpeg",
+    "url": "https://www.goodreads.com/book/show/16130.Alexander_Hamilton",
+    "media": "goodreads",
+    "title": "Alexander Hamilton",
+    "turraId": "1768900222581624896"
+  },
+  {
+    "id": "1771433061919375697",
+    "type": "card",
+    "img": "./metadata/ksPOzH7i.jpeg",
+    "url": "https://www.goodreads.com/book/show/39863462-the-power-of-agency",
+    "media": "goodreads",
+    "title": "The Power of Agency: The 7 Principles to Conquer Obstacles, Make Effective Decisions, and Create a Life on Your Own Terms",
+    "turraId": "1771432938288107757"
+  },
+  {
+    "id": "1781573541944561941",
+    "type": "card",
+    "img": "./metadata/BRNfs3K-.jpeg",
+    "url": "https://www.goodreads.com/book/show/173476263-mythmaking",
+    "media": "goodreads",
+    "title": "Mythmaking: Self-Discovery and the Timeless Art of Memoir",
+    "turraId": "1781573444485697867"
   }
 ]
