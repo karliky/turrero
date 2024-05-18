@@ -1,12 +1,27 @@
+# Prompt for summary
+```
 Create a short headline from this text and do it in Spanish, never use these words in your headline: turras, hoy, hilo. Also, answer me in JSON format including the first word from my text which is an id and your headline but the property of the headline should be called "summary":
+<text>
+
+</text
+```
+# Prompt for exams
+```
 You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and make the options as concised as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format following this structure [ { "question": "", "options": [ ], "answer": answerIndex }] where answerIndex is the index of the option from the array of options and the answerIndex starts from 1 and not 0:
+<text>
 
+</text
+```
 
-
-----------------------------
-
-After that, I need you to categorize the text in any of these categories, you should include at least one.
-
+# Prompt for categorization
+```
+I need you to categorize the text in any of these categories, you should include at least one and maximum 5 categories. 
+Return the output in a JSON format where id is the first word of the text and categories is a comma separated list of the selected categories:
+for example:
+<example>
+{ "id": "1763816753929347384", "categories": "factor-x,sociología,estrategia,leyes-y-sesgos" },
+</example>
+<categories>
 resolución-de-problemas-complejos
 sistemas-complejos
 marketing
@@ -25,15 +40,19 @@ lectura-de-señales
 el-contexto-manda
 desarrollo-de-habilidades
 otras-turras-del-querer
+</categories>
+<text>
 
+</text>
+```
 
-
+# Prompt for books categorization
 Categoriza estos libros en alguna de las siguientes categorías, puedes incluir varias si es necesario. Responde solo las categorías por libro, no expliques nada mas, no busques en internet, usa el contexto para llegar a conclusiones, nunca respondas categorias fuera de la lista que te proveo:
 
 Libros:
 
 
-Categorias que debes usar:
+<Categorias>
 Nonfiction
 Psychology
 History
@@ -49,3 +68,4 @@ Education
 Artificial Intelligence
 Games
 Fiction
+<categorias>
