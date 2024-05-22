@@ -10,27 +10,22 @@ interface Turra {
     urls: string[];
 }
 
-interface Embed {
-    type: string;
-    id: string;
-    author: string;
-    tweet: string;
-}
-
-
-interface Stats {
-    views: string;
-    retweets: string;
-    quotetweets: string;
-    likes: string;
-}
-
 interface Tweet {
     tweet: string;
     id: string;
     metadata: {
-        embed: Embed;
+        embed: {
+            type: string;
+            id: string;
+            author: string;
+            tweet: string;
+        };
     };
     time: string;
-    stats: Stats;
+    stats: {
+        views: string;
+        retweets: string;
+        quotetweets: string;
+        likes: string;
+    };
 }

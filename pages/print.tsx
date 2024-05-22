@@ -41,7 +41,6 @@ function genProps(tweetId: string): Turra {
   }
 
   return {
-
     tweetId: tweetId,
     summary: summaryResult.summary || "",
     categories: categoriesResult.categories || "",
@@ -49,18 +48,18 @@ function genProps(tweetId: string): Turra {
     enrichments,
     urls,
     publishedDate
-
   }
 }
 
 
 const Turra: React.FC<Turra> = ({ tweetId, summary, categories, tweets, enrichments, publishedDate, urls }) => {
+  const printMode = true;
   return (
     <div>
       <div className={`wrapper ${styles.wrapper}`
       }>
         {TurraHeader({ summary, categories, publishedDate, tweetId, tweets })}
-        {TwitterThread({ tweets, enrichments, urls, summary, categories, tweetId })}
+        {TwitterThread({ tweets, enrichments, urls, summary, categories, tweetId, printMode })}
       </div>
     </div>
   );
@@ -92,6 +91,7 @@ const Turras: React.FC = () => {
                   enrichments={turra.enrichments}
                   publishedDate={turra.publishedDate}
                   urls={turra.urls}
+                  sharing={false}
                 />
               </div>
             );

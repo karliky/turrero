@@ -24,7 +24,7 @@ export default function ({ summary, categories, publishedDate, tweetId, tweets }
     const categoriesList = categories.split(",").map((category) => <span key={category} className={styles.category}><a href={"/#" + category.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}>{formatTitle(category.replaceAll("-", " "))}</a></span>);
     return <div className={styles.header}>
         <a href="/" className={styles.back}><img src="/back.svg" alt="Volver atrás" />El Turrero Post</a>
-        <h1><Title title={summary}/></h1>
+        <h1><Title title={summary} /></h1>
         <h2>
             {publishedDate}.
             Tiempo de lectura: {readingTime(unrolledThread)}min.

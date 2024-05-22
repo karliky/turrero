@@ -2,7 +2,7 @@ import Sidebar from "./sidebar";
 import RenderTweet from "./renderTweet";
 import styles from './turra.module.css';
 
-export default function ({ tweets, enrichments, urls, summary, categories, tweetId }) {
+export default function ({ tweets, enrichments, urls, summary, categories, tweetId, printMode = false }) {
     const books = enrichments.filter((tweet) => tweet.media === "goodreads");
     const videos = enrichments.filter((tweet) => tweet.media === "youtube");
     const linkedin = enrichments.filter((tweet) => tweet.media === "linkedin");
@@ -20,6 +20,6 @@ export default function ({ tweets, enrichments, urls, summary, categories, tweet
             const embed = embeddedTweet ? embeddedTweet.embed : undefined;
             return RenderTweet({ id, tweetText, metadata, embed });
         })}</div>
-        {Sidebar({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId })}
+        {!printMode && Sidebar({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId })}
     </div>;
 }
