@@ -67,7 +67,7 @@ const TableOfContents: React.FC<{ turras: Turra[] }> = ({ turras }) => {
       <h2 className={styles.brand}>Índice</h2>
       <ol className={styles.index}>
         {turras.map((turra, index) => (
-          <li id={'index' + turra.tweetId}>
+          <li id={'index' + turra.tweetId} key={'index' + turra.tweetId}>
             <a href={"#" + turra.tweetId}>{`${index + 1}. ${turra.summary}`}</a>
           </li>
         ))}
