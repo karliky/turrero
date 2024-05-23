@@ -30,3 +30,7 @@ yarn-error.log*
 .env.production.local
 .env
 scripts/pdfs
+
+# Turra caché
+pdfs/turra-*.pdf
+

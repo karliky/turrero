@@ -5,7 +5,7 @@ import styles from './sidebar.module.css';
 const TweetsPodcast = require("../db/tweets_podcast.json");
 const ExamQuestions = require("../db/tweets_exam.json");
 
-export default function ({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId }) {
+export default function ({ books, videos, linkedin, urls, wikipedia, summary, categories, tweetId, printMode = false }) {
     const { questions } = ExamQuestions.find(({ id }) => id === tweetId);
     const hasPodcast = !!TweetsPodcast.find(({ id }) => id === tweetId);
     const hasQuestions = !!questions.length;
@@ -24,7 +24,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
 
     const checkExam = () => {
         const answers = Array.from(questionsRef.current.querySelectorAll("input[type=radio]")).map(input => input.checked);
-        const correctAnswers = ExamQuestions.find((({id}) => id === tweetId)).questions.map(({ options, answer }) => options.map((_, index) => index + 1 === answer)).flat();
+        const correctAnswers = ExamQuestions.find((({ id }) => id === tweetId)).questions.map(({ options, answer }) => options.map((_, index) => index + 1 === answer)).flat();
         const result = JSON.stringify(answers) === JSON.stringify(correctAnswers);
         setHasFailed(!result);
         setHideQuestions(result);
@@ -34,7 +34,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
         return <div>
             <div className={styles['metadata-section']}><img className={styles.icon} src="/share-2.svg" alt="Compartir Turra" />Dale la turra a más gente</div>
             <div className={styles.sharing}>
-                <div className={`${styles['social-media']} ${styles.twitter}`}><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className={styles.icon}  src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
+                <div className={`${styles['social-media']} ${styles.twitter}`}><a href={"https://twitter.com/intent/tweet?text=" + sharingText} target="_blank"><img className={styles.icon} src="/twitter-white.svg" alt="Compartir en Twitter" />Compartir en Twitter</a></div>
                 <div className={`${styles['social-media']} ${styles.linkedin}`}><a href={"http://www.linkedin.com/shareArticle?url=" + "https://turrero.vercel.app/turra/" + tweetId + "&title=" + encodeURI("La turra de @recuenco sobre " + categoriesAsText)} target="_blank"><img className={styles.icon} src="/linkedin-white.svg" alt="Compartir en Linkedin" />Compartir en Linkedin</a></div>
             </div>
         </div>
@@ -76,7 +76,7 @@ export default function ({ books, videos, linkedin, urls, wikipedia, summary, ca
                 {urls.map((url, key) => <a key={key + "-url"} target="_blank" className={styles.related} href={url}>{url}</a>)}
             </div>}
         </div>
-        {!hideQuestions && <div className={styles['side-block']}><Sharing /></div>}
+        {printMode && !hideQuestions && <div className={styles['side-block']}><Sharing /></div>}
         {hasQuestions && !hideQuestions &&
             <div className={styles['side-block']}>
                 <div className={styles.title}><img className={styles.icon} src="/book-open.svg" alt="Exámen de esta turra" />Pon en práctica tu comprensión</div>
