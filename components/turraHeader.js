@@ -32,7 +32,7 @@ export default function ({ summary, categories, publishedDate, tweetId, tweets, 
     const categoriesList = categories.split(",").map((category) => <span key={category} className={styles.category}><a href={"/#" + category.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}>{formatTitle(category.replaceAll("-", " "))}</a></span>);
     return (<div className={styles.header}>
         {printMode ? (
-            <BackLink href="#" altText="Regresar al índice">Regresar al índice</BackLink>
+            <BackLink href={"#index" + tweetId} altText="Regresar al índice">Regresar al índice</BackLink>
         ) : (
             <BackLink href="/" altText="Volver atrás">El Turrero Post</BackLink>
         )}

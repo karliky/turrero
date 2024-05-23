@@ -67,24 +67,24 @@ const Turra: React.FC<Turra> = ({ tweetId, summary, categories, tweets, enrichme
 
 const TableOfContents: React.FC<{ turras: Turra[] }> = ({ turras }) => {
   return (
-    <div className='flexContainer'>
-      <h1 className='header'>Índice</h1>
-      <ul>
+    <div className={styles.header}>
+      <h2 className={styles.brand}>Índice</h2>
+      <ul className='category'>
         {turras.map((turra) => (
-          <li key={turra.tweetId}>
-            <a href
-              ={"#" + turra.tweetId}>{turra.summary}</a>
+          <li id={'index' + turra.tweetId}>
+            <a href={"#" + turra.tweetId}>{turra.summary}</a>
           </li>
         ))}
       </ul>
     </div>
+
   );
 }
 
 
 const Turras: React.FC = () => {
   const title = "Recopilación de las turras de Javier G. Recuenco";
-  const turras: Turra[] = Tweets.map((tweets) => genProps(tweets[0].id));
+  const turras: Turra[] = Tweets.map((tweets) => genProps(tweets[0].id)).sort((a, b) => new Date(a.publishedDate) > new Date(b.publishedDate) ? -1 : 1);
   return (
     <>
       <Head>
@@ -102,24 +102,31 @@ const Turras: React.FC = () => {
         <meta name="twitter:title" content="Las turras de Javier G. Recuenco - Recopilación" />
         <meta name="twitter:image" content="https://turrero.vercel.app/promo.png"></meta>
       </Head>
-      <TableOfContents turras={turras} />
-      <div>
-        {
-          turras.map((turra) => (
-            <div id={turra.tweetId} key={turra.tweetId}>
-              <Turra
-                key={"turra-" + turra.tweetId}
-                tweetId={turra.tweetId}
-                summary={turra.summary}
-                categories={turra.categories}
-                tweets={turra.tweets}
-                enrichments={turra.enrichments}
-                publishedDate={turra.publishedDate}
-                urls={turra.urls}
-              /></div>)
-          )
-        }
-        <NewPage />
+      <div className={styles.wrapper}>
+        <div className={styles.header}>
+          <h1 className={styles.brand}>{title}</h1>
+          <p>Última actualización: {new Date().toLocaleDateString("es-ES")} / {new Date().toLocaleTimeString("es-ES")}</p>
+          <p>URL: <a href="https://turrero.vercel.app/">https://turrero.vercel.app/print</a></p>
+        </div>
+        <TableOfContents turras={turras} />
+        <div>
+          {
+            turras.map((turra) => (
+              <div id={turra.tweetId} key={turra.tweetId}>
+                <Turra
+                  key={"turra-" + turra.tweetId}
+                  tweetId={turra.tweetId}
+                  summary={turra.summary}
+                  categories={turra.categories}
+                  tweets={turra.tweets}
+                  enrichments={turra.enrichments}
+                  publishedDate={turra.publishedDate}
+                  urls={turra.urls}
+                /></div>)
+            )
+          }
+          <NewPage />
+        </div>
       </div>
     </>
   );
