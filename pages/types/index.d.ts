@@ -29,3 +29,10 @@ interface Tweet {
         likes: string;
     };
 }
+
+interface TweetSummary {
+    id: string;
+    summary: string;
+}
+
+interface TweetsMap { id: string, categories: string }

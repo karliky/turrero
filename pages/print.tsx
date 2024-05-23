@@ -6,8 +6,8 @@ import styles from '../components/turra.module.css';
 import Url from "url";
 
 const Tweets: Tweet[][] = require("../db/tweets.json");
-const TweetsMap: any = require("../db/tweets_map.json");
-const TweetsSummary: any = require("../db/tweets_summary.json");
+const TweetsMap: TweetsMap[] = require("../db/tweets_map.json");
+const TweetsSummary: TweetSummary[] = require("../db/tweets_summary.json");
 const TweetsEnriched: any = require("../db/tweets_enriched.json");
 
 
@@ -16,9 +16,9 @@ export function NewPage(): JSX.Element {
 }
 
 function genProps(tweetId: string): Turra {
-  const summaryResult = TweetsSummary.find((_tweet: any) => _tweet.id === tweetId) || "";
-  const categoriesResult = TweetsMap.find((_tweet: any) => _tweet.id === tweetId) || "";
-  const thread = Tweets.find((tweet: any) => {
+  const summaryResult: string = TweetsSummary.find((_tweet: any) => _tweet.id === tweetId)?.summary || "";
+  const categoriesResult: string = TweetsMap.find((_tweet: any) => _tweet.id === tweetId)?.categories || "";
+  const thread = Tweets.find((tweet: Tweet[]) => {
     return tweetId === tweet[0].id;
   }) || [];
 
@@ -42,8 +42,8 @@ function genProps(tweetId: string): Turra {
 
   return {
     tweetId: tweetId,
-    summary: summaryResult.summary || "",
-    categories: categoriesResult.categories || "",
+    summary: summaryResult,
+    categories: categoriesResult,
     tweets: thread,
     enrichments,
     urls,
@@ -68,12 +68,12 @@ const Turra: React.FC<Turra> = ({ tweetId, summary, categories, tweets, enrichme
 
 
 const Turras: React.FC = () => {
-  const title = `El Turrero Post - Las turras de Javier G. Recuenco`;
+  const title = "El Turrero Post - Recopilación de las turras de Javier G. Recuenco";
   return (
     <>
       <Head>
-        <title>{title} </title>
-        < meta content="text/html; charset=UTF-8" name="Content-Type" />
+        <title>{title}</title>
+        <meta content="text/html; charset=UTF-8" name="Content-Type" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div>
@@ -82,8 +82,9 @@ const Turras: React.FC = () => {
             const t0 = tweets[0];
             const turra: Turra = genProps(t0.id);
             return (
-              <div key={turra.tweetId} >
+              <div key={"turra-" + turra.tweetId} >
                 <Turra
+                  key={turra.tweetId}
                   tweetId={turra.tweetId}
                   summary={turra.summary}
                   categories={turra.categories}
@@ -91,7 +92,6 @@ const Turras: React.FC = () => {
                   enrichments={turra.enrichments}
                   publishedDate={turra.publishedDate}
                   urls={turra.urls}
-                  sharing={false}
                 />
               </div>
             );
