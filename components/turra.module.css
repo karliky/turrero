@@ -13,6 +13,10 @@
     margin-right: 4px;
 }
 
+ol.index {
+    line-height: "140%";
+}
+
 .footer {
     font-size: 1rem;
     line-height: 1.25;
@@ -30,6 +34,11 @@
 .header h1 {
     font-size: 32px;
     line-height: 1.25em;
+}
+
+.NewPage {
+    clear: both;
+    page-break-before: "always";
 }
 
 .header h2 {
@@ -247,28 +256,39 @@
     .back {
         display: none;
     }
+
     .footer {
         display: none;
+        clear: both;
+        page-break-after: always;
     }
+
     .h1 {
         font-size: 2em;
         margin: 0;
-    }	
-    .header h1, .header h2, .categories {
+    }
+
+    .header h1,
+    .header h2,
+    .categories {
         margin: 0;
         padding: 0;
     }
+
     .wrapper {
         width: 100%;
         padding: 0;
     }
+
     .tweet>p {
         font-size: 0.9em;
         line-height: 1.2em;
     }
+
     .tweet {
         margin: 0.7em;
     }
+
     .metadata {
         margin: 0;
     }
