@@ -58,44 +58,66 @@ const Turra: React.FC<Turra> = ({ tweetId, summary, categories, tweets, enrichme
     <div>
       <div className={`wrapper ${styles.wrapper}`
       }>
-        {TurraHeader({ summary, categories, publishedDate, tweetId, tweets })}
+        {TurraHeader({ summary, categories, publishedDate, tweetId, tweets, printMode })}
         {TwitterThread({ tweets, enrichments, urls, summary, categories, tweetId, printMode })}
       </div>
     </div>
   );
 }
 
+const TableOfContents: React.FC<{ turras: Turra[] }> = ({ turras }) => {
+  return (
+    <div className='flexContainer'>
+      <h1 className='header'>Índice</h1>
+      <ul>
+        {turras.map((turra) => (
+          <li key={turra.tweetId}>
+            <a href
+              ={"#" + turra.tweetId}>{turra.summary}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 
 const Turras: React.FC = () => {
-  const title = "El Turrero Post - Recopilación de las turras de Javier G. Recuenco";
+  const title = "Recopilación de las turras de Javier G. Recuenco";
+  const turras: Turra[] = Tweets.map((tweets) => genProps(tweets[0].id));
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta content="text/html; charset=UTF-8" name="Content-Type" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <meta property='og:url' content='https://turrero.vercel.app/print' />
+        <meta property="og:title" content="Libros - Las turras de Javier G. Recuenco" />
+
+        <meta property="og:image" content="https://turrero.vercel.app/promo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@recuenco" />
+        <meta name="twitter:creator" content="@k4rliky" />
+        <meta name="twitter:title" content="Las turras de Javier G. Recuenco - Recopilación" />
+        <meta name="twitter:image" content="https://turrero.vercel.app/promo.png"></meta>
       </Head>
+      <TableOfContents turras={turras} />
       <div>
         {
-          Tweets.map((tweets: any) => {
-            const t0 = tweets[0];
-            const turra: Turra = genProps(t0.id);
-            return (
-              <div key={"turra-" + turra.tweetId} >
-                <Turra
-                  key={turra.tweetId}
-                  tweetId={turra.tweetId}
-                  summary={turra.summary}
-                  categories={turra.categories}
-                  tweets={turra.tweets}
-                  enrichments={turra.enrichments}
-                  publishedDate={turra.publishedDate}
-                  urls={turra.urls}
-                />
-              </div>
-            );
-          })
+          turras.map((turra) => (
+            <div id={turra.tweetId} key={turra.tweetId}>
+              <Turra
+                key={"turra-" + turra.tweetId}
+                tweetId={turra.tweetId}
+                summary={turra.summary}
+                categories={turra.categories}
+                tweets={turra.tweets}
+                enrichments={turra.enrichments}
+                publishedDate={turra.publishedDate}
+                urls={turra.urls}
+              /></div>)
+          )
         }
         <NewPage />
       </div>
