@@ -27,9 +27,6 @@ const TweetComponent: React.FC<Props> = ({ tweets, enrichments, urls, summary, c
         <div className={styles.flexContainer}>
             <div className={styles.flexLeft}>
                 {tweets.map(({ tweet, id, metadata: embeddedTweet }) => {
-                    if (id === "1653834693081440288") {
-                        console.log("tweet", tweet);
-                    }
                     const metadata = enrichments.find(_tweet => id === _tweet.id);
                     let tweetText = replaceURLWithHTMLLinks(tweet);
                     // Cambia los hashtags por links, only alphanumeric characters
