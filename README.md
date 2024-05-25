@@ -45,15 +45,19 @@ To get started with the project, you will need to clone the repository and insta
 
 The process of adding a new thread is half manual half automated:
 
-1. Manually add the first tweet id and the first tweet text to ontop of the turras.csv file (you can leave the categories empty as "")
+You could use the script: `$ ./scripts/add_thread.sh $id $first_tweet_line` where `id` is the first tweet id (thread id) and `first_tweet_line` is the first tweet text.
+
+Alternatively you could use the following steps:
+
+1. `$ node ./scripts/add-new-tweet.js $id $first_tweet_line` to add the first twwet id (thread id) and the first tweet text to ontop of the turras.csv file
 2. `$ node ./scripts/recorder.js`. This will scrap it and save it into tweets.json
 3. `$ node ./scripts/tweets_enrichment.js`
 4. `$ node ./scripts/image-card-generator.js`
 5. Move the `./scripts/metadata` content into `public/metadata`, you can use the following command `mv -v ./metadata/* ./public/metadata/`
 6. `$ node ./scripts/make-algolia-db.js` then update the index in the Algolia service, clear the index and fetch the `db/tweets-db.json` file
-7. Use the prompts in the file tweets.prompt to generate the summary, categories and questions to include them in `db/tweets_summary.json`, `db/tweets_map.json` and `db/tweets_exam.json` respectively
-8. `$ node ./scripts/generate-books.js` this will update the `db/books-not-enriched.json`
-9. `$ node ./scripts/book-enrichment.js` this will output the list of books you should use in the last prompt to get the category of books and update the `db/books.json`
+7. `$ node ./scripts/generate-books.js` this will update the `db/books-not-enriched.json`
+8. `$ node ./scripts/book-enrichment.js` this will output the list of books you should use in the last prompt to get the category of books and update the `db/books.json`
+9. Use the `$ ./scripts/generate_prompts.sh` to generate the prompts to be used with ChatGPT (or the LLM of your choice) and obtain the summary, categories and questions to include in `db/tweets_summary.json`, `db/tweets_map.json` and `db/tweets_exam.json` respectively
 10. Change manually the date on the file `components/header.js` to the latest update date
 11. Verify that everything is fine by running `npm run dev` on the root folder
 
