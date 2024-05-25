@@ -48,7 +48,7 @@ The process of adding a new thread is half manual half automated:
 1. Manually add the first tweet id and the first tweet text to ontop of the turras.csv file (you can leave the categories empty as "")
 2. `$ node ./scripts/recorder.js`. This will scrap it and save it into tweets.json
 3. `$ node ./scripts/tweets_enrichment.js`
-4. `$ node ./scripts/images-card-generator.js`
+4. `$ node ./scripts/image-card-generator.js`
 5. Move the `./scripts/metadata` content into `public/metadata`, you can use the following command `mv -v ./metadata/* ./public/metadata/`
 6. `$ node ./scripts/make-algolia-db.js` then update the index in the Algolia service, clear the index and fetch the `db/tweets-db.json` file
 7. Use the prompts in the file tweets.prompt to generate the summary, categories and questions to include them in `db/tweets_summary.json`, `db/tweets_map.json` and `db/tweets_exam.json` respectively
