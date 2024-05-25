@@ -31,7 +31,7 @@ const merger = new PDFMerger();
         producer: "El Turrero Post",
         author: "Javier G. Recuenco",
         creator: "Karliky",
-        title: "Totas las turras de El Turrero Post"
+        title: "Todas las turras de El Turrero Post"
     });
 
     await merger.save('./../public/turras.pdf');
