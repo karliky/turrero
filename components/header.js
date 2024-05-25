@@ -22,7 +22,7 @@ export default function Header({ totalTweets, noHeading }) {
     </div>
     {!noHeading && <div className={styles.information}>
       <h2>Esta es la colección curada y ordenada de las publicaciones de <a className={styles.red__color} href='https://twitter.com/recuenco' target='_blank'>Javier. G. Recuenco</a> sobre las ciencias de la complejidad, CPS, Factor-X, etc...</h2>
-      <h3>Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el 18/05/2024.</h3>
+      <h3>Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el 25/05/2024.</h3>
     </div>}
   </div>;
 }
