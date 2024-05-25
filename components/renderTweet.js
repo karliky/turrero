@@ -1,6 +1,15 @@
 import styles from './turra.module.css';
 
 export default function ({ id, tweetText, metadata, embed }) {
+    /* Se guardan usuarios en diferentes formatos, todo en un solo string.
+        
+    "Maria Alvarez \n@ostraperlera"
+    "juanmacias \n@juanmacias\n·\nMay 3, 2023"
+
+    Yo quiero extraer el usuario, pero sin la @
+    */
+    const reg = /.*@(\w+)/g;
+    const username = (embed && embed.author && embed.author.match(reg) || ["@"])[0].split("@")[1];
     return <div className={styles.tweet} key={id} id={id}>
         <p dangerouslySetInnerHTML={{ __html: tweetText }}></p>
         {metadata && metadata.url && <span className={styles.metadata}>
@@ -13,7 +22,7 @@ export default function ({ id, tweetText, metadata, embed }) {
             <img src={"../" + metadata.img}></img>
         </span>}
         {embed && embed.type === "embed" && <a
-            href={"https://twitter.com/" + embed.author.split("\n").pop().replace("@", "") + "/status/" + embed.id}
+            href={"https://twitter.com/" + username + "/status/" + embed.id}
             className={`${styles['static-tweet']}`}
             target="_blank"
         >
