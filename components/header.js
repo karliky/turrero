@@ -12,6 +12,7 @@ export default function Header({ totalTweets, noHeading }) {
       <div className={`${styles.header__section} ${styles.menu}`}>
         <a href="https://cps.tonidorta.com/" target='_blank'>CPS Notebook</a>
         <a href="/print">Versión imprimible</a>
+        <a href="/graph">Grafo de Turras</a>
         <a href="/about">Sobre esta web</a>
         <a href="/books">Libros</a>
         <a href="/hall-of-fame">Hall of Fame</a>

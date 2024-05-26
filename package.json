@@ -7,6 +7,7 @@
     "test": "jest ./tests/"
   },
   "dependencies": {
+    "@types/d3": "^7.4.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.12",
     "@types/react": "^17.0.80",
@@ -14,6 +15,7 @@
     "@vercel/analytics": "0.1.8",
     "algoliasearch": "4.14.3",
     "csvdata": "2.0.0",
+    "d3": "^7.9.0",
     "date-fns": "2.29.3",
     "dayjs": "1.11.7",
     "dotenv": "16.4.5",

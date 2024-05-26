@@ -35,4 +35,16 @@ interface TweetSummary {
     summary: string;
 }
 
+interface TurraNode {
+    id: string;
+    url: string;
+    replies: int;
+    likes: int;
+    bookmarks: int;
+    views: int;
+    summary: string;
+    categories: string[];
+    related_threads: string[];
+}
+
 interface TweetsMap { id: string, categories: string }
