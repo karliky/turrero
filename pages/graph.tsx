@@ -3,14 +3,14 @@ import * as d3 from 'd3';
 import Head from "next/head";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import Tweets from "../db/tweets.json";
+import Tweets from "../db/tweets.json"; 
 import styles from './graph.module.css';
 
 const TurraNodes: TurraNode[] = require("../db/processed_graph_data.json");
 
 const GraphPage = () => {
   const ref = useRef<SVGSVGElement>(null);
-  const [legendVisible, setLegendVisible] = useState(true);
+  const [legendVisible, setLegendVisible] = useState(false);
 
   useEffect(() => {
     const nodes = TurraNodes;
@@ -112,21 +112,20 @@ const GraphPage = () => {
       </div>`)
       .style("visibility", "visible");
 
-      // Calcular la posición del tooltip
+      // Calcular la posición del tooltip encima del nodo
       const tooltipWidth = tooltip.node().offsetWidth;
       const tooltipHeight = tooltip.node().offsetHeight;
-      let left = event.pageX + 10;
-      let top = event.pageY - 10;
+      let left = event.pageX - tooltipWidth / 2;
+      let top = event.pageY - tooltipHeight - 20;
 
       // Ajustar la posición si el tooltip se sale de la pantalla
       if (left + tooltipWidth > window.innerWidth) {
         left = window.innerWidth - tooltipWidth - 10;
       }
-      if (top + tooltipHeight > window.innerHeight) {
-        top = window.innerHeight - tooltipHeight - 10;
+      if (top < 0) {
+        top = event.pageY + 10;
       }
       if (left < 0) left = 10;
-      if (top < 0) top = 10;
 
       tooltip.style("left", `${left}px`)
              .style("top", `${top}px`);
@@ -137,12 +136,12 @@ const GraphPage = () => {
         .style("visibility", "hidden");
     };
 
-    // Añadir eventos de ratón y táctiles para el tooltip
-    node.on("mouseover", function(event) {
+    // Añadir eventos de clic y táctiles para el tooltip
+    node.on("click", function(event) {
       const d = d3.select(this).datum();
       showTooltip(event, d);
+      event.stopPropagation();
     })
-    .on("mouseout", hideTooltip)
     .on("touchstart", function(event) {
       const d = d3.select(this).datum();
       showTooltip(event.touches[0], d);
@@ -150,7 +149,7 @@ const GraphPage = () => {
       event.preventDefault();
     });
 
-    svg.on("touchstart", function(event) {
+    svg.on("click", function() {
       hideTooltip();
     });
 
@@ -230,13 +229,13 @@ const GraphPage = () => {
         <div className={styles.wrapper}>
           <Header totalTweets={Tweets.length} />
           <div className={styles.content}>
-            <div className="graph-container" style={{ width: '100vw', height: 'calc(100vh - 100px)', position: 'relative' }}>
+            <div className={`graph-container ${styles.graphContainer}`} style={{ width: '100vw', height: 'calc(100vh - 100px)', position: 'relative' }}>
               <svg ref={ref} style={{ width: '100%', height: '100%' }} />
               <div id="tooltip" style={{ position: 'absolute', visibility: 'hidden', backgroundColor: 'white', padding: '10px', borderRadius: '5px', boxShadow: '0px 0px 5px rgba(0,0,0,0.5)' }}></div>
               <button 
                 onClick={toggleLegend} 
                 style={{ position: 'absolute', top: 20, right: 20, zIndex: 1000 }}>
-                {legendVisible ? 'Ocultar Leyenda' : 'Mostrar Leyenda'}
+                {legendVisible ? 'Ocultar leyenda' : 'Mostrar leyenda'}
               </button>
             </div>
           </div>
