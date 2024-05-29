@@ -92,11 +92,7 @@ const GraphPage = () => {
       .selectAll("circle")
       .data(nodes)
       .join("g")
-      .call(drag(simulation))
-      .on("click", function() {
-        const d = d3.select(this).datum();
-        window.open(`/turra/${d.id}`, "_blank");
-      });
+      .call(drag(simulation));
 
     node.append("circle")
       .attr("r", d => radiusScale(d.views))
@@ -106,12 +102,13 @@ const GraphPage = () => {
     const showTooltip = (event, d) => {
       const tooltip = d3.select("#tooltip");
       tooltip.html(`<div>
-        <p style="font-size: 12px;">Click para abrir en nueva pestaña</p>
+        <p style="font-size: 12px;">Tap fuera del nodo para cerrar</p>
         <h3 style="font-weight:bold;">${d.summary}</h3>   
         <p><i>Views:</i> ${d.views}</p>
         <p><i>Likes:</i> ${d.likes}</p>
         <p><i>Replies:</i> ${d.replies}</p>
         <p><i>Bookmarks:</i> ${d.bookmarks}</p>
+        <p><a href="/turra/${d.id}" target="_blank">Abrir en nueva pestaña</a></p>
       </div>`)
       .style("visibility", "visible");
 
@@ -149,10 +146,13 @@ const GraphPage = () => {
     .on("touchstart", function(event) {
       const d = d3.select(this).datum();
       showTooltip(event.touches[0], d);
-      // Prevenir el comportamiento de zoom mientras se muestra el tooltip
+      event.stopPropagation();
       event.preventDefault();
-    })
-    .on("touchend", hideTooltip);
+    });
+
+    svg.on("touchstart", function(event) {
+      hideTooltip();
+    });
 
     const zoom = d3.zoom()
       .scaleExtent([1 / 2, 8])
@@ -236,7 +236,7 @@ const GraphPage = () => {
               <button 
                 onClick={toggleLegend} 
                 style={{ position: 'absolute', top: 20, right: 20, zIndex: 1000 }}>
-                {legendVisible ? 'Hide Legend' : 'Show Legend'}
+                {legendVisible ? 'Ocultar Leyenda' : 'Mostrar Leyenda'}
               </button>
             </div>
           </div>
