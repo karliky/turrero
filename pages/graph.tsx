@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import Head from "next/head";
 import Footer from "../components/footer";
@@ -9,11 +9,10 @@ import styles from './graph.module.css';
 const TurraNodes: TurraNode[] = require("../db/processed_graph_data.json");
 
 const GraphPage = () => {
-
   const ref = useRef<SVGSVGElement>(null);
+  const [legendVisible, setLegendVisible] = useState(true);
 
   useEffect(() => {
-    
     const nodes = TurraNodes;
     const links = [];
 
@@ -165,22 +164,25 @@ const GraphPage = () => {
 
     // Adding legend
     const legend = svg.append("g")
-      .attr("transform", `translate(${width - 250}, 20)`);
+      .attr("transform", `translate(${width - 250}, 20)`)
+      .attr("id", "legend");
 
-    categories.forEach((category, index) => {
-      const legendRow = legend.append("g")
-        .attr("transform", `translate(0, ${index * 20})`);
+    if (legendVisible) {
+      categories.forEach((category, index) => {
+        const legendRow = legend.append("g")
+          .attr("transform", `translate(0, ${index * 20})`);
 
-      legendRow.append("rect")
-        .attr("width", 10)
-        .attr("height", 10)
-        .attr("fill", color(category));
+        legendRow.append("rect")
+          .attr("width", 10)
+          .attr("height", 10)
+          .attr("fill", color(category));
 
-      legendRow.append("text")
-        .attr("x", 20)
-        .attr("y", 10)
-        .text(category);
-    });
+        legendRow.append("text")
+          .attr("x", 20)
+          .attr("y", 10)
+          .text(category);
+      });
+    }
 
     simulation.on("tick", () => {
       link
@@ -193,8 +195,15 @@ const GraphPage = () => {
         .attr("transform", d => `translate(${d.x}, ${d.y})`);
     });
 
-    return svg.node();
-  }, []);
+    // Limpiar elementos SVG al desmontar el componente
+    return () => {
+      svg.selectAll('*').remove();
+    };
+  }, [legendVisible]);
+
+  const toggleLegend = () => {
+    setLegendVisible(!legendVisible);
+  };
 
   const title = `Grafo de Turras`;
   const summary = `Grafo de como se relacionan los distintos hilos de turras entre si, por categorías, el tamaño de los nodos se corresponden con el número de views de cada hilo.`;
@@ -224,6 +233,11 @@ const GraphPage = () => {
             <div className="graph-container" style={{ width: '100vw', height: 'calc(100vh - 100px)', position: 'relative' }}>
               <svg ref={ref} style={{ width: '100%', height: '100%' }} />
               <div id="tooltip" style={{ position: 'absolute', visibility: 'hidden', backgroundColor: 'white', padding: '10px', borderRadius: '5px', boxShadow: '0px 0px 5px rgba(0,0,0,0.5)' }}></div>
+              <button 
+                onClick={toggleLegend} 
+                style={{ position: 'absolute', top: 20, right: 20, zIndex: 1000 }}>
+                {legendVisible ? 'Hide Legend' : 'Show Legend'}
+              </button>
             </div>
           </div>
           <Footer />
