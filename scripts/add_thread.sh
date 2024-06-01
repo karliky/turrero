@@ -10,35 +10,35 @@ id=$1
 first_tweet_line=$2
 
 
-# Paso 1: Añadir nuevo tweet a turras.csv
+echo "Adding thread $id to turras.csv"
 node ./scripts/add-new-tweet.js $id $first_tweet_line
 
-# Paso 2: Scrappear el hilo
+echo "Obtaining thread $id"
 node ./scripts/recorder.js
 
-# Paso 3: enriquecer twwets
+echo "Enriching tweets for thread $id" 
 node ./scripts/tweets_enrichment.js
 
-# Paso 4: generar imagenes
+echo "Generating images for thread $id"
 node ./scripts/image-card-generator.js
 
-# Paso 5: generar indice de búsqueda de hilos
+echo "Generating algolia index for thread $id"
 node ./scripts/make-algolia-db.js
 
-# Paso 6: extraer los libros del hilo
+echo "Generating books for thread $id"
 node ./scripts/generate-books.js
 
-# Paso 7: enriquecer información de los libros
+echo "Enriching books for thread $id" 
 node ./scripts/book-enrichment.js
 
-# Paso 8: mover los datos de los hilos
+echo "Adding thread $id to graph" 
+python ./scripts/create_graph.py 
+
+echo "Moving metadata to public for thread $id"
 mv -v ./metadata/* ./public/metadata/
 
-# Paso 9: generar los prompts
-./scripts/generate_prompts.sh
+echo "Generating prompts for thread $id"
+./scripts/generate_prompts.sh $id
 
-# Paso 10
-echo "Asegurate de modificar los archivos tweets_summary.json, tweets_exam.json y tweets_map.json"
-
-# Paso 11
-npm run dev
+echo "Make sure to modify the following files tweets_summary.json, tweets_exam.json y tweets_map.json"
+echo "Please update the date on components/header.js"
