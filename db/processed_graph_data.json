@@ -69,7 +69,9 @@
             "sistemas-complejos",
             "lectura-de-señales"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1796796569829687349"
+        ]
     },
     {
         "id": "1593870067128627200",
@@ -1236,7 +1238,8 @@
         ],
         "related_threads": [
             "1396010920174837761",
-            "1390935441591967746"
+            "1390935441591967746",
+            "1796796569829687349"
         ]
     },
     {
@@ -2717,6 +2720,40 @@
             "estrategia",
             "orquestación-cognitiva",
             "factor-x"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1794224768574476545",
+        "url": "https://twitter.com/Recuenco/status/1794224768574476545",
+        "replies": 59,
+        "likes": 283,
+        "bookmarks": 60,
+        "views": 75069,
+        "summary": "La importancia de una estrategia clara en las organizaciones",
+        "categories": [
+            "estrategia",
+            "factor-x",
+            "lectura-de-señales",
+            "desarrollo-de-habilidades",
+            "libros"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1796796569829687349",
+        "url": "https://twitter.com/Recuenco/status/1796796569829687349",
+        "replies": 51,
+        "likes": 18,
+        "bookmarks": 4,
+        "views": 6801,
+        "summary": "El desafío del sensemaking y el colapso cognitivo: explorando fenómenos y ejemplos en la cultura popular y la literatura",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "lectura-de-señales",
+            "orquestación-cognitiva",
+            "libros"
         ],
         "related_threads": []
     }
