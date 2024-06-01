@@ -2104,5 +2104,23 @@
     "media": "goodreads",
     "title": "Mythmaking: Self-Discovery and the Timeless Art of Memoir",
     "turraId": "1781573444485697867"
+  },
+  {
+    "id": "1796796709659447568",
+    "type": "card",
+    "img": "./metadata/bdb8KeCW.jpeg",
+    "url": "https://www.goodreads.com/book/show/13588403-my-share-of-the-task",
+    "media": "goodreads",
+    "title": "My Share of the Task: A Memoir",
+    "turraId": "1796796569829687349"
+  },
+  {
+    "id": "1796796710691156268",
+    "type": "card",
+    "img": "./metadata/HEFETE-9.jpeg",
+    "url": "https://www.goodreads.com/book/show/60097850-banned-books",
+    "media": "goodreads",
+    "title": "Banned Books: The World's Most Controversial Books, Past and Present",
+    "turraId": "1796796569829687349"
   }
 ]
