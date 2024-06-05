@@ -2,10 +2,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { readFileSync, writeFileSync } from 'fs';
-import { getTweetText, extractMetadata } from './scraping.js';
+import { getTweetText, extractMetadata } from './scraping';
 
-import puppeteer from 'puppeteer';
-import { KnownDevices } from 'puppeteer';
+import puppeteer, { KnownDevices } from 'puppeteer';
 import existingTweetsData from '../db/tweets.json' assert { type: 'json' };
 
 import { fileURLToPath } from 'url';
@@ -14,14 +13,20 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
+interface Tweet {
+    tweet: string;
+    id: string;
+    metadata: any;
+    time: string;
+    stats: any;
+}
 
 /**
  * Parse CSV file into an array of objects.
  * @param {string} filePath Path to the CSV file.
  * @returns {Array} Array of objects where each object represents a row in the CSV.
  */
-function parseCSV(filePath) {
+function parseCSV(filePath: string): any[] {
     const csvContent = readFileSync(filePath, { encoding: 'utf8' });
     const lines = csvContent.split('\n');
     const headers = lines[0].split(',');
@@ -30,7 +35,7 @@ function parseCSV(filePath) {
         return headers.reduce((obj, nextKey, index) => {
             obj[nextKey.trim()] = data[index].replace(/(^"|"$)/g, '').trim(); // Remove surrounding quotes and trim.
             return obj;
-        }, {});
+        }, {} as any);
     });
 }
 
@@ -40,42 +45,41 @@ const random = Math.floor(Math.random() * 150) + 750;
 
 (async () => {
     console.log("Launching...");
-    const browser = await puppeteer.launch({ slowMo: random})
+    const browser = await puppeteer.launch({ slowMo: random });
     const page = await browser.newPage();
 
-
     const cookies = [
-        { 'name': 'twid', 'value': process.env.twid, 'domain': 'twitter.com' },
-        { 'name': 'auth_token', 'value': process.env.auth_token, 'domain': 'twitter.com'  },
-        { 'name': 'lang', 'value': process.env.lang, 'domain': 'twitter.com'  },
-        { 'name': 'd_prefs', 'value': process.env.d_prefs, 'domain': 'twitter.com'  },
-        { 'name': 'kdt', 'value': process.env.kdt, 'domain': 'twitter.com'  },
-        { 'name': 'ct0', 'value': process.env.ct0, 'domain': 'twitter.com'  },
-        { 'name': 'guest_id', 'value': process.env.guest_id, 'domain': 'twitter.com'  },
-        { 'name': 'domain', 'value': "https://twitter.com/", 'domain': 'twitter.com'  }
+        { 'name': 'twid', 'value': process.env.twid || '', 'domain': 'twitter.com' },
+        { 'name': 'auth_token', 'value': process.env.auth_token || '', 'domain': 'twitter.com' },
+        { 'name': 'lang', 'value': process.env.lang || '', 'domain': 'twitter.com' },
+        { 'name': 'd_prefs', 'value': process.env.d_prefs || '', 'domain': 'twitter.com' },
+        { 'name': 'kdt', 'value': process.env.kdt || '', 'domain': 'twitter.com' },
+        { 'name': 'ct0', 'value': process.env.ct0 || '', 'domain': 'twitter.com' },
+        { 'name': 'guest_id', 'value': process.env.guest_id || '', 'domain': 'twitter.com' },
+        { 'name': 'domain', 'value': "https://twitter.com/", 'domain': 'twitter.com' }
     ];
 
-    console.log('Setting cookies');	
+    console.log('Setting cookies');
     await page.setCookie(...cookies);
-    
+
     const m = KnownDevices['iPhone 12'];
     await page.emulate(m);
 
-    
     console.log('Total tweets', tweets.length);
     // Start by processing only the tweets that are not already processed
-    const existingTweets = existingTweetsData.reduce((acc, tweets) => {
-        acc.push(tweets[0].id);
+    const existingTweets = existingTweetsData.reduce((acc: string[], tweet: any) => {
+        acc.push(tweet[0].id);
         return acc;
     }, []);
 
-    let tweetIds = tweets.map((tweet) => tweet.id).reduce((acc, id) => {
+    const tweetIds = tweets.map((tweet: any) => tweet.id).reduce((acc: string[], id: string) => {
         if (existingTweets.find(_id => id === _id)) return acc;
         acc.push(id);
         return acc;
     }, []);
 
     console.log('Processing a total of tweets', tweetIds.length);
+
     /**
      * Extracts all tweets from a thread, including the original tweet, and saves them as an array into a json file.
      */
@@ -84,13 +88,13 @@ const random = Math.floor(Math.random() * 150) + 750;
             /**
              * Go to tweet 
             */
-            await page.goto(`https://x.com/Recuenco/status/${tweetId}`)
+            await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
             console.log("Waiting for selector");
-            await page.waitForSelector('div[data-testid="tweetText"]')
+            await page.waitForSelector('div[data-testid="tweetText"]');
 
             let stopped = false;
             // Holds all tweets from a particular thread
-            const tweets = [];
+            const tweets: Tweet[] = [];
 
             while (!stopped) {
                 /**
@@ -99,7 +103,7 @@ const random = Math.floor(Math.random() * 150) + 750;
                 await new Promise(r => setTimeout(r, 100));
                 console.log("Waiting for progress bar");
                 await page.waitForSelector('div[role="progressbar"]', { hidden: true });
-                const currentTweetId = page.url().split("/").slice(-1).pop();
+                const currentTweetId = page.url().split("/").slice(-1).pop() || '';
                 const tweet = await page.evaluate(getTweetText);
 
                 console.log("currentTweetId", currentTweetId);
@@ -112,16 +116,14 @@ const random = Math.floor(Math.random() * 150) + 750;
                  * Get at what time the tweet was posted
                 */
                 const time = await page.evaluate(() => {
-                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('time').dateTime;
+                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]')?.querySelector('time')?.getAttribute('dateTime') || '';
                     return el;
                 });
                 /**
                  * Get views, likes, retweets, replies
                 */
-                
                 const stats = await page.evaluate(() => {
-                    
-                    const statsKeyMap = {
+                    const statsKeyMap: { [key: string]: string } = {
                         likes: "likes",
                         like: "likes",
                         views: "views",
@@ -133,34 +135,30 @@ const random = Math.floor(Math.random() * 150) + 750;
                         bookmarks: "bookmarks",
                         bookmark: "bookmarks"
                     };
-                    
-                    function parseStats(text) {
-                        const stats = {};
-                        // Dividir la cadena de texto en segmentos basados en comas
+
+                    function parseStats(text: string): { [key: string]: string } {
+                        const stats: { [key: string]: string } = {};
                         const segments = text.split(',');
-                    
+
                         segments.forEach(segment => {
-                            // Extraer el número y la clave de cada segmento
                             const match = segment.trim().match(/(\d+)\s(\w+)/);
                             if (match) {
                                 const value = match[1];
                                 const key = match[2];
-                    
-                                // Usar el mapa de claves para convertir la palabra clave a la propiedad del objeto
+
                                 if (statsKeyMap[key]) {
                                     stats[statsKeyMap[key]] = value;
                                 }
                             }
                         });
-                    
+
                         return stats;
                     }
 
-                    const statsLabel = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[role="group"]').getAttribute("aria-label").toLowerCase();
-                    const stats_map = parseStats(statsLabel);
-                    return stats_map;
+                    const statsLabel = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]')?.querySelector('div[role="group"]')?.getAttribute("aria-label")?.toLowerCase() || '';
+                    return parseStats(statsLabel);
                 });
-                
+
                 console.log("tweetId", tweetId, { tweet, id: currentTweetId, metadata, time, stats });
                 tweets.push({ tweet, id: currentTweetId, metadata, time, stats });
                 console.log("finding lastTweetFound");
@@ -169,16 +167,17 @@ const random = Math.floor(Math.random() * 150) + 750;
                  * Stop thread scraping if we reach the last tweet
                 */
                 const lastTweetFound = await page.evaluate(() => {
-                    if (document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling === null) return 'finished';
-                    const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('div[data-testid]').querySelector("a").href;
+                    const tweetElement = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
+                    const nextSibling = tweetElement?.closest('div[data-testid="cellInnerDiv"]')?.nextElementSibling?.nextElementSibling;
+                    if (!nextSibling) return 'finished';
+                    const el = nextSibling.querySelector('div[data-testid]')?.querySelector("a")?.href || '';
                     return el;
                 });
                 console.log("lastTweetFound", lastTweetFound !== 'https://x.com/Recuenco');
                 if (lastTweetFound !== 'https://x.com/Recuenco') {
                     stopped = true;
-                    //const existingTweets = require(__dirname + "/../db/tweets.json");
                     existingTweetsData.push(tweets);
-                    writeFileSync(__dirname + "/../db/tweets.json", JSON.stringify(existingTweetsData));
+                    writeFileSync(__dirname + "/../db/tweets.json", JSON.stringify(existingTweetsData, null, 2));
                     continue;
                 }
                 /**
@@ -188,7 +187,8 @@ const random = Math.floor(Math.random() * 150) + 750;
                 await Promise.all([
                     page.waitForSelector('div[role="progressbar"]', { hidden: true }),
                     page.evaluate(() => {
-                        document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('article[data-testid="tweet"]').click()
+                        const tweetElement = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
+                        tweetElement?.closest('div[data-testid="cellInnerDiv"]')?.nextElementSibling?.nextElementSibling?.querySelector('article[data-testid="tweet"]')?.click();
                     }),
                     page.waitForNavigation()
                 ]);
@@ -197,7 +197,7 @@ const random = Math.floor(Math.random() * 150) + 750;
     }
 
     await getAllTweets();
-    console.log("Estaré aquí mismo!")
-    await page.close();
+    console.log("Finished scraping tweets!");
+    await browser.close();
     process.exit(0);
-})()
+})();

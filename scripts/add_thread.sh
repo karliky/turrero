@@ -11,10 +11,10 @@ first_tweet_line=$2
 
 
 echo "Adding thread $id to turras.csv"
-node ./scripts/add-new-tweet.js $id $first_tweet_line
+npx deno ./scripts/add-new-tweet.ts $id $first_tweet_line
 
 echo "Obtaining thread $id"
-node ./scripts/recorder.js
+npx deno ./scripts/recorder.ts
 
 echo "Enriching tweets for thread $id" 
 node ./scripts/tweets_enrichment.js

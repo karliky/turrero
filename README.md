@@ -29,6 +29,7 @@ The website is built using:
 - Next.js for the front-end and server-side rendering
 - Node.js for the back-end and the scraping tools
 - Puppeter for web scraping twitter threads
+- some bits of typescript and deno
 
 ## Getting Started
 
