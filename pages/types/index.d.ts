@@ -8,6 +8,7 @@ interface Turra {
     enrichments: any[];
     publishedDate: string;
     urls: string[];
+    date: Date;
 }
 
 interface Tweet {

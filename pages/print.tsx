@@ -31,9 +31,10 @@ function genProps(tweetId: string): Turra {
   const duplicatedUrls = urlsInThread.filter((url: string) => urlsInEnrichments.find((_url: string) => Url.parse(_url).path === Url.parse(url).path));
   const urls = urlsInThread.filter((url: string) => !duplicatedUrls.find((_url: string) => _url === url));
 
+  const date = new Date(thread[0].time);
   let publishedDate = "";
   if (thread[0] && thread[0].time) {
-    publishedDate = `Publicado el ${new Date(thread[0].time).toLocaleDateString("es-ES")} / ${new Date(thread[0].time).toLocaleTimeString("es-ES")}`;
+    publishedDate = `Publicado el ${date.toLocaleDateString("es-ES")} / ${date.toLocaleTimeString("es-ES")}`;
   }
 
   return {
@@ -43,7 +44,8 @@ function genProps(tweetId: string): Turra {
     tweets: thread,
     enrichments,
     urls,
-    publishedDate
+    publishedDate,
+    date,
   }
 }
 
@@ -78,10 +80,16 @@ const TableOfContents: React.FC<{ turras: Turra[] }> = ({ turras }) => {
 }
 
 
+declare global {
+  interface Window {
+    t: Turra;
+  }
+}
 const Turras: React.FC = () => {
+
   const title = "Recopilación de las turras de Javier G. Recuenco";
   const turras: Turra[] = Tweets.map((tweets) => genProps(tweets[0].id)).sort((a, b) => new Date(a.publishedDate) > new Date(b.publishedDate) ? -1 : 1);
-  const newest = new Date(turras[turras.length - 1].publishedDate).toLocaleDateString("es-ES");
+  const newest = turras[turras.length - 1];
   return (
     <>
       <Head>
@@ -103,7 +111,7 @@ const Turras: React.FC = () => {
         <div className={styles.header}>
           <h1 className={styles.brand}>{title}</h1>
           <p>Descargar versión más reciente en <a className={styles.brand} href="https://turrero.vercel.app/">El Turrero Post</a></p>
-          <p>Última actualización: {newest}.</p>
+          <p>Última actualización: {newest.date.toLocaleDateString("es-Es")}.</p>
         </div>
         <TableOfContents turras={turras} />
         <div>
@@ -119,6 +127,7 @@ const Turras: React.FC = () => {
                   enrichments={turra.enrichments}
                   publishedDate={turra.publishedDate}
                   urls={turra.urls}
+                  date={turra.date}
                 /></div>)
             )
           }
