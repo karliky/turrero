@@ -88,7 +88,9 @@ declare global {
 const Turras: React.FC = () => {
 
   const title = "Recopilación de las turras de Javier G. Recuenco";
-  const turras: Turra[] = Tweets.map((tweets) => genProps(tweets[0].id)).sort((a, b) => new Date(a.publishedDate) > new Date(b.publishedDate) ? -1 : 1);
+  const turras: Turra[] = Tweets.map((tweets) => genProps(tweets[0].id)).sort((a, b) => new Date(a.publishedDate) > new Date(b.publishedDate) ? -1 : 1).
+    filter((turra) => !turra.summary.startsWith("Turra invitada"));
+
   const newest = turras[turras.length - 1];
   return (
     <>
