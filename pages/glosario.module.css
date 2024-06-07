@@ -1,56 +1,47 @@
 .wrapper {
+    width: 100%;
+    padding: 0;
+}
+
+.centered {
+    width: 80%;
     position: relative;
     min-height: 64px;
     max-width: 1400px;
     margin: 0 auto;
     padding-left: 40px;
     padding-right: 40px;
+
 }
 
-.person {
+
+.glossary {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    align-content: normal;
-    line-height: normal;
+    width: 90%;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 15px;
+
 }
 
-.person__text {
-    width: 600px;
-}
-
-.person__description {}
-
-.person__name {
+.word {
     color: #a5050b;
-    font-size: 2em;
+    font-weight: bold;
 }
 
-.person__title {
-    font-style: italic;
-    margin-bottom: 1em;
+.glossaryEntry {
+    width: 100%;
+    /* nothing else worked */
+    border-bottom: 1px solid white;
+    border-width: 1em;
 }
 
-.person__image img {
-    border-radius: 50%;
-    filter: grayscale(100%);
-    width: 150px;
-    height: 150px;
-    margin: 25px;
-}
 
-.person__image img.boss {
-    width: 300px;
-    height: 300px;
-}
-
-.person:last-child {
-    margin-top: 25px;
-}
-
-h2.contributor {
+h2.title {
     font-size: 2em;
     color: #a5050b;
     margin-bottom: 1em;

@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data[]
             });
         })
         .on('end', () => {
-            res.status(200).json(results);
+            res.status(200).json(results.sort((a, b) => a.word.localeCompare(b.word)));
         })
         .on('error', (error) => {
             res.status(500).json({ error: 'Failed to read CSV file' });

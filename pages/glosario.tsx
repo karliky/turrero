@@ -53,37 +53,40 @@ const Turra: React.FC = () => {
       </Head>
       <div>
         <div className={styles.wrapper}>
-          <Header totalTweets={Tweets.length} />
-          <div className={styles.content}>
-            <h2 className={styles.contributor}>Glosario</h2>
-            <div className={styles.person__description}>
-              Aqui hay un glosario de la jerga especializada que se utiliza en las turras de Javier G. Recuenco. Recoger y explicar estos términos es una tarea en curso,
-              a la cual puedes contribuir editando este fichero <a href="https://github.com/karliky/turrero">CSV en github</a>.
-            </div>
+          <Header totalTweets={Tweets.length} noHeading={true} />
+          <div className={styles.centered}>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Palabra</th>
-                  <th>Definición</th>
-                  <th>Fuentes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {values.data.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.word}</td>
-                    <td>{row.definition}</td>
-                    <td>{row.sources || 'N/A'}</td>
+            <div className={styles.content}>
+              <h2 className={styles.title}>Glosario</h2>
+              <p>
+                Aqui hay un glosario de la jerga especializada que se utiliza en las turras de Javier G. Recuenco. Recoger y explicar estos términos es una tarea en curso,
+                a la cual puedes contribuir editando este fichero <a className={styles.word} href="https://github.com/karliky/turrero/blob/main/db/glosario.csv">CSV en github</a>, recuerda que lo puedes importar y editable en excel.
+              </p>
+
+              <table className={styles.glossary}>
+                <thead>
+                  <tr>
+                    {/* <th>Palabra</th> */}
+                    {/* <th>Definición</th> */}
+                    {/* <th>Fuentes</th> */}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {values.data.map((row, index) => (
+                    <tr key={index} className={styles.glossaryEntry}>
+                      <td className={styles.word} >{row.word}</td>
+                      <td>{row.definition}</td>
+                      {/* <td>{row.sources || 'N/A'}</td> */}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <Footer />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
