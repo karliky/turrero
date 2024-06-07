@@ -36,8 +36,7 @@
 .glossaryEntry {
     width: 100%;
     /* nothing else worked */
-    border-bottom: 1px solid white;
-    border-width: 1em;
+    border-bottom: 1em solid transparent;
 }
 
 
@@ -48,42 +47,6 @@ h2.title {
     text-align: center;
 }
 
-.blockquote {
-    display: block;
-    border-width: 2px 0;
-    border-style: solid;
-    border-color: #eee;
-    padding: 1.5em 0;
-    margin: 1.5em 0;
-    position: relative;
-    text-align: center;
-    font-size: 3.5em;
-}
-
-.blockquote strong {
-    font-weight: 700;
-}
-
-.about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.about__description {
-    width: 90%;
-    background: #faebd7;
-    margin: 25px;
-    padding: 25px;
-    border-radius: 20px;
-    color: #000;
-
-    font-size: 16px;
-    line-height: 26px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
 
 @media (max-width: 770px) {
     .wrapper {
@@ -91,15 +54,13 @@ h2.title {
         padding-right: 10px;
     }
 
-    .person__description {
-        margin-bottom: 25px;
-    }
+    .centered {
+        width: 100%;
+        position: relative;
+        min-height: 32px;
+        margin: 0 auto;
+        padding-left: 10px;
+        padding-right: 10px;
 
-    .person {
-        flex-direction: column-reverse;
-    }
-
-    .person__text {
-        width: auto;
     }
 }

@@ -3,13 +3,10 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import Tweets from "../db/tweets.json";
 import styles from './glosario.module.css';
-import React, { useEffect, useState } from "react";
-
-export async function getStaticProps(context: any) {
-  return {
-    props: {}
-  }
-}
+import React from "react";
+import fs from 'fs';
+import csv from 'csv-parser';
+import path from 'path';
 
 type Data = {
   word: string
@@ -17,20 +14,40 @@ type Data = {
   sources?: string
 }
 
-type Glossary = {
-  data: Data[]
+type GlossaryProps = {
+  data: Data[];
 }
 
-const Turra: React.FC = () => {
+export async function getStaticProps() {
+  const results: Data[] = [];
+  const filePath = path.join(process.cwd(), 'db', 'glosario.csv');
+
+  await new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv({ separator: ',', escape: '"', headers: ['word', 'definition', 'sources'] }))
+      .on('data', (data) => {
+        results.push({
+          word: data.word, definition: data.definition, sources: data.sources || ''
+        });
+      })
+      .on('end', () => {
+        resolve(results);
+      })
+      .on('error', (error: any) => {
+        reject(error);
+      });
+  });
+
+  return {
+    props: {
+      data: results,
+    },
+  };
+}
+
+const Glossary: React.FC<GlossaryProps> = ({ data }) => {
   const title = `Sobre el proyecto de El Turrero Post - Las turras de Javier G. Recuenco`;
   const summary = `Sobre el proyecto de El Turrero Post`;
-  const [values, setValues] = useState<Glossary>({ data: [] });
-
-  useEffect(() => {
-    fetch('/api/glosario')
-      .then((res) => res.json())
-      .then((data) => setValues({ data }));
-  }, []);
 
   return (
     <div>
@@ -55,7 +72,6 @@ const Turra: React.FC = () => {
         <div className={styles.wrapper}>
           <Header totalTweets={Tweets.length} noHeading={true} />
           <div className={styles.centered}>
-
             <div className={styles.content}>
               <h2 className={styles.title}>Glosario</h2>
               <p>
@@ -66,28 +82,29 @@ const Turra: React.FC = () => {
               <table className={styles.glossary}>
                 <thead>
                   <tr>
-                    {/* <th>Palabra</th> */}
-                    {/* <th>Definición</th> */}
-                    {/* <th>Fuentes</th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  {values.data.map((row, index) => (
-                    <tr key={index} className={styles.glossaryEntry}>
-                      <td className={styles.word} >{row.word}</td>
-                      <td>{row.definition}</td>
-                      {/* <td>{row.sources || 'N/A'}</td> */}
-                    </tr>
-                  ))}
+                  {data.map((row, index) => {
+                    // only alphanumeric, no spaces, no special characters
+                    const id = row.word.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    return (
+                      <tr key={index} id={id} className={styles.glossaryEntry}>
+                        <td className={styles.word}>
+                          <a href={`#${id}`}>{row.word}</a></td>
+                        <td>{row.definition}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
         <Footer />
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
 
-export default Turra;
+export default Glossary;
