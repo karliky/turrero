@@ -16,6 +16,7 @@ const Header: React.FC<HeaderProps> = ({ totalTweets, noHeading }) => {
           </h1>
         </div>
         <div className={`${styles.header__section} ${styles.menu}`}>
+          <a href="/glosario">Glosario</a>
           <a href="https://cps.tonidorta.com/" target='_blank' rel="noopener noreferrer">CPS Notebook</a>
           <a href="/print">Versión imprimible</a>
           <a href="/graph">Grafo de Turras</a>
