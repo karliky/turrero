@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.3.0",
     "@vercel/analytics": "0.1.8",
     "algoliasearch": "4.14.3",
+    "csv-parser": "^3.0.0",
     "csvdata": "2.0.0",
     "d3": "^7.9.0",
     "date-fns": "2.29.3",
