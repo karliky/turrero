@@ -1,4 +1,36 @@
 [
+    {
+        "id": "1799313887285669975",
+        "questions": [
+            {
+                "question": "¿Qué representa metafóricamente un 'rabbit hole'?",
+                "options": [
+                    "Una situación simple",
+                    "Una vía de exploración compleja",
+                    "Un estado de felicidad"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué libro describe la experiencia de 'flow'?",
+                "options": [
+                    "Drive",
+                    "Flow",
+                    "Alicia en el País de las Maravillas"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es uno de los elementos esenciales que motivan a las personas según Daniel H. Pink?",
+                "options": [
+                    "Autonomía",
+                    "Obsesión",
+                    "Éxtasis"
+                ],
+                "answer": 1
+            }
+        ]
+    },    
     { "id": "1610940502609723393", "questions": [ { "question": "¿Qué opinión tiene el autor sobre los CFOs?", "options": [ "El autor piensa que los CFOs son estratégicos", "El autor considera que los CFOs son un activo espectacular para las empresas", "El autor no tiene nada en contra de los CFOs" ], "answer": 2 }, { "question": "¿Qué es lo que el autor considera que es la principal problemática en la estrategia?", "options": [ "La mayoría de los problemas en la estrategia son causados por el CFO", "Todos quieren ser el estratega", "La estrategia sin operaciones no es posible" ], "answer": 2 }, { "question": "¿Qué opinión tiene el autor sobre McKinsey?", "options": [ "McKinsey se dedica a gestionar el alto rendimiento", "Las operaciones son más importantes que la estrategia", "McKinsey se dedica a gestionar el bajo rendimiento" ], "answer": 3 } ] },
     { "id": "1604019306349592577", "questions": [ { "question": "¿Qué es el factor humano?", "options": [ "El comportamiento imprevisible y incontrolable de las personas.", "La gestión de la realidad y su conexión con el CPS.", "La diferencia entre la noche y el día." ], "answer": 1 }, { "question": "¿Cómo se diferencia el Factor X del factor humano?", "options": [ "El Factor X acepta como absolutamente caótico el comportamiento humano.", "El Factor X intenta en la medida de lo posible modelar el comportamiento esperado y gestionarlo.", "El Factor X no considera que una aproximación a cualquier tipo de solución CPS pasa por elaborar una tesis acerca de la situación y plantear como abordarlo como parte integral de la solución del problema." ], "answer": 2 }, { "question": "Según el framework CPS, ¿qué es el Factor X?", "options": [ "Una de las cuatro macro.", "El comportamiento imprevisible e incontrolable de las personas.", "La diferencia entre la noche y el día." ], "answer": 1 } ] },
     { "id": "1601483220029161473", "questions": [ { "question": "En su libro Homo Ludens, ¿qué sugiere el historiador holandés Johan Huizinga sobre la cultura humana?", "options": [ "El juego es el elemento central de la cultura humana", "El juego no es importante en la cultura humana", "El juego es secundario en la cultura humana" ], "answer": 1 }, { "question": "De acuerdo a Johan Huizinga, ¿qué define el juego en su relación con la cultura?", "options": [ "Un interludio de la vida cotidiana", "Una actividad relacionada con intereses materiales", "Una actividad seria" ], "answer": 1 }, { "question": "Según Johan Huizinga, ¿cómo describió las características formales del juego?", "options": [ "Una actividad libre y seria, situada fuera de la vida 'ordinaria'", "Una actividad relacionada con intereses materiales, situada dentro de la vida 'ordinaria'", "Una actividad seria y relacionada con intereses materiales, situada dentro de la vida 'ordinaria'" ], "answer": 1 } ] },

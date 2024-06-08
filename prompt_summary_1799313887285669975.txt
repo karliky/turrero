@@ -1,0 +1,49 @@
+Create a short headline from this text and do it in Spanish, never use these words in your headline: turras, hoy, hilo. Also, answer me in JSON format including the first word from my text which is an id and your headline but the property of the headline should be called "summary":
+<text>
+1799313887285669975
+En el hilo turras de hoy, vamos a seguir con la serie de sensemaking y vamos a hablar de rabbit holes y de pensamiento liminal inducido.
+El concepto de “rabbit hole” en inglés, que se traduce literalmente como “agujero de conejo”, se utiliza metafóricamente para describir una situación compleja y a menudo surrealista.
+El nombre viene por su semejanza a la caída de Alicia en el cuento de Lewis Carroll, “Alicia en el País de las Maravillas”.
+En este contexto, un “rabbit hole” representa una vía de exploración o actividad que parece simple al principio pero que se convierte en algo muy complejo o difícil de abandonar una vez que se ha comenzado.
+En cuanto a las obsesiones sobre un tema específico, el término se refiere a la tendencia de una persona a sumergirse profundamente en un tema, idea o actividad.
+Hasta el punto de que esta obsesión consume una cantidad significativa de tiempo y atención, a menudo a expensas de otras áreas de la vida.
+Es como seguir una pista fascinante que te lleva a más y más información, haciendo que uno se pierda en un laberinto de datos, historias o ideas relacionadas.
+Por ejemplo, alguien podría empezar investigando sobre un tipo de música, y horas después encontrarse leyendo sobre la historia de los instrumentos musicales, los movimientos culturales asociados y las biografías de músicos específicos.
+En el proceso, no se ha dado cuenta de cuánto tiempo ha pasado desde que comenzó su búsqueda.
+El “rabbit hole” puede ser tanto positivo como negativo. Por un lado, puede llevar a un aprendizaje profundo y a la satisfacción de la curiosidad; por otro lado, puede resultar en procrastinación y la negligencia de responsabilidades importantes.
+Es un concepto que captura la naturaleza humana de querer explorar y entender, pero también advierte sobre la posibilidad de perderse en el exceso de información o en la obsesión.
+Hay múltiples ejemplos del proceso, en ambos extremos.
+En el lado positivo, podemos ver ejemplos del mismo canalizado de manera optima en libros como Flow o Drive.
+La tesis principal del libro “Flow: The Psychology of Optimal Experience” de Mihaly Csikszentmihalyi es que la felicidad se alcanza a través de un estado mental llamado “flow”, o flujo, en el cual las personas se sienten completamente involucradas y absortas en una actividad.
+Este estado se caracteriza por un enfoque intenso, una sensación de éxtasis, una claridad interna de dirección y propósito, y la sensación de que el tiempo se distorsiona (se acelera o se ralentiza).
+Csikszentmihalyi argumenta que el flujo es el resultado de un equilibrio entre el nivel de desafío de una tarea y las habilidades de una persona para realizarla.
+Cuando los desafíos presentados coinciden con las habilidades personales, las personas no solo disfrutan de lo que están haciendo, sino que también se sienten más motivadas y comprometidas, lo que lleva a un mayor rendimiento y satisfacción personal.
+El concepto de flujo se aplica a una amplia gama de actividades, incluyendo el trabajo, el arte, el deporte y la educación.
+Csikszentmihalyi sugiere que al buscar y fomentar experiencias de flujo en nuestras vidas diarias, podemos mejorar nuestra calidad de vida y alcanzar un estado de felicidad genuina y duradera.
+Otro ejemplo lo podemos encontrar en “Drive: The Surprising Truth About What Motivates Us”, donde Daniel H. Pink explora la importancia de la autonomía y el dominio (mastery) como elementos clave para la motivación intrínseca y el rendimiento.
+Según Pink, hay tres elementos esenciales que motivan a las personas, especialmente en el contexto del trabajo creativo e intelectual: autonomía, maestría y propósito.
+Autonomía: Pink argumenta que las personas están más motivadas y se desempeñan mejor cuando tienen control sobre su propio trabajo. La autonomía se refiere a la capacidad de ser autodirigido y tener la libertad de elegir cómo, cuándo y con quién trabajar.
+Según Pink, cuando las personas sienten que tienen autonomía, están más comprometidas, creativas y satisfechas con su trabajo.
+Maestría (Mastery): Este concepto se refiere al deseo innato de mejorar en algo que nos importa. Pink sostiene que las personas están motivadas por el desafío de dominar una habilidad o tarea. La búsqueda de la maestría es un proceso continuo y requiere esfuerzo y práctica.
+La satisfacción de hacer algo bien y mejorar en ello es una poderosa fuente de motivación intrínseca.
+La tesis de Pink sugiere que, para maximizar la motivación y el rendimiento, los individuos y las organizaciones deben fomentar entornos que apoyen la autonomía y proporcionen oportunidades para que las personas desarrollen su maestría en áreas que les apasionan.
+Al hacerlo, no solo se mejora la satisfacción personal, sino que también se contribuye al éxito y la innovación en el lugar de trabajo.
+En el otro extremo de la gama, el de la obsesión que nos lleva a la mierda, podemos encontrar multitud de ejemplos fácilmente: El miserere, de Bécquer, que tuvo una adaptación magistral de Carlos Giménez, es uno de ellos.
+Ya hemos hablado de Arrebato, de Zulueta, como metáfora perfecta de la obsesión que te termina devorando:
+También he mencionado en reiteradas ocasiones la relación entre la obsesión y la excelencia:
+A lo largo de la historia, ha habido muchas personas que se han perdido en sus obsesiones, algunas de las cuales han tenido un impacto significativo en el mundo.
+Tesla, Howard Hughes, Marie Curie, Vincent van Gogh, Ludwig van Beethoven...
+Estos individuos muestran cómo una obsesión puede llevar a la grandeza en sus respectivos campos, pero también cómo puede consumir la vida personal y la salud de una persona. Sus historias son testimonios del poder y el peligro de la obsesión.
+La madre que me matriculó en Redes y Sistemas. Turra Limit hits. A empacar y resumir la tesis.
+Todo el mundo debería deslizarse por un rabbit hole, es una experiencia sin igual.
+Lo que hay que obligarse es a cambiar periódicamente de rabbit hole. Varios rabbit holes estimulan el pensamiento liminal y generan esa especie de conexiones random que son riquísimas. Y previenen los efectos negativos del monocultivo obsesivo.
+He hablado ya de mi relación con el Reader's Digest o los libros random de mi padre:
+Durante un tiempo compartía mis obsesiones semanales:
+Un friki es sencillamente, una persona que ha encontrado un agujero de conejo en el que se siente a gusto y no se quiere mover de allí. Es tremendamente satisfactorio pero tremendamente limitante.
+Mucha gente confunde la edad con la madurez, o el aceptar un camino estándar como el camino a la felicidad. Tu felicidad te puede estar esperando en cualquier rabbit hole random.
+El proceso de sensemaking se beneficia muchísimo de un proceso de  bajadas por rabbit holes diversos y aparentemente inconexos. Es liminalidad natural desbordada.
+Mucha gente que se dedica a hacer sensemaking no es particularmente bueno porque le falta calle y le faltan rabbit holes. #Finhilo
+P.D.I: Este libro me encantó, porque el fenómeno fan concita lo bueno y lo malo de los rabbit holes:
+P.D. II: Un libro liminal entre varias de las cosas que hemos estado hablando:
+P.D. III: El comic, como de costumbre, al rescate. Estoy esperando este y el de Jordan Mechner como agua de Mayo:
+</text>

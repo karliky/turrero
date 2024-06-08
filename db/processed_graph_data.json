@@ -1589,7 +1589,8 @@
         "related_threads": [
             "1593870067128627200",
             "1436601048978890753",
-            "1753677668996837620"
+            "1753677668996837620",
+            "1799313887285669975"
         ]
     },
     {
@@ -1868,7 +1869,7 @@
         "likes": 6,
         "bookmarks": 0,
         "views": 0,
-        "summary": "",
+        "summary": "Turra invitada: Propuesta de valor Customer centric y narrativa identificable",
         "categories": [
             "otras-turras-del-querer"
         ],
@@ -2755,6 +2756,17 @@
             "orquestación-cognitiva",
             "libros"
         ],
+        "related_threads": []
+    },
+    {
+        "id": "1799313887285669975",
+        "url": "https://twitter.com/Recuenco/status/1799313887285669975",
+        "replies": 63,
+        "likes": 546,
+        "bookmarks": 129,
+        "views": 107283,
+        "summary": "Sensemaking: rabbit holes y de pensamiento liminal inducido.",
+        "categories": [],
         "related_threads": []
     }
 ]

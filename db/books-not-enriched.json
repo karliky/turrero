@@ -2122,5 +2122,23 @@
     "media": "goodreads",
     "title": "Banned Books: The World's Most Controversial Books, Past and Present",
     "turraId": "1796796569829687349"
+  },
+  {
+    "id": "1799313954239312298",
+    "type": "card",
+    "img": "./metadata/vT4fueZh.jpeg",
+    "url": "https://www.goodreads.com/book/show/19286537-reaching-down-the-rabbit-hole",
+    "media": "goodreads",
+    "title": "Reaching Down the Rabbit Hole: A Renowned Neurologist Explains the Mystery and Drama of Brain Disease",
+    "turraId": "1799313887285669975"
+  },
+  {
+    "id": "1799313955229200852",
+    "type": "card",
+    "img": "./metadata/xbNjQY6C.jpeg",
+    "url": "https://www.goodreads.com/book/show/195391718-einstein-in-kafkaland",
+    "media": "goodreads",
+    "title": "Einstein in Kafkaland: How Albert Fell Down the Rabbit Hole and Came Up With the Universe",
+    "turraId": "1799313887285669975"
   }
 ]
