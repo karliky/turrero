@@ -2140,5 +2140,32 @@
     "media": "goodreads",
     "title": "Einstein in Kafkaland: How Albert Fell Down the Rabbit Hole and Came Up With the Universe",
     "turraId": "1799313887285669975"
+  },
+  {
+    "id": "1801852349004042628",
+    "type": "card",
+    "img": "./metadata/ks6-G0PO.jpeg",
+    "url": "https://www.goodreads.com/book/show/49198606-how-not-to-be-wrong",
+    "media": "goodreads",
+    "title": "How Not to Be Wrong: The Art of Changing Your Mind",
+    "turraId": "1801852274232218084"
+  },
+  {
+    "id": "1801852349993914776",
+    "type": "card",
+    "img": "./metadata/4YPIK3lZ.jpeg",
+    "url": "https://www.goodreads.com/book/show/36613747-how-to-change-your-mind",
+    "media": "goodreads",
+    "title": "How to Change Your Mind: What the New Science of Psychedelics Teaches Us About Consciousness, Dying, Addiction, Depression, and Transcendence",
+    "turraId": "1801852274232218084"
+  },
+  {
+    "id": "1801852350946009488",
+    "type": "card",
+    "img": "./metadata/tjpXoc6h.jpeg",
+    "url": "https://www.goodreads.com/book/show/1963638.The_Untethered_Soul",
+    "media": "goodreads",
+    "title": "The Untethered Soul: The Journey Beyond Yourself",
+    "turraId": "1801852274232218084"
   }
 ]

@@ -2592,7 +2592,9 @@
             "estrategia",
             "leyes-y-sesgos"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1801852274232218084"
+        ]
     },
     {
         "id": "1766352097409134910",
@@ -2765,7 +2767,24 @@
         "likes": 546,
         "bookmarks": 129,
         "views": 107283,
-        "summary": "Sensemaking: rabbit holes y de pensamiento liminal inducido.",
+        "summary": "Exploración de los rabbit holes y su impacto en la mente y la vida",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "estrategia",
+            "lectura-de-señales",
+            "desarrollo-de-habilidades"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1801852274232218084",
+        "url": "https://twitter.com/Recuenco/status/1801852274232218084",
+        "replies": 67,
+        "likes": 505,
+        "bookmarks": 100,
+        "views": 81078,
+        "summary": "",
         "categories": [],
         "related_threads": []
     }
