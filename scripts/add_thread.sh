@@ -41,4 +41,5 @@ echo "Generating prompts for thread $id"
 ./scripts/generate_prompts.sh $id
 
 echo "Make sure to modify the following files tweets_summary.json, tweets_exam.json y tweets_map.json"
-echo "Please update the date on components/header.js"
+echo "Delete manually the prompt txt files and the turra txt file"
+echo "Please update the date on components/header.tsx"

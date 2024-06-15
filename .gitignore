@@ -33,3 +33,10 @@ scripts/pdfs
 
 # Turra caché
 pdfs/turra-*.pdf
+
+# Prompt files
+prompt_summary_*.txt
+prompt_map_*.txt
+prompt_exam_*.txt
+prompt_books_*.txt
+turra_*.txt
