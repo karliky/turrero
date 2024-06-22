@@ -2167,5 +2167,23 @@
     "media": "goodreads",
     "title": "The Untethered Soul: The Journey Beyond Yourself",
     "turraId": "1801852274232218084"
+  },
+  {
+    "id": "1804386963790708803",
+    "type": "card",
+    "img": "./metadata/0Z62UrRd.jpeg",
+    "url": "https://www.goodreads.com/book/show/818257.Sensemaking_in_Organizations",
+    "media": "goodreads",
+    "title": "Sensemaking in Organizations",
+    "turraId": "1804386948938699148"
+  },
+  {
+    "id": "1804387032380150008",
+    "type": "card",
+    "img": "./metadata/44BofCvq.jpeg",
+    "url": "https://www.goodreads.com/book/show/213077996-the-six-big-ideas-of-adaptive-organizations",
+    "media": "goodreads",
+    "title": "The Six Big Ideas of Adaptive Organizations: From Frameworks to Sensemaking:",
+    "turraId": "1804386948938699148"
   }
 ]
