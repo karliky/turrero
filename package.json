@@ -14,6 +14,8 @@
     "@types/react-dom": "^18.3.0",
     "@vercel/analytics": "0.1.8",
     "algoliasearch": "4.14.3",
+    "chromadb": "^1.8.1",
+    "chromadb-default-embed": "^2.13.2",
     "csv-parser": "^3.0.0",
     "csvdata": "2.0.0",
     "d3": "^7.9.0",

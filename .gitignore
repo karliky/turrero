@@ -40,3 +40,6 @@ prompt_map_*.txt
 prompt_exam_*.txt
 prompt_books_*.txt
 turra_*.txt
+
+# Chroma log
+chroma.log
