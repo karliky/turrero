@@ -4,7 +4,6 @@ First install python and chromadb, as well as project dependencies.
 
 ```bash
 pip install chromadb 
-
 ```
 
 Then install the notebook
@@ -21,4 +20,13 @@ tslab install --python=python3
 ```
 chroma run --path db
 jupyter lab 
+```
+
+
+# Troubleshooting
+
+If there is a bug with chroma that says `Chroma getOrCreateCollection error: Error: AttributeError("type object 'CreateCollection' has no attribute 'model_validate'"`, upgrade pydantic:
+
+```bash
+pip install pydantic --upgrade
 ```
