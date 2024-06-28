@@ -1,22 +1,23 @@
-# Install
+# Install and test the chat
 
-First install python and chromadb, as well as project dependencies.
+First install all python dependencies in the localhost using `requirements.text`.
+
 
 ```bash
-pip install chromadb 
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3
+pip install -r requirements.txt
 ```
+The system expects you to have ollama running on `localhost:11434` and that you already installed `llama3` but you may want to tinker as you wish.
 
-Then install the notebook
+To run the chat demo:
 
 ```bash
-npm -g tslab
-pip install juypterlab
-jupyter kernelspec list|grep tslab
-tslab install --python=python3
+streamlit run app.py
 ```
 
 
-# Run 
+# Run the jupyter notebook to experiment
 ```
 chroma run --path db
 jupyter lab 

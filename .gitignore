@@ -41,5 +41,6 @@ prompt_exam_*.txt
 prompt_books_*.txt
 turra_*.txt
 
-# Chroma log
+# python and chroma db
 chroma.log
+**/__pycache__/*.pyc
