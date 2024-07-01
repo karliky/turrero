@@ -14,7 +14,7 @@ class TurreroChat:
     chain = None
 
     def __init__(self):
-        self.model = ChatOllama(model="llama3")
+        self.model = ChatOllama(model="phi3")
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1024, chunk_overlap=100)
         self.prompt = PromptTemplate.from_template(
@@ -27,7 +27,7 @@ class TurreroChat:
         )
 
         vector_store = Chroma(
-            "glossary", embedding_function=FastEmbedEmbeddings())
+            "turras", embedding_function=FastEmbedEmbeddings())
 
         self.retriever = vector_store.as_retriever(
             search_type="similarity_score_threshold",
