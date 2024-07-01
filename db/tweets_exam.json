@@ -1,5 +1,37 @@
 [
     {
+        "id": "1806938762129101276",
+        "questions": [
+            {
+                "question": "¿Qué disciplina se describe como multifacética y crítica en el proceso CPS?",
+                "options": [
+                    "Sensemaking",
+                    "Neurodiversidad",
+                    "Personotecnia"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué elemento se utiliza como analogía para el sensemaking debido a su reactividad?",
+                "options": [
+                    "Oxígeno",
+                    "Fósforo",
+                    "Carbono"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué estudia la neuroestética?",
+                "options": [
+                    "Bases neuronales de experiencias estéticas",
+                    "Neurodivergencia en la educación",
+                    "Inteligencia artificial aplicada al arte"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
         "id": "1804386948938699148",
         "questions": [
             {
