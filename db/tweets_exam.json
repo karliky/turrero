@@ -1,5 +1,37 @@
 [
     {
+        "id": "1832301234105061777",
+        "questions": [
+            {
+                "question": "¿Cuál es el nombre de la empresa familiar en la serie 'Galgos'?",
+                "options": [
+                    "Grupo Galgo",
+                    "Grupo Somarriba",
+                    "Grupo Díaz"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Quién es el personaje que lidera la empresa después de la muerte del padre?",
+                "options": [
+                    "Emilio Somarriba",
+                    "Gonzalo Díaz",
+                    "Blanca Somarriba"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué desafío enfrenta la empresa en 'Galgos'?",
+                "options": [
+                    "Ley restrictiva sobre el azúcar",
+                    "Crisis financiera global",
+                    "Competencia desleal"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
         "id": "1804386948938699148",
         "questions": [
             {

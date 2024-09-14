@@ -2185,5 +2185,32 @@
     "media": "goodreads",
     "title": "The Six Big Ideas of Adaptive Organizations: From Frameworks to Sensemaking:",
     "turraId": "1804386948938699148"
+  },
+  {
+    "id": "1832301269291069679",
+    "type": "card",
+    "img": "./metadata/MytxYJmt.jpeg",
+    "url": "https://www.goodreads.com/book/show/22085568-the-culture-map?ref=nav_sb_ss_1_15",
+    "media": "goodreads",
+    "title": "The Culture Map: Breaking Through the Invisible Boundaries of Global Business",
+    "turraId": "1832301234105061777"
+  },
+  {
+    "id": "1832301322462261659",
+    "type": "card",
+    "img": "./metadata/pVjA93wq.jpeg",
+    "url": "https://www.goodreads.com/book/show/56817.El_padrino",
+    "media": "goodreads",
+    "title": "El padrino",
+    "turraId": "1832301234105061777"
+  },
+  {
+    "id": "1832301324047646772",
+    "type": "card",
+    "img": "./metadata/Qxk-sc6o.jpeg",
+    "url": "https://www.goodreads.com/book/show/51485709-your-business-your-family-your-legacy",
+    "media": "goodreads",
+    "title": "Your Business, Your Family, Your Legacy: Building a Multigenerational Family Business that Lasts",
+    "turraId": "1832301234105061777"
   }
 ]

@@ -1,5 +1,20 @@
 [
   {
+    "id": "1832301324047646772",
+    "type": "card",
+    "img": "./metadata/51485709.jpg",
+    "url": "https://www.goodreads.com/book/show/51485709-your-business-your-family-your-legacy",
+    "media": "goodreads",
+    "turraId": "1832301234105061777",
+    "title": "Your Business, Your Family, Your Legacy: Building a Multigenerational Family Business that Lasts",
+    "categories": [
+      "Business",
+      "Nonfiction",
+      "Personal Development",
+      "Economics"
+    ]
+  },
+  {
     "id": "1610940583975047168",
     "type": "card",
     "img": "./metadata/YkCt4imh.jpeg",
