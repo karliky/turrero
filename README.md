@@ -58,7 +58,7 @@ Alternatively you could use the following steps:
 7. `$ node ./scripts/generate-books.js` this will update the `db/books-not-enriched.json`
 8. `$ node ./scripts/book-enrichment.js` this will output the list of books you should use in the last prompt to get the category of books and update the `db/books.json`
 9. Use the `$ ./scripts/generate_prompts.sh` to generate the prompts to be used with ChatGPT (or the LLM of your choice) and obtain the summary, categories and questions to include in `db/tweets_summary.json`, `db/tweets_map.json` and `db/tweets_exam.json` respectively
-10. Change manually the date on the file `components/header.js` to the latest update date
+10. Change manually the date on the file `components/header.tsx` to the latest update date
 11. Verify that everything is fine by running `npm run dev` on the root folder
 
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.

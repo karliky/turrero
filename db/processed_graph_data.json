@@ -557,7 +557,8 @@
             "1581161865035407360",
             "1550748648845238272",
             "1652189268742209537",
-            "1667419646671179776"
+            "1667419646671179776",
+            "1834829754488221846"
         ]
     },
     {
@@ -587,7 +588,8 @@
         "related_threads": [
             "1581161865035407360",
             "1502547574263361538",
-            "1634418954511822848"
+            "1634418954511822848",
+            "1834829754488221846"
         ]
     },
     {
@@ -2818,6 +2820,23 @@
         "likes": 506,
         "bookmarks": 87,
         "views": 86998,
+        "summary": "La compleja dinámica de las empresas familiares en la serie 'Galgos'",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "estrategia",
+            "gestión-del-talento",
+            "leyes-y-sesgos"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1834829754488221846",
+        "url": "https://twitter.com/Recuenco/status/1834829754488221846",
+        "replies": 53,
+        "likes": 281,
+        "bookmarks": 66,
+        "views": 54399,
         "summary": "",
         "categories": [],
         "related_threads": []
