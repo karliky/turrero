@@ -21860,64 +21860,157 @@
     },
     {
         "type": "embed",
+        "embeddedTweetId": "1827256646420087143",
+        "id": "1832301234105061777",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Uno de mis campos de actuación preferidos es éste: compañías familiares con problemas de todo tipo, extra de Factor X.\nMi primer hilo turras de esta temporada irá de esto. \nVía @victorianoi"
+    },
+    {
+        "id": "1832301234105061777",
+        "img": "./metadata/GW2kQuJWcAAmxo2.png",
+        "url": "https://x.com/Recuenco/status/1832301234105061777/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1832301240761332188",
+        "img": "./metadata/GW2kRHrWIAEjU5M.png",
+        "url": "https://x.com/Recuenco/status/1832301240761332188/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1832301248130789871",
+        "img": "./metadata/GW2kRkLWIAAxiKs.png",
+        "url": "https://x.com/Recuenco/status/1832301248130789871/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1832301260600447332",
+        "img": "./metadata/GW2kSS3WEAAYmHs.png",
+        "url": "https://x.com/Recuenco/status/1832301260600447332/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1832301268154343484",
+        "type": "card",
+        "img": "./metadata/bkZxhMah.jpeg",
+        "url": "https://www.eleconomista.es/empresas-finanzas/noticias/2413755/09/10/Lio-en-Gullon-la-ex-presidenta-celebra-la-junta-en-un-coche-con-la-oposicion-del-consejo.html"
+    },
+    {
+        "id": "1832301269291069679",
+        "type": "card",
+        "img": "./metadata/MytxYJmt.jpeg",
+        "url": "https://www.goodreads.com/book/show/22085568-the-culture-map?ref=nav_sb_ss_1_15",
+        "media": "goodreads",
+        "title": "The Culture Map: Breaking Through the Invisible Boundaries of Global Business"
+    },
+    {
+        "id": "1832301272352854091",
+        "type": "card",
+        "img": "./metadata/RpHKeTWy.jpeg",
+        "url": "https://www.youtube.com/watch?v=FA1TvzQSDK0&feature=youtu.be",
+        "media": "youtube",
+        "description": "",
+        "title": "Los ricos Tambien Lloran 1979 | Capítulo 1 | Tlenovelas"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1401066621846933516",
+        "id": "1832301273397211435",
+        "author": "Javier G. Recuenco\n@Recuenco\n·\nJun 5, 2021",
+        "tweet": "Si alguien quiere ver un monumento vivo a la no validez de la premisa de que el rico siempre será rico, solo tiene que ver en las afueras de Segovia las ruinas de lo que fue la gloriosa fábrica de Cantimpalo, donde se hacían los embutidos que triunfaban en Bruguera."
+    },
+    {
+        "id": "1832301274596872232",
+        "type": "card",
+        "img": "./metadata/p_SCkqi0.jpeg",
+        "url": "https://www.youtube.com/watch?v=YwP_kXyd-Rw&feature=youtu.be",
+        "media": "youtube",
+        "description": "Here's the official trailer, now digitally remastered to the drama/war film 'Ran' directed by Akira Kurosawa.                                                ...",
+        "title": "Ran | Official Trailer"
+    },
+    {
+        "id": "1832301284726030470",
+        "img": "./metadata/GW2kTmcXoAAgH6K.jpeg",
+        "url": "",
+        "type": "media"
+    },
+    {
+        "id": "1832301292087062792",
+        "img": "./metadata/GW2kUE_XUAA5JJh.png",
+        "url": "https://x.com/Recuenco/status/1832301292087062792/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1832301299154497701",
+        "img": "./metadata/GW2kUfaWkAAFvpm.jpeg",
+        "url": "https://x.com/Recuenco/status/1832301299154497701/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1832301310684569828",
+        "img": "./metadata/GW2kVJkWUAATvwi.jpeg",
+        "url": "",
+        "type": "media"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1635195473249341441",
+        "id": "1832301312320454830",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Siempre he dicho que Podemos es una empresa familiar."
+    },
+    {
+        "id": "1832301319500988796",
+        "img": "./metadata/GW2kVt9WIAAeCB7.jpeg",
+        "url": "",
+        "type": "media"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1565955222106767361",
+        "id": "1832301320910344427",
+        "author": "Javier G. Recuenco\n@Recuenco\n·\nSep 3, 2022",
+        "tweet": "Voy a usar como hilo conductor el maravilloso cómic \"El hijo del chófer\", de @jordiamat22 y @josepablo_x que me parece sencillamente un puto cañón. Otro día desarrollaré mi idea de que cuando el cómic es perfecto, es un arte insuperable."
+    },
+    {
+        "id": "1832301322462261659",
+        "type": "card",
+        "img": "./metadata/pVjA93wq.jpeg",
+        "url": "https://www.goodreads.com/book/show/56817.El_padrino",
+        "media": "goodreads",
+        "title": "El padrino"
+    },
+    {
+        "type": "embed",
         "embeddedTweetId": "1805850749156352355",
         "id": "1806938762129101276",
         "author": "Javier G. Recuenco\n@Recuenco",
         "tweet": "Éste fin de semana terminaré la serie sobre sensemaking (de momento) y la regularidad de los hilos turra hasta Septiembre.\nIntentaremos irnos a descansar with a bang."
     },
     {
-        "id": "1806938771184652643",
-        "img": "./metadata/GROJPGSWoAA1uTC.png",
-        "url": "https://x.com/Recuenco/status/1806938771184652643/photo/1",
-        "type": "media"
-    },
-    {
-        "id": "1806938778579169533",
-        "img": "./metadata/GROJPhTXkAA3a0J.png",
-        "url": "https://x.com/Recuenco/status/1806938778579169533/photo/1",
-        "type": "media"
-    },
-    {
-        "id": "1806938786305130788",
-        "img": "./metadata/GROJP6IXYAAYewc.jpeg",
-        "url": "https://x.com/Recuenco/status/1806938786305130788/photo/1",
-        "type": "media"
-    },
-    {
-        "id": "1806938792734892339",
-        "img": "./metadata/GROJQWQWcAAiXPa.png",
-        "url": "https://x.com/Recuenco/status/1806938792734892339/photo/1",
-        "type": "media"
-    },
-    {
-        "id": "1806938805062037656",
+        "id": "1832301324047646772",
         "type": "card",
-        "img": "./metadata/rPjzw1Vg.jpeg",
-        "url": "https://t.co/Da5bVPUBwe"
+        "img": "./metadata/Qxk-sc6o.jpeg",
+        "url": "https://www.goodreads.com/book/show/51485709-your-business-your-family-your-legacy",
+        "media": "goodreads",
+        "title": "Your Business, Your Family, Your Legacy: Building a Multigenerational Family Business that Lasts"
     },
     {
-        "id": "1806938819783974916",
-        "img": "./metadata/GROJRzqXIAA0CCF.jpeg",
-        "url": "",
-        "type": "media"
+        "id": "1832301325188464777",
+        "type": "card",
+        "img": "./metadata/qq7GshzS.jpeg",
+        "url": "https://www.youtube.com/watch?v=CD2CnVww4qE",
+        "media": "youtube",
+        "description": "",
+        "title": "Crematorio - intro"
     },
     {
-        "id": "1806938839065235468",
-        "img": "./metadata/GROJSoHXYAAsFBj.jpeg",
-        "url": "",
-        "type": "media"
-    },
-    {
-        "id": "1806938844282974628",
-        "img": "./metadata/GROJTXmWcAA76lm.jpeg",
-        "url": "https://x.com/Recuenco/status/1806938844282974628/photo/1",
-        "type": "media"
-    },
-    {
-        "type": "embed",
-        "embeddedTweetId": "1781573532385706038",
-        "id": "1806938847445389539",
-        "author": "Javier G. Recuenco\n@Recuenco\n·\nApr 20",
-        "tweet": "En breve comentaremos como vamos a crear un grupo de perfiles híbridos creatividad/CPS en @singularsolving e incorporarlos a nuestro proceso de diagnóstico."
+        "id": "1832301326409060699",
+        "type": "card",
+        "img": "./metadata/IXCK87tj.jpeg",
+        "url": "https://www.youtube.com/watch?v=lpzEpAckyRE",
+        "media": "youtube",
+        "description": "The Five Bands Lemmy Hated Most https://amzn.to/45QR5Y5",
+        "title": "The Five Bands Lemmy Hated Most"
     }
 ]
