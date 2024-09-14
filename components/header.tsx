@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ totalTweets, noHeading }) => {
             sobre las ciencias de la complejidad, CPS, Factor-X, etc...
           </h2>
           <h3>
-            Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el 15/06/2024.
+            Hay un total de <span className={styles.total__tweets}>{totalTweets}</span> turras, la última actualización fue el 14/09/2024.
           </h3>
         </div>
       )}

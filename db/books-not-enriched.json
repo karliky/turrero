@@ -2212,5 +2212,32 @@
     "media": "goodreads",
     "title": "Your Business, Your Family, Your Legacy: Building a Multigenerational Family Business that Lasts",
     "turraId": "1832301234105061777"
+  },
+  {
+    "id": "1834829821647417577",
+    "type": "card",
+    "img": "./metadata/Jg0wcNU_.jpeg",
+    "url": "https://www.goodreads.com/book/show/695442.Autopoiesis_and_Cognition",
+    "media": "goodreads",
+    "title": "Autopoiesis and Cognition: The Realization of the Living",
+    "turraId": "1834829754488221846"
+  },
+  {
+    "id": "1834829822763131385",
+    "type": "card",
+    "img": "./metadata/Obpuc5Ok.jpeg",
+    "url": "https://www.goodreads.com/book/show/2615.The_Innovator_s_Dilemma",
+    "media": "goodreads",
+    "title": "The Innovator's Dilemma: The Revolutionary Book that Will Change the Way You Do Business",
+    "turraId": "1834829754488221846"
+  },
+  {
+    "id": "1834829823832654036",
+    "type": "card",
+    "img": "./metadata/M8ujelT8.jpeg",
+    "url": "https://www.goodreads.com/book/show/337482.Social_Systems",
+    "media": "goodreads",
+    "title": "Social Systems",
+    "turraId": "1834829754488221846"
   }
 ]

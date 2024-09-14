@@ -557,7 +557,8 @@
             "1581161865035407360",
             "1550748648845238272",
             "1652189268742209537",
-            "1667419646671179776"
+            "1667419646671179776",
+            "1834829754488221846"
         ]
     },
     {
@@ -587,7 +588,8 @@
         "related_threads": [
             "1581161865035407360",
             "1502547574263361538",
-            "1634418954511822848"
+            "1634418954511822848",
+            "1834829754488221846"
         ]
     },
     {
@@ -2818,8 +2820,14 @@
         "likes": 506,
         "bookmarks": 87,
         "views": 86998,
-        "summary": "",
-        "categories": [],
+        "summary": "La compleja dinámica de las empresas familiares en la serie 'Galgos'",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "estrategia",
+            "gestión-del-talento",
+            "leyes-y-sesgos"
+        ],
         "related_threads": []
     },
     {
@@ -2829,6 +2837,23 @@
         "likes": 389,
         "bookmarks": 67,
         "views": 53520,
+        "summary": "Exploración de la neuroestética y su impacto en el arte y la ciencia",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "personotecnia",
+            "desarrollo-de-habilidades",
+            "libros"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1834829754488221846",
+        "url": "https://twitter.com/Recuenco/status/1834829754488221846",
+        "replies": 54,
+        "likes": 308,
+        "bookmarks": 68,
+        "views": 59714,
         "summary": "",
         "categories": [],
         "related_threads": []

@@ -5870,5 +5870,37 @@
                 "answer": 2
             }
         ]
+    },
+    {
+        "id": "1834829754488221846",
+        "questions": [
+            {
+                "question": "¿Quién desarrolló el concepto de autopoiesis?",
+                "options": [
+                    "Niklas Luhmann",
+                    "Humberto Maturana y Francisco Varela",
+                    "Luis Mateos"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué es la autopoiesis empresarial según el texto?",
+                "options": [
+                    "Un sistema de control externo",
+                    "La capacidad de autorregulación y renovación",
+                    "La sustitución de CFOs por CTOs"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué característica define a los sistemas sociales autopoiéticos?",
+                "options": [
+                    "Autorreferencialidad",
+                    "Influencia externa directa",
+                    "Innovación continua"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]
