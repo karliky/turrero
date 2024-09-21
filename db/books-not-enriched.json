@@ -2239,5 +2239,14 @@
     "media": "goodreads",
     "title": "Social Systems",
     "turraId": "1834829754488221846"
+  },
+  {
+    "id": "1837390540591042591",
+    "type": "card",
+    "img": "./metadata/1z3qWC4_.jpeg",
+    "url": "https://goodreads.com/book/show/48989663.The_Reasonable_Robot_Artificial_Intelligence_and_the_Law",
+    "media": "goodreads",
+    "title": "The Reasonable Robot: Artificial Intelligence and the Law",
+    "turraId": "1837390467337490808"
   }
 ]

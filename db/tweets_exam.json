@@ -1,5 +1,37 @@
 [
     {
+        "id": "1837390467337490808",
+        "questions": [
+            {
+                "question": "¿Qué es un híbrido centauro?",
+                "options": [
+                    "Una entidad mitológica",
+                    "Una combinación de humano e IA",
+                    "Un nuevo tipo de vehículo"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es el principal desafío en la delegación de responsabilidad en híbridos centauro?",
+                "options": [
+                    "Determinar quién es responsable en caso de errores",
+                    "Asignar tareas específicas",
+                    "Evaluar las capacidades de la IA"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Por qué no está funcionando la conducción autónoma según el texto?",
+                "options": [
+                    "Por falta de tecnología",
+                    "Por falta de acuerdo en la transferencia de responsabilidad",
+                    "Por problemas de seguridad"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1832301234105061777",
         "questions": [
             {
