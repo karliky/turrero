@@ -2248,5 +2248,41 @@
     "media": "goodreads",
     "title": "The Reasonable Robot: Artificial Intelligence and the Law",
     "turraId": "1837390467337490808"
+  },
+  {
+    "id": "1839910160577245396",
+    "type": "card",
+    "img": "./metadata/PHB6KNmZ.jpeg",
+    "url": "https://www.goodreads.com/book/show/324748.The_Dip",
+    "media": "goodreads",
+    "title": "The Dip: A Little Book That Teaches You When to Quit",
+    "turraId": "1839910136023847394"
+  },
+  {
+    "id": "1839910225949634795",
+    "type": "card",
+    "img": "./metadata/JLO0Fwl4.jpeg",
+    "url": "https://www.goodreads.com/book/show/27213329-grit",
+    "media": "goodreads",
+    "title": "Grit: The Power of Passion and Perseverance",
+    "turraId": "1839910136023847394"
+  },
+  {
+    "id": "1839910226943746189",
+    "type": "card",
+    "img": "./metadata/i8mpUaMW.jpeg",
+    "url": "https://www.goodreads.com/book/show/18077875-essentialism",
+    "media": "goodreads",
+    "title": "Essentialism: The Disciplined Pursuit of Less",
+    "turraId": "1839910136023847394"
+  },
+  {
+    "id": "1839910228017463775",
+    "type": "card",
+    "img": "./metadata/8EXufdkX.jpeg",
+    "url": "https://www.goodreads.com/book/show/60097435-quit",
+    "media": "goodreads",
+    "title": "Quit: The Power of Knowing When to Walk Away",
+    "turraId": "1839910136023847394"
   }
 ]

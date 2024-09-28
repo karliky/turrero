@@ -1,5 +1,37 @@
 [
     {
+        "id": "1839910136023847394",
+        "questions": [
+            {
+                "question": "¿Qué significa 'afilar el hacha' en el contexto del texto?",
+                "options": [
+                    "Prepararse adecuadamente",
+                    "Perder el tiempo",
+                    "Actuar impulsivamente"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según Seth Godin, ¿qué es 'el abismo' en un proyecto?",
+                "options": [
+                    "Un período de dificultad y desafío",
+                    "El momento de abandonar",
+                    "El punto de mayor éxito"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué concepto introduce Godin en 'Understanding Local Max'?",
+                "options": [
+                    "Éxito temporal limitante",
+                    "Crecimiento constante",
+                    "Fracaso inevitable"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
         "id": "1837390467337490808",
         "questions": [
             {
