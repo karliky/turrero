@@ -539,7 +539,9 @@
         "categories": [
             "futurismo-de-frontera"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1842453861094609097"
+        ]
     },
     {
         "id": "1494930305811111938",
@@ -2888,6 +2890,23 @@
         "likes": 343,
         "bookmarks": 88,
         "views": 45134,
+        "summary": "La importancia de la preparación en el éxito empresarial",
+        "categories": [
+            "estrategia",
+            "resolución-de-problemas-complejos",
+            "desarrollo-de-habilidades",
+            "leyes-y-sesgos",
+            "otras-turras-del-querer"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1842453861094609097",
+        "url": "https://twitter.com/Recuenco/status/1842453861094609097",
+        "replies": 66,
+        "likes": 306,
+        "bookmarks": 55,
+        "views": 68315,
         "summary": "",
         "categories": [],
         "related_threads": []

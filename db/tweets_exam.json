@@ -1,5 +1,37 @@
 [
     {
+        "id": "1842453861094609097",
+        "questions": [
+            {
+                "question": "¿Qué pone en riesgo la privacidad de individuos, empresas y estados?",
+                "options": [
+                    "Publicidad tradicional",
+                    "Modelos extractivos de datos",
+                    "Decisiones data-driven"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué se menciona como el primer paso para el cambio en la publicidad?",
+                "options": [
+                    "Publicidad digital",
+                    "Aumento de presupuesto",
+                    "Fraude publicitario"
+                ],
+                "answer": 3
+            },
+            {
+                "question": "¿Qué tipo de impacto se busca con las estrategias propuestas?",
+                "options": [
+                    "Solo en ventas",
+                    "Impacto en P&L y calidad de datos",
+                    "Aumento de visibilidad en redes"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1839910136023847394",
         "questions": [
             {
