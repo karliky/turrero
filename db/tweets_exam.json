@@ -1,5 +1,37 @@
 [
     {
+        "id": "1845017839423369267",
+        "questions": [
+            {
+                "question": "¿Qué elemento es fundamental para la existencia de una compañía en el sector lifestyle, según Spinae?",
+                "options": [
+                    "La marca",
+                    "La tecnología",
+                    "La financiación"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué representan Shiva y Shakti en la filosofía tántrica?",
+                "options": [
+                    "La destrucción y la renovación",
+                    "La unión de la conciencia y la energía",
+                    "El crecimiento económico y el mercado"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es la característica distintiva del estilo de actuación de John Belushi?",
+                "options": [
+                    "Energía cinética",
+                    "Humor intelectual",
+                    "Silencio dramático"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
         "id": "1842453861094609097",
         "questions": [
             {
