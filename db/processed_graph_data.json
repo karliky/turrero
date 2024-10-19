@@ -335,7 +335,9 @@
         "categories": [
             "trabajo-en-equipo"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1847550414226411917"
+        ]
     },
     {
         "id": "1527905242376962054",
@@ -2629,7 +2631,8 @@
             "resolución-de-problemas-complejos"
         ],
         "related_threads": [
-            "1791716794312318984"
+            "1791716794312318984",
+            "1847550414226411917"
         ]
     },
     {
@@ -2922,6 +2925,23 @@
         "likes": 369,
         "bookmarks": 35,
         "views": 41941,
+        "summary": "Spinae: estrategia y marca en la industria lifestyle, un enfoque centrado en el cliente",
+        "categories": [
+            "estrategia",
+            "marketing",
+            "factor-x",
+            "personotecnia",
+            "sociología"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1847550414226411917",
+        "url": "https://twitter.com/Recuenco/status/1847550414226411917",
+        "replies": 61,
+        "likes": 132,
+        "bookmarks": 18,
+        "views": 21012,
         "summary": "",
         "categories": [],
         "related_threads": []

@@ -2284,5 +2284,23 @@
     "media": "goodreads",
     "title": "Quit: The Power of Knowing When to Walk Away",
     "turraId": "1839910136023847394"
+  },
+  {
+    "id": "1847550510120763520",
+    "type": "card",
+    "img": "./metadata/luMxOKnL.jpeg",
+    "url": "https://www.goodreads.com/book/show/13623814-marvel-comics",
+    "media": "goodreads",
+    "title": "Marvel Comics: The Untold Story",
+    "turraId": "1847550414226411917"
+  },
+  {
+    "id": "1847550511089688632",
+    "type": "card",
+    "img": "./metadata/MDWplwKB.jpeg",
+    "url": "https://www.goodreads.com/book/show/57961546-the-dealmaker",
+    "media": "goodreads",
+    "title": "The Dealmaker: Lessons from a Life in Private Equity",
+    "turraId": "1847550414226411917"
   }
 ]

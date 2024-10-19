@@ -1,5 +1,37 @@
 [
     {
+        "id": "1847550414226411917",
+        "questions": [
+            {
+                "question": "¿Cuál es la principal función de @unconvcps según el texto?",
+                "options": [
+                    "Conectar islas distantes y actuar como tensoactivo empresarial.",
+                    "Digitalizar negocios de manera dramática.",
+                    "Crear sinergias tecnológicas sin ayuda."
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué característica clave permite a las lapas adherirse a las rocas?",
+                "options": [
+                    "Utilizan su concha como un ancla.",
+                    "Segregan un moco adhesivo especial.",
+                    "Dependencia exclusiva de la fuerza muscular."
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué refleja la tensión entre revolución y reforma mencionada en el texto?",
+                "options": [
+                    "Un enfoque común para cambios rápidos y graduales.",
+                    "La elección entre un cambio radical o una mejora gradual.",
+                    "Una estrategia uniforme de transformación empresarial."
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1845017839423369267",
         "questions": [
             {
