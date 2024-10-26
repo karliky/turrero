@@ -2302,5 +2302,14 @@
     "media": "goodreads",
     "title": "The Dealmaker: Lessons from a Life in Private Equity",
     "turraId": "1847550414226411917"
+  },
+  {
+    "id": "1850051349980856397",
+    "type": "card",
+    "img": "./metadata/wgawanUX.jpeg",
+    "url": "https://www.goodreads.com/book/show/212323051-the-future-will-not-be-taught?ref=nav_sb_ss_1_29",
+    "media": "goodreads",
+    "title": "The Future Will Not Be Taught: How to Reimagine Education and Build a Thriving Learning Community",
+    "turraId": "1850051280107983315"
   }
 ]

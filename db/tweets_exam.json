@@ -1,5 +1,37 @@
 [
     {
+        "id": "1850051280107983315",
+        "questions": [
+            {
+                "question": "¿Cuál es el enfoque principal de @solvers_academy?",
+                "options": [
+                    "Proveer soporte a nuevas iniciativas",
+                    "Crear contenido académico exclusivo",
+                    "Ser una empresa tutelada"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es la razón principal para tener un enfoque multiinstitucional?",
+                "options": [
+                    "Segmentación del CPS",
+                    "Evitar competencia directa",
+                    "Ofrecer programas gratuitos"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué tipo de relación mantiene @solvers_academy con @uniruniversidad?",
+                "options": [
+                    "Asociación para formación universitaria",
+                    "Competencia en oferta académica",
+                    "Fusión institucional"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
         "id": "1847550414226411917",
         "questions": [
             {

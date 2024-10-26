@@ -2648,7 +2648,9 @@
             "estrategia",
             "desarrollo-de-habilidades"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1850051280107983315"
+        ]
     },
     {
         "id": "1779018888203608064",
@@ -2942,6 +2944,23 @@
         "likes": 132,
         "bookmarks": 18,
         "views": 21012,
+        "summary": "Reflexión sobre la distancia entre tecnología y líderes empresariales y la necesidad de puentes para una transformación real.",
+        "categories": [
+            "estrategia",
+            "sistemas-complejos",
+            "factor-x",
+            "resolución-de-problemas-complejos",
+            "el-contexto-manda"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1850051280107983315",
+        "url": "https://twitter.com/Recuenco/status/1850051280107983315",
+        "replies": 43,
+        "likes": 67,
+        "bookmarks": 11,
+        "views": 19863,
         "summary": "",
         "categories": [],
         "related_threads": []
