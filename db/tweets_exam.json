@@ -1,5 +1,37 @@
 [
     {
+        "id": "1852267188519854245",
+        "questions": [
+            {
+                "question": "¿Quién es considerado el padre del concepto de 'Sensemaking'?",
+                "options": [
+                    "Karl E. Weick",
+                    "David Ogilvy",
+                    "Ortega"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué describe el concepto de 'loose coupling' según Weick?",
+                "options": [
+                    "Adaptación flexible",
+                    "Rigidez organizacional",
+                    "Desacoplamiento total"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es una característica clave en la teoría de Weick sobre la interpretación colectiva en organizaciones?",
+                "options": [
+                    "Adaptación individual",
+                    "Interpretación conjunta",
+                    "Falta de reacción"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1850051280107983315",
         "questions": [
             {

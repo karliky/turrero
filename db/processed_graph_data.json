@@ -1371,7 +1371,8 @@
         ],
         "related_threads": [
             "1629367962103586817",
-            "1675028035836182528"
+            "1675028035836182528",
+            "1852267188519854245"
         ]
     },
     {
@@ -1911,7 +1912,9 @@
             "factor-x",
             "sociología"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1852267188519854245"
+        ]
     },
     {
         "id": "1614168029876600833",
@@ -2767,7 +2770,9 @@
             "orquestación-cognitiva",
             "libros"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1852267188519854245"
+        ]
     },
     {
         "id": "1799313887285669975",
@@ -2961,6 +2966,23 @@
         "likes": 67,
         "bookmarks": 11,
         "views": 19863,
+        "summary": "Solvers Academy: Alianzas estratégicas y evolución en la oferta educativa",
+        "categories": [
+            "estrategia",
+            "orquestación-cognitiva",
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "desarrollo-de-habilidades"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1852267188519854245",
+        "url": "https://twitter.com/Recuenco/status/1852267188519854245",
+        "replies": 90,
+        "likes": 1197,
+        "bookmarks": 131,
+        "views": 171814,
         "summary": "",
         "categories": [],
         "related_threads": []
