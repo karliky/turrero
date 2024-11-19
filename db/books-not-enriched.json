@@ -2311,5 +2311,32 @@
     "media": "goodreads",
     "title": "The Future Will Not Be Taught: How to Reimagine Education and Build a Thriving Learning Community",
     "turraId": "1850051280107983315"
+  },
+  {
+    "id": "1857680413726015981",
+    "type": "card",
+    "img": "./metadata/AiTek3z1.jpeg",
+    "url": "https://www.goodreads.com/book/show/104327.The_Ayn_Rand_Cult",
+    "media": "goodreads",
+    "title": "The Ayn Rand Cult",
+    "turraId": "1857680297443164321"
+  },
+  {
+    "id": "1857680414699057228",
+    "type": "card",
+    "img": "./metadata/9PXzci6D.jpeg",
+    "url": "https://www.goodreads.com/book/show/97752.The_Freud_Jung_Letters",
+    "media": "goodreads",
+    "title": "The Freud/Jung Letters",
+    "turraId": "1857680297443164321"
+  },
+  {
+    "id": "1857680415806435357",
+    "type": "card",
+    "img": "./metadata/GgDGBAow.jpeg",
+    "url": "https://www.goodreads.com/book/show/113934.The_Goal",
+    "media": "goodreads",
+    "title": "The Goal: A Process of Ongoing Improvement",
+    "turraId": "1857680297443164321"
   }
 ]

@@ -527,7 +527,8 @@
             "gestión-del-talento"
         ],
         "related_threads": [
-            "1647132462982524929"
+            "1647132462982524929",
+            "1857680297443164321"
         ]
     },
     {
@@ -1689,7 +1690,8 @@
             "1337670943276224513",
             "1657283004727738368",
             "1723236412487553316",
-            "1781573444485697867"
+            "1781573444485697867",
+            "1857680297443164321"
         ]
     },
     {
@@ -2446,7 +2448,9 @@
             "estrategia",
             "orquestación-cognitiva"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1857680297443164321"
+        ]
     },
     {
         "id": "1738462543344005507",
@@ -2983,6 +2987,23 @@
         "likes": 1197,
         "bookmarks": 131,
         "views": 171814,
+        "summary": "Reflexión sobre colapsos cognitivos, sentido común y figuras heroicas en tiempos complejos",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "orquestación-cognitiva",
+            "leyes-y-sesgos",
+            "sociología"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1857680297443164321",
+        "url": "https://twitter.com/Recuenco/status/1857680297443164321",
+        "replies": 44,
+        "likes": 108,
+        "bookmarks": 18,
+        "views": 13297,
         "summary": "",
         "categories": [],
         "related_threads": []

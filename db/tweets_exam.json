@@ -1,5 +1,37 @@
 [
     {
+        "id": "1857680297443164321",
+        "questions": [
+            {
+                "question": "¿Qué diferencia principal tenían Freud y Jung sobre la libido?",
+                "options": [
+                    "Freud la veía como energía sexual; Jung como energía psíquica general.",
+                    "Freud la veía como energía espiritual; Jung como energía material.",
+                    "Freud y Jung coincidían completamente sobre la libido."
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué concepto introdujo Jung que Freud no aceptó?",
+                "options": [
+                    "El inconsciente colectivo.",
+                    "La asociación libre.",
+                    "El complejo de Edipo."
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué actitud recomienda el CPS según el texto?",
+                "options": [
+                    "Seguir metodologías rígidas.",
+                    "Promover el mestizaje de ideas.",
+                    "Proteger la ortodoxia filosófica."
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1852267188519854245",
         "questions": [
             {
