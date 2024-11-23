@@ -1,5 +1,37 @@
 [
     {
+        "id": "1860224907386273949",
+        "questions": [
+            {
+                "question": "¿Qué opina el texto sobre 'tener razón' en las relaciones interpersonales?",
+                "options": [
+                    "Fomenta la empatía y la cooperación.",
+                    "Es esencial para evitar conflictos.",
+                    "No influye en las relaciones."
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según Schopenhauer, ¿qué motiva a las personas en los debates?",
+                "options": [
+                    "Buscar la verdad.",
+                    "Demostrar superioridad intelectual.",
+                    "Construir argumentos sólidos."
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué neurotransmisor está asociado con el placer de 'tener razón'?",
+                "options": [
+                    "Serotonina.",
+                    "Adrenalina.",
+                    "Dopamina."
+                ],
+                "answer": 3
+            }
+        ]
+    },
+    {
         "id": "1857680297443164321",
         "questions": [
             {

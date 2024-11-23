@@ -2338,5 +2338,14 @@
     "media": "goodreads",
     "title": "The Goal: A Process of Ongoing Improvement",
     "turraId": "1857680297443164321"
+  },
+  {
+    "id": "1860225002454282540",
+    "type": "card",
+    "img": "./metadata/OVJis6Av.jpeg",
+    "url": "https://www.goodreads.com/book/show/230817.The_Art_of_Always_Being_Right",
+    "media": "goodreads",
+    "title": "The Art of Always Being Right",
+    "turraId": "1860224907386273949"
   }
 ]
