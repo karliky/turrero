@@ -2347,5 +2347,23 @@
     "media": "goodreads",
     "title": "The Art of Always Being Right",
     "turraId": "1860224907386273949"
+  },
+  {
+    "id": "1862774932154839541",
+    "type": "card",
+    "img": "./metadata/S5M2KkHG.jpeg",
+    "url": "https://www.goodreads.com/book/show/35631386-the-undoing-project",
+    "media": "goodreads",
+    "title": "The Undoing Project: A Friendship That Changed Our Minds",
+    "turraId": "1862770042686845320"
+  },
+  {
+    "id": "1862775079710441645",
+    "type": "card",
+    "img": "./metadata/_HmzjQW4.jpeg",
+    "url": "https://www.goodreads.com/book/show/12758014-articles-on-behavioral-economists-including",
+    "media": "goodreads",
+    "title": "Articles on Behavioral Economists, Including: Daniel Kahneman, Richard Thaler, Colin Camerer, Matthew Rabin, Charles A. Holt, Dan Ariely, Howard Rachlin, Hersh Shefrin, Justin Wolfers, Arthur C. Brooks, Herbert Gintis",
+    "turraId": "1862770042686845320"
   }
 ]

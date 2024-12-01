@@ -1,5 +1,37 @@
 [
     {
+        "id": "1862770042686845320",
+        "questions": [
+            {
+                "question": "¿Cuál fue el trabajo más influyente de Kahneman y Tversky?",
+                "options": [
+                    "Teoría de las perspectivas",
+                    "Modelo de utilidad esperada",
+                    "Evaluación de expectativas futuras"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué fenómeno demuestra cómo el contexto influye en las decisiones?",
+                "options": [
+                    "Aversión a la pérdida",
+                    "Efecto de encuadre",
+                    "Preferencia temporal"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué estudió Ted O'Donoghue en su trabajo 'Doing it Now or Later'?",
+                "options": [
+                    "Aversión al riesgo",
+                    "Procrastinación y gratificación inmediata",
+                    "Diseño de impuestos óptimos"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1860224907386273949",
         "questions": [
             {

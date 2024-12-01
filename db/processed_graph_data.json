@@ -1492,7 +1492,8 @@
         ],
         "related_threads": [
             "1507611365288161280",
-            "1487312375351029760"
+            "1487312375351029760",
+            "1862770042686845320"
         ]
     },
     {
@@ -2548,7 +2549,9 @@
             "el-contexto-manda",
             "desarrollo-de-habilidades"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1862770042686845320"
+        ]
     },
     {
         "id": "1758760266068590698",
@@ -3021,6 +3024,23 @@
         "likes": 1065,
         "bookmarks": 148,
         "views": 110897,
+        "summary": "La sobrevaloración de tener razón frente a la resolución de problemas",
+        "categories": [
+            "estrategia",
+            "leyes-y-sesgos",
+            "factor-x",
+            "sociología",
+            "resolución-de-problemas-complejos"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1862770042686845320",
+        "url": "https://twitter.com/Recuenco/status/1862770042686845320",
+        "replies": 90,
+        "likes": 743,
+        "bookmarks": 203,
+        "views": 111359,
         "summary": "",
         "categories": [],
         "related_threads": []
