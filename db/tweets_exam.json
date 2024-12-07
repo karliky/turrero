@@ -1,5 +1,37 @@
 [
     {
+        "id": "1865306644827029957",
+        "questions": [
+            {
+                "question": "¿Qué es una aporía en términos filosóficos?",
+                "options": [
+                    "Una solución clara y definitiva",
+                    "Una situación de incertidumbre o paradoja",
+                    "Un argumento lógico sin contradicciones"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cómo utilizó Sócrates las aporías en sus diálogos?",
+                "options": [
+                    "Para afirmar verdades absolutas",
+                    "Para exponer la ignorancia y fomentar el pensamiento crítico",
+                    "Para evitar responder preguntas complejas"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué representa el Kintsugi en relación con las aporías?",
+                "options": [
+                    "La eliminación de grietas y contradicciones",
+                    "La reparación y embellecimiento de imperfecciones",
+                    "El rechazo a las imperfecciones y fallos"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1862770042686845320",
         "questions": [
             {

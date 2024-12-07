@@ -2365,5 +2365,23 @@
     "media": "goodreads",
     "title": "Articles on Behavioral Economists, Including: Daniel Kahneman, Richard Thaler, Colin Camerer, Matthew Rabin, Charles A. Holt, Dan Ariely, Howard Rachlin, Hersh Shefrin, Justin Wolfers, Arthur C. Brooks, Herbert Gintis",
     "turraId": "1862770042686845320"
+  },
+  {
+    "id": "1865306713399644325",
+    "type": "card",
+    "img": "./metadata/yFcWk4TF.jpeg",
+    "url": "https://www.goodreads.com/book/show/9324452-aporetics",
+    "media": "goodreads",
+    "title": "Aporetics: Rational Deliberation in the Face of Inconsistency",
+    "turraId": "1865306644827029957"
+  },
+  {
+    "id": "1865306714305659020",
+    "type": "card",
+    "img": "./metadata/Eh5zYtjX.jpeg",
+    "url": "https://www.goodreads.com/book/show/35749478-the-aporetic-tradition-in-ancient-philosophy",
+    "media": "goodreads",
+    "title": "The Aporetic Tradition in Ancient Philosophy",
+    "turraId": "1865306644827029957"
   }
 ]
