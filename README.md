@@ -64,6 +64,13 @@ Alternatively you could use the following steps:
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
 The files `db/tweets_map.json, db/tweets_summary.json`, `db/tweets_exam.json` should be manually edited.
 
+## Debug 
+if a single tweet fails, test to download and parse it in isolation without consequences by using the scrapper like this:
+
+`node ./scripts/recorder.js --test id`
+
+Read the comments in it to figure out better debug.
+
 ## Contribution
 
 We welcome contributions to this project. If you find any bugs or have any suggestions for new features, please open an issue or a pull request on the GitHub repository.

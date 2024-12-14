@@ -38,7 +38,7 @@ function parseCSV(filePath) {
 const tweets = parseCSV(__dirname + '/../db/turras.csv');
 const random = Math.floor(Math.random() * 150) + 750;
 
-async function fetchAndParseTweet({ page }) {
+async function parseTweet({ page }) {
     /**
      * Wait for progress bar to disappear
     */
@@ -99,36 +99,29 @@ async function fetchAndParseTweet({ page }) {
         return parseStats(statsLabel);
     });
 
-    console.log("Parsed tweet", { tweet, id: currentTweetId, metadata, time, stats });
-
     return { tweet, id: currentTweetId, metadata, time, stats };
 }
 
-async function getAllTweets({ browser, page, tweetIds, outputFilePath }) {
+async function getAllTweets({ page, tweetIds, outputFilePath }) {
+    await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
+    console.log("Waiting for selector");
     for (const tweetId of tweetIds) {
         await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
         console.log("Waiting for selector");
         await page.waitForSelector('div[data-testid="tweetText"]');
+        // Refuse cookies and close the popup, only the first time it happens, afterwards it should be ignored
+        try {
+            await rejectCookies(page)
+        } catch (error) { }
 
         let stopped = false;
         const tweets = [];
 
         while (!stopped) {
-            const { tweet } = await fetchAndParseTweet({ page });
+            const { tweet, shouldStop } = await fetchSingleTweet(page);
             tweets.push(tweet);
             console.log("finding lastTweetFound");
-            await new Promise(r => setTimeout(r, 100));
-            /**
-             * Stop thread scraping if we reach the last tweet
-            */
-            const lastTweetFound = await page.evaluate(() => {
-                if (document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling === null) return 'finished';
-                const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('div[data-testid]').querySelector("a").href;
-                return el;
-            });
 
-            const shouldStop = lastTweetFound !== 'https://x.com/Recuenco';
-            console.log("lastTweetFound", shouldStop);
 
             if (shouldStop) {
                 stopped = true;
@@ -151,8 +144,67 @@ async function getAllTweets({ browser, page, tweetIds, outputFilePath }) {
     }
 }
 
-async function testSingleTweet(tweetId) {
-    const browser = await puppeteer.launch({ slowMo: random });
+async function fetchSingleTweet(page) {
+
+    const tweet = await parseTweet({ page });
+    console.log("Fetched tweet data:", tweet);
+    await new Promise(r => setTimeout(r, 100));
+    /**
+     * Stop thread scraping if we reach the last tweet
+    */
+    const lastTweetFound = await page.evaluate(() => {
+        if (document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling === null) return 'finished';
+        const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('div[data-testid]').querySelector("a").href;
+        return el;
+    });
+
+    const shouldStop = lastTweetFound !== 'https://x.com/Recuenco';
+    console.log("lastTweetFound", shouldStop);
+    return { tweet, shouldStop };
+}
+
+async function rejectCookies(page) {
+    // Close the popup using parentElement traversal
+    await page.evaluate(() => {
+        const cookieButton = Array.from(document.querySelectorAll('span'))
+            .find(el => el.textContent.includes('Welcome to x.com!'));
+        if (cookieButton) {
+            const closeButton = cookieButton
+                .parentElement.parentElement.parentElement.parentElement
+                .querySelector('button');
+            if (closeButton) {
+                closeButton.click();
+            }
+        }
+    });
+
+    // Refuse non-essential cookies
+    await page.evaluate(() => {
+        const cookieButton = Array.from(document.querySelectorAll('span'))
+            .find(el => el.textContent.includes('Refuse non-essential cookies'));
+        if (cookieButton) {
+            cookieButton.click();
+        }
+    });
+}
+
+(async () => {
+    const args = process.argv.slice(2);
+    const testIndex = args.indexOf('--test');
+    const testMode = testIndex !== -1;
+    var browserProps = {}
+
+    if (testMode) {
+        console.log("Launching. test mode..");
+        browserProps = {
+            headless: false,
+            slowMo: 50 // Slows down Puppeteer actions by only 50ms,
+        };
+    } else {
+        console.log("Launching..");
+        browserProps = { slowMo: random };
+    }
+    const browser = await puppeteer.launch(browserProps);
     const page = await browser.newPage();
 
     const cookies = [
@@ -172,49 +224,29 @@ async function testSingleTweet(tweetId) {
     const m = KnownDevices['iPhone 12'];
     await page.emulate(m);
 
-    console.log(`Fetching tweet ${tweetId}`);
-    await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
-    await page.waitForSelector('div[data-testid="tweetText"]');
-
-    const tweetData = await fetchAndParseTweet({ page });
-    console.log("Fetched tweet data:", tweetData);
-
-    await page.close();
-    await browser.close();
-}
-
-(async () => {
-    const args = process.argv.slice(2);
-    const testIndex = args.indexOf('--test');
-
-    if (testIndex !== -1) {
+    if (testMode) {
         const tweetId = args[testIndex + 1];
         if (!tweetId) {
             console.error("Please provide a tweet ID after --test");
             process.exit(1);
         }
-        await testSingleTweet(tweetId);
+        await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
+        console.log("Waiting for selector");
+        await page.waitForSelector('div[data-testid="tweetText"]');
+        // Refuse cookies and close the popup
+        try {
+            await rejectCookies(page)
+            console.log("Cookies rejected, closed the popup");
+        } catch (error) {
+            console.log("I could not reject cookies and close the popup");
+        }
+        console.log(`Fetching tweet ${tweetId}`);
+
+        // Add this line before the code you want to inspect on the browser console
+        //debugger;
+        await fetchSingleTweet(page);
+        console.log("Correct exit");
     } else {
-        console.log("Launching...");
-        const browser = await puppeteer.launch({ slowMo: random });
-        const page = await browser.newPage();
-
-        const cookies = [
-            { 'name': 'twid', 'value': process.env.twid, 'domain': 'twitter.com' },
-            { 'name': 'auth_token', 'value': process.env.auth_token, 'domain': 'twitter.com' },
-            { 'name': 'lang', 'value': process.env.lang, 'domain': 'twitter.com' },
-            { 'name': 'd_prefs', 'value': process.env.d_prefs, 'domain': 'twitter.com' },
-            { 'name': 'kdt', 'value': process.env.kdt, 'domain': 'twitter.com' },
-            { 'name': 'ct0', 'value': process.env.ct0, 'domain': 'twitter.com' },
-            { 'name': 'guest_id', 'value': process.env.guest_id, 'domain': 'twitter.com' },
-            { 'name': 'domain', 'value': "https://twitter.com/", 'domain': 'twitter.com' }
-        ];
-
-        console.log('Setting cookies');
-        await page.setCookie(...cookies);
-
-        const m = KnownDevices['iPhone 12'];
-        await page.emulate(m);
 
         const existingTweets = existingTweetsData.reduce((acc, tweets) => {
             acc.push(tweets[0].id);
@@ -228,20 +260,20 @@ async function testSingleTweet(tweetId) {
         }, []);
 
         console.log('Processing a total of tweets', tweetIds.length);
-
         await getAllTweets({
-            browser,
             page,
             tweetIds,
             outputFilePath: __dirname + '/../db/tweets.json'
         });
-
-        console.log("Estaré aquí mismo!");
-        await page.close();
-        process.exit(0);
     }
+
+    console.log("Estaré aquí mismo!");
+    await page.close();
+    await browser.close();
+    process.exit(0);
+
 })();
 
 // Usage Examples:
-// Type: `./scripts/recorder.js` to run the full functionality.
-// Type: `./scripts/recorder.js --test 1867841814809461115` to fetch and parse a single tweet without modifying the environment.
+// Type: `node ./scripts/recorder.js` to run the full functionality.
+// Type: `node ./scripts/recorder.js --test 1867841814809461115` to fetch and parse a single tweet without modifying the environment.

@@ -8,8 +8,10 @@
 
 export const getTweetText = () => {
     const tweetContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
-    if (tweetContainer.querySelector('div[data-testid="tweetText"]'))
-        return tweetContainer.querySelector('div[data-testid="tweetText"]').textContent;
+    if (tweetContainer.querySelector('div[data-testid="tweetText"]')) {
+        const c2 = tweetContainer.querySelector('div[data-testid="tweetText"]');
+        if (c2) return c2.textContent;
+    }
     return "";
 }
 
@@ -47,40 +49,64 @@ const extractMedia = () => {
 /**
  * Given a existing tweet, it will return the metadata of the tweet (cards, media, embed tweets, etc)
  */
-export const extractMetadata  = async (page) => {
-    const metadata = await page.evaluate(extractMedia);
-    const hasEmbedTweet = await page.evaluate(() => {
-        const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
-        if (embeddedTweet && embeddedTweet.querySelector("time")) return true;
-    });
+export const extractMetadata = async (page) => {
+    try {
+        // Extract metadata (e.g., media) from the tweet
+        const metadata = await page.
+            evaluate(extractMedia);
 
-    if (!hasEmbedTweet && !!metadata) return metadata;
-    if (!hasEmbedTweet) return metadata;
+        // Check if there's an embedded tweet
+        const hasEmbedTweet = await page.evaluate(() => {
+            const embeddedTweet = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector("div[aria-labelledby]");
+            return !!(embeddedTweet && embeddedTweet.querySelector("time")); // Returns true if embedded tweet exists
+        });
 
-    if (await page.$('div[data-testid="app-bar-close"]') !== null) await page.click('div[data-testid="app-bar-close"]')
+        // Return metadata if no embedded tweet exists
+        if (!hasEmbedTweet) return metadata || null;
 
-    // We remove the media from the tweet to be able to click on the embedded tweet
-    await page.evaluate(() => {
-        const imageContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[data-testid="tweetPhoto"]');
-        if (imageContainer) return imageContainer.remove();
-        return "";
-    }),
-    // Navigate to the embedded tweet
-    //await page.waitForTimeout(50);
-    await Promise.all([
-        page.waitForNavigation(),
-        page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time')
-    ]);
-    const embed = {
-        type: "embed",
-        id: page.url().split("/").slice(-1).pop(),
-        author: await page.evaluate(() => document.querySelector("div[data-testid=User-Name]").innerText),
-        tweet: await page.evaluate(getTweetText)
-    };
-    // Go back to the original tweet so we can continue with the rest of the tweets
-    await Promise.all([page.waitForNavigation(), page.goBack()]);
-    if (!metadata) return { embed };
-    return { ...metadata, embed };
-}
+        // If the embedded tweet exists, check if the "close button" is present and click to close it
+        if (await page.$('div[data-testid="app-bar-close"]') !== null) {
+            await page.click('div[data-testid="app-bar-close"]');
+        }
+
+        // Remove media from the tweet to enable interaction with the embedded tweet
+        await page.evaluate(() => {
+            const imageContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[data-testid="tweetPhoto"]');
+            if (imageContainer) imageContainer.remove();
+        });
+
+        // Navigate to the embedded tweet
+        await Promise.all([
+            page.waitForNavigation(),
+            // document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time')
+            // .click()
+            page.click('article[tabindex="-1"][role="article"][data-testid="tweet"] div[aria-labelledby] div[tabindex="0"] div[dir="ltr"] time')
+        ]);
+
+        // Extract details of the embedded tweet
+        const embed = {
+            type: "embed",
+            id: page.url().split("/").slice(-1).pop(),
+            author: await page.evaluate(() => {
+                const authorElement = document.querySelector("div[data-testid=User-Name]");
+                return authorElement ? authorElement.innerText : null;
+            }),
+            tweet: await page.evaluate(getTweetText)
+        };
+
+        // Return to the original tweet after extracting embedded tweet details
+        await Promise.all([
+            page.waitForNavigation(),
+            page.goBack()
+        ]);
+
+        // Return combined metadata and embedded tweet
+        return metadata ? { ...metadata, embed } : { embed };
+    } catch (error) {
+        console.error("Error in extractMetadata:", error);
+        return null; // Fallback to null if extraction fails
+    }
+};
+
 
 //module.exports.getTweetText = getTweetText;

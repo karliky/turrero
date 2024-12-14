@@ -23,6 +23,21 @@
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug fetch tweet 1867841814809461115",
+      "program": "${workspaceFolder}/scripts/recorder.js",
+      "args": [
+        "--test",
+        "1867841814809461115"
+        //"1860251366708396490",
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "console": "integratedTerminal"
     }
-  ]
+  ],
 }
