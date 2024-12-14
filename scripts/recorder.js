@@ -128,7 +128,7 @@ async function getAllTweets({ page, tweetIds, outputFilePath }) {
             if (shouldStop) {
                 stopped = true;
                 existingTweetsData.push(tweets);
-                writeFileSync(outputFilePath, JSON.stringify(existingTweetsData, null, 2));
+                writeFileSync(outputFilePath, JSON.stringify(existingTweetsData, null, 4));
                 continue;
             }
 

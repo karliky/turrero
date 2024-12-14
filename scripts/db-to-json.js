@@ -12,7 +12,7 @@ const transformedTweets = Tweets.map(tweetArray => ({
 }));
 
 // Convertimos el nuevo array de objetos a un string JSON.
-const jsonString = JSON.stringify(transformedTweets, null, 2);
+const jsonString = JSON.stringify(transformedTweets, null, 4);
 
 // Guardamos el nuevo formato en un archivo JSON.
 fs.writeFile("../db/transformed_tweets.json", jsonString, err => {

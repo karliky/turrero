@@ -34,7 +34,7 @@ console.log('# Pending books to enrich', booksToEnrich.length);
             if (!('categories' in book)) book.categories = [];
             return book;
         });
-        fs.writeFileSync(__dirname + '/../db/books.json', JSON.stringify(enrichedBooks, null, 2));
+        fs.writeFileSync(__dirname + '/../db/books.json', JSON.stringify(enrichedBooks, null, 4));
     }
     console.log('# Estaré ahí mismo.')
     process.exit(0);

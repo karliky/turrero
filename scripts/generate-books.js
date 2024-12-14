@@ -16,4 +16,4 @@ console.log("Total books fromGoodReads", fromGoodReads.length);
 
 const books = [...fromGoodReads].filter((book) => book.url.indexOf('/author/') === -1);
 
-fs.writeFileSync(__dirname + '/../db/books-not-enriched.json', JSON.stringify(books, null, 2));
+fs.writeFileSync(__dirname + '/../db/books-not-enriched.json', JSON.stringify(books, null, 4));
