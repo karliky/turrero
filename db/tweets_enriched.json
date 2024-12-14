@@ -23031,5 +23031,92 @@
         "img": "./metadata/GeLmk5VXYAAWrZq.png",
         "url": "https://x.com/Recuenco/status/1865306720966156773/photo/1",
         "type": "media"
+    },
+    {
+        "id": "1867841781313769674",
+        "img": "./metadata/GevoM1pXsAEeObE.png",
+        "url": "https://x.com/Recuenco/status/1867841781313769674/photo/1",
+        "type": "media"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1867257586556256671",
+        "id": "1867841782630744120",
+        "author": "Dear Son.\n@DearS_o_n",
+        "tweet": "In your own view, why do you think 85% of people choose a 9-5 over starting their own business?"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1867306440584778071",
+        "id": "1867841783587053676",
+        "author": "joan tubau\n@joantubau",
+        "tweet": "This, by \n@nntaleb"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1330121203806244867",
+        "id": "1867841790373449948",
+        "author": "Javier G. Recuenco\n@Recuenco\n·\nNov 21, 2020",
+        "tweet": "Sobre el cálculo del ETA (Estimated time of arrival), he de decir que es una de las disciplinas más complicadas que existen, y la razón de mis peloteras con mis amigos futuristas."
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1492853901401468928",
+        "id": "1867841792600670456",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Si hemos llorado con esta mierda, se reconoce y ya está. \nDos de mis obsesiones juntas: The man on a mission y la importancia de elegir a tu compañero de vida."
+    },
+    {
+        "id": "1867841799500288307",
+        "type": "card",
+        "img": "./metadata/gvnMAqNn.jpeg",
+        "url": "https://www.nytimes.com/es/2022/01/20/espanol/vacunas-arnm-covid.html"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1867306440584778071",
+        "id": "1867841817191830004",
+        "author": "joan tubau\n@joantubau",
+        "tweet": "This, by \n@nntaleb"
+    },
+    {
+        "id": "1867841837194457431",
+        "img": "./metadata/GevoQFfWQAALLIe.jpeg",
+        "url": "https://x.com/Recuenco/status/1867841837194457431/photo/1",
+        "type": "media"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1618860315990708225",
+        "id": "1867841840587661354",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Systems VS. Goals."
+    },
+    {
+        "id": "1867841845511753862",
+        "img": "./metadata/GevoQmtW8AAE5kD.png",
+        "url": "https://x.com/Recuenco/status/1867841845511753862/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1867841852210118903",
+        "img": "./metadata/GevoRBMXIAADMJq.png",
+        "url": "https://x.com/Recuenco/status/1867841852210118903/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1867841856429576577",
+        "type": "card",
+        "img": "./metadata/8_ywOqTc.jpeg",
+        "url": "https://mailchi.mp/bonillaware/algoritmo-cambio-mundo"
+    },
+    {
+        "id": "1867841869125681216",
+        "type": "card",
+        "img": "./metadata/o7SUM4gg.jpeg",
+        "url": "https://www.youtube.com/watch?app=desktop&v=MRXSv3PLLAg",
+        "media": "youtube",
+        "description": "Provided to YouTube by The Orchard EnterprisesThere's No Money in Jazz · Mattias IA EklundhFreak Guitar - The Road Less Traveled℗ 2013 TSP-Thunderstruck Prod...",
+        "title": "There's No Money in Jazz"
     }
 ]

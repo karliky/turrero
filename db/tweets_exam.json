@@ -1,5 +1,37 @@
 [
     {
+        "id": "1867841781313769674",
+        "questions": [
+            {
+                "question": "¿Qué describe el capítulo 'Peer Cruelty' de 'The Black Swan'?",
+                "options": [
+                    "La presión social y crueldad entre pares.",
+                    "Estrategias empresariales exitosas.",
+                    "Casos históricos de emprendedores."
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según el texto, ¿qué es esencial para sobrevivir como emprendedor?",
+                "options": [
+                    "Aceptar compromisos y apoyo cercano.",
+                    "Evitar riesgos y optar por la seguridad.",
+                    "Seguir las tendencias de moda."
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué dice George Bernard Shaw sobre el progreso?",
+                "options": [
+                    "Es impulsado por el hombre racional.",
+                    "Depende del hombre irracional.",
+                    "Surge de la cooperación social."
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1865306644827029957",
         "questions": [
             {

@@ -3049,7 +3049,9 @@
             "estrategia",
             "libros"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1867841781313769674"
+        ]
     },
     {
         "id": "1865306644827029957",
@@ -3058,6 +3060,23 @@
         "likes": 355,
         "bookmarks": 53,
         "views": 40300,
+        "summary": "La gestión de la aporía como arte en el CPS",
+        "categories": [
+            "resolución-de-problemas-complejos",
+            "sistemas-complejos",
+            "estrategia",
+            "orquestación-cognitiva",
+            "otras-turras-del-querer"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1867841781313769674",
+        "url": "https://twitter.com/Recuenco/status/1867841781313769674",
+        "replies": 98,
+        "likes": 1407,
+        "bookmarks": 320,
+        "views": 219192,
         "summary": "",
         "categories": [],
         "related_threads": []
