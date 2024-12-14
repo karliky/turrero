@@ -38,6 +38,28 @@
         "<node_internals>/**"
       ],
       "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Next.js",
+      "program": "${workspaceFolder}/node_modules/.bin/next",
+      "args": [
+        "dev"
+      ],
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "outFiles": [
+        "${workspaceFolder}/.next/**/*.js"
+      ]
     }
   ],
 }
