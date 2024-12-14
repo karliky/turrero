@@ -94,9 +94,9 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             }
             if (embed) {
                 console.log({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                
+
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets));
+                writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets, null, 2));
             }
             if (!tweet.metadata.type) continue;
             try {
@@ -122,5 +122,5 @@ function saveTweet(tweet) {
     console.log({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
     existingTweets.push({ id: tweet.id, ...tweet.metadata });
-    writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets));
+    writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets, null, 2));
 }

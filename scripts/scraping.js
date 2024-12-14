@@ -7,12 +7,13 @@
  */
 
 export const getTweetText = () => {
-    const tweetContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
-    if (tweetContainer.querySelector('div[data-testid="tweetText"]')) {
-        const c2 = tweetContainer.querySelector('div[data-testid="tweetText"]');
-        if (c2) return c2.textContent;
+    try {
+        tweetContainer = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
+        c2 = tweetContainer.querySelector('div[data-testid="tweetText"]');
+        return c2.innerText;
+    } catch (_) {
+        return "";
     }
-    return "";
 }
 
 // Extracts the metadata of a tweet (cards, media, etc)
@@ -62,7 +63,8 @@ export const extractMetadata = async (page) => {
         });
 
         // Return metadata if no embedded tweet exists
-        if (!hasEmbedTweet) return metadata || null;
+        if (!hasEmbedTweet && !!metadata) return metadata;
+        if (!hasEmbedTweet) return metadata;
 
         // If the embedded tweet exists, check if the "close button" is present and click to close it
         if (await page.$('div[data-testid="app-bar-close"]') !== null) {

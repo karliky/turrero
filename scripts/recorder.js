@@ -47,11 +47,9 @@ async function parseTweet({ page }) {
     await page.waitForSelector('div[role="progressbar"]', { hidden: true });
 
     const currentTweetId = page.url().split("/").slice(-1).pop();
-    const tweet = await page.evaluate(getTweetText);
-
     console.log("currentTweetId", currentTweetId);
-    // Extract metadata (card, media, etc)
-    const metadata = await extractMetadata(page);
+    const tweet = await page.evaluate(getTweetText); // text
+    const metadata = await extractMetadata(page); // media
     await new Promise(r => setTimeout(r, 100));
     // Get at what time the tweet was posted
     const time = await page.evaluate(() => {
@@ -98,13 +96,17 @@ async function parseTweet({ page }) {
         const statsLabel = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').querySelector('div[role="group"]').getAttribute("aria-label").toLowerCase();
         return parseStats(statsLabel);
     });
+    /* This workaround is to prevent a bug for the next situation:
 
-    return { tweet, id: currentTweetId, metadata, time, stats };
+       when a tweet has no text (only media) and it has an embedded, the parser may actually
+       identify as tweet text the text of the embedding and it is not trully fixable with
+       just text selectors as they have random names and attributes.
+    */
+    const actualTweet = (tweet == metadata?.embed?.tweet) ? "" : tweet;
+    return { tweet: actualTweet, id: currentTweetId, metadata, time, stats };
 }
 
 async function getAllTweets({ page, tweetIds, outputFilePath }) {
-    await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
-    console.log("Waiting for selector");
     for (const tweetId of tweetIds) {
         await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
         console.log("Waiting for selector");
@@ -126,7 +128,7 @@ async function getAllTweets({ page, tweetIds, outputFilePath }) {
             if (shouldStop) {
                 stopped = true;
                 existingTweetsData.push(tweets);
-                writeFileSync(outputFilePath, JSON.stringify(existingTweetsData));
+                writeFileSync(outputFilePath, JSON.stringify(existingTweetsData, null, 2));
                 continue;
             }
 
