@@ -2383,5 +2383,32 @@
         "media": "goodreads",
         "title": "The Aporetic Tradition in Ancient Philosophy",
         "turraId": "1865306644827029957"
+    },
+    {
+        "id": "1870373358589587569",
+        "type": "card",
+        "img": "./metadata/a289Y_b2.jpeg",
+        "url": "https://www.goodreads.com/book/show/38398157-blitzscaling",
+        "media": "goodreads",
+        "title": "Blitzscaling: The Lightning-Fast Path to Building Massively Valuable Companies",
+        "turraId": "1870373349282484488"
+    },
+    {
+        "id": "1870373475581407492",
+        "type": "card",
+        "img": "./metadata/90twpw9z.jpeg",
+        "url": "https://www.goodreads.com/book/show/60001876-the-little-book-of-herm-s",
+        "media": "goodreads",
+        "title": "The Little Book of Hermès: The Story of the Iconic Fashion House",
+        "turraId": "1870373349282484488"
+    },
+    {
+        "id": "1870373476613095523",
+        "type": "card",
+        "img": "./metadata/u1tVRWpr.jpeg",
+        "url": "https://www.goodreads.com/book/show/9702401-ford-vs-ferrari",
+        "media": "goodreads",
+        "title": "Ford Vs Ferrari",
+        "turraId": "1870373349282484488"
     }
 ]

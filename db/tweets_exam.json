@@ -1,5 +1,37 @@
 [
     {
+        "id": "1870373349282484488",
+        "questions": [
+            {
+                "question": "¿Qué significa el término 'blitzscaling'?",
+                "options": [
+                    "Una estrategia de crecimiento lento y eficiente.",
+                    "Una estrategia de crecimiento rápido y agresivo.",
+                    "Una técnica de reducción de riesgos financieros."
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál fue una de las causas principales del fracaso de Quiznos?",
+                "options": [
+                    "Falta de inversión inicial.",
+                    "Problemas de calidad y consistencia.",
+                    "Competencia insuficiente en el mercado."
+                ],
+                "answer": 2
+            },
+            {
+                "question": "Según el texto, ¿qué impacto tendrá la IA en los negocios?",
+                "options": [
+                    "Reducirá los costos laborales a corto plazo.",
+                    "Incrementará la productividad y el costo del trabajo humano no escalable.",
+                    "Sustituirá completamente el pensamiento creativo humano."
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
         "id": "1867841781313769674",
         "questions": [
             {
