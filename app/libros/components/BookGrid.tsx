@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Book } from "../../../infrastructure";
+import Link from "next/link";
 
 interface BookGridProps {
   books: Book[];
@@ -79,12 +80,12 @@ export default function BookGrid({ books, categories, categoriesMap }: BookGridP
               >
                 Tweet original
               </a>
-              <a 
+              <Link 
                 href={`/turra/${book.id}`}
                 className="text-gray-600 hover:text-whiskey-600 transition-colors flex items-center gap-1"
               >
                 Turra original
-              </a>
+              </Link>
             </div>
 
             {/* Categories - More compact and modern */}

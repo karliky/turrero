@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import SearchBar from '@/app/components/SearchBar';
 import { FaCaretDown } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function Header() {
         <div className="flex items-center space-x-2">
           <span className="inline-flex items-center gap-x-1 text-xl font-semibold text-whiskey-800">
             <Image className="w-10 h-auto mr-2" src="/logo.png" alt="Logo" width={100} height={100}></Image>
-            <a href="/" className="text-whiskey-800">El <span className="text-brand">Turrero Post</span></a>
+            <Link href="/" className="text-whiskey-800">El <span className="text-brand">Turrero Post</span></Link>
           </span>
         </div>
 
@@ -35,13 +36,13 @@ export default function Header() {
           isMenuOpen ? 'absolute top-16 left-0 right-0 bg-white shadow-md' : 'hidden'
         } lg:relative lg:flex lg:top-0 lg:shadow-none lg:space-x-8 w-full lg:w-auto flex-col lg:flex-row items-center`}>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
-            <a href="/glosario" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Glosario</a>
+            <Link href="/glosario" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Glosario</Link>
           </li>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
-            <a href="/libros" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Libros</a>
+            <Link href="/libros" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Libros</Link>
           </li>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
-            <a href="/hall-of-fame" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Hall of Fame</a>
+            <Link href="/hall-of-fame" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Hall of Fame</Link>
           </li>
           <li className="hidden lg:block w-full lg:w-auto py-2 px-4 lg:px-0 relative group">
             <button 
@@ -53,46 +54,46 @@ export default function Header() {
             </button>
             <ul className="hidden lg:group-hover:block w-48 bg-white shadow-lg rounded-md py-2 absolute -left-10 mt-2">
               <li>
-                <a href="/sobre-esta-web" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link href="/sobre-esta-web" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
                   Sobre esta web
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link href="#" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
                   Versión en PDF
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link href="#" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
                   Grafo de Turras
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://cps.tonidorta.com/" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link href="https://cps.tonidorta.com/" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
                   CPS Notebook
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <a href="/sobre-esta-web" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="/sobre-esta-web" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               Sobre esta web
-            </a>
+            </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <a href="#" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="#" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               Versión en PDF
-            </a>
+            </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <a href="#" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="#" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               Grafo de Turras
-            </a>
+            </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <a href="https://cps.tonidorta.com/" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="https://cps.tonidorta.com/" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               CPS Notebook
-            </a>
+            </Link>
           </li>
           <li className="w-full lg:hidden py-2 px-4">
             <SearchBar className="w-full" />

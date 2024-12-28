@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const Footer = () => {
   return (
     <footer className="bg-whiskey-100 text-whiskey-700">
@@ -10,7 +12,9 @@ const Footer = () => {
           
           {/* Links */}
           <div className="flex space-x-6">
-            <a href="/contacto" className="text-whiskey-600 hover:text-whiskey-900 transition-colors">Contacto</a>
+            <Link href="/contacto" className="text-whiskey-600 hover:text-whiskey-900 transition-colors">
+              Contacto
+            </Link>
           </div>
         </div>
         

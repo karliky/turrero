@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import Link from 'next/link';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -112,12 +113,12 @@ export default async function CategoryPage({ params, searchParams }: Params) {
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <a
+        <Link
           href="/"
           className="inline-block mb-6 text-whiskey-600 hover:text-whiskey-800 transition-colors"
         >
           ← Volver al inicio
-        </a>
+        </Link>
 
         <h1 className="text-2xl font-semibold text-whiskey-900 mb-2">
           {normalizeCategory(category)}
@@ -147,18 +148,18 @@ export default async function CategoryPage({ params, searchParams }: Params) {
                   locale: es,
                 })}
               </time>
-              <a
+              <Link
                 href={`/turra/${tweet.id}`}
                 className="block text-whiskey-800 mb-3 line-clamp-3 hover:text-whiskey-600"
               >
                 {summary}
-              </a>
-              <a
+              </Link>
+              <Link
                 href={`/turra/${tweet.id}`}
                 className="inline-flex items-center text-whiskey-600 hover:text-whiskey-800 font-medium"
               >
                 Leer más <span className="ml-1">→</span>
-              </a>
+              </Link>
             </article>
           );
         })}
@@ -167,7 +168,7 @@ export default async function CategoryPage({ params, searchParams }: Params) {
       {totalPages > 1 && (
         <nav className="mt-8 flex justify-center gap-2">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <a
+            <Link
               key={page}
               href={`/${category}?page=${page}`}
               className={`px-3 py-2 rounded ${
@@ -177,7 +178,7 @@ export default async function CategoryPage({ params, searchParams }: Params) {
               }`}
             >
               {page}
-            </a>
+            </Link>
           ))}
         </nav>
       )}
