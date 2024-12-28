@@ -9,6 +9,10 @@ import Link from 'next/link';
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleNavigationClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="bg-white shadow-md">
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -33,16 +37,16 @@ export default function Header() {
         </button>
 
         <ul className={`${
-          isMenuOpen ? 'absolute top-16 left-0 right-0 bg-white shadow-md' : 'hidden'
+          isMenuOpen ? 'absolute top-16 left-0 right-0 bg-white shadow-md z-50' : 'hidden'
         } lg:relative lg:flex lg:top-0 lg:shadow-none lg:space-x-8 w-full lg:w-auto flex-col lg:flex-row items-center`}>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
-            <Link href="/glosario" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Glosario</Link>
+            <Link href="/glosario" onClick={handleNavigationClick} className="text-whiskey-800 hover:text-whiskey-950 block text-center">Glosario</Link>
           </li>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
-            <Link href="/libros" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Libros</Link>
+            <Link href="/libros" onClick={handleNavigationClick} className="text-whiskey-800 hover:text-whiskey-950 block text-center">Libros</Link>
           </li>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
-            <Link href="/hall-of-fame" className="text-whiskey-800 hover:text-whiskey-950 block text-center">Hall of Fame</Link>
+            <Link href="/hall-of-fame" onClick={handleNavigationClick} className="text-whiskey-800 hover:text-whiskey-950 block text-center">Hall of Fame</Link>
           </li>
           <li className="hidden lg:block w-full lg:w-auto py-2 px-4 lg:px-0 relative group">
             <button 
@@ -76,22 +80,22 @@ export default function Header() {
             </ul>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <Link href="/sobre-esta-web" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="/sobre-esta-web" onClick={handleNavigationClick} className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               Sobre esta web
             </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <Link href="#" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="#" onClick={handleNavigationClick} className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               Versión en PDF
             </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <Link href="#" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="#" onClick={handleNavigationClick} className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               Grafo de Turras
             </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <Link href="https://cps.tonidorta.com/" target="_blank" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="https://cps.tonidorta.com/" target="_blank" onClick={handleNavigationClick} className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               CPS Notebook
             </Link>
           </li>
