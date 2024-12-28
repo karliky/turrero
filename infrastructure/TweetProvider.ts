@@ -51,17 +51,28 @@ export interface EnrichedTweetMetadata {
   tweet?: string;
 }
 
+export interface TweetExam {
+  id: string;
+  questions: {
+    question: string;
+    options: string[];
+    answer: number;
+  }[];
+}
+
 export class TweetProvider {
   private tweetsMap: CategorizedTweet[];
   private tweets: Tweet[][];
   private tweetSummaries: TweetSummary[];
   private enrichedTweets: EnrichedTweetMetadata[];
+  private tweetExams: TweetExam[];
 
   constructor() {
     this.tweetsMap = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_map.json'), 'utf-8'));
     this.tweets = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets.json'), 'utf-8'));
     this.tweetSummaries = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_summary.json'), 'utf-8'));
     this.enrichedTweets = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_enriched.json'), 'utf-8'));
+    this.tweetExams = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_exam.json'), 'utf-8'));
   }
 
   getTweetsByCategory(category: string): Tweet[] {
@@ -115,6 +126,10 @@ export class TweetProvider {
 
   public getEnrichedTweetData(id: string): EnrichedTweetMetadata | undefined {
     return this.enrichedTweets.find(t => t.id === id);
+  }
+
+  public getExamById(id: string): TweetExam | undefined {
+    return this.tweetExams.find(exam => exam.id === id);
   }
 }
  

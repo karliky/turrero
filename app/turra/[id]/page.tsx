@@ -6,6 +6,7 @@ import { TweetProvider, Tweet } from "../../../infrastructure/TweetProvider";
 import { TweetContent } from "../../components/TweetContent";
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { TurraSidebar } from '../../components/TurraSidebar';
 
 interface Params {
   params: Promise<{
@@ -39,6 +40,10 @@ function normalizeText(text: string): string {
     .replace(/\s+/g, '-'); // Replace spaces with hyphens
 }
 
+function getTweetExam(id: string) {
+  return new TweetProvider().getExamById(id);
+}
+
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const resolvedParams = await params;
   const id = resolvedParams.id;
@@ -61,6 +66,7 @@ export default async function TurraPage({ params }: Params) {
 
   const mainTweet = thread[0];
   const summary = getTweetSummary(mainTweet.id);
+  const exam = getTweetExam(mainTweet.id);
   const words = summary.split(' ');
   const coloredWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
@@ -141,186 +147,7 @@ export default async function TurraPage({ params }: Params) {
             </div>
           </article>
 
-          {/* Sidebar */}
-          <aside className="lg:col-span-4">
-            <div className="top-4 space-y-4">
-              {/* Related Books Card */}
-              <div className="bg-white border border-whiskey-200 rounded-xl p-4">
-                <h2 className="text-lg font-semibold mb-4 text-whiskey-900">
-                  Libros relacionados
-                </h2>
-                <ul className="list-disc list-inside space-y-3">
-                  <li className="flex flex-col">
-                    <a
-                      href="https://www.goodreads.com/book/show/28570175-the-fourth-industrial-revolution"
-                      className="group"
-                    >
-                      <h3 className="text-sm font-medium text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
-                        The Fourth Industrial Revolution
-                      </h3>
-                      <p className="text-xs text-whiskey-700">Klaus Schwab</p>
-                    </a>
-                  </li>
-                  <li className="flex flex-col">
-                    <a
-                      href="https://www.goodreads.com/book/show/22928874-rise-of-the-robots"
-                      className="group"
-                    >
-                      <h3 className="text-sm font-medium text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
-                        Rise of the Robots: Technology and the Threat of a
-                        Jobless Future
-                      </h3>
-                      <p className="text-xs text-whiskey-700">Martin Ford</p>
-                    </a>
-                  </li>
-                  <li className="flex flex-col">
-                    <a
-                      href="https://www.goodreads.com/book/show/23316526-the-second-machine-age"
-                      className="group"
-                    >
-                      <h3 className="text-sm font-medium text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
-                        The Second Machine Age: Work, Progress, and Prosperity
-                        in a Time of Brilliant Technologies
-                      </h3>
-                      <p className="text-xs text-whiskey-700">
-                        Erik Brynjolfsson & Andrew McAfee
-                      </p>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Quiz Card */}
-              <div className="bg-white border border-whiskey-200 rounded-xl p-4">
-                <h2 className="text-lg font-semibold mb-4 text-whiskey-900">
-                  Pon en práctica tu comprensión
-                </h2>
-                <div className="space-y-4">
-                  {/* Question 1 */}
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-whiskey-800">
-                      1. ¿Qué porcentaje de la fuerza laboral podría verse
-                      afectada?
-                    </p>
-                    <div className="space-y-1.5">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q1"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          a) 50% de la fuerza laboral
-                        </span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q1"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          b) 80% con al menos 10% de tareas
-                        </span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q1"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          c) 100% de los trabajadores
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Question 2 */}
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-whiskey-800">
-                      2. ¿Qué habilidades son menos propensas a verse afectadas?
-                    </p>
-                    <div className="space-y-1.5">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q2"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          a) Programación y escritura
-                        </span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q2"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          b) Científicas y pensamiento crítico
-                        </span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q2"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          c) Habilidades manuales
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Question 3 */}
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-whiskey-800">
-                      3. ¿Qué áreas son más susceptibles al impacto?
-                    </p>
-                    <div className="space-y-1.5">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q3"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          a) Manufactura y producción
-                        </span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q3"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          b) Programación y escritura
-                        </span>
-                      </label>
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="q3"
-                          className="text-whiskey-600"
-                        />
-                        <span className="text-sm text-gray-600">
-                          c) Ventas y marketing
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <button className="w-full py-2 px-4 bg-whiskey-600 text-white rounded-lg hover:bg-whiskey-700 transition-colors font-medium">
-                    Comprobar resultados
-                  </button>
-                </div>
-              </div>
-            </div>
-          </aside>
+          <TurraSidebar exam={exam} />
         </div>
       </div>
     </main>
