@@ -67,7 +67,7 @@ export default function SobreEstaWeb() {
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <Image
+                  <img
                     src="https://gurulibros.com/wp-content/uploads/2021/09/javier_g_recuenco.jpg"
                     alt="Javier G. Recuenco"
                     className="rounded-lg shadow-md w-full"
@@ -81,7 +81,7 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <Image
+                  <img
                     src="https://avatars.githubusercontent.com/u/881069?v=4"
                     alt="Carlos Hernández Gómez (Karliky)"
                     className="rounded-lg shadow-md w-full"
@@ -154,7 +154,7 @@ export default function SobreEstaWeb() {
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <Image
+                  <img
                     src="https://www.tonidorta.com/wp-content/uploads/tonidorta_240x285.jpg"
                     alt="Toni Dorta"
                     className="rounded-lg shadow-md w-full"
@@ -168,7 +168,7 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <Image
+                  <img
                     src="https://avatars.githubusercontent.com/u/8669176?v=4"
                     alt="Alejandra Arri"
                     className="rounded-lg shadow-md w-full"

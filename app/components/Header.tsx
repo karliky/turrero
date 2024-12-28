@@ -69,7 +69,7 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="https://cps.tonidorta.com/" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link href="https://cps.tonidorta.com/" target="_blank" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
                   CPS Notebook
                 </Link>
               </li>
@@ -91,7 +91,7 @@ export default function Header() {
             </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <Link href="https://cps.tonidorta.com/" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link href="https://cps.tonidorta.com/" target="_blank" className="block text-whiskey-800 hover:text-whiskey-950 text-center">
               CPS Notebook
             </Link>
           </li>
