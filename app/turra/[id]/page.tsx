@@ -5,11 +5,12 @@ import { FaArrowLeft } from "react-icons/fa";
 import { TweetProvider, Tweet } from "../../../infrastructure/TweetProvider";
 import { TweetContent } from "../../components/TweetContent";
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 interface Params {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 async function getTweetById(id: string): Promise<Tweet[]> {
@@ -39,7 +40,8 @@ function normalizeText(text: string): string {
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { id } = await params;
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
   const summary = getTweetSummary(id);
   
   return {
@@ -48,7 +50,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default async function TurraPage({ params }: Params) {
-  const { id } = await params;
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
 
   const thread = await getTweetById(id);
 
@@ -67,13 +70,13 @@ export default async function TurraPage({ params }: Params) {
       {/* Back Navigation */}
       <nav className="border-whiskey-200">
         <div className="container mx-auto px-4 py-3">
-          <a
+          <Link
             href="/"
             className="inline-flex items-center gap-2 text-whiskey-700 hover:text-whiskey-900 transition-colors"
           >
             <FaArrowLeft className="text-sm" />
             <span className="font-medium">Volver</span>
-          </a>
+          </Link>
         </div>
       </nav>
 

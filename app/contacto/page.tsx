@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const metadata = {
   title: "Contacto | El Turrero Post",
 };
@@ -7,7 +9,13 @@ export default function ContactPage() {
     <main className="relative min-h-screen">
       {/* Background layers */}
       <div className="absolute inset-0">
-        <img src="/aliens.jpg" alt="" className="w-full h-full object-cover" />
+        <Image
+          src="/aliens.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-whiskey-900/90 via-whiskey-800/85 to-whiskey-700/80" />
       </div>
 

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function SobreEstaWeb() {
   return (
     <div className="bg-whiskey-50 min-h-screen">
@@ -17,8 +19,8 @@ export default function SobreEstaWeb() {
                 problemas complejos.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Como dijo el gran John Lasseter de Pixar: "No podemos cambiar el
-                mundo a menos que entendamos primero cómo funciona".
+                Como dijo el gran John Lasseter de Pixar: &ldquo;No podemos cambiar el
+                mundo a menos que entendamos primero cómo funciona&rdquo;.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 El objetivo es ayudarte a comprender mejor el mundo a través de
@@ -28,7 +30,7 @@ export default function SobreEstaWeb() {
               </p>
             </div>
             <blockquote className="border-l-4 border-whiskey-600 pl-4 py-2 bg-whiskey-50 rounded-r-lg italic text-whiskey-800">
-              "Study the greats and become greater."
+              &ldquo;Study the greats and become greater.&rdquo;
               <strong className="block mt-2 text-whiskey-900">
                 - Michael Jackson
               </strong>
@@ -61,14 +63,16 @@ export default function SobreEstaWeb() {
                     desafíos que superan a cualquier persona, independientemente
                     de su tamaño y éxito, y hay que estar preparados para lo
                     desconocido. Javier escribe semanalmente una disertación
-                    llamada "turra" sobre las ciencias de la complejidad.
+                    llamada &ldquo;turra&rdquo; sobre las ciencias de la complejidad.
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://gurulibros.com/wp-content/uploads/2021/09/javier_g_recuenco.jpg"
                     alt="Javier G. Recuenco"
                     className="rounded-lg shadow-md w-full"
+                    width={400}
+                    height={400}
                   />
                 </div>
               </div>
@@ -77,10 +81,12 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://avatars.githubusercontent.com/u/881069?v=4"
                     alt="Carlos Hernández Gómez (Karliky)"
                     className="rounded-lg shadow-md w-full"
+                    width={400}
+                    height={400}
                   />
                 </div>
                 <div className="md:w-2/3">
@@ -148,10 +154,12 @@ export default function SobreEstaWeb() {
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://www.tonidorta.com/wp-content/uploads/tonidorta_240x285.jpg"
                     alt="Toni Dorta"
                     className="rounded-lg shadow-md w-full"
+                    width={240}
+                    height={285}
                   />
                 </div>
               </div>
@@ -160,10 +168,12 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://avatars.githubusercontent.com/u/8669176?v=4"
                     alt="Alejandra Arri"
                     className="rounded-lg shadow-md w-full"
+                    width={400}
+                    height={400}
                   />
                 </div>
                 <div className="md:w-2/3">
@@ -195,10 +205,12 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="/victor.jpeg"
                     alt="Víctor R. Escobar"
                     className="rounded-lg shadow-md w-full"
+                    width={400}
+                    height={400}
                   />
                 </div>
                 <div className="md:w-2/3">
@@ -228,10 +240,12 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="/angel.jpg"
                     alt="Ángel"
                     className="rounded-lg shadow-md w-full"
+                    width={400}
+                    height={400}
                   />
                 </div>
                 <div className="md:w-2/3">
@@ -252,7 +266,7 @@ export default function SobreEstaWeb() {
                   <p className="text-gray-600 leading-relaxed">
                     Venture manager, emba, strategy, product manager, coach/mentor, agilist, 
                     cloud architect, tech passionate, engineer, gopher, runner, rubik fan, 
-                    日本語の学生！Do'er
+                    日本語の学生！Do&apos;er
                   </p>
                 </div>
               </div>

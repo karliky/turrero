@@ -1,4 +1,4 @@
-import { TweetFacade, Book } from "../../infrastructure";
+import { TweetFacade } from "../../infrastructure";
 import BookGrid from './components/BookGrid';
 
 const categories = [

@@ -1,9 +1,9 @@
-import { TweetFacade } from "../../infrastructure";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import Link from 'next/link';
+import Link from "next/link";
+import { TweetFacade } from "../../infrastructure";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -45,16 +45,6 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
     "Otras turras que no encajan en categorías específicas.",
 };
 
-interface Params {
-  params: {
-    category: string;
-    page?: string;
-  };
-  searchParams: {
-    page?: string;
-  };
-}
-
 function normalizeCategory(category: string): string {
   return category.replace(/-/g, " ").replace(/^\w/, (c) => c.toUpperCase());
 }
@@ -70,19 +60,27 @@ function formatCategoryForComparison(category: string): string {
     .trim();
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> {
   const { category } = await params;
-  const categoryName = normalizeCategory(category);
-
   return {
-    title: `${categoryName} - El Turrero Post`,
+    title: `${normalizeCategory(category)} - El Turrero Post`,
   };
 }
 
-export default async function CategoryPage({ params, searchParams }: Params) {
-  const { category } = await params;
-  const { page } = await searchParams;
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ page?: string }>;
+}) {
   const tweetFacade = new TweetFacade();
+  const { category } = await params;
+  const { page } = await searchParams || {};
   const currentPage = Number(page) || 1;
 
   // Find matching category by comparing normalized versions
@@ -90,8 +88,7 @@ export default async function CategoryPage({ params, searchParams }: Params) {
     .getCategories()
     .find(
       (cat) =>
-        formatCategoryForComparison(cat) ===
-        formatCategoryForComparison(category)
+        formatCategoryForComparison(cat) === formatCategoryForComparison(category)
     );
 
   // Verify category exists
