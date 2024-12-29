@@ -61,7 +61,10 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link 
+                  href="/version-en-pdf" 
+                  className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left"
+                >
                   Versión en PDF
                 </Link>
               </li>
@@ -86,7 +89,11 @@ export default function Header() {
             </Link>
           </li>
           <li className="lg:hidden w-full py-2 px-4">
-            <Link href="#" onClick={handleNavigationClick} className="block text-whiskey-800 hover:text-whiskey-950 text-center">
+            <Link 
+              href="/version-en-pdf" 
+              onClick={handleNavigationClick} 
+              className="block text-whiskey-800 hover:text-whiskey-950 text-center"
+            >
               Versión en PDF
             </Link>
           </li>
