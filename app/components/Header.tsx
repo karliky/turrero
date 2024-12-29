@@ -67,7 +67,10 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left">
+                <Link 
+                  href="/grafo-de-turras" 
+                  className="block px-4 py-2 text-whiskey-800 hover:text-whiskey-950 hover:bg-gray-100 text-left"
+                >
                   Grafo de Turras
                 </Link>
               </li>

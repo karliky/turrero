@@ -60,6 +60,17 @@ export interface TweetExam {
   }[];
 }
 
+export interface TurraNode {
+  id: string;
+  summary: string;
+  categories: string[];
+  views: number;
+  likes: number;
+  replies: number;
+  bookmarks: number;
+  related_threads: string[];
+}
+
 export class TweetProvider {
   private tweetsMap: CategorizedTweet[];
   private tweets: Tweet[][];
@@ -67,6 +78,7 @@ export class TweetProvider {
   private enrichedTweets: EnrichedTweetMetadata[];
   private tweetExams: TweetExam[];
   private tweetPodcasts: { id: string }[];
+  private graphData: TurraNode[];
 
   constructor() {
     this.tweetsMap = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_map.json'), 'utf-8'));
@@ -75,6 +87,7 @@ export class TweetProvider {
     this.enrichedTweets = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_enriched.json'), 'utf-8'));
     this.tweetExams = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_exam.json'), 'utf-8'));
     this.tweetPodcasts = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_podcast.json'), 'utf-8'));
+    this.graphData = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/processed_graph_data.json'), 'utf-8'));
   }
 
   getTweetsByCategory(category: string): Tweet[] {
@@ -136,6 +149,10 @@ export class TweetProvider {
 
   public hasPodcast(id: string): boolean {
     return this.tweetPodcasts.some(podcast => podcast.id === id);
+  }
+
+  public getGraphData(): TurraNode[] {
+    return this.graphData;
   }
 }
  

@@ -109,20 +109,33 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
 
   return (
     <div className={`relative ${className}`}>
-      <div className="relative">
+      <div className="relative group">
         <input
           type="text"
           value={inputText}
           onChange={onSearchDebounce}
           placeholder="Buscar turras..."
-          className="w-full pl-3 pr-10 py-2 border border-whiskey-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-whiskey-300 text-whiskey-900 placeholder-whiskey-500"
+          className="w-full pl-10 pr-4 py-2.5 
+            border border-whiskey-200 
+            rounded-lg
+            bg-white
+            placeholder:text-whiskey-400
+            text-whiskey-950
+            transition-colors
+            focus:outline-none 
+            focus:border-whiskey-300 
+            focus:ring-1 
+            focus:ring-whiskey-200
+            hover:border-whiskey-200/80"
         />
-        {!isLoading && (
-          <FaSearch 
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-whiskey-500 cursor-pointer hover:text-whiskey-700" 
-            onClick={triggerSearch}
-          />
-        )}
+        <FaSearch 
+          className={`absolute left-3 top-1/2 -translate-y-1/2 
+            ${isLoading 
+              ? 'text-whiskey-200' 
+              : 'text-whiskey-400'
+            }`}
+          onClick={!isLoading ? triggerSearch : undefined}
+        />
       </div>
 
       {isModalOpen && (
