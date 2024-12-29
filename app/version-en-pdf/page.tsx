@@ -6,13 +6,6 @@ export default function PDFVersion() {
     <div className="bg-whiskey-50 min-h-screen">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
-          <Link
-            href="/"
-            className="inline-block mb-8 text-whiskey-600 hover:text-whiskey-800 transition-colors"
-          >
-            ← Volver al inicio
-          </Link>
-
           <div className="bg-white rounded-xl shadow-md p-8">
             <div className="flex items-center justify-center mb-6">
               <FaFilePdf className="text-6xl text-whiskey-600" />
