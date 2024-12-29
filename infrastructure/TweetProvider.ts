@@ -66,6 +66,7 @@ export class TweetProvider {
   private tweetSummaries: TweetSummary[];
   private enrichedTweets: EnrichedTweetMetadata[];
   private tweetExams: TweetExam[];
+  private tweetPodcasts: { id: string }[];
 
   constructor() {
     this.tweetsMap = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_map.json'), 'utf-8'));
@@ -73,6 +74,7 @@ export class TweetProvider {
     this.tweetSummaries = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_summary.json'), 'utf-8'));
     this.enrichedTweets = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_enriched.json'), 'utf-8'));
     this.tweetExams = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_exam.json'), 'utf-8'));
+    this.tweetPodcasts = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_podcast.json'), 'utf-8'));
   }
 
   getTweetsByCategory(category: string): Tweet[] {
@@ -130,6 +132,10 @@ export class TweetProvider {
 
   public getExamById(id: string): TweetExam | undefined {
     return this.tweetExams.find(exam => exam.id === id);
+  }
+
+  public hasPodcast(id: string): boolean {
+    return this.tweetPodcasts.some(podcast => podcast.id === id);
   }
 }
  

@@ -6,6 +6,7 @@ import {
 } from "../../infrastructure/TweetProvider";
 import { TurraExam } from "./TurraExam";
 import { RelatedLinks } from "./RelatedLinks";
+import { TurraPodcast } from "./TurraPodcast";
 
 interface TurraSidebarProps {
   exam?: TweetExam;
@@ -22,9 +23,12 @@ export function TurraSidebar({ exam, thread }: TurraSidebarProps) {
         !!data && (!!data.url || !!data.embeddedTweetId)
     );
 
+  const hasPodcast = tweetProvider.hasPodcast(thread[0].id);
+
   return (
     <aside className="lg:col-span-4 space-y-8">
-      <RelatedLinks enrichedData={enrichedData} />
+      {hasPodcast && <TurraPodcast tweetId={thread[0].id} />}
+      <RelatedLinks enrichedData={enrichedData} thread={thread} />
       {exam && <TurraExam exam={exam} />}
     </aside>
   );
