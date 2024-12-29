@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import SearchBar from '@/app/components/SearchBar';
 import { FaCaretDown } from 'react-icons/fa';
 import Link from 'next/link';

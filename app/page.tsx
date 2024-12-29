@@ -13,7 +13,8 @@ async function getData() {
       return tweetFacade.tweetProvider.getTop25Tweets()
         .map(tweet => ({
           ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id)
+          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
+          engagement: 0
         }));
     }
     
@@ -24,7 +25,8 @@ async function getData() {
           .slice(0, 10)
           .map(tweet => ({
             ...tweet,
-            summary: tweetFacade.tweetProvider.getSummaryById(tweet.id)
+            summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
+            engagement: 0
           }))
       : [];
   }));

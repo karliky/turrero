@@ -42,7 +42,7 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
     const g = svg.append("g");
 
     const simulation = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id(d => d.index))
+      .force("link", d3.forceLink(links).id(d => d.index ?? 0))
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(width / 2, height / 2));
 
@@ -120,13 +120,13 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
 
     svg.on("click", hideTooltip);
 
-    const zoom = d3.zoom()
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
       .scaleExtent([1/2, 8])
       .on("zoom", (event) => {
         g.attr("transform", event.transform);
       });
 
-    svg.call(zoom as unknown as (selection: d3.Selection<SVGSVGElement, unknown, null, undefined>) => void);
+    svg.call(zoom);
 
     simulation.on("tick", () => {
       link
@@ -142,15 +142,15 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
 
     // Añadir controles de zoom
     const zoomIn = () => {
-      svg.transition().call(zoom.scaleBy, 1.5);
+      svg.transition().call((g) => zoom.scaleBy(g, 1.5));
     };
 
     const zoomOut = () => {
-      svg.transition().call(zoom.scaleBy, 0.75);
+      svg.transition().call((g) => zoom.scaleBy(g, 0.75));
     };
 
     const resetZoom = () => {
-      svg.transition().call(zoom.transform, d3.zoomIdentity);
+      svg.transition().call((g) => zoom.transform(g, d3.zoomIdentity));
     };
 
     // Bind zoom controls
