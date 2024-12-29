@@ -147,7 +147,7 @@ export default async function TurraPage({ params }: Params) {
             </div>
           </article>
 
-          <TurraSidebar exam={exam} />
+          <TurraSidebar exam={exam} thread={thread} />
         </div>
       </div>
     </main>

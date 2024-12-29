@@ -172,7 +172,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
                   }}
                 >
                   {result.summary && (
-                    <div className="text-sm text-whiskey-800 mb-2">
+                    <div className="text-base text-whiskey-900 mb-3 leading-relaxed font-bold">
                       {result.summary}
                     </div>
                   )}

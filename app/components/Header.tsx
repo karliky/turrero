@@ -18,7 +18,6 @@ export default function Header() {
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <span className="inline-flex items-center gap-x-1 text-xl font-semibold text-whiskey-800">
-            <Image className="w-10 h-auto mr-2" src="/logo.png" alt="Logo" width={100} height={100}></Image>
             <Link href="/" className="text-whiskey-800">El <span className="text-brand">Turrero Post</span></Link>
           </span>
         </div>
