@@ -60,23 +60,32 @@ function formatCategoryUrl(category: string): string {
 }
 
 export function CategoryCard({ category, tweets, formatCategoryTitle }: CategoryCardProps) {
+  const isTop25 = category === 'top-25-turras';
+  
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow flex flex-col min-h-[400px]">
-      <h2 className="text-lg font-bold mb-3 text-whiskey-900">
-        {formatCategoryTitle(category)}
+    <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col min-h-[400px] group">
+      <h2 className="text-xl font-bold mb-4 text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
+        {isTop25 ? (
+          formatCategoryTitle(category)
+        ) : (
+          <a href={`/${formatCategoryUrl(category)}`} className="hover:underline">
+            {formatCategoryTitle(category)}
+          </a>
+        )}
       </h2>
+
       <div className="relative flex-1 min-h-0">
         <div className="absolute inset-0 space-y-1 overflow-y-auto scrollbar-hide pr-2">
           {tweets.map((item) => (
             <div
               key={`${category}-${item.id}`}
-              className="p-0 rounded-md flex items-baseline gap-2"
+              className="py-1.5 px-2 rounded-md flex items-baseline gap-3 hover:bg-whiskey-50 transition-colors"
             >
-              <div className="hs-tooltip inline-block">
-                <span className="hs-tooltip-toggle text-whiskey-500 text-xs whitespace-nowrap border-b border-dotted border-whiskey-300 cursor-help">
+              <div className="hs-tooltip inline-block shrink-0">
+                <span className="hs-tooltip-toggle text-whiskey-500 text-xs whitespace-nowrap border-b border-dotted border-whiskey-300 cursor-help hover:text-whiskey-600 transition-colors">
                   {formatRelativeTime(item.time)}
                   <span
-                    className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
+                    className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-2 px-3 bg-gray-900 text-xs font-medium text-white rounded-md shadow-lg dark:bg-neutral-700 max-w-xs"
                     role="tooltip"
                   >
                     {category === 'top-25-turras' 
@@ -88,7 +97,7 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
               </div>
               <a
                 href={`/turra/${item.id}`}
-                className="text-gray-700 hover:text-gray-900 text-sm transition-colors duration-200 hover:underline"
+                className="text-gray-700 hover:text-whiskey-900 text-sm transition-colors duration-200 hover:underline line-clamp-2"
               >
                 {item.summary}
               </a>
@@ -96,14 +105,17 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
           ))}
         </div>
       </div>
-      <div className="pt-4 text-right">
-        <a
-          href={`/${formatCategoryUrl(category)}`}
-          className="text-whiskey-600 hover:text-whiskey-800 text-sm font-medium"
-        >
-          Ver más →
-        </a>
-      </div>
+
+      {!isTop25 && (
+        <div className="pt-4 mt-2 border-t border-whiskey-100">
+          <a
+            href={`/${formatCategoryUrl(category)}`}
+            className="inline-flex items-center text-whiskey-600 hover:text-whiskey-800 text-sm font-medium group-hover:translate-x-1 transition-all duration-200"
+          >
+            Ver más <span className="ml-1.5">→</span>
+          </a>
+        </div>
+      )}
     </div>
   );
 } 

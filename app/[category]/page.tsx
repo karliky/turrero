@@ -112,21 +112,22 @@ export default async function CategoryPage({
       <div className="mb-8">
         <Link
           href="/"
-          className="inline-block mb-6 text-whiskey-600 hover:text-whiskey-800 transition-colors"
+          className="inline-flex items-center text-whiskey-700 hover:text-whiskey-900 transition-colors duration-200 group"
         >
-          ← Volver al inicio
+          <span className="transform group-hover:-translate-x-1 transition-transform duration-200">←</span>
+          <span className="ml-2">Volver al inicio</span>
         </Link>
 
-        <h1 className="text-2xl font-semibold text-whiskey-900 mb-2">
+        <h1 className="text-3xl font-bold text-whiskey-900 mb-3 mt-6">
           {normalizeCategory(category)}
-          <span className="ml-2 text-sm font-normal text-whiskey-600">
-            ({totalTweets.toLocaleString()}{" "}
-            {totalTweets === 1 ? "turra" : "turras"})
+          <span className="ml-3 text-base font-medium text-whiskey-700 bg-whiskey-50 px-3 py-1 rounded-full">
+            {totalTweets.toLocaleString()}{" "}
+            {totalTweets === 1 ? "turra" : "turras"}
           </span>
         </h1>
 
         {CATEGORY_DESCRIPTIONS[category] && (
-          <p className="text-sm text-whiskey-600 ">
+          <p className="text-base text-whiskey-700 leading-relaxed bg-whiskey-50/50 p-4 rounded-lg border border-whiskey-100">
             {CATEGORY_DESCRIPTIONS[category]}
           </p>
         )}
@@ -138,24 +139,25 @@ export default async function CategoryPage({
           return (
             <article
               key={tweet.id}
-              className="bg-white rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-200 border border-whiskey-100 hover:border-whiskey-200"
             >
-              <time className="block text-sm text-whiskey-500 mb-3">
+              <time className="block text-sm font-medium text-whiskey-600 mb-3">
                 {format(new Date(tweet.time), "d 'de' MMMM, yyyy", {
                   locale: es,
                 })}
               </time>
               <Link
                 href={`/turra/${tweet.id}`}
-                className="block text-whiskey-800 mb-3 line-clamp-3 hover:text-whiskey-600"
+                className="block text-whiskey-900 mb-3 line-clamp-3 hover:text-whiskey-700 transition-colors duration-200"
               >
                 {summary}
               </Link>
               <Link
                 href={`/turra/${tweet.id}`}
-                className="inline-flex items-center text-whiskey-600 hover:text-whiskey-800 font-medium"
+                className="inline-flex items-center text-whiskey-700 hover:text-whiskey-900 font-medium group"
               >
-                Leer más <span className="ml-1">→</span>
+                Leer más 
+                <span className="ml-1 transform group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
             </article>
           );
@@ -163,15 +165,15 @@ export default async function CategoryPage({
       </div>
 
       {totalPages > 1 && (
-        <nav className="mt-8 flex justify-center gap-2">
+        <nav className="mt-12 flex justify-center gap-3">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <Link
               key={page}
               href={`/${category}?page=${page}`}
-              className={`px-3 py-2 rounded ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                 currentPage === page
-                  ? "bg-whiskey-600 text-white"
-                  : "bg-white text-whiskey-600 hover:bg-whiskey-100 transition-colors"
+                  ? "bg-whiskey-700 text-white shadow-md"
+                  : "bg-white text-whiskey-700 hover:bg-whiskey-50 border border-whiskey-200 hover:border-whiskey-300"
               }`}
             >
               {page}

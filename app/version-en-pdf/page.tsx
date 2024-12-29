@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { FaFilePdf, FaDownload } from 'react-icons/fa';
 
 export default function PDFVersion() {
