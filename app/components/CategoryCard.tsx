@@ -2,6 +2,8 @@ interface Tweet {
   id: string;
   time: string;
   summary: string;
+  stats: { retweets: string; quotetweets: string; likes: string };
+  engagement: number;
 }
 
 function formatRelativeTime(dateString: string, fullText: boolean = false): string {
@@ -77,7 +79,10 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
                     className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
                     role="tooltip"
                   >
-                    Turra publicada hace {formatRelativeTime(item.time, true)}
+                    {category === 'top-25-turras' 
+                      ? `Turra publicada hace ${formatRelativeTime(item.time, true)}. (${item.stats.likes} likes, ${item.stats.retweets} retweets, ${item.stats.quotetweets} quotetweets)`
+                      : `Turra publicada hace ${formatRelativeTime(item.time, true)}`
+                    }
                   </span>
                 </span>
               </div>
@@ -92,14 +97,12 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
         </div>
       </div>
       <div className="pt-4 text-right">
-        {category !== 'top-25-turras' && (
-          <a
-            href={`/${formatCategoryUrl(category)}`}
-            className="text-whiskey-600 hover:text-whiskey-800 text-sm font-medium"
-          >
-            Ver más →
-          </a>
-        )}
+        <a
+          href={`/${formatCategoryUrl(category)}`}
+          className="text-whiskey-600 hover:text-whiskey-800 text-sm font-medium"
+        >
+          Ver más →
+        </a>
       </div>
     </div>
   );
