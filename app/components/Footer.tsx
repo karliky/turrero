@@ -15,6 +15,9 @@ const Footer = () => {
             <Link href="/contacto" className="text-whiskey-600 hover:text-whiskey-900 transition-colors">
               Contacto
             </Link>
+            <Link href="/sitemap.xml" className="text-whiskey-600 hover:text-whiskey-900 transition-colors">
+              Sitemap
+            </Link>
           </div>
         </div>
         
