@@ -63,8 +63,8 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
   const isTop25 = category === 'top-25-turras';
   
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col min-h-[400px] group">
-      <h2 className="text-xl font-bold mb-4 text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
+    <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 flex flex-col min-h-[400px] group">
+      <h2 className="text-xl font-bold mb-3 text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
         {isTop25 ? (
           formatCategoryTitle(category)
         ) : (
@@ -75,11 +75,17 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
       </h2>
 
       <div className="relative flex-1 min-h-0">
-        <div className="absolute inset-0 space-y-1 overflow-y-auto scrollbar-hide pr-2">
+        <div 
+          className="absolute inset-0 space-y-0.5 overflow-y-auto pr-2 no-scrollbar" 
+          style={{ 
+            msOverflowStyle: 'none',  /* IE and Edge */
+            scrollbarWidth: 'none'    /* Firefox */
+          }}
+        >
           {tweets.map((item) => (
             <div
               key={`${category}-${item.id}`}
-              className="py-1.5 px-2 rounded-md flex items-baseline gap-3 hover:bg-whiskey-50 transition-colors"
+              className="py-1 px-2 rounded-md flex items-baseline gap-2 hover:bg-whiskey-50 transition-colors"
             >
               <div className="hs-tooltip inline-block shrink-0">
                 <span className="hs-tooltip-toggle text-whiskey-500 text-xs whitespace-nowrap border-b border-dotted border-whiskey-300 cursor-help hover:text-whiskey-600 transition-colors">
@@ -107,7 +113,7 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
       </div>
 
       {!isTop25 && (
-        <div className="pt-4 mt-2 border-t border-whiskey-100">
+        <div className="pt-3 mt-2 border-t border-whiskey-100">
           <a
             href={`/${formatCategoryUrl(category)}`}
             className="inline-flex items-center text-whiskey-600 hover:text-whiskey-800 text-sm font-medium group-hover:translate-x-1 transition-all duration-200"
