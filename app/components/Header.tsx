@@ -39,7 +39,7 @@ export default function Header() {
 
         <ul className={`${
           isMenuOpen 
-            ? 'absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-whiskey-100 z-50' 
+            ? 'absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-whiskey-100 z-50 lg:bg-transparent lg:shadow-none lg:border-none' 
             : 'hidden'
         } lg:relative lg:flex lg:top-0 lg:shadow-none lg:space-x-8 w-full lg:w-auto flex-col lg:flex-row items-center`}>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
@@ -77,7 +77,7 @@ export default function Header() {
               Aprende más
               <FaCaretDown className="ml-1 group-hover:rotate-180 transition-transform duration-200" />
             </button>
-            <ul className="hidden lg:group-hover:block w-48 bg-white shadow-lg rounded-md py-2 absolute -left-10 mt-2 border border-whiskey-100">
+            <ul className="hidden lg:group-hover:block w-48 bg-white shadow-lg rounded-md py-2 absolute -left-10 mt-2 border border-whiskey-100 z-[60]">
               <li>
                 <Link 
                   href="/sobre-esta-web" 
