@@ -53,11 +53,11 @@ export default function Header() {
           </li>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
             <Link 
-              href="/libros" 
+              href="/biblioteca" 
               onClick={handleNavigationClick} 
               className="text-whiskey-700 hover:text-whiskey-900 transition-colors duration-200 block text-center font-medium"
             >
-              Libros
+              Biblioteca
             </Link>
           </li>
           <li className="w-full lg:w-auto py-2 px-4 lg:px-0">
