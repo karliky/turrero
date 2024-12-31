@@ -1,5 +1,10 @@
-import fs from "fs";
-import path from "path";
+import tweetsMapData from './db/tweets_map.json';
+import tweetsData from './db/tweets.json';
+import tweetSummariesData from './db/tweets_summary.json';
+import enrichedTweetsData from './db/tweets_enriched.json';
+import tweetExamsData from './db/tweets_exam.json';
+import tweetPodcastsData from './db/tweets_podcast.json';
+import graphData from './db/processed_graph_data.json';
 
 export interface CategorizedTweet {
   id: string;
@@ -71,23 +76,31 @@ export interface TurraNode {
   related_threads: string[];
 }
 
+let instance: TweetProvider | null = null;
+
 export class TweetProvider {
-  private tweetsMap: CategorizedTweet[];
-  private tweets: Tweet[][];
-  private tweetSummaries: TweetSummary[];
-  private enrichedTweets: EnrichedTweetMetadata[];
-  private tweetExams: TweetExam[];
-  private tweetPodcasts: { id: string }[];
-  private graphData: TurraNode[];
+  private tweetsMap!: CategorizedTweet[];
+  private tweets!: Tweet[][];
+  private tweetSummaries!: TweetSummary[];
+  private enrichedTweets!: EnrichedTweetMetadata[];
+  private tweetExams!: TweetExam[];
+  private tweetPodcasts!: { id: string }[];
+  private graphData!: TurraNode[];
 
   constructor() {
-    this.tweetsMap = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_map.json'), 'utf-8'));
-    this.tweets = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets.json'), 'utf-8'));
-    this.tweetSummaries = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_summary.json'), 'utf-8'));
-    this.enrichedTweets = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_enriched.json'), 'utf-8'));
-    this.tweetExams = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_exam.json'), 'utf-8'));
-    this.tweetPodcasts = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/tweets_podcast.json'), 'utf-8'));
-    this.graphData = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'infrastructure/db/processed_graph_data.json'), 'utf-8'));
+    if (instance) {
+      return instance;
+    }
+
+    this.tweetsMap = tweetsMapData as CategorizedTweet[];
+    this.tweets = tweetsData as Tweet[][];
+    this.tweetSummaries = tweetSummariesData as TweetSummary[];
+    this.enrichedTweets = enrichedTweetsData as EnrichedTweetMetadata[];
+    this.tweetExams = tweetExamsData as TweetExam[];
+    this.tweetPodcasts = tweetPodcastsData as { id: string }[];
+    this.graphData = graphData as TurraNode[];
+
+    instance = this;
   }
 
   getTweetsByCategory(category: string): Tweet[] {

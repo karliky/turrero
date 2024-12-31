@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { FaArrowLeft } from "react-icons/fa";
-import { TweetProvider, Tweet } from "../../../infrastructure/TweetProvider";
+import { TweetProvider } from "../../../infrastructure/TweetProvider";
 import { TweetContent } from "../../components/TweetContent";
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -14,22 +14,21 @@ interface Params {
   }>;
 }
 
-async function getTweetById(id: string): Promise<Tweet[]> {
+async function getTweetData(id: string) {
   const tweetProvider = new TweetProvider();
-  const allThreads = tweetProvider.getAllTweets();
-  // Find the thread that contains the tweet with the given ID
-  const thread = allThreads.find(thread => 
+  const thread = tweetProvider.getAllTweets().find(thread => 
     thread.some(tweet => tweet.id === id)
-  );
-  return thread || [];
-}
-
-function getTweetSummary(id: string): string {
-  return new TweetProvider().getSummaryById(id);
-}
-
-function getTweetCategories(id: string): string[] {
-  return new TweetProvider().getCategoryById(id);
+  ) || [];
+  
+  if (thread.length === 0) return null;
+  
+  const mainTweet = thread[0];
+  return {
+    thread,
+    summary: tweetProvider.getSummaryById(mainTweet.id),
+    categories: tweetProvider.getCategoryById(mainTweet.id),
+    exam: tweetProvider.getExamById(mainTweet.id)
+  };
 }
 
 function normalizeText(text: string): string {
@@ -40,33 +39,40 @@ function normalizeText(text: string): string {
     .replace(/\s+/g, '-'); // Replace spaces with hyphens
 }
 
-function getTweetExam(id: string) {
-  return new TweetProvider().getExamById(id);
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const resolvedParams = await params;
   const id = resolvedParams.id;
-  const summary = getTweetSummary(id);
+  const data = await getTweetData(id);
   
   return {
-    title: `${summary} - El Turrero Post`,
+    title: `${data?.summary || 'Not Found'} - El Turrero Post`,
   };
 }
+
+export async function generateStaticParams() {
+  const tweetProvider = new TweetProvider();
+  const allThreads = tweetProvider.getAllTweets();
+  
+  return allThreads.map(thread => ({
+    id: thread[0].id
+  }));
+}
+
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
 
 export default async function TurraPage({ params }: Params) {
   const resolvedParams = await params;
   const id = resolvedParams.id;
 
-  const thread = await getTweetById(id);
+  const data = await getTweetData(id);
 
-  if (!thread || thread.length === 0) {
+  if (!data) {
     notFound();
   }
 
+  const { thread, summary, categories, exam } = data;
   const mainTweet = thread[0];
-  const summary = getTweetSummary(mainTweet.id);
-  const exam = getTweetExam(mainTweet.id);
   const words = summary.split(' ');
   const coloredWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
@@ -120,7 +126,7 @@ export default async function TurraPage({ params }: Params) {
           {/* Add categories section */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm text-whiskey-600">Categoría(s) de esta turra:</span>
-            {getTweetCategories(mainTweet.id).map((category, index) => (
+            {categories.map((category, index) => (
               <a
                 key={index}
                 href={`/${normalizeText(category)}`}
