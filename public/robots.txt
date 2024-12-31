@@ -1,3 +1,0 @@
-User-Agent: *
-Allow: /
-Sitemap: https://turrero.vercel.app/sitemap.xml
