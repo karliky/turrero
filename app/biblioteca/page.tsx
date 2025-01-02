@@ -34,7 +34,7 @@ export default async function LibrosPage() {
     <main className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-whiskey-900 mb-4">
-          La biblioteca de El Turrero Post.
+          La biblioteca.
         </h1>
         <p className="text-lg text-whiskey-700 mb-6">
           Un total de {books.length} libros mencionados en las turras.
