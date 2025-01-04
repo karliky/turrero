@@ -1,15 +1,17 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import puppeteer from 'puppeteer';
 import PDFMerger from 'pdf-merger-js';
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
 import { cpus } from 'os';
 import sharp from 'sharp';
+import Epub from 'epub-gen';
+import { readFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 
 // Utility functions
 const readJsonFile = (filePath) => {
   const projectRoot = path.join(process.cwd(), '..');
-  return JSON.parse(fs.readFileSync(path.join(projectRoot, filePath), 'utf-8'));
+  return JSON.parse(readFileSync(path.join(projectRoot, filePath), 'utf-8'));
 };
 
 const normalizeImagePath = async (imagePath) => {
@@ -26,7 +28,7 @@ const normalizeImagePath = async (imagePath) => {
         withoutEnlargement: true
       })
       .jpeg({ // Convert to JPEG for better compression
-        quality: 60,
+        quality: 30,
         progressive: true
       })
       .toBuffer();
@@ -261,6 +263,63 @@ const generateTurraHtml = async (thread, summary, categories) => {
   `;
 };
 
+const generateEpubHtml = async (thread, summary, categories) => {
+  // Similar to generateTurraHtml but with simplified styling for ebooks
+  const mainTweet = thread[0];
+  const enrichedTweets = readJsonFile('infrastructure/db/tweets_enriched.json');
+  
+  const renderEmbed = async (tweet) => {
+    const enrichedData = getEnrichedTweetData(enrichedTweets, tweet.id);
+    if (!enrichedData) return '';
+
+    switch (enrichedData.type) {
+      case 'card':
+        const cardImage = enrichedData.img ? await getImageForEpub(enrichedData.img) : '';
+        return `
+          <div>
+            ${cardImage ? `<img src="${cardImage}" alt="${enrichedData.title || ''}" />` : ''}
+            <h4>${enrichedData.title || enrichedData.url}</h4>
+            ${enrichedData.description ? `<p><em>${enrichedData.description}</em></p>` : ''}
+            ${enrichedData.media ? `<p class="source">${enrichedData.media}</p>` : ''}
+          </div>
+        `;
+
+      case 'media':
+        const mediaImage = enrichedData.img ? await getImageForEpub(enrichedData.img) : '';
+        return mediaImage ? `<img src="${mediaImage}" alt="" />` : '';
+
+      case 'embed':
+        return `
+          <blockquote>
+            <p><strong>${enrichedData.author}</strong></p>
+            <p>${enrichedData.tweet}</p>
+          </blockquote>
+        `;
+
+      default:
+        return '';
+    }
+  };
+
+  const processedTweets = await Promise.all(thread.map(async tweet => {
+    const embedHtml = await renderEmbed(tweet);
+    return `
+      <div>
+        <p>${tweet.tweet}</p>
+        ${embedHtml}
+      </div>
+      <hr/>
+    `;
+  }));
+
+  return `
+    <h1>${summary}</h1>
+    <p><em>Categorías: ${categories.map(formatCategoryTitle).join(', ')}</em></p>
+    <p><em>Fecha: ${new Date(mainTweet.time).toLocaleDateString('es-ES')}</em></p>
+    ${processedTweets.join('\n')}
+  `;
+};
+
 const generateIndexHtml = (categories, tweetsMap, summaries) => {
   const categorizedTweets = {};
   
@@ -422,6 +481,109 @@ async function generateThreadPDF(browser, thread, summary, tweetCategories, temp
   return pdfPath;
 }
 
+async function generateEbook(categories, tweetsMap, tweets, summaries) {
+  console.log('📚 Generating EPUB...');
+  
+  const chapters = [];
+  
+  // Add index chapter
+  chapters.push({
+    title: 'Índice de Turras',
+    data: `
+      <h1>Índice de Turras</h1>
+      ${categories.map(category => {
+        const categoryTweets = tweetsMap
+          .filter(tweet => tweet.categories.split(',').map(c => c.trim()).includes(category))
+          .map(tweet => {
+            const summary = summaries.find(s => s.id === tweet.id)?.summary || '';
+            return `<li>${summary}</li>`;
+          })
+          .join('\n');
+        
+        return `
+          <h2>${formatCategoryTitle(category)}</h2>
+          <ul>${categoryTweets}</ul>
+        `;
+      }).join('\n')}
+    `
+  });
+
+  // Add chapters for each category
+  for (const category of categories) {
+    const categoryTweets = tweetsMap
+      .filter(tweet => tweet.categories.split(',').map(c => c.trim()).includes(category))
+      .map(tweet => tweet.id);
+
+    const categoryThreads = tweets
+      .filter(thread => categoryTweets.includes(thread[0].id))
+      .sort((a, b) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
+
+    for (const thread of categoryThreads) {
+      const summary = summaries.find(s => s.id === thread[0].id)?.summary || '';
+      const tweetCategories = tweetsMap
+        .find(t => t.id === thread[0].id)?.categories.split(',') || [];
+      
+      chapters.push({
+        title: summary,
+        data: await generateEpubHtml(thread, summary, tweetCategories)
+      });
+    }
+  }
+
+  const options = {
+    title: 'El Turrero Post',
+    author: 'El Turrero',
+    publisher: 'El Turrero Post',
+    content: chapters,
+    verbose: true,
+    cover: await getImageForEpub('../public/cover.png'),
+    css: `
+      body {
+        font-family: serif;
+        line-height: 1.5;
+      }
+      h1 {
+        font-size: 1.5em;
+        margin: 1em 0;
+      }
+      h2 {
+        font-size: 1.3em;
+        margin: 1em 0;
+      }
+      h4 {
+        font-size: 1.1em;
+        margin: 0.5em 0;
+      }
+      p {
+        margin: 0.5em 0;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        margin: 1em 0;
+      }
+      blockquote {
+        margin: 1em 0;
+        padding: 0 1em;
+        border-left: 3px solid #ccc;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        margin: 1em 0;
+      }
+      .source {
+        font-style: italic;
+        color: #666;
+      }
+    `
+  };
+
+  const outputPath = path.join(process.cwd(), '..', 'public', 'turras.epub');
+  await new Epub(options, outputPath).promise;
+  console.log(`📱 EPUB generated successfully at ${outputPath}`);
+}
+
 // Worker thread code
 if (!isMainThread) {
   const { threads, tempDir, workerId } = workerData;
@@ -494,8 +656,8 @@ async function main() {
 
   // Create temp directory
   const tempDir = path.join(process.cwd(), 'temp_pdfs');
-  if (!fs.existsSync(tempDir)) {
-    fs.mkdirSync(tempDir);
+  if (!existsSync(tempDir)) {
+    mkdirSync(tempDir);
     console.log('📁 Created temporary directory');
   }
 
@@ -599,12 +761,15 @@ async function main() {
   const outputPath = path.join(process.cwd(), '..', 'public', `turras.pdf`);
   await merger.save(outputPath);
 
+  // After PDF generation, generate EPUB
+  await generateEbook(categories, tweetsMap, tweets, summaries);
+
   // Cleanup
   console.log('🧹 Cleaning up...');
   await browser.close();
-  fs.rmSync(tempDir, { recursive: true });
+  rmSync(tempDir, { recursive: true });
   
-  console.log(`✅ PDF generated successfully at ${outputPath}`);
+  console.log(`✅ PDF and EPUB generated successfully at ${outputPath}`);
   console.log(`Estaré aquí mismo.`);
   process.exit(0);
 }
@@ -613,3 +778,15 @@ async function main() {
 if (isMainThread) {
   main().catch(console.error);
 } 
+
+const getImageForEpub = async (imagePath) => {
+  try {
+    const absolutePath = path.join(process.cwd(), '..', 'public', imagePath);
+    console.log(`Converting image path: ${imagePath} -> ${absolutePath}`);
+    await fs.access(absolutePath);
+    return absolutePath;
+  } catch (error) {
+    console.warn(`Warning: Could not find image at ${imagePath}`, error);
+    return null;
+  }
+}; 

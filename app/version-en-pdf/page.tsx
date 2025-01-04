@@ -11,29 +11,39 @@ export default function PDFVersion() {
             </div>
             
             <h1 className="text-3xl font-bold text-whiskey-900 mb-6 text-center">
-              Versión en PDF de El Turrero Post
+              Versiones descargables de El Turrero Post
             </h1>
 
             <div className="prose max-w-none mb-8">
               <p className="text-gray-600 leading-relaxed mb-4">
-                Hemos recopilado todas las turras en un único documento PDF para facilitar su lectura offline. 
-                El documento incluye:
+                Hemos recopilado todas las turras en diferentes formatos para facilitar su lectura offline. 
+                Los documentos incluyen:
               </p>
               
               <ul className="list-disc pl-6 text-gray-600 mb-6">
                 <li>Índice organizado por categorías</li>
                 <li>Todas las turras hasta la fecha</li>
-                <li>Turras a dos columnas para facilitar la lectura</li>
+                <li>Formatos optimizados para diferentes dispositivos</li>
               </ul>
 
               <div className="bg-whiskey-50 p-4 rounded-lg mb-6">
                 <p className="text-whiskey-700 text-sm">
-                  <strong>Nota:</strong> El archivo tiene un tamaño de 120MB debido a la cantidad de contenido incluido.
+                  <strong>Nota:</strong> El archivo PDF tiene un tamaño de 120MB debido a la cantidad de contenido incluido.
+                  La versión EPUB es más ligera y optimizada para lectores electrónicos.
                 </p>
               </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-4">
+              <a
+                href="https://drive.google.com/file/d/15LIQ8Car0BsmVgHKSVfZuYJ0x8xPl2No/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-whiskey-600 text-white px-6 py-3 rounded-lg hover:bg-whiskey-700 transition-colors"
+              >
+                <FaFilePdf />
+                Descargar PDF
+              </a>
               <a
                 href="https://drive.google.com/file/d/15LIQ8Car0BsmVgHKSVfZuYJ0x8xPl2No/view?usp=sharing"
                 target="_blank"
@@ -41,7 +51,7 @@ export default function PDFVersion() {
                 className="inline-flex items-center gap-2 bg-whiskey-600 text-white px-6 py-3 rounded-lg hover:bg-whiskey-700 transition-colors"
               >
                 <FaDownload />
-                Descargar PDF
+                Descargar EPUB
               </a>
             </div>
           </div>
