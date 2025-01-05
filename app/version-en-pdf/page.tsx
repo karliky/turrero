@@ -36,7 +36,7 @@ export default function PDFVersion() {
 
             <div className="flex justify-center gap-4">
               <a
-                href="https://drive.google.com/file/d/15LIQ8Car0BsmVgHKSVfZuYJ0x8xPl2No/view?usp=sharing"
+                href="/turras.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-whiskey-600 text-white px-6 py-3 rounded-lg hover:bg-whiskey-700 transition-colors"
@@ -45,7 +45,7 @@ export default function PDFVersion() {
                 Descargar PDF
               </a>
               <a
-                href="https://drive.google.com/file/d/15LIQ8Car0BsmVgHKSVfZuYJ0x8xPl2No/view?usp=sharing"
+                href="/turras.epub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-whiskey-600 text-white px-6 py-3 rounded-lg hover:bg-whiskey-700 transition-colors"
