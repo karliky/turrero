@@ -28,8 +28,8 @@ export default function PDFVersion() {
 
               <div className="bg-whiskey-50 p-4 rounded-lg mb-6">
                 <p className="text-whiskey-700 text-sm">
-                  <strong>Nota:</strong> El archivo PDF tiene un tamaño de 120MB debido a la cantidad de contenido incluido.
-                  La versión EPUB es más ligera y optimizada para lectores electrónicos.
+                  <strong>Nota:</strong> El archivo PDF tiene un tamaño de 99mb debido a la cantidad de contenido incluido.
+                  La versión EPUB es más ligera y optimizada para lectores electrónicos con un tamaño de 19mb.
                 </p>
               </div>
             </div>
