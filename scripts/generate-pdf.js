@@ -313,7 +313,6 @@ const generateEpubHtml = async (thread, summary, categories) => {
   }));
 
   return `
-    <h1>${summary}</h1>
     <p><em>Categorías: ${categories.map(formatCategoryTitle).join(', ')}</em></p>
     <p><em>Fecha: ${new Date(mainTweet.time).toLocaleDateString('es-ES')}</em></p>
     ${processedTweets.join('\n')}
@@ -481,9 +480,51 @@ async function generateThreadPDF(browser, thread, summary, tweetCategories, temp
   return pdfPath;
 }
 
+const getImageForEpub = async (imagePath) => {
+  if (!imagePath) return null;
+  
+  try {
+    const projectRoot = path.join(process.cwd(), '..');
+    const absolutePath = path.join(projectRoot, 'public', imagePath.replace(/^\.\//, ''));
+    const tempDir = path.join(process.cwd(), 'temp_epub_images');
+    
+    // Create temp directory if it doesn't exist
+    if (!existsSync(tempDir)) {
+      mkdirSync(tempDir);
+    }
+
+    // Generate unique filename for the optimized image
+    const optimizedFileName = `${path.basename(imagePath, path.extname(imagePath))}_optimized.jpg`;
+    const optimizedPath = path.join(tempDir, optimizedFileName);
+
+    // Optimize image using sharp
+    await sharp(absolutePath)
+      .resize(400, 400, {
+        fit: 'inside',
+        withoutEnlargement: true
+      })
+      .jpeg({ 
+        quality: 30,
+        progressive: true
+      })
+      .toFile(optimizedPath);
+
+    return optimizedPath;
+  } catch (error) {
+    console.warn(`Warning: Could not process image at ${imagePath}`, error);
+    return null;
+  }
+};
+
 async function generateEbook(categories, tweetsMap, tweets, summaries) {
   console.log('📚 Generating EPUB...');
   
+  // Create temp directory for optimized images
+  const tempImagesDir = path.join(process.cwd(), 'temp_epub_images');
+  if (!existsSync(tempImagesDir)) {
+    mkdirSync(tempImagesDir);
+  }
+
   const chapters = [];
   
   // Add index chapter
@@ -582,6 +623,10 @@ async function generateEbook(categories, tweetsMap, tweets, summaries) {
   const outputPath = path.join(process.cwd(), '..', 'public', 'turras.epub');
   await new Epub(options, outputPath).promise;
   console.log(`📱 EPUB generated successfully at ${outputPath}`);
+
+  // After EPUB generation, clean up temp images
+  console.log('🧹 Cleaning up temporary EPUB images...');
+  rmSync(tempImagesDir, { recursive: true });
 }
 
 // Worker thread code
@@ -778,15 +823,3 @@ async function main() {
 if (isMainThread) {
   main().catch(console.error);
 } 
-
-const getImageForEpub = async (imagePath) => {
-  try {
-    const absolutePath = path.join(process.cwd(), '..', 'public', imagePath);
-    console.log(`Converting image path: ${imagePath} -> ${absolutePath}`);
-    await fs.access(absolutePath);
-    return absolutePath;
-  } catch (error) {
-    console.warn(`Warning: Could not find image at ${imagePath}`, error);
-    return null;
-  }
-}; 
