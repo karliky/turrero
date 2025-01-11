@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
     const canvas = createCanvas(972, 547);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d') as unknown as CanvasRenderingContext2D;
 
     if (!id) {
       return new Response('ID not found', { status: 404 });
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     }
 
     const image = await loadImage('https://turrero.vercel.app/meta_promo.png');
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image as unknown as CanvasImageSource, 0, 0);
 
     // Add text to image
     ctx.font = '32px Open Sans';
