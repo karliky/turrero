@@ -11,7 +11,6 @@
   "dependencies": {
     "@fast-csv/parse": "^5.0.2",
     "algoliasearch": "4.14.3",
-    "canvas": "^3.0.1",
     "csv-parse": "^5.6.0",
     "date-fns": "^4.1.0",
     "epub-gen": "^0.1.0",
