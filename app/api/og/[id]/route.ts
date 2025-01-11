@@ -3,14 +3,18 @@ import { Jimp, loadFont, HorizontalAlign, VerticalAlign } from 'jimp';
 import { SANS_32_BLACK } from 'jimp/fonts';
 import { TweetProvider } from '../../../../infrastructure/TweetProvider';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
+    const url = new URL(request.url);
+    const id = url.pathname.split('/').pop();
+
+    if (!id) {
+      return new Response('ID not found', { status: 404 });
+    }
+
     // Get the tweet summary
     const tweetProvider = new TweetProvider();
-    const summary = tweetProvider.getSummaryById(params.id);
+    const summary = tweetProvider.getSummaryById(id);
     
     if (!summary) {
       return new Response('Summary not found', { status: 404 });
