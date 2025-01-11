@@ -1,7 +1,5 @@
 'use client';
 
-import { Metadata } from 'next';
-
 type Topic = {
   id: string;
   title: string;
@@ -156,12 +154,3 @@ export default function HallOfFame() {
     </main>
   );
 }
-
-export const metadata: Metadata = {
-  title: 'Salón de la Fama',
-  description: 'Las turras más influyentes y conceptos fundamentales de Javier G. Recuenco',
-  openGraph: {
-    title: 'Salón de la Fama - El Turrero Post',
-    description: 'Las turras más influyentes y conceptos fundamentales de Javier G. Recuenco',
-  }
-}; 
