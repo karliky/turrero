@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 
     // Load the base image and font
     const [image, font] = await Promise.all([
-      Jimp.read(process.cwd() + '/public/meta_promo.png'),
+      Jimp.read('https://turrero.vercel.app/meta_promo.png'),
       loadFont(SANS_32_BLACK)
     ]);
 
