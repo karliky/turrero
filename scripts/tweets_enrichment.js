@@ -2,9 +2,9 @@
 import Downloader from 'nodejs-file-downloader';
 import { writeFileSync } from 'fs';
 import { tall } from 'tall';
-import enrichments from '../db/tweets_enriched.json' assert { type: 'json' };
-import existingTweets from '../db/tweets_enriched.json' assert { type: 'json' };
-import tweetsLibrary from '../db/tweets.json' assert { type: 'json' };
+import enrichments from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
+import existingTweets from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
+import tweetsLibrary from '../infrastructure/db/tweets.json' assert { type: 'json' };
 import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
@@ -122,5 +122,5 @@ function saveTweet(tweet) {
     console.log({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
     existingTweets.push({ id: tweet.id, ...tweet.metadata });
-    writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
+    writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
 }

@@ -7,7 +7,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 # Asignar argumentos a variables
-archivo_json=db/tweets.json
+archivo_json=../infrastructure/db/tweets.json
 id=$1
 
 # Usar jq para encontrar el subarray y extraer los campos tweet sin comillas

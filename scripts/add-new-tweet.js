@@ -13,7 +13,7 @@ if (process.argv.length < 4) {
 const tweetId = process.argv[2];
 // Combine all remaining arguments to handle spaces and special characters in tweetContent
 const tweetContent = process.argv.slice(3).join(' ');
-const filePath = join(__dirname, '/../db/turras.csv');
+const filePath = join(__dirname, '/../infrastructure/db/turras.csv');
 
 async function addTweet(tweetId, tweetContent) {
     try {

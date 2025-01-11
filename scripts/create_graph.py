@@ -67,9 +67,9 @@ def process_threads(threads_data, summaries, categories):
     return graph_data
 
 def main():
-    threads_data = read_json('db/tweets.json')
-    summaries = read_json('db/tweets_summary.json')
-    categories = read_json('db/tweets_map.json')
+    threads_data = read_json('../infrastructure/db/tweets.json')
+    summaries = read_json('../infrastructure/db/tweets_summary.json')
+    categories = read_json('../infrastructure/db/tweets_map.json')
 
     result = process_threads(threads_data, summaries, categories)
 

@@ -2,7 +2,7 @@
  * With this script, we create a new file that contains all the tweets in a single array (flatting the threads)
  * and then we can manually upload it to Algolia.
  */
-import tweets from '../db/tweets.json' assert { type: 'json' };
+import tweets from '../infrastructure/db/tweets.json' assert { type: 'json' };
 import fs from 'fs';
 
 

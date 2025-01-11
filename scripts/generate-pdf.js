@@ -677,9 +677,9 @@ if (!isMainThread) {
 
 async function main() {
   console.log('📚 Reading JSON files...');
-  const tweetsMap = readJsonFile('infrastructure/db/tweets_map.json');
-  const tweets = readJsonFile('infrastructure/db/tweets.json');
-  const summaries = readJsonFile('infrastructure/db/tweets_summary.json');
+  const tweetsMap = readJsonFile('../infrastructure/db/tweets_map.json');
+  const tweets = readJsonFile('../infrastructure/db/tweets.json');
+  const summaries = readJsonFile('../infrastructure/db/tweets_summary.json');
   
   const categories = ORDERED_CATEGORIES;
   

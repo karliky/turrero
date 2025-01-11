@@ -1,5 +1,5 @@
-import enrichments from '../db/tweets_enriched.json' assert { type: 'json' };
-import tweets from '../db/tweets.json' assert { type: 'json' };
+import enrichments from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
+import tweets from '../infrastructure/db/tweets.json' assert { type: 'json' };
 import fs from 'fs';
 
 import { fileURLToPath } from 'url';
@@ -16,4 +16,4 @@ console.log("Total books fromGoodReads", fromGoodReads.length);
 
 const books = [...fromGoodReads].filter((book) => book.url.indexOf('/author/') === -1);
 
-fs.writeFileSync(__dirname + '/../db/books-not-enriched.json', JSON.stringify(books, null, 4));
+fs.writeFileSync(__dirname + '/../infrastructure/db/books-not-enriched.json', JSON.stringify(books, null, 4));

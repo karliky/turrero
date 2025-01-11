@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Load the JSON file
-const filePath = path.join("db/tweets.json");
+const filePath = path.join("/infrastructure/db/tweets.json");
 const tweets = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
 // Function to find objects missing the 'id' field

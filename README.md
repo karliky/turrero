@@ -61,6 +61,8 @@ Alternatively you could use the following steps:
 10. Change manually the date on the file `components/header.js` to the latest update date
 11. Verify that everything is fine by running `npm run dev` on the root folder
 
+The data source that contains the twitter threads and metadata is located under `/infrastructure`.
+
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
 The files `db/tweets_map.json, db/tweets_summary.json`, `db/tweets_exam.json` should be manually edited.
 

@@ -6,7 +6,7 @@ import { getTweetText, extractMetadata } from './scraping.js';
 
 import puppeteer from 'puppeteer';
 import { KnownDevices } from 'puppeteer';
-import existingTweetsData from '../db/tweets.json' assert { type: 'json' };
+import existingTweetsData from '../infrastructure/db/tweets.json' assert { type: 'json' };
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -35,7 +35,7 @@ function parseCSV(filePath) {
 }
 
 // Replace csvdata.load with custom parseCSV function
-const tweets = parseCSV(__dirname + '/../db/turras.csv');
+const tweets = parseCSV(__dirname + '/../infrastructure/db/turras.csv');
 const random = Math.floor(Math.random() * 150) + 750;
 
 async function parseTweet({ page }) {
@@ -265,7 +265,7 @@ async function rejectCookies(page) {
         await getAllTweets({
             page,
             tweetIds,
-            outputFilePath: __dirname + '/../db/tweets.json'
+            outputFilePath: __dirname + '/../infrastructure/db/tweets.json'
         });
     }
 
