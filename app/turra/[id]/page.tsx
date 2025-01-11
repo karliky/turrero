@@ -50,19 +50,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     };
   }
 
+  const ogImageUrl = `/api/og/${id}`;
+
   return {
     title: `${data.summary} - El Turrero Post - Las turras de Javier G. Recuenco`,
     description: data.summary,
     openGraph: {
       title: data.summary,
       description: data.summary,
-      images: [`/meta/${id}.png`],
+      images: [ogImageUrl],
     },
     twitter: {
       card: 'summary_large_image',
       title: data.summary,
       description: data.summary,
-      images: [`/meta/${id}.png`],
+      images: [ogImageUrl],
     }
   };
 }

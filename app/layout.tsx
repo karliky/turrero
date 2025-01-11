@@ -16,7 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://turrero.vercel.app'),
+  metadataBase: new URL(
+    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://turrero.vercel.app'
+  ),
   title: {
     default: 'El Turrero Post - Las turras de Javier G. Recuenco',
     template: '%s | El Turrero Post'
