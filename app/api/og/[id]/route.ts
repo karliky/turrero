@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error generating image:', error);
-    return new Response('Error generating image', { status: 500 });
+    return new Response('Error generating image ' + error, { status: 500 });
   }
 }
 
