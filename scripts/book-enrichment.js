@@ -1,5 +1,5 @@
-import booksNotEnriched from '../db/books-not-enriched.json' assert { type: 'json' };
-import currentBooks from '../db/books.json' assert { type: 'json' };
+import booksNotEnriched from '../infrastructure/db/books-not-enriched.json' assert { type: 'json' };
+import currentBooks from '../infrastructure/db/books.json' assert { type: 'json' };
 import fs from 'fs';
 import puppeteer from 'puppeteer';
 
@@ -34,7 +34,7 @@ console.log('# Pending books to enrich', booksToEnrich.length);
             if (!('categories' in book)) book.categories = [];
             return book;
         });
-        fs.writeFileSync(__dirname + '/../db/books.json', JSON.stringify(enrichedBooks, null, 4));
+        fs.writeFileSync(__dirname + '/../infrastructure/db/books.json', JSON.stringify(enrichedBooks, null, 4));
     }
     console.log('# Estaré ahí mismo.')
     process.exit(0);
