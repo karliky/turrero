@@ -31,12 +31,14 @@ export const metadata: Metadata = {
     siteName: 'El Turrero Post',
     locale: 'es_ES',
     type: 'website',
+    images: ['/promo.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'El Turrero Post - Las turras de Javier G. Recuenco',
     description: 'Colección de turras de Javier G. Recuenco sobre resolución de problemas complejos, estrategia y más.',
     site: '@recuenco',
+    images: ['/promo.png'],
   },
   viewport: 'width=device-width, initial-scale=1',
   robots: {

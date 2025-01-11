@@ -33,6 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Biblioteca - El Turrero Post',
     description: 'Colección de libros mencionados en las turras de Javier G. Recuenco',
+    images: ['/promo.png'],
   }
 };
 

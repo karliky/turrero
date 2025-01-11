@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Versión en PDF - El Turrero Post',
     description: 'Descarga todas las turras de Javier G. Recuenco en formato PDF y EPUB',
+    images: ['/promo.png'],
   }
 };
 

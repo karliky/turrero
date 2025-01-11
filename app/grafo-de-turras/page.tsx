@@ -60,5 +60,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Grafo de Turras - El Turrero Post',
     description: 'Visualización interactiva de las conexiones entre las turras de Javier G. Recuenco',
+    images: ['/promo.png'],
   }
 }; 

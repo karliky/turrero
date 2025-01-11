@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Glosario CPS - El Turrero Post',
     description: 'Glosario de términos especializados utilizados en las turras de Javier G. Recuenco',
+    images: ['/promo.png'],
   }
 };
 
