@@ -19,4 +19,4 @@ tweets.forEach((thread) => {
     thread.forEach(({ id, tweet }) => algoliaTweets.push({ id: tweetId + "-" + id, tweet: tweet, time: thread[0].time }));
 });
 
-fs.writeFileSync(__dirname + '/../db/tweets-db.json', JSON.stringify(algoliaTweets, null, 4));
+fs.writeFileSync(__dirname + '/../infrastructure/db/tweets-db.json', JSON.stringify(algoliaTweets, null, 4));

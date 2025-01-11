@@ -96,7 +96,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                 console.log({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
 
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                writeFileSync(__dirname + '/../db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
+                writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
             }
             if (!tweet.metadata.type) continue;
             try {
