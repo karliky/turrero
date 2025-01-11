@@ -1,12 +1,43 @@
 import { NextRequest } from 'next/server';
-import { Jimp, loadFont, HorizontalAlign, VerticalAlign } from 'jimp';
-import { SANS_32_BLACK } from 'jimp/fonts';
 import { TweetProvider } from '../../../../infrastructure/TweetProvider';
+import { createCanvas, loadImage } from 'canvas';
+
+function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
+  const words = text.split(' ');
+  let line = '';
+  const lines = [];
+  
+  // Calculate lines
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    const testWidth = metrics.width;
+
+    if (testWidth > maxWidth && n > 0) {
+      lines.push(line);
+      line = words[n] + ' ';
+    } else {
+      line = testLine;
+    }
+  }
+  lines.push(line);
+
+  // Calculate vertical offset for centering
+  const totalHeight = lines.length * lineHeight;
+  const yOffsetStart = y - totalHeight / 2;
+
+  // Draw lines
+  lines.forEach((line, index) => {
+    ctx.fillText(line, x, yOffsetStart + index * lineHeight);
+  });
+}
 
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
+    const canvas = createCanvas(972, 547);
+    const ctx = canvas.getContext('2d');
 
     if (!id) {
       return new Response('ID not found', { status: 404 });
@@ -20,33 +51,19 @@ export async function GET(request: NextRequest) {
       return new Response('Summary not found', { status: 404 });
     }
 
-    // Load the base image and font
-    const [image, font] = await Promise.all([
-      Jimp.read('https://turrero.vercel.app/meta_promo.png'),
-      loadFont(SANS_32_BLACK)
-    ]);
+    const image = await loadImage('https://turrero.vercel.app/meta_promo.png');
+    ctx.drawImage(image, 0, 0);
 
     // Add text to image
-    image.print({
-      text: {
-        text: summary + '.',
-        alignmentX: HorizontalAlign.CENTER,
-        alignmentY: VerticalAlign.MIDDLE
-      },
-      x: 350,
-      y: 200,
-      maxWidth: 600,
-      font
-    });
+    ctx.font = '32px Open Sans';
+    ctx.fillStyle = '#000000';
+    ctx.textAlign = 'center';
+    wrapText(ctx, summary, 650, 273, 600, 40);
 
     // Convert to buffer
-    const buffer = await image.getBuffer("image/png");
-    // Return the image
+    const buffer = canvas.toBuffer('image/png');
     return new Response(buffer, {
-      headers: {
-        'Content-Type': 'image/png',
-        'Cache-Control': 'public, max-age=31536000, immutable'
-      },
+      headers: { 'Content-Type': 'image/png' },
     });
   } catch (error) {
     console.error('Error generating image:', error);
