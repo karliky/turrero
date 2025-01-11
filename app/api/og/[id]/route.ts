@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
     const image = await loadImage('https://turrero.vercel.app/meta_promo.png');
     ctx.drawImage(image as unknown as CanvasImageSource, 0, 0);
 
-    // Add text to image
+    // Add text to image  
     ctx.font = '32px Open Sans';
     ctx.fillStyle = '#000000';
     ctx.textAlign = 'center';
