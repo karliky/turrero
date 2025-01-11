@@ -1,4 +1,14 @@
 import { TweetFacade, GlossaryTerm } from '@/infrastructure';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Glosario CPS',
+  description: 'Glosario de términos especializados utilizados en las turras de Javier G. Recuenco',
+  openGraph: {
+    title: 'Glosario CPS - El Turrero Post',
+    description: 'Glosario de términos especializados utilizados en las turras de Javier G. Recuenco',
+  }
+};
 
 export default async function GlosarioPage() {
   const facade = new TweetFacade();

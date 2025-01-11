@@ -16,11 +16,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "El Turrero Post",
-  description: "Las turras de Javier G. Recuenco",
-  icons: {
-    icon: '/favicon.ico',
+  metadataBase: new URL('https://turrero.vercel.app'),
+  title: {
+    default: 'El Turrero Post - Las turras de Javier G. Recuenco',
+    template: '%s | El Turrero Post'
   },
+  description: 'Colección de turras de Javier G. Recuenco sobre resolución de problemas complejos, estrategia y más.',
+  openGraph: {
+    title: 'El Turrero Post - Las turras de Javier G. Recuenco',
+    description: 'Colección de turras de Javier G. Recuenco sobre resolución de problemas complejos, estrategia y más.',
+    url: 'https://turrero.vercel.app',
+    siteName: 'El Turrero Post',
+    locale: 'es_ES',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'El Turrero Post - Las turras de Javier G. Recuenco',
+    description: 'Colección de turras de Javier G. Recuenco sobre resolución de problemas complejos, estrategia y más.',
+    site: '@recuenco',
+  },
+  viewport: 'width=device-width, initial-scale=1',
+  robots: {
+    index: true,
+    follow: true
+  }
 };
 
 export default function RootLayout({

@@ -44,8 +44,26 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const id = resolvedParams.id;
   const data = await getTweetData(id);
   
+  if (!data) {
+    return {
+      title: 'Not Found',
+    };
+  }
+
   return {
-    title: `${data?.summary || 'Not Found'} - El Turrero Post`,
+    title: `${data.summary} - El Turrero Post - Las turras de Javier G. Recuenco`,
+    description: data.summary,
+    openGraph: {
+      title: data.summary,
+      description: data.summary,
+      images: [`/meta/${id}.png`],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data.summary,
+      description: data.summary,
+      images: [`/meta/${id}.png`],
+    }
   };
 }
 
