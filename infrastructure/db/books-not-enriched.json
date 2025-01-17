@@ -2410,5 +2410,23 @@
         "media": "goodreads",
         "title": "Ford Vs Ferrari",
         "turraId": "1870373349282484488"
+    },
+    {
+        "id": "1877979291935293502",
+        "type": "card",
+        "img": "./metadata/s0HvbzkK.jpeg",
+        "url": "https://www.goodreads.com/book/show/507952.Empires_of_Light",
+        "media": "goodreads",
+        "title": "Empires of Light: Edison, Tesla, Westinghouse, and the Race to Electrify the World",
+        "turraId": "1877979196271550821"
+    },
+    {
+        "id": "1877979292891488476",
+        "type": "card",
+        "img": "./metadata/9hpMbaSj.jpeg",
+        "url": "https://www.goodreads.com/book/show/855219.Blood_and_Volts",
+        "media": "goodreads",
+        "title": "Blood and Volts: Edison, Tesla and the Electric Chair",
+        "turraId": "1877979196271550821"
     }
 ]
