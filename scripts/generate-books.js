@@ -1,5 +1,5 @@
-import enrichments from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
-import tweets from '../infrastructure/db/tweets.json' assert { type: 'json' };
+import enrichments from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
+import tweets from '../infrastructure/db/tweets.json' with { type: 'json' };
 import fs from 'fs';
 
 import { fileURLToPath } from 'url';

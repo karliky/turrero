@@ -1,5 +1,5 @@
-import booksNotEnriched from '../infrastructure/db/books-not-enriched.json' assert { type: 'json' };
-import currentBooks from '../infrastructure/db/books.json' assert { type: 'json' };
+import booksNotEnriched from '../infrastructure/db/books-not-enriched.json' with { type: 'json' };
+import currentBooks from '../infrastructure/db/books.json' with { type: 'json' };
 import fs from 'fs';
 import puppeteer from 'puppeteer';
 

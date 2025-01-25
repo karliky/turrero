@@ -6,7 +6,7 @@ import { getTweetText, extractMetadata } from './scraping.js';
 
 import puppeteer from 'puppeteer';
 import { KnownDevices } from 'puppeteer';
-import existingTweetsData from '../infrastructure/db/tweets.json' assert { type: 'json' };
+import existingTweetsData from '../infrastructure/db/tweets.json' with { type: 'json' };
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -114,6 +114,7 @@ async function getAllTweets({ page, tweetIds, outputFilePath }) {
         // Refuse cookies and close the popup, only the first time it happens, afterwards it should be ignored
         try {
             await rejectCookies(page)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) { }
 
         let stopped = false;
@@ -239,6 +240,7 @@ async function rejectCookies(page) {
         try {
             await rejectCookies(page)
             console.log("Cookies rejected, closed the popup");
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             console.log("I could not reject cookies and close the popup");
         }

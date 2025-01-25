@@ -2,9 +2,9 @@
 import Downloader from 'nodejs-file-downloader';
 import { writeFileSync } from 'fs';
 import { tall } from 'tall';
-import enrichments from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
-import existingTweets from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
-import tweetsLibrary from '../infrastructure/db/tweets.json' assert { type: 'json' };
+import enrichments from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
+import existingTweets from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
+import tweetsLibrary from '../infrastructure/db/tweets.json' with { type: 'json' };
 import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';

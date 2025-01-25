@@ -1,6 +1,9 @@
 # El Turrero Post
 
-Welcome to the El Turrero Post project! This website is designed to showcase the Twitter threads of Javier G. Recuenco who specializes in complexity science. The goal of the website is to present the he's tweets in a visually pleasing and easy-to-navigate format.
+Welcome to the El Turrero Post project! This website is designed to showcase the
+Twitter threads of Javier G. Recuenco who specializes in complexity science. The
+goal of the website is to present the he's tweets in a visually pleasing and
+easy-to-navigate format.
 
 ## Features
 
@@ -11,10 +14,12 @@ Welcome to the El Turrero Post project! This website is designed to showcase the
 
 ## Kown bugs or improvements
 
-- Add blocks: #preguntaalrecu y latest 25 cronologic turras 
+- Add blocks: #preguntaalrecu y latest 25 cronologic turras
 - Show cards with card design (for those with url)
-- Some dates are incorrectly scraped, example https://twitter.com/Recuenco/status/1614168029876600833
-- Add copy link to every tweet so we can share it, like lexical.dev does on the left of every block
+- Some dates are incorrectly scraped, example
+  https://twitter.com/Recuenco/status/1614168029876600833
+- Add copy link to every tweet so we can share it, like lexical.dev does on the
+  left of every block
 
 ## More resources
 
@@ -26,15 +31,25 @@ Welcome to the El Turrero Post project! This website is designed to showcase the
 
 The website is built using:
 
-- Next.js for the front-end and server-side rendering
-- Node.js for the back-end and the scraping tools
+- Node.js 22 or higher for the front-end and server-side rendering
+- Node.js 22 or higher for the back-end and the scraping tools
+- python 3.8 or higher to generate the graph
 - Puppeter for web scraping twitter threads
+
+You can handle node.js versions by useing nvm, for example:
+
+```
+nvm use v23.3.0
+nvm alias default 23.3.0 # now should be forever default
+```
 
 ## Getting Started
 
-The front-end is located at the root of the project folder and the scraping logic is located under the `scripts` folder on its own package.
+The front-end is located at the root of the project folder and the scraping
+logic is located under the `scripts` folder on its own package.
 
-To get started with the project, you will need to clone the repository and install the dependencies. Here are the steps:
+To get started with the project, you will need to clone the repository and
+install the dependencies. Here are the steps:
 
 1. Clone the repository: `git clone git@github.com:karliky/turrero.git`
 2. Install the dependencies: `npm install`
@@ -45,29 +60,46 @@ To get started with the project, you will need to clone the repository and insta
 
 The process of adding a new thread is half manual half automated:
 
-You could use the script: `$ ./scripts/add_thread.sh $id $first_tweet_line` where `id` is the first tweet id (thread id) and `first_tweet_line` is the first tweet text.
+You could use the script: `$ ./scripts/add_thread.sh $id $first_tweet_line`
+where `id` is the first tweet id (thread id) and `first_tweet_line` is the first
+tweet text.
 
 Alternatively you could use the following steps:
 
-1. `node ./scripts/add-new-tweet.js $id $first_tweet_line` to add the first twwet id (thread id) and the first tweet text to ontop of the turras.csv file
+1. `node ./scripts/add-new-tweet.js $id $first_tweet_line` to add the first
+   twwet id (thread id) and the first tweet text to ontop of the turras.csv file
 2. `node ./scripts/recorder.js`. This will scrap it and save it into tweets.json
 3. `node ./scripts/tweets_enrichment.js`
 4. `node ./scripts/image-card-generator.js`
-5. Move the `./scripts/metadata` content into `public/metadata`, you can use the following command `mv -v ./metadata/* ./public/metadata/`
-6. `node ./scripts/make-algolia-db.js` then update the index in the Algolia service, clear the index and fetch the `db/tweets-db.json` file
-7. `node ./scripts/generate-books.js` this will update the `db/books-not-enriched.json`
-8. `node ./scripts/book-enrichment.js` this will output the list of books you should use in the last prompt to get the category of books and update the `db/books.json`
-9. Use the `./scripts/generate_prompts.sh` to generate the prompts to be used with ChatGPT (or the LLM of your choice) and obtain the summary, categories and questions to include in `db/tweets_summary.json`, `db/tweets_map.json` and `db/tweets_exam.json` respectively
-10. Change manually the date on the file `components/header.js` to the latest update date
+5. Move the `./scripts/metadata` content into `public/metadata`, you can use the
+   following command `mv -v ./metadata/* ./public/metadata/`
+6. `node ./scripts/make-algolia-db.js` then update the index in the Algolia
+   service, clear the index and fetch the `db/tweets-db.json` file
+7. `node ./scripts/generate-books.js` this will update the
+   `db/books-not-enriched.json`
+8. `node ./scripts/book-enrichment.js` this will output the list of books you
+   should use in the last prompt to get the category of books and update the
+   `db/books.json`
+9. Use the `./scripts/generate_prompts.sh` to generate the prompts to be used
+   with ChatGPT (or the LLM of your choice) and obtain the summary, categories
+   and questions to include in `db/tweets_summary.json`, `db/tweets_map.json`
+   and `db/tweets_exam.json` respectively
+10. Change manually the date on the file `components/header.js` to the latest
+    update date
 11. Verify that everything is fine by running `npm run dev` on the root folder
 
-The data source that contains the twitter threads and metadata is located under `/infrastructure`.
+The data source that contains the twitter threads and metadata is located under
+`/infrastructure`.
 
-The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are automatically generated and should not be manually edited.
-The files `db/tweets_map.json, db/tweets_summary.json`, `db/tweets_exam.json` should be manually edited.
+The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are
+automatically generated and should not be manually edited. The files
+`db/tweets_map.json, db/tweets_summary.json`, `db/tweets_exam.json` should be
+manually edited.
 
-## Debug 
-if a single tweet fails, test to download and parse it in isolation without consequences by using the scrapper like this:
+## Debug
+
+if a single tweet fails, test to download and parse it in isolation without
+consequences by using the scrapper like this:
 
 `node ./scripts/recorder.js --test id`
 
@@ -75,4 +107,6 @@ Read the comments in it to figure out better debug.
 
 ## Contribution
 
-We welcome contributions to this project. If you find any bugs or have any suggestions for new features, please open an issue or a pull request on the GitHub repository.
+We welcome contributions to this project. If you find any bugs or have any
+suggestions for new features, please open an issue or a pull request on the
+GitHub repository.

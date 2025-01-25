@@ -4,8 +4,8 @@ dotenv.config();
 import OpenAI from 'openai';
 import fs from 'fs';
 
-import Tweets from '../infrastructure/db/tweets.json' assert { type: 'json' };
-import TweetsEnrichements from '../infrastructure/db/tweets_enriched.json' assert { type: 'json' };
+import Tweets from '../infrastructure/db/tweets.json' with { type: 'json' };
+import TweetsEnrichements from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
 
 import { fileURLToPath } from 'url';
 import path from 'path';

@@ -67,13 +67,13 @@ def process_threads(threads_data, summaries, categories):
     return graph_data
 
 def main():
-    threads_data = read_json('../infrastructure/db/tweets.json')
-    summaries = read_json('../infrastructure/db/tweets_summary.json')
-    categories = read_json('../infrastructure/db/tweets_map.json')
+    threads_data = read_json('./infrastructure/db/tweets.json')
+    summaries = read_json('./infrastructure/db/tweets_summary.json')
+    categories = read_json('./infrastructure/db/tweets_map.json')
 
     result = process_threads(threads_data, summaries, categories)
 
-    with open('db/processed_graph_data.json', 'w', encoding='utf-8') as f:
+    with open('./infrastructure/db/processed_graph_data.json', 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import Tweets from './../db/tweets_summary.json' assert { type: 'json' };
+import Tweets from './../db/tweets_summary.json' with { type: 'json' };
 import PDFMerger from 'pdf-merger-js';
 import fs from 'fs';
 

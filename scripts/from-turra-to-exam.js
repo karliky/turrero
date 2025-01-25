@@ -1,6 +1,6 @@
-(async () => {
-    const Threads = require('../infrastructure/db/tweets.json');
+import Threads from '../infrastructure/db/tweets.json';
 
+(async () => {
     const processThread = async (thread) => {
         const TweetId = thread[0].id;
         console.log("TweetId: " + TweetId);
