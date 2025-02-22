@@ -2428,5 +2428,32 @@
         "media": "goodreads",
         "title": "Blood and Volts: Edison, Tesla and the Electric Chair",
         "turraId": "1877979196271550821"
+    },
+    {
+        "id": "1883056010094329902",
+        "type": "card",
+        "img": "./metadata/_fle01mz.jpeg",
+        "url": "https://www.goodreads.com/en/book/show/29775340-george-lucas",
+        "media": "goodreads",
+        "title": "George Lucas: A Life",
+        "turraId": "1883055789553676359"
+    },
+    {
+        "id": "1883056011046531342",
+        "type": "card",
+        "img": "./metadata/w9q8ajgU.jpeg",
+        "url": "https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned",
+        "media": "goodreads",
+        "title": "Why Greatness Cannot Be Planned: The Myth of the Objective",
+        "turraId": "1883055789553676359"
+    },
+    {
+        "id": "1883056015509192996",
+        "type": "card",
+        "img": "./metadata/Tu7W0eQO.jpeg",
+        "url": "https://www.goodreads.com/book/show/588138.The_Hero_With_a_Thousand_Faces",
+        "media": "goodreads",
+        "title": "The Hero With a Thousand Faces",
+        "turraId": "1883055789553676359"
     }
 ]
