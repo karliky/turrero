@@ -23602,5 +23602,79 @@
         "img": "./metadata/GiH1eMgXYAApiC0.jpeg",
         "url": "https://x.com/Recuenco/status/1883056021741945094/photo/1",
         "type": "media"
+    },
+    {
+        "id": "1893203295725871217",
+        "img": "./metadata/GkYCXNLWkAAwWno.jpeg",
+        "url": "https://x.com/Recuenco/status/1893203295725871217/photo/1",
+        "type": "media"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1892312912481378381",
+        "id": "1893203297370018019",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Madre mia, que locura de mes. \nEste sábado vuelvo a escribir yo el hilo turras. Hablaremos de sidestepping, Nintendo y en general de los huevos que hay que tener cuando eres alguien pequeño y propones jugar al Calvinball."
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1488626429726281728",
+        "id": "1893203304928129274",
+        "author": "Javier G. Recuenco\n@Recuenco\n·\nFeb 1, 2022",
+        "tweet": "Pues mira, te lo voy a contar. \nEstaba saliendo yo con mi novia de por aquel entonces y me voy a su casa donde veo que su hermano pequeño está jugando al Tekken 3."
+    },
+    {
+        "id": "1893203306014453873",
+        "type": "card",
+        "img": "./metadata/MfZk8kEF.jpeg",
+        "url": "https://www.youtube.com/watch?si=5O9QNL6aoNsjgleF&v=ZkU2W4n0d7g&feature=youtu.be",
+        "media": "youtube",
+        "description": "Tekken 3 Forest Law move list video showcase featuring his command moves, general moveset and various secrets, tips and tricks. The song running in the backg...",
+        "title": "Tekken 3 - Forest Law Move List"
+    },
+    {
+        "id": "1893203314579259730",
+        "img": "./metadata/GkYCYSMXQAAw2lW.jpeg",
+        "url": "https://x.com/Recuenco/status/1893203314579259730/photo/1",
+        "type": "media"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "215493839694217217",
+        "id": "1893203317108486614",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "@itorres\n @SenseiConsultor A mi es que me viene a la memoria todos los Hardcore Gamers descojonándose de la Wii. Son un 1% del mercado."
+    },
+    {
+        "id": "1893203322095501465",
+        "img": "./metadata/GkYCY1LWsAAhAKH.png",
+        "url": "https://x.com/Recuenco/status/1893203322095501465/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1893203328042947068",
+        "type": "card",
+        "img": "./metadata/hKIzLF1q.jpeg",
+        "url": "https://www.blueoceanstrategy.com/what-is-blue-ocean-strategy/"
+    },
+    {
+        "id": "1893203388646523069",
+        "img": "./metadata/GkYCcteWcAAmIdF.png",
+        "url": "https://x.com/Recuenco/status/1893203388646523069/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1893203404849131802",
+        "img": "./metadata/GkYCdqBXwAAtp1v.png",
+        "url": "https://x.com/Recuenco/status/1893203404849131802/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1893203406069624864",
+        "type": "card",
+        "img": "./metadata/E-sntC1y.jpeg",
+        "url": "https://www.goodreads.com/book/show/24812.The_Complete_Calvin_and_Hobbes",
+        "media": "goodreads",
+        "title": "The Complete Calvin and Hobbes"
     }
 ]

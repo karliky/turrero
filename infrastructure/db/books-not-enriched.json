@@ -2455,5 +2455,14 @@
         "media": "goodreads",
         "title": "The Hero With a Thousand Faces",
         "turraId": "1883055789553676359"
+    },
+    {
+        "id": "1893203406069624864",
+        "type": "card",
+        "img": "./metadata/E-sntC1y.jpeg",
+        "url": "https://www.goodreads.com/book/show/24812.The_Complete_Calvin_and_Hobbes",
+        "media": "goodreads",
+        "title": "The Complete Calvin and Hobbes",
+        "turraId": "1893203295725871217"
     }
 ]

@@ -45,7 +45,7 @@ async function parseTweet({ page }) {
     await new Promise(r => setTimeout(r, 100));
     console.log("Waiting for progress bar");
     await page.waitForSelector('div[role="progressbar"]', { hidden: true });
-    // There was a bug when the tweet id had a a Post parameters ?mx=2, so we remove it
+    // There was a bug when the tweet id had a a Post parameters , so we remove it
     const currentTweetId = page.url().split("/").slice(-1).pop().split("?")[0];
     console.log("currentTweetId", currentTweetId);
     const tweet = await page.evaluate(getTweetText); // text
