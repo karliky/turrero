@@ -19,9 +19,6 @@ node ./scripts/recorder.js
 echo "Enriching tweets for thread $id" 
 node ./scripts/tweets_enrichment.js
 
-# echo "Generating images for thread $id"
-# node ./scripts/image-card-generator.js
-
 echo "Generating algolia index for thread $id"
 node ./scripts/make-algolia-db.js
 

@@ -15,18 +15,18 @@ books_file="prompt_books_$id.txt"
 echo "Extrayendo texto del hilo..."
 scripts/extract_thread_text.sh $id
 
-echo "Generando prompt para db/tweets_summary.json..."
+echo "Generando prompt para infrastructure/db/tweets_summary.json ..."
 if [ -f "$turra_file" ]; then
     echo "Create a short headline from this text and do it in Spanish, never use these words in your headline: turras, hoy, hilo. Also, answer me in JSON format including the first word from my text which is an id and your headline but the property of the headline should be called \"summary\":" > $summary_file
     echo "<text>" >> $summary_file
     cat $turra_file >> $summary_file
     echo "</text>" >> $summary_file
-    echo "Prompt generado para db/tweets_summary.json..."
+    echo "Prompt generado para infrastructure/db/tweets_summary.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
 fi
 
-echo "Generando prompt para db/tweets_map.json..."
+echo "Generando prompt para infrastructure/db/tweets_map.json ..."
 if [ -f "$turra_file" ]; then
     
     echo "I need you to categorize the text in any of these categories, you should include at least one and maximum 5 categories." > $map_file
@@ -58,23 +58,23 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $map_file
     cat $turra_file >> $map_file
     echo "</text>" >> $map_file
-    echo "Prompt generado para db/tweets_map.json..."
+    echo "Prompt generado para infrastructure/db/tweets_map.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
 fi
 
-echo "Generando prompt para db/tweets_exam.json..."
+echo "Generando prompt para infrastructure/db/tweets_exam.json ..."
 if [ -f "$turra_file" ]; then
     echo "You are an expert teacher, your task is to create an exam for your students. Create a multiple choice test exam from this text. Every question should have a maximum of 3 options and make the options as concised as possible, create a maximum of 3 questions. Make sure your response is in Spanish and as a JSON format following this structure { "id":"first word of the text", "questions": [ { "question": "", "options": [ ], "answer": answerIndex }] } where answerIndex is the index of the option from the array of options and the answerIndex starts from 1 and not 0. Please create the JSON in one single line." > $exam_file
     echo "<text>" >> $exam_file
     cat $turra_file >> $exam_file
     echo "</text>" >> $exam_file
-    echo "Prompt generado para db/tweets_exam.json..."
+    echo "Prompt generado para infrastructure/db/tweets_exam.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
 fi
 
-echo "Generando prompt para db/tweets_books.json..."
+echo "Generando prompt para infrastructure/db/tweets_books.json ..."
 echo "Categoriza estos libros en alguna de las siguientes categorías, puedes incluir varias si es necesario. Responde solo las categorías por libro, no expliques nada mas, no busques en internet, usa el contexto para llegar a conclusiones, nunca respondas categorias fuera de la lista que te proveo:" > $books_file
 echo "El formato de salida es en formato JSON donde espero este formato como ejemplo:" >> $books_file
 echo "<ejemplo>" >> $books_file
@@ -104,4 +104,4 @@ echo "</categorias>" >> $books_file
 echo "<libros>" >> $books_file
 node scripts/book-enrichment.js >> $books_file
 echo "</libros>" >> $books_file
-echo "Prompt generado para db/tweets_books.json..."
+echo "Prompt generado para infrastructure/db/tweets_books.json ..."

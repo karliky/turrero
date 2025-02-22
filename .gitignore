@@ -40,3 +40,12 @@ prompt_map_*.txt
 prompt_exam_*.txt
 prompt_books_*.txt
 turra_*.txt
+
+# Python
+venv/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
