@@ -15,6 +15,7 @@ export interface Tweet {
   tweet: string;
   id: string;
   time: string;
+  author: string;
   metadata?: {
     embed?: {
       type: string;

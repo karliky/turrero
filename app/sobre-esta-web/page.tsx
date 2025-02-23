@@ -169,8 +169,8 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <img
-                    src="https://avatars.githubusercontent.com/u/8669176?v=4"
+                  <Image
+                    src="/alejandra.jpeg"
                     alt="Alejandra Arri"
                     className="rounded-lg shadow-md w-full"
                     width={400}

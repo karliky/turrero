@@ -10,6 +10,12 @@ export type Author = {
   YOUTUBE: string
 }
 
+export const fromXtoAuthor = (x: string) => {
+  // I don't like this, but it's a quick fix
+  if (x === AUTHORS.RECUENCO.X) return AUTHORS.RECUENCO;
+  return AUTHORS.CPSCOMUNITY;
+}
+
 export const AUTHORS : Authors = {
   MAIN: "Javier G. Recuenco y la Comunidad CPS",
   CPSCOMUNITY: {

@@ -1,9 +1,8 @@
-import { AUTHORS, Authors } from "@/infrastructure/constants";
+import { AUTHORS } from "@/infrastructure/constants";
 
 interface HeaderDescriptionProps {
   totalTweets: number;
   lastUpdateDate: string;
-  author: Authors;
 }
 
 export function HeaderDescription({ totalTweets, lastUpdateDate }: HeaderDescriptionProps) {
