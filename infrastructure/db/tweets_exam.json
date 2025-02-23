@@ -1,5 +1,37 @@
 [
   {
+    "id": "1893203295725871217",
+    "questions": [
+      {
+        "question": "¿Qué estrategia utilizó Nintendo con la Wii?",
+        "options": [
+          "Competir en hardware",
+          "Sidestepping estratégico",
+          "Imitar a Sony y Microsoft"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "¿Cuál fue el principal atractivo del control de la Wii?",
+        "options": [
+          "Gráficos avanzados",
+          "Experiencia intuitiva",
+          "Mayor capacidad de almacenamiento"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "¿Qué caracteriza al Calvinball?",
+        "options": [
+          "Reglas fijas",
+          "Improvisación constante",
+          "Estrategia definida"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  {
     "id": "1888123731865702418",
     "questions": [
       {

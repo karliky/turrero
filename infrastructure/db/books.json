@@ -1,46 +1,5 @@
 [
     {
-        "title": "The Six Big Ideas of Adaptive Organizations: From Frameworks to Sensemaking:",
-        "categories": [
-            "Business",
-            "Personal Development"
-        ]
-    },
-    {
-        "title": "Your Business, Your Family, Your Legacy: Building a Multigenerational Family Business that Lasts",
-        "categories": [
-            "Business",
-            "Economics"
-        ]
-    },
-    {
-        "title": "The Future Will Not Be Taught: How to Reimagine Education and Build a Thriving Learning Community",
-        "categories": [
-            "Education",
-            "Personal Development"
-        ]
-    },
-    {
-        "title": "Aporetics: Rational Deliberation in the Face of Inconsistency",
-        "categories": [
-            "Philosophy"
-        ]
-    },
-    {
-        "title": "The Aporetic Tradition in Ancient Philosophy",
-        "categories": [
-            "Philosophy",
-            "History"
-        ]
-    },
-    {
-        "title": "Ford Vs Ferrari",
-        "categories": [
-            "History",
-            "Biography"
-        ]
-    },
-    {
         "id": "1832301324047646772",
         "type": "card",
         "img": "./metadata/Qxk-sc6o.jpeg",
@@ -48,7 +7,10 @@
         "media": "goodreads",
         "title": "Your Business, Your Family, Your Legacy: Building a Multigenerational Family Business that Lasts",
         "turraId": "1832301234105061777",
-        "categories": []
+        "categories": [
+            "Business",
+            "Personal Development"
+        ]
     },
     {
         "id": "1610940583975047168",
@@ -4119,7 +4081,10 @@
         "media": "goodreads",
         "title": "The Six Big Ideas of Adaptive Organizations: From Frameworks to Sensemaking:",
         "turraId": "1804386948938699148",
-        "categories": []
+        "categories": [
+            "Business",
+            "Personal Development"
+        ]
     },
     {
         "id": "1832301269291069679",
@@ -4339,7 +4304,10 @@
         "media": "goodreads",
         "title": "The Future Will Not Be Taught: How to Reimagine Education and Build a Thriving Learning Community",
         "turraId": "1850051280107983315",
-        "categories": []
+        "categories": [
+            "Education",
+            "Personal Development"
+        ]
     },
     {
         "id": "1857680413726015981",
@@ -4450,7 +4418,9 @@
         "media": "goodreads",
         "title": "Aporetics: Rational Deliberation in the Face of Inconsistency",
         "turraId": "1865306644827029957",
-        "categories": []
+        "categories": [
+            "Philosophy"
+        ]
     },
     {
         "id": "1865306714305659020",
@@ -4460,7 +4430,10 @@
         "media": "goodreads",
         "title": "The Aporetic Tradition in Ancient Philosophy",
         "turraId": "1865306644827029957",
-        "categories": []
+        "categories": [
+            "Philosophy",
+            "History"
+        ]
     },
     {
         "id": "1870373358589587569",
@@ -4502,7 +4475,10 @@
         "media": "goodreads",
         "title": "Ford Vs Ferrari",
         "turraId": "1870373349282484488",
-        "categories": []
+        "categories": [
+            "History",
+            "Biography"
+        ]
     },
     {
         "id": "1877979291935293502",

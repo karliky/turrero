@@ -3114,8 +3114,14 @@
         "likes": 1276,
         "bookmarks": 257,
         "views": 225931,
-        "summary": "",
-        "categories": [],
+        "summary": "George Lucas, visión creativa y el desafío de materializar ideas",
+        "categories": [
+            "estrategia",
+            "orquestación-cognitiva",
+            "gestión-del-talento",
+            "lectura-de-señales",
+            "libros"
+        ],
         "related_threads": []
     },
     {
@@ -3125,8 +3131,14 @@
         "likes": 669,
         "bookmarks": 142,
         "views": 120242,
-        "summary": "",
-        "categories": [],
+        "summary": "Estrategias disruptivas y creatividad en negocios y videojuegos",
+        "categories": [
+            "estrategia",
+            "gaming",
+            "lectura-de-señales",
+            "orquestación-cognitiva",
+            "desarrollo-de-habilidades"
+        ],
         "related_threads": []
     },
     {
@@ -3151,8 +3163,14 @@
         "likes": 1627,
         "bookmarks": 265,
         "views": 242189,
-        "summary": "",
-        "categories": [],
+        "summary": "Reflexión sobre influencias ocultas, música y acción civil en España",
+        "categories": [
+            "estrategia",
+            "sociología",
+            "lectura-de-señales",
+            "orquestación-cognitiva",
+            "el-contexto-manda"
+        ],
         "related_threads": []
     }
 ]
