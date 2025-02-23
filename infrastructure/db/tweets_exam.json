@@ -1,5 +1,37 @@
 [
   {
+    "id": "1888123731865702418",
+    "questions": [
+      {
+        "question": "¿Cuál es uno de los temas principales del libro mencionado en el texto?",
+        "options": [
+          "Influencia de la tecnología en la música",
+          "Historia de la política española",
+          "Impacto del deporte en la cultura"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué artistas se mencionan como innovadores en la música?",
+        "options": [
+          "The Beatles, Elvis Presley, Madonna",
+          "Brian Eno, David Bowie, Kraftwerk",
+          "Mozart, Beethoven, Chopin"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "¿Cuál es uno de los factores que han influido en la evolución de la música según el texto?",
+        "options": [
+          "Avances en la grabación y producción digital",
+          "Prohibición de ciertos géneros",
+          "Reducción de conciertos en vivo"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  {
     "id": "1870373349282484488",
     "questions": [
       {
@@ -150,7 +182,11 @@
       },
       {
         "question": "¿Qué neurotransmisor está asociado con el placer de 'tener razón'?",
-        "options": ["Serotonina.", "Adrenalina.", "Dopamina."],
+        "options": [
+          "Serotonina.",
+          "Adrenalina.",
+          "Dopamina."
+        ],
         "answer": 3
       }
     ]
@@ -192,7 +228,11 @@
     "questions": [
       {
         "question": "¿Quién es considerado el padre del concepto de 'Sensemaking'?",
-        "options": ["Karl E. Weick", "David Ogilvy", "Ortega"],
+        "options": [
+          "Karl E. Weick",
+          "David Ogilvy",
+          "Ortega"
+        ],
         "answer": 1
       },
       {
@@ -284,7 +324,11 @@
     "questions": [
       {
         "question": "¿Qué elemento es fundamental para la existencia de una compañía en el sector lifestyle, según Spinae?",
-        "options": ["La marca", "La tecnología", "La financiación"],
+        "options": [
+          "La marca",
+          "La tecnología",
+          "La financiación"
+        ],
         "answer": 1
       },
       {
@@ -408,12 +452,20 @@
     "questions": [
       {
         "question": "¿Cuál es el nombre de la empresa familiar en la serie 'Galgos'?",
-        "options": ["Grupo Galgo", "Grupo Somarriba", "Grupo Díaz"],
+        "options": [
+          "Grupo Galgo",
+          "Grupo Somarriba",
+          "Grupo Díaz"
+        ],
         "answer": 1
       },
       {
         "question": "¿Quién es el personaje que lidera la empresa después de la muerte del padre?",
-        "options": ["Emilio Somarriba", "Gonzalo Díaz", "Blanca Somarriba"],
+        "options": [
+          "Emilio Somarriba",
+          "Gonzalo Díaz",
+          "Blanca Somarriba"
+        ],
         "answer": 1
       },
       {
@@ -432,12 +484,20 @@
     "questions": [
       {
         "question": "¿Qué disciplina se describe como multifacética y crítica en el proceso CPS?",
-        "options": ["Sensemaking", "Neurodiversidad", "Personotecnia"],
+        "options": [
+          "Sensemaking",
+          "Neurodiversidad",
+          "Personotecnia"
+        ],
         "answer": 1
       },
       {
         "question": "¿Qué elemento se utiliza como analogía para el sensemaking debido a su reactividad?",
-        "options": ["Oxígeno", "Fósforo", "Carbono"],
+        "options": [
+          "Oxígeno",
+          "Fósforo",
+          "Carbono"
+        ],
         "answer": 2
       },
       {
@@ -497,12 +557,20 @@
       },
       {
         "question": "¿Qué libro describe la experiencia de 'flow'?",
-        "options": ["Drive", "Flow", "Alicia en el País de las Maravillas"],
+        "options": [
+          "Drive",
+          "Flow",
+          "Alicia en el País de las Maravillas"
+        ],
         "answer": 2
       },
       {
         "question": "¿Cuál es uno de los elementos esenciales que motivan a las personas según Daniel H. Pink?",
-        "options": ["Autonomía", "Obsesión", "Éxtasis"],
+        "options": [
+          "Autonomía",
+          "Obsesión",
+          "Éxtasis"
+        ],
         "answer": 1
       }
     ]
@@ -608,7 +676,11 @@
     "questions": [
       {
         "question": "¿Cuál es el término que define el fenómeno psicológico en el que las personas se esfuerzan por alcanzar un consenso dentro de un grupo?",
-        "options": ["Groupthink", "Normies", "Doublethink"],
+        "options": [
+          "Groupthink",
+          "Normies",
+          "Doublethink"
+        ],
         "answer": 1
       },
       {
@@ -700,17 +772,29 @@
     "questions": [
       {
         "question": "Quién escribió el artículo de LinkedIn titulado 'The thinking human manifesto'?",
-        "options": ["SylviaDM", "Javier G. Recuenco", "Larry Fink"],
+        "options": [
+          "SylviaDM",
+          "Javier G. Recuenco",
+          "Larry Fink"
+        ],
         "answer": 2
       },
       {
         "question": "Quién menciona el síndrome de Eric Ries en la turra?",
-        "options": ["Larry Fink", "Javier G. Recuenco", "SylviaDM"],
+        "options": [
+          "Larry Fink",
+          "Javier G. Recuenco",
+          "SylviaDM"
+        ],
         "answer": 2
       },
       {
         "question": "Quién escribió la carta para los CEO's de 2018 sobre la responsabilidad de las partes interesadas para las empresas?",
-        "options": ["Mark Zuckerberg", "Elon Musk", "Larry Fink"],
+        "options": [
+          "Mark Zuckerberg",
+          "Elon Musk",
+          "Larry Fink"
+        ],
         "answer": 3
       }
     ]
@@ -761,7 +845,11 @@
       },
       {
         "question": "Quién se apostó una mariscada con @_miki en relación a Facebook?",
-        "options": ["@Recuenco", "@HeavyMental_es", "@samuelgil"],
+        "options": [
+          "@Recuenco",
+          "@HeavyMental_es",
+          "@samuelgil"
+        ],
         "answer": 1
       },
       {
@@ -798,7 +886,11 @@
       },
       {
         "question": "Según la Dra. Wendy A. Suzuki, ¿qué es lo más transformador que se puede hacer hoy por el cerebro?",
-        "options": ["Leer un libro", "Hacer ejercicio", "Dormir lo suficiente"],
+        "options": [
+          "Leer un libro",
+          "Hacer ejercicio",
+          "Dormir lo suficiente"
+        ],
         "answer": 2
       }
     ]
@@ -872,7 +964,11 @@
     "questions": [
       {
         "question": "¿Quién fue la primera persona que intentó crear una compañía en torno a CPS?",
-        "options": ["David Ogilvy", "Bill Bernbach", "Howard Luck Gossage"],
+        "options": [
+          "David Ogilvy",
+          "Bill Bernbach",
+          "Howard Luck Gossage"
+        ],
         "answer": 3
       },
       {
@@ -950,7 +1046,11 @@
       },
       {
         "question": "¿Qué significa la expresión 'manca finezza' en italiano?",
-        "options": ["Falta claridad", "Falta toque", "Falta finura"],
+        "options": [
+          "Falta claridad",
+          "Falta toque",
+          "Falta finura"
+        ],
         "answer": 3
       }
     ]
@@ -969,7 +1069,11 @@
       },
       {
         "question": "¿Quién es uno de los autores favoritos de Javier G. Recuenco?",
-        "options": ["Gary Larson", "Sesardić", "Louis Leakey"],
+        "options": [
+          "Gary Larson",
+          "Sesardić",
+          "Louis Leakey"
+        ],
         "answer": 2
       },
       {
@@ -1454,7 +1558,11 @@
       },
       {
         "question": "¿Qué juego menciona el autor en el texto?",
-        "options": ["Prince of Persia", "Tetris", "Tir Na Nog"],
+        "options": [
+          "Prince of Persia",
+          "Tetris",
+          "Tir Na Nog"
+        ],
         "answer": 3
       }
     ]
@@ -2008,7 +2116,11 @@
     "questions": [
       {
         "question": "¿Cuántos años tiene el autor del texto?",
-        "options": ["31 años", "41 años", "51 años"],
+        "options": [
+          "31 años",
+          "41 años",
+          "51 años"
+        ],
         "answer": 3
       },
       {
@@ -2077,7 +2189,11 @@
       },
       {
         "question": "¿De qué compañía se habla en el libro 'Lights Out'?",
-        "options": ["Enron", "General Electric", "Brexit"],
+        "options": [
+          "Enron",
+          "General Electric",
+          "Brexit"
+        ],
         "answer": 2
       },
       {
@@ -2224,7 +2340,11 @@
     "questions": [
       {
         "question": "¿Qué novela apareció en 2008 y es en parte autobiográfica?",
-        "options": ["Mi traidor", "La traición", "Sorj Chalandon"],
+        "options": [
+          "Mi traidor",
+          "La traición",
+          "Sorj Chalandon"
+        ],
         "answer": 3
       },
       {
@@ -2357,12 +2477,20 @@
       },
       {
         "question": "¿En qué plataforma ha publicado el autor más contenido antes de usar Twitter?",
-        "options": ["Blogs", "LinkedIn", "Instagram"],
+        "options": [
+          "Blogs",
+          "LinkedIn",
+          "Instagram"
+        ],
         "answer": 2
       },
       {
         "question": "¿Quién ayudó al autor cuando comenzó a publicar hilos en Twitter?",
-        "options": ["@jlantunez", "@RobertoCarreras", "Nadie"],
+        "options": [
+          "@jlantunez",
+          "@RobertoCarreras",
+          "Nadie"
+        ],
         "answer": 1
       }
     ]
@@ -2413,7 +2541,11 @@
       },
       {
         "question": "¿Quién es el autor del texto?",
-        "options": ["Jaime R. Des", "Luismi Barral", "Javier G. Recuenco"],
+        "options": [
+          "Jaime R. Des",
+          "Luismi Barral",
+          "Javier G. Recuenco"
+        ],
         "answer": 3
       },
       {
@@ -2633,7 +2765,11 @@
       },
       {
         "question": "Según Javier G. Recuenco, ¿quién es el responsable de hacer CPS real en una empresa?",
-        "options": ["Los Middle Managers", "El CEO", "Los delegados en España"],
+        "options": [
+          "Los Middle Managers",
+          "El CEO",
+          "Los delegados en España"
+        ],
         "answer": 2
       },
       {
@@ -2844,12 +2980,20 @@
     "questions": [
       {
         "question": "En qué año se publicó el libro 'The Filter Bubble'?",
-        "options": ["2004", "2011", "2008"],
+        "options": [
+          "2004",
+          "2011",
+          "2008"
+        ],
         "answer": 2
       },
       {
         "question": "En qué año Facebook alcanzó los 100 millones de usuarios?",
-        "options": ["2004", "2011", "2008"],
+        "options": [
+          "2004",
+          "2011",
+          "2008"
+        ],
         "answer": 3
       },
       {
@@ -2996,7 +3140,11 @@
     "questions": [
       {
         "question": "¿Qué es una decisión con 100% de posibilidades de éxito según el autor del texto?",
-        "options": ["Una decisión", "Una opinión", "Una consecuencia lógica"],
+        "options": [
+          "Una decisión",
+          "Una opinión",
+          "Una consecuencia lógica"
+        ],
         "answer": 3
       },
       {
@@ -3056,7 +3204,11 @@
     "questions": [
       {
         "question": "¿Quién es el autor del artículo seminal que menciona el término 'Bothism' en el Marketing?",
-        "options": ["Javier G. Recuenco", "Jim Collins", "Mark Ritson"],
+        "options": [
+          "Javier G. Recuenco",
+          "Jim Collins",
+          "Mark Ritson"
+        ],
         "answer": 3
       },
       {
@@ -3221,7 +3373,11 @@
       },
       {
         "question": "¿Quién demostró el problema del gap espectral en 2015?",
-        "options": ["Alan Turing", "Kurt Gödel", "No se menciona en el texto"],
+        "options": [
+          "Alan Turing",
+          "Kurt Gödel",
+          "No se menciona en el texto"
+        ],
         "answer": 3
       },
       {
@@ -3313,7 +3469,11 @@
       },
       {
         "question": "¿Qué personaje histórico prefiere el autor del hilo?",
-        "options": ["Aristóteles", "Alejandro Magno", "Doctor Manhattan"],
+        "options": [
+          "Aristóteles",
+          "Alejandro Magno",
+          "Doctor Manhattan"
+        ],
         "answer": 2
       },
       {
@@ -3437,7 +3597,11 @@
       },
       {
         "question": "¿Quién es el autor de la turra publicada el 17/11/2020 en la que se habla del ser humano como sistema complejo y la decadencia brutal del Marketing?",
-        "options": ["Ubaldo Hervás", "Moquintana", "Autor desconocido"],
+        "options": [
+          "Ubaldo Hervás",
+          "Moquintana",
+          "Autor desconocido"
+        ],
         "answer": 3
       },
       {
@@ -3561,7 +3725,11 @@
       },
       {
         "question": "¿Cuál es el nombre de la sección que inspiró la creación de “Pregúntale al Recu”?",
-        "options": ["“Ask Marilyn”", "“Ask the Recu”", "“Ask the Chinese”"],
+        "options": [
+          "“Ask Marilyn”",
+          "“Ask the Recu”",
+          "“Ask the Chinese”"
+        ],
         "answer": 1
       },
       {
@@ -3790,7 +3958,11 @@
       },
       {
         "question": "¿Qué avanza a pesar de los problemas complejos solucionados?",
-        "options": ["La ciencia", "La humanidad", "Los inconscientes"],
+        "options": [
+          "La ciencia",
+          "La humanidad",
+          "Los inconscientes"
+        ],
         "answer": 1
       }
     ]
@@ -3918,7 +4090,11 @@
       },
       {
         "question": "¿Cuánto tiempo de estudio requiere un director de orquesta para ser efectivo?",
-        "options": ["10 años", "15 años", "25 años"],
+        "options": [
+          "10 años",
+          "15 años",
+          "25 años"
+        ],
         "answer": 3
       }
     ]
@@ -3992,17 +4168,29 @@
     "questions": [
       {
         "question": "¿Hay correlación entre la superdotación y la prosperidad de un país?",
-        "options": ["Sí", "No", "No está claro"],
+        "options": [
+          "Sí",
+          "No",
+          "No está claro"
+        ],
         "answer": 1
       },
       {
         "question": "¿Están correlados el CI de un país con su éxito como país?",
-        "options": ["Sí", "No", "No está claro"],
+        "options": [
+          "Sí",
+          "No",
+          "No está claro"
+        ],
         "answer": 1
       },
       {
         "question": "¿Estamos trasladando con éxito el potencial intelectual de España hacia el objetivo de la prosperidad?",
-        "options": ["Sí", "No", "No está claro"],
+        "options": [
+          "Sí",
+          "No",
+          "No está claro"
+        ],
         "answer": 2
       }
     ]
@@ -4126,7 +4314,11 @@
       },
       {
         "question": "¿Qué aspectos son importantes para replicar la experiencia del frutero a gran escala?",
-        "options": ["Tecnología", "Big Data", "Estrategia y personotecnia"],
+        "options": [
+          "Tecnología",
+          "Big Data",
+          "Estrategia y personotecnia"
+        ],
         "answer": 3
       }
     ]
@@ -4273,7 +4465,11 @@
       },
       {
         "question": "¿Cómo describe el autor la arquitectura general de la industria publicitaria?",
-        "options": ["Integra", "Innovadora", "Corrupta"],
+        "options": [
+          "Integra",
+          "Innovadora",
+          "Corrupta"
+        ],
         "answer": 3
       },
       {
@@ -4314,7 +4510,11 @@
       },
       {
         "question": "¿Quién dijo la frase 'Nadie cruza el mismo río dos veces, ni el hombre ni el agua son los mismos'?",
-        "options": ["Heráclito", "Miguel Anxo Bastos", "Pascal-Emmanuel Gobry"],
+        "options": [
+          "Heráclito",
+          "Miguel Anxo Bastos",
+          "Pascal-Emmanuel Gobry"
+        ],
         "answer": 1
       }
     ]
@@ -5388,7 +5588,11 @@
     "questions": [
       {
         "question": "¿Qué porcentaje de la fuerza laboral de EE. UU. podría ver afectado al menos el 10% de sus tareas por la IA según el informe de OpenAI y Penn University?",
-        "options": ["80%", "50%", "30%"],
+        "options": [
+          "80%",
+          "50%",
+          "30%"
+        ],
         "answer": 1
       },
       {
@@ -5512,7 +5716,11 @@
     "questions": [
       {
         "question": "¿Qué animal mitológico se utiliza para describir a los CFOs en el texto?",
-        "options": ["Unicornio", "Dragón", "León"],
+        "options": [
+          "Unicornio",
+          "Dragón",
+          "León"
+        ],
         "answer": 3
       },
       {
@@ -5636,7 +5844,11 @@
     "questions": [
       {
         "question": "¿Qué personaje es usado por Claremont como vehículo para explicar las reacciones de un adolescente inteligente ante situaciones abrumadoras?",
-        "options": ["Rogue", "Psylocke", "Kitty Pryde"],
+        "options": [
+          "Rogue",
+          "Psylocke",
+          "Kitty Pryde"
+        ],
         "answer": 3
       },
       {
@@ -5696,7 +5908,11 @@
     "questions": [
       {
         "question": "¿Quién fue seleccionado por Paramount para dirigir 'El Padrino' debido a su autenticidad cultural?",
-        "options": ["Sergio Leone", "Francis Ford Coppola", "Mario Puzo"],
+        "options": [
+          "Sergio Leone",
+          "Francis Ford Coppola",
+          "Mario Puzo"
+        ],
         "answer": 2
       },
       {
@@ -5710,7 +5926,11 @@
       },
       {
         "question": "¿Qué líder de la mafia influyó en la creación del personaje de Vito Corleone?",
-        "options": ["Carlo Gambino", "Joe Profaci", "Frank Costello"],
+        "options": [
+          "Carlo Gambino",
+          "Joe Profaci",
+          "Frank Costello"
+        ],
         "answer": 2
       }
     ]
@@ -5729,7 +5949,11 @@
       },
       {
         "question": "¿Qué papel juega Miles Teller en 'The Offer'?",
-        "options": ["Albert S. Ruddy", "Robert Evans", "Francis Ford Coppola"],
+        "options": [
+          "Albert S. Ruddy",
+          "Robert Evans",
+          "Francis Ford Coppola"
+        ],
         "answer": 1
       },
       {
@@ -5844,12 +6068,20 @@
     "questions": [
       {
         "question": "¿Qué tema no se menciona en la discusión de Javier G. Recuenco?",
-        "options": ["El arte", "La economía", "La antropología"],
+        "options": [
+          "El arte",
+          "La economía",
+          "La antropología"
+        ],
         "answer": 2
       },
       {
         "question": "Según el texto, ¿qué es esencial para entender los 'PHENOMENA'?",
-        "options": ["Las cienciartes", "El dinero", "El Factor X"],
+        "options": [
+          "Las cienciartes",
+          "El dinero",
+          "El Factor X"
+        ],
         "answer": 1
       },
       {
@@ -5868,7 +6100,11 @@
     "questions": [
       {
         "question": "¿Qué concepto menciona el artículo como fundamental en varias religiones orientales, incluyendo el hinduismo y el budismo?",
-        "options": ["Dharma", "Karma", "Yoga"],
+        "options": [
+          "Dharma",
+          "Karma",
+          "Yoga"
+        ],
         "answer": 1
       },
       {
@@ -6024,7 +6260,11 @@
     "questions": [
       {
         "question": "¿Quién es considerado un sensemaker fundamental según el texto?",
-        "options": ["Dave Snowden", "Jean Grey", "Alexander Thorne"],
+        "options": [
+          "Dave Snowden",
+          "Jean Grey",
+          "Alexander Thorne"
+        ],
         "answer": 1
       },
       {
@@ -6038,7 +6278,11 @@
       },
       {
         "question": "¿Cuál es un ejemplo de un libro prohibido mencionado en el texto?",
-        "options": ["Necronomicón", "La Biblia", "El Quijote"],
+        "options": [
+          "Necronomicón",
+          "La Biblia",
+          "El Quijote"
+        ],
         "answer": 1
       }
     ]
@@ -6048,7 +6292,11 @@
     "questions": [
       {
         "question": "¿Quién originó el meme 'Change My Mind'?",
-        "options": ["Steven Crowder", "Daniel Kahneman", "Leon Festinger"],
+        "options": [
+          "Steven Crowder",
+          "Daniel Kahneman",
+          "Leon Festinger"
+        ],
         "answer": 1
       },
       {
@@ -6108,17 +6356,29 @@
     "questions": [
       {
         "question": "Durante la Guerra de las Corrientes, ¿qué tipo de corriente promovía Edison?",
-        "options": ["Corriente continua", "Corriente alterna", "Corriente continua y alterna"],
+        "options": [
+          "Corriente continua",
+          "Corriente alterna",
+          "Corriente continua y alterna"
+        ],
         "answer": 1
       },
       {
         "question": "¿Qué animal fue electrocutado por Edison para desacreditar la corriente alterna?",
-        "options": ["Elefante", "Perro", "Tiburón"],
+        "options": [
+          "Elefante",
+          "Perro",
+          "Tiburón"
+        ],
         "answer": 1
       },
       {
         "question": "¿Quién pagaba el alojamiento de Tesla en sus últimos años?",
-        "options": ["Edison", "Westinghouse", "JP Morgan"],
+        "options": [
+          "Edison",
+          "Westinghouse",
+          "JP Morgan"
+        ],
         "answer": 2
       }
     ]

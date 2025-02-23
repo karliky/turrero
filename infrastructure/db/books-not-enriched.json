@@ -2464,5 +2464,59 @@
         "media": "goodreads",
         "title": "The Complete Calvin and Hobbes",
         "turraId": "1893203295725871217"
+    },
+    {
+        "id": "1494930467971338245",
+        "type": "card",
+        "img": "./metadata/sj3_OhUg.jpeg",
+        "url": "https://www.goodreads.com/book/show/19013459-the-buyout-of-america",
+        "media": "goodreads",
+        "title": "The Buyout of America: How Private Equity Will Cause the Next Great Credit Crisis",
+        "turraId": "1494930305811111938"
+    },
+    {
+        "id": "1888123741885886589",
+        "type": "card",
+        "img": "./metadata/nisBPGX6.jpeg",
+        "url": "https://www.goodreads.com/book/show/146225.Undercurrents",
+        "media": "goodreads",
+        "title": "Undercurrents: The Hidden Wiring of Modern Music",
+        "turraId": "1888123731865702418"
+    },
+    {
+        "id": "1888123794067222896",
+        "type": "card",
+        "img": "./metadata/_VvTiSMO.jpeg",
+        "url": "https://www.goodreads.com/book/show/27397.A_Civil_Action",
+        "media": "goodreads",
+        "title": "A Civil Action",
+        "turraId": "1888123731865702418"
+    },
+    {
+        "id": "1888123795166097696",
+        "type": "card",
+        "img": "./metadata/Er_tqeog.jpeg",
+        "url": "https://www.goodreads.com/book/show/108402.Power_in_Movement",
+        "media": "goodreads",
+        "title": "Power in Movement: Social Movements and Contentious Politics",
+        "turraId": "1888123731865702418"
+    },
+    {
+        "id": "1888123796168532300",
+        "type": "card",
+        "img": "./metadata/Xyycl3NA.jpeg",
+        "url": "https://www.goodreads.com/book/show/60627426-el-libro-de-la-inteligencia-colectiva",
+        "media": "goodreads",
+        "title": "El libro de la Inteligencia colectiva",
+        "turraId": "1888123731865702418"
+    },
+    {
+        "id": "1888123797166862764",
+        "type": "card",
+        "img": "./metadata/Qgu2VJNP.jpeg",
+        "url": "https://www.goodreads.com/book/show/218688993-c-mo-impulsar-la-inteligencia-colectiva",
+        "media": "goodreads",
+        "title": "Cómo impulsar la inteligencia colectiva",
+        "turraId": "1888123731865702418"
     }
 ]

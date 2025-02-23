@@ -1694,7 +1694,8 @@
         "related_threads": [
             "1517738336210894850",
             "1494930305811111938",
-            "1479732314791886850"
+            "1479732314791886850",
+            "1494930415504789506"
         ]
     },
     {
@@ -2982,7 +2983,9 @@
             "leyes-y-sesgos",
             "sociología"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1888123731865702418"
+        ]
     },
     {
         "id": "1857680297443164321",
@@ -3122,6 +3125,32 @@
         "likes": 669,
         "bookmarks": 142,
         "views": 120242,
+        "summary": "",
+        "categories": [],
+        "related_threads": []
+    },
+    {
+        "id": "1494930415504789506",
+        "url": "https://twitter.com/Recuenco/status/1494930415504789506",
+        "replies": 15,
+        "likes": 99,
+        "bookmarks": 4,
+        "views": 0,
+        "summary": "Aquellas compañías que han sido capturadas por fondos y los gestores profesionales",
+        "categories": [
+            "futurismo-de-frontera"
+        ],
+        "related_threads": [
+            "1842453861094609097"
+        ]
+    },
+    {
+        "id": "1888123731865702418",
+        "url": "https://twitter.com/Recuenco/status/1888123731865702418",
+        "replies": 121,
+        "likes": 1627,
+        "bookmarks": 265,
+        "views": 242189,
         "summary": "",
         "categories": [],
         "related_threads": []
