@@ -1,3 +1,4 @@
+import React from 'react';
 import { TweetFacade } from "../infrastructure";
 import { CategoryCard } from './components/CategoryCard';
 import { AdvertisementCard } from './components/AdvertisementCard';
@@ -69,25 +70,27 @@ export default async function Home() {
           const categoryTweets = tweetsPerCategory[index];
           if (index === 5) {
             return (
-              <>
+              <React.Fragment key={`group-${index}-${category}`}>
                 <CategoryCard 
-                  key={category}
+                  key={`category-${index}-${category}`}
                   category={category}
                   tweets={categoryTweets}
                   formatCategoryTitle={formatCategoryTitle}
                 />
-                <AdvertisementCard />
-              </>
+                <AdvertisementCard key={`ad-${category}`} />
+              </React.Fragment>
             );
           }
           
           return (
-            <CategoryCard 
-              key={category}
-              category={category}
-              tweets={categoryTweets}
-              formatCategoryTitle={formatCategoryTitle}
-            />
+            <React.Fragment key={`group-${index}-${category}`}>
+              <CategoryCard 
+                key={`category-${index}-${category}`}
+                category={category}
+                tweets={categoryTweets}
+                formatCategoryTitle={formatCategoryTitle}
+              />
+            </React.Fragment>
           );
         })}
       </div>
