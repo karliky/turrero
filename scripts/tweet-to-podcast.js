@@ -1,14 +1,17 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
-import OpenAI from 'openai';
-import fs from 'fs';
+import OpenAI from "openai";
+import fs from "fs";
 
-import Tweets from '../infrastructure/db/tweets.json' with { type: 'json' };
-import TweetsEnrichements from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
+import Tweets from "../infrastructure/db/tweets.json" with { type: "json" };
+import TweetsEnrichements from "../infrastructure/db/tweets_enriched.json" with {
+  type: "json",
+};
 
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { fileURLToPath } from "url";
+import path from "path";
+import { AUTHORS } from "../infrastructure/constants.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,64 +20,73 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const tweetId = process.argv[2];
 
 const replacements = {
-  WEF: 'Foro Económico Mundial',
-  CPS: 'Complex Problem Solving',
-  "Javier G. Recuenco@Recuenco": 'Javier Recuenco',
-  "Javier G. Recuenco": 'Javier Recuenco',
+  WEF: "Foro Económico Mundial",
+  CPS: "Complex Problem Solving",
+  [`${AUTHORS.RECUENCO.NAME}${AUTHORS.RECUENCO.X}`]: AUTHORS.RECUENCO.NAME,
+  [AUTHORS.RECUENCO.NAME]: AUTHORS.RECUENCO.NAME,
   "P.D. I:": "Postdata 1:",
   "P.D. II:": "Postdata 2:",
-  "P.D. III:": "Postdata 3:"
+  "P.D. III:": "Postdata 3:",
 };
 
 if (!tweetId) {
-  console.error('Please provide a tweet id');
+  console.error("Please provide a tweet id");
   process.exit(1);
 }
 
 if (!process.env.OPENAI_API_KEY) {
-  console.error('Please provide OPENAI_API_KEY');
+  console.error("Please provide OPENAI_API_KEY");
   process.exit(1);
 }
 
 const outputPath = __dirname + `/../db/podcast/${tweetId}.txt`;
 
 if (fs.existsSync(outputPath)) {
-  console.error('Podcast already exists for this tweet id. Please delete it first if you want to regenerate it.');
+  console.error(
+    "Podcast already exists for this tweet id. Please delete it first if you want to regenerate it.",
+  );
   process.exit(1);
 }
 
 const tweetIndex = Tweets.findIndex((tweet) => tweet[0].id === tweetId);
 
 if (!tweetIndex) {
-  console.error('Tweet not found');
+  console.error("Tweet not found");
   process.exit(1);
 }
 
 const thread = Tweets[tweetIndex].reduce((acc, t) => {
   let paragraph = t.tweet;
 
-  if (t?.metadata?.embed?.type === 'embed') {
+  if (t?.metadata?.embed?.type === "embed") {
     paragraph += `
-      TWEET PARA DAR CONTEXTO. AUTOR ${t.metadata.embed.author.trim().replace(/\n/g, '')}.
+      TWEET PARA DAR CONTEXTO. AUTOR ${
+      t.metadata.embed.author.trim().replace(/\n/g, "")
+    }.
       TWEET: ${t.metadata.embed.tweet}
       CONTINUA TEXTO ORIGINAL:`;
   }
 
-  const hasEnrichment = TweetsEnrichements.find((enrichment) => enrichment.id === t.id);
-  if (hasEnrichment && hasEnrichment.type === 'card' && hasEnrichment.media === 'goodreads') {
-    console.log('MEDIA', hasEnrichment);
+  const hasEnrichment = TweetsEnrichements.find((enrichment) =>
+    enrichment.id === t.id
+  );
+  if (
+    hasEnrichment && hasEnrichment.type === "card" &&
+    hasEnrichment.media === "goodreads"
+  ) {
+    console.log("MEDIA", hasEnrichment);
     paragraph += `
       LIBRO PARA DAR CONTEXTO ${hasEnrichment.title}.
       CONTINUA TEXTO ORIGINAL:`;
   }
 
   return `${acc}\n${paragraph}`;
-}, '');
+}, "");
 
 const applyReplacements = (text) => {
   let newText = text;
   for (const [key, value] of Object.entries(replacements)) {
-    newText = newText.replace(new RegExp(key, 'g'), value);
+    newText = newText.replace(new RegExp(key, "g"), value);
   }
   return newText;
 };
@@ -97,17 +109,19 @@ console.log(fullText);
 async function main() {
   const result = [];
   const stream = await openai.beta.chat.completions.stream({
-    model: 'gpt-4',
-    messages: [{ role: 'user', content: fullText }],
+    model: "gpt-4",
+    messages: [{ role: "user", content: fullText }],
     stream: true,
   });
 
-  stream.on('content', (delta, snapshot) => {
+  stream.on("content", (delta) => {
     result.push(delta);
   });
 
   const chatCompletion = await stream.finalChatCompletion();
-  const finalText = applyReplacements(chatCompletion.choices[0].message.content);
+  const finalText = applyReplacements(
+    chatCompletion.choices[0].message.content,
+  );
   fs.writeFileSync(outputPath, finalText);
   console.log(`Estaré ahí mismo`);
   process.exit(0);

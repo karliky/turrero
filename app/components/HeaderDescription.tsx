@@ -1,6 +1,9 @@
+import { AUTHORS, Authors } from "@/infrastructure/constants";
+
 interface HeaderDescriptionProps {
   totalTweets: number;
   lastUpdateDate: string;
+  author: Authors;
 }
 
 export function HeaderDescription({ totalTweets, lastUpdateDate }: HeaderDescriptionProps) {
@@ -10,13 +13,21 @@ export function HeaderDescription({ totalTweets, lastUpdateDate }: HeaderDescrip
         Esta es la colección curada y ordenada de las publicaciones de{" "}
         <a
           className="font-semibold text-whiskey-700 hover:text-whiskey-900 transition-colors duration-200 underline decoration-whiskey-300 hover:decoration-whiskey-500"
-          href="https://x.com/recuenco"
+          href={AUTHORS.RECUENCO.X}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Javier G. Recuenco
+          {AUTHORS.RECUENCO.NAME}
         </a>{" "}
-        sobre las ciencias de la complejidad, CPS, Factor-X, etc.
+        y la{" "}
+        <a
+          className="font-semibold text-whiskey-700 hover:text-whiskey-900 transition-colors duration-200 underline decoration-whiskey-300 hover:decoration-whiskey-500"
+          href={AUTHORS.CPSCOMUNITY.YOUTUBE}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {AUTHORS.CPSCOMUNITY.NAME}
+        </a> sobre las ciencias de la complejidad, CPS, Factor-X, etc.
         <br className="hidden sm:block" />
         <span className="block mt-3">
           Hay un total de{" "}

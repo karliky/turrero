@@ -24,6 +24,8 @@ easy-to-navigate format.
 ## More resources
 
 - [Javier G. Recuenco](https://twitter.com/Recuenco)
+- [Comunidad CPS](https://twitter.com/CPSComunidad)
+- [Comunidad CPS (Youtube)](https://youtube.com/@cpsspain)
 - [Polymatas: Sabiduría = Conocimiento + Razón + Aprendizaje](https://www.polymatas.com/)
 - [CPS Notebook](https://cps.tonidorta.com)
 

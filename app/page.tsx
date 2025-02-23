@@ -3,6 +3,7 @@ import { TweetFacade } from "../infrastructure";
 import { CategoryCard } from './components/CategoryCard';
 import { AdvertisementCard } from './components/AdvertisementCard';
 import { HeaderDescription } from './components/HeaderDescription';
+import { AUTHORS } from '../infrastructure/constants';
 
 async function getData() {
   const tweetFacade = new TweetFacade();
@@ -62,7 +63,8 @@ export default async function Home() {
     <div className="container mx-auto px-4 py-8">
       <HeaderDescription 
         totalTweets={totalTweets}
-        lastUpdateDate={ data.lastUpdateDate }
+        lastUpdateDate={data.lastUpdateDate}
+        author={AUTHORS.MAIN}
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

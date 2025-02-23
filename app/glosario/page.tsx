@@ -1,12 +1,13 @@
 import { TweetFacade, GlossaryTerm } from '@/infrastructure';
 import { Metadata } from 'next';
+import { AUTHORS } from '@/infrastructure/constants';
 
 export const metadata: Metadata = {
   title: 'Glosario CPS',
-  description: 'Glosario de términos especializados utilizados en las turras de Javier G. Recuenco',
+  description: `Glosario de términos especializados utilizados en las turras de ${AUTHORS.MAIN}`,
   openGraph: {
     title: 'Glosario CPS - El Turrero Post',
-    description: 'Glosario de términos especializados utilizados en las turras de Javier G. Recuenco',
+    description: `Glosario de términos especializados utilizados en las turras de ${AUTHORS.MAIN}`,
     images: ['/promo.png'],
   }
 };
@@ -20,7 +21,7 @@ export default async function GlosarioPage() {
       <h1 className="text-4xl font-bold text-whiskey-800 mb-4">Glosario CPS</h1>
       
       <p className="text-gray-600 mb-8">
-        Aqui hay un glosario de la jerga especializada que se utiliza en las turras de Javier G. Recuenco. 
+        Aqui hay un glosario de la jerga especializada que se utiliza en las turras de {AUTHORS.MAIN}. 
         Recoger y explicar estos términos es una tarea en curso, a la cual puedes contribuir editando este{" "}
         <a href="https://github.com/karliky/turrero/blob/main/db/glosario.csv" className="text-brand hover:text-brand-dark underline">fichero CSV en GitHub</a>, recuerda que lo puedes importar y editar en Excel.
       </p>

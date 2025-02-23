@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Book } from "../../../infrastructure";
 import Link from "next/link";
+import { AUTHORS } from "@/infrastructure/constants";
 
 interface BookGridProps {
   books: Book[];
@@ -73,7 +74,7 @@ export default function BookGrid({ books, categories, categoriesMap }: BookGridP
             {/* Links section - Modernized with icons (you'll need to add icons) */}
             <div className="mt-2 flex gap-3 text-xs">
               <a 
-                href={`https://x.com/Recuenco/status/${book.id}`}
+                href={`${AUTHORS.RECUENCO.X}/status/${book.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-whiskey-600 transition-colors flex items-center gap-1"

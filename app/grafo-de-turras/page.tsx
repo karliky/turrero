@@ -3,6 +3,7 @@ import GraphVisualization from './GraphVisualization';
 import { FaArrowLeft, FaQuestionCircle } from "react-icons/fa";
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { AUTHORS } from '@/infrastructure/constants';
 
 export default async function GraphPage() {
   const tweetProvider = new TweetProvider();
@@ -56,10 +57,10 @@ export default async function GraphPage() {
 
 export const metadata: Metadata = {
   title: 'Grafo de Turras',
-  description: 'Visualización interactiva de las conexiones entre las turras de Javier G. Recuenco',
+  description: `Visualización interactiva de las conexiones entre las turras de ${AUTHORS.MAIN}`,
   openGraph: {
     title: 'Grafo de Turras - El Turrero Post',
-    description: 'Visualización interactiva de las conexiones entre las turras de Javier G. Recuenco',
+    description: `Visualización interactiva de las conexiones entre las turras de ${AUTHORS.MAIN}`,
     images: ['/promo.png'],
   }
 }; 
