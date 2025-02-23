@@ -38,8 +38,12 @@ async function getData() {
           }))
       : [];
   }));
-
-  return { categories, tweets, tweetsPerCategory, totalTweets: allTweets.length };
+  const lastUpdateDate = new Date(tweetFacade.tweetProvider.get25newestTweets()[0].time).toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  }).replace(' de ', ' del ')
+  return { categories, tweets, tweetsPerCategory, totalTweets: allTweets.length, lastUpdateDate };
 }
 
 function formatCategoryTitle(category: string): string {
@@ -57,7 +61,7 @@ export default async function Home() {
     <div className="container mx-auto px-4 py-8">
       <HeaderDescription 
         totalTweets={totalTweets}
-        lastUpdateDate={'03/01/2025'}
+        lastUpdateDate={ data.lastUpdateDate }
       />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
