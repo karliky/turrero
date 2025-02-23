@@ -135,12 +135,12 @@ export default async function TurraPage({ params }: Params) {
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <a
-              href={`https://twitter.com/Recuenco/status/${mainTweet.id}`}
+              href={`https://x.com/Recuenco/status/${mainTweet.id}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-whiskey-700 hover:text-whiskey-900 font-medium"
             >
-              Leer en Twitter
+              Leer en X.com
             </a>
           </div>
 

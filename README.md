@@ -1,14 +1,14 @@
 # El Turrero Post
 
 Welcome to the El Turrero Post project! This website is designed to showcase the
-Twitter threads of Javier G. Recuenco who specializes in complexity science. The
+x.com threads of Javier G. Recuenco who specializes in complexity science. The
 goal of the website is to present the he's tweets in a visually pleasing and
 easy-to-navigate format.
 
 ## Features
 
 - A clean, minimalist design that puts the focus on the threads
-- Automatic embedding of images and cards from Twitter
+- Automatic embedding of images and cards from x.com
 - A simple navigation system that makes it easy to find specific threads
 - The ability to search for specific keywords within the threads
 
@@ -17,14 +17,14 @@ easy-to-navigate format.
 - Add blocks: #preguntaalrecu y latest 25 cronologic turras
 - Show cards with card design (for those with url)
 - Some dates are incorrectly scraped, example
-  https://twitter.com/Recuenco/status/1614168029876600833
+  https://x.com/Recuenco/status/1614168029876600833
 - Add copy link to every tweet so we can share it, like lexical.dev does on the
   left of every block
 
 ## More resources
 
-- [Javier G. Recuenco](https://twitter.com/Recuenco)
-- [Comunidad CPS](https://twitter.com/CPSComunidad)
+- [Javier G. Recuenco](https://x.com/Recuenco)
+- [Comunidad CPS](https://x.com/CPSComunidad)
 - [Comunidad CPS (Youtube)](https://youtube.com/@cpsspain)
 - [Polymatas: Sabiduría = Conocimiento + Razón + Aprendizaje](https://www.polymatas.com/)
 - [CPS Notebook](https://cps.tonidorta.com)
@@ -36,7 +36,7 @@ The website is built using:
 - Node.js 22 or higher for the front-end and server-side rendering
 - Node.js 22 or higher for the back-end and the scraping tools
 - python 3.8 or higher to generate the graph
-- Puppeter for web scraping twitter threads
+- Puppeter for web scraping x.com threads
 
 You can handle node.js versions by useing nvm, for example:
 
@@ -90,7 +90,7 @@ Alternatively you could use the following steps:
     update date
 11. Verify that everything is fine by running `npm run dev` on the root folder
 
-The data source that contains the twitter threads and metadata is located under
+The data source that contains the x.com threads and metadata is located under
 `/infrastructure`.
 
 The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are

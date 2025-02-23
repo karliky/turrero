@@ -54,7 +54,7 @@ def process_threads(threads_data, summaries, categories):
 
         graph_data.append({
             "id": thread_id,
-            "url": f"https://twitter.com/Recuenco/status/{thread_id}",
+            "url": f"https://x.com/Recuenco/status/{thread_id}",
             "replies": stats_total['replies'],
             "likes": stats_total['likes'],
             "bookmarks": stats_total['bookmarks'],

@@ -94,7 +94,7 @@ const applyReplacements = (text) => {
 const prompt = `
 Considera todos estos pasos:
 - Sobre el texto dado, solo corrige faltas de ortografía, no cambies ninguna otra palabra.
-- Si aparece un TWEET PARA DAR CONTEXTO en el texto debes introducirlo diciendio "{Nombre de la persona reescrito de forma audible} comentó en Twitter:", para que cuando se escuche tenga sentido para quien lo escucha.
+- Si aparece un TWEET PARA DAR CONTEXTO en el texto debes introducirlo diciendio "{Nombre de la persona reescrito de forma audible} comentó en x.com:", para que cuando se escuche tenga sentido para quien lo escucha.
 - Si aparece un LIBRO PARA DAR CONTEXTO en el texto debes introducirlo como creas oportuno para que cuando se escuche tenga sentido para quien lo escucha.
 - Si aparece algún texto tipo P.D. I, P.D. II, esto quiere decir postdata. Puedes introducirlo sin cambiar el texto.
 - No introduzcas bloques con titulo por cada seccion, tu respuesta solo debe incluir el texto original procesado por las reglas anteriores.
