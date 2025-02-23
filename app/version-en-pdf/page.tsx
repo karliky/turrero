@@ -1,12 +1,13 @@
 import { FaFilePdf, FaDownload } from 'react-icons/fa';
 import { Metadata } from 'next';
+import { AUTHORS } from '@/infrastructure/constants';
 
 export const metadata: Metadata = {
   title: 'Versión en PDF',
-  description: 'Descarga todas las turras de Javier G. Recuenco en formato PDF y EPUB',
+  description: `Descarga todas las turras de ${AUTHORS.MAIN} en formato PDF y EPUB`,
   openGraph: {
     title: 'Versión en PDF - El Turrero Post',
-    description: 'Descarga todas las turras de Javier G. Recuenco en formato PDF y EPUB',
+    description: `Descarga todas las turras de ${AUTHORS.MAIN} en formato PDF y EPUB`,
     images: ['/promo.png'],
   }
 };

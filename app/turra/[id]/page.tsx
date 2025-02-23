@@ -7,6 +7,7 @@ import { TweetContent } from "../../components/TweetContent";
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { TurraSidebar } from '../../components/TurraSidebar';
+import { AUTHORS } from "@/infrastructure/constants";
 
 interface Params {
   params: Promise<{
@@ -53,7 +54,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const ogImageUrl = `/api/og/${id}`;
 
   return {
-    title: `${data.summary} - El Turrero Post - Las turras de Javier G. Recuenco`,
+    title: `${data.summary} - El Turrero Post - Las turras de ${AUTHORS.MAIN}`,
     description: data.summary,
     openGraph: {
       title: data.summary,

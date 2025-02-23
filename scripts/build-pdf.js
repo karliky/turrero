@@ -1,14 +1,15 @@
-import puppeteer from 'puppeteer';
-import Tweets from './../db/tweets_summary.json' with { type: 'json' };
-import PDFMerger from 'pdf-merger-js';
-import fs from 'fs';
+import puppeteer from "puppeteer";
+import Tweets from "./../db/tweets_summary.json" with { type: "json" };
+import PDFMerger from "pdf-merger-js";
+import fs from "fs";
+import { AUTHORS } from "../infrastructure/constants.js";
 
 const PUBLIC = "./public";
 const PDFS = "./pdfs";
 const merger = new PDFMerger();
 
 (async () => {
-    const browser = await puppeteer.launch({})
+    const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     const tweets = Tweets.sort((a, b) => a.id - b.id);
     // recreate the folders everytime
@@ -29,7 +30,7 @@ const merger = new PDFMerger();
         // wait for the tweet to load
         await page.waitForNetworkIdle();
         // save it to pdf
-        await page.pdf({ path: `${PDFS}/turra-${tweet.id}.pdf`, format: 'A4' });
+        await page.pdf({ path: `${PDFS}/turra-${tweet.id}.pdf`, format: "A4" });
         // add to the merger
         merger.add(`${PDFS}/turra-${tweet.id}.pdf`);
     }
@@ -37,9 +38,9 @@ const merger = new PDFMerger();
     // Set metadata
     await merger.setMetadata({
         producer: "El Turrero Post",
-        author: "Javier G. Recuenco",
+        author: AUTHORS.MAIN,
         creator: "El Turrero Team",
-        title: "Todas las turras de El Turrero Post"
+        title: "Todas las turras de El Turrero Post",
     });
     await merger.save(`${PUBLIC}/turras.pdf`);
     console.log(`Turra completa: ${PUBLIC}/turras.pdf`);

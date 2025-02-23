@@ -1,6 +1,7 @@
 import { TweetFacade } from "../../infrastructure";
 import BookGrid from './components/BookGrid';
 import { Metadata } from 'next';
+import { AUTHORS } from '@/infrastructure/constants';
 
 const categories = [
   "Nonfiction", "Psychology", "History", "Business", "Self Help",
@@ -29,10 +30,10 @@ const categoriesMap: { [key: string]: string } = {
 
 export const metadata: Metadata = {
   title: 'Biblioteca',
-  description: 'Colección de libros mencionados en las turras de Javier G. Recuenco',
+  description: `Colección de libros mencionados en las turras de ${AUTHORS.MAIN}`,
   openGraph: {
     title: 'Biblioteca - El Turrero Post',
-    description: 'Colección de libros mencionados en las turras de Javier G. Recuenco',
+    description: `Colección de libros mencionados en las turras de ${AUTHORS.MAIN}`,
     images: ['/promo.png'],
   }
 };

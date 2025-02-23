@@ -1,3 +1,4 @@
+import { AUTHORS } from '@/infrastructure/constants';
 import Image from 'next/image';
 
 export default function SobreEstaWeb() {
@@ -44,7 +45,7 @@ export default function SobreEstaWeb() {
                   <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
                     Javier G. Recuenco
                     <a
-                      href="https://x.com/recuenco"
+                      href={AUTHORS.RECUENCO.X}
                       className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -67,9 +68,9 @@ export default function SobreEstaWeb() {
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://gurulibros.com/wp-content/uploads/2021/09/javier_g_recuenco.jpg"
-                    alt="Javier G. Recuenco"
+                    alt={AUTHORS.RECUENCO.NAME}
                     className="rounded-lg shadow-md w-full"
                     width={400}
                     height={400}
@@ -81,7 +82,7 @@ export default function SobreEstaWeb() {
             <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div className="flex flex-col md:flex-row gap-8 mb-4">
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://avatars.githubusercontent.com/u/881069?v=4"
                     alt="Carlos Hernández Gómez (Karliky)"
                     className="rounded-lg shadow-md w-full"
@@ -154,7 +155,7 @@ export default function SobreEstaWeb() {
                   </p>
                 </div>
                 <div className="md:w-1/3">
-                  <img
+                  <Image
                     src="https://www.tonidorta.com/wp-content/uploads/tonidorta_240x285.jpg"
                     alt="Toni Dorta"
                     className="rounded-lg shadow-md w-full"
