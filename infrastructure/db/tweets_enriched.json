@@ -23800,5 +23800,100 @@
         "url": "https://www.goodreads.com/book/show/218688993-c-mo-impulsar-la-inteligencia-colectiva",
         "media": "goodreads",
         "title": "Cómo impulsar la inteligencia colectiva"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1879818507573149748",
+        "id": "1880543676876874203",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "A ver, comunidad.\nAprovechando que tengo sarao familiar y que llevo tiempo pensando que la comunidad puede darle aire fresco a los hilos turra, este fin de semana me toma el relevo el titán intelectual de \n@nudpiedo\n.\nDADLE HAPOLLO Y KARINYO."
+    },
+    {
+        "id": "1880543707935748484",
+        "img": "./metadata/GhkEvamXcAAcNdY.png",
+        "url": "https://x.com/nudpiedo/status/1880543707935748484/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1880543753284551013",
+        "img": "./metadata/GhkHKLzXUAAkolg.png",
+        "url": "https://x.com/nudpiedo/status/1880543753284551013/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1880545057104920735",
+        "img": "./metadata/GhkJfdBW0AAAmlR.png",
+        "url": "https://x.com/nudpiedo/status/1880545057104920735/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1880553317904118234",
+        "img": "./metadata/GhkPbntWoAA8Bc3.png",
+        "url": "https://x.com/nudpiedo/status/1880553317904118234/photo/1",
+        "type": "media"
+    },
+    {
+        "id": "1880553320923926866",
+        "type": "card",
+        "img": "./metadata/zivmSAwg.jpeg",
+        "url": "https://www.youtube.com/watch?v=nImIWol_rhQ",
+        "media": "youtube",
+        "description": "You think clicking fast on your keyboard and mouse is what's stopping from reaching the next level? I have some interesting examples for you, that I hope wil...",
+        "title": "Why Speed doesn't matter in Age of Empires 2"
+    },
+    {
+        "type": "embed",
+        "embeddedTweetId": "1878902368668180580",
+        "id": "1880554850855145478",
+        "author": "Sergio Serrano\n@sergserrano",
+        "tweet": " El mito de la receta universal:\n\n1/ Las ‘best practices’ prometen resultados de la hostia pero la realidad es que pocas veces lo son.\n\nMás allá de ciertos procesos simples, copiar lo que le funcionó a Zucky te hará cagarla.\n\nLos frameworks intercambiables son los padres."
+    },
+    {
+        "id": "1880556680494350493",
+        "type": "card",
+        "img": "./metadata/wbVDbYpn.jpeg",
+        "url": "https://www.imdb.com/es-es/title/tt0268978/"
+    },
+    {
+        "id": "1880556685619818741",
+        "type": "card",
+        "img": "./metadata/nbwE304E.jpeg",
+        "url": "https://www.youtube.com/watch?v=Jk2hRN5dyIg",
+        "media": "youtube",
+        "description": "👇👇PUEDES SEGUIRME EN INSTRAGRAM👇👇 https://www.instagram.com/ayo.martyn/📖📖PUEDES CONSEGUIR MI NOVELA EN FÍSICO O EBOOK AQUÍ👇 👇 📚📚FÍSICO📚📚 https://...",
+        "title": "JOHN NASH: SUFRÍA de ESQUIZOFRENIA y GANÓ un PREMIO NOBEL"
+    },
+    {
+        "id": "1880556687763128358",
+        "type": "card",
+        "img": "./metadata/1rvi56d3.jpeg",
+        "url": "https://www.youtube.com/watch?v=e31OSVZF77w",
+        "media": "youtube",
+        "description": "Multiplayer games like League of Legends design content with specific strengths and weaknesses. When one strategy or \"meta\" becomes dominant, the counters to...",
+        "title": "Perfect Imbalance - Why Unbalanced Design Creates Balanced Play - Extra Credits"
+    },
+    {
+        "id": "1880556690434929143",
+        "type": "card",
+        "img": "./metadata/DyjOrZBd.jpeg",
+        "url": "https://www.hacking.finance/read/too-clever-by-half/"
+    },
+    {
+        "id": "1880556695266775487",
+        "type": "card",
+        "img": "./metadata/8SJTTohk.jpeg",
+        "url": "https://www.youtube.com/watch?v=z6ANTFiTo7s",
+        "media": "youtube",
+        "description": "YT MEMBERSHIP PERKS https://www.youtube.com/channel/UCSTwYbmgquOwStjvyjYWD4Q/joinDISCORD https://discord.gg/ZPKTYSFjGJSUBSCRIBE https://www.youtube.com/chann...",
+        "title": "This Strategy Breaks \"Rock, Paper, Scissors\""
+    },
+    {
+        "id": "1880556697909133337",
+        "type": "card",
+        "img": "./metadata/kZmsyFUK.jpeg",
+        "url": "https://www.youtube.com/watch?v=tCoEYFbDVoI",
+        "media": "youtube",
+        "description": "Twitch: https://www.twitch.tv/justin_helpsDiscord: https://discord.gg/NbruaNWStore: https://store.dftba.com/collections/primerPatreon: https://www.patreon.co...",
+        "title": "Simulating the Evolution of Rock, Paper, Scissors"
     }
 ]

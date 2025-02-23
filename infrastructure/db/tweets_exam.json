@@ -1,5 +1,37 @@
 [
   {
+    "id": "1880543676876874203",
+    "questions": [
+      {
+        "question": "¿Qué es el metajuego según la primera definición presentada?",
+        "options": [
+          "Pensar en un nivel superior al juego",
+          "Jugar sin reglas",
+          "Mejorar habilidades motoras"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Cuál es un ejemplo de equilibrio de Nash en estrategias mixtas mencionado en el texto?",
+        "options": [
+          "Dungeons and Dragons",
+          "Piedra, papel o tijera",
+          "Starcraft"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Según el texto, ¿qué representa la META en el contexto de los videojuegos RTS?",
+        "options": [
+          "Una táctica aleatoria",
+          "Un conjunto de tácticas óptimas",
+          "Un error del juego"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  {
     "id": "1893203295725871217",
     "questions": [
       {
