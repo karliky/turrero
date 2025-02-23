@@ -13,7 +13,7 @@ export const getTweetText = () => {
         );
         c2 = tweetContainer.querySelector('div[data-testid="tweetText"]');
         return c2.innerText;
-    } catch () {
+    } catch (_) {
         return "";
     }
 };

@@ -37,8 +37,9 @@ function parseCSV(filePath) {
 // Replace csvdata.load with custom parseCSV function
 const tweets = parseCSV(__dirname + "/../infrastructure/db/turras.csv");
 const random = Math.floor(Math.random() * 150) + 750;
-function extractAuthor(url) {
-    const author = url.match(/\.com\/([^/]+)\/status/)[1];
+
+function extractAuthorUrl(url) {
+    const author = url.split("/status/")[0];
     return author;
 }
 
@@ -52,6 +53,7 @@ async function parseTweet({ page }) {
     // There was a bug when the tweet id had a a Post parameters , so we remove it
     const currentTweetId = page.url().split("/").slice(-1).pop().split("?")[0];
     console.log("currentTweetId", currentTweetId);
+    const tweetAuthorUrl = extractAuthorUrl(page.url());
     const tweet = await page.evaluate(getTweetText); // text
     const metadata = await extractMetadata(page); // media
     await new Promise((r) => setTimeout(r, 100));
@@ -62,8 +64,6 @@ async function parseTweet({ page }) {
         ).querySelector("time").dateTime;
         return el;
     });
-    // wait for the author to be visible after everything loaded
-    const tweetAuthor = extractAuthor(page.url());
     // Get views, likes, retweets, replies
     const stats = await page.evaluate(() => {
         const statsKeyMap = {
@@ -116,7 +116,7 @@ async function parseTweet({ page }) {
     const actualTweet = (tweet == metadata?.embed?.tweet) ? "" : tweet;
     return {
         tweet: actualTweet,
-        author: tweetAuthor,
+        author: tweetAuthorUrl,
         id: currentTweetId,
         metadata,
         time,
@@ -187,11 +187,6 @@ async function fetchSingleTweet({ page, expectedAuthor }) {
     /**
      * Stop thread scraping if we reach the last tweet
      */
-    // const lastTweetFound = await page.evaluate(() => {
-    //     if (document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling === null) return 'finished';
-    //     const el = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]').closest('div[data-testid="cellInnerDiv"]').nextElementSibling.nextElementSibling.querySelector('div[data-testid]').querySelector("a").href;
-    //     return el;
-    // });
 
     const mustStop = tweet.author !== expectedAuthor;
     console.log("lastTweetFound tweet.author", tweet.author);
