@@ -14,7 +14,12 @@ echo "Adding thread $id to turras.csv"
 node ./scripts/add-new-tweet.js $id $first_tweet_line
 
 echo "Obtaining thread $id"
-node ./scripts/recorder.js
+if ! node ./scripts/recorder.js; then
+    echo "Failed to record thread $id\n"
+    echo "You may want to try the test mode with a debugger:"
+    echo "node ./scripts/recorder.js --test $id"
+    exit 1
+fi
 
 echo "Enriching tweets for thread $id" 
 node ./scripts/tweets_enrichment.js
