@@ -5,6 +5,7 @@ import enrichedTweetsData from './db/tweets_enriched.json';
 import tweetExamsData from './db/tweets_exam.json';
 import tweetPodcastsData from './db/tweets_podcast.json';
 import graphData from './db/processed_graph_data.json';
+import { Author } from './constants';
 
 export interface CategorizedTweet {
   id: string;
@@ -160,6 +161,19 @@ export class TweetProvider {
       .slice(0, 25);
 
     return newestTweets;
+  }
+
+  public filterTweetsByAuthor(author: Author): Tweet[] {
+    return this.tweets
+    .map(thread => thread[0]) // Get first tweet of each thread
+    .filter(tweet => tweet.author === author.X);
+  }
+
+  public filterAvoidTweetsByAuthor(author: Author): Tweet[] {
+    return this.tweets
+    .map(thread => thread[0]) // Get first tweet of each thread
+    .flat()
+    .filter(tweet => tweet.author !== author.X);
   }
 
   private calculateEngagement(stats: Tweet['stats']): number {

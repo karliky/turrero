@@ -3,6 +3,7 @@ import { TweetFacade } from "../infrastructure";
 import { CategoryCard } from './components/CategoryCard';
 import { AdvertisementCard } from './components/AdvertisementCard';
 import { HeaderDescription } from './components/HeaderDescription';
+import { AUTHORS } from '@/infrastructure/constants';
 
 async function getData() {
   const tweetFacade = new TweetFacade();
@@ -26,6 +27,14 @@ async function getData() {
           engagement: 0
         }));
     }
+    if (category === 'otros-autores') {
+      return tweetFacade.tweetProvider.filterAvoidTweetsByAuthor(AUTHORS.RECUENCO)
+        .map(tweet => ({
+          ...tweet,
+          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
+          engagement: 0
+        }));
+    }
     
     const categoryTweets = await tweetFacade.tweetProvider.getTweetsByCategory(category);
     return categoryTweets.length > 0 
@@ -43,7 +52,7 @@ async function getData() {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
-  }).replace(' de ', ' del ')
+  });
   return { categories, tweets, tweetsPerCategory, totalTweets: allTweets.length, lastUpdateDate };
 }
 
