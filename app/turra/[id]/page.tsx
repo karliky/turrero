@@ -146,7 +146,7 @@ export default async function TurraPage({ params }: Params) {
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <a
-              href={`${AUTHORS.CPSCOMUNITY.X}/status/${mainTweet.id}`} // X will redirect to the actual author
+              href={`${mainTweet.author}/status/${mainTweet.id}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-whiskey-700 hover:text-whiskey-900 font-medium"

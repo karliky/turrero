@@ -2612,7 +2612,9 @@
             "gaming",
             "orquestación-cognitiva"
         ],
-        "related_threads": []
+        "related_threads": [
+            "1880543676876874203"
+        ]
     },
     {
         "id": "1768900222581624896",
@@ -3171,6 +3173,17 @@
             "orquestación-cognitiva",
             "el-contexto-manda"
         ],
+        "related_threads": []
+    },
+    {
+        "id": "1880543676876874203",
+        "url": "https://x.com/Recuenco/status/1880543676876874203",
+        "replies": 79,
+        "likes": 831,
+        "bookmarks": 120,
+        "views": 113508,
+        "summary": "",
+        "categories": [],
         "related_threads": []
     }
 ]
