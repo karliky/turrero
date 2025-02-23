@@ -25,7 +25,7 @@ export default {
           '900': '#5b3b33',
           '950': '#301e1a',
         },
-        brand: '#a5050b', // Red pixel from Recuenco's twitter profile
+        brand: '#a5050b', // Red pixel from Recuenco's x.com profile
       },
     },
   },

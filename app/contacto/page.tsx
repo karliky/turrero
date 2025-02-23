@@ -67,7 +67,7 @@ export default function ContactPage() {
                 Víctor R. Escobar
               </a>
               <a
-                href="https://twitter.com/k4rliky"
+                href="https://x.com/k4rliky"
                 title="Programador guapo"
                 target="_blank"
                 className="text-whiskey-200 hover:text-whiskey-100 transition-colors block"
@@ -92,7 +92,7 @@ export default function ContactPage() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="https://twitter.com/Recuenco"
+                  href="https://x.com/Recuenco"
                   target="_blank"
                   className="text-whiskey-200 hover:text-whiskey-100 transition-colors"
                 >
