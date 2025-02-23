@@ -7,7 +7,7 @@ import { TweetContent } from "../../components/TweetContent";
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { TurraSidebar } from '../../components/TurraSidebar';
-import { AUTHORS } from "@/infrastructure/constants";
+import { AUTHORS, Author, fromXtoAuthor } from "@/infrastructure/constants";
 
 interface Params {
   params: Promise<{
@@ -28,7 +28,8 @@ async function getTweetData(id: string) {
     thread,
     summary: tweetProvider.getSummaryById(mainTweet.id),
     categories: tweetProvider.getCategoryById(mainTweet.id),
-    exam: tweetProvider.getExamById(mainTweet.id)
+    exam: tweetProvider.getExamById(mainTweet.id),
+    author: mainTweet.author,
   };
 }
 
@@ -97,7 +98,7 @@ export default async function TurraPage({ params }: Params) {
   const words = summary.split(' ');
   const coloredWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
-
+  const author: Author = fromXtoAuthor(mainTweet.author);
   return (
     <main className="min-h-screen">
       {/* Back Navigation */}
@@ -120,8 +121,18 @@ export default async function TurraPage({ params }: Params) {
             <span style={{ color: '#a5050b' }}>{coloredWords}</span>{' '}
             {remainingWords}
           </h1>
-
           <div className="flex flex-wrap items-center gap-3 text-sm text-whiskey-600 mb-3">
+            <span>Por{" "}
+            <a
+              href={author.X}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-whiskey-700 hover:text-whiskey-900 font-medium"
+            >
+                {author.NAME} 
+             </a>
+             </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <time>
               Publicado el{" "}
               {format(new Date(mainTweet.time), "d 'de' MMMM, yyyy", { locale: es })}
@@ -135,7 +146,7 @@ export default async function TurraPage({ params }: Params) {
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <a
-              href={`https://x.com/Recuenco/status/${mainTweet.id}`}
+              href={`${AUTHORS.CPSCOMUNITY.X}/status/${mainTweet.id}`} // X will redirect to the actual author
               target="_blank"
               rel="noopener noreferrer"
               className="text-whiskey-700 hover:text-whiskey-900 font-medium"
