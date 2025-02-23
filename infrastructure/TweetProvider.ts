@@ -76,6 +76,7 @@ export interface TurraNode {
   related_threads: string[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
 let instance: TweetProvider | null = null;
 
 export class TweetProvider {
@@ -86,10 +87,11 @@ export class TweetProvider {
   private tweetExams!: TweetExam[];
   private tweetPodcasts!: { id: string }[];
   private graphData!: TurraNode[];
+  static instance: TweetProvider | null = null;
 
   constructor() {
-    if (instance) {
-      return instance;
+    if (TweetProvider.instance) {
+      return TweetProvider.instance;
     }
 
     this.tweetsMap = tweetsMapData as CategorizedTweet[];
@@ -100,7 +102,7 @@ export class TweetProvider {
     this.tweetPodcasts = tweetPodcastsData as { id: string }[];
     this.graphData = graphData as TurraNode[];
 
-    instance = this;
+    TweetProvider.instance = this;
   }
 
   getTweetsByCategory(category: string): Tweet[] {
