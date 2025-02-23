@@ -30,6 +30,7 @@ export interface GlossaryTerm {
 const Categories: string[] = [
     "top-25-turras",
     "las-más-nuevas",
+    "otros-autores",
     "resolución-de-problemas-complejos",
     "sistemas-complejos",
     "marketing",
