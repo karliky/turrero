@@ -1,5 +1,37 @@
 [
   {
+    "id": "1890657339599999084",
+    "questions": [
+      {
+        "question": "¿Qué significa M.E.T.A. en el contexto del metajuego?",
+        "options": [
+          "Método Estratégico Totalmente Avanzado",
+          "Most Effective Tactic Available",
+          "Modelo Eficaz de Táctica Adaptativa"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "¿Cuál es el propósito de analizar el tablero de juego antes de competir?",
+        "options": [
+          "Evitar jugar contra rivales difíciles",
+          "Identificar reglas y normas clave",
+          "Encontrar atajos en el juego"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "¿Qué representa la 'META permanente'?",
+        "options": [
+          "Estrategias que nunca cambian",
+          "Un ciclo constante de evolución de tácticas",
+          "La mejor táctica en todos los juegos"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  {
     "id": "1880543676876874203",
     "questions": [
       {
