@@ -184,13 +184,8 @@ async function fetchSingleTweet({ page, expectedAuthor }) {
     const tweet = await parseTweet({ page });
     console.log("Fetched tweet data:", tweet);
     await new Promise((r) => setTimeout(r, 100));
-    /**
-     * Stop thread scraping if we reach the last tweet
-     */
-
+    // Stop thread scraping if we reach the last tweet
     const mustStop = tweet.author !== expectedAuthor;
-    console.log("lastTweetFound tweet.author", tweet.author);
-    console.log("lastTweetFound expectedAuthor", expectedAuthor);
     console.log("lastTweetFound", mustStop);
     return { tweet, mustStop };
 }
