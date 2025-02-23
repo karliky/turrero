@@ -146,6 +146,19 @@ export class TweetProvider {
     return topTweets;
   }
 
+  get25newestTweets(): Tweet[] {
+    const newestTweets = this.tweets
+      .map(thread => thread[0]) // Get first tweet of each thread
+      .map(tweet => ({
+        ...tweet,
+        engagement: this.calculateEngagement(tweet.stats)
+      }))
+      .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+      .slice(0, 25);
+
+    return newestTweets;
+  }
+
   private calculateEngagement(stats: Tweet['stats']): number {
     return Number(stats.retweets) + 
            Number(stats.quotetweets) + 

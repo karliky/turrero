@@ -61,11 +61,14 @@ function formatCategoryUrl(category: string): string {
 
 export function CategoryCard({ category, tweets, formatCategoryTitle }: CategoryCardProps) {
   const isTop25 = category === 'top-25-turras';
+  const isLasMasNuevas = category === 'las-más-nuevas';
   
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 flex flex-col min-h-[400px] group">
       <h2 className="text-xl font-bold mb-3 text-whiskey-900 group-hover:text-whiskey-700 transition-colors">
         {isTop25 ? (
+          formatCategoryTitle(category)
+        ) : isLasMasNuevas ? (
           formatCategoryTitle(category)
         ) : (
           <a href={`/${formatCategoryUrl(category)}`} className="hover:underline">
@@ -94,7 +97,7 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
                     className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-2 px-3 bg-gray-900 text-xs font-medium text-white rounded-md shadow-lg dark:bg-neutral-700 max-w-xs"
                     role="tooltip"
                   >
-                    {category === 'top-25-turras' 
+                    {(isTop25|| isLasMasNuevas)
                       ? `Turra publicada hace ${formatRelativeTime(item.time, true)}. (${item.stats.likes} likes, ${item.stats.retweets} retweets, ${item.stats.quotetweets} quotetweets)`
                       : `Turra publicada hace ${formatRelativeTime(item.time, true)}`
                     }
@@ -112,7 +115,7 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
         </div>
       </div>
 
-      {!isTop25 && (
+      {!isTop25 && !isLasMasNuevas && (
         <div className="pt-3 mt-2 border-t border-whiskey-100">
           <a
             href={`/${formatCategoryUrl(category)}`}
@@ -122,6 +125,7 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
           </a>
         </div>
       )}
+      
     </div>
   );
 } 

@@ -17,6 +17,14 @@ async function getData() {
           engagement: 0
         }));
     }
+    if (category === 'las-más-nuevas') {
+      return tweetFacade.tweetProvider.get25newestTweets()
+        .map(tweet => ({
+          ...tweet,
+          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
+          engagement: 0
+        }));
+    }
     
     const categoryTweets = await tweetFacade.tweetProvider.getTweetsByCategory(category);
     return categoryTweets.length > 0 
