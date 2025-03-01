@@ -40,26 +40,19 @@
       "console": "integratedTerminal"
     },
     {
+      "name": "Deno recorder.ts",
       "type": "node",
       "request": "launch",
-      "name": "Debug Next.js",
-      "program": "${workspaceFolder}/node_modules/.bin/next",
-      "args": [
-        "dev"
-      ],
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "node",
-      "skipFiles": [
-        "<node_internals>/**"
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "run",
+        "--inspect-brk",
+        "-A",
+        "${workspaceFolder}/scripts/recorder.ts"
       ],
-      "console": "integratedTerminal",
-      "sourceMaps": true,
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "outFiles": [
-        "${workspaceFolder}/.next/**/*.js"
-      ]
+      "outputCapture": "std",
+      "attachSimplePort": 9229
     }
-  ],
+  ]
 }

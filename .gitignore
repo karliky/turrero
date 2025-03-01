@@ -16,6 +16,7 @@
 /build
 
 # misc
+.cache/
 .DS_Store
 
 # debug

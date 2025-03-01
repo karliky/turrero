@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "deno.ns",
+            "deno.window"
+        ],
+        "strict": true,
+        "target": "esnext",
+        "module": "esnext"
+    }
+}
