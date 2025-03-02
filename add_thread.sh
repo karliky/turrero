@@ -8,20 +8,19 @@ fi
 
 id=$1
 first_tweet_line=$2
-
+DENO_FLAGS="--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run"
 
 echo "Adding thread $id to turras.csv"
 node ./scripts/add-new-tweet.js "$id" "$first_tweet_line"
 
 echo "Obtaining thread $id"
-
-deno run --allow-all scripts/recorder.ts
+$(echo "deno run $DENO_FLAGS scripts/recorder.ts")
 # To debug:
-# deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts --test $id
+# deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts --test "$id"
 
 
 echo "Enriching tweets for thread $id" 
-node ./scripts/tweets_enrichment.js
+$(echo "deno run $DENO_FLAGS ./scripts/tweets_enrichment.ts")
 
 echo "Generating algolia index for thread $id"
 node ./scripts/make-algolia-db.js

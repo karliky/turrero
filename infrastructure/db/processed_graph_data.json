@@ -3182,7 +3182,7 @@
         "likes": 831,
         "bookmarks": 120,
         "views": 113508,
-        "summary": "El metajuego y su impacto en la estrategia y competencia (1 de 2)",
+        "summary": "El metajuego y su impacto en la estrategia en entornos competitivos (1 de 2)",
         "categories": [
             "estrategia",
             "gaming",
@@ -3201,7 +3201,24 @@
         "likes": 372,
         "bookmarks": 61,
         "views": 31597,
-        "summary": "El metajuego y su impacto en la estrategia y competencia (2 de 2)",
+        "summary": "El metajuego y su impacto en la estrategia en entornos competitivos (2 de 2)",
+        "categories": [
+            "estrategia",
+            "gaming",
+            "sistemas-complejos",
+            "lectura-de-señales",
+            "el-contexto-manda"
+        ],
+        "related_threads": []
+    },
+    {
+        "id": "1895724907880657360",
+        "url": "https://x.com/Recuenco/status/1895724907880657360",
+        "replies": 56,
+        "likes": 462,
+        "bookmarks": 92,
+        "views": 60788,
+        "summary": "",
         "categories": [],
         "related_threads": []
     }
