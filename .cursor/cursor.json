@@ -1,0 +1,53 @@
+{
+    "version": "1.0.0",
+    "project": "X.com For You Blocker",
+    "files": {
+        "README.md": {
+            "lastUpdate": "2024-03-20",
+            "description": "Documentación principal del proyecto que incluye instrucciones de instalación y uso"
+        },
+        "ForYouBlocker/manifest.json": {
+            "lastUpdate": "2024-03-20",
+            "description": "Archivo de manifiesto de la extensión"
+        },
+        "ForYouBlocker/src/content.js": {
+            "lastUpdate": "2024-03-20",
+            "description": "Script principal que oculta la pestaña 'For You' y activa 'Following'",
+            "functions": {
+                "updateTabs": "Encuentra y actualiza las pestañas, ocultando 'For You' y activando 'Following'",
+                "init": "Inicializa el proceso y configura el MutationObserver"
+            }
+        },
+        "PRIVACY.md": {
+            "lastUpdate": "2024-03-20",
+            "description": "Documento de política de privacidad"
+        },
+        "LICENSE.txt": {
+            "lastUpdate": "2024-03-20",
+            "description": "Licencia MIT del proyecto"
+        }
+    },
+    "metadata": {
+        "author": "vrescobar",
+        "maintainers": [
+            "vrescobar"
+        ],
+        "platforms": [
+            "Chrome",
+            "Safari",
+            "Brave"
+        ],
+        "tags": [
+            "extension",
+            "x.com",
+            "twitter",
+            "blocker"
+        ],
+        "status": "active"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "xcode": "Para compilación en Safari",
+        "safari-web-extension-converter": "Para conversión a extensión Safari"
+    }
+}

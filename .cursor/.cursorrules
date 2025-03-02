@@ -1,0 +1,107 @@
+You are an expert in Deno 2.2, TypeScript, Node.js, Next.js 14 App Router,
+React, Web scrapper and twitter user.
+
+Key Principles
+
+- Write concise, technical responses with accurate TypeScript examples.
+- Use functional, declarative programming. Avoid classes.
+- Prefer iteration and modularization over duplication.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading).
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for components.
+- Use the Receive an Object, Return an Object (RORO) pattern.
+
+JavaScript/TypeScript
+
+- Use "function" keyword for pure functions. Omit semicolons.
+- Use TypeScript for all code. Prefer interfaces over types. Avoid enums, use
+  maps.
+- File structure: Exported component, subcomponents, helpers, static content,
+  types.
+- Avoid unnecessary curly braces in conditional statements.
+- For single-line statements in conditionals, omit curly braces.
+- Use concise, one-line syntax for simple conditional statements (e.g., if
+  (condition) doSomething()).
+
+Error Handling and Validation
+
+- Prioritize error handling and edge cases:
+  - Handle errors and edge cases at the beginning of functions.
+  - Use early returns for error conditions to avoid deeply nested if statements.
+  - Place the happy path last in the function for improved readability.
+  - Avoid unnecessary else statements; use if-return pattern instead.
+  - Use guard clauses to handle preconditions and invalid states early.
+  - Implement proper error logging and user-friendly error messages.
+  - Consider using custom error types or error factories for consistent error
+    handling.
+
+Server side scripts under ./scripts/
+
+- Use Deno and typescript when possible
+- Prefer deno packages instead of nodejs imports for eveerything regarding the
+  system (filesystem, network, etc), if needed, you can fetch them from
+  https://docs.deno.com/api/deno/~/Deno
+- For the rest of packages, such as pupeteer, prefer imports using npm style,
+  for example:
+
+```
+import dotenv from "dotenv";
+import { readFileSync, writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import process from "node:process";
+import puppeteer from "puppeteer-core";
+import {
+    Browser as InstallBrowser,
+    BrowserPlatform,
+    detectBrowserPlatform,
+    install,
+    resolveBuildId,
+} from "@puppeteer/browsers";
+import type { Browser, Page } from "puppeteer-core";
+```
+
+- Prefer small composable async functions which isolate behaves and
+  transformations rather than long ones
+- Fail fast when somenthing cannot be fetched such as tweet threads or similar
+- prefer asyncrounous code so multiple calls can be done in paralel
+
+React/Next.js
+
+- Use functional components and TypeScript interfaces.
+- Use declarative JSX.
+- Use function, not const, for components.
+- Use Shadcn UI, Radix, and Tailwind Aria for components and styling.
+- Implement responsive design with Tailwind CSS.
+- Use mobile-first approach for responsive design.
+- Place static content and interfaces at file end.
+- Use content variables for static content outside render functions.
+- Minimize 'use client', 'useEffect', and 'setState'. Favor RSC.
+- Use Zod for form validation.
+- Wrap client components in Suspense with fallback.
+- Use dynamic loading for non-critical components.
+- Optimize images: WebP format, size data, lazy loading.
+- Model expected errors as return values: Avoid using try/catch for expected
+  errors in Server Actions. Use useActionState to manage these errors and return
+  them to the client.
+- Use error boundaries for unexpected errors: Implement error boundaries using
+  error.tsx and global-error.tsx files to handle unexpected errors and provide a
+  fallback UI.
+- Use useActionState with react-hook-form for form validation.
+- Code in services/ dir always throw user-friendly errors that tanStackQuery can
+  catch and show to the user.
+- Use next-safe-action for all server actions:
+  - Implement type-safe server actions with proper validation.
+  - Utilize the action function from next-safe-action for creating actions.
+  - Define input schemas using Zod for robust type checking and validation.
+  - Handle errors gracefully and return appropriate responses.
+  - Use import type { ActionResponse } from '@/types/actions'
+  - Ensure all server actions return the ActionResponse type
+  - Implement consistent error handling and success responses using
+    ActionResponse
+
+Key Conventions
+
+1. Rely on Next.js App Router for state changes.
+2. Use the json files under ./infrastructure/db/ as databases using a typescript
+   type. Do not use them as part of the context

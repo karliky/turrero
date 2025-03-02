@@ -1,0 +1,12 @@
+*.pem
+
+.DS_Store
+*.zip
+
+infrastructure/db/tweets_enriched.json
+infrastructure/db/tweets_summary.json
+infrastructure/db/tweets_exam.json
+infrastructure/db/tweets_map.json
+infrastructure/db/tweets_summary.json
+infrastructure/db/tweets_exam.json
+infrastructure/db/tweets_map.json
