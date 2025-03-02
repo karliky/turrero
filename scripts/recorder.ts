@@ -3,15 +3,11 @@
 
 import { config as loadDotEnv } from "npm:dotenv";
 import { resolve } from "node:path";
-import {
-    installChrome,
-    setupBrowser,
-    setupCleanup,
-    setupPage,
-} from "./libs/browser-setup.ts";
+import { setupBrowser, setupCleanup, setupPage } from "./libs/browser-setup.ts";
 import { getAllTweets } from "./libs/tweet-navigation.ts";
 import { CommandLineArgs, TwitterCookies } from "./libs/types.ts";
 import { parseArgs } from "node:util";
+import process from "node:process";
 
 // Load environment variables from .env file
 const envResult = loadDotEnv({ path: resolve(process.cwd(), ".env") });
@@ -24,12 +20,12 @@ async function main() {
     // Verify required environment variables
     const requiredEnvVars = ["twid", "auth_token", "ct0"];
     const missingVars = requiredEnvVars.filter((varName) =>
-        !process.env[varName]
+        !Deno.env.get(varName)
     );
 
     if (missingVars.length > 0) {
         console.error(
-            "Error: Missing required environment variables:",
+            "Error: Missing required environment variables for twitter cookies:",
             missingVars.join(", "),
         );
         console.error(
@@ -58,19 +54,17 @@ async function main() {
     };
 
     const cookies: TwitterCookies = {
-        twid: process.env.twid,
-        auth_token: process.env.auth_token,
-        lang: process.env.lang,
-        d_prefs: process.env.d_prefs,
-        kdt: process.env.kdt,
-        ct0: process.env.ct0,
-        guest_id: process.env.guest_id,
+        twid: Deno.env.get("twid"),
+        auth_token: Deno.env.get("auth_token"),
+        lang: Deno.env.get("lang"),
+        d_prefs: Deno.env.get("d_prefs"),
+        kdt: Deno.env.get("kdt"),
+        ct0: Deno.env.get("ct0"),
+        guest_id: Deno.env.get("guest_id"),
     };
 
     const outputFilePath = "infrastructure/db/tweets.json";
-    const executablePath = await installChrome(commandLineArgs.test);
     const browser = await setupBrowser({
-        executablePath,
         test: commandLineArgs.test,
     });
 

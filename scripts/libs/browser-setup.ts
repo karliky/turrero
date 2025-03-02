@@ -17,15 +17,6 @@ const iPhone12 = {
     },
 };
 
-export async function installChrome(test: boolean): Promise<string> {
-    const browser = await puppeteer.launch(
-        test ? { headless: false } : { headless: "new" },
-    );
-    const executablePath = browser.process()?.spawnfile || "";
-    await browser.close();
-    return executablePath;
-}
-
 export async function setupBrowser(config: BrowserConfig): Promise<Browser> {
     const browserProps = config.test
         ? {
@@ -45,7 +36,6 @@ export async function setupBrowser(config: BrowserConfig): Promise<Browser> {
 
     const launchOptions = {
         ...browserProps,
-        executablePath: config.executablePath,
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",

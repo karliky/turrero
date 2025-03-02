@@ -31,7 +31,7 @@ export interface TweetNavigationConfig {
 }
 
 export interface BrowserConfig {
-    executablePath: string;
+    executablePath?: string;
     test?: boolean;
 }
 
