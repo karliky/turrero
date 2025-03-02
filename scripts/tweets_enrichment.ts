@@ -162,8 +162,23 @@ function saveTweet(tweet: Tweet): void {
 }
 
 async function main() {
+    // Parse command line arguments
+    const args = Deno.args;
+    const idIndex = args.indexOf("--id");
+    const idMode = idIndex !== -1;
+
+    if (!idMode) {
+        console.error("Please provide --id <id>");
+        Deno.exit(1);
+    }
+
+    const tweetId = args[idIndex + 1];
+    if (!tweetId) {
+        console.error("Please provide a tweet ID after --id");
+        Deno.exit(1);
+    }
+
     // Initialize Puppeteer
-    // Ensure Chrome is installed
     const buildId = await resolveBuildId(
         InstallBrowser.CHROME,
         detectBrowserPlatform() as BrowserPlatform,
@@ -205,74 +220,83 @@ async function main() {
         const tweetsLibrary = JSON.parse(Deno.readTextFileSync(tweetsPath));
         const enrichments = JSON.parse(Deno.readTextFileSync(enrichmentsPath));
 
-        // Process each tweet library
-        for (const tweetLibrary of tweetsLibrary) {
-            for (const tweet of tweetLibrary) {
-                if (!tweet.metadata) continue;
+        // Find the tweet library containing our target tweet
+        const targetTweetLibrary = tweetsLibrary.find(
+            (library: Tweet[]) =>
+                library.some((tweet: Tweet) => tweet.id === tweetId),
+        );
 
-                const { embed } = tweet.metadata;
+        if (!targetTweetLibrary) {
+            console.error(`Tweet with ID ${tweetId} not found in tweets.json`);
+            Deno.exit(1);
+        }
 
-                // Skip if already enriched
-                if (
-                    enrichments.find((_tweet: Tweet) =>
-                        tweet.id === _tweet.id ||
-                        (embed && embed.id === _tweet.id)
-                    )
-                ) {
+        // Process only tweets from the target library
+        for (const tweet of targetTweetLibrary) {
+            if (!tweet.metadata) continue;
+
+            const { embed } = tweet.metadata;
+
+            // Skip if already enriched
+            if (
+                enrichments.find((_tweet: Tweet) =>
+                    tweet.id === _tweet.id ||
+                    (embed && embed.id === _tweet.id)
+                )
+            ) {
+                continue;
+            }
+
+            // Handle embedded tweets
+            if (embed) {
+                const embeddedTweet = {
+                    type: "embeddedTweet",
+                    embeddedTweetId: embed.id,
+                    ...embed,
+                    id: tweet.id,
+                };
+                console.log(embeddedTweet);
+                saveTweet(embeddedTweet as Tweet);
+            }
+
+            // Process media
+            if (!tweet.metadata.type) continue;
+
+            try {
+                if (tweet.metadata.type === "card") {
+                    await downloadTweetMedia(tweet, page);
                     continue;
                 }
 
-                // Handle embedded tweets
-                if (embed) {
-                    const embeddedTweet = {
-                        type: "embeddedTweet",
-                        embeddedTweetId: embed.id,
-                        ...embed,
-                        id: tweet.id,
-                    };
-                    console.log(embeddedTweet);
-                    saveTweet(embeddedTweet as Tweet);
-                }
-
-                // Process media
-                if (!tweet.metadata.type) continue;
-
-                try {
-                    if (tweet.metadata.type === "card") {
-                        await downloadTweetMedia(tweet, page);
-                        continue;
-                    }
-
-                    // Process multiple images if present
-                    if (tweet.metadata.imgs) {
-                        await Promise.all(
-                            tweet.metadata.imgs.map(
-                                async (
-                                    metadata: { src: string; alt: string },
-                                ) => {
-                                    await downloadTweetMedia(
-                                        {
-                                            id: tweet.id,
-                                            metadata: {
-                                                ...metadata,
-                                                type: "media",
-                                            },
+                // Process multiple images if present
+                if (tweet.metadata.imgs) {
+                    await Promise.all(
+                        tweet.metadata.imgs.map(
+                            async (
+                                metadata: { src: string; alt: string },
+                            ) => {
+                                await downloadTweetMedia(
+                                    {
+                                        id: tweet.id,
+                                        metadata: {
+                                            ...metadata,
+                                            type: "media",
                                         },
-                                        page,
-                                    );
-                                },
-                            ),
-                        );
-                    }
-                } catch (error) {
-                    console.error(
-                        "Request failed",
-                        tweet.id,
-                        tweet.metadata,
-                        error,
+                                    },
+                                    page,
+                                );
+                            },
+                        ),
                     );
-                    tweet.metadata.url = undefined;
                 }
+            } catch (error) {
+                console.error(
+                    "Request failed",
+                    tweet.id,
+                    tweet.metadata,
+                    error,
+                );
+                tweet.metadata.url = undefined;
             }
         }
     } finally {

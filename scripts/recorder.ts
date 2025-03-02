@@ -60,38 +60,6 @@ interface Tweet {
     };
 }
 
-interface TweetCSV {
-    id: string;
-    [key: string]: string;
-}
-
-/**
- * Parse CSV file into an array of objects.
- * @param filePath Path to the CSV file.
- * @returns Array of objects where each object represents a row in the CSV.
- */
-function parseCSV(filePath: string): TweetCSV[] {
-    const csvContent = readFileSync(filePath, { encoding: "utf8" });
-    const lines = csvContent.split("\n");
-    const headers = lines[0].split(",");
-    return lines.slice(1).map((line) => {
-        const data = line.split(",");
-        const obj = headers.reduce(
-            (
-                acc: { [key: string]: string },
-                nextKey: string,
-                index: number,
-            ) => {
-                acc[nextKey.trim()] =
-                    data[index]?.replace(/(^"|"$)/g, "").trim() ?? "";
-                return acc;
-            },
-            { id: "" }, // Initialize with required 'id' property
-        );
-        return obj as TweetCSV;
-    });
-}
-
 function extractAuthorUrl(url: string): string {
     const author = url.split("/status/")[0];
     return author;
@@ -441,8 +409,19 @@ async function main() {
     process.on("SIGTERM", cleanup);
 
     const args = process.argv.slice(2);
-    const testIndex = args.indexOf("--test");
-    const testMode = testIndex !== -1;
+    const idIndex = args.indexOf("--id");
+    const testMode = args.includes("--test");
+
+    if (idIndex === -1) {
+        console.error("Please provide --id <id>");
+        process.exit(1);
+    }
+
+    const tweetId = args[idIndex + 1];
+    if (!tweetId) {
+        console.error("Please provide a value for --id");
+        process.exit(1);
+    }
 
     // Ensure Chrome is installed
     const buildId = await resolveBuildId(
@@ -520,56 +499,26 @@ async function main() {
     await page.emulate(iPhone12);
 
     try {
+        await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
+        console.log("Waiting for selector");
+        await page.waitForSelector('div[data-testid="tweetText"]');
+
+        const tweet = await parseTweet({ page });
+        try {
+            await rejectCookies(page);
+            console.log("Cookies rejected, closed the popup");
+        } catch {
+            console.log("Could not reject cookies and close the popup");
+        }
+
         if (testMode) {
-            const tweetId = args[testIndex + 1];
-            if (!tweetId) {
-                console.error("Please provide a tweet ID after --test");
-                process.exit(1);
-            }
-
-            await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
-            console.log("Waiting for selector");
-            await page.waitForSelector('div[data-testid="tweetText"]');
-
-            const tweet = await parseTweet({ page });
-            try {
-                await rejectCookies(page);
-                console.log("Cookies rejected, closed the popup");
-            } catch {
-                console.log("Could not reject cookies and close the popup");
-            }
-
             await fetchSingleTweet({ page, expectedAuthor: tweet.author });
             console.log("Correct exit");
         } else {
-            const existingTweetsData = JSON.parse(
-                readFileSync(
-                    path.join(__dirname, "../infrastructure/db/tweets.json"),
-                    "utf-8",
-                ),
-            );
-            const tweets = parseCSV(
-                path.join(__dirname, "../infrastructure/db/turras.csv"),
-            );
-
-            const existingTweets = existingTweetsData.reduce(
-                (acc: string[], tweets: Tweet[]) => {
-                    acc.push(tweets[0].id);
-                    return acc;
-                },
-                [],
-            );
-
-            const tweetIds = tweets
-                .map((tweet) => tweet.id)
-                .filter((id) => !existingTweets.includes(id));
-
-            console.log("Processing a total of tweets:", tweetIds.length);
-
             await getAllTweets({
                 page,
                 author: undefined,
-                tweetIds,
+                tweetIds: [tweetId],
                 outputFilePath: path.join(
                     __dirname,
                     "../infrastructure/db/tweets.json",

@@ -19,7 +19,6 @@ def read_json_ids(filename):
 
 def main():
     files = {
-        'turras.csv': read_csv_ids('infrastructure/db/turras.csv'),
         'tweets_exam.json': read_json_ids('infrastructure/db/tweets_exam.json'),
         'tweets_map.json': read_json_ids('infrastructure/db/tweets_map.json'),
         'tweets_summary.json': read_json_ids('infrastructure/db/tweets_summary.json')

@@ -1,29 +1,25 @@
 #!/bin/bash
 
 
-if [ "$#" -ne 2 ]; then
-    echo "Uso: $0 <id> <first_tweet_line>"
+if [ "$#" -ne 1 ]; then
+    echo "Uso: $0 <id>"
     exit 1
 fi
 
 id=$1
-first_tweet_line=$2
 DENO_FLAGS="--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run"
 
-echo "Adding thread $id to turras.csv"
-node ./scripts/add-new-tweet.js "$id" "$first_tweet_line"
-
 echo "Obtaining thread $id"
-$(echo "deno run $DENO_FLAGS scripts/recorder.ts")
+$(echo "deno run $DENO_FLAGS scripts/recorder.ts --id $id")
 # To debug:
 # deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts --test "$id"
 
 
 echo "Enriching tweets for thread $id" 
-$(echo "deno run $DENO_FLAGS ./scripts/tweets_enrichment.ts")
+$(echo "deno run $DENO_FLAGS ./scripts/tweets_enrichment.ts --id $id")
 
 echo "Generating algolia index for thread $id"
-node ./scripts/make-algolia-db.js
+$(echo "node ./scripts/make-algolia-db.js")
 
 echo "Generating books for thread $id"
 node ./scripts/generate-books.js

@@ -1,26 +1,25 @@
 #!/bin/bash
 
-if [ "$#" -ne 2 ]; then
-    echo "Uso: $0 <id> <first_tweet_line>"
+
+if [ "$#" -ne 1 ]; then
+    echo "Uso: $0 <id>"
     exit 1
 fi
 
 id=$1
-first_tweet_line=$2
-
-echo "Adding thread $id to turras.csv"
-node ./scripts/add-new-tweet.js $id "$first_tweet_line"
+DENO_FLAGS="--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run"
 
 echo "Obtaining thread $id"
-node ./scripts/recorder.js
+$(echo "deno run $DENO_FLAGS scripts/recorder.ts --id $id")
 # To debug:
-# node ./scripts/recorder.js --test $id
+# deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts --test "$id"
+
 
 echo "Enriching tweets for thread $id" 
-node ./scripts/tweets_enrichment.js
+$(echo "deno run $DENO_FLAGS ./scripts/tweets_enrichment.ts --id $id")
 
 echo "Generating algolia index for thread $id"
-node ./scripts/make-algolia-db.js
+$(echo "node ./scripts/make-algolia-db.js")
 
 echo "Generating books for thread $id"
 node ./scripts/generate-books.js
@@ -35,8 +34,8 @@ echo "Moving metadata to public for thread $id"
 mv -v ./metadata/* ./public/metadata/
 
 echo "Generating prompts for thread $id"
-./scripts/generate_prompts.sh $id
+./scripts/generate_prompts.sh "$id"
 
 echo "Make sure to modify the following files tweets_summary.json, tweets_exam.json y tweets_map.json"
 echo "Delete manually the prompt txt files and the turra txt file"
-echo "Please update the date on components/header.tsx" 
+echo "Please update the date on components/header.tsx"
