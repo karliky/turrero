@@ -15,6 +15,7 @@ export interface TweetStats {
 
 export interface Tweet extends TweetMetadata {
     text: string;
+    id: string;
     stats: TweetStats;
 }
 
@@ -26,7 +27,7 @@ export interface CommandLineArgs {
 export interface TweetNavigationConfig {
     page: Page;
     author?: string;
-    tweetIds: string[];
+    tweetId: string;
     outputFilePath: string;
 }
 

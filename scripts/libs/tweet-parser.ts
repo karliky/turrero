@@ -2,13 +2,25 @@ import type { Page } from "puppeteer-core";
 import { Tweet, TweetStats } from "./types.ts";
 
 async function extractTweetText(page: Page): Promise<string> {
-    const tweetText = await page.evaluate(() => {
-        const tweetTextElement = document.querySelector(
-            'div[data-testid="tweetText"]',
-        );
-        return tweetTextElement ? tweetTextElement.textContent || "" : "";
+    // Wait for progress bar to disappear
+    await page.waitForSelector('div[role="progressbar"]', { hidden: true });
+    return await page.evaluate(() => {
+        try {
+            const tweetContainer = document.querySelector(
+                'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+            );
+            if (!tweetContainer) return "";
+
+            const tweetText = tweetContainer.querySelector(
+                'div[data-testid="tweetText"]',
+            );
+            if (!tweetText) return "";
+
+            return tweetText.textContent || "";
+        } catch {
+            return "";
+        }
     });
-    return tweetText;
 }
 
 async function extractTweetStats(page: Page): Promise<TweetStats> {
@@ -20,20 +32,31 @@ async function extractTweetStats(page: Page): Promise<TweetStats> {
             views: 0,
         };
 
-        const statsElements = document.querySelectorAll(
-            'a[role="link"] span[data-testid="app-text-transition-container"]',
-        );
-        statsElements.forEach((element) => {
-            const text = element.textContent || "";
-            const value = parseInt(text.replace(/,/g, "")) || 0;
-            const parentLink = element.closest('a[role="link"]');
+        const statsLabel = document.querySelector(
+            'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+        )?.querySelector('div[role="group"]')?.getAttribute("aria-label")
+            ?.toLowerCase() || "";
 
-            if (parentLink) {
-                const ariaLabel = parentLink.getAttribute("aria-label") || "";
-                if (ariaLabel.includes("repl")) stats.replies = value;
-                else if (ariaLabel.includes("Retweet")) stats.retweets = value;
-                else if (ariaLabel.includes("Like")) stats.likes = value;
-                else if (ariaLabel.includes("View")) stats.views = value;
+        const statsKeyMap: Record<string, keyof TweetStats> = {
+            reply: "replies",
+            replies: "replies",
+            repost: "retweets",
+            reposts: "retweets",
+            like: "likes",
+            likes: "likes",
+            view: "views",
+            views: "views",
+        };
+
+        const segments = statsLabel.split(",");
+        segments.forEach((segment) => {
+            const match = segment.trim().match(/(\d+)\s(\w+)/);
+            if (match) {
+                const [, value, key] = match;
+                const mappedKey = statsKeyMap[key];
+                if (mappedKey) {
+                    stats[mappedKey] = parseInt(value.replace(/,/g, "")) || 0;
+                }
             }
         });
 
@@ -57,6 +80,11 @@ async function extractAuthorUrl(page: Page): Promise<string> {
     });
 }
 
+export function extractTweetId(url: string): string {
+    const match = url.match(/\/status\/(\d+)(?!\?)/);
+    return match ? match[1] : "";
+}
+
 export async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     const [text, stats, time, authorUrl] = await Promise.all([
         extractTweetText(page),
@@ -68,6 +96,7 @@ export async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     const author = authorUrl.split("/")[1] || "";
 
     return {
+        id: extractTweetId(page.url()),
         text,
         stats,
         time,

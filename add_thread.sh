@@ -10,7 +10,7 @@ id=$1
 #DENO_FLAGS="--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run"
 
 echo "Obtaining thread $id"
-deno run --allow-all scripts/recorder.ts --id $i
+deno run --allow-all scripts/recorder.ts --id $id
 # To debug:
 # deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts --test "$id"
 

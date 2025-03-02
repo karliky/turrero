@@ -36,20 +36,20 @@ async function main() {
 
     const args = parseArgs({
         options: {
-            id: { type: "string", multiple: true },
+            id: { type: "string" },
             test: { type: "boolean", default: false },
         },
         strict: true,
         allowPositionals: false,
     });
 
-    if (!args.values.id || args.values.id.length === 0) {
-        console.error("Please provide at least one tweet ID using --id");
+    if (!args.values.id) {
+        console.error("Please provide a tweet ID using --id");
         process.exit(1);
     }
 
     const commandLineArgs: CommandLineArgs = {
-        tweetId: args.values.id[0],
+        tweetId: args.values.id,
         test: args.values.test || false,
     };
 
@@ -78,7 +78,7 @@ async function main() {
 
     await getAllTweets({
         page,
-        tweetIds: args.values.id,
+        tweetId: commandLineArgs.tweetId,
         outputFilePath,
     });
 

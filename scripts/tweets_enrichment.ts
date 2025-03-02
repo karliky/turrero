@@ -220,19 +220,18 @@ async function main() {
         const tweetsLibrary = JSON.parse(Deno.readTextFileSync(tweetsPath));
         const enrichments = JSON.parse(Deno.readTextFileSync(enrichmentsPath));
 
-        // Find the tweet library containing our target tweet
-        const targetTweetLibrary = tweetsLibrary.find(
-            (library: Tweet[]) =>
-                library.some((tweet: Tweet) => tweet.id === tweetId),
+        // Find the target tweet directly in the tweets array
+        const targetTweet = tweetsLibrary.find((tweet: Tweet) =>
+            tweet.id === tweetId
         );
 
-        if (!targetTweetLibrary) {
+        if (!targetTweet) {
             console.error(`Tweet with ID ${tweetId} not found in tweets.json`);
             Deno.exit(1);
         }
 
-        // Process only tweets from the target library
-        for (const tweet of targetTweetLibrary) {
+        // Process tweets
+        for (const tweet of tweetsLibrary) {
             if (!tweet.metadata) continue;
 
             const { embed } = tweet.metadata;

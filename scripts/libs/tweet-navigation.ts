@@ -5,66 +5,32 @@ import { rejectCookies } from "./cookie-handler.ts";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
-export async function navigateToNextTweet(page: Page): Promise<void> {
-    await page.waitForSelector(
-        'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-        { timeout: 5000 },
-    );
+export async function navigateToNextTweet(
+    page: Page,
+): Promise<void> {
+    // Navigate to next tweet using DOM traversal
+    await page.evaluate(() => {
+        const tweet = document.querySelector(
+            'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+        );
+        const cell = tweet?.closest('div[data-testid="cellInnerDiv"]');
+        const nextTweet = cell?.nextElementSibling?.nextElementSibling
+            ?.querySelector('article[data-testid="tweet"]');
 
+        if (!nextTweet) {
+            throw new Error("Could not find next tweet");
+        }
+
+        (nextTweet as HTMLElement).click();
+    });
+
+    // Wait for new content to load
     await Promise.all([
-        page.waitForSelector('div[role="progressbar"]', { hidden: true }),
-        page.evaluate(() => {
-            return new Promise<void>((resolve, reject) => {
-                const maxAttempts = 3;
-                let attempts = 0;
-
-                const tryClick = () => {
-                    attempts++;
-                    const currentTweet = document.querySelector(
-                        'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-                    );
-                    if (!currentTweet) {
-                        if (attempts < maxAttempts) {
-                            setTimeout(tryClick, 500);
-                            return;
-                        }
-                        reject(new Error("Could not find current tweet"));
-                        return;
-                    }
-
-                    const cellDiv = currentTweet.closest(
-                        'div[data-testid="cellInnerDiv"]',
-                    );
-                    if (!cellDiv) {
-                        if (attempts < maxAttempts) {
-                            setTimeout(tryClick, 500);
-                            return;
-                        }
-                        reject(new Error("Could not find cell div"));
-                        return;
-                    }
-
-                    const nextTweet = cellDiv.nextElementSibling
-                        ?.nextElementSibling?.querySelector(
-                            'article[data-testid="tweet"]',
-                        ) as HTMLElement;
-                    if (!nextTweet) {
-                        if (attempts < maxAttempts) {
-                            setTimeout(tryClick, 500);
-                            return;
-                        }
-                        reject(new Error("Could not find next tweet"));
-                        return;
-                    }
-
-                    nextTweet.click();
-                    resolve();
-                };
-
-                tryClick();
-            });
+        page.waitForNavigation({ waitUntil: "networkidle0", timeout: 10000 }),
+        page.waitForSelector('div[data-testid="tweetText"]', {
+            visible: true,
+            timeout: 10000,
         }),
-        page.waitForNavigation({ timeout: 10000 }),
     ]);
 }
 
@@ -91,105 +57,94 @@ export async function fetchSingleTweet(
 export async function getAllTweets(
     config: TweetNavigationConfig,
 ): Promise<void> {
-    const { page, author, tweetIds, outputFilePath } = config;
+    const { page, author, tweetId, outputFilePath } = config;
 
-    // Ensure the directory exists
+    // Ensure output directory exists
     const dir = dirname(outputFilePath);
     if (!existsSync(dir)) {
         mkdirSync(dir, { recursive: true });
     }
 
-    // Initialize tweets.json if it doesn't exist
-    if (!existsSync(outputFilePath)) {
-        writeFileSync(outputFilePath, "[]", "utf-8");
+    // Initialize or load tweets file
+    const existingTweets: Tweet[] = existsSync(outputFilePath)
+        ? JSON.parse(readFileSync(outputFilePath, "utf-8"))
+        : [];
+
+    // Navigate to initial tweet
+    await page.goto(`https://x.com/${author || "Recuenco"}/status/${tweetId}`);
+    await page.waitForSelector('div[data-testid="tweetText"]', {
+        timeout: 10000,
+    });
+
+    try {
+        await rejectCookies(page);
+    } catch (error) {
+        console.log("Cookie popup not found or already handled:", error);
     }
 
-    for (const tweetId of tweetIds) {
-        await page.goto(
-            `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
-        );
-        console.log("Waiting for selector");
-        await page.waitForSelector('div[data-testid="tweetText"]');
+    // Get the author if not provided
+    let currentAuthor = author;
+    if (!currentAuthor) {
+        const tweet = await parseTweet({ page });
+        currentAuthor = tweet.author;
+        console.log("Author detected:", currentAuthor);
+    }
 
+    const tweets: Tweet[] = [];
+
+    while (true) {
         try {
-            await rejectCookies(page);
-            console.log("Cookies rejected, closed the popup");
-        } catch (error) {
-            console.log("Could not reject cookies and close the popup:", error);
-        }
+            // Wait for tweet content to be fully loaded
+            await page.waitForSelector('div[data-testid="tweetText"]', {
+                timeout: 10000,
+                visible: true,
+            });
+            await page.waitForSelector('div[role="progressbar"]', {
+                hidden: true,
+                timeout: 10000,
+            });
 
-        let currentAuthor = author;
-        if (currentAuthor === undefined) {
-            const tweet = await parseTweet({ page });
-            currentAuthor = tweet.author;
-            console.log("Author found:", currentAuthor);
-        }
+            // Get current tweet data
+            const { tweet, mustStop } = await fetchSingleTweet({
+                page,
+                expectedAuthor: currentAuthor!,
+            });
 
-        let stopped = false;
-        const tweets: Tweet[] = [];
+            tweets.push(tweet);
+            console.log(`Fetched tweet: ${tweet.url}`);
 
-        while (!stopped) {
+            if (mustStop) {
+                console.log(
+                    "Reached end of thread (different author detected)",
+                );
+                break;
+            }
+
             try {
-                const { tweet, mustStop } = await fetchSingleTweet({
-                    page,
-                    expectedAuthor: currentAuthor!,
-                });
-
-                if (mustStop) {
-                    stopped = true;
-                    const existingTweets = JSON.parse(
-                        readFileSync(outputFilePath, "utf-8"),
-                    );
-                    existingTweets.push(tweets);
-                    writeFileSync(
-                        outputFilePath,
-                        JSON.stringify(existingTweets, null, 4),
-                    );
+                await navigateToNextTweet(page);
+                continue;
+            } catch (error) {
+                if (
+                    error instanceof Error &&
+                    error.message === "Next tweet button not found"
+                ) {
+                    console.log("End of thread reached - no more tweets");
                     break;
                 }
-
-                tweets.push(tweet);
-                console.log("Finding next tweet...");
-
-                try {
-                    await navigateToNextTweet(page);
-                } catch (error) {
-                    if (
-                        error instanceof Error &&
-                        error.message === "Could not find next tweet"
-                    ) {
-                        console.error(
-                            "\nNo more tweets found in the thread. Stack trace:",
-                        );
-                        console.error(error.stack);
-                        console.log(
-                            "\nTip: Try running in test mode to see the browser:",
-                        );
-                        console.log(
-                            `deno run --allow-all scripts/recorder.ts --id ${tweetId} --test`,
-                        );
-
-                        // Save what we have so far
-                        const existingTweets = JSON.parse(
-                            readFileSync(outputFilePath, "utf-8"),
-                        );
-                        existingTweets.push(tweets);
-                        writeFileSync(
-                            outputFilePath,
-                            JSON.stringify(existingTweets, null, 4),
-                        );
-
-                        // Exit gracefully
-                        return;
-                    }
-                    // For other errors, try to recover
-                    console.error("Navigation error:", error);
-                    await handleNavigationError(page);
-                }
-            } catch (error) {
-                console.error("Tweet processing error:", error);
-                await handleNavigationError(page);
+                throw error; // Re-throw other navigation errors
             }
+        } catch (error) {
+            console.error("Error processing tweet:", error);
+            break;
         }
+    }
+
+    // Save all tweets
+    if (tweets.length > 0) {
+        existingTweets.push(tweets);
+        writeFileSync(outputFilePath, JSON.stringify(existingTweets, null, 4));
+        console.log(
+            `Successfully saved ${tweets.length} tweets to ${outputFilePath}`,
+        );
     }
 }

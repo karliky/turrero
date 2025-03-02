@@ -25,21 +25,6 @@
       }
     },
     {
-      "type": "node",
-      "request": "launch",
-      "name": "Debug fetch tweet 1867841814809461115",
-      "program": "${workspaceFolder}/scripts/recorder.js",
-      "args": [
-        "--test",
-        "1867841814809461115"
-        // "1860251366708396490",
-      ],
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "console": "integratedTerminal"
-    },
-    {
       "name": "Deno recorder.ts",
       "type": "node",
       "request": "launch",
@@ -49,7 +34,10 @@
         "run",
         "--inspect-brk",
         "-A",
-        "${workspaceFolder}/scripts/recorder.ts"
+        "${workspaceFolder}/scripts/recorder.ts",
+        "--test",
+        "--id",
+        "1895724907880657360"
       ],
       "outputCapture": "std",
       "attachSimplePort": 9229
