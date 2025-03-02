@@ -39,8 +39,8 @@ Server side scripts under ./scripts/
 
 - Use Deno and typescript when possible
 - Prefer deno packages instead of nodejs imports for eveerything regarding the
-  system (filesystem, network, etc), if needed, you can fetch them from
-  https://docs.deno.com/api/deno/~/Deno
+  system (filesystem, network, etc)
+- Never use https://deno.land/x/puppeteer use pupeteer and puppeteer-core
 - For the rest of packages, such as pupeteer, prefer imports using npm style,
   for example:
 

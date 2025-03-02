@@ -7,16 +7,16 @@ if [ "$#" -ne 1 ]; then
 fi
 
 id=$1
-DENO_FLAGS="--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run"
+#DENO_FLAGS="--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run"
 
 echo "Obtaining thread $id"
-$(echo "deno run $DENO_FLAGS scripts/recorder.ts --id $id")
+deno run --allow-all scripts/recorder.ts --id $i
 # To debug:
 # deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts --test "$id"
 
 
 echo "Enriching tweets for thread $id" 
-$(echo "deno run $DENO_FLAGS ./scripts/tweets_enrichment.ts --id $id")
+deno run --allow-all ./scripts/tweets_enrichment.ts --id $id
 
 echo "Generating algolia index for thread $id"
 $(echo "node ./scripts/make-algolia-db.js")
