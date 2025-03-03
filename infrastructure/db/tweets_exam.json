@@ -1824,38 +1824,6 @@
     ]
   },
   {
-    "id": "1494930415504789506",
-    "questions": [
-      {
-        "question": "¿Cuál es el problema que menciona el autor en la entrada de Twitter sobre compañías capturadas por fondos y gestores profesionales?",
-        "options": [
-          "El dinero no crece en los árboles",
-          "Falta de profesionalismo en el Asset Management",
-          "La escasez de gente funcional en entornos desconocidos"
-        ],
-        "answer": 3
-      },
-      {
-        "question": "¿Quiénes deben capturar el valor en el futuro de las compañías según el autor?",
-        "options": [
-          "Los gestores financieros",
-          "Los pensadores",
-          "Los líderes estratégicos y expertos en CPS"
-        ],
-        "answer": 3
-      },
-      {
-        "question": "¿Cuál es la distinción artificial mencionada por el autor sobre la estrategia?",
-        "options": [
-          "Entre el dinero y los gestores",
-          "Entre los pensadores y los ejecutores",
-          "Entre el valor financiero y el know how"
-        ],
-        "answer": 2
-      }
-    ]
-  },
-  {
     "id": "1494930305811111938",
     "questions": [
       {

@@ -88,7 +88,7 @@ export function CategoryCard({ category, tweets, formatCategoryTitle }: Category
         >
           {tweets.map((item) => (
             <div
-              key={`${category}-${item.id}-${item.time}`}
+              key={item.id}
               className="py-1 px-2 rounded-md flex items-baseline gap-2 hover:bg-whiskey-50 transition-colors"
             >
               <div className="hs-tooltip inline-block shrink-0">
