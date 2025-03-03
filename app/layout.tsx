@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import PrelineScript from "./components/PrelineScript";
 import Header from '@/app/components/Header';
@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -38,7 +43,6 @@ export const metadata: Metadata = {
     site: '@recuenco',
     images: ['/promo.png'],
   },
-  viewport: 'width=device-width, initial-scale=1',
   robots: {
     index: true,
     follow: true

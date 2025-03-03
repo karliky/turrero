@@ -4,9 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import algoliasearch from 'algoliasearch';
 
-const client = algoliasearch('WU4KEG8DAS', '7bd2f67692c4d35a0c9a5d7e005deb1e');
-const index = client.initIndex('turras');
-
 interface SearchBarProps {
   className?: string;
 }
@@ -34,9 +31,15 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
   const DEBOUNCE_MIN_MS = 300;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [index, setIndex] = useState<any>(null);
+
+  useEffect(() => {
+    const client = algoliasearch('WU4KEG8DAS', '7bd2f67692c4d35a0c9a5d7e005deb1e');
+    setIndex(client.initIndex('turras'));
+  }, []);
 
   const onSearch = async (searchValue: string) => {
-    if (searchValue === '') {
+    if (!index || searchValue === '') {
       setIsLoading(false);
       setIsModalOpen(false);
       return setSearchResults([]);
@@ -46,7 +49,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
       setIsLoading(true);
       const { hits } = await index.search<SearchResult>(searchValue);
       
-      const summaryPromises = hits.map(async (hit) => {
+      const summaryPromises = hits.map(async (hit: SearchResult) => {
         const tweetId = hit.id.split('-')[0];
         const response = await fetch(`/api/search?q=${tweetId}`);
         const data = await response.json();

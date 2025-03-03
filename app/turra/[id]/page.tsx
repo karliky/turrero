@@ -4,10 +4,15 @@ import { es } from "date-fns/locale";
 import { FaArrowLeft } from "react-icons/fa";
 import { TweetProvider } from "../../../infrastructure/TweetProvider";
 import { TweetContent } from "../../components/TweetContent";
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 import { TurraSidebar } from '../../components/TurraSidebar';
 import { AUTHORS, Author, fromXtoAuthor } from "@/infrastructure/constants";
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 interface Params {
   params: Promise<{
