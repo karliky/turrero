@@ -1,5 +1,3 @@
-import type { Browser, Page } from "puppeteer-core";
-
 export interface TweetMetadata {
     author: string;
     url: string;
@@ -7,38 +5,15 @@ export interface TweetMetadata {
 }
 
 export interface TweetStats {
-    replies: number;
-    retweets: number;
-    likes: number;
-    views: number;
-}
-
-export interface Tweet extends TweetMetadata {
-    text: string;
-    id: string;
-    stats: TweetStats;
+    replies: string;
+    retweets: string;
+    likes: string;
+    views: string;
 }
 
 export interface CommandLineArgs {
     tweetId: string;
     test: boolean;
-}
-
-export interface TweetNavigationConfig {
-    page: Page;
-    author?: string;
-    tweetId: string;
-    outputFilePath: string;
-}
-
-export interface BrowserConfig {
-    executablePath?: string;
-    test?: boolean;
-}
-
-export interface CleanupConfig {
-    browser: Browser;
-    page: Page;
 }
 
 export interface TwitterCookies {
@@ -51,8 +26,36 @@ export interface TwitterCookies {
     guest_id?: string;
 }
 
-export interface PageConfig {
-    browser: Browser;
-    isTest: boolean;
-    cookies: TwitterCookies;
+// type metadata
+export interface MetadataCard {
+    type: "card";
+    img: string;
+    url: string;
+}
+
+export interface MetadataEmbed {
+    type: "embed";
+    id: string;
+    author: string;
+    tweet: string;
+}
+
+export interface MetadataMedia {
+    type: "media";
+    imgs: {
+        img: string;
+        url: string;
+    }[];
+}
+
+export type Metadata = MetadataCard | MetadataEmbed | MetadataMedia;
+
+export interface MyTweet {
+    id: string;
+    tweet: string;
+    author: string;
+    time: string;
+    url: string;
+    stats: TweetStats;
+    metadata?: Metadata;
 }

@@ -3,11 +3,15 @@
 
 import { config as loadDotEnv } from "npm:dotenv";
 import { resolve } from "node:path";
-import { setupBrowser, setupCleanup, setupPage } from "./libs/browser-setup.ts";
-import { getAllTweets } from "./libs/tweet-navigation.ts";
-import { CommandLineArgs, TwitterCookies } from "./libs/types.ts";
+import { Rettiwt, Tweet, TweetMedia } from "npm:rettiwt-api";
+import { CommandLineArgs, MyTweet } from "./libs/types.ts";
 import { parseArgs } from "node:util";
-import process from "node:process";
+import process, { exit } from "node:process";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+import puppeteer from "puppeteer";
+import { encodeCookies, env2cookies } from "./libs/cookie-handler.ts";
+import { cardMediaDownload } from "./libs/fetcherTools.ts";
 
 // Load environment variables from .env file
 const envResult = loadDotEnv({ path: resolve(process.cwd(), ".env") });
@@ -44,7 +48,7 @@ async function main() {
     });
 
     if (!args.values.id) {
-        console.error("Please provide a tweet ID using --id");
+        console.error("Please provide the ID OF THE LAST TWEET, using --id");
         process.exit(1);
     }
 
@@ -53,39 +57,135 @@ async function main() {
         test: args.values.test || false,
     };
 
-    const cookies: TwitterCookies = {
-        twid: Deno.env.get("twid"),
-        auth_token: Deno.env.get("auth_token"),
-        lang: Deno.env.get("lang"),
-        d_prefs: Deno.env.get("d_prefs"),
-        kdt: Deno.env.get("kdt"),
-        ct0: Deno.env.get("ct0"),
-        guest_id: Deno.env.get("guest_id"),
-    };
-
+    const cookies = env2cookies(Deno.env);
     const outputFilePath = "infrastructure/db/tweets.json";
-    const browser = await setupBrowser({
-        test: commandLineArgs.test,
-    });
 
-    const page = await setupPage({
-        browser,
-        isTest: commandLineArgs.test,
-        cookies,
-    });
+    // Create API key from encoded cookies
+    const apiKey = encodeCookies(cookies);
+    const rettiwt: Rettiwt = new Rettiwt({ apiKey: apiKey });
 
-    setupCleanup({ browser, page });
+    try {
+        // Ensure output directory exists
+        const dir = dirname(outputFilePath);
+        if (!existsSync(dir)) {
+            mkdirSync(dir, { recursive: true });
+        }
 
-    await getAllTweets({
-        page,
-        tweetId: commandLineArgs.tweetId,
-        outputFilePath,
-    });
+        // Initialize or load tweets file
+        const existingTweets: MyTweet[][] = existsSync(outputFilePath)
+            ? JSON.parse(readFileSync(outputFilePath, "utf-8"))
+            : [];
 
-    await browser.close();
+        // Fetching the details of the given user
+        const tweets: Tweet[] = [];
+        let currentTweetId: string | undefined = commandLineArgs.tweetId;
+        const browser = await puppeteer.launch();
+
+        while (currentTweetId) {
+            const tweet: Tweet | undefined = await rettiwt.tweet.details(
+                currentTweetId,
+            )
+                .catch((err) => {
+                    console.log(
+                        "crashed at " + "https://x.com/111111/status/" +
+                            currentTweetId,
+                    );
+                    console.error("Error fetching tweet:", err);
+                    process.exit(1);
+                    return undefined;
+                });
+
+            if (!tweet) {
+                break;
+            }
+
+            tweets.push(tweet);
+            currentTweetId = tweet.replyTo || undefined;
+        }
+
+        console.log(`Tweet thread (${tweets.length} tweets)`);
+        const tweetTexts: MyTweet[] = await Promise.all(
+            tweets.reverse().map(async (tweet) =>
+                await transformTweet(browser, tweet)
+            ),
+        );
+        await browser.close();
+
+        // Save all tweets
+        if (tweetTexts.length > 0) {
+            existingTweets.push(tweetTexts);
+            writeFileSync(
+                outputFilePath,
+                JSON.stringify(existingTweets, null, 4),
+            );
+            console.log(
+                `Successfully saved ${tweets.length} tweets to ${outputFilePath}`,
+            );
+        }
+    } catch (error) {
+        console.error("Error fetching thread:", error);
+        process.exit(1);
+    }
 }
 
 main().catch((error) => {
     console.error("An error occurred:", error);
     process.exit(1);
 });
+
+async function transformTweet(
+    browser: puppeteer.Browser,
+    tweet: Tweet,
+): Promise<MyTweet> {
+    const uid = tweet.tweetBy.userName;
+    const myTweet: MyTweet = {
+        id: tweet.id,
+        tweet: tweet.fullText,
+        author: `https://x.com/${uid}`,
+        time: new Date(tweet.createdAt).toISOString(),
+        url: `https://x.com/${uid}/status/${tweet.id}`,
+        stats: {
+            replies: tweet.replyCount.toString(),
+            retweets: tweet.retweetCount.toString(),
+            likes: tweet.likeCount.toString(),
+            views: tweet.viewCount.toString(),
+        },
+    };
+
+    if (tweet.media) {
+        myTweet.metadata = {
+            type: "media",
+            imgs: tweet.media.map((media: TweetMedia) => {
+                return {
+                    img: media.thumbnailUrl || "",
+                    url: media.url,
+                };
+            }),
+        };
+    }
+    if (tweet.retweetedTweet) {
+        myTweet.metadata = {
+            type: "embed",
+            id: tweet.retweetedTweet.id,
+            author: tweet.retweetedTweet.tweetBy.userName,
+            tweet: tweet.retweetedTweet.fullText,
+        };
+    }
+
+    if (tweet.entities?.urls && tweet.entities?.urls.length > 0) {
+        // open the URL and get the image with puppeteer
+        try {
+            const resourceUrl = tweet.entities.urls[0];
+            const webURL = myTweet.url;
+            const card = await cardMediaDownload(
+                browser,
+                resourceUrl,
+                webURL,
+            );
+            myTweet.metadata = card;
+        } catch {
+            // Silently fail if there are any errors
+        }
+    }
+    return myTweet;
+}
