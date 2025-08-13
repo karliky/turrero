@@ -3,6 +3,8 @@
  */
 
 import type { Page } from 'puppeteer';
+import type { ContextualError } from '../infrastructure/types/index.js';
+import { TweetMetadataType } from '../infrastructure/types/index.js';
 
 interface MediaImage {
     img: string;
@@ -10,13 +12,13 @@ interface MediaImage {
 }
 
 interface CardMedia {
-    type: "card";
+    type: TweetMetadataType.CARD;
     img: string;
     url: string;
 }
 
 interface PhotoMedia {
-    type: "media";
+    type: TweetMetadataType.IMAGE;
     imgs: MediaImage[];
 }
 
@@ -26,7 +28,7 @@ interface MediaError {
 }
 
 interface EmbedTweet {
-    type: "embed";
+    type: TweetMetadataType.EMBED;
     id: string;
     author: string | null;
     tweet: string;
@@ -62,7 +64,7 @@ const extractMedia = (): MediaMetadata | undefined => {
             const imgElement = card.querySelector("img") as HTMLImageElement;
             const linkElement = card.querySelector("a") as HTMLAnchorElement;
             return {
-                type: "card",
+                type: TweetMetadataType.CARD,
                 img: imgElement ? imgElement.src : "",
                 url: linkElement ? linkElement.href : "",
             };
@@ -79,7 +81,7 @@ const extractMedia = (): MediaMetadata | undefined => {
             );
             if (images.length !== 0) {
                 return {
-                    type: "media",
+                    type: TweetMetadataType.IMAGE,
                     imgs: images.map((mediaImg) => {
                         const img = mediaImg.querySelector("img") as HTMLImageElement;
                         const link = img?.closest("a") as HTMLAnchorElement;
@@ -91,9 +93,12 @@ const extractMedia = (): MediaMetadata | undefined => {
                 };
             }
         }
-    } catch (error: any) {
-        return { error: "Could not get metadata ", msg: error.message };
+    } catch (error: unknown) {
+        const contextError = error as ContextualError;
+        return { error: "Could not get metadata ", msg: contextError.message || 'Unknown error' };
     }
+    
+    return undefined;
 };
 
 /**
@@ -141,7 +146,7 @@ export const extractMetadata = async (page: Page): Promise<TweetMetadata> => {
 
         // Extract details of the embedded tweet
         const embed: EmbedTweet = {
-            type: "embed",
+            type: TweetMetadataType.EMBED,
             id: page.url().split("/").slice(-1).pop() || "",
             author: await page.evaluate(() => {
                 const authorElement = document.querySelector(

@@ -2,17 +2,17 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import OpenAI from "openai";
-import fs from "fs";
+import fs from "node:fs";
 
 import Tweets from "../infrastructure/db/tweets.json" with { type: "json" };
 import TweetsEnrichements from "../infrastructure/db/tweets_enriched.json" with {
   type: "json",
 };
 
-import { fileURLToPath } from "url";
-import path from "path";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 import { AUTHORS } from "../infrastructure/constants.js";
-import type { Tweet, EnrichmentResult } from "../infrastructure/types/index.js";
+import type { Tweet, EnrichmentResult, TweetMetadataType } from "../infrastructure/types/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -59,7 +59,7 @@ if (!tweetIndex) {
 const thread: string = Tweets[tweetIndex].reduce((acc: string, t: Tweet) => {
   let paragraph = t.tweet;
 
-  if (t?.metadata?.embed?.type === "embed") {
+  if (t?.metadata?.embed?.type === TweetMetadataType.EMBED) {
     paragraph += `
       TWEET PARA DAR CONTEXTO. AUTOR ${
       t.metadata.embed.author.trim().replace(/\n/g, "")
@@ -72,7 +72,7 @@ const thread: string = Tweets[tweetIndex].reduce((acc: string, t: Tweet) => {
     enrichment.id === t.id
   );
   if (
-    hasEnrichment && hasEnrichment.type === "card" &&
+    hasEnrichment && hasEnrichment.type === TweetMetadataType.CARD &&
     hasEnrichment.media === "goodreads"
   ) {
     console.log("MEDIA", hasEnrichment);

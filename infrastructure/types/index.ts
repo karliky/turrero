@@ -497,20 +497,21 @@ export function isTweet(obj: unknown): obj is Tweet {
 
 /** Type guard to check if object is a TweetWithEngagement */
 export function isTweetWithEngagement(obj: unknown): obj is TweetWithEngagement {
-  return isTweet(obj) && 'engagement' in obj && typeof (obj as any).engagement === 'number';
+  return isTweet(obj) && 'engagement' in obj && typeof (obj as Record<string, unknown>).engagement === 'number';
 }
 
 /** Type guard to check if object is an Author */
 export function isAuthor(obj: unknown): obj is Author {
+  const record = obj as Record<string, unknown>;
   return (
     typeof obj === 'object' &&
     obj !== null &&
     'NAME' in obj &&
     'X' in obj &&
     'YOUTUBE' in obj &&
-    typeof (obj as any).NAME === 'string' &&
-    typeof (obj as any).X === 'string' &&
-    typeof (obj as any).YOUTUBE === 'string'
+    typeof record.NAME === 'string' &&
+    typeof record.X === 'string' &&
+    typeof record.YOUTUBE === 'string'
   );
 }
 
@@ -519,25 +520,230 @@ export function isAuthor(obj: unknown): obj is Author {
 // ============================================================================
 
 /** Supported enrichment types */
-export const ENRICHMENT_TYPES = ['card', 'embed', 'media'] as const;
-export type EnrichmentType = typeof ENRICHMENT_TYPES[number];
+export enum EnrichmentType {
+  CARD = 'card',
+  EMBED = 'embed',
+  MEDIA = 'media'
+}
 
 /** Supported category types */
-export const CATEGORY_TYPES = [
-  'desarrollo-software',
-  'arquitectura',
-  'management',
-  'carrera-profesional',
-  'tecnologia',
-  'startup',
-  'empresa',
-  'formacion',
-  'top-25-turras',
-  'las-más-nuevas',
-  'otros-autores'
-] as const;
-export type CategoryType = typeof CATEGORY_TYPES[number];
+export enum CategoryType {
+  DESARROLLO_SOFTWARE = 'desarrollo-software',
+  ARQUITECTURA = 'arquitectura',
+  MANAGEMENT = 'management',
+  CARRERA_PROFESIONAL = 'carrera-profesional',
+  TECNOLOGIA = 'tecnologia',
+  STARTUP = 'startup',
+  EMPRESA = 'empresa',
+  FORMACION = 'formacion',
+  TOP_25_TURRAS = 'top-25-turras',
+  LAS_MAS_NUEVAS = 'las-más-nuevas',
+  OTROS_AUTORES = 'otros-autores'
+}
+
+/** Processing states for scripts */
+export enum ProcessingState {
+  PENDING = 'pending',
+  PROCESSING = 'processing',
+  COMPLETED = 'completed',
+  ERROR = 'error',
+  SKIPPED = 'skipped'
+}
+
+/** Tweet metadata types */
+export enum TweetMetadataType {
+  CARD = 'card',
+  EMBED = 'embed',
+  IMAGE = 'image',
+  VIDEO = 'video',
+  LINK = 'link',
+  QUOTE = 'quote'
+}
+
+/** Media file formats */
+export enum MediaFormat {
+  PNG = 'png',
+  JPG = 'jpg',
+  JPEG = 'jpeg',
+  GIF = 'gif',
+  WEBP = 'webp',
+  MP4 = 'mp4',
+  WEBM = 'webm'
+}
 
 /** PDF format options */
-export const PDF_FORMATS = ['A4', 'Letter', 'Legal'] as const;
-export type PDFFormat = typeof PDF_FORMATS[number];
+export enum PDFFormat {
+  A4 = 'A4',
+  LETTER = 'Letter',
+  LEGAL = 'Legal'
+}
+
+/** Script execution modes */
+export enum ScriptMode {
+  DEVELOPMENT = 'development',
+  PRODUCTION = 'production',
+  TEST = 'test',
+  DEBUG = 'debug'
+}
+
+/** Log levels for scripts */
+export enum LogLevel {
+  DEBUG = 'debug',
+  INFO = 'info',
+  WARN = 'warn',
+  ERROR = 'error',
+  FATAL = 'fatal'
+}
+
+/** Book enrichment status */
+export enum BookEnrichmentStatus {
+  NOT_ENRICHED = 'not_enriched',
+  ENRICHING = 'enriching',
+  ENRICHED = 'enriched',
+  FAILED = 'failed'
+}
+
+/** Scraping status */
+export enum ScrapingStatus {
+  QUEUED = 'queued',
+  SCRAPING = 'scraping',
+  COMPLETED = 'completed',
+  FAILED = 'failed',
+  RATE_LIMITED = 'rate_limited'
+}
+
+// Legacy constants for backward compatibility
+export const ENRICHMENT_TYPES = [
+  EnrichmentType.CARD,
+  EnrichmentType.EMBED,
+  EnrichmentType.MEDIA
+] as const;
+
+export const CATEGORY_TYPES = [
+  CategoryType.DESARROLLO_SOFTWARE,
+  CategoryType.ARQUITECTURA,
+  CategoryType.MANAGEMENT,
+  CategoryType.CARRERA_PROFESIONAL,
+  CategoryType.TECNOLOGIA,
+  CategoryType.STARTUP,
+  CategoryType.EMPRESA,
+  CategoryType.FORMACION,
+  CategoryType.TOP_25_TURRAS,
+  CategoryType.LAS_MAS_NUEVAS,
+  CategoryType.OTROS_AUTORES
+] as const;
+
+export const PDF_FORMATS = [
+  PDFFormat.A4,
+  PDFFormat.LETTER,
+  PDFFormat.LEGAL
+] as const;
+
+// ============================================================================
+// SPECIFIC SCRIPT TYPES (replacing any)
+// ============================================================================
+
+/** jQuery element type for cheerio operations */
+export interface CheerioElement {
+  text(): string;
+  html(): string | null;
+  attr(name: string): string | undefined;
+  find(selector: string): CheerioElement[];
+  [key: string]: unknown;
+}
+
+/** Scraped metadata for tweet enrichment */
+export interface ScrapedMetadata {
+  type: TweetMetadataType;
+  url?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  siteName?: string;
+  [key: string]: unknown;
+}
+
+/** Book to enrich interface */
+export interface BookToEnrich {
+  id: string;
+  title: string;
+  author: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  sourceThreadId?: string;
+  categories?: string[];
+}
+
+/** Current book with potential enrichment data */
+export interface CurrentBook extends BookToEnrich {
+  isbn?: string;
+  year?: number;
+  publisher?: string;
+  rating?: number;
+  pages?: number;
+  enrichmentStatus?: BookEnrichmentStatus;
+}
+
+/** Image metadata for downloading */
+export interface ImageMetadata {
+  img: string;
+  url: string;
+  filename?: string;
+  path?: string;
+}
+
+/** Error with context information */
+export interface ContextualError extends Error {
+  context?: {
+    tweetId?: string;
+    url?: string;
+    operation?: string;
+    metadata?: Record<string, unknown>;
+  };
+}
+
+/** JSON file content type */
+export type JsonContent = 
+  | Record<string, unknown>
+  | unknown[]
+  | string
+  | number
+  | boolean
+  | null;
+
+/** Logger interface for scripts */
+export interface ScriptLogger {
+  debug(message: string, ...args: unknown[]): void;
+  info(message: string, ...args: unknown[]): void;
+  warn(message: string, ...args: unknown[]): void;
+  error(message: string, ...args: unknown[]): void;
+  fatal(message: string, ...args: unknown[]): void;
+}
+
+/** Console interface for type safety */
+export interface TypedConsole {
+  log(message?: unknown, ...optionalParams: unknown[]): void;
+  error(message?: unknown, ...optionalParams: unknown[]): void;
+  warn(message?: unknown, ...optionalParams: unknown[]): void;
+  info(message?: unknown, ...optionalParams: unknown[]): void;
+  debug(message?: unknown, ...optionalParams: unknown[]): void;
+  trace(message?: unknown, ...optionalParams: unknown[]): void;
+}
+
+/** File system path operations */
+export interface PathOperations {
+  join(...paths: string[]): string;
+  resolve(...pathSegments: string[]): string;
+  dirname(path: string): string;
+  basename(path: string, ext?: string): string;
+  extname(path: string): string;
+}
+
+/** Environment variables interface */
+export interface ScriptEnvironment {
+  NODE_ENV?: string;
+  DENO_ENV?: string;
+  DEBUG?: string;
+  [key: string]: string | undefined;
+}

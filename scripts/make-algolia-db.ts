@@ -3,10 +3,10 @@
  * and then we can manually upload it to Algolia.
  */
 import tweets from '../infrastructure/db/tweets.json' with { type: 'json' };
-import fs from 'fs';
+import fs from 'node:fs';
 
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import type { Tweet, SearchIndexEntry } from '../infrastructure/types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);

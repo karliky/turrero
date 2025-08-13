@@ -1,14 +1,14 @@
-import fs from 'fs/promises';
-import path from 'path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import puppeteer, { Browser, Page } from 'puppeteer';
 import PDFMerger from 'pdf-merger-js';
-import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
-import { cpus } from 'os';
+import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
+import { cpus } from 'node:os';
 import sharp from 'sharp';
 import Epub from 'epub-gen';
-import { readFileSync, existsSync, mkdirSync, rmSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { createLogger } from '../infrastructure/logger.js';
-import type { Tweet, TweetSummary, CategorizedTweet, EnrichmentResult } from '../infrastructure/types/index.js';
+import type { Tweet, TweetSummary, CategorizedTweet, EnrichmentResult, JsonContent } from '../infrastructure/types/index.js';
 
 // Initialize logger
 const logger = createLogger({ prefix: 'generate-pdf' });
@@ -47,7 +47,7 @@ interface EpubOptions {
 }
 
 // Utility functions
-const readJsonFile = (filePath: string): any => {
+const readJsonFile = (filePath: string): JsonContent => {
   const projectRoot = path.join(process.cwd(), '..');
   return JSON.parse(readFileSync(path.join(projectRoot, filePath), 'utf-8'));
 };

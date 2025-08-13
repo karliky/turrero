@@ -10,9 +10,9 @@ import cheerio from 'cheerio';
 import puppeteer, { Page } from 'puppeteer';
 import { createLogger } from '../infrastructure/logger.js';
 
-import { fileURLToPath } from 'url';
-import path from 'path';
-import type { Tweet, EnrichmentResult } from '../infrastructure/types/index.js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import type { Tweet, EnrichmentResult, TweetMetadataType, CheerioElement, ImageMetadata, ContextualError, JsonContent } from '../infrastructure/types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +25,21 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 interface TweetForEnrichment {
     id: string;
-    metadata: any;
+    metadata: {
+        type?: TweetMetadataType | string;
+        url?: string;
+        img?: string;
+        title?: string;
+        description?: string;
+        media?: string;
+        embed?: {
+            id: string;
+            author: string;
+            tweet: string;
+        };
+        imgs?: ImageMetadata[];
+        [key: string]: unknown;
+    };
     tweet?: string;
 }
 
@@ -54,7 +68,7 @@ interface TweetForEnrichment {
             const $ = cheerio.load(data);
             tweet.metadata.media = "wikipedia";
             tweet.metadata.title = $('h1').text().trim();
-            tweet.metadata.description = Array.from($("div[id=mw-content-text] p")).slice(0, 2).map((el: any) => $(el).text()).join("").trim()
+            tweet.metadata.description = Array.from($("div[id=mw-content-text] p")).slice(0, 2).map((el: CheerioElement) => $(el).text()).join("").trim()
             // Prevent ban from Wikipedia servers
             await new Promise(r => setTimeout(r, 1000));
         }
@@ -84,7 +98,7 @@ interface TweetForEnrichment {
         if (!tweet.metadata.url) {
             delete tweet.metadata.embed;
             tweet.metadata.img = filePath;
-            tweet.metadata.type = "media";
+            tweet.metadata.type = TweetMetadataType.IMAGE;
             saveTweet(tweet);
             return;
         }
@@ -106,21 +120,22 @@ interface TweetForEnrichment {
             if (embed) {
                 logger.debug({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
 
-                (existingTweets as any[]).push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
+                (existingTweets as JsonContent[]).push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
             }
             if (!tweet.metadata.type) continue;
             try {
-                if (tweet.metadata.type === "card") {
+                if (tweet.metadata.type === TweetMetadataType.CARD) {
                     await downloadTweetMedia(tweet);
                     continue;
                 }
-                await Promise.all(tweet.metadata.imgs.map(async (metadata: any) => {
-                    metadata.type = "media";
+                await Promise.all(tweet.metadata.imgs!.map(async (metadata: ImageMetadata) => {
+                    (metadata as { type: string }).type = TweetMetadataType.IMAGE;
                     await downloadTweetMedia({ id: tweet.id, metadata });
                 }));
-            } catch (error: any) {
-                logger.error("Request failed", tweet.id, tweet.metadata, error.message);
+            } catch (error: unknown) {
+                const contextError = error as ContextualError;
+                logger.error("Request failed", tweet.id, tweet.metadata, contextError.message || 'Unknown error');
                 tweet.metadata.url = undefined;
             }
         }
@@ -132,6 +147,6 @@ interface TweetForEnrichment {
 function saveTweet(tweet: TweetForEnrichment): void {
     logger.debug({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
-    (existingTweets as any[]).push({ id: tweet.id, ...tweet.metadata });
+    (existingTweets as JsonContent[]).push({ id: tweet.id, ...tweet.metadata });
     writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
 }

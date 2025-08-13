@@ -517,13 +517,13 @@ export type ProgressCallback = (progress: {
 /** Logger interface */
 export interface Logger {
   /** Log info message */
-  info(message: string, ...args: any[]): void;
+  info(message: string, ...args: unknown[]): void;
   /** Log warning message */
-  warn(message: string, ...args: any[]): void;
+  warn(message: string, ...args: unknown[]): void;
   /** Log error message */
-  error(message: string, ...args: any[]): void;
+  error(message: string, ...args: unknown[]): void;
   /** Log debug message */
-  debug(message: string, ...args: any[]): void;
+  debug(message: string, ...args: unknown[]): void;
 }
 
 // ============================================================================
@@ -591,7 +591,7 @@ export interface ValidationError {
   /** Error code */
   code: string;
   /** Actual value that failed validation */
-  value: any;
+  value: unknown;
 }
 
 /** Validation warning */
@@ -603,7 +603,7 @@ export interface ValidationWarning {
   /** Warning code */
   code: string;
   /** Value that triggered warning */
-  value: any;
+  value: unknown;
 }
 
 // ============================================================================

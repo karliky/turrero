@@ -4,9 +4,9 @@ import fs from 'fs';
 import puppeteer from 'puppeteer';
 import { createLogger } from '../infrastructure/logger.js';
 
-import { fileURLToPath } from 'url';
-import path from 'path';
-import type { EnrichedBook } from '../infrastructure/types/index.js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import type { EnrichedBook, BookToEnrich, CurrentBook } from '../infrastructure/types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,12 +14,9 @@ const __dirname = path.dirname(__filename);
 // Initialize logger
 const logger = createLogger({ prefix: 'book-enrichment' });
 
-interface BookToEnrich extends EnrichedBook {
-    categories?: string[];
-}
 
-const booksToEnrich: BookToEnrich[] = booksNotEnriched.filter((book: any) => {
-    return currentBooks.find((currentBook: any) => currentBook.id === book.id && (!('categories' in currentBook) || currentBook.categories.length === 0));
+const booksToEnrich: BookToEnrich[] = booksNotEnriched.filter((book: BookToEnrich) => {
+    return currentBooks.find((currentBook: CurrentBook) => currentBook.id === book.id && (!('categories' in currentBook) || (currentBook.categories && currentBook.categories.length === 0)));
 });
 
 logger.info('# Pending books to enrich', booksToEnrich.length);
@@ -38,10 +35,12 @@ logger.info('# Pending books to enrich', booksToEnrich.length);
         if (categories.length > 0) book.categories = categories;
         
         // Merge current books with enriched books
-        const enrichedBooks = currentBooks.map((currentBook: any) => {
+        const enrichedBooks = currentBooks.map((currentBook: CurrentBook) => {
             const enrichedBook = booksToEnrich.find((book: BookToEnrich) => book.id === currentBook.id);
-            const book = enrichedBook ? enrichedBook : currentBook;
-            if (!('categories' in book)) book.categories = [];
+            const book: CurrentBook = enrichedBook ? enrichedBook : currentBook;
+            if (!('categories' in book)) {
+                (book as CurrentBook).categories = [];
+            }
             return book;
         });
         fs.writeFileSync(__dirname + '/../infrastructure/db/books.json', JSON.stringify(enrichedBooks, null, 4));

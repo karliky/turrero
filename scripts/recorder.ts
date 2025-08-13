@@ -16,6 +16,7 @@ import {
     resolveBuildId,
 } from "@puppeteer/browsers";
 import type { Browser, Page } from "puppeteer-core";
+import { TweetMetadataType } from '../infrastructure/types/index.ts';
 
 // Load environment variables
 dotenv.config();
@@ -77,7 +78,10 @@ interface TweetCSV {
 function parseCSV(filePath: string): TweetCSV[] {
     const csvContent = readFileSync(filePath, { encoding: "utf8" });
     const lines = csvContent.split("\n");
-    const headers = lines[0].split(",");
+    if (lines.length === 0) {
+        throw new Error("CSV file is empty");
+    }
+    const headers = lines[0]!.split(",");
     return lines.slice(1).map((line) => {
         const data = line.split(",");
         const obj = headers.reduce(
@@ -98,6 +102,9 @@ function parseCSV(filePath: string): TweetCSV[] {
 
 function extractAuthorUrl(url: string): string {
     const author = url.split("/status/")[0];
+    if (author === undefined) {
+        throw new Error("Invalid URL format: cannot extract author");
+    }
     return author;
 }
 
@@ -109,7 +116,11 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     logger.debug("Waiting for progress bar");
     await page.waitForSelector('div[role="progressbar"]', { hidden: true });
 
-    const currentTweetId = page.url().split("/").slice(-1)[0].split("?")[0];
+    const urlParts = page.url().split("/").slice(-1);
+    if (urlParts.length === 0 || !urlParts[0]) {
+        throw new Error("Invalid URL format: cannot extract tweet ID");
+    }
+    const currentTweetId = urlParts[0].split("?")[0]!;
     logger.debug("currentTweetId", currentTweetId);
     const tweetAuthorUrl = extractAuthorUrl(page.url());
 
@@ -132,7 +143,7 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                 type: undefined,
                 imgs: undefined,
                 embed: { tweet: undefined },
-            } as TweetMetadata;
+            } as unknown as TweetMetadata;
         }
 
         const imgs = Array.from(article.querySelectorAll('img[alt="Image"]'))
@@ -142,10 +153,10 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             }));
 
         return {
-            type: imgs.length > 0 ? "media" : undefined,
+            type: imgs.length > 0 ? TweetMetadataType.IMAGE : undefined,
             imgs: imgs.length > 0 ? imgs : undefined,
             embed: { tweet: undefined },
-        } as TweetMetadata;
+        } as unknown as TweetMetadata;
     });
 
     await new Promise((r) => setTimeout(r, 100));
@@ -181,8 +192,11 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                     const value = match[1];
                     const key = match[2];
 
-                    if (statsKeyMap[key]) {
-                        stats[statsKeyMap[key]] = value;
+                    if (key && value && statsKeyMap[key]) {
+                        const mappedKey = statsKeyMap[key];
+                        if (mappedKey) {
+                            stats[mappedKey] = value;
+                        }
                     }
                 }
             });
@@ -483,11 +497,16 @@ async function main() {
 
     logger.info(testMode ? "Launching test mode..." : "Launching...");
 
-    browser = await puppeteer.launch({
+    const launchOptions: any = {
         ...browserProps,
         channel: "chrome",
-        executablePath: process.env.CHROME_PATH,
-    });
+    };
+    
+    if (process.env.CHROME_PATH) {
+        launchOptions.executablePath = process.env.CHROME_PATH;
+    }
+    
+    browser = await puppeteer.launch(launchOptions);
 
     page = await browser.newPage();
 
@@ -558,7 +577,9 @@ async function main() {
 
             const existingTweets = existingTweetsData.reduce(
                 (acc: string[], tweets: Tweet[]) => {
-                    acc.push(tweets[0].id);
+                    if (tweets && tweets.length > 0 && tweets[0]) {
+                        acc.push(tweets[0].id);
+                    }
                     return acc;
                 },
                 [],
