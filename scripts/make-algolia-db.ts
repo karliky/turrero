@@ -1,22 +1,47 @@
 /**
- * With this script, we create a new file that contains all the tweets in a single array (flatting the threads)
- * and then we can manually upload it to Algolia.
+ * Creates a flattened database for Algolia search indexing
+ * Converts threaded tweets into individual searchable entries
  */
-import tweets from '../infrastructure/db/tweets.json' with { type: 'json' };
-import fs from 'node:fs';
 
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import { getScriptDirectory, createScriptLogger, runWithErrorHandling } from './libs/common-utils.js';
+import { createDataAccess } from './libs/data-access.js';
 import type { Tweet, SearchIndexEntry } from '../infrastructure/types/index.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const scriptDir = getScriptDirectory(import.meta.url);
+const logger = createScriptLogger('make-algolia-db');
+const dataAccess = createDataAccess(scriptDir);
 
-const algoliaTweets: SearchIndexEntry[] = [];
+async function createAlgoliaDatabase(): Promise<void> {
+    const tweets = await dataAccess.getTweets();
+    const searchEntries = createSearchIndexEntries(tweets);
+    
+    await dataAccess.saveTweetsDb(searchEntries);
+    
+    logger.info(`Created Algolia database with ${searchEntries.length} searchable entries`);
+}
 
-tweets.forEach((thread: Tweet[]) => {
-    const tweetId: string = thread[0].id;
-    thread.forEach(({ id, tweet }: Tweet) => algoliaTweets.push({ id: tweetId + "-" + id, tweet: tweet, time: thread[0].time }));
-});
+function createSearchIndexEntries(tweets: Tweet[][]): SearchIndexEntry[] {
+    const searchEntries: SearchIndexEntry[] = [];
+    
+    tweets.forEach((thread: Tweet[]) => {
+        const threadId = thread[0].id;
+        const threadTime = thread[0].time;
+        
+        thread.forEach(({ id, tweet }: Tweet) => {
+            searchEntries.push({
+                id: `${threadId}-${id}`,
+                tweet: tweet,
+                time: threadTime
+            });
+        });
+    });
+    
+    return searchEntries;
+}
 
-fs.writeFileSync(__dirname + '/../infrastructure/db/tweets-db.json', JSON.stringify(algoliaTweets, null, 4));
+// Run with standardized error handling
+runWithErrorHandling(
+    createAlgoliaDatabase,
+    logger,
+    "Creating Algolia search database"
+);

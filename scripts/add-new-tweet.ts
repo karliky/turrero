@@ -1,49 +1,50 @@
-import { promises as fs } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { createLogger } from '../infrastructure/logger.js';
+import {
+  getScriptDirectory,
+  getDbFilePath,
+  createScriptLogger,
+  validateArgs,
+  extractTweetId,
+  extractTweetContent,
+  escapeCsvContent,
+  formatCsvRow,
+  runWithErrorHandling,
+  readCsvFile,
+  writeCsvFile
+} from './libs/common-utils.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const scriptDir = getScriptDirectory(import.meta.url);
+const logger = createScriptLogger('add-tweet');
 
-// Initialize logger
-const logger = createLogger({ prefix: 'add-tweet' });
+// Validate command line arguments
+validateArgs(process.argv, 4, "node add-new-tweet.ts <tweetId> <tweetContent>");
 
-if (process.argv.length < 4) {
-    logger.error("Usage: node addTweet.js <tweetId> <tweetContent>");
-    process.exit(1);
-}
-
-const tweetId: string = process.argv[2];
-// Combine all remaining arguments to handle spaces and special characters in tweetContent
-const tweetContent: string = process.argv.slice(3).join(' ');
-const filePath: string = join(__dirname, '/../infrastructure/db/turras.csv');
+const tweetId = extractTweetId(process.argv);
+const tweetContent = extractTweetContent(process.argv);
+const filePath = getDbFilePath(scriptDir, 'turras.csv');
 
 async function addTweet(tweetId: string, tweetContent: string): Promise<void> {
-    try {
-        const data = await fs.readFile(filePath, { encoding: 'utf8' });
-
-        // Escape double quotes in the tweet content
-        const escapedContent = `"${tweetContent.replace(/"/g, '""')}"`;
-
-        // Prepare the new tweet entry
-        const newTweet = `${tweetId},${escapedContent},""`;
-
-        // Split data into lines and ensure newline handling is consistent
-        const lines = data.split(/\r?\n/);
-
-        // Insert the new tweet after the header (assumed to be the first line)
-        lines.splice(1, 0, newTweet);
-
-        // Join the lines back together with a newline character
-        const updatedContent = lines.join('\n');
-
-        // Write the updated content back to the file
-        await fs.writeFile(filePath, updatedContent, { encoding: 'utf8' });
-        logger.info("Tweet added successfully!");
-    } catch (err) {
-        logger.error("Error processing the file:", err);
-    }
+    const data = await readCsvFile(filePath);
+    
+    // Prepare the new tweet entry
+    const escapedContent = escapeCsvContent(tweetContent);
+    const newTweet = formatCsvRow([tweetId, escapedContent, '""']);
+    
+    // Split data into lines and ensure newline handling is consistent
+    const lines = data.split(/\r?\n/);
+    
+    // Insert the new tweet after the header (assumed to be the first line)
+    lines.splice(1, 0, newTweet);
+    
+    // Join the lines back together and write
+    const updatedContent = lines.join('\n');
+    await writeCsvFile(filePath, updatedContent);
+    
+    logger.info("Tweet added successfully!");
 }
 
-addTweet(tweetId, tweetContent);
+// Run with standardized error handling
+runWithErrorHandling(
+    () => addTweet(tweetId, tweetContent),
+    logger,
+    "Adding tweet to CSV"
+);

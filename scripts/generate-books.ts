@@ -1,28 +1,32 @@
-import enrichments from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
-import tweets from '../infrastructure/db/tweets.json' with { type: 'json' };
-import fs from 'node:fs';
-import { createLogger } from '../infrastructure/logger.js';
+import { getScriptDirectory, createScriptLogger, runWithErrorHandling } from './libs/common-utils.js';
+import { createDataAccess, getBooksFromGoodReads } from './libs/data-access.js';
+import type { EnrichmentResult } from '../infrastructure/types/index.js';
 
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import type { Tweet, EnrichmentResult } from '../infrastructure/types/index.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Initialize logger
-const logger = createLogger({ prefix: 'generate-books' });
+const scriptDir = getScriptDirectory(import.meta.url);
+const logger = createScriptLogger('generate-books');
+const dataAccess = createDataAccess(scriptDir);
 
 interface BookWithTurraId extends EnrichmentResult {
     turraId: string;
 }
 
-const fromGoodReads: BookWithTurraId[] = enrichments.filter((e: EnrichmentResult) => e.media === 'goodreads').map((book: EnrichmentResult) => {
-    const tweet = tweets.find((t: Tweet[]) => t.find((tt: Tweet) => tt.id === book.id))?.[0];
-    return { ...book, turraId: tweet?.id || "" };
-});
-logger.info("Total books fromGoodReads", fromGoodReads.length);
+async function generateBooks(): Promise<void> {
+    const books = await getBooksFromGoodReads(dataAccess) as BookWithTurraId[];
+    
+    logger.info("Total books from GoodReads", books.length);
+    
+    // Filter out author pages
+    const filteredBooks = books.filter((book: BookWithTurraId) => 
+        book.url.indexOf('/author/') === -1
+    );
+    
+    await dataAccess.saveBooksNotEnriched(filteredBooks);
+    logger.info("Books generation completed successfully!");
+}
 
-const books: BookWithTurraId[] = [...fromGoodReads].filter((book: BookWithTurraId) => book.url.indexOf('/author/') === -1);
-
-fs.writeFileSync(__dirname + '/../infrastructure/db/books-not-enriched.json', JSON.stringify(books, null, 4));
+// Run with standardized error handling
+runWithErrorHandling(
+    generateBooks,
+    logger,
+    "Generating books from enrichments"
+);

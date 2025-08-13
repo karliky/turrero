@@ -1,152 +1,151 @@
-// NODE_TLS_REJECT_UNAUTHORIZED=0
-import Downloader from 'nodejs-file-downloader';
-import { writeFileSync } from 'fs';
-import { tall } from 'tall';
-import enrichments from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
-import existingTweets from '../infrastructure/db/tweets_enriched.json' with { type: 'json' };
-import tweetsLibrary from '../infrastructure/db/tweets.json' with { type: 'json' };
-import fetch from 'node-fetch';
-import cheerio from 'cheerio';
-import puppeteer, { Page } from 'puppeteer';
-import { createLogger } from '../infrastructure/logger.js';
+import { 
+    getScriptDirectory, 
+    createScriptLogger, 
+    createBrowser, 
+    runWithErrorHandling 
+} from './libs/common-utils.js';
+import { createDataAccess } from './libs/data-access.js';
+import {
+    configureEnvironment,
+    TweetEnricher,
+    shouldEnrichTweet,
+    isValidMetadataType,
+    type TweetForEnrichment
+} from './libs/enrichment-utils.js';
+import type { 
+    Tweet, 
+    EnrichmentResult, 
+    TweetMetadataType, 
+    ImageMetadata, 
+    ContextualError 
+} from '../infrastructure/types/index.js';
 
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import type { Tweet, EnrichmentResult, TweetMetadataType, CheerioElement, ImageMetadata, ContextualError, JsonContent } from '../infrastructure/types/index.js';
+const scriptDir = getScriptDirectory(import.meta.url);
+const logger = createScriptLogger('tweets-enrichment');
+const dataAccess = createDataAccess(scriptDir);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Configure environment for safe operations
+configureEnvironment();
 
-// Initialize logger
-const logger = createLogger({ prefix: 'tweets-enrichment' });
+async function enrichTweets(): Promise<void> {
+    const browser = await createBrowser({ slowMo: 200 });
+    const page = await browser.newPage();
+    const enricher = new TweetEnricher(logger);
 
-// We need to set this to avoid SSL errors when downloading images
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    try {
+        const [tweets, enrichments] = await Promise.all([
+            dataAccess.getTweets(),
+            dataAccess.getTweetsEnriched()
+        ]);
 
-interface TweetForEnrichment {
-    id: string;
-    metadata: {
-        type?: TweetMetadataType | string;
-        url?: string;
-        img?: string;
-        title?: string;
-        description?: string;
-        media?: string;
-        embed?: {
-            id: string;
-            author: string;
-            tweet: string;
-        };
-        imgs?: ImageMetadata[];
-        [key: string]: unknown;
-    };
-    tweet?: string;
+        for (const tweetLibrary of tweets) {
+            await processTweetLibrary(tweetLibrary as Tweet[], enrichments, enricher, page);
+        }
+        
+        logger.info("Tweet enrichment completed successfully!");
+    } finally {
+        await browser.close();
+    }
 }
 
-(async (): Promise<void> => {
-    const browser = await puppeteer.launch({ slowMo: 200 });
-    const page: Page = await browser.newPage();
+async function processTweetLibrary(
+    tweets: Tweet[], 
+    enrichments: EnrichmentResult[], 
+    enricher: TweetEnricher, 
+    page: any
+): Promise<void> {
+    for (const tweet of tweets) {
+        if (!shouldEnrichTweet(tweet, enrichments)) continue;
+        
+        await processTweetForEnrichment(tweet, enricher, page);
+    }
+}
 
-    const processKnownDomain = async (tweet: TweetForEnrichment, url: string): Promise<void> => {
-        if (url.includes("youtube.com")) {
-            const response = await fetch(url);
-            const data = await response.text();
-            const $ = cheerio.load(data);
-            tweet.metadata.media = "youtube";
-            tweet.metadata.description = $('meta[name=description]').attr('content');
-            tweet.metadata.title = $('meta[name=title]').attr('content');
-        }
-        if (url.includes("goodreads.com") && !url.includes("user_challenges")) {
-            await Promise.all([page.goto(url), page.waitForNavigation(), page.waitForSelector('h1')]);
-            const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
-            tweet.metadata.media = "goodreads";
-            tweet.metadata.title = title;
-        }
-        if (url.includes("wikipedia.org")) {
-            const response = await fetch(url);
-            const data = await response.text();
-            const $ = cheerio.load(data);
-            tweet.metadata.media = "wikipedia";
-            tweet.metadata.title = $('h1').text().trim();
-            tweet.metadata.description = Array.from($("div[id=mw-content-text] p")).slice(0, 2).map((el: CheerioElement) => $(el).text()).join("").trim()
-            // Prevent ban from Wikipedia servers
-            await new Promise(r => setTimeout(r, 1000));
-        }
-        if (url.includes("linkedin.com")) {
-            const response = await fetch(url);
-            const data = await response.text();
-            const $ = cheerio.load(data);
-            tweet.metadata.media = "linkedin";
-            tweet.metadata.title = $('h1').text().trim();
-            tweet.metadata.description = $('meta[name=description]').attr('content');
-        }
+async function processTweetForEnrichment(
+    tweet: Tweet, 
+    enricher: TweetEnricher, 
+    page: any
+): Promise<void> {
+    const { embed } = tweet.metadata || {};
+    
+    if (embed) {
+        await processEmbeddedTweet(tweet, embed);
+        return;
     }
 
-    const downloadTweetMedia = async (tweet: TweetForEnrichment): Promise<void> => {
-        if (!tweet.metadata.img) {
-            const url = await tall(tweet.metadata.url);
-            tweet.metadata.url = url;
-            await processKnownDomain(tweet, url);
-            saveTweet(tweet);
-            return;
-        }
-        const downloader = new Downloader({
-            url: tweet.metadata.img,
-            directory: "./metadata",
-        });
-        const { filePath } = await downloader.download();
-        if (!tweet.metadata.url) {
-            delete tweet.metadata.embed;
-            tweet.metadata.img = filePath;
-            tweet.metadata.type = TweetMetadataType.IMAGE;
-            saveTweet(tweet);
-            return;
-        }
-        const url = await tall(tweet.metadata.url);
-        tweet.metadata.img = filePath;
-        tweet.metadata.url = url;
-        tweet.tweet = undefined;
-        await processKnownDomain(tweet, url);
-        saveTweet(tweet);
-    };
+    if (!isValidMetadataType(tweet.metadata?.type)) return;
 
-    for (const tweetLibrary of tweetsLibrary) {
-        for (const tweet of tweetLibrary as Tweet[]) {
-            if (!tweet.metadata) continue;
-            const { embed } = tweet.metadata;
-            if (enrichments.find((_tweet: EnrichmentResult) => tweet.id === _tweet.id || (embed && embed.id === _tweet.id))) {
-                continue;
-            }
-            if (embed) {
-                logger.debug({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-
-                (existingTweets as JsonContent[]).push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
-                writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
-            }
-            if (!tweet.metadata.type) continue;
-            try {
-                if (tweet.metadata.type === TweetMetadataType.CARD) {
-                    await downloadTweetMedia(tweet);
-                    continue;
-                }
-                await Promise.all(tweet.metadata.imgs!.map(async (metadata: ImageMetadata) => {
-                    (metadata as { type: string }).type = TweetMetadataType.IMAGE;
-                    await downloadTweetMedia({ id: tweet.id, metadata });
-                }));
-            } catch (error: unknown) {
-                const contextError = error as ContextualError;
-                logger.error("Request failed", tweet.id, tweet.metadata, contextError.message || 'Unknown error');
-                tweet.metadata.url = undefined;
-            }
+    try {
+        if (tweet.metadata?.type === 'card') {
+            await enricher.downloadTweetMedia(tweet, page, saveTweet);
+        } else if (tweet.metadata?.imgs) {
+            await processImageTweets(tweet, enricher);
         }
+    } catch (error: unknown) {
+        handleEnrichmentError(error, tweet);
     }
-    logger.info("Finished!");
-    process.exit(0);
-})()
+}
 
-function saveTweet(tweet: TweetForEnrichment): void {
+async function processEmbeddedTweet(tweet: Tweet, embed: any): Promise<void> {
+    logger.debug({ 
+        type: "embeddedTweet", 
+        embeddedTweetId: embed.id, 
+        ...embed, 
+        id: tweet.id 
+    });
+
+    const existingEnrichments = await dataAccess.getTweetsEnriched();
+    existingEnrichments.push({ 
+        type: "embeddedTweet", 
+        embeddedTweetId: embed.id, 
+        ...embed, 
+        id: tweet.id 
+    });
+    
+    await dataAccess.saveTweetsEnriched(existingEnrichments);
+}
+
+async function processImageTweets(tweet: Tweet, enricher: TweetEnricher): Promise<void> {
+    const imagePromises = tweet.metadata!.imgs!.map(async (metadata: ImageMetadata) => {
+        const imageMetadata = { ...metadata, type: 'image' as TweetMetadataType };
+        await enricher.downloadTweetMedia(
+            { id: tweet.id, metadata: imageMetadata }, 
+            undefined, 
+            saveTweet
+        );
+    });
+    
+    await Promise.all(imagePromises);
+}
+
+function handleEnrichmentError(error: unknown, tweet: Tweet): void {
+    const contextError = error as ContextualError;
+    logger.error(
+        "Request failed", 
+        tweet.id, 
+        tweet.metadata, 
+        contextError.message || 'Unknown error'
+    );
+    
+    if (tweet.metadata) {
+        tweet.metadata.url = undefined;
+    }
+}
+
+async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
     logger.debug({ id: tweet.id, ...tweet.metadata });
+    
+    // Clean up embed data before saving
     delete tweet.metadata.embed;
-    (existingTweets as JsonContent[]).push({ id: tweet.id, ...tweet.metadata });
-    writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
+    
+    const existingEnrichments = await dataAccess.getTweetsEnriched();
+    existingEnrichments.push({ id: tweet.id, ...tweet.metadata });
+    await dataAccess.saveTweetsEnriched(existingEnrichments);
 }
+
+// Run with standardized error handling
+runWithErrorHandling(
+    enrichTweets,
+    logger,
+    "Enriching tweets with metadata"
+);
