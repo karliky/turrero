@@ -7,10 +7,13 @@ import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 import Downloader from 'nodejs-file-downloader';
 import { tall } from 'tall';
+import type { Page } from 'puppeteer';
 import type { 
     CheerioElement, 
     ImageMetadata, 
-    TweetMetadataType
+    TweetMetadataType,
+    ScriptLogger,
+    EnrichedTweetData
 } from '../../infrastructure/types/index.js';
 
 // ============================================================================
@@ -51,7 +54,7 @@ export interface TweetForEnrichment {
 
 export interface MediaProcessor {
     canProcess(url: string): boolean;
-    process(tweet: TweetForEnrichment, url: string, page?: any): Promise<void>;
+    process(tweet: TweetForEnrichment, url: string, page?: Page): Promise<void>;
 }
 
 // ============================================================================
@@ -85,7 +88,7 @@ export class GoodReadsProcessor implements MediaProcessor {
         return url.includes("goodreads.com") && !url.includes("user_challenges");
     }
 
-    async process(tweet: TweetForEnrichment, url: string, page: any): Promise<void> {
+    async process(tweet: TweetForEnrichment, url: string, page: Page): Promise<void> {
         if (!page) {
             throw new Error('Page instance required for GoodReads processing');
         }
@@ -159,7 +162,7 @@ export class MediaProcessorRegistry {
         new LinkedInProcessor()
     ];
 
-    async processKnownDomain(tweet: TweetForEnrichment, url: string, page?: any): Promise<void> {
+    async processKnownDomain(tweet: TweetForEnrichment, url: string, page?: Page): Promise<void> {
         for (const processor of this.processors) {
             if (processor.canProcess(url)) {
                 await processor.process(tweet, url, page);
@@ -207,9 +210,9 @@ export async function expandUrl(shortUrl?: string): Promise<string | undefined> 
 
 export class TweetEnricher {
     private mediaRegistry: MediaProcessorRegistry;
-    private logger: any;
+    private logger: ScriptLogger;
 
-    constructor(logger: any) {
+    constructor(logger: ScriptLogger) {
         this.mediaRegistry = new MediaProcessorRegistry();
         this.logger = logger;
     }
@@ -219,7 +222,7 @@ export class TweetEnricher {
      */
     async downloadTweetMedia(
         tweet: TweetForEnrichment, 
-        page?: any,
+        page?: Page,
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
         try {
@@ -242,7 +245,7 @@ export class TweetEnricher {
 
     private async processUrlOnlyTweet(
         tweet: TweetForEnrichment, 
-        page?: any,
+        page?: Page,
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
         const url = await expandUrl(tweet.metadata.url);
@@ -269,7 +272,7 @@ export class TweetEnricher {
 
     private async processImageWithUrlTweet(
         tweet: TweetForEnrichment, 
-        page?: any,
+        page?: Page,
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
         const [filePath, url] = await Promise.all([
@@ -295,11 +298,11 @@ export class TweetEnricher {
 /**
  * Checks if a tweet should be enriched
  */
-export function shouldEnrichTweet(tweet: any, enrichments: any[]): boolean {
+export function shouldEnrichTweet(tweet: TweetForEnrichment, enrichments: EnrichedTweetData[]): boolean {
     if (!tweet.metadata) return false;
     
     const { embed } = tweet.metadata;
-    const alreadyEnriched = enrichments.find((_tweet: any) => 
+    const alreadyEnriched = enrichments.find((_tweet: EnrichedTweetData) => 
         tweet.id === _tweet.id || (embed && embed.id === _tweet.id)
     );
     

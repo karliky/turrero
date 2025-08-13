@@ -14,11 +14,13 @@ import {
 } from './libs/enrichment-utils.js';
 import type { 
     Tweet, 
-    EnrichmentResult, 
+    EnrichedTweetData, 
     TweetMetadataType, 
     ImageMetadata, 
-    ContextualError 
+    ContextualError,
+    TweetEmbedMetadata
 } from '../infrastructure/types/index.js';
+import type { Page } from 'puppeteer';
 
 const scriptDir = getScriptDirectory(import.meta.url);
 const logger = createScriptLogger('tweets-enrichment');
@@ -50,9 +52,9 @@ async function enrichTweets(): Promise<void> {
 
 async function processTweetLibrary(
     tweets: Tweet[], 
-    enrichments: EnrichmentResult[], 
+    enrichments: EnrichedTweetData[], 
     enricher: TweetEnricher, 
-    page: any
+    page: Page
 ): Promise<void> {
     for (const tweet of tweets) {
         if (!shouldEnrichTweet(tweet, enrichments)) continue;
@@ -64,7 +66,7 @@ async function processTweetLibrary(
 async function processTweetForEnrichment(
     tweet: Tweet, 
     enricher: TweetEnricher, 
-    page: any
+    page: Page
 ): Promise<void> {
     const { embed } = tweet.metadata || {};
     
@@ -86,7 +88,7 @@ async function processTweetForEnrichment(
     }
 }
 
-async function processEmbeddedTweet(tweet: Tweet, embed: any): Promise<void> {
+async function processEmbeddedTweet(tweet: Tweet, embed: TweetEmbedMetadata): Promise<void> {
     logger.debug({ 
         type: "embeddedTweet", 
         embeddedTweetId: embed.id, 

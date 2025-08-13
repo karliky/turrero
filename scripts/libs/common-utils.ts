@@ -60,7 +60,7 @@ export function createScriptLogger(scriptName: string) {
 /**
  * Safely reads a JSON file with error handling
  */
-export async function readJsonFile<T = any>(filePath: string): Promise<T> {
+export async function readJsonFile<T = unknown>(filePath: string): Promise<T> {
   try {
     const content = await fs.readFile(filePath, 'utf8');
     return JSON.parse(content);
@@ -72,7 +72,7 @@ export async function readJsonFile<T = any>(filePath: string): Promise<T> {
 /**
  * Safely writes a JSON file with error handling and formatting
  */
-export async function writeJsonFile<T = any>(filePath: string, data: T): Promise<void> {
+export async function writeJsonFile<T = unknown>(filePath: string, data: T): Promise<void> {
   try {
     const content = JSON.stringify(data, null, 4);
     await fs.writeFile(filePath, content, 'utf8');
@@ -186,7 +186,7 @@ export function formatCsvRow(columns: string[]): string {
 /**
  * Standardized error handler for scripts
  */
-export function handleScriptError(error: unknown, logger: any, context: string): never {
+export function handleScriptError(error: unknown, logger: { error: (message: string) => void }, context: string): never {
   const errorMessage = error instanceof Error ? error.message : String(error);
   logger.error(`${context}: ${errorMessage}`);
   process.exit(1);
@@ -197,7 +197,7 @@ export function handleScriptError(error: unknown, logger: any, context: string):
  */
 export async function runWithErrorHandling<T>(
   operation: () => Promise<T>,
-  logger: any,
+  logger: { error: (message: string) => void },
   context: string
 ): Promise<T> {
   try {

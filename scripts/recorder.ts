@@ -497,7 +497,7 @@ async function main() {
 
     logger.info(testMode ? "Launching test mode..." : "Launching...");
 
-    const launchOptions: any = {
+    const launchOptions: Record<string, unknown> = {
         ...browserProps,
         channel: "chrome",
     };

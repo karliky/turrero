@@ -66,7 +66,7 @@ class Logger {
     }
   }
 
-  private formatMessage(level: LogLevel, message: string, ...args: any[]): string {
+  private formatMessage(level: LogLevel, message: string): string {
     const timestamp = new Date().toISOString();
     const levelStr = LogLevel[level];
     const prefix = this.config.prefix ? `[${this.config.prefix}]` : '';
@@ -74,32 +74,32 @@ class Logger {
     return `${timestamp} ${levelStr}${prefix} ${message}`;
   }
 
-  debug(message: string, ...args: any[]): void {
+  debug(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.DEBUG)) {
       console.log(this.formatMessage(LogLevel.DEBUG, message), ...args);
     }
   }
 
-  info(message: string, ...args: any[]): void {
+  info(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.INFO)) {
       console.log(this.formatMessage(LogLevel.INFO, message), ...args);
     }
   }
 
-  warn(message: string, ...args: any[]): void {
+  warn(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.WARN)) {
       console.warn(this.formatMessage(LogLevel.WARN, message), ...args);
     }
   }
 
-  error(message: string, ...args: any[]): void {
+  error(message: string, ...args: unknown[]): void {
     if (this.shouldLog(LogLevel.ERROR)) {
       console.error(this.formatMessage(LogLevel.ERROR, message), ...args);
     }
   }
 
   // Convenience method for conditional logging based on environment
-  devLog(message: string, ...args: any[]): void {
+  devLog(message: string, ...args: unknown[]): void {
     if (this.isDevelopment || this.isDebugEnabled) {
       console.log(`[DEV] ${message}`, ...args);
     }
@@ -116,21 +116,5 @@ export function createLogger(config: LoggerConfig): Logger {
 
 // Deno-compatible logger for scripts
 export function createDenoLogger(prefix?: string): Logger {
-  // @ts-ignore - Deno only available in Deno runtime
-  const isDevelopment = (typeof globalThis.Deno !== 'undefined' && globalThis.Deno?.env?.get('NODE_ENV') === 'development') || 
-                       // @ts-ignore
-                       (typeof globalThis.Deno !== 'undefined' && globalThis.Deno?.env?.get('NODE_ENV') === undefined);
-  // @ts-ignore
-  const isDebugEnabled = (typeof globalThis.Deno !== 'undefined' && globalThis.Deno?.env?.get('DEBUG') === 'true') || 
-                        // @ts-ignore
-                        (typeof globalThis.Deno !== 'undefined' && globalThis.Deno?.env?.get('DEBUG') === '1');
-
-  return new class DenoLogger extends Logger {
-    constructor() {
-      super(prefix ? { prefix } : {});
-      // Override environment detection for Deno
-      (this as any).isDevelopment = isDevelopment;
-      (this as any).isDebugEnabled = isDebugEnabled;
-    }
-  }();
+  return new Logger(prefix ? { prefix } : {});
 }

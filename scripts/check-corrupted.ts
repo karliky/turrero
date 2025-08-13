@@ -13,12 +13,12 @@ const tweets: Tweet[][] = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 interface MissingIdItem {
     threadIndex: number;
     tweetIndex: number;
-    tweet: any;
+    tweet: Tweet;
 }
 
 // Function to find objects missing the 'id' field
 function findMissingIds(data: Tweet[][]): MissingIdItem[] {
-    let missingIds: MissingIdItem[] = [];
+    const missingIds: MissingIdItem[] = [];
     data.forEach((thread, threadIndex) => {
         thread.forEach((tweet, tweetIndex) => {
             if (!tweet.id) {

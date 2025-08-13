@@ -7,13 +7,15 @@ import { join } from 'node:path';
 import { readJsonFile, writeJsonFile, getDbPath } from './common-utils.js';
 import type {
   Tweet,
-  EnrichmentResult,
+  EnrichedTweetData,
   CategorizedTweet,
   TweetSummary,
-  ExamQuestion,
-  EnrichedBook,
+  TweetExam,
   BookToEnrich,
-  CurrentBook
+  CurrentBook,
+  SearchIndexEntry,
+  PodcastEpisode,
+  TurraNode
 } from '../../infrastructure/types/index.js';
 
 // ============================================================================
@@ -36,11 +38,11 @@ export class DataAccess {
     await writeJsonFile(join(this.dbPath, 'tweets.json'), tweets);
   }
 
-  async getTweetsEnriched(): Promise<EnrichmentResult[]> {
-    return readJsonFile<EnrichmentResult[]>(join(this.dbPath, 'tweets_enriched.json'));
+  async getTweetsEnriched(): Promise<EnrichedTweetData[]> {
+    return readJsonFile<EnrichedTweetData[]>(join(this.dbPath, 'tweets_enriched.json'));
   }
 
-  async saveTweetsEnriched(enrichments: EnrichmentResult[]): Promise<void> {
+  async saveTweetsEnriched(enrichments: EnrichedTweetData[]): Promise<void> {
     await writeJsonFile(join(this.dbPath, 'tweets_enriched.json'), enrichments);
   }
 
@@ -60,27 +62,27 @@ export class DataAccess {
     await writeJsonFile(join(this.dbPath, 'tweets_summary.json'), summaries);
   }
 
-  async getTweetsExam(): Promise<ExamQuestion[]> {
-    return readJsonFile<ExamQuestion[]>(join(this.dbPath, 'tweets_exam.json'));
+  async getTweetsExam(): Promise<TweetExam[]> {
+    return readJsonFile<TweetExam[]>(join(this.dbPath, 'tweets_exam.json'));
   }
 
-  async saveTweetsExam(exam: ExamQuestion[]): Promise<void> {
+  async saveTweetsExam(exam: TweetExam[]): Promise<void> {
     await writeJsonFile(join(this.dbPath, 'tweets_exam.json'), exam);
   }
 
-  async getTweetsDb(): Promise<any[]> {
-    return readJsonFile<any[]>(join(this.dbPath, 'tweets-db.json'));
+  async getTweetsDb(): Promise<SearchIndexEntry[]> {
+    return readJsonFile<SearchIndexEntry[]>(join(this.dbPath, 'tweets-db.json'));
   }
 
-  async saveTweetsDb(db: any[]): Promise<void> {
+  async saveTweetsDb(db: SearchIndexEntry[]): Promise<void> {
     await writeJsonFile(join(this.dbPath, 'tweets-db.json'), db);
   }
 
-  async getTweetsPodcast(): Promise<any[]> {
-    return readJsonFile<any[]>(join(this.dbPath, 'tweets_podcast.json'));
+  async getTweetsPodcast(): Promise<PodcastEpisode[]> {
+    return readJsonFile<PodcastEpisode[]>(join(this.dbPath, 'tweets_podcast.json'));
   }
 
-  async saveTweetsPodcast(podcast: any[]): Promise<void> {
+  async saveTweetsPodcast(podcast: PodcastEpisode[]): Promise<void> {
     await writeJsonFile(join(this.dbPath, 'tweets_podcast.json'), podcast);
   }
 
@@ -123,11 +125,11 @@ export class DataAccess {
   }
 
   // Graph data access
-  async getProcessedGraphData(): Promise<any> {
-    return readJsonFile(join(this.dbPath, 'processed_graph_data.json'));
+  async getProcessedGraphData(): Promise<TurraNode[]> {
+    return readJsonFile<TurraNode[]>(join(this.dbPath, 'processed_graph_data.json'));
   }
 
-  async saveProcessedGraphData(data: any): Promise<void> {
+  async saveProcessedGraphData(data: TurraNode[]): Promise<void> {
     await writeJsonFile(join(this.dbPath, 'processed_graph_data.json'), data);
   }
 }
@@ -165,19 +167,19 @@ export async function getBooksToEnrich(dataAccess: DataAccess): Promise<BookToEn
 /**
  * Gets books from GoodReads enrichments
  */
-export async function getBooksFromGoodReads(dataAccess: DataAccess): Promise<EnrichmentResult[]> {
+export async function getBooksFromGoodReads(dataAccess: DataAccess): Promise<EnrichedTweetData[]> {
   const [enrichments, tweets] = await Promise.all([
     dataAccess.getTweetsEnriched(),
     dataAccess.getTweets()
   ]);
 
   return enrichments
-    .filter((e: EnrichmentResult) => e.media === 'goodreads')
-    .map((book: EnrichmentResult) => {
+    .filter((e: EnrichedTweetData) => e.media === 'goodreads')
+    .map((book: EnrichedTweetData) => {
       const tweet = tweets.find((t: Tweet[]) => t.find((tt: Tweet) => tt.id === book.id))?.[0];
       return { ...book, turraId: tweet?.id || "" };
     })
-    .filter((book: any) => book.url.indexOf('/author/') === -1);
+    .filter((book: EnrichedTweetData & { turraId: string }) => book.url && book.url.indexOf('/author/') === -1);
 }
 
 /**
