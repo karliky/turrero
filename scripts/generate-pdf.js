@@ -7,6 +7,10 @@ import { cpus } from 'os';
 import sharp from 'sharp';
 import Epub from 'epub-gen';
 import { readFileSync, existsSync, mkdirSync, rmSync } from 'fs';
+import { createLogger } from '../infrastructure/logger.js';
+
+// Initialize logger
+const logger = createLogger({ prefix: 'generate-pdf' });
 
 // Utility functions
 const readJsonFile = (filePath) => {
@@ -36,7 +40,7 @@ const normalizeImagePath = async (imagePath) => {
     const base64Image = imageBuffer.toString('base64');
     return `data:image/jpeg;base64,${base64Image}`;
   } catch (error) {
-    console.warn(`Failed to process image: ${absolutePath}`, error);
+    logger.warn(`Failed to process image: ${absolutePath}`, error);
     return '';
   }
 };
@@ -511,13 +515,13 @@ const getImageForEpub = async (imagePath) => {
 
     return optimizedPath;
   } catch (error) {
-    console.warn(`Warning: Could not process image at ${imagePath}`, error);
+    logger.warn(`Warning: Could not process image at ${imagePath}`, error);
     return null;
   }
 };
 
 async function generateEbook(categories, tweetsMap, tweets, summaries) {
-  console.log('📚 Generating EPUB...');
+  logger.info('📚 Generating EPUB...');
   
   // Create temp directory for optimized images
   const tempImagesDir = path.join(process.cwd(), 'temp_epub_images');
@@ -622,27 +626,28 @@ async function generateEbook(categories, tweetsMap, tweets, summaries) {
 
   const outputPath = path.join(process.cwd(), '..', 'public', 'turras.epub');
   await new Epub(options, outputPath).promise;
-  console.log(`📱 EPUB generated successfully at ${outputPath}`);
+  logger.info(`📱 EPUB generated successfully at ${outputPath}`);
 
   // After EPUB generation, clean up temp images
-  console.log('🧹 Cleaning up temporary EPUB images...');
+  logger.info('🧹 Cleaning up temporary EPUB images...');
   rmSync(tempImagesDir, { recursive: true });
 }
 
 // Worker thread code
 if (!isMainThread) {
   const { threads, tempDir, workerId } = workerData;
+  const workerLogger = createLogger({ prefix: `worker-${workerId}` });
   
   (async () => {
     let browser;
     try {
-      console.log(`[Worker ${workerId}] Starting browser...`);
+      workerLogger.info(`[Worker ${workerId}] Starting browser...`);
       browser = await puppeteer.launch();
       const pdfPaths = [];
       
       for (let i = 0; i < threads.length; i++) {
         const thread = threads[i];
-        console.log(`[Worker ${workerId}] Processing ${i + 1}/${threads.length} - Thread ID: ${thread.thread[0].id}`);
+        workerLogger.info(`[Worker ${workerId}] Processing ${i + 1}/${threads.length} - Thread ID: ${thread.thread[0].id}`);
         
         try {
           const pdfPath = await generateThreadPDF(
@@ -654,29 +659,29 @@ if (!isMainThread) {
           );
           pdfPaths.push(pdfPath);
         } catch (error) {
-          console.error(`[Worker ${workerId}] Failed to process thread ${thread.thread[0].id}:`, error);
+          workerLogger.error(`[Worker ${workerId}] Failed to process thread ${thread.thread[0].id}:`, error);
           // Continue with next thread instead of crashing the worker
         }
       }
       
-      console.log(`[Worker ${workerId}] Closing browser...`);
+      workerLogger.info(`[Worker ${workerId}] Closing browser...`);
       await browser.close();
       parentPort.postMessage({ workerId, pdfPaths });
     } catch (error) {
-      console.error(`[Worker ${workerId}] Critical error:`, error);
+      workerLogger.error(`[Worker ${workerId}] Critical error:`, error);
       if (browser) {
-        await browser.close().catch(console.error);
+        await browser.close().catch((err) => workerLogger.error('Browser close error:', err));
       }
       process.exit(1);
     }
   })().catch(error => {
-    console.error(`[Worker ${workerId}] Fatal error:`, error);
+    workerLogger.error(`[Worker ${workerId}] Fatal error:`, error);
     process.exit(1);
   });
 }
 
 async function main() {
-  console.log('📚 Reading JSON files...');
+  logger.info('📚 Reading JSON files...');
   const tweetsMap = readJsonFile('../infrastructure/db/tweets_map.json');
   const tweets = readJsonFile('../infrastructure/db/tweets.json');
   const summaries = readJsonFile('../infrastructure/db/tweets_summary.json');
@@ -697,22 +702,22 @@ async function main() {
     categorizedTweets[category] = categoryThreads;
   });
 
-  console.log(`📊 Found ${tweets.length} threads across ${categories.length} categories`);
+  logger.info(`📊 Found ${tweets.length} threads across ${categories.length} categories`);
 
   // Create temp directory
   const tempDir = path.join(process.cwd(), 'temp_pdfs');
   if (!existsSync(tempDir)) {
     mkdirSync(tempDir);
-    console.log('📁 Created temporary directory');
+    logger.info('📁 Created temporary directory');
   }
 
   // Launch browser
-  console.log('🌐 Launching browser...');
+  logger.info('🌐 Launching browser...');
   const browser = await puppeteer.launch();
   const merger = new PDFMerger();
 
   // Generate index PDF
-  console.log('📑 Generating index PDF...');
+  logger.info('📑 Generating index PDF...');
   const indexPage = await browser.newPage();
   await indexPage.setContent(generateIndexHtml(categories, tweetsMap, summaries));
   await indexPage.pdf({
@@ -722,7 +727,7 @@ async function main() {
 
   merger.add(path.join(tempDir, 'index.pdf'));
 
-  console.log('📊 Creating worker threads...');
+  logger.info('📊 Creating worker threads...');
   const numCPUs = cpus().length;
   const allThreads = categories.flatMap(category => 
     categorizedTweets[category].map(thread => ({
@@ -738,13 +743,13 @@ async function main() {
   let processedCount = 0;
   const totalThreads = allThreads.length;
 
-  console.log(`📊 Creating ${numCPUs} worker threads for ${totalThreads} total threads...`);
+  logger.info(`📊 Creating ${numCPUs} worker threads for ${totalThreads} total threads...`);
   
   for (let i = 0; i < numCPUs; i++) {
     const workerThreads = allThreads.slice(i * threadsPerWorker, (i + 1) * threadsPerWorker);
     if (workerThreads.length === 0) continue;
 
-    console.log(`[Main] Worker ${i + 1} assigned ${workerThreads.length} threads`);
+    logger.info(`[Main] Worker ${i + 1} assigned ${workerThreads.length} threads`);
     
     const worker = new Worker(new URL(import.meta.url), {
       workerData: { 
@@ -759,17 +764,17 @@ async function main() {
       new Promise((resolve, reject) => {
         worker.on('message', ({ workerId, pdfPaths }) => {
           processedCount += workerThreads.length;
-          console.log(`[Worker ${workerId}] ✅ Completed all ${workerThreads.length} threads`);
-          console.log(`📄 Total Progress: ${processedCount}/${totalThreads} threads (${Math.round(processedCount/totalThreads*100)}%)`);
+          logger.info(`[Worker ${workerId}] ✅ Completed all ${workerThreads.length} threads`);
+          logger.info(`📄 Total Progress: ${processedCount}/${totalThreads} threads (${Math.round(processedCount/totalThreads*100)}%)`);
           resolve(pdfPaths);
         });
         worker.on('error', (error) => {
-          console.error(`[Worker ${i + 1}] ❌ Error:`, error);
+          logger.error(`[Worker ${i + 1}] ❌ Error:`, error);
           reject(error);
         });
         worker.on('exit', (code) => {
           if (code !== 0) {
-            console.error(`[Worker ${i + 1}] ❌ Stopped with code ${code}`);
+            logger.error(`[Worker ${i + 1}] ❌ Stopped with code ${code}`);
             reject(new Error(`Worker stopped with exit code ${code}`));
           }
         });
@@ -778,7 +783,7 @@ async function main() {
         setTimeout(() => reject(new Error(`Worker ${i + 1} timed out after 10 minutes`)), 600000)
       )
     ]).catch(error => {
-      console.error(`[Worker ${i + 1}] Failed:`, error);
+      logger.error(`[Worker ${i + 1}] Failed:`, error);
       worker.terminate();
       return []; // Return empty array of PDFs on failure
     });
@@ -787,12 +792,12 @@ async function main() {
   }
 
   // Wait for all workers to complete
-  console.log('⏳ Generating PDFs in parallel...');
+  logger.info('⏳ Generating PDFs in parallel...');
   const workerResults = await Promise.all(workerPromises);
   const allPdfPaths = workerResults.flat();
 
   // Merge PDFs
-  console.log('📎 Merging all PDFs...');
+  logger.info('📎 Merging all PDFs...');
   
   // Add index first
   await merger.add(path.join(tempDir, 'index.pdf'));
@@ -810,16 +815,16 @@ async function main() {
   await generateEbook(categories, tweetsMap, tweets, summaries);
 
   // Cleanup
-  console.log('🧹 Cleaning up...');
+  logger.info('🧹 Cleaning up...');
   await browser.close();
   rmSync(tempDir, { recursive: true });
   
-  console.log(`✅ PDF and EPUB generated successfully at ${outputPath}`);
-  console.log(`Estaré aquí mismo.`);
+  logger.info(`✅ PDF and EPUB generated successfully at ${outputPath}`);
+  logger.info(`Estaré aquí mismo.`);
   process.exit(0);
 }
 
 // Only run main() in the main thread
 if (isMainThread) {
-  main().catch(console.error);
+  main().catch((error) => logger.error('Main function error:', error));
 } 

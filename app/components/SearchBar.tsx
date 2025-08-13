@@ -3,13 +3,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import algoliasearch from 'algoliasearch';
+import { SearchBarProps } from '../../infrastructure/types';
 
 const client = algoliasearch('WU4KEG8DAS', '7bd2f67692c4d35a0c9a5d7e005deb1e');
 const index = client.initIndex('turras');
-
-interface SearchBarProps {
-  className?: string;
-}
 
 interface SearchResult {
   id: string;
@@ -26,8 +23,8 @@ interface SearchResult {
   };
 }
 
-export default function SearchBar({ className = '' }: SearchBarProps) {
-  const [inputText, setInputText] = useState('');
+export default function SearchBar({ className = '', placeholder, onSearch: onSearchCallback, initialValue }: SearchBarProps): React.ReactElement {
+  const [inputText, setInputText] = useState(initialValue || '');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const modalInputRef = useRef<HTMLInputElement>(null);
@@ -35,11 +32,12 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSearch = async (searchValue: string) => {
+  const onSearch = async (searchValue: string): Promise<void> => {
     if (searchValue === '') {
       setIsLoading(false);
       setIsModalOpen(false);
-      return setSearchResults([]);
+      setSearchResults([]);
+      return;
     }
 
     try {
@@ -60,14 +58,20 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
       setSearchResults(resultsWithSummary);
       setIsLoading(false);
       setIsModalOpen(true);
+      
+      // Call external callback if provided
+      onSearchCallback?.(searchValue);
     } catch (error) {
-      console.error('Search error:', error);
+      // Only log errors in development environment
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Search error:', error);
+      }
       setSearchResults([]);
       setIsLoading(false);
     }
   };
 
-  const onSearchDebounce = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSearchDebounce = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const searchValue = e.target.value.toLowerCase();
     setInputText(searchValue);
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -103,7 +107,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
     }
   }, [isModalOpen]);
 
-  const triggerSearch = () => {
+  const triggerSearch = (): void => {
     onSearch(inputText);
   };
 
@@ -114,7 +118,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
           type="text"
           value={inputText}
           onChange={onSearchDebounce}
-          placeholder="Buscar turras..."
+          placeholder={placeholder || "Buscar turras..."}
           className="w-full pl-10 pr-4 py-2.5 
             border border-whiskey-200 
             rounded-lg

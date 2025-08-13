@@ -38,11 +38,15 @@ export const metadata: Metadata = {
     site: '@recuenco',
     images: ['/promo.png'],
   },
-  viewport: 'width=device-width, initial-scale=1',
   robots: {
     index: true,
     follow: true
   }
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1
 };
 
 export default function RootLayout({
@@ -55,6 +59,7 @@ export default function RootLayout({
       
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whiskey-50`}
+        suppressHydrationWarning
       >
         <main className="min-h-screen flex flex-col">
           <Header />

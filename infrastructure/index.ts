@@ -3,6 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import { parse } from '@fast-csv/parse';
 
+// Re-export all types from the consolidated types file
+export * from './types';
+
+// Legacy interfaces for backward compatibility
 export interface Tweet {
   id: string;
   content: string;

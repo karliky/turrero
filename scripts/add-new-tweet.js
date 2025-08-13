@@ -1,12 +1,16 @@
 import { promises as fs } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { createLogger } from '../infrastructure/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Initialize logger
+const logger = createLogger({ prefix: 'add-tweet' });
+
 if (process.argv.length < 4) {
-    console.log("Usage: node addTweet.js <tweetId> <tweetContent>");
+    logger.error("Usage: node addTweet.js <tweetId> <tweetContent>");
     process.exit(1);
 }
 
@@ -36,9 +40,9 @@ async function addTweet(tweetId, tweetContent) {
 
         // Write the updated content back to the file
         await fs.writeFile(filePath, updatedContent, { encoding: 'utf8' });
-        console.log("Tweet added successfully!");
+        logger.info("Tweet added successfully!");
     } catch (err) {
-        console.error("Error processing the file:", err);
+        logger.error("Error processing the file:", err);
     }
 }
 

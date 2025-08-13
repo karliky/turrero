@@ -21,11 +21,11 @@ export function HeaderDescription({ totalTweets, lastUpdateDate }: HeaderDescrip
         y la{" "}
         <a
           className="font-semibold text-whiskey-700 hover:text-whiskey-900 transition-colors duration-200 underline decoration-whiskey-300 hover:decoration-whiskey-500"
-          href={AUTHORS.CPSCOMUNITY.YOUTUBE}
+          href={AUTHORS.CPSCOMUNIDAD.YOUTUBE}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {AUTHORS.CPSCOMUNITY.NAME}
+          {AUTHORS.CPSCOMUNIDAD.NAME}
         </a> sobre las ciencias de la complejidad, CPS, Factor-X, etc.
         <br className="hidden sm:block" />
         <span className="block mt-3">

@@ -1,10 +1,4 @@
-interface Tweet {
-  id: string;
-  time: string;
-  summary: string;
-  stats: { retweets: string; quotetweets: string; likes: string };
-  engagement: number;
-}
+import { CategoryCardProps } from "../../infrastructure/types";
 
 function formatRelativeTime(dateString: string, fullText: boolean = false): string {
   const date = new Date(dateString);
@@ -40,12 +34,6 @@ function formatRelativeTime(dateString: string, fullText: boolean = false): stri
     
     return `${years}a`;
   }
-}
-
-interface CategoryCardProps {
-  category: string;
-  tweets: Tweet[];
-  formatCategoryTitle: (category: string) => string;
 }
 
 function formatCategoryUrl(category: string): string {

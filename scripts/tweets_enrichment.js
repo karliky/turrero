@@ -8,12 +8,16 @@ import tweetsLibrary from '../infrastructure/db/tweets.json' with { type: 'json'
 import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
+import { createLogger } from '../infrastructure/logger.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Initialize logger
+const logger = createLogger({ prefix: 'tweets-enrichment' });
 
 // We need to set this to avoid SSL errors when downloading images
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -93,7 +97,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                 continue;
             }
             if (embed) {
-                console.log({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
+                logger.debug({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
 
                 existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
@@ -109,17 +113,17 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                     await downloadTweetMedia({ id: tweet.id, metadata });
                 }));
             } catch (error) {
-                console.log("Request failed", tweet.id, tweet.metadata, error.message);
+                logger.error("Request failed", tweet.id, tweet.metadata, error.message);
                 tweet.metadata.url = undefined;
             }
         }
     }
-    console.log("Finished!");
+    logger.info("Finished!");
     process.exit(0);
 })()
 
 function saveTweet(tweet) {
-    console.log({ id: tweet.id, ...tweet.metadata });
+    logger.debug({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
     existingTweets.push({ id: tweet.id, ...tweet.metadata });
     writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));

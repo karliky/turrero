@@ -1,13 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { TweetExam } from '../../infrastructure/TweetProvider';
+import { TweetExamProps } from '../../infrastructure/types';
 import Confetti from 'react-confetti';
 
-interface TurraExamProps {
-  exam: TweetExam;
-}
-
-export function TurraExam({ exam }: TurraExamProps) {
+export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElement {
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -29,9 +25,10 @@ export function TurraExam({ exam }: TurraExamProps) {
       }, 10000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [showConfetti]);
 
-  const handleAnswerSelect = (questionIndex: number, answerIndex: number) => {
+  const handleAnswerSelect = (questionIndex: number, answerIndex: number): void => {
     const newAnswers = [...selectedAnswers];
     newAnswers[questionIndex] = answerIndex;
     setSelectedAnswers(newAnswers);
@@ -39,15 +36,17 @@ export function TurraExam({ exam }: TurraExamProps) {
     setShowConfetti(false);
   };
 
-  const handleCheckResults = () => {
+  const handleCheckResults = (): void => {
     if (selectedAnswers.length !== exam.questions.length) {
       alert('Por favor, responde todas las preguntas antes de comprobar los resultados');
       return;
     }
 
-    const allCorrect = exam.questions.every((q, idx) => 
-      selectedAnswers[idx] === (q.answer - 1)
+    const correctAnswers = exam.questions.reduce((count, q, idx) => 
+      selectedAnswers[idx] === (q.answer - 1) ? count + 1 : count, 0
     );
+    
+    const allCorrect = correctAnswers === exam.questions.length;
 
     if (allCorrect) {
       setShowConfetti(true);
@@ -58,7 +57,11 @@ export function TurraExam({ exam }: TurraExamProps) {
       const questionElement = document.querySelector(`[data-question-index="${firstWrongQuestionIndex}"]`);
       questionElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    
     setShowResults(true);
+    
+    // Call onComplete callback if provided
+    onComplete?.(correctAnswers, exam.questions.length);
   };
 
   return (

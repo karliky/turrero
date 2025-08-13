@@ -24,6 +24,8 @@ async function getTweetData(id: string) {
   if (thread.length === 0) return null;
   
   const mainTweet = thread[0];
+  if (!mainTweet) return null;
+  
   return {
     thread,
     summary: tweetProvider.getSummaryById(mainTweet.id),
@@ -75,9 +77,11 @@ export async function generateStaticParams() {
   const tweetProvider = new TweetProvider();
   const allThreads = tweetProvider.getAllTweets();
   
-  return allThreads.map(thread => ({
-    id: thread[0].id
-  }));
+  return allThreads
+    .filter(thread => thread && thread[0])
+    .map(thread => ({
+      id: thread[0]!.id
+    }));
 }
 
 export const dynamic = 'force-static';
@@ -95,6 +99,9 @@ export default async function TurraPage({ params }: Params) {
 
   const { thread, summary, categories, exam } = data;
   const mainTweet = thread[0];
+  if (!mainTweet) {
+    notFound();
+  }
   const words = summary.split(' ');
   const coloredWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
@@ -185,7 +192,7 @@ export default async function TurraPage({ params }: Params) {
             </div>
           </article>
 
-          <TurraSidebar exam={exam} thread={thread} />
+          <TurraSidebar {...(exam ? { exam } : {})} thread={thread} />
         </div>
       </div>
     </main>

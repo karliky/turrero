@@ -23,7 +23,7 @@ export default async function GlosarioPage() {
       <p className="text-gray-600 mb-8">
         Aqui hay un glosario de la jerga especializada que se utiliza en las turras de {AUTHORS.MAIN}. 
         Recoger y explicar estos términos es una tarea en curso, a la cual puedes contribuir editando este{" "}
-        <a href="https://github.com/karliky/turrero/blob/main/db/glosario.csv" className="text-brand hover:text-brand-dark underline">fichero CSV en GitHub</a>, recuerda que lo puedes importar y editar en Excel.
+        <a href="https://github.com/karliky/turrero/blob/main/infrastructure/db/glosario.csv" className="text-brand hover:text-brand-dark underline">fichero CSV en GitHub</a>, recuerda que lo puedes importar y editar en Excel.
       </p>
 
       <div className="overflow-x-auto shadow-lg rounded-lg">

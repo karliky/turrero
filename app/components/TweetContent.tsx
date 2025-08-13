@@ -1,14 +1,10 @@
 import { FaTwitter } from "react-icons/fa";
-import { TweetProvider, Tweet, EnrichedTweetMetadata } from "../../infrastructure/TweetProvider";
+import { TweetProvider } from "../../infrastructure/TweetProvider";
+import { Tweet, EnrichedTweetMetadata, TweetContentProps } from "../../infrastructure/types";
 import Image from 'next/image';
 
-interface TweetContentProps {
-  tweet: Tweet;
-  id: string;
-}
-
 export function TweetContent({ tweet, id }: TweetContentProps) {
-  const renderMentions = (text: string) => {
+  const renderMentions = (text: string): (string | React.ReactElement | null)[] => {
     // Regex for URLs and mentions
     const regex = /(@\w+)|(https?:\/\/[^\s]+)/g;
     return text.split(regex).map((part, index) => {
@@ -50,19 +46,19 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     });
   };
 
-  const getEmbedding = (tweet: Tweet) => {
+  const getEmbedding = (tweet: Tweet): EnrichedTweetMetadata | undefined => {
     return new TweetProvider().getEnrichedTweetData(tweet.id);
   };
 
-  const getEmbeddedAuthorHandle = (author: string) => {
-    return author.split('@')[1] || author.split('\n@')[1];
+  const getEmbeddedAuthorHandle = (author: string): string => {
+    return author.split('@')[1] || author.split('\n@')[1] || '';
   };
 
-  const normalizeImagePath = (path: string) => {
+  const normalizeImagePath = (path: string): string => {
     return path?.startsWith('./') ? path.substring(1) : path;
   };
 
-  const renderEmbed = (embed: EnrichedTweetMetadata) => {
+  const renderEmbed = (embed: EnrichedTweetMetadata): React.ReactElement | null => {
     switch (embed.type) {
       case 'card':
         return (

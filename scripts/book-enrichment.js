@@ -2,6 +2,7 @@ import booksNotEnriched from '../infrastructure/db/books-not-enriched.json' with
 import currentBooks from '../infrastructure/db/books.json' with { type: 'json' };
 import fs from 'fs';
 import puppeteer from 'puppeteer';
+import { createLogger } from '../infrastructure/logger.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -9,11 +10,14 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Initialize logger
+const logger = createLogger({ prefix: 'book-enrichment' });
+
 const booksToEnrich = booksNotEnriched.filter(book => {
     return currentBooks.find(currentBook => currentBook.id === book.id && (!('categories' in currentBook) || currentBook.categories.length === 0));
 });
 
-console.log('# Pending books to enrich', booksToEnrich.length);
+logger.info('# Pending books to enrich', booksToEnrich.length);
 
 (async () => {
     const browser = await puppeteer.launch({ slowMo: 10 });
@@ -25,7 +29,7 @@ console.log('# Pending books to enrich', booksToEnrich.length);
             const elements = Array.from(document.querySelectorAll('.BookPageMetadataSection__genreButton .Button__labelItem'));
             return elements.map(element => element.innerText);
         });
-        console.log({ categories, title: book.title, url: book.url });
+        logger.debug({ categories, title: book.title, url: book.url });
         if (categories.length > 0) book.categories = categories;
         //merge current books with enriched books
         const enrichedBooks = currentBooks.map(currentBook => {
@@ -36,6 +40,6 @@ console.log('# Pending books to enrich', booksToEnrich.length);
         });
         fs.writeFileSync(__dirname + '/../infrastructure/db/books.json', JSON.stringify(enrichedBooks, null, 4));
     }
-    console.log('# Estaré ahí mismo.')
+    logger.info('# Estaré ahí mismo.')
     process.exit(0);
 })();

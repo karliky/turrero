@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { TurraNode } from '@/infrastructure/TweetProvider';
+import { TurraNode } from '@/infrastructure/types';
 import { FaSearchPlus, FaSearchMinus, FaExpand, FaTimes } from 'react-icons/fa';
 
 interface GraphNode extends TurraNode {
@@ -63,7 +63,7 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
           .range([3, 20]);
         return radiusScale(d.views);
       })
-      .attr("fill", d => color(d.categories[0]));
+      .attr("fill", d => color(d.categories[0] || 'default'));
 
     if (legendVisible) {
       const legend = svg.append("g")
@@ -77,12 +77,12 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
         legendRow.append("rect")
           .attr("width", 10)
           .attr("height", 10)
-          .attr("fill", color(category));
+          .attr("fill", color(category || 'default'));
 
         legendRow.append("text")
           .attr("x", 20)
           .attr("y", 10)
-          .text(category);
+          .text(category || '');
       });
     }
 
