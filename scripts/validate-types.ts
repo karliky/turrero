@@ -45,7 +45,7 @@ function printColored(color: keyof typeof colors, message: string): void {
  */
 async function runCommand(cmd: string[], cwd?: string): Promise<{ success: boolean; output: string; error: string }> {
   try {
-    const command = new Deno.Command(cmd[0], {
+    const command = new Deno.Command(cmd[0]!, {
       args: cmd.slice(1),
       cwd: cwd || Deno.cwd(),
       stdout: 'piped',
@@ -60,10 +60,11 @@ async function runCommand(cmd: string[], cwd?: string): Promise<{ success: boole
       error: new TextDecoder().decode(stderr),
     };
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return {
       success: false,
       output: '',
-      error: `Command execution failed: ${error.message}`,
+      error: `Command execution failed: ${errorMessage}`,
     };
   }
 }
@@ -131,10 +132,11 @@ async function validateDenoTS(): Promise<ValidationResult> {
       }
     }
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return {
       success: false,
       message: 'Failed to read scripts directory',
-      details: error.message,
+      details: errorMessage,
     };
   }
 
@@ -204,9 +206,13 @@ async function checkForAnyTypes(): Promise<ValidationResult> {
 async function validateEnumUsage(): Promise<ValidationResult> {
   printColored('cyan', '📋 Checking enum usage consistency...');
   
+  // Import enums to check for usage - magic strings that should use enums
   const magicStrings = [
+    // Environment types - should use EnvironmentType enum
     '"development"', '"production"', '"test"',
+    // Metadata types - should use TweetMetadataType enum  
     '"card"', '"embed"', '"media"',
+    // Processing states - should use ProcessingState enum
     '"pending"', '"processing"', '"completed"', '"error"',
   ];
   
@@ -242,10 +248,11 @@ async function validateEnumUsage(): Promise<ValidationResult> {
       }
     }
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return {
       success: false,
       message: 'Failed to validate enum usage',
-      details: error.message,
+      details: errorMessage,
     };
   }
   
@@ -282,7 +289,10 @@ async function main(): Promise<void> {
   summary.results.push(...depResults);
   
   // Only proceed if basic tools are available
-  const criticalDeps = depResults.filter(r => ['deno', 'node'].includes(r.message.split(' ')[0]));
+  const criticalDeps = depResults.filter(r => {
+    const firstWord = r.message.split(' ')[0];
+    return firstWord && ['deno', 'node'].includes(firstWord);
+  });
   if (criticalDeps.some(r => !r.success)) {
     printColored('red', '❌ Critical dependencies missing!');
     Deno.exit(1);
@@ -301,10 +311,11 @@ async function main(): Promise<void> {
       const result = await validation();
       summary.results.push(result);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       summary.results.push({
         success: false,
         message: `Validation error: ${validation.name}`,
-        details: error.message,
+        details: errorMessage,
       });
     }
   }

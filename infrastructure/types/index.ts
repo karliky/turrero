@@ -119,6 +119,28 @@ export interface EnrichedTweetMetadata {
   tweet?: string;
 }
 
+/** Enriched tweet data structure as stored in tweets_enriched.json */
+export interface EnrichedTweetData {
+  /** Tweet ID */
+  id: string;
+  /** Type of enrichment */
+  type: string;
+  /** Image URL for cards/media */
+  img?: string;
+  /** External URL for cards */
+  url?: string;
+  /** Media source (youtube, goodreads, etc) */
+  media?: string;
+  /** Card description */
+  description?: string;
+  /** Card title */
+  title?: string;
+  /** Embedded tweet author */
+  author?: string;
+  /** Embedded tweet content */
+  tweet?: string;
+}
+
 // ============================================================================
 // EXAMINATION & TESTING TYPES
 // ============================================================================

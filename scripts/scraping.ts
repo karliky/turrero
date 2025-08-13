@@ -47,7 +47,7 @@ export const getTweetText = (): string => {
         );
         const c2 = tweetContainer?.querySelector('div[data-testid="tweetText"]') as HTMLElement;
         return c2?.innerText || "";
-    } catch (_) {
+    } catch {
         return "";
     }
 };

@@ -49,12 +49,5 @@
     "node_modules",
     "scripts/**/*.ts",
     "scripts/**/*.js"
-  ],
-  "ts-node": {
-    "compilerOptions": {
-      "skipLibCheck": true,
-      "noImplicitAny": false,
-      "strictNullChecks": false
-    }
-  }
+  ]
 }

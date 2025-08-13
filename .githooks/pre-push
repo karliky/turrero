@@ -30,27 +30,27 @@ else
     print_status "$GREEN" "✅ Main project TypeScript compilation passed"
 fi
 
-# 2. Check Deno TypeScript files
+# 2. Check Deno TypeScript files (only Deno-specific scripts)
 print_status "$YELLOW" "🦕 Checking Deno TypeScript files..."
-if ! deno check scripts/*.ts; then
+if ! deno check scripts/recorder.ts scripts/validate-types.ts; then
     print_status "$RED" "❌ Deno TypeScript check failed!"
     VALIDATION_FAILED=true
 else
     print_status "$GREEN" "✅ Deno TypeScript check passed"
 fi
 
-# 3. Run linting on TypeScript files
+# 3. Run linting on TypeScript files (excluding auto-generated)
 print_status "$YELLOW" "🔧 Running TypeScript linting..."
-if ! npx eslint "**/*.ts" "**/*.tsx" --max-warnings 0; then
+if ! npx eslint "app/**/*.ts" "app/**/*.tsx" "infrastructure/**/*.ts" "scripts/**/*.ts" "*.ts" --max-warnings 0; then
     print_status "$RED" "❌ TypeScript linting failed!"
     VALIDATION_FAILED=true
 else
     print_status "$GREEN" "✅ TypeScript linting passed"
 fi
 
-# 4. Run Deno linting
+# 4. Run Deno linting (only on Deno-specific scripts)
 print_status "$YELLOW" "🦕 Running Deno linting on scripts..."
-if ! deno lint scripts/; then
+if ! deno lint scripts/recorder.ts scripts/validate-types.ts; then
     print_status "$RED" "❌ Deno linting failed!"
     VALIDATION_FAILED=true
 else

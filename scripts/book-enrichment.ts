@@ -1,3 +1,4 @@
+import type { Page } from 'puppeteer';
 import { 
     getScriptDirectory, 
     createScriptLogger, 
@@ -40,7 +41,7 @@ async function enrichBooksWithCategories(): Promise<void> {
     }
 }
 
-async function enrichBookCategories(page: any, book: BookToEnrich): Promise<void> {
+async function enrichBookCategories(page: Page, book: BookToEnrich): Promise<void> {
     await page.goto(book.url, { waitUntil: 'networkidle2' });
     
     const categories: string[] = await page.evaluate(() => {

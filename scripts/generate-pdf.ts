@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises';
 import path from 'node:path';
 import puppeteer, { Browser, Page } from 'puppeteer';
 import PDFMerger from 'pdf-merger-js';
@@ -8,7 +7,7 @@ import sharp from 'sharp';
 import Epub from 'epub-gen';
 import { readFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { createLogger } from '../infrastructure/logger.js';
-import type { Tweet, TweetSummary, CategorizedTweet, EnrichmentResult, JsonContent } from '../infrastructure/types/index.js';
+import type { Tweet, TweetSummary, CategorizedTweet, EnrichedTweetData, JsonContent } from '../infrastructure/types/index.js';
 
 // Initialize logger
 const logger = createLogger({ prefix: 'generate-pdf' });
@@ -79,8 +78,8 @@ const normalizeImagePath = async (imagePath: string): Promise<string> => {
   }
 };
 
-const getEnrichedTweetData = (enrichedTweets: EnrichmentResult[], id: string): EnrichmentResult | undefined => {
-  return enrichedTweets.find((t: EnrichmentResult) => t.id === id);
+const getEnrichedTweetData = (enrichedTweets: EnrichedTweetData[], id: string): EnrichedTweetData | undefined => {
+  return enrichedTweets.find((t: EnrichedTweetData) => t.id === id);
 };
 
 const formatCategoryTitle = (category: string): string => {
@@ -93,7 +92,7 @@ const formatCategoryTitle = (category: string): string => {
 
 const generateTurraHtml = async (thread: Tweet[], summary: string, categories: string[]): Promise<string> => {
   const mainTweet = thread[0];
-  const enrichedTweets: EnrichmentResult[] = readJsonFile('infrastructure/db/tweets_enriched.json');
+  const enrichedTweets: EnrichedTweetData[] = readJsonFile('infrastructure/db/tweets_enriched.json');
   
   const renderEmbed = async (tweet: Tweet): Promise<string> => {
     const enrichedData = getEnrichedTweetData(enrichedTweets, tweet.id);
@@ -304,7 +303,7 @@ const generateTurraHtml = async (thread: Tweet[], summary: string, categories: s
 const generateEpubHtml = async (thread: Tweet[], summary: string, categories: string[]): Promise<string> => {
   // Similar to generateTurraHtml but with simplified styling for ebooks
   const mainTweet = thread[0];
-  const enrichedTweets: EnrichmentResult[] = readJsonFile('infrastructure/db/tweets_enriched.json');
+  const enrichedTweets: EnrichedTweetData[] = readJsonFile('infrastructure/db/tweets_enriched.json');
   
   const renderEmbed = async (tweet: Tweet): Promise<string> => {
     const enrichedData = getEnrichedTweetData(enrichedTweets, tweet.id);
