@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# TypeScript validation pre-push hook
+# This hook ensures all TypeScript files pass strict type checking before pushing
+
+echo "🔍 Running TypeScript validation before push..."
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_status() {
+    local color=$1
+    local message=$2
+    echo -e "${color}${message}${NC}"
+}
+
+# Track validation status
+VALIDATION_FAILED=false
+
+# 1. Check TypeScript compilation for main project
+print_status "$YELLOW" "📁 Checking main project TypeScript compilation..."
+if ! npx tsc --noEmit; then
+    print_status "$RED" "❌ Main project TypeScript compilation failed!"
+    VALIDATION_FAILED=true
+else
+    print_status "$GREEN" "✅ Main project TypeScript compilation passed"
+fi
+
+# 2. Check Deno TypeScript files
+print_status "$YELLOW" "🦕 Checking Deno TypeScript files..."
+if ! deno check scripts/*.ts; then
+    print_status "$RED" "❌ Deno TypeScript check failed!"
+    VALIDATION_FAILED=true
+else
+    print_status "$GREEN" "✅ Deno TypeScript check passed"
+fi
+
+# 3. Run linting on TypeScript files
+print_status "$YELLOW" "🔧 Running TypeScript linting..."
+if ! npx eslint "**/*.ts" "**/*.tsx" --max-warnings 0; then
+    print_status "$RED" "❌ TypeScript linting failed!"
+    VALIDATION_FAILED=true
+else
+    print_status "$GREEN" "✅ TypeScript linting passed"
+fi
+
+# 4. Run Deno linting
+print_status "$YELLOW" "🦕 Running Deno linting on scripts..."
+if ! deno lint scripts/; then
+    print_status "$RED" "❌ Deno linting failed!"
+    VALIDATION_FAILED=true
+else
+    print_status "$GREEN" "✅ Deno linting passed"
+fi
+
+# 5. Check for any remaining 'any' types in critical files
+print_status "$YELLOW" "🔍 Checking for remaining 'any' types..."
+ANY_TYPES_FOUND=$(grep -r ":\s*any\b\|as\s\+any\b" scripts/*.ts infrastructure/types/*.ts 2>/dev/null || true)
+if [ -n "$ANY_TYPES_FOUND" ]; then
+    print_status "$RED" "❌ Found remaining 'any' types:"
+    echo "$ANY_TYPES_FOUND"
+    VALIDATION_FAILED=true
+else
+    print_status "$GREEN" "✅ No 'any' types found in critical files"
+fi
+
+# 6. Validate that required enums are being used
+print_status "$YELLOW" "📋 Checking enum usage consistency..."
+MAGIC_STRINGS=$(grep -r "\"development\"\|\"production\"\|\"card\"\|\"embed\"\|\"media\"" scripts/*.ts | grep -v "enum\|import" || true)
+if [ -n "$MAGIC_STRINGS" ]; then
+    print_status "$YELLOW" "⚠️  Found potential magic strings that should use enums:"
+    echo "$MAGIC_STRINGS"
+    print_status "$YELLOW" "Consider using the appropriate enums from infrastructure/types/index.ts"
+fi
+
+# Final validation result
+if [ "$VALIDATION_FAILED" = true ]; then
+    print_status "$RED" "💥 TypeScript validation failed! Push rejected."
+    print_status "$YELLOW" "Please fix the above issues before pushing."
+    exit 1
+else
+    print_status "$GREEN" "🎉 All TypeScript validations passed! Push allowed."
+    exit 0
+fi

@@ -9,24 +9,24 @@ id=$1
 first_tweet_line=$2
 
 echo "Adding thread $id to turras.csv"
-node ./scripts/add-new-tweet.js $id "$first_tweet_line"
+npx tsx ./scripts/add-new-tweet.ts $id "$first_tweet_line"
 
 echo "Obtaining thread $id"
-node ./scripts/recorder.js
+deno run --allow-all ./scripts/recorder.ts
 # To debug:
-# node ./scripts/recorder.js --test $id
+# deno run --allow-all ./scripts/recorder.ts --test $id
 
 echo "Enriching tweets for thread $id" 
-node ./scripts/tweets_enrichment.js
+npx tsx ./scripts/tweets_enrichment.ts
 
 echo "Generating algolia index for thread $id"
-node ./scripts/make-algolia-db.js
+npx tsx ./scripts/make-algolia-db.ts
 
 echo "Generating books for thread $id"
-node ./scripts/generate-books.js
+npx tsx ./scripts/generate-books.ts
 
 echo "Enriching books for thread $id" 
-node ./scripts/book-enrichment.js
+npx tsx ./scripts/book-enrichment.ts
 
 echo "Adding thread $id to graph" 
 python ./scripts/create_graph.py 
