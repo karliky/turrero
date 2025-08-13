@@ -7,11 +7,12 @@ import existingTweets from '../infrastructure/db/tweets_enriched.json' with { ty
 import tweetsLibrary from '../infrastructure/db/tweets.json' with { type: 'json' };
 import fetch from 'node-fetch';
 import cheerio from 'cheerio';
-import puppeteer from 'puppeteer';
+import puppeteer, { Page } from 'puppeteer';
 import { createLogger } from '../infrastructure/logger.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
+import type { Tweet, EnrichmentResult } from '../infrastructure/types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,11 +23,17 @@ const logger = createLogger({ prefix: 'tweets-enrichment' });
 // We need to set this to avoid SSL errors when downloading images
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-(async () => {
-    const browser = await puppeteer.launch({ slowMo: 200 });
-    const page = await browser.newPage();
+interface TweetForEnrichment {
+    id: string;
+    metadata: any;
+    tweet?: string;
+}
 
-    const processKnownDomain = async (tweet, url) => {
+(async (): Promise<void> => {
+    const browser = await puppeteer.launch({ slowMo: 200 });
+    const page: Page = await browser.newPage();
+
+    const processKnownDomain = async (tweet: TweetForEnrichment, url: string): Promise<void> => {
         if (url.includes("youtube.com")) {
             const response = await fetch(url);
             const data = await response.text();
@@ -37,7 +44,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
         }
         if (url.includes("goodreads.com") && !url.includes("user_challenges")) {
             await Promise.all([page.goto(url), page.waitForNavigation(), page.waitForSelector('h1')]);
-            const title = await page.evaluate(() => document.querySelector('h1').textContent);
+            const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
             tweet.metadata.media = "goodreads";
             tweet.metadata.title = title;
         }
@@ -47,7 +54,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             const $ = cheerio.load(data);
             tweet.metadata.media = "wikipedia";
             tweet.metadata.title = $('h1').text().trim();
-            tweet.metadata.description = Array.from($("div[id=mw-content-text] p")).slice(0, 2).map(el => $(el).text()).join("").trim()
+            tweet.metadata.description = Array.from($("div[id=mw-content-text] p")).slice(0, 2).map((el: any) => $(el).text()).join("").trim()
             // Prevent ban from Wikipedia servers
             await new Promise(r => setTimeout(r, 1000));
         }
@@ -61,7 +68,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
         }
     }
 
-    const downloadTweetMedia = async (tweet) => {
+    const downloadTweetMedia = async (tweet: TweetForEnrichment): Promise<void> => {
         if (!tweet.metadata.img) {
             const url = await tall(tweet.metadata.url);
             tweet.metadata.url = url;
@@ -90,16 +97,16 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     };
 
     for (const tweetLibrary of tweetsLibrary) {
-        for (const tweet of tweetLibrary) {
+        for (const tweet of tweetLibrary as Tweet[]) {
             if (!tweet.metadata) continue;
             const { embed } = tweet.metadata;
-            if (enrichments.find(_tweet => tweet.id === _tweet.id || (embed && embed.id === _tweet.id))) {
+            if (enrichments.find((_tweet: EnrichmentResult) => tweet.id === _tweet.id || (embed && embed.id === _tweet.id))) {
                 continue;
             }
             if (embed) {
                 logger.debug({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
 
-                existingTweets.push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
+                (existingTweets as any[]).push({ type: "embeddedTweet", embeddedTweetId: embed.id, ...embed, id: tweet.id, });
                 writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
             }
             if (!tweet.metadata.type) continue;
@@ -108,11 +115,11 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                     await downloadTweetMedia(tweet);
                     continue;
                 }
-                await Promise.all(tweet.metadata.imgs.map(async metadata => {
+                await Promise.all(tweet.metadata.imgs.map(async (metadata: any) => {
                     metadata.type = "media";
                     await downloadTweetMedia({ id: tweet.id, metadata });
                 }));
-            } catch (error) {
+            } catch (error: any) {
                 logger.error("Request failed", tweet.id, tweet.metadata, error.message);
                 tweet.metadata.url = undefined;
             }
@@ -122,9 +129,9 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     process.exit(0);
 })()
 
-function saveTweet(tweet) {
+function saveTweet(tweet: TweetForEnrichment): void {
     logger.debug({ id: tweet.id, ...tweet.metadata });
     delete tweet.metadata.embed;
-    existingTweets.push({ id: tweet.id, ...tweet.metadata });
+    (existingTweets as any[]).push({ id: tweet.id, ...tweet.metadata });
     writeFileSync(__dirname + '/../infrastructure/db/tweets_enriched.json', JSON.stringify(existingTweets, null, 4));
 }

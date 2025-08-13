@@ -5,6 +5,7 @@ import { createLogger } from '../infrastructure/logger.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
+import type { Tweet, EnrichmentResult } from '../infrastructure/types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,12 +13,16 @@ const __dirname = path.dirname(__filename);
 // Initialize logger
 const logger = createLogger({ prefix: 'generate-books' });
 
-const fromGoodReads = enrichments.filter((e) => e.media === 'goodreads').map((book) => {
-    const tweet = tweets.find((t) => t.find((tt) => tt.id === book.id))[0];
-    return { ...book, turraId: tweet.id };
+interface BookWithTurraId extends EnrichmentResult {
+    turraId: string;
+}
+
+const fromGoodReads: BookWithTurraId[] = enrichments.filter((e: EnrichmentResult) => e.media === 'goodreads').map((book: EnrichmentResult) => {
+    const tweet = tweets.find((t: Tweet[]) => t.find((tt: Tweet) => tt.id === book.id))?.[0];
+    return { ...book, turraId: tweet?.id || "" };
 });
 logger.info("Total books fromGoodReads", fromGoodReads.length);
 
-const books = [...fromGoodReads].filter((book) => book.url.indexOf('/author/') === -1);
+const books: BookWithTurraId[] = [...fromGoodReads].filter((book: BookWithTurraId) => book.url.indexOf('/author/') === -1);
 
 fs.writeFileSync(__dirname + '/../infrastructure/db/books-not-enriched.json', JSON.stringify(books, null, 4));

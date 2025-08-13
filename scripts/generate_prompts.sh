@@ -102,6 +102,6 @@ echo "Games" >> $books_file
 echo "Fiction" >> $books_file
 echo "</categorias>" >> $books_file
 echo "<libros>" >> $books_file
-node scripts/book-enrichment.js >> $books_file
+npx tsx scripts/book-enrichment.ts >> $books_file
 echo "</libros>" >> $books_file
 echo "Prompt generado para infrastructure/db/tweets_books.json ..."

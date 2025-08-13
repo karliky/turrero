@@ -1,23 +1,26 @@
-import puppeteer from "puppeteer";
+import puppeteer, { Page } from "puppeteer";
 import Tweets from "./../db/tweets_summary.json" with { type: "json" };
 import PDFMerger from "pdf-merger-js";
 import fs from "fs";
 import { AUTHORS } from "../infrastructure/constants.js";
+import type { TweetSummary } from "../infrastructure/types/index.js";
 
 const PUBLIC = "./public";
 const PDFS = "./pdfs";
 const merger = new PDFMerger();
 
-(async () => {
+(async (): Promise<void> => {
     const browser = await puppeteer.launch({});
-    const page = await browser.newPage();
-    const tweets = Tweets.sort((a, b) => a.id - b.id);
+    const page: Page = await browser.newPage();
+    const tweets: TweetSummary[] = Tweets.sort((a: TweetSummary, b: TweetSummary) => Number(a.id) - Number(b.id));
+    
     // recreate the folders everytime
     for await (const dir of [PUBLIC, PDFS]) {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
         }
     }
+    
     for await (const tweet of tweets) {
         console.log(`Saving tweet ${tweet.id} to PDF`);
         // Skip if already exists

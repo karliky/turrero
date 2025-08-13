@@ -14,12 +14,12 @@ if (process.argv.length < 4) {
     process.exit(1);
 }
 
-const tweetId = process.argv[2];
+const tweetId: string = process.argv[2];
 // Combine all remaining arguments to handle spaces and special characters in tweetContent
-const tweetContent = process.argv.slice(3).join(' ');
-const filePath = join(__dirname, '/../infrastructure/db/turras.csv');
+const tweetContent: string = process.argv.slice(3).join(' ');
+const filePath: string = join(__dirname, '/../infrastructure/db/turras.csv');
 
-async function addTweet(tweetId, tweetContent) {
+async function addTweet(tweetId: string, tweetContent: string): Promise<void> {
     try {
         const data = await fs.readFile(filePath, { encoding: 'utf8' });
 

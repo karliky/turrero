@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import puppeteer from 'puppeteer';
+import puppeteer, { Browser, Page } from 'puppeteer';
 import PDFMerger from 'pdf-merger-js';
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
 import { cpus } from 'os';
@@ -8,17 +8,51 @@ import sharp from 'sharp';
 import Epub from 'epub-gen';
 import { readFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { createLogger } from '../infrastructure/logger.js';
+import type { Tweet, TweetSummary, CategorizedTweet, EnrichmentResult } from '../infrastructure/types/index.js';
 
 // Initialize logger
 const logger = createLogger({ prefix: 'generate-pdf' });
 
+// Interfaces for this script
+interface ThreadData {
+  thread: Tweet[];
+  summary: string;
+  categories: string[];
+}
+
+interface WorkerData {
+  threads: ThreadData[];
+  tempDir: string;
+  workerId: number;
+}
+
+interface WorkerMessage {
+  workerId: number;
+  pdfPaths: string[];
+}
+
+interface EpubChapter {
+  title: string;
+  data: string;
+}
+
+interface EpubOptions {
+  title: string;
+  author: string;
+  publisher: string;
+  content: EpubChapter[];
+  verbose: boolean;
+  cover?: string | null;
+  css: string;
+}
+
 // Utility functions
-const readJsonFile = (filePath) => {
+const readJsonFile = (filePath: string): any => {
   const projectRoot = path.join(process.cwd(), '..');
   return JSON.parse(readFileSync(path.join(projectRoot, filePath), 'utf-8'));
 };
 
-const normalizeImagePath = async (imagePath) => {
+const normalizeImagePath = async (imagePath: string): Promise<string> => {
   if (!imagePath) return '';
   
   const projectRoot = path.join(process.cwd(), '..');
@@ -45,11 +79,11 @@ const normalizeImagePath = async (imagePath) => {
   }
 };
 
-const getEnrichedTweetData = (enrichedTweets, id) => {
-  return enrichedTweets.find(t => t.id === id);
+const getEnrichedTweetData = (enrichedTweets: EnrichmentResult[], id: string): EnrichmentResult | undefined => {
+  return enrichedTweets.find((t: EnrichmentResult) => t.id === id);
 };
 
-const formatCategoryTitle = (category) => {
+const formatCategoryTitle = (category: string): string => {
   return category
     .replace(/-/g, ' ')
     .split(' ')
@@ -57,11 +91,11 @@ const formatCategoryTitle = (category) => {
     .join(' ');
 };
 
-const generateTurraHtml = async (thread, summary, categories) => {
+const generateTurraHtml = async (thread: Tweet[], summary: string, categories: string[]): Promise<string> => {
   const mainTweet = thread[0];
-  const enrichedTweets = readJsonFile('infrastructure/db/tweets_enriched.json');
+  const enrichedTweets: EnrichmentResult[] = readJsonFile('infrastructure/db/tweets_enriched.json');
   
-  const renderEmbed = async (tweet) => {
+  const renderEmbed = async (tweet: Tweet): Promise<string> => {
     const enrichedData = getEnrichedTweetData(enrichedTweets, tweet.id);
     if (!enrichedData) return '';
 
@@ -120,7 +154,7 @@ const generateTurraHtml = async (thread, summary, categories) => {
   };
 
   // Process all embeds concurrently
-  const processedTweets = await Promise.all(thread.map(async tweet => {
+  const processedTweets = await Promise.all(thread.map(async (tweet: Tweet) => {
     const embedHtml = await renderEmbed(tweet);
     return `
       <div class="tweet">
@@ -267,12 +301,12 @@ const generateTurraHtml = async (thread, summary, categories) => {
   `;
 };
 
-const generateEpubHtml = async (thread, summary, categories) => {
+const generateEpubHtml = async (thread: Tweet[], summary: string, categories: string[]): Promise<string> => {
   // Similar to generateTurraHtml but with simplified styling for ebooks
   const mainTweet = thread[0];
-  const enrichedTweets = readJsonFile('infrastructure/db/tweets_enriched.json');
+  const enrichedTweets: EnrichmentResult[] = readJsonFile('infrastructure/db/tweets_enriched.json');
   
-  const renderEmbed = async (tweet) => {
+  const renderEmbed = async (tweet: Tweet): Promise<string> => {
     const enrichedData = getEnrichedTweetData(enrichedTweets, tweet.id);
     if (!enrichedData) return '';
 
@@ -305,7 +339,7 @@ const generateEpubHtml = async (thread, summary, categories) => {
     }
   };
 
-  const processedTweets = await Promise.all(thread.map(async tweet => {
+  const processedTweets = await Promise.all(thread.map(async (tweet: Tweet) => {
     const embedHtml = await renderEmbed(tweet);
     return `
       <div>
@@ -323,14 +357,14 @@ const generateEpubHtml = async (thread, summary, categories) => {
   `;
 };
 
-const generateIndexHtml = (categories, tweetsMap, summaries) => {
-  const categorizedTweets = {};
+const generateIndexHtml = (categories: string[], tweetsMap: CategorizedTweet[], summaries: TweetSummary[]): string => {
+  const categorizedTweets: Record<string, Array<{ id: string; summary: string }>> = {};
   
-  tweetsMap.forEach(tweet => {
+  tweetsMap.forEach((tweet: CategorizedTweet) => {
     const tweetCategories = tweet.categories.split(',').map(c => c.trim());
-    const summary = summaries.find(s => s.id === tweet.id)?.summary || '';
+    const summary = summaries.find((s: TweetSummary) => s.id === tweet.id)?.summary || '';
     
-    tweetCategories.forEach(category => {
+    tweetCategories.forEach((category: string) => {
       if (!categorizedTweets[category]) {
         categorizedTweets[category] = [];
       }
@@ -394,7 +428,7 @@ const generateIndexHtml = (categories, tweetsMap, summaries) => {
     </head>
     <body>
       <h1 class="main-title">Índice de Turras</h1>
-      ${categories.map(category => {
+      ${categories.map((category: string) => {
         const categoryTweets = categorizedTweets[category] || [];
         return `
           <div class="category-section">
@@ -403,7 +437,7 @@ const generateIndexHtml = (categories, tweetsMap, summaries) => {
               <span class="category-count">(${categoryTweets.length})</span>
             </h2>
             <div class="turras-list">
-              ${categoryTweets.map(tweet => `
+              ${categoryTweets.map((tweet: { id: string; summary: string }) => `
                 <div class="turra-item">
                   • ${tweet.summary}
                 </div>
@@ -438,9 +472,9 @@ const ORDERED_CATEGORIES = [
     "otras-turras-del-querer",
 ];
 
-async function generateThreadPDF(browser, thread, summary, tweetCategories, tempDir) {
+async function generateThreadPDF(browser: Browser, thread: Tweet[], summary: string, tweetCategories: string[], tempDir: string): Promise<string> {
   const mainTweet = thread[0];
-  const page = await browser.newPage();
+  const page: Page = await browser.newPage();
   const html = await generateTurraHtml(thread, summary, tweetCategories);
   
   // Set viewport to ensure images are rendered
@@ -455,10 +489,10 @@ async function generateThreadPDF(browser, thread, summary, tweetCategories, temp
   await page.evaluate(() => {
     return Promise.all(
       Array.from(document.images)
-        .filter(img => !img.complete)
-        .map(img => new Promise((resolve, reject) => {
-          img.addEventListener('load', resolve);
-          img.addEventListener('error', reject);
+        .filter((img: HTMLImageElement) => !img.complete)
+        .map((img: HTMLImageElement) => new Promise<void>((resolve, reject) => {
+          img.addEventListener('load', () => resolve());
+          img.addEventListener('error', () => reject());
         }))
     );
   });
@@ -484,7 +518,7 @@ async function generateThreadPDF(browser, thread, summary, tweetCategories, temp
   return pdfPath;
 }
 
-const getImageForEpub = async (imagePath) => {
+const getImageForEpub = async (imagePath: string): Promise<string | null> => {
   if (!imagePath) return null;
   
   try {
@@ -520,7 +554,7 @@ const getImageForEpub = async (imagePath) => {
   }
 };
 
-async function generateEbook(categories, tweetsMap, tweets, summaries) {
+async function generateEbook(categories: string[], tweetsMap: CategorizedTweet[], tweets: Tweet[][], summaries: TweetSummary[]): Promise<void> {
   logger.info('📚 Generating EPUB...');
   
   // Create temp directory for optimized images
@@ -529,18 +563,18 @@ async function generateEbook(categories, tweetsMap, tweets, summaries) {
     mkdirSync(tempImagesDir);
   }
 
-  const chapters = [];
+  const chapters: EpubChapter[] = [];
   
   // Add index chapter
   chapters.push({
     title: 'Índice de Turras',
     data: `
       <h1>Índice de Turras</h1>
-      ${categories.map(category => {
+      ${categories.map((category: string) => {
         const categoryTweets = tweetsMap
-          .filter(tweet => tweet.categories.split(',').map(c => c.trim()).includes(category))
-          .map(tweet => {
-            const summary = summaries.find(s => s.id === tweet.id)?.summary || '';
+          .filter((tweet: CategorizedTweet) => tweet.categories.split(',').map(c => c.trim()).includes(category))
+          .map((tweet: CategorizedTweet) => {
+            const summary = summaries.find((s: TweetSummary) => s.id === tweet.id)?.summary || '';
             return `<li>${summary}</li>`;
           })
           .join('\n');
@@ -556,17 +590,17 @@ async function generateEbook(categories, tweetsMap, tweets, summaries) {
   // Add chapters for each category
   for (const category of categories) {
     const categoryTweets = tweetsMap
-      .filter(tweet => tweet.categories.split(',').map(c => c.trim()).includes(category))
-      .map(tweet => tweet.id);
+      .filter((tweet: CategorizedTweet) => tweet.categories.split(',').map(c => c.trim()).includes(category))
+      .map((tweet: CategorizedTweet) => tweet.id);
 
     const categoryThreads = tweets
-      .filter(thread => categoryTweets.includes(thread[0].id))
-      .sort((a, b) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
+      .filter((thread: Tweet[]) => categoryTweets.includes(thread[0].id))
+      .sort((a: Tweet[], b: Tweet[]) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
 
     for (const thread of categoryThreads) {
-      const summary = summaries.find(s => s.id === thread[0].id)?.summary || '';
+      const summary = summaries.find((s: TweetSummary) => s.id === thread[0].id)?.summary || '';
       const tweetCategories = tweetsMap
-        .find(t => t.id === thread[0].id)?.categories.split(',') || [];
+        .find((t: CategorizedTweet) => t.id === thread[0].id)?.categories.split(',') || [];
       
       chapters.push({
         title: summary,
@@ -575,7 +609,7 @@ async function generateEbook(categories, tweetsMap, tweets, summaries) {
     }
   }
 
-  const options = {
+  const options: EpubOptions = {
     title: 'El Turrero Post',
     author: 'El Turrero',
     publisher: 'El Turrero Post',
@@ -635,15 +669,15 @@ async function generateEbook(categories, tweetsMap, tweets, summaries) {
 
 // Worker thread code
 if (!isMainThread) {
-  const { threads, tempDir, workerId } = workerData;
+  const { threads, tempDir, workerId }: WorkerData = workerData;
   const workerLogger = createLogger({ prefix: `worker-${workerId}` });
   
-  (async () => {
-    let browser;
+  (async (): Promise<void> => {
+    let browser: Browser | undefined;
     try {
       workerLogger.info(`[Worker ${workerId}] Starting browser...`);
       browser = await puppeteer.launch();
-      const pdfPaths = [];
+      const pdfPaths: string[] = [];
       
       for (let i = 0; i < threads.length; i++) {
         const thread = threads[i];
@@ -666,7 +700,7 @@ if (!isMainThread) {
       
       workerLogger.info(`[Worker ${workerId}] Closing browser...`);
       await browser.close();
-      parentPort.postMessage({ workerId, pdfPaths });
+      parentPort?.postMessage({ workerId, pdfPaths });
     } catch (error) {
       workerLogger.error(`[Worker ${workerId}] Critical error:`, error);
       if (browser) {
@@ -680,24 +714,24 @@ if (!isMainThread) {
   });
 }
 
-async function main() {
+async function main(): Promise<void> {
   logger.info('📚 Reading JSON files...');
-  const tweetsMap = readJsonFile('../infrastructure/db/tweets_map.json');
-  const tweets = readJsonFile('../infrastructure/db/tweets.json');
-  const summaries = readJsonFile('../infrastructure/db/tweets_summary.json');
+  const tweetsMap: CategorizedTweet[] = readJsonFile('../infrastructure/db/tweets_map.json');
+  const tweets: Tweet[][] = readJsonFile('../infrastructure/db/tweets.json');
+  const summaries: TweetSummary[] = readJsonFile('../infrastructure/db/tweets_summary.json');
   
   const categories = ORDERED_CATEGORIES;
   
   // Sort tweets by date (newest first) within each category
-  const categorizedTweets = {};
-  categories.forEach(category => {
+  const categorizedTweets: Record<string, Tweet[][]> = {};
+  categories.forEach((category: string) => {
     const categoryTweetIds = tweetsMap
-      .filter(tweet => tweet.categories.split(',').map(c => c.trim()).includes(category))
-      .map(tweet => tweet.id);
+      .filter((tweet: CategorizedTweet) => tweet.categories.split(',').map(c => c.trim()).includes(category))
+      .map((tweet: CategorizedTweet) => tweet.id);
 
     const categoryThreads = tweets
-      .filter(thread => categoryTweetIds.includes(thread[0].id))
-      .sort((a, b) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
+      .filter((thread: Tweet[]) => categoryTweetIds.includes(thread[0].id))
+      .sort((a: Tweet[], b: Tweet[]) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
 
     categorizedTweets[category] = categoryThreads;
   });
@@ -713,12 +747,12 @@ async function main() {
 
   // Launch browser
   logger.info('🌐 Launching browser...');
-  const browser = await puppeteer.launch();
+  const browser: Browser = await puppeteer.launch();
   const merger = new PDFMerger();
 
   // Generate index PDF
   logger.info('📑 Generating index PDF...');
-  const indexPage = await browser.newPage();
+  const indexPage: Page = await browser.newPage();
   await indexPage.setContent(generateIndexHtml(categories, tweetsMap, summaries));
   await indexPage.pdf({
     path: path.join(tempDir, 'index.pdf'),
@@ -729,17 +763,17 @@ async function main() {
 
   logger.info('📊 Creating worker threads...');
   const numCPUs = cpus().length;
-  const allThreads = categories.flatMap(category => 
-    categorizedTweets[category].map(thread => ({
+  const allThreads: ThreadData[] = categories.flatMap((category: string) => 
+    categorizedTweets[category].map((thread: Tweet[]) => ({
       thread,
-      summary: summaries.find(s => s.id === thread[0].id)?.summary || '',
-      categories: tweetsMap.find(t => t.id === thread[0].id)?.categories.split(',') || []
+      summary: summaries.find((s: TweetSummary) => s.id === thread[0].id)?.summary || '',
+      categories: tweetsMap.find((t: CategorizedTweet) => t.id === thread[0].id)?.categories.split(',') || []
     }))
   );
 
   // Split threads among workers
   const threadsPerWorker = Math.ceil(allThreads.length / numCPUs);
-  const workerPromises = [];
+  const workerPromises: Promise<string[]>[] = [];
   let processedCount = 0;
   const totalThreads = allThreads.length;
 
@@ -760,29 +794,29 @@ async function main() {
     });
 
     // Add a 10-minute timeout for each worker
-    const workerPromise = Promise.race([
-      new Promise((resolve, reject) => {
-        worker.on('message', ({ workerId, pdfPaths }) => {
+    const workerPromise: Promise<string[]> = Promise.race([
+      new Promise<string[]>((resolve, reject) => {
+        worker.on('message', ({ workerId, pdfPaths }: WorkerMessage) => {
           processedCount += workerThreads.length;
           logger.info(`[Worker ${workerId}] ✅ Completed all ${workerThreads.length} threads`);
           logger.info(`📄 Total Progress: ${processedCount}/${totalThreads} threads (${Math.round(processedCount/totalThreads*100)}%)`);
           resolve(pdfPaths);
         });
-        worker.on('error', (error) => {
+        worker.on('error', (error: Error) => {
           logger.error(`[Worker ${i + 1}] ❌ Error:`, error);
           reject(error);
         });
-        worker.on('exit', (code) => {
+        worker.on('exit', (code: number) => {
           if (code !== 0) {
             logger.error(`[Worker ${i + 1}] ❌ Stopped with code ${code}`);
             reject(new Error(`Worker stopped with exit code ${code}`));
           }
         });
       }),
-      new Promise((_, reject) => 
+      new Promise<string[]>((_, reject) => 
         setTimeout(() => reject(new Error(`Worker ${i + 1} timed out after 10 minutes`)), 600000)
       )
-    ]).catch(error => {
+    ]).catch((error: Error) => {
       logger.error(`[Worker ${i + 1}] Failed:`, error);
       worker.terminate();
       return []; // Return empty array of PDFs on failure
@@ -827,4 +861,4 @@ async function main() {
 // Only run main() in the main thread
 if (isMainThread) {
   main().catch((error) => logger.error('Main function error:', error));
-} 
+}

@@ -12,14 +12,15 @@ import TweetsEnrichements from "../infrastructure/db/tweets_enriched.json" with 
 import { fileURLToPath } from "url";
 import path from "path";
 import { AUTHORS } from "../infrastructure/constants.js";
+import type { Tweet, EnrichmentResult } from "../infrastructure/types/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-const tweetId = process.argv[2];
+const tweetId: string = process.argv[2];
 
-const replacements = {
+const replacements: Record<string, string> = {
   WEF: "Foro Económico Mundial",
   CPS: "Complex Problem Solving",
   [`${AUTHORS.RECUENCO.NAME}${AUTHORS.RECUENCO.X}`]: AUTHORS.RECUENCO.NAME,
@@ -39,7 +40,7 @@ if (!process.env.OPENAI_API_KEY) {
   process.exit(1);
 }
 
-const outputPath = __dirname + `/../db/podcast/${tweetId}.txt`;
+const outputPath: string = __dirname + `/../db/podcast/${tweetId}.txt`;
 
 if (fs.existsSync(outputPath)) {
   console.error(
@@ -48,14 +49,14 @@ if (fs.existsSync(outputPath)) {
   process.exit(1);
 }
 
-const tweetIndex = Tweets.findIndex((tweet) => tweet[0].id === tweetId);
+const tweetIndex = Tweets.findIndex((tweet: Tweet[]) => tweet[0].id === tweetId);
 
 if (!tweetIndex) {
   console.error("Tweet not found");
   process.exit(1);
 }
 
-const thread = Tweets[tweetIndex].reduce((acc, t) => {
+const thread: string = Tweets[tweetIndex].reduce((acc: string, t: Tweet) => {
   let paragraph = t.tweet;
 
   if (t?.metadata?.embed?.type === "embed") {
@@ -67,7 +68,7 @@ const thread = Tweets[tweetIndex].reduce((acc, t) => {
       CONTINUA TEXTO ORIGINAL:`;
   }
 
-  const hasEnrichment = TweetsEnrichements.find((enrichment) =>
+  const hasEnrichment: EnrichmentResult | undefined = TweetsEnrichements.find((enrichment: EnrichmentResult) =>
     enrichment.id === t.id
   );
   if (
@@ -83,7 +84,7 @@ const thread = Tweets[tweetIndex].reduce((acc, t) => {
   return `${acc}\n${paragraph}`;
 }, "");
 
-const applyReplacements = (text) => {
+const applyReplacements = (text: string): string => {
   let newText = text;
   for (const [key, value] of Object.entries(replacements)) {
     newText = newText.replace(new RegExp(key, "g"), value);
@@ -91,7 +92,7 @@ const applyReplacements = (text) => {
   return newText;
 };
 
-const prompt = `
+const prompt: string = `
 Considera todos estos pasos:
 - Sobre el texto dado, solo corrige faltas de ortografía, no cambies ninguna otra palabra.
 - Si aparece un TWEET PARA DAR CONTEXTO en el texto debes introducirlo diciendio "{Nombre de la persona reescrito de forma audible} comentó en x.com:", para que cuando se escuche tenga sentido para quien lo escucha.
@@ -104,23 +105,24 @@ Considera todos estos pasos:
 Aqui tienes el texto:
 `;
 
-const fullText = prompt + thread;
+const fullText: string = prompt + thread;
 console.log(fullText);
-async function main() {
-  const result = [];
+
+async function main(): Promise<void> {
+  const result: string[] = [];
   const stream = await openai.beta.chat.completions.stream({
     model: "gpt-4",
     messages: [{ role: "user", content: fullText }],
     stream: true,
   });
 
-  stream.on("content", (delta) => {
+  stream.on("content", (delta: string) => {
     result.push(delta);
   });
 
   const chatCompletion = await stream.finalChatCompletion();
   const finalText = applyReplacements(
-    chatCompletion.choices[0].message.content,
+    chatCompletion.choices[0].message.content || "",
   );
   fs.writeFileSync(outputPath, finalText);
   console.log(`Estaré ahí mismo`);
