@@ -14,7 +14,12 @@ import {
   TweetExam,
   TurraNode,
   TweetWithEngagement,
-  PodcastEpisode
+  PodcastEpisode,
+  ThreadId,
+  TweetId,
+  normalizeId,
+  extractThreadId,
+  createCompositeId
 } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
@@ -52,11 +57,15 @@ export class TweetProvider {
         const tweetCategories = tweet.categories.split(',').map(c => c.trim());
         return tweetCategories.includes(category);
       })
-      .map(tweet => tweet.id);
+      .map(tweet => normalizeId(tweet.id));
     
     // Flatten the array of arrays and then filter
     const flatTweets = this.tweets.flat();
-    const result = flatTweets.filter(tweet => matchingTweets.includes(tweet.id));
+    const result = flatTweets.filter(tweet => {
+      const normalizedTweetId = normalizeId(tweet.id);
+      const threadId = extractThreadId(normalizedTweetId);
+      return matchingTweets.includes(threadId);
+    });
     
     return result;
   }
@@ -66,13 +75,17 @@ export class TweetProvider {
   }
 
   public getSummaryById(id: string): string {
-    const summary = this.tweetSummaries.find(s => s.id === id);
+    const normalizedId = normalizeId(id);
+    const threadId = extractThreadId(normalizedId);
+    const summary = this.tweetSummaries.find(s => normalizeId(s.id) === threadId);
     return summary?.summary || '';
   }
 
   public getCategoryById(id: string): string[] {
-    const tweet = this.tweetsMap.find(tweet => tweet.id === id);
-    return tweet?.categories.split(',') || [];
+    const normalizedId = normalizeId(id);
+    const threadId = extractThreadId(normalizedId);
+    const tweet = this.tweetsMap.find(tweet => normalizeId(tweet.id) === threadId);
+    return tweet?.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) || [];
   }
 
   getTop25Tweets(): TweetWithEngagement[] {
@@ -123,19 +136,51 @@ export class TweetProvider {
   }
 
   public getEnrichedTweetData(id: string): EnrichedTweetMetadata | undefined {
-    return this.enrichedTweets.find(t => t.id === id);
+    const normalizedId = normalizeId(id);
+    return this.enrichedTweets.find(t => normalizeId(t.id) === normalizedId);
   }
 
   public getExamById(id: string): TweetExam | undefined {
-    return this.tweetExams.find(exam => exam.id === id);
+    const normalizedId = normalizeId(id);
+    const threadId = extractThreadId(normalizedId);
+    return this.tweetExams.find(exam => normalizeId(exam.id) === threadId);
   }
 
   public hasPodcast(id: string): boolean {
-    return this.tweetPodcasts.some(podcast => podcast.id === id);
+    const normalizedId = normalizeId(id);
+    const threadId = extractThreadId(normalizedId);
+    return this.tweetPodcasts.some(podcast => normalizeId(podcast.id) === threadId);
   }
 
   public getGraphData(): TurraNode[] {
     return this.graphData;
+  }
+
+  /**
+   * Gets a complete thread by thread ID or any tweet ID within the thread
+   */
+  public getThread(id: string): Tweet[] {
+    const normalizedId = normalizeId(id);
+    const threadId = extractThreadId(normalizedId);
+    
+    // Find the thread that contains the ID
+    const thread = this.tweets.find(thread => 
+      thread.some(tweet => {
+        const tweetThreadId = extractThreadId(normalizeId(tweet.id));
+        return tweetThreadId === threadId;
+      })
+    );
+    
+    return thread || [];
+  }
+
+  /**
+   * Gets a specific tweet by its exact ID
+   */
+  public getTweetById(id: string): Tweet | undefined {
+    const normalizedId = normalizeId(id);
+    const flatTweets = this.tweets.flat();
+    return flatTweets.find(tweet => normalizeId(tweet.id) === normalizedId);
   }
 }
  

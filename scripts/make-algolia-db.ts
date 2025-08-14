@@ -10,6 +10,7 @@ import {
 } from "@/scripts/libs/common-utils.ts";
 import { createDataAccess } from "@/scripts/libs/data-access.ts";
 import type { SearchIndexEntry, Tweet } from "@/infrastructure/types/index.ts";
+import { createCompositeId } from "../infrastructure/utils/id-utils.ts";
 
 const scriptDir = getScriptDirectory(import.meta.url);
 const logger = createScriptLogger("make-algolia-db");
@@ -37,7 +38,7 @@ function createSearchIndexEntries(tweets: Tweet[][]): SearchIndexEntry[] {
 
     thread.forEach(({ id, tweet }: Tweet) => {
       searchEntries.push({
-        objectID: `${threadId}-${id}`,
+        objectID: createCompositeId(threadId, id),
         tweet: tweet,
         time: threadTime,
         summary: "",
