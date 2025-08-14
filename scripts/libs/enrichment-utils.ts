@@ -6,7 +6,6 @@
 import cheerio from 'cheerio';
 import type { Page } from 'puppeteer';
 import type { 
-    CheerioElement, 
     ImageMetadata, 
     TweetMetadataType,
     ScriptLogger,

@@ -5,7 +5,7 @@
  * Validates all JSON and CSV files against their respective schemas
  */
 
-import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
+// Schema validation tool utilities
 
 interface ValidationResult {
   file: string;
@@ -88,7 +88,7 @@ async function loadData(dataPath: string): Promise<any> {
   }
 }
 
-function validateBasicStructure(data: any, schema: any): string[] {
+function validateBasicStructure(data: unknown, schema: Record<string, unknown>): string[] {
   const errors: string[] = [];
   
   // Check if data is array when schema expects array
@@ -106,7 +106,7 @@ function validateBasicStructure(data: any, schema: any): string[] {
   return errors;
 }
 
-function validateArrayItems(data: any[], itemSchema: any, maxSample: number = 100): string[] {
+function validateArrayItems(data: unknown[], itemSchema: Record<string, unknown>, maxSample: number = 100): string[] {
   const errors: string[] = [];
   const sampleSize = Math.min(data.length, maxSample);
   
@@ -123,7 +123,7 @@ function validateArrayItems(data: any[], itemSchema: any, maxSample: number = 10
   return errors;
 }
 
-function validateObject(obj: any, schema: any, path: string = 'root'): string[] {
+function validateObject(obj: unknown, schema: Record<string, unknown>, path: string = 'root'): string[] {
   const errors: string[] = [];
   
   if (!schema.properties) return errors;
@@ -138,7 +138,7 @@ function validateObject(obj: any, schema: any, path: string = 'root'): string[] 
   }
   
   // Check field types
-  for (const [fieldName, fieldSchema] of Object.entries(schema.properties as any)) {
+  for (const [fieldName, fieldSchema] of Object.entries((schema.properties as Record<string, unknown>) || {})) {
     if (fieldName in obj) {
       const value = obj[fieldName];
       const fieldErrors = validateField(value, fieldSchema, `${path}.${fieldName}`);
@@ -149,7 +149,7 @@ function validateObject(obj: any, schema: any, path: string = 'root'): string[] 
   return errors;
 }
 
-function validateField(value: any, fieldSchema: any, path: string): string[] {
+function validateField(value: unknown, fieldSchema: Record<string, unknown>, path: string): string[] {
   const errors: string[] = [];
   
   // Type validation
@@ -200,7 +200,7 @@ function validateField(value: any, fieldSchema: any, path: string): string[] {
   return errors;
 }
 
-async function validateFile(filename: string, config: any): Promise<ValidationResult> {
+async function validateFile(filename: string, config: { schemaPath: string; dataPath: string }): Promise<ValidationResult> {
   console.log(`🔍 Validating ${filename}...`);
   
   try {
@@ -211,7 +211,7 @@ async function validateFile(filename: string, config: any): Promise<ValidationRe
     console.log(`  📄 Loaded ${config.description}`);
     
     // Basic structure validation
-    let errors = validateBasicStructure(data, schema);
+    const errors = validateBasicStructure(data, schema);
     
     // Detailed validation based on schema type
     if (errors.length === 0) {

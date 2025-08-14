@@ -2,10 +2,7 @@
 /// <reference lib="dom.iterable" />
 
 import dotenv from "dotenv";
-import { readFileSync, writeFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
-import process from "node:process";
+import { dirname, join } from "@std/path";
 import puppeteer from "puppeteer-core";
 import { createDenoLogger } from "../infrastructure/logger.ts";
 import {
@@ -24,8 +21,7 @@ dotenv.config();
 // Initialize logger
 const logger = createDenoLogger("recorder");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(new URL(import.meta.url).pathname);
 
 // Define device configuration for iPhone 12
 const iPhone12 = {

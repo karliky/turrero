@@ -15,11 +15,8 @@ import {
   TurraNode,
   TweetWithEngagement,
   PodcastEpisode,
-  ThreadId,
-  TweetId,
   normalizeId,
-  extractThreadId,
-  createCompositeId
+  extractThreadId
 } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const

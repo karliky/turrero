@@ -13,17 +13,17 @@ interface InferredSchema {
   title: string;
   description: string;
   type: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface FieldAnalysis {
   type: string;
   nullable: boolean;
   patterns: Set<string>;
-  values: Set<any>;
+  values: Set<unknown>;
   minLength?: number;
   maxLength?: number;
-  examples: any[];
+  examples: unknown[];
 }
 
 const JSON_SCHEMA_DRAFT = "http://json-schema.org/draft/2020-12/schema";
@@ -61,7 +61,7 @@ const FILE_CONFIGS = {
   }
 };
 
-function analyzeValue(value: any, analysis: FieldAnalysis, maxExamples: number = 3): void {
+function analyzeValue(value: unknown, analysis: FieldAnalysis, maxExamples: number = 3): void {
   if (value === null || value === undefined) {
     analysis.nullable = true;
     return;
@@ -107,10 +107,10 @@ function analyzeValue(value: any, analysis: FieldAnalysis, maxExamples: number =
   }
 }
 
-function analyzeObject(obj: any, maxSample: number = 100): Record<string, FieldAnalysis> {
+function analyzeObject(obj: unknown, maxSample: number = 100): Record<string, FieldAnalysis> {
   const fields: Record<string, FieldAnalysis> = {};
   
-  function processItem(item: any) {
+  function processItem(item: unknown) {
     if (typeof item !== 'object' || item === null) return;
     
     for (const [key, value] of Object.entries(item)) {
@@ -140,8 +140,8 @@ function analyzeObject(obj: any, maxSample: number = 100): Record<string, FieldA
   return fields;
 }
 
-function generateFieldSchema(fieldName: string, analysis: FieldAnalysis): any {
-  const schema: any = {};
+function generateFieldSchema(fieldName: string, analysis: FieldAnalysis): Record<string, unknown> {
+  const schema: Record<string, unknown> = {};
   
   // Type
   if (analysis.type === 'mixed') {
@@ -212,7 +212,7 @@ function generateFieldSchema(fieldName: string, analysis: FieldAnalysis): any {
   return schema;
 }
 
-function generateSchema(data: any, filename: string, config: any): InferredSchema {
+function generateSchema(data: unknown, filename: string, config: { path: string; description: string; title: string }): InferredSchema {
   const schema: InferredSchema = {
     $schema: JSON_SCHEMA_DRAFT,
     $id: filename.replace('.json', '.schema.json'),
@@ -276,7 +276,7 @@ function generateSchema(data: any, filename: string, config: any): InferredSchem
   return schema;
 }
 
-async function inferSchemaForFile(filename: string, config: any): Promise<void> {
+async function inferSchemaForFile(filename: string, config: { path: string; description: string; title: string }): Promise<void> {
   console.log(`🔍 Analyzing ${filename}...`);
   
   try {
@@ -306,7 +306,7 @@ async function inferAllSchemas(): Promise<void> {
   // Ensure output directory exists
   try {
     await Deno.mkdir('artifacts/db-schemas', { recursive: true });
-  } catch (error) {
+  } catch (_error) {
     // Directory might already exist
   }
   

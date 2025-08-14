@@ -18,8 +18,8 @@ import type {
   ImageMetadata,
   Tweet,
   TweetEmbedMetadata,
-  TweetMetadataType,
 } from "@/infrastructure/types/index.ts";
+import { TweetMetadataType } from "@/infrastructure/types/index.ts";
 import type { Page } from "puppeteer";
 
 const scriptDir = getScriptDirectory(import.meta.url);
@@ -99,7 +99,7 @@ async function processTweetForEnrichment(
   };
 
   try {
-    if (tweet.metadata?.type === "card") {
+    if (tweet.metadata?.type === TweetMetadataType.CARD) {
       await enricher.downloadTweetMedia(enrichmentTweet, page, saveTweet);
     } else if (tweet.metadata?.imgs) {
       await processImageTweets(tweet, enricher);

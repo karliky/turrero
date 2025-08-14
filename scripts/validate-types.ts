@@ -122,7 +122,6 @@ async function validateDenoTS(): Promise<ValidationResult> {
   
   try {
     const denoOnlyFiles = [
-      'recorder.ts',
       'validate-types.ts'
     ];
     
@@ -222,8 +221,7 @@ async function validateEnumUsage(): Promise<ValidationResult> {
   try {
     const filesToCheck = [
       'scraping.ts',
-      'tweets_enrichment.ts', 
-      'recorder.ts'
+      'tweets_enrichment.ts'
     ];
     
     for await (const entry of Deno.readDir(scriptsDir)) {
