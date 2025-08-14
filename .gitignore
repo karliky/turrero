@@ -68,3 +68,4 @@ vendor/
 # Claude Code hooks
 thread_hook.log
 tsconfig.tsbuildinfo
+tsconfig.tsbuildinfo
