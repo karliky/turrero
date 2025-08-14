@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "books-not-enriched.schema.json",
+  "title": "Books Not Enriched Database",
+  "description": "Raw book references before AI categorization",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Tweet ID where book was referenced"
+      },
+      "type": {
+        "const": "card",
+        "description": "Always 'card' for book references"
+      },
+      "img": {
+        "type": "string",
+        "description": "Path to book cover image"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "URL to book on external platform"
+      },
+      "media": {
+        "type": "string",
+        "enum": ["goodreads", "amazon"],
+        "description": "Source platform for book reference"
+      },
+      "title": {
+        "type": "string",
+        "description": "Book title"
+      },
+      "turraId": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Thread ID where book appears"
+      }
+    },
+    "required": ["id", "type", "url", "title", "turraId"]
+  }
+}

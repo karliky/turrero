@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "tweets.schema.json",
+  "title": "Tweets Main Database",
+  "description": "Primary tweet data structure containing scraped Twitter threads",
+  "type": "array",
+  "items": {
+    "type": "array",
+    "description": "A thread containing multiple tweets",
+    "items": {
+      "type": "object",
+      "properties": {
+      "tweet": {
+        "type": "string",
+        "description": "Tweet content text"
+      },
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Twitter tweet ID"
+      },
+      "metadata": {
+        "type": "object",
+        "description": "Additional metadata like embeds, cards, media",
+        "properties": {
+          "embed": {
+            "type": "object",
+            "properties": {
+              "type": { "const": "embed" },
+              "id": { "type": "string", "pattern": "^[0-9]+$" },
+              "author": { "type": "string" },
+              "tweet": { "type": "string" }
+            },
+            "required": ["type", "id", "author", "tweet"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["card", "media"]
+          },
+          "img": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "imgs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "img": { "type": "string" },
+                "url": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Tweet timestamp in ISO format"
+      },
+      "stats": {
+        "type": "object",
+        "description": "Tweet engagement statistics",
+        "properties": {
+          "views": { "type": "string" },
+          "retweets": { "type": "string" },
+          "quotetweets": { "type": "string" },
+          "likes": { "type": "string" }
+        }
+      },
+      "author": {
+        "type": "string",
+        "format": "uri",
+        "description": "Author profile URL"
+      }
+      },
+      "required": ["tweet", "id", "time", "author"]
+    }
+  }
+}

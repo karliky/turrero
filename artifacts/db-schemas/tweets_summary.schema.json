@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "tweets_summary.schema.json",
+  "title": "Tweets Summary Database",
+  "description": "AI-generated summaries for tweet threads",
+  "type": "array", 
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Thread ID (first tweet ID)"
+      },
+      "summary": {
+        "type": "string",
+        "description": "AI-generated thread summary in Spanish",
+        "maxLength": 200
+      }
+    },
+    "required": ["id", "summary"]
+  }
+}
