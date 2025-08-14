@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import process from "node:process";
 import puppeteer from "puppeteer-core";
+import { createDenoLogger } from "../infrastructure/logger.ts";
 import {
     Browser as InstallBrowser,
     BrowserPlatform,
@@ -15,9 +16,13 @@ import {
     resolveBuildId,
 } from "@puppeteer/browsers";
 import type { Browser, Page } from "puppeteer-core";
+import { TweetMetadataType } from '../infrastructure/types/index.ts';
 
 // Load environment variables
 dotenv.config();
+
+// Initialize logger
+const logger = createDenoLogger("recorder");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,7 +78,10 @@ interface TweetCSV {
 function parseCSV(filePath: string): TweetCSV[] {
     const csvContent = readFileSync(filePath, { encoding: "utf8" });
     const lines = csvContent.split("\n");
-    const headers = lines[0].split(",");
+    if (lines.length === 0) {
+        throw new Error("CSV file is empty");
+    }
+    const headers = lines[0]!.split(",");
     return lines.slice(1).map((line) => {
         const data = line.split(",");
         const obj = headers.reduce(
@@ -94,6 +102,9 @@ function parseCSV(filePath: string): TweetCSV[] {
 
 function extractAuthorUrl(url: string): string {
     const author = url.split("/status/")[0];
+    if (author === undefined) {
+        throw new Error("Invalid URL format: cannot extract author");
+    }
     return author;
 }
 
@@ -102,11 +113,15 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
      * Wait for progress bar to disappear
      */
     await new Promise((r) => setTimeout(r, 100));
-    console.log("Waiting for progress bar");
+    logger.debug("Waiting for progress bar");
     await page.waitForSelector('div[role="progressbar"]', { hidden: true });
 
-    const currentTweetId = page.url().split("/").slice(-1)[0].split("?")[0];
-    console.log("currentTweetId", currentTweetId);
+    const urlParts = page.url().split("/").slice(-1);
+    if (urlParts.length === 0 || !urlParts[0]) {
+        throw new Error("Invalid URL format: cannot extract tweet ID");
+    }
+    const currentTweetId = urlParts[0].split("?")[0]!;
+    logger.debug("currentTweetId", currentTweetId);
     const tweetAuthorUrl = extractAuthorUrl(page.url());
 
     const tweet = await page.evaluate(() => {
@@ -114,12 +129,12 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             'article[tabindex="-1"][role="article"][data-testid="tweet"] div[data-testid="tweetText"]',
         )
             ?.textContent;
-        console.log("Found tweet text:", tweetText);
+        // Note: This console.log is inside page.evaluate() and cannot be replaced with logger
         return tweetText || "";
     });
 
     // Log the tweet text and ID for debugging
-    console.log(`Tweet ID: ${currentTweetId}, Text: ${tweet.slice(0, 50)}...`);
+    logger.debug(`Tweet ID: ${currentTweetId}, Text: ${tweet.slice(0, 50)}...`);
 
     const metadata = await page.evaluate(() => {
         const article = document.querySelector('article[role="article"]');
@@ -128,7 +143,7 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                 type: undefined,
                 imgs: undefined,
                 embed: { tweet: undefined },
-            } as TweetMetadata;
+            } as unknown as TweetMetadata;
         }
 
         const imgs = Array.from(article.querySelectorAll('img[alt="Image"]'))
@@ -138,10 +153,10 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             }));
 
         return {
-            type: imgs.length > 0 ? "media" : undefined,
+            type: imgs.length > 0 ? TweetMetadataType.IMAGE : undefined,
             imgs: imgs.length > 0 ? imgs : undefined,
             embed: { tweet: undefined },
-        } as TweetMetadata;
+        } as unknown as TweetMetadata;
     });
 
     await new Promise((r) => setTimeout(r, 100));
@@ -177,8 +192,11 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                     const value = match[1];
                     const key = match[2];
 
-                    if (statsKeyMap[key]) {
-                        stats[statsKeyMap[key]] = value;
+                    if (key && value && statsKeyMap[key]) {
+                        const mappedKey = statsKeyMap[key];
+                        if (mappedKey) {
+                            stats[mappedKey] = value;
+                        }
                     }
                 }
             });
@@ -238,10 +256,10 @@ async function fetchSingleTweet(
     { page, expectedAuthor }: { page: Page; expectedAuthor: string },
 ): Promise<{ tweet: Tweet; mustStop: boolean }> {
     const tweet = await parseTweet({ page });
-    console.log("Fetched tweet data:", tweet);
+    logger.debug("Fetched tweet data:", tweet);
     await new Promise((r) => setTimeout(r, 100));
     const mustStop = tweet.author !== expectedAuthor;
-    console.log("lastTweetFound", mustStop);
+    logger.debug("lastTweetFound", mustStop);
     return { tweet, mustStop };
 }
 
@@ -260,19 +278,19 @@ async function getAllTweets({
         await page.goto(
             `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
         );
-        console.log("Waiting for selector");
+        logger.debug("Waiting for selector");
         await page.waitForSelector('div[data-testid="tweetText"]');
         try {
             await rejectCookies(page);
-            console.log("Cookies rejected, closed the popup");
+            logger.debug("Cookies rejected, closed the popup");
         } catch {
-            console.log("Could not reject cookies and close the popup");
+            logger.debug("Could not reject cookies and close the popup");
         }
 
         if (author === undefined) {
             const tweet = await parseTweet({ page });
             author = tweet.author;
-            console.log("Author found: ", author);
+            logger.info("Author found: ", author);
         }
 
         let stopped = false;
@@ -299,8 +317,8 @@ async function getAllTweets({
             }
 
             tweets.push(tweet);
-            console.log("finding lastTweetFound");
-            console.log("Navigating to next tweet");
+            logger.debug("finding lastTweetFound");
+            logger.debug("Navigating to next tweet");
 
             try {
                 await page.waitForSelector(
@@ -329,7 +347,7 @@ async function getAllTweets({
                         ),
                     };
                 });
-                console.log("Debug DOM structure:", debugInfo);
+                logger.debug("Debug DOM structure:", debugInfo);
 
                 await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -399,7 +417,7 @@ async function getAllTweets({
                     page.waitForNavigation({ timeout: 10000 }),
                 ]);
             } catch (error) {
-                console.error("Navigation error:", error);
+                logger.error("Navigation error:", error);
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 await page.reload();
                 await page.waitForSelector(
@@ -421,17 +439,17 @@ async function main() {
     async function cleanup() {
         try {
             if (page) {
-                console.log("\nClosing page...");
+                logger.info("\nClosing page...");
                 await page.close().catch(() => {}); // Ignore errors if page is already closed
                 page = undefined;
             }
             if (browser) {
-                console.log("Closing browser...");
+                logger.info("Closing browser...");
                 await browser.close().catch(() => {}); // Ignore errors if browser is already closed
                 browser = undefined;
             }
         } catch (error) {
-            console.error("Error during cleanup:", error);
+            logger.error("Error during cleanup:", error);
         } finally {
             process.exit(0);
         }
@@ -459,7 +477,7 @@ async function main() {
             downloadedBytes: number,
             totalBytes: number,
         ) => {
-            console.log(
+            logger.info(
                 `Download progress: ${
                     Math.round((downloadedBytes / totalBytes) * 100)
                 }%`,
@@ -477,13 +495,18 @@ async function main() {
             slowMo: Math.floor(Math.random() * 150) + 750,
         };
 
-    console.log(testMode ? "Launching test mode..." : "Launching...");
+    logger.info(testMode ? "Launching test mode..." : "Launching...");
 
-    browser = await puppeteer.launch({
+    const launchOptions: Record<string, unknown> = {
         ...browserProps,
         channel: "chrome",
-        executablePath: process.env.CHROME_PATH,
-    });
+    };
+    
+    if (process.env.CHROME_PATH) {
+        launchOptions.executablePath = process.env.CHROME_PATH;
+    }
+    
+    browser = await puppeteer.launch(launchOptions);
 
     page = await browser.newPage();
 
@@ -514,7 +537,7 @@ async function main() {
         },
     ];
 
-    console.log("Setting cookies");
+    logger.debug("Setting cookies");
     await page.setCookie(...cookies);
 
     await page.emulate(iPhone12);
@@ -523,24 +546,24 @@ async function main() {
         if (testMode) {
             const tweetId = args[testIndex + 1];
             if (!tweetId) {
-                console.error("Please provide a tweet ID after --test");
+                logger.error("Please provide a tweet ID after --test");
                 process.exit(1);
             }
 
             await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
-            console.log("Waiting for selector");
+            logger.debug("Waiting for selector");
             await page.waitForSelector('div[data-testid="tweetText"]');
 
             const tweet = await parseTweet({ page });
             try {
                 await rejectCookies(page);
-                console.log("Cookies rejected, closed the popup");
+                logger.debug("Cookies rejected, closed the popup");
             } catch {
-                console.log("Could not reject cookies and close the popup");
+                logger.debug("Could not reject cookies and close the popup");
             }
 
             await fetchSingleTweet({ page, expectedAuthor: tweet.author });
-            console.log("Correct exit");
+            logger.info("Correct exit");
         } else {
             const existingTweetsData = JSON.parse(
                 readFileSync(
@@ -554,7 +577,9 @@ async function main() {
 
             const existingTweets = existingTweetsData.reduce(
                 (acc: string[], tweets: Tweet[]) => {
-                    acc.push(tweets[0].id);
+                    if (tweets && tweets.length > 0 && tweets[0]) {
+                        acc.push(tweets[0].id);
+                    }
                     return acc;
                 },
                 [],
@@ -564,7 +589,7 @@ async function main() {
                 .map((tweet) => tweet.id)
                 .filter((id) => !existingTweets.includes(id));
 
-            console.log("Processing a total of tweets:", tweetIds.length);
+            logger.info("Processing a total of tweets:", tweetIds.length);
 
             await getAllTweets({
                 page,
@@ -577,10 +602,13 @@ async function main() {
             });
         }
     } finally {
-        console.log("¡Estaré aquí mismo!");
+        logger.info("¡Estaré aquí mismo!");
         await page.close();
         await browser.close();
     }
 }
 
-main().catch(console.error);
+main().catch((error) => {
+    const logger = createDenoLogger("recorder");
+    logger.error("Main function error:", error);
+});

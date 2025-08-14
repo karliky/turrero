@@ -1,0 +1,379 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2025-01-13T00:00:00Z",
+  "requirements": {
+    "functional": [
+      {
+        "id": "RF001",
+        "name": "Scraping de Threads X.com",
+        "description": "Sistema automatizado para extraer threads completos de X.com",
+        "priority": "CRÍTICO",
+        "source": "scripts/recorder.ts:26-586",
+        "acceptance_criteria": {
+          "given": "Un ID válido de thread de X.com y cookies de autenticación",
+          "when": "Se ejecuta el comando de scraping",
+          "then": "El sistema extrae todos los tweets del thread con metadata completa (texto, autor, tiempo, stats)"
+        },
+        "metrics": {
+          "success_rate": ">95%",
+          "timeout": "<60s por thread",
+          "retry_attempts": "3"
+        },
+        "dependencies": ["Puppeteer", "Deno runtime", "Cookies X.com válidas"]
+      },
+      {
+        "id": "RF002",
+        "name": "Pipeline de Enriquecimiento",
+        "description": "Pipeline de 11 pasos para procesar y enriquecer threads",
+        "priority": "CRÍTICO",
+        "source": "scripts/add_thread.sh:11-42",
+        "acceptance_criteria": {
+          "given": "Un thread scrapeado exitosamente",
+          "when": "Se ejecuta el pipeline completo",
+          "then": "El thread es enriquecido con metadata de YouTube, Goodreads, Wikipedia y categorizado"
+        },
+        "metrics": {
+          "completion_time": "<5 minutos",
+          "data_integrity": "100%",
+          "rollback_capability": "Sí"
+        },
+        "dependencies": ["RF001", "Node.js scripts", "APIs externas"]
+      },
+      {
+        "id": "RF003",
+        "name": "Búsqueda en Tiempo Real",
+        "description": "Búsqueda instantánea con Algolia",
+        "priority": "ALTO",
+        "source": "app/components/SearchBar.tsx:1-100",
+        "acceptance_criteria": {
+          "given": "Usuario ingresa término de búsqueda",
+          "when": "Teclea en la barra de búsqueda",
+          "then": "Resultados aparecen en <300ms con relevancia ordenada"
+        },
+        "metrics": {
+          "latency": "<300ms",
+          "relevance_score": ">0.8",
+          "indexing_time": "<30s post-update"
+        },
+        "dependencies": ["Algolia API", "tweets-db.json"]
+      },
+      {
+        "id": "RF004",
+        "name": "Sistema de Exámenes",
+        "description": "Exámenes interactivos por thread",
+        "priority": "MEDIO",
+        "source": "app/components/TurraExam.tsx:1-150",
+        "acceptance_criteria": {
+          "given": "Un thread con examen asociado en tweets_exam.json",
+          "when": "Usuario accede a la página del thread",
+          "then": "Se muestra examen interactivo con feedback inmediato"
+        },
+        "metrics": {
+          "response_time": "<100ms",
+          "validation_accuracy": "100%"
+        },
+        "dependencies": ["tweets_exam.json", "React components"]
+      },
+      {
+        "id": "RF005",
+        "name": "Visualización de Grafos",
+        "description": "Grafo interactivo de relaciones entre threads",
+        "priority": "MEDIO",
+        "source": "app/grafo-de-turras/GraphVisualization.tsx:1-200",
+        "acceptance_criteria": {
+          "given": "Datos de grafos generados",
+          "when": "Usuario accede a /grafo-de-turras",
+          "then": "Se renderiza grafo interactivo D3.js con zoom y pan"
+        },
+        "metrics": {
+          "render_time": "<2s",
+          "fps": ">30",
+          "nodes_supported": ">500"
+        },
+        "dependencies": ["D3.js", "graph_data.json"]
+      },
+      {
+        "id": "RF006",
+        "name": "Categorización de Contenido",
+        "description": "Sistema de categorías temáticas",
+        "priority": "ALTO",
+        "source": "infrastructure/index.ts:30-52",
+        "acceptance_criteria": {
+          "given": "Thread procesado por pipeline",
+          "when": "Se asignan categorías",
+          "then": "Thread aparece en páginas de categorías correspondientes"
+        },
+        "metrics": {
+          "categorization_accuracy": ">90%",
+          "categories_per_thread": "1-5"
+        },
+        "dependencies": ["tweets_map.json", "AI processing"]
+      },
+      {
+        "id": "RF007",
+        "name": "Generación de Metadata Cards",
+        "description": "Cards automáticas para social sharing",
+        "priority": "MEDIO",
+        "source": "scripts/image-card-generator.js:1-150",
+        "acceptance_criteria": {
+          "given": "Thread enriquecido",
+          "when": "Se genera metadata card",
+          "then": "Imagen optimizada para OpenGraph/Twitter se crea"
+        },
+        "metrics": {
+          "generation_time": "<5s",
+          "image_size": "<500KB",
+          "dimensions": "1200x630px"
+        },
+        "dependencies": ["Jimp", "tweets_enriched.json"]
+      },
+      {
+        "id": "RF008",
+        "name": "Hook Claude Code",
+        "description": "Automatización completa vía comando",
+        "priority": "ALTO",
+        "source": "scripts/auto_thread_hook.sh:1-50",
+        "acceptance_criteria": {
+          "given": "Comando 'add thread [id] [text]'",
+          "when": "Se ejecuta en Claude Code",
+          "then": "Pipeline completo se ejecuta automáticamente"
+        },
+        "metrics": {
+          "execution_time": "<10min",
+          "success_rate": ">95%"
+        },
+        "dependencies": ["RF002", "Claude Code settings"]
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "RNF001",
+        "name": "Seguridad de Credenciales",
+        "description": "Protección de tokens y secrets",
+        "priority": "CRÍTICO",
+        "category": "Seguridad",
+        "source": ".env:6",
+        "acceptance_criteria": {
+          "given": "Variables de entorno sensibles",
+          "when": "Se almacenan credenciales",
+          "then": "Nunca se exponen en repositorio, solo en .env.local"
+        },
+        "metrics": {
+          "exposed_secrets": "0",
+          "encryption": "Required",
+          "rotation_period": "90 días"
+        },
+        "current_status": "VIOLADO - auth_token expuesto"
+      },
+      {
+        "id": "RNF002",
+        "name": "Performance de Carga",
+        "description": "Tiempo de carga de páginas",
+        "priority": "ALTO",
+        "category": "Performance",
+        "source": "next.config.ts:3-21",
+        "acceptance_criteria": {
+          "given": "Usuario accede a cualquier página",
+          "when": "Se carga la página",
+          "then": "Contenido visible en <2s, interactivo en <3s"
+        },
+        "metrics": {
+          "FCP": "<2s",
+          "TTI": "<3s",
+          "CLS": "<0.1",
+          "bundle_size": "<500KB"
+        }
+      },
+      {
+        "id": "RNF003",
+        "name": "Integridad de Datos",
+        "description": "Consistencia en JSON databases",
+        "priority": "CRÍTICO",
+        "category": "Confiabilidad",
+        "source": "infrastructure/db/*.json",
+        "acceptance_criteria": {
+          "given": "Operaciones de escritura en JSON",
+          "when": "Se modifican datos",
+          "then": "Integridad referencial mantenida, sin duplicados"
+        },
+        "metrics": {
+          "data_corruption": "0%",
+          "duplicate_keys": "0",
+          "validation_rate": "100%"
+        },
+        "current_status": "Issues detectados - duplicate keys"
+      },
+      {
+        "id": "RNF004",
+        "name": "Compatibilidad Dual Runtime",
+        "description": "Separación Node.js/Deno",
+        "priority": "ALTO",
+        "category": "Arquitectura",
+        "source": "CLAUDE.md:62-65",
+        "acceptance_criteria": {
+          "given": "Scripts del proyecto",
+          "when": "Se ejecutan",
+          "then": "Node.js para frontend/scripts, Deno solo para recorder.ts"
+        },
+        "metrics": {
+          "runtime_violations": "0",
+          "dependency_conflicts": "0"
+        }
+      },
+      {
+        "id": "RNF005",
+        "name": "Disponibilidad del Sistema",
+        "description": "Uptime de la aplicación",
+        "priority": "ALTO",
+        "category": "Confiabilidad",
+        "source": "Inferido",
+        "acceptance_criteria": {
+          "given": "Sistema en producción",
+          "when": "Usuarios acceden",
+          "then": "Disponible 99.9% del tiempo"
+        },
+        "metrics": {
+          "uptime": "99.9%",
+          "MTTR": "<1 hora",
+          "error_rate": "<1%"
+        }
+      },
+      {
+        "id": "RNF006",
+        "name": "Escalabilidad de Datos",
+        "description": "Manejo de JSONs grandes",
+        "priority": "MEDIO",
+        "category": "Performance",
+        "source": "infrastructure/TweetProvider.ts:84-200",
+        "acceptance_criteria": {
+          "given": "JSONs con >10000 threads",
+          "when": "Se cargan en memoria",
+          "then": "Sin degradación significativa de performance"
+        },
+        "metrics": {
+          "max_file_size": "100MB",
+          "load_time": "<5s",
+          "memory_usage": "<1GB"
+        }
+      },
+      {
+        "id": "RNF007",
+        "name": "Mantenibilidad del Código",
+        "description": "Calidad y mantenibilidad",
+        "priority": "MEDIO",
+        "category": "Calidad",
+        "source": "tsconfig.json",
+        "acceptance_criteria": {
+          "given": "Código TypeScript",
+          "when": "Se desarrolla",
+          "then": "Sin errores de tipos, linting pasado"
+        },
+        "metrics": {
+          "type_coverage": ">95%",
+          "lint_errors": "0",
+          "test_coverage": ">80%"
+        },
+        "current_status": "Necesita mejora - console.logs, imports no usados"
+      },
+      {
+        "id": "RNF008",
+        "name": "Seguridad de Dependencias",
+        "description": "Vulnerabilidades en packages",
+        "priority": "CRÍTICO",
+        "category": "Seguridad",
+        "source": "package.json",
+        "acceptance_criteria": {
+          "given": "Dependencias del proyecto",
+          "when": "Se auditan",
+          "then": "Sin vulnerabilidades críticas o altas"
+        },
+        "metrics": {
+          "critical_vulns": "0",
+          "high_vulns": "0",
+          "audit_frequency": "semanal"
+        },
+        "current_status": "VIOLADO - 5 vulnerabilidades críticas en Next.js"
+      },
+      {
+        "id": "RNF009",
+        "name": "Responsividad Mobile",
+        "description": "Experiencia móvil optimizada",
+        "priority": "ALTO",
+        "category": "UX",
+        "source": "app/components/Header.tsx",
+        "acceptance_criteria": {
+          "given": "Usuario en dispositivo móvil",
+          "when": "Navega el sitio",
+          "then": "UI completamente funcional y responsive"
+        },
+        "metrics": {
+          "mobile_score": ">90",
+          "viewport_coverage": "320px-768px",
+          "touch_target_size": ">44px"
+        }
+      },
+      {
+        "id": "RNF010",
+        "name": "Logging y Monitoreo",
+        "description": "Sistema de logs centralizado",
+        "priority": "MEDIO",
+        "category": "Observabilidad",
+        "source": "scripts/recorder.ts:105-586",
+        "acceptance_criteria": {
+          "given": "Operaciones del sistema",
+          "when": "Se ejecutan",
+          "then": "Logs estructurados sin console.log en producción"
+        },
+        "metrics": {
+          "console_logs_prod": "0",
+          "log_retention": "30 días",
+          "structured_logging": "100%"
+        },
+        "current_status": "VIOLADO - múltiples console.logs en producción"
+      }
+    ]
+  },
+  "risks": [
+    {
+      "id": "RISK001",
+      "description": "Auth token expuesto en repositorio",
+      "severity": "CRÍTICO",
+      "mitigation": "Rotar token inmediatamente, mover a .env.local",
+      "related_requirements": ["RNF001"]
+    },
+    {
+      "id": "RISK002",
+      "description": "Vulnerabilidades de seguridad en Next.js",
+      "severity": "CRÍTICO",
+      "mitigation": "Actualizar a versión parcheada",
+      "related_requirements": ["RNF008"]
+    },
+    {
+      "id": "RISK003",
+      "description": "Dependencia de cookies X.com",
+      "severity": "ALTO",
+      "mitigation": "Implementar rotación automática de cookies",
+      "related_requirements": ["RF001"]
+    },
+    {
+      "id": "RISK004",
+      "description": "Escalabilidad limitada por JSON files",
+      "severity": "MEDIO",
+      "mitigation": "Migrar a base de datos real cuando > 10000 threads",
+      "related_requirements": ["RNF006"]
+    }
+  ],
+  "assumptions": [
+    "X.com mantendrá estructura DOM similar",
+    "Algolia API permanecerá compatible",
+    "Usuarios tienen conexión estable a internet",
+    "Claude Code permanecerá disponible"
+  ],
+  "open_questions": [
+    "¿Plan de migración a base de datos real?",
+    "¿Estrategia de backup para JSON files?",
+    "¿Implementación de autenticación de usuarios?",
+    "¿CDN para assets estáticos?",
+    "¿CI/CD pipeline configuración?"
+  ]
+}

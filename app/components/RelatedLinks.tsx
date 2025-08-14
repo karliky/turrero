@@ -1,5 +1,5 @@
 'use client'
-import { EnrichedTweetMetadata, Tweet } from '../../infrastructure/TweetProvider';
+import { EnrichedTweetMetadata, Tweet } from '../../infrastructure/types';
 import { FaYoutube, FaWikipediaW, FaBook, FaLinkedin } from "react-icons/fa";
 
 interface RelatedLinksProps {
@@ -48,7 +48,7 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     else if (data.url.includes('linkedin.com')) category = 'LinkedIn';
     
     if (!acc[category]) acc[category] = [];
-    acc[category].push(data);
+    acc[category]!.push(data);
     return acc;
   }, {} as Record<string, EnrichedTweetMetadata[]>);
   

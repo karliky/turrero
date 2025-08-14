@@ -8,10 +8,11 @@
     "pdf-merger-js": "5.1.1",
     "puppeteer": "^23.11.1",
     "sharp": "^0.33.5",
-    "tall": "8.0.0"
+    "tall": "8.0.0",
+    "tsx": "^4.7.1"
   },
   "type": "module",
   "scripts": {
-    "generate-pdf": "node generate-pdf.js"
+    "generate-pdf": "tsx generate-pdf.ts"
   }
 }

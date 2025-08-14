@@ -48,11 +48,12 @@ async function getData() {
           }))
       : [];
   }));
-  const lastUpdateDate = new Date(tweetFacade.tweetProvider.get25newestTweets()[0].time).toLocaleDateString('es-ES', {
+  const newestTweets = tweetFacade.tweetProvider.get25newestTweets();
+  const lastUpdateDate = newestTweets[0] ? new Date(newestTweets[0].time).toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
-  });
+  }) : 'No hay datos';
   return { categories, tweets, tweetsPerCategory, totalTweets: allTweets.length, lastUpdateDate };
 }
 
@@ -83,7 +84,7 @@ export default async function Home() {
                 <CategoryCard 
                   key={`category-${index}-${category}`}
                   category={category}
-                  tweets={categoryTweets}
+                  tweets={categoryTweets || []}
                   formatCategoryTitle={formatCategoryTitle}
                 />
                 <AdvertisementCard key={`ad-${category}`} />
@@ -96,7 +97,7 @@ export default async function Home() {
               <CategoryCard 
                 key={`category-${index}-${category}`}
                 category={category}
-                tweets={categoryTweets}
+                tweets={categoryTweets || []}
                 formatCategoryTitle={formatCategoryTitle}
               />
             </React.Fragment>

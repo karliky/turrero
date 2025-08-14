@@ -6,77 +6,16 @@ import tweetExamsData from './db/tweets_exam.json';
 import tweetPodcastsData from './db/tweets_podcast.json';
 import graphData from './db/processed_graph_data.json';
 import { Author } from './constants';
-
-export interface CategorizedTweet {
-  id: string;
-  categories: string;
-}
-
-export interface Tweet {
-  tweet: string;
-  id: string;
-  time: string;
-  author: string;
-  metadata?: {
-    embed?: {
-      type: string;
-      id: string;
-      author: string;
-      tweet: string;
-    },
-    type?: string;
-    imgs?: {
-      img: string;
-      url: string;
-    }[],
-    img?: string;
-    url?: string;
-  };
-  stats: {
-    views: string;
-    retweets: string;
-    quotetweets: string;
-    likes: string;
-  };
-}
-
-export interface TweetSummary {
-  id: string;
-  summary: string;
-}
-
-export interface EnrichedTweetMetadata {
-  id: string;
-  type: 'card' | 'embed' | 'media';
-  img?: string;
-  url?: string;
-  media?: string;
-  description?: string;
-  title?: string;
-  embeddedTweetId?: string;
-  author?: string;
-  tweet?: string;
-}
-
-export interface TweetExam {
-  id: string;
-  questions: {
-    question: string;
-    options: string[];
-    answer: number;
-  }[];
-}
-
-export interface TurraNode {
-  id: string;
-  summary: string;
-  categories: string[];
-  views: number;
-  likes: number;
-  replies: number;
-  bookmarks: number;
-  related_threads: string[];
-}
+import {
+  CategorizedTweet,
+  Tweet,
+  TweetSummary,
+  EnrichedTweetMetadata,
+  TweetExam,
+  TurraNode,
+  TweetWithEngagement,
+  PodcastEpisode
+} from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
 let instance: TweetProvider | null = null;
@@ -87,7 +26,7 @@ export class TweetProvider {
   private tweetSummaries!: TweetSummary[];
   private enrichedTweets!: EnrichedTweetMetadata[];
   private tweetExams!: TweetExam[];
-  private tweetPodcasts!: { id: string }[];
+  private tweetPodcasts!: PodcastEpisode[];
   private graphData!: TurraNode[];
   static instance: TweetProvider | null = null;
 
@@ -101,7 +40,7 @@ export class TweetProvider {
     this.tweetSummaries = tweetSummariesData as TweetSummary[];
     this.enrichedTweets = enrichedTweetsData as EnrichedTweetMetadata[];
     this.tweetExams = tweetExamsData as TweetExam[];
-    this.tweetPodcasts = tweetPodcastsData as { id: string }[];
+    this.tweetPodcasts = tweetPodcastsData as PodcastEpisode[];
     this.graphData = graphData as TurraNode[];
 
     TweetProvider.instance = this;
@@ -136,10 +75,11 @@ export class TweetProvider {
     return tweet?.categories.split(',') || [];
   }
 
-  getTop25Tweets(): Tweet[] {
+  getTop25Tweets(): TweetWithEngagement[] {
     // Get first tweet from each thread and calculate engagement
     const topTweets = this.tweets
       .map(thread => thread[0]) // Get first tweet of each thread
+      .filter((tweet): tweet is Tweet => tweet !== undefined)
       .map(tweet => ({
         ...tweet,
         engagement: this.calculateEngagement(tweet.stats)
@@ -150,9 +90,10 @@ export class TweetProvider {
     return topTweets;
   }
 
-  get25newestTweets(): Tweet[] {
+  get25newestTweets(): TweetWithEngagement[] {
     const newestTweets = this.tweets
       .map(thread => thread[0]) // Get first tweet of each thread
+      .filter((tweet): tweet is Tweet => tweet !== undefined)
       .map(tweet => ({
         ...tweet,
         engagement: this.calculateEngagement(tweet.stats)
@@ -165,15 +106,14 @@ export class TweetProvider {
 
   public filterTweetsByAuthor(author: Author): Tweet[] {
     return this.tweets
-    .map(thread => thread[0]) // Get first tweet of each thread
-    .filter(tweet => tweet.author === author.X);
+      .map(thread => thread[0]) // Get first tweet of each thread
+      .filter((tweet): tweet is Tweet => tweet !== undefined && tweet.author === author.X);
   }
 
   public filterAvoidTweetsByAuthor(author: Author): Tweet[] {
     return this.tweets
-    .map(thread => thread[0]) // Get first tweet of each thread
-    .flat()
-    .filter(tweet => tweet.author !== author.X);
+      .map(thread => thread[0]) // Get first tweet of each thread
+      .filter((tweet): tweet is Tweet => tweet !== undefined && tweet.author !== author.X);
   }
 
   private calculateEngagement(stats: Tweet['stats']): number {

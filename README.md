@@ -112,7 +112,18 @@ npx @puppeteer/browsers install chrome
 
 ## Adding new threads
 
-The process of adding a new thread is half manual half automated:
+### Automated Method (Recommended)
+
+**Using Claude Code Hook (Fully Automated):**
+
+If you have the Claude Code hook configured, simply type:
+```
+add thread 1234567890123456789 This is the first tweet text
+```
+
+Claude will automatically detect this pattern and execute the complete 12-step workflow including AI processing.
+
+**Using the Script (Semi-Automated):**
 
 You could use the script: `$ ./scripts/add_thread.sh $id $first_tweet_line`
 where `id` is the first tweet id (thread id) and `first_tweet_line` is the first
@@ -159,6 +170,59 @@ consequences by using the scrapper like this:
 `node ./scripts/recorder.js --test id`
 
 Read the comments in it to figure out better debug.
+
+## Claude Code Hook Setup
+
+To enable the automated thread processing feature with Claude Code:
+
+### 1. Install the Hook Configuration
+
+Copy the hook configuration to your Claude Code settings:
+
+**Hook Already Configured:**
+The hook is already configured in `.claude/settings.json` in this project.
+
+**For Global Configuration (Optional):**
+To use this hook in other projects, add to your `~/.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "add.*thread|new.*thread|thread.*[0-9]{15,20}",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/auto_thread_hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### 2. Verify Hook Installation
+
+Test the hook by typing in Claude Code:
+```
+add thread 1234567890123456789 Test thread content
+```
+
+### 3. Hook Features
+
+- **Automatic Detection**: Recognizes thread addition patterns
+- **Complete Workflow**: Executes all 12 steps automatically
+- **AI Processing**: Integrates with `ai-prompt-processor` agent
+- **Error Handling**: Provides feedback and logs issues
+- **Safe Execution**: Always exits successfully to avoid blocking Claude
+
+### 4. Hook Logs
+
+Check hook activity:
+```bash
+tail -f ~/.claude/thread_hook.log
+```
 
 ## Contribution
 

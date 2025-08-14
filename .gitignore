@@ -30,6 +30,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 .env
+.env.*
+!.env.example
 scripts/pdfs
 
 # Turra caché
@@ -51,3 +53,8 @@ venv/
 *.pyz
 *.pywz
 
+
+# AI
+.serena/
+SERENA.md
+logs/

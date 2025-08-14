@@ -1,8 +1,9 @@
-import Threads from '../infrastructure/db/tweets.json';
+import Threads from '../infrastructure/db/tweets.json' with { type: "json" };
+import type { Tweet } from '../infrastructure/types/index.js';
 
-(async () => {
-    const processThread = async (thread) => {
-        const TweetId = thread[0].id;
+(async (): Promise<void> => {
+    const processThread = async (thread: Tweet[]): Promise<void> => {
+        const TweetId: string = thread[0].id;
         console.log("TweetId: " + TweetId);
         console.log(thread.map(({ tweet, metadata }) => {
             if (metadata && metadata.embed) {

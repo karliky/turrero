@@ -1,27 +1,27 @@
-export type Authors = {
-  MAIN: string,
-  CPSCOMUNITY: Author,
-  VICTOR: Author,
-  RECUENCO: Author
+export interface Authors {
+  readonly MAIN: string;
+  readonly CPSCOMUNIDAD: Author;
+  readonly VICTOR: Author;
+  readonly RECUENCO: Author;
 }
 
-export type Author = {
-  NAME: string,
-  X: string,
-  YOUTUBE: string
+export interface Author {
+  readonly NAME: string;
+  readonly X: string;
+  readonly YOUTUBE: string;
 }
 
-export const fromXtoAuthor = (x: string) => {
+export const fromXtoAuthor = (x: string): Author => {
   // I don't like this, but it's a quick fix
   if (x === AUTHORS.RECUENCO.X) return AUTHORS.RECUENCO;
   if (x === AUTHORS.VICTOR.X) return AUTHORS.VICTOR;
   
-  return AUTHORS.CPSCOMUNITY;
+  return AUTHORS.CPSCOMUNIDAD;
 }
 
-export const AUTHORS : Authors = {
+export const AUTHORS: Authors = {
   MAIN: "Javier G. Recuenco y la Comunidad CPS",
-  CPSCOMUNITY: {
+  CPSCOMUNIDAD: {
     NAME: "Comunidad CPS",
     X: "https://x.com/CPSComunidad",
     YOUTUBE: "https://youtube.com/@cpsspain"

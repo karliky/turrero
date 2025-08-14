@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import preline from 'preline/plugin';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 export default {
   content: [
@@ -30,7 +32,7 @@ export default {
     },
   },
   plugins: [
-    require('preline/plugin'),
-    require('tailwindcss-animate'),
+    preline,
+    tailwindcssAnimate,
   ],
 } satisfies Config;

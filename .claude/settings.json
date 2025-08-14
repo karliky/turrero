@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "add.*thread|new.*thread|thread.*[0-9]{15,20}",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/auto_thread_hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

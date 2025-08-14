@@ -8,7 +8,47 @@
             "deno.window"
         ],
         "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "exactOptionalPropertyTypes": true,
+        "useUnknownInCatchVariables": true,
         "target": "esnext",
-        "module": "esnext"
+        "module": "esnext",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmitOnError": true,
+        "preserveConstEnums": true,
+        "skipLibCheck": false
+    },
+    "lint": {
+        "rules": {
+            "tags": ["recommended"],
+            "include": ["ban-untagged-todo"],
+            "exclude": ["no-unused-vars"]
+        }
+    },
+    "fmt": {
+        "useTabs": false,
+        "lineWidth": 100,
+        "indentWidth": 2,
+        "semiColons": true,
+        "singleQuote": true,
+        "proseWrap": "preserve"
+    },
+    "tasks": {
+        "dev": "deno run --allow-all --watch scripts/recorder.ts",
+        "check": "deno check scripts/*.ts",
+        "lint": "deno lint scripts/",
+        "fmt": "deno fmt scripts/",
+        "test": "deno test --allow-all scripts/"
     }
 }

@@ -1,9 +1,9 @@
+import { TweetProvider } from "../../infrastructure/TweetProvider";
 import {
   TweetExam,
   Tweet,
-  TweetProvider,
-  EnrichedTweetMetadata,
-} from "../../infrastructure/TweetProvider";
+  EnrichedTweetMetadata
+} from "../../infrastructure/types";
 import { TurraExam } from "./TurraExam";
 import { RelatedLinks } from "./RelatedLinks";
 import { TurraPodcast } from "./TurraPodcast";
@@ -13,7 +13,7 @@ interface TurraSidebarProps {
   thread: Tweet[];
 }
 
-export function TurraSidebar({ exam, thread }: TurraSidebarProps) {
+export function TurraSidebar({ exam, thread }: TurraSidebarProps): React.ReactElement {
   // Create instance and get enriched data on the server
   const tweetProvider = new TweetProvider();
   const enrichedData = thread
@@ -23,11 +23,11 @@ export function TurraSidebar({ exam, thread }: TurraSidebarProps) {
         !!data && (!!data.url || !!data.embeddedTweetId)
     );
 
-  const hasPodcast = tweetProvider.hasPodcast(thread[0].id);
+  const hasPodcast = thread[0] ? tweetProvider.hasPodcast(thread[0].id) : false;
 
   return (
     <aside className="lg:col-span-4 space-y-8">
-      {hasPodcast && <TurraPodcast tweetId={thread[0].id} />}
+      {hasPodcast && thread[0] && <TurraPodcast tweetId={thread[0].id} />}
       <RelatedLinks enrichedData={enrichedData} thread={thread} />
       {exam && <TurraExam exam={exam} />}
     </aside>
