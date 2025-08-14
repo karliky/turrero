@@ -70,7 +70,7 @@ const SCHEMA_MAPPINGS: SchemaValidation = {
   }
 };
 
-async function loadSchema(schemaPath: string): Promise<any> {
+async function loadSchema(schemaPath: string): Promise<Record<string, unknown>> {
   try {
     const schemaContent = await Deno.readTextFile(schemaPath);
     return JSON.parse(schemaContent);
@@ -79,7 +79,7 @@ async function loadSchema(schemaPath: string): Promise<any> {
   }
 }
 
-async function loadData(dataPath: string): Promise<any> {
+async function loadData(dataPath: string): Promise<Record<string, unknown> | Array<Record<string, unknown>>> {
   try {
     const dataContent = await Deno.readTextFile(dataPath);
     return JSON.parse(dataContent);

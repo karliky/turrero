@@ -2,7 +2,10 @@
 /// <reference lib="dom.iterable" />
 
 import dotenv from "dotenv";
-import { dirname, join } from "@std/path";
+import { dirname } from "@std/path";
+import { readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import process from "node:process";
 import puppeteer from "puppeteer-core";
 import { createDenoLogger } from "../infrastructure/logger.ts";
 import {
@@ -78,7 +81,7 @@ function parseCSV(filePath: string): TweetCSV[] {
         throw new Error("CSV file is empty");
     }
     const headers = lines[0]!.split(",");
-    return lines.slice(1).map((line) => {
+    return lines.slice(1).map((line: string) => {
         const data = line.split(",");
         const obj = headers.reduce(
             (
@@ -464,7 +467,7 @@ async function main() {
         detectBrowserPlatform() as BrowserPlatform,
         "latest",
     );
-    const cacheDir = path.join(__dirname, "../.cache/puppeteer");
+    const cacheDir = join(__dirname, "../.cache/puppeteer");
     await install({
         browser: InstallBrowser.CHROME,
         buildId,
@@ -563,12 +566,12 @@ async function main() {
         } else {
             const existingTweetsData = JSON.parse(
                 readFileSync(
-                    path.join(__dirname, "../infrastructure/db/tweets.json"),
+                    join(__dirname, "../infrastructure/db/tweets.json"),
                     "utf-8",
                 ),
             );
             const tweets = parseCSV(
-                path.join(__dirname, "../infrastructure/db/turras.csv"),
+                join(__dirname, "../infrastructure/db/turras.csv"),
             );
 
             const existingTweets = existingTweetsData.reduce(
@@ -591,7 +594,7 @@ async function main() {
                 page,
                 author: undefined,
                 tweetIds,
-                outputFilePath: path.join(
+                outputFilePath: join(
                     __dirname,
                     "../infrastructure/db/tweets.json",
                 ),
