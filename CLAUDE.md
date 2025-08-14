@@ -10,13 +10,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint` - Run ESLint checks
 - `npm start` - Start production server
 
-### Script Commands
-- `cd scripts && npm run generate-pdf` - Generate PDF from data
-- `deno run --allow-all scripts/recorder.ts` - Run thread scraping tool
+### Deno Script Commands (Primary)
+- `deno task scrape` - Run thread scraping tool
+- `deno task enrich` - Run tweet enrichment process
+- `deno task books` - Generate book references
+- `deno task algolia` - Update Algolia search index
+- `deno task validate` - Validate Deno scripts and types
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
 
+### Development Pipeline Commands
+- `npm run pipeline:validate` - Validate both Next.js and Deno environments
+- `npm run pipeline:build` - Build complete project (Next.js + Deno compatibility)
+- `npm run pipeline:test` - Run all tests (Next.js + Deno scripts)
+- `npm run pipeline:full` - Complete validation → build → test pipeline
+
+### Legacy Node.js Commands
+- `cd scripts && npm run generate-pdf` - Generate PDF from data (Node.js)
+
 ### Testing Individual Tweets
-- `deno run --allow-all scripts/recorder.ts --test $tweet_id` - Test scraping a single tweet
+- `deno task scrape --test $tweet_id` - Test scraping a single tweet
 
 ## Tech Stack & Architecture
 
@@ -27,17 +39,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Fonts: Geist Sans and Geist Mono
 
 ### Data & Infrastructure
-- **Dual Runtime**: Node.js for frontend, Deno for scraping tools
+- **Hybrid Runtime Architecture**: Node.js for frontend, Deno for scripts
 - **Data Storage**: JSON files in `infrastructure/db/`
-- **Scraping**: Puppeteer for X.com threads
-- **Image Processing**: Jimp for metadata card generation
-- **Search**: Algolia integration
+- **Scraping**: Puppeteer for X.com threads (Deno runtime)
+- **Image Processing**: Jimp for metadata card generation (Deno runtime)
+- **Search**: Algolia integration (Deno runtime)
 
-### Scripts Environment
-- **Node.js 22+** for main scripts
-- **Deno 1.41+** for tweet scraping (`scripts/recorder.ts`)
+### Scripts Environment (Modernized)
+- **Deno 1.41+** for primary scripts (enrichment, scraping, data processing)
+- **Node.js 22+** for Next.js frontend and legacy scripts
 - **Python 3.8+** for graph generation
-- **Puppeteer** for web scraping
+- **Dual validation pipeline** for both runtimes
+
+### Deno Configuration
+- **Import maps** configured in `deno.json` for seamless dependency resolution
+- **NPM package support** via `npm:` specifiers for Node.js compatibility
+- **Strict TypeScript** with enhanced type checking
+- **Built-in formatting and linting** with `deno fmt` and `deno lint`
 
 ## Project Structure
 
@@ -159,11 +177,19 @@ Or follow the manual 11-step process:
 - Always ask before running `git commit`, `git push`, or equivalent commands
 - Use proper commit messages following existing patterns when authorized
 
+### Hybrid Runtime Development
+- **Frontend Development**: Use Node.js commands (`npm run dev`, `npm run build`)
+- **Script Development**: Use Deno commands (`deno task`, `deno check`, `deno fmt`)
+- **Unified Pipeline**: Use `npm run pipeline:*` commands for full system validation
+- **Environment Validation**: Always run `npm run pipeline:validate` before deployment
+- **Type Checking**: Both `npx tsc --noEmit` (Node.js) and `deno check` (Deno) must pass
+
 ### TypeScript and Type Safety
 - **ALWAYS** maintain TypeScript types up-to-date across all files
 - Update type definitions when modifying data structures
 - Ensure type safety in all new implementations and modifications
-- Run `npm run lint` to verify TypeScript compliance
+- Run `npm run lint` (Node.js) and `deno task lint` (Deno) to verify compliance
+- **Strict mode enabled** in both environments with `exactOptionalPropertyTypes`
 
 ### Requirements and Dependencies
 - **MAINTAIN** all requirements updated in PRD-create MCP server

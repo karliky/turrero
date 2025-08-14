@@ -2,22 +2,19 @@
  * Common utilities shared across scripts to eliminate code duplication
  */
 
-import { promises as fs } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { createLogger } from '../../infrastructure/logger.js';
+import { dirname, join } from '@std/path';
+import { createDenoLogger } from '@/infrastructure/logger.ts';
 
 // ============================================================================
 // PATH UTILITIES
 // ============================================================================
 
 /**
- * Gets the directory path for ES modules
+ * Gets the directory path for ES modules (Deno compatible)
  * Replaces duplicate __filename and __dirname patterns
  */
 export function getScriptDirectory(importMetaUrl: string): string {
-  const __filename = fileURLToPath(importMetaUrl);
-  return dirname(__filename);
+  return dirname(new URL(importMetaUrl).pathname);
 }
 
 /**
@@ -50,7 +47,7 @@ export function getDbFilePath(scriptDir: string, filename: string): string {
  * Eliminates duplicate logger initialization patterns
  */
 export function createScriptLogger(scriptName: string) {
-  return createLogger({ prefix: scriptName });
+  return createDenoLogger(scriptName);
 }
 
 // ============================================================================
@@ -62,7 +59,7 @@ export function createScriptLogger(scriptName: string) {
  */
 export async function readJsonFile<T = unknown>(filePath: string): Promise<T> {
   try {
-    const content = await fs.readFile(filePath, 'utf8');
+    const content = await Deno.readTextFile(filePath);
     return JSON.parse(content);
   } catch (error) {
     throw new Error(`Failed to read JSON file ${filePath}: ${error}`);
@@ -75,7 +72,7 @@ export async function readJsonFile<T = unknown>(filePath: string): Promise<T> {
 export async function writeJsonFile<T = unknown>(filePath: string, data: T): Promise<void> {
   try {
     const content = JSON.stringify(data, null, 4);
-    await fs.writeFile(filePath, content, 'utf8');
+    await Deno.writeTextFile(filePath, content);
   } catch (error) {
     throw new Error(`Failed to write JSON file ${filePath}: ${error}`);
   }
@@ -86,7 +83,7 @@ export async function writeJsonFile<T = unknown>(filePath: string, data: T): Pro
  */
 export async function readCsvFile(filePath: string): Promise<string> {
   try {
-    return await fs.readFile(filePath, 'utf8');
+    return await Deno.readTextFile(filePath);
   } catch (error) {
     throw new Error(`Failed to read CSV file ${filePath}: ${error}`);
   }
@@ -97,7 +94,7 @@ export async function readCsvFile(filePath: string): Promise<string> {
  */
 export async function writeCsvFile(filePath: string, content: string): Promise<void> {
   try {
-    await fs.writeFile(filePath, content, 'utf8');
+    await Deno.writeTextFile(filePath, content);
   } catch (error) {
     throw new Error(`Failed to write CSV file ${filePath}: ${error}`);
   }
@@ -121,8 +118,8 @@ export interface BrowserConfig {
  * Creates a standardized Puppeteer browser instance
  */
 export async function createBrowser(config: BrowserConfig = {}) {
-  const puppeteer = (await import('puppeteer')).default;
-  return puppeteer.launch({
+  const puppeteer = await import('puppeteer');
+  return puppeteer.default.launch({
     slowMo: config.slowMo || 200,
     headless: config.headless !== false, // default to headless
     devtools: config.devtools || false,
@@ -137,9 +134,9 @@ export async function createBrowser(config: BrowserConfig = {}) {
  * Validates command line arguments with standardized error handling
  */
 export function validateArgs(args: string[], minArgs: number, usage: string): void {
-  if (args.length < minArgs + 2) { // +2 for node and script name
+  if (args.length < minArgs) { // Deno args don't include node and script name
     console.error(`Usage: ${usage}`);
-    process.exit(1);
+    Deno.exit(1);
   }
 }
 
@@ -147,7 +144,7 @@ export function validateArgs(args: string[], minArgs: number, usage: string): vo
  * Extracts and validates tweet ID from command line args
  */
 export function extractTweetId(args: string[]): string {
-  const tweetId = args[2];
+  const tweetId = args[0]; // Deno args start from index 0
   if (!tweetId || !/^\d+$/.test(tweetId)) {
     throw new Error('Invalid tweet ID. Must be a numeric string.');
   }
@@ -158,7 +155,7 @@ export function extractTweetId(args: string[]): string {
  * Extracts tweet content from command line args (handles spaces)
  */
 export function extractTweetContent(args: string[]): string {
-  return args.slice(3).join(' ');
+  return args.slice(1).join(' '); // Deno args start from index 0
 }
 
 // ============================================================================
@@ -189,7 +186,7 @@ export function formatCsvRow(columns: string[]): string {
 export function handleScriptError(error: unknown, logger: { error: (message: string) => void }, context: string): never {
   const errorMessage = error instanceof Error ? error.message : String(error);
   logger.error(`${context}: ${errorMessage}`);
-  process.exit(1);
+  Deno.exit(1);
 }
 
 /**

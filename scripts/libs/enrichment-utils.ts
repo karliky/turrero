@@ -3,10 +3,7 @@
  * Reduces complexity in tweets_enrichment.ts
  */
 
-import fetch from 'node-fetch';
 import cheerio from 'cheerio';
-import Downloader from 'nodejs-file-downloader';
-import { tall } from 'tall';
 import type { Page } from 'puppeteer';
 import type { 
     CheerioElement, 
@@ -14,7 +11,7 @@ import type {
     TweetMetadataType,
     ScriptLogger,
     EnrichedTweetData
-} from '../../infrastructure/types/index.js';
+} from '@/infrastructure/types/index.ts';
 
 // ============================================================================
 // CONFIGURATION
@@ -25,7 +22,8 @@ import type {
  */
 export function configureEnvironment(): void {
     // We need to set this to avoid SSL errors when downloading images
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    // Note: Deno has better TLS defaults, this is mainly for compatibility
+    Deno.env.set('NODE_TLS_REJECT_UNAUTHORIZED', '0');
 }
 
 // ============================================================================
@@ -75,8 +73,8 @@ export class YouTubeProcessor implements MediaProcessor {
         const $ = cheerio.load(data);
         
         tweet.metadata.media = "youtube";
-        tweet.metadata.description = $('meta[name=description]').attr('content');
-        tweet.metadata.title = $('meta[name=title]').attr('content');
+        tweet.metadata.description = $('meta[name=description]').attr('content') || '';
+        tweet.metadata.title = $('meta[name=title]').attr('content') || '';
     }
 }
 
@@ -101,7 +99,7 @@ export class GoodReadsProcessor implements MediaProcessor {
         
         const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
         tweet.metadata.media = "goodreads";
-        tweet.metadata.title = title;
+        tweet.metadata.title = title || '';
     }
 }
 
@@ -120,9 +118,10 @@ export class WikipediaProcessor implements MediaProcessor {
         
         tweet.metadata.media = "wikipedia";
         tweet.metadata.title = $('h1').text().trim();
-        tweet.metadata.description = Array.from($("div[id=mw-content-text] p"))
+        tweet.metadata.description = $("div[id=mw-content-text] p")
             .slice(0, 2)
-            .map((el: CheerioElement) => $(el).text())
+            .map((_index, el) => $(el).text())
+            .get()
             .join("")
             .trim();
         
@@ -146,7 +145,7 @@ export class LinkedInProcessor implements MediaProcessor {
         
         tweet.metadata.media = "linkedin";
         tweet.metadata.title = $('h1').text().trim();
-        tweet.metadata.description = $('meta[name=description]').attr('content');
+        tweet.metadata.description = $('meta[name=description]').attr('content') || '';
     }
 }
 
@@ -181,27 +180,46 @@ export interface DownloadConfig {
 }
 
 /**
- * Downloads media with standardized configuration
+ * Downloads media with standardized configuration (Deno implementation)
  */
 export async function downloadMedia(
     imageUrl: string, 
     config: DownloadConfig = { directory: "./metadata" }
 ): Promise<string> {
-    const downloader = new Downloader({
-        url: imageUrl,
-        directory: config.directory,
-    });
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+        throw new Error(`Failed to download image: ${response.statusText}`);
+    }
     
-    const { filePath } = await downloader.download();
+    const arrayBuffer = await response.arrayBuffer();
+    const bytes = new Uint8Array(arrayBuffer);
+    
+    // Extract filename from URL or generate one
+    const url = new URL(imageUrl);
+    const filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
+    const filePath = `${config.directory}/${filename}`;
+    
+    // Ensure directory exists
+    await Deno.mkdir(config.directory, { recursive: true });
+    
+    // Write file
+    await Deno.writeFile(filePath, bytes);
     return filePath;
 }
 
 /**
- * Resolves and expands shortened URLs
+ * Resolves and expands shortened URLs (Deno implementation)
  */
 export async function expandUrl(shortUrl?: string): Promise<string | undefined> {
     if (!shortUrl) return undefined;
-    return await tall(shortUrl);
+    
+    try {
+        const response = await fetch(shortUrl, { redirect: 'follow' });
+        return response.url; // This will be the final URL after redirects
+    } catch (error) {
+        console.warn(`Failed to expand URL ${shortUrl}:`, error);
+        return shortUrl; // Return original if expansion fails
+    }
 }
 
 // ============================================================================
@@ -283,7 +301,7 @@ export class TweetEnricher {
         tweet.metadata.img = filePath;
         if (url) {
             tweet.metadata.url = url;
-            tweet.tweet = undefined;
+            // Clean tweet content when we have a URL
             await this.mediaRegistry.processKnownDomain(tweet, url, page);
         }
         

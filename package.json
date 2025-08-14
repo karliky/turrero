@@ -6,7 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deno:check": "deno task check",
+    "deno:lint": "deno task lint",
+    "deno:fmt": "deno task fmt",
+    "deno:validate": "deno run --allow-run --allow-read --allow-env scripts/validate-deno.ts",
+    "deno:scrape": "deno task scrape",
+    "deno:enrich": "deno task enrich",
+    "deno:books": "deno task books",
+    "deno:algolia": "deno task algolia",
+    "pipeline:validate": "deno run --allow-run --allow-read --allow-env scripts/dev-pipeline.ts validate",
+    "pipeline:build": "deno run --allow-run --allow-read --allow-env scripts/dev-pipeline.ts build",
+    "pipeline:test": "deno run --allow-run --allow-read --allow-env scripts/dev-pipeline.ts test",
+    "pipeline:full": "deno run --allow-run --allow-read --allow-env scripts/dev-pipeline.ts full",
+    "vercel:build": "deno run --allow-run --allow-read --allow-env scripts/vercel-build.ts"
   },
   "dependencies": {
     "@fast-csv/parse": "^5.0.5",

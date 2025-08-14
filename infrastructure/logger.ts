@@ -98,6 +98,12 @@ class Logger {
     }
   }
 
+  fatal(message: string, ...args: unknown[]): void {
+    if (this.shouldLog(LogLevel.ERROR)) {
+      console.error(this.formatMessage(LogLevel.ERROR, `FATAL: ${message}`), ...args);
+    }
+  }
+
   // Convenience method for conditional logging based on environment
   devLog(message: string, ...args: unknown[]): void {
     if (this.isDevelopment || this.isDebugEnabled) {
