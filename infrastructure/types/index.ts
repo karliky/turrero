@@ -5,6 +5,21 @@
  * including data structures, API responses, and component props.
  */
 
+// ID TYPES AND UTILITIES
+// ============================================================================
+
+/** Standard thread ID format */
+export type ThreadId = string;
+
+/** Standard tweet ID format */
+export type TweetId = string;
+
+/** Composite ID format: threadId#tweetId */
+export type CompositeId = string;
+
+// Re-export ID utilities for convenience
+export * from '../utils/id-utils';
+
 // ============================================================================
 // CORE DATA TYPES
 // ============================================================================
@@ -24,7 +39,7 @@ export interface TweetStats {
 /** Embedded tweet metadata within a tweet */
 export interface TweetEmbedMetadata {
   type: string;
-  id: string;
+  id: TweetId;
   author: string;
   tweet: string;
 }
@@ -49,7 +64,7 @@ export interface Tweet {
   /** Tweet text content */
   tweet: string;
   /** Unique tweet ID */
-  id: string;
+  id: TweetId;
   /** Tweet timestamp in ISO format */
   time: string;
   /** Author handle or profile URL */
@@ -68,7 +83,7 @@ export interface TweetWithEngagement extends Tweet {
 
 /** Tweet with summary for display in category cards */
 export interface TweetWithSummary {
-  id: string;
+  id: ThreadId;
   time: string;
   summary: string;
   stats: TweetStats;
@@ -81,16 +96,16 @@ export interface TweetWithSummary {
 
 /** Tweet categorization mapping */
 export interface CategorizedTweet {
-  /** Tweet ID */
-  id: string;
+  /** Thread ID */
+  id: ThreadId;
   /** Comma-separated category names */
   categories: string;
 }
 
 /** Tweet summary for display purposes */
 export interface TweetSummary {
-  /** Tweet ID */
-  id: string;
+  /** Thread ID */
+  id: ThreadId;
   /** Human-readable summary */
   summary: string;
 }
@@ -98,7 +113,7 @@ export interface TweetSummary {
 /** Enriched tweet metadata for enhanced display */
 export interface EnrichedTweetMetadata {
   /** Tweet ID */
-  id: string;
+  id: TweetId;
   /** Type of enrichment */
   type: 'card' | 'embed' | 'media';
   /** Image URL for cards/media */
@@ -112,7 +127,7 @@ export interface EnrichedTweetMetadata {
   /** Card title */
   title?: string;
   /** Embedded tweet ID */
-  embeddedTweetId?: string;
+  embeddedTweetId?: TweetId;
   /** Embedded tweet author */
   author?: string;
   /** Embedded tweet content */
@@ -122,7 +137,7 @@ export interface EnrichedTweetMetadata {
 /** Enriched tweet data structure as stored in tweets_enriched.json */
 export interface EnrichedTweetData {
   /** Tweet ID */
-  id: string;
+  id: TweetId;
   /** Type of enrichment */
   type: string;
   /** Image URL for cards/media */
@@ -157,8 +172,8 @@ export interface QuizQuestion {
 
 /** Tweet-based examination/quiz */
 export interface TweetExam {
-  /** Source tweet ID */
-  id: string;
+  /** Source thread ID */
+  id: ThreadId;
   /** Array of quiz questions */
   questions: QuizQuestion[];
 }
@@ -170,7 +185,7 @@ export interface TweetExam {
 /** Graph node representing a tweet thread */
 export interface TurraNode {
   /** Tweet thread ID */
-  id: string;
+  id: ThreadId;
   /** Thread summary */
   summary: string;
   /** Array of category names */
@@ -255,8 +270,8 @@ export interface EnrichedBook extends BookReference {
 
 /** Podcast episode metadata */
 export interface PodcastEpisode {
-  /** Source tweet ID */
-  id: string;
+  /** Source thread ID */
+  id: ThreadId;
   /** Episode title */
   title?: string;
   /** Episode description */
@@ -276,7 +291,7 @@ export interface PodcastEpisode {
 /** Algolia search index structure */
 export interface SearchIndexEntry {
   /** Unique identifier */
-  objectID: string;
+  objectID: CompositeId;
   /** Tweet content for search */
   tweet: string;
   /** Thread summary */
@@ -323,8 +338,8 @@ export interface TweetExamProps {
 
 /** Props for TweetSidebar component */
 export interface TweetSidebarProps {
-  /** Current tweet ID */
-  currentTweetId: string;
+  /** Current thread ID */
+  currentTweetId: ThreadId;
   /** Category for related tweets */
   category?: string;
   /** Maximum number of related tweets to show */
@@ -687,7 +702,7 @@ export interface ScrapedMetadata {
 
 /** Book to enrich interface */
 export interface BookToEnrich {
-  id: string;
+  id: TweetId;
   title: string;
   author: string;
   description?: string;

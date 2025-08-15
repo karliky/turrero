@@ -3,8 +3,8 @@
  * Eliminates duplicate JSON imports and provides type-safe data access
  */
 
-import { join } from 'node:path';
-import { readJsonFile, writeJsonFile, getDbPath } from './common-utils.js';
+import { join } from '@std/path';
+import { readJsonFile, writeJsonFile, getDbPath } from './common-utils.ts';
 import type {
   Tweet,
   EnrichedTweetData,
@@ -16,7 +16,7 @@ import type {
   SearchIndexEntry,
   PodcastEpisode,
   TurraNode
-} from '../../infrastructure/types/index.js';
+} from '@/infrastructure/types/index.ts';
 
 // ============================================================================
 // DATA ACCESS LAYER
@@ -105,23 +105,19 @@ export class DataAccess {
 
   // CSV data access
   async getTurrasCsv(): Promise<string> {
-    const fs = await import('node:fs/promises');
-    return fs.readFile(join(this.dbPath, 'turras.csv'), 'utf8');
+    return await Deno.readTextFile(join(this.dbPath, 'turras.csv'));
   }
 
   async saveTurrasCsv(content: string): Promise<void> {
-    const fs = await import('node:fs/promises');
-    await fs.writeFile(join(this.dbPath, 'turras.csv'), content, 'utf8');
+    await Deno.writeTextFile(join(this.dbPath, 'turras.csv'), content);
   }
 
   async getGlosarioCsv(): Promise<string> {
-    const fs = await import('node:fs/promises');
-    return fs.readFile(join(this.dbPath, 'glosario.csv'), 'utf8');
+    return await Deno.readTextFile(join(this.dbPath, 'glosario.csv'));
   }
 
   async saveGlosarioCsv(content: string): Promise<void> {
-    const fs = await import('node:fs/promises');
-    await fs.writeFile(join(this.dbPath, 'glosario.csv'), content, 'utf8');
+    await Deno.writeTextFile(join(this.dbPath, 'glosario.csv'), content);
   }
 
   // Graph data access

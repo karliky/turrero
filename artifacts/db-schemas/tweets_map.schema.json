@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "tweets_map.schema.json",
+  "title": "Tweets Map Database", 
+  "description": "Manual categorization mapping for tweet threads",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Thread ID (first tweet ID)"
+      },
+      "categories": {
+        "type": "string",
+        "pattern": "^[a-z0-9ñáéíóúü\\-]+(,[a-z0-9ñáéíóúü\\-]+)*$",
+        "description": "Comma-separated category tags in kebab-case with Spanish characters",
+        "examples": ["estrategia,gaming,sistemas-complejos,orquestación-cognitiva"]
+      }
+    },
+    "required": ["id", "categories"]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "glosario.schema.json",
+  "title": "Glosario CSV Database",
+  "description": "Glossary of terms and definitions",
+  "type": "object",
+  "properties": {
+    "headers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["term", "definition", "category"]
+      }
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "Term or concept name"
+          },
+          "definition": {
+            "type": "string",
+            "description": "Definition or explanation of the term"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category classification (often empty)"
+          }
+        },
+        "required": ["term", "definition"]
+      }
+    }
+  }
+}

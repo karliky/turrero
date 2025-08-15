@@ -4,8 +4,10 @@
         "lib": [
             "dom",
             "dom.iterable",
+            "dom.asynciterable",
             "deno.ns",
-            "deno.window"
+            "deno.window",
+            "es2022"
         ],
         "strict": true,
         "noImplicitAny": true,
@@ -21,7 +23,7 @@
         "useUnknownInCatchVariables": true,
         "target": "esnext",
         "module": "esnext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
@@ -29,26 +31,80 @@
         "preserveConstEnums": true,
         "skipLibCheck": false
     },
+    "imports": {
+        "@/": "./",
+        "@/infrastructure/": "./infrastructure/",
+        "@/scripts/": "./scripts/",
+        "@std/": "https://deno.land/std@0.224.0/",
+        "puppeteer": "npm:puppeteer@^24.16.1",
+        "csv": "https://deno.land/x/csv@v0.8.0/mod.ts",
+        "dotenv": "https://deno.land/std@0.224.0/dotenv/mod.ts",
+        "jimp": "npm:jimp@^0.22.12",
+        "cheerio": "npm:cheerio@^1.0.0",
+        "algoliasearch": "npm:algoliasearch@^5.15.0",
+        "date-fns": "npm:date-fns@^4.1.0",
+        "node-fetch": "npm:node-fetch@^3.3.2",
+        "@puppeteer/browsers": "npm:@puppeteer/browsers@^2.4.4",
+        "puppeteer-core": "npm:puppeteer-core@^24.16.1",
+        "react": "npm:react@^19.1.1",
+        "react-dom": "npm:react-dom@^19.1.1",
+        "next": "npm:next@^15.1.3",
+        "react-icons": "npm:react-icons@^5.5.0",
+        "react-confetti": "npm:react-confetti@^6.4.0",
+        "d3": "npm:d3@^7.9.0",
+        "pdf-merger-js": "npm:pdf-merger-js@^5.1.2",
+        "sharp": "npm:sharp@^0.33.5",
+        "epub-gen": "npm:epub-gen@^0.1.0",
+        "dotenv": "npm:dotenv@^16.4.7",
+        "openai": "npm:openai@^4.73.1",
+        "axios": "npm:axios@^1.7.9"
+    },
     "lint": {
         "rules": {
             "tags": ["recommended"],
             "include": ["ban-untagged-todo"],
             "exclude": ["no-unused-vars"]
-        }
+        },
+        "exclude": [
+            ".next/",
+            "node_modules/",
+            "out/",
+            "build/",
+            "dist/"
+        ]
     },
     "fmt": {
         "useTabs": false,
         "lineWidth": 100,
         "indentWidth": 2,
         "semiColons": true,
-        "singleQuote": true,
-        "proseWrap": "preserve"
+        "proseWrap": "preserve",
+        "exclude": [
+            ".next/",
+            "node_modules/",
+            "out/",
+            "build/",
+            "dist/"
+        ]
     },
     "tasks": {
         "dev": "deno run --allow-all --watch scripts/recorder.ts",
-        "check": "deno check scripts/*.ts",
-        "lint": "deno lint scripts/",
+        "scrape": "deno run --allow-all scripts/recorder.ts",
+        "validate": "deno run --allow-all scripts/validate-types.ts",
+        "enrich": "deno run --allow-all scripts/tweets_enrichment.ts",
+        "books": "deno run --allow-all scripts/generate-books.ts",
+        "book-enrich": "deno run --allow-all scripts/book-enrichment.ts",
+        "algolia": "deno run --allow-all scripts/make-algolia-db.ts",
+        "images": "deno run --allow-all scripts/image-card-generator.ts",
+        "schema:validate": "deno run --allow-read scripts/validate-schemas.ts",
+        "schema:infer": "deno run --allow-read --allow-write scripts/infer-schemas.ts",
+        "flows:check": "deno run --allow-read scripts/check-data-flows.ts",
+        "check": "deno check scripts/tweets_enrichment.ts scripts/make-algolia-db.ts scripts/generate-books.ts scripts/validate-deno.ts scripts/test-deno-scripts.ts",
+        "lint": "deno lint scripts/tweets_enrichment.ts scripts/make-algolia-db.ts scripts/generate-books.ts scripts/validate-deno.ts scripts/test-deno-scripts.ts",
         "fmt": "deno fmt scripts/",
-        "test": "deno test --allow-all scripts/"
-    }
+        "test": "deno test --allow-all scripts/",
+        "clean": "rm -rf .deno_cache"
+    },
+    "nodeModulesDir": "auto",
+    "lock": false
 }

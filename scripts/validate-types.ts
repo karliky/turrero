@@ -9,6 +9,7 @@
 
 import { existsSync } from 'https://deno.land/std@0.208.0/fs/mod.ts';
 import { join } from 'https://deno.land/std@0.208.0/path/mod.ts';
+import { ScriptMode, TweetMetadataType, ProcessingState } from "../infrastructure/types/index.ts";
 
 interface ValidationResult {
   success: boolean;
@@ -208,12 +209,12 @@ async function validateEnumUsage(): Promise<ValidationResult> {
   
   // Import enums to check for usage - magic strings that should use enums
   const magicStrings = [
-    // Environment types - should use EnvironmentType enum
-    '"development"', '"production"', '"test"',
+    // Environment types - should use ScriptMode enum
+    `"${ScriptMode.DEVELOPMENT}"`, `"${ScriptMode.PRODUCTION}"`, `"${ScriptMode.TEST}"`,
     // Metadata types - should use TweetMetadataType enum  
-    '"card"', '"embed"', '"media"',
+    `"${TweetMetadataType.CARD}"`, `"${TweetMetadataType.EMBED}"`, `"${TweetMetadataType.IMAGE}"`,
     // Processing states - should use ProcessingState enum
-    '"pending"', '"processing"', '"completed"', '"error"',
+    `"${ProcessingState.PENDING}"`, `"${ProcessingState.PROCESSING}"`, `"${ProcessingState.COMPLETED}"`, `"${ProcessingState.ERROR}"`,
   ];
   
   const issues: string[] = [];

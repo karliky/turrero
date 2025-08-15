@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "processed_graph_data.schema.json",
+  "title": "Processed Graph Data Database",
+  "description": "Aggregated tweet data for graph analysis and visualization",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Thread ID (first tweet ID)"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "Twitter thread URL"
+      },
+      "replies": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Total replies count"
+      },
+      "likes": {
+        "type": "number", 
+        "minimum": 0,
+        "description": "Total likes count"
+      },
+      "bookmarks": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Total bookmarks count"
+      },
+      "views": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Total views count"
+      },
+      "summary": {
+        "type": "string",
+        "description": "Thread summary for graph labels"
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Thread categories for graph clustering"
+      },
+      "related_threads": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "description": "Related thread IDs for graph connections"
+      }
+    },
+    "required": ["id", "url", "replies", "likes", "bookmarks", "views", "summary", "categories", "related_threads"]
+  }
+}

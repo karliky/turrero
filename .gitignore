@@ -58,3 +58,14 @@ venv/
 .serena/
 SERENA.md
 logs/
+
+# Deno
+.deno/
+deno.lock
+.deno_cache/
+vendor/
+
+# Claude Code hooks
+thread_hook.log
+tsconfig.tsbuildinfo
+tsconfig.tsbuildinfo

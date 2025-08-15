@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "tweets_enriched.schema.json", 
+  "title": "Tweets Enriched Database",
+  "description": "Enhanced tweet data with extracted embedded content and cards",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "enum": ["embed", "card", "media"],
+        "description": "Type of enriched content"
+      },
+      "id": {
+        "type": "string", 
+        "pattern": "^[0-9]+$",
+        "description": "Parent tweet ID that contains the enrichment"
+      }
+    },
+    "required": ["type", "id"],
+    "oneOf": [
+      {
+        "properties": {
+          "type": { "const": "embed" },
+          "embeddedTweetId": {
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "description": "ID of the embedded tweet"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author name and handle of embedded tweet"
+          },
+          "tweet": {
+            "type": "string",
+            "description": "Content of the embedded tweet"
+          }
+        },
+        "required": ["type", "embeddedTweetId", "id", "author", "tweet"]
+      },
+      {
+        "properties": {
+          "type": { "const": "card" },
+          "img": {
+            "type": "string",
+            "description": "Image path for the card"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL for the card"
+          },
+          "media": {
+            "type": "string",
+            "description": "Media type or platform"
+          },
+          "title": {
+            "type": "string",
+            "description": "Card title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Card description"
+          }
+        },
+        "required": ["type", "id", "url"]
+      },
+      {
+        "properties": {
+          "type": { "const": "media" },
+          "img": {
+            "type": "string",
+            "description": "Image path for the media"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL for the media (can be empty)"
+          }
+        },
+        "required": ["type", "id", "img"]
+      }
+    ]
+  }
+}

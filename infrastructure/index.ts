@@ -1,6 +1,6 @@
 import { TweetProvider } from "./TweetProvider";
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { parse } from '@fast-csv/parse';
 
 // Re-export all types from the consolidated types file

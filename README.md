@@ -7,10 +7,15 @@ easy-to-navigate format.
 
 ## Features
 
-- A clean, minimalist design that puts the focus on the threads
-- Automatic embedding of images and cards from x.com
-- A simple navigation system that makes it easy to find specific threads
-- The ability to search for specific keywords within the threads
+- **Clean, minimalist design** focused on thread readability
+- **Automatic embedding** of images and cards from X.com
+- **Advanced search** with Algolia-powered indexing
+- **Category-based navigation** for organized thread discovery
+- **Interactive quizzes** for educational threads
+- **Book recommendations** extracted from thread content
+- **Standardized ID system** for consistent data handling
+- **Real-time validation** pipeline for data integrity
+- **Responsive design** optimized for all devices
 
 ## Kown bugs or improvements
 
@@ -20,6 +25,28 @@ easy-to-navigate format.
   https://x.com/Recuenco/status/1614168029876600833
 - Add copy link to every tweet so we can share it, like lexical.dev does on the
   left of every block
+
+## Recent Architecture Improvements (v2.0)
+
+### ID Standardization System
+- **Unified ID Format**: Standardized to `threadId#tweetId` format across all systems
+- **Type Safety**: Full TypeScript support with proper ID type definitions
+- **Backward Compatibility**: Automatic migration from legacy formats
+- **Validation Pipeline**: Comprehensive data integrity checks
+
+### Hybrid Runtime Architecture
+- **Frontend**: Next.js 15 with React 19 for optimal user experience
+- **Scripts**: Deno for data processing with modern JavaScript features
+- **Database**: JSON-based with strict schema validation
+- **Pipeline**: Automated validation and build processes
+
+### Development Pipeline
+```bash
+npm run pipeline:validate    # Validate both Node.js and Deno environments
+npm run pipeline:build      # Build complete project
+npm run pipeline:test       # Run all tests
+npm run pipeline:full       # Complete validation → build → test
+```
 
 ## More resources
 
@@ -33,12 +60,13 @@ easy-to-navigate format.
 
 The website is built using:
 
-- Node.js 22 or higher for the front-end and server-side rendering
-- Node.js 22 or higher for the scraping tools
-- Deno 1.41 or higher for the tweet scraping script (install from
-  https://deno.com)
-- python 3.8 or higher to generate the graph
-- Puppeteer for web scraping x.com threads
+- **Next.js 15** with App Router for the frontend
+- **React 19** with TypeScript for components  
+- **Node.js 22+** for frontend and legacy scripts
+- **Deno 1.41+** for primary data processing scripts
+- **Python 3.8+** for graph generation
+- **Puppeteer** for web scraping X.com threads
+- **Hybrid Architecture**: Node.js frontend + Deno scripts for optimal performance
 
 You can handle node.js versions by using nvm, for example:
 

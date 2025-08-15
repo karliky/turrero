@@ -1,3 +1,23 @@
 {
-    "deno.enable": true
+    "deno.enable": true,
+    "deno.enablePaths": [
+        "./scripts"
+    ],
+    "deno.config": "./deno.json",
+    "deno.suggest.imports.hosts": {
+        "https://deno.land": true,
+        "https://cdn.skypack.dev": true,
+        "https://esm.sh": true
+    },
+    "deno.lint": true,
+    "deno.unstable": false,
+    "typescript.preferences.includePackageJsonAutoImports": "off",
+    "[typescript]": {
+        "editor.defaultFormatter": "denoland.vscode-deno",
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "denoland.vscode-deno",
+        "editor.formatOnSave": true
+    }
 }

@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "turras.schema.json",
+  "title": "Turras CSV Database",
+  "description": "Original tweet threads CSV database",
+  "type": "object",
+  "properties": {
+    "headers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["id", "content", "categoria"]
+      }
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "description": "Thread ID (first tweet ID)"
+          },
+          "content": {
+            "type": "string",
+            "description": "First tweet content of the thread"
+          },
+          "categoria": {
+            "type": "string",
+            "description": "Thread category (often empty)"
+          }
+        },
+        "required": ["id", "content"]
+      }
+    }
+  }
+}

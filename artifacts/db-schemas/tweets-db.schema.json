@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "tweets-db.schema.json",
+  "title": "Tweets Algolia Database",
+  "description": "Simplified tweet structure optimized for Algolia search indexing",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+#[0-9]+$",
+        "description": "Composite ID: threadId#tweetId"
+      },
+      "tweet": {
+        "type": "string",
+        "description": "Tweet content text for search"
+      },
+      "time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Tweet timestamp in ISO format"
+      }
+    },
+    "required": ["id", "tweet", "time"]
+  }
+}

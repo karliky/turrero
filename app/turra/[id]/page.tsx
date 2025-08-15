@@ -17,9 +17,7 @@ interface Params {
 
 async function getTweetData(id: string) {
   const tweetProvider = new TweetProvider();
-  const thread = tweetProvider.getAllTweets().find(thread => 
-    thread.some(tweet => tweet.id === id)
-  ) || [];
+  const thread = tweetProvider.getThread(id);
   
   if (thread.length === 0) return null;
   

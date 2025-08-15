@@ -1,7 +1,7 @@
 import puppeteer, { Page } from "puppeteer";
 import Tweets from "./../db/tweets_summary.json" with { type: "json" };
 import PDFMerger from "pdf-merger-js";
-import fs from "fs";
+import fs from "node:fs";
 import { AUTHORS } from "../infrastructure/constants.js";
 import type { TweetSummary } from "../infrastructure/types/index.js";
 

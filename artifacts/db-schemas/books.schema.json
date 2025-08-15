@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "books.schema.json",
+  "title": "Books Database",
+  "description": "Categorized book references extracted from tweet threads",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Tweet ID where book was referenced"
+      },
+      "type": {
+        "const": "card",
+        "description": "Always 'card' for book references"
+      },
+      "img": {
+        "type": "string",
+        "description": "Path to book cover image"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "URL to book on external platform (Goodreads, Amazon)"
+      },
+      "media": {
+        "type": "string",
+        "enum": ["goodreads", "amazon"],
+        "description": "Source platform for book reference"
+      },
+      "title": {
+        "type": "string",
+        "description": "Book title"
+      },
+      "turraId": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Thread ID where book appears"
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "Business", "Personal Development", "Politics", "Philosophy", 
+            "Nonfiction", "Sociology", "Psychology", "Essays", "History",
+            "Leadership", "Self Help", "Communication"
+          ]
+        },
+        "description": "AI-generated book categories"
+      }
+    },
+    "required": ["id", "type", "url", "title", "turraId", "categories"]
+  }
+}

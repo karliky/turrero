@@ -30,9 +30,9 @@ else
     print_status "$GREEN" "✅ Main project TypeScript compilation passed"
 fi
 
-# 2. Check Deno TypeScript files (only Deno-specific scripts)
+# 2. Check Deno TypeScript files (all migrated scripts) - using comprehensive type checker
 print_status "$YELLOW" "🦕 Checking Deno TypeScript files..."
-if ! deno check scripts/recorder.ts scripts/validate-types.ts; then
+if ! deno run --allow-all scripts/comprehensive-type-check.ts > /dev/null 2>&1; then
     print_status "$RED" "❌ Deno TypeScript check failed!"
     VALIDATION_FAILED=true
 else
@@ -48,9 +48,9 @@ else
     print_status "$GREEN" "✅ TypeScript linting passed"
 fi
 
-# 4. Run Deno linting (only on Deno-specific scripts)
+# 4. Run Deno linting (all migrated scripts)
 print_status "$YELLOW" "🦕 Running Deno linting on scripts..."
-if ! deno lint scripts/recorder.ts scripts/validate-types.ts; then
+if ! deno lint scripts/recorder.ts scripts/validate-types.ts scripts/tweets_enrichment.ts scripts/make-algolia-db.ts scripts/generate-books.ts; then
     print_status "$RED" "❌ Deno linting failed!"
     VALIDATION_FAILED=true
 else
