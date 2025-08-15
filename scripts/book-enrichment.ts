@@ -4,13 +4,13 @@ import {
     createScriptLogger, 
     createBrowser, 
     runWithErrorHandling 
-} from './libs/common-utils.js';
+} from './libs/common-utils.ts';
 import { 
     createDataAccess, 
     getBooksToEnrich, 
     mergeEnrichedBooks 
-} from './libs/data-access.js';
-import type { BookToEnrich, CurrentBook } from '../infrastructure/types/index.js';
+} from './libs/data-access.ts';
+import type { BookToEnrich, CurrentBook } from '../infrastructure/types/index.ts';
 
 const scriptDir = getScriptDirectory(import.meta.url);
 const logger = createScriptLogger('book-enrichment');

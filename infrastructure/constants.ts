@@ -3,6 +3,7 @@ export interface Authors {
   readonly CPSCOMUNIDAD: Author;
   readonly VICTOR: Author;
   readonly RECUENCO: Author;
+  readonly JLANTUNEZ: Author;
 }
 
 export interface Author {
@@ -15,6 +16,7 @@ export const fromXtoAuthor = (x: string): Author => {
   // I don't like this, but it's a quick fix
   if (x === AUTHORS.RECUENCO.X) return AUTHORS.RECUENCO;
   if (x === AUTHORS.VICTOR.X) return AUTHORS.VICTOR;
+  if (x === AUTHORS.JLANTUNEZ.X) return AUTHORS.JLANTUNEZ;
   
   return AUTHORS.CPSCOMUNIDAD;
 }
@@ -35,6 +37,11 @@ export const AUTHORS: Authors = {
     NAME: "Javier G. Recuenco",
     X: "https://x.com/Recuenco",
     YOUTUBE: "https://www.youtube.com/results?search_query=Javier+Recuenco"
+  },
+  JLANTUNEZ: {
+    NAME: "José Luis Antúnez",
+    X: "https://x.com/jlantunez",
+    YOUTUBE: "https://www.youtube.com/results?search_query=José+Luis+Antúnez"
   }
 } as const;
 

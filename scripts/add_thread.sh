@@ -9,7 +9,7 @@ id=$1
 first_tweet_line=$2
 
 echo "Adding thread $id to turras.csv"
-npx tsx ./scripts/add-new-tweet.ts $id "$first_tweet_line"
+deno run --allow-all ./scripts/add-new-tweet.ts $id "$first_tweet_line"
 
 echo "Obtaining thread $id"
 deno run --allow-all ./scripts/recorder.ts
@@ -17,16 +17,16 @@ deno run --allow-all ./scripts/recorder.ts
 # deno run --allow-all ./scripts/recorder.ts --test $id
 
 echo "Enriching tweets for thread $id" 
-npx tsx ./scripts/tweets_enrichment.ts
+deno run --allow-all ./scripts/tweets_enrichment.ts
 
 echo "Generating algolia index for thread $id"
-npx tsx ./scripts/make-algolia-db.ts
+deno run --allow-all ./scripts/make-algolia-db.ts
 
 echo "Generating books for thread $id"
-npx tsx ./scripts/generate-books.ts
+deno run --allow-all ./scripts/generate-books.ts
 
 echo "Enriching books for thread $id" 
-npx tsx ./scripts/book-enrichment.ts
+deno run --allow-all ./scripts/book-enrichment.ts
 
 echo "Adding thread $id to graph" 
 python ./scripts/create_graph.py 

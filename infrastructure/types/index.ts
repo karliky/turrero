@@ -18,7 +18,7 @@ export type TweetId = string;
 export type CompositeId = string;
 
 // Re-export ID utilities for convenience
-export * from '../utils/id-utils';
+export * from '../utils/id-utils.ts';
 
 // ============================================================================
 // CORE DATA TYPES
