@@ -15,6 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `deno task enrich` - Run tweet enrichment process
 - `deno task books` - Generate book references
 - `deno task algolia` - Update Algolia search index
+- `deno task ai-process` - Generate AI prompts and process with Claude CLI (NEW)
 - `deno task validate` - Validate Deno scripts and types
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
 
@@ -30,6 +31,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Testing Individual Tweets
 - `deno task scrape --test $tweet_id` - Test scraping a single tweet (auto-detects username)
 - `deno run --allow-all scripts/recorder.ts --test $tweet_id` - Direct test with auto-detection
+
+### AI Prompt Processing (NEW)
+- `deno task ai-process $thread_id` - Full AI processing with Claude CLI integration
+- `deno task ai-process --test $thread_id` - Generate prompt files without Claude execution
+- `deno task ai-process --no-claude $thread_id` - Force prompt file generation only
+- `deno task ai-process --verbose $thread_id` - Detailed logging output
+- **Features**: Thread text extraction, Claude CLI auto-detection, schema validation, atomic database updates
+- **Fallback**: Generates prompt files for manual processing when Claude CLI unavailable
 
 ## Tech Stack & Architecture
 
@@ -114,8 +123,11 @@ Or follow the manual 11-step process:
 6. Update Algolia: `deno run --allow-all scripts/make-algolia-db.ts`
 7. Generate books: `deno run --allow-all scripts/generate-books.ts`
 8. Enrich books: `deno run --allow-all scripts/book-enrichment.ts`
-9. Generate prompts: `./scripts/generate_prompts.sh`
-10. Process AI prompts with `ai-prompt-processor` agent: reads generated prompts, processes them with AI, and updates the corresponding JSON database files (`tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`)
+9. **MODERNIZED**: Generate AI prompts and process: `deno task ai-process $thread_id`
+   - Replaces legacy `./scripts/generate_prompts.sh` bash script
+   - Auto-detects Claude CLI availability for automatic processing
+   - Updates JSON database files: `tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`
+   - Falls back to prompt file generation if Claude CLI unavailable
 11. Update header date manually in `app/components/Header.tsx`
 12. Test with `npm run dev`
 

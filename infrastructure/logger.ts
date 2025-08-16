@@ -124,3 +124,8 @@ export function createLogger(config: LoggerConfig): Logger {
 export function createDenoLogger(prefix?: string): Logger {
   return new Logger(prefix ? { prefix } : {});
 }
+
+// Node.js-compatible logger for scripts
+export function createNodeLogger(prefix?: string): Logger {
+  return new Logger(prefix ? { prefix } : {});
+}

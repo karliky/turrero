@@ -32,6 +32,9 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+
+# Authentication files
+cookies.txt
 scripts/pdfs
 
 # Turra caché

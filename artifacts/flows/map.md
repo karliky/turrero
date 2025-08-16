@@ -143,10 +143,10 @@ graph TB
 4. `tweets.json` → `generate-books.ts` → `books-not-enriched.json`
 5. `books-not-enriched.json` → `book-enrichment.ts` → `books.json`
 
-### AI Processing Pipeline
-1. Generate prompts: `./scripts/generate_prompts.sh`
-2. Process prompts with `ai-prompt-processor` agent
-3. Update manual files: `tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`
+### AI Processing Pipeline (MODERNIZED)
+1. **Automated processing**: `deno task ai-process $thread_id` (replaces generate_prompts.sh)
+2. **Automatic Claude CLI integration** with fallback to prompt file generation
+3. **Atomic updates** to manual files: `tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`
 
 ### Graph Pipeline
 1. Python script reads: `tweets.json`, `tweets_map.json`, `tweets_summary.json`

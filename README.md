@@ -174,10 +174,10 @@ Alternatively you could use the following steps:
 8. `node ./scripts/book-enrichment.js` this will output the list of books you
    should use in the last prompt to get the category of books and update the
    `db/books.json`
-9. Use the `./scripts/generate_prompts.sh` to generate the prompts to be used
-   with ChatGPT (or the LLM of your choice) and obtain the summary, categories
-   and questions to include in `db/tweets_summary.json`, `db/tweets_map.json`
-   and `db/tweets_exam.json` respectively
+9. **MODERNIZED**: Use `deno task ai-process $thread_id` to automatically generate and process
+   prompts with Claude CLI integration. This replaces the legacy generate_prompts.sh script
+   and automatically updates `db/tweets_summary.json`, `db/tweets_map.json`,
+   `db/tweets_exam.json`, and `db/books.json` with proper schema validation
 10. Change manually the date on the file `components/header.js` to the latest
     update date
 11. Verify that everything is fine by running `npm run dev` on the root folder
