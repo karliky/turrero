@@ -143,7 +143,6 @@ export enum DatabaseFiles {
   TWEETS_PODCAST = 'tweets_podcast.json',
   BOOKS = 'books.json',
   BOOKS_NOT_ENRICHED = 'books-not-enriched.json',
-  TURRAS_CSV = 'turras.csv',
   GLOSARIO_CSV = 'glosario.csv',
   PROCESSED_GRAPH_DATA = 'processed_graph_data.json',
 }

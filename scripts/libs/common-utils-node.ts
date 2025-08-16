@@ -3,8 +3,8 @@
  * Node.js compatible version of common-utils.ts
  */
 
-import { dirname, join } from 'path';
-import { readFile, writeFile } from 'fs/promises';
+import { dirname, join } from 'node:path';
+import { readFile, writeFile } from 'node:fs/promises';
 // Simple logger for Node.js compatibility
 interface Logger {
   debug(message: string, ...args: unknown[]): void;

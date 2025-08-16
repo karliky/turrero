@@ -71,4 +71,25 @@ vendor/
 # Claude Code hooks
 thread_hook.log
 tsconfig.tsbuildinfo
+
+# Development temporary files
+*.backup*
+PLAN.md
+PHASE*.md
+PROJECT_DELIVERABLES.md
+ARCHITECTURE.md
+MIGRATION.md
+PERFORMANCE.md
+TROUBLESHOOTING.md
+test_*.log
+benchmark.json
+reports/
+artifacts/
+
+# Temporary script files
+scripts/temp/
+scripts/metadata/*
+scripts/prompt_*.txt
+.tmp_*
 tsconfig.tsbuildinfo
+*.log

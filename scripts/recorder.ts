@@ -75,7 +75,7 @@ interface TweetCSV {
  * @param filePath Path to the CSV file.
  * @returns Array of objects where each object represents a row in the CSV.
  */
-async function parseCSV(filePath: string): Promise<TweetCSV[]> {
+async function _parseCSV(filePath: string): Promise<TweetCSV[]> {
   const csvContent = await Deno.readTextFile(filePath);
   const lines = csvContent.split("\n");
   if (lines.length === 0) {
@@ -310,9 +310,11 @@ async function detectUsernameForTweet(
 
       if (profileLinks.length > 0) {
         const firstProfile = profileLinks[0];
-        const match = firstProfile.match(/x\.com\/([^\/\?]+)/);
-        if (match && match[1]) {
-          return match[1];
+        if (firstProfile) {
+          const match = firstProfile.match(/x\.com\/([^\/\?]+)/);
+          if (match && match[1]) {
+            return match[1];
+          }
         }
       }
 
@@ -792,9 +794,8 @@ async function main() {
           join(__dirname, "../infrastructure/db/tweets.json"),
         ),
       );
-      const tweets = await parseCSV(
-        join(__dirname, "../infrastructure/db/turras.csv"),
-      );
+      // Note: turras.csv has been removed - tweets now come directly from existing tweets.json
+      const tweets: TweetCSV[] = [];
 
       const existingTweets = existingTweetsData.reduce(
         (acc: string[], tweets: Tweet[]) => {

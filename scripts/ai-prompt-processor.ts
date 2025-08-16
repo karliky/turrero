@@ -11,6 +11,29 @@ import type {
     BookToEnrich
 } from "../infrastructure/types/index.ts";
 
+// Import Phase 1 infrastructure
+import {
+    validateTweets,
+    validateTweetsSummary,
+    validateTweetsMap,
+    validateTweetsExam,
+    validateBooks,
+    validateBooksNotEnriched,
+    type TweetSummaryObject,
+    type TweetMapObject,
+    type TweetExamObject,
+    type BookObject,
+    type ExamQuestion
+} from "../infrastructure/schemas/database-schemas.ts";
+import {
+    safeReadDatabase,
+    safeWriteDatabase,
+    atomicMultiWrite,
+    tweetExists,
+    type AtomicOperationResult,
+    type DatabaseBackupInfo
+} from "./lib/atomic-db-operations.ts";
+
 // Initialize logger
 const logger = createDenoLogger("ai-prompt-processor");
 
@@ -35,6 +58,21 @@ interface ProcessingResult {
     errors: ProcessingError[];
     claudeUsed: boolean;
     duration: number;
+    backups: DatabaseBackupInfo[];
+    validationResults: ValidationResult[];
+}
+
+interface ValidationResult {
+    fileName: string;
+    success: boolean;
+    error?: string;
+}
+
+interface ClaudeRetryConfig {
+    maxRetries: number;
+    baseDelayMs: number;
+    maxDelayMs: number;
+    exponentialBackoff: boolean;
 }
 
 enum ErrorType {
@@ -43,7 +81,11 @@ enum ErrorType {
     SCHEMA_VALIDATION = 'schema_validation',
     FILE_IO = 'file_io',
     THREAD_NOT_FOUND = 'thread_not_found',
-    COMMAND_EXECUTION = 'command_execution'
+    COMMAND_EXECUTION = 'command_execution',
+    RESPONSE_VALIDATION = 'response_validation',
+    ATOMIC_OPERATION = 'atomic_operation',
+    BACKUP_FAILURE = 'backup_failure',
+    RETRY_EXHAUSTED = 'retry_exhausted'
 }
 
 interface ProcessingError {
@@ -100,10 +142,18 @@ class AIPromptProcessor {
     private options: ProcessorOptions;
     private startTime: number;
     private backupPaths: Map<string, string> = new Map();
+    private retryConfig: ClaudeRetryConfig;
+    private validationResults: ValidationResult[] = [];
 
     constructor(options: ProcessorOptions) {
         this.options = options;
         this.startTime = Date.now();
+        this.retryConfig = {
+            maxRetries: 3,
+            baseDelayMs: 1000,
+            maxDelayMs: 10000,
+            exponentialBackoff: true
+        };
     }
 
     /**
@@ -115,7 +165,9 @@ class AIPromptProcessor {
             processedFiles: [],
             errors: [],
             claudeUsed: false,
-            duration: 0
+            duration: 0,
+            backups: [],
+            validationResults: []
         };
 
         try {
@@ -124,12 +176,23 @@ class AIPromptProcessor {
             // Ensure temp directories exist
             await this.createTempDirectories();
 
-            // Extract thread text
+            // Validate thread exists using Phase 1 infrastructure
+            if (!tweetExists(this.options.threadId)) {
+                result.errors.push({
+                    type: ErrorType.THREAD_NOT_FOUND,
+                    message: `Thread ${this.options.threadId} not found in tweets.json`,
+                    context: { threadId: this.options.threadId },
+                    recoverable: false
+                });
+                return result;
+            }
+
+            // Extract thread text with validation
             const threadText = await this.extractThreadText(this.options.threadId);
             if (!threadText) {
                 result.errors.push({
                     type: ErrorType.THREAD_NOT_FOUND,
-                    message: `Thread ${this.options.threadId} not found in tweets.json`,
+                    message: `Failed to extract thread text for ID ${this.options.threadId}`,
                     context: { threadId: this.options.threadId },
                     recoverable: false
                 });
@@ -152,9 +215,19 @@ class AIPromptProcessor {
 
             result.success = result.errors.length === 0;
             result.duration = Date.now() - this.startTime;
+            result.validationResults = this.validationResults;
 
             if (result.success) {
                 logger.info(`Processing completed successfully in ${result.duration}ms`);
+                logger.info(`Validation results: ${result.validationResults.length} files checked`);
+            } else {
+                logger.error(`Processing failed with ${result.errors.length} errors`);
+                // Log validation results for debugging
+                for (const validation of result.validationResults) {
+                    if (!validation.success) {
+                        logger.error(`Validation failed for ${validation.fileName}: ${validation.error}`);
+                    }
+                }
             }
 
         } catch (error) {
@@ -170,16 +243,30 @@ class AIPromptProcessor {
     }
 
     /**
-     * Extract thread text from tweets.json (replaces extract_thread_text.sh)
+     * Extract thread text from tweets.json with Zod validation
      */
     private async extractThreadText(threadId: ThreadId): Promise<string | null> {
         try {
-            const tweetsPath = join(dbPath, 'tweets.json');
-            const tweetsData = JSON.parse(await Deno.readTextFile(tweetsPath)) as Tweet[][];
+            // Use atomic operations for safe reading
+            const result = safeReadDatabase<typeof validateTweets>('tweets.json');
+            if (!result.success || !result.data) {
+                logger.error(`Failed to read tweets.json: ${result.error}`);
+                this.validationResults.push({
+                    fileName: 'tweets.json',
+                    success: false,
+                    error: result.error
+                });
+                return null;
+            }
+
+            this.validationResults.push({
+                fileName: 'tweets.json',
+                success: true
+            });
 
             // Find the thread containing the specified ID
-            const thread = tweetsData.find(tweetArray => 
-                tweetArray.some(tweet => tweet.id === threadId)
+            const thread = (result.data as unknown as Tweet[][]).find((tweetArray: Tweet[]) => 
+                tweetArray.some((tweet: Tweet) => tweet.id === threadId)
             );
 
             if (!thread) {
@@ -188,7 +275,7 @@ class AIPromptProcessor {
             }
 
             // Extract all tweet text from the thread (similar to jq operation)
-            const tweetTexts = thread.map(tweet => tweet.tweet).filter(text => text.trim());
+            const tweetTexts = thread.map((tweet: Tweet) => tweet.tweet).filter((text: string) => text.trim());
             
             // Format: ID on first line, then tweet text
             const output = [threadId, ...tweetTexts].join('\n');
@@ -198,6 +285,11 @@ class AIPromptProcessor {
 
         } catch (error) {
             logger.error(`Failed to extract thread text: ${error}`);
+            this.validationResults.push({
+                fileName: 'tweets.json',
+                success: false,
+                error: String(error)
+            });
             return null;
         }
     }
@@ -229,24 +321,83 @@ class AIPromptProcessor {
     }
 
     /**
-     * Process all prompts with Claude CLI
+     * Process all prompts with Claude CLI using atomic operations
      */
     private async processWithClaude(threadText: string, result: ProcessingResult): Promise<void> {
-        logger.info("Processing prompts with Claude CLI...");
+        logger.info("Processing prompts with Claude CLI using atomic operations...");
 
-        // Create backups before processing
-        await this.createBackups();
+        const operations: Array<{
+            fileName: 'tweets_summary.json' | 'tweets_map.json' | 'tweets_exam.json' | 'books.json';
+            data: any;
+            skipValidation?: boolean;
+        }> = [];
 
         try {
-            // Process each prompt type
-            await this.processSummaryPrompt(threadText, result);
-            await this.processCategoryPrompt(threadText, result);
-            await this.processExamPrompt(threadText, result);
-            await this.processBooksPrompt(result);
+            // Process each prompt type and collect data for atomic write
+            const summaryData = await this.processSummaryPromptData(threadText);
+            if (summaryData) {
+                const currentSummaries = safeReadDatabase<typeof validateTweetsSummary>('tweets_summary.json');
+                if (currentSummaries.success && currentSummaries.data) {
+                    const filtered = (currentSummaries.data as unknown as TweetSummary[]).filter((s: TweetSummary) => s.id !== this.options.threadId);
+                    filtered.push(summaryData);
+                    operations.push({ fileName: 'tweets_summary.json', data: filtered });
+                }
+            }
+
+            const categoryData = await this.processCategoryPromptData(threadText);
+            if (categoryData) {
+                const currentMap = safeReadDatabase<typeof validateTweetsMap>('tweets_map.json');
+                if (currentMap.success && currentMap.data) {
+                    const filtered = (currentMap.data as unknown as CategorizedTweet[]).filter((m: CategorizedTweet) => m.id !== this.options.threadId);
+                    filtered.push(categoryData);
+                    operations.push({ fileName: 'tweets_map.json', data: filtered });
+                }
+            }
+
+            const examData = await this.processExamPromptData(threadText);
+            if (examData) {
+                const currentExam = safeReadDatabase<typeof validateTweetsExam>('tweets_exam.json');
+                if (currentExam.success && currentExam.data) {
+                    const filtered = (currentExam.data as unknown as TweetExam[]).filter((e: TweetExam) => e.id !== this.options.threadId);
+                    filtered.push(examData);
+                    operations.push({ fileName: 'tweets_exam.json', data: filtered });
+                }
+            }
+
+            const booksData = await this.processBooksPromptData();
+            if (booksData.length > 0) {
+                const currentBooks = safeReadDatabase<typeof validateBooks>('books.json');
+                if (currentBooks.success && currentBooks.data) {
+                    const updatedBooks = [...(currentBooks.data as unknown as CurrentBook[])];
+                    for (const newBook of booksData) {
+                        const existingIndex = updatedBooks.findIndex(b => b.title === newBook.title);
+                        if (existingIndex >= 0 && newBook.categories && updatedBooks[existingIndex]) {
+                            updatedBooks[existingIndex]!.categories = newBook.categories;
+                        }
+                    }
+                    operations.push({ fileName: 'books.json', data: updatedBooks });
+                }
+            }
+
+            // Perform atomic multi-write operation
+            if (operations.length > 0) {
+                const atomicResult = atomicMultiWrite(operations);
+                if (atomicResult.success) {
+                    result.backups = atomicResult.data?.backups || [];
+                    result.processedFiles = operations.map(op => op.fileName);
+                    logger.info(`Successfully updated ${operations.length} database files atomically`);
+                } else {
+                    result.errors.push({
+                        type: ErrorType.ATOMIC_OPERATION,
+                        message: `Atomic write failed: ${atomicResult.error}`,
+                        context: { operations: operations.map(op => op.fileName) },
+                        recoverable: true
+                    });
+                }
+            }
 
         } catch (error) {
             logger.error(`Error during Claude processing: ${error}`);
-            await this.rollbackFromBackups();
             result.errors.push({
                 type: ErrorType.COMMAND_EXECUTION,
                 message: `Claude processing failed: ${error}`,
@@ -370,91 +521,92 @@ ${booksData}
     }
 
     /**
-     * Get books data for processing
+     * Get books data for processing using atomic operations
      */
     private async getBooksData(): Promise<string> {
         try {
-            // Read books-not-enriched.json for book data
-            const booksPath = join(dbPath, 'books-not-enriched.json');
-            const booksData = JSON.parse(await Deno.readTextFile(booksPath)) as BookToEnrich[];
+            const result = safeReadDatabase<typeof validateBooksNotEnriched>('books-not-enriched.json');
+            if (!result.success || !result.data) {
+                logger.warn(`Could not read books data: ${result.error}`);
+                this.validationResults.push({
+                    fileName: 'books-not-enriched.json',
+                    success: false,
+                    error: result.error
+                });
+                return '';
+            }
+
+            this.validationResults.push({
+                fileName: 'books-not-enriched.json',
+                success: true
+            });
             
-            return booksData.map(book => `${book.title} - ${book.author || 'Unknown Author'}`).join('\n');
+            return (result.data as unknown as CurrentBook[]).map((book: CurrentBook) => `${book.title} - ${book.author || 'Unknown Author'}`).join('\n');
         } catch (error) {
             logger.warn(`Could not read books data: ${error}`);
+            this.validationResults.push({
+                fileName: 'books-not-enriched.json',
+                success: false,
+                error: String(error)
+            });
             return '';
         }
     }
 
     /**
-     * Process summary prompt with Claude
+     * Process summary prompt with Claude and return data (for atomic operations)
      */
-    private async processSummaryPrompt(threadText: string, result: ProcessingResult): Promise<void> {
+    private async processSummaryPromptData(threadText: string): Promise<TweetSummaryObject | null> {
         const prompt = this.generateSummaryPrompt(threadText);
         const response = await this.executeClaudeWithPrompt(prompt);
         
         if (response) {
-            const summaryData = this.parseSummaryResponse(response, this.options.threadId);
-            if (summaryData) {
-                await this.updateTweetsSummary(summaryData);
-                result.processedFiles.push('tweets_summary.json');
-                logger.info("Successfully updated tweets_summary.json");
-            }
+            return this.parseSummaryResponse(response, this.options.threadId);
         }
+        return null;
     }
 
     /**
-     * Process category prompt with Claude
+     * Process category prompt with Claude and return data (for atomic operations)
      */
-    private async processCategoryPrompt(threadText: string, result: ProcessingResult): Promise<void> {
+    private async processCategoryPromptData(threadText: string): Promise<TweetMapObject | null> {
         const prompt = this.generateCategoryPrompt(threadText);
         const response = await this.executeClaudeWithPrompt(prompt);
         
         if (response) {
-            const categoryData = this.parseCategoryResponse(response, this.options.threadId);
-            if (categoryData) {
-                await this.updateTweetsMap(categoryData);
-                result.processedFiles.push('tweets_map.json');
-                logger.info("Successfully updated tweets_map.json");
-            }
+            return this.parseCategoryResponse(response, this.options.threadId);
         }
+        return null;
     }
 
     /**
-     * Process exam prompt with Claude
+     * Process exam prompt with Claude and return data (for atomic operations)
      */
-    private async processExamPrompt(threadText: string, result: ProcessingResult): Promise<void> {
+    private async processExamPromptData(threadText: string): Promise<TweetExamObject | null> {
         const prompt = this.generateExamPrompt(threadText);
         const response = await this.executeClaudeWithPrompt(prompt);
         
         if (response) {
-            const examData = this.parseExamResponse(response, this.options.threadId);
-            if (examData) {
-                await this.updateTweetsExam(examData);
-                result.processedFiles.push('tweets_exam.json');
-                logger.info("Successfully updated tweets_exam.json");
-            }
+            return this.parseExamResponse(response, this.options.threadId);
         }
+        return null;
     }
 
     /**
-     * Process books prompt with Claude
+     * Process books prompt with Claude and return data (for atomic operations)
      */
-    private async processBooksPrompt(result: ProcessingResult): Promise<void> {
+    private async processBooksPromptData(): Promise<Partial<BookObject>[]> {
         const prompt = await this.generateBooksPrompt();
         const response = await this.executeClaudeWithPrompt(prompt);
         
         if (response) {
-            const booksData = this.parseBooksResponse(response);
-            if (booksData.length > 0) {
-                await this.updateBooks(booksData);
-                result.processedFiles.push('books.json');
-                logger.info("Successfully updated books.json");
-            }
+            return this.parseBooksResponse(response);
         }
+        return [];
     }
 
     /**
-     * Execute Claude CLI with a prompt
+     * Execute Claude CLI with a prompt - simple but robust approach
      */
     private async executeClaudeWithPrompt(prompt: string): Promise<string | null> {
         try {
@@ -476,8 +628,15 @@ ${booksData}
 
             if (success) {
                 const response = new TextDecoder().decode(stdout);
-                logger.debug("Claude response received");
-                return response;
+                
+                // Simple validation - non-empty response
+                if (response && response.trim().length > 0) {
+                    logger.debug("Claude response received");
+                    return response;
+                } else {
+                    logger.warn("Claude returned empty response");
+                    return null;
+                }
             } else {
                 const errorText = new TextDecoder().decode(stderr);
                 logger.error(`Claude execution failed: ${errorText}`);
@@ -490,222 +649,278 @@ ${booksData}
     }
 
     /**
-     * Parse summary response from Claude
+     * Validate Claude response format and content
      */
-    private parseSummaryResponse(response: string, threadId: ThreadId): TweetSummary | null {
+    private validateClaudeResponse(response: string): boolean {
+        if (!response || response.trim().length === 0) {
+            logger.warn('Claude response is empty');
+            return false;
+        }
+        
+        // Remove markdown code blocks if present
+        const cleanResponse = response.replace(/```json\n?([\s\S]*?)\n?```/g, '$1').trim();
+        
         try {
-            const parsed = JSON.parse(response.trim());
+            JSON.parse(cleanResponse);
+            return true;
+        } catch {
+            logger.warn('Claude response is not valid JSON');
+            logger.debug(`Response content: ${response.substring(0, 200)}...`);
+            return false;
+        }
+    }
+
+    /**
+     * Clean Claude response by removing markdown wrappers
+     */
+    private cleanClaudeResponse(response: string): string {
+        return response.replace(/```json\n?([\s\S]*?)\n?```/g, '$1').trim();
+    }
+
+    /**
+     * Parse Claude response with smart cleaning and one retry
+     */
+    private parseClaudeResponse(response: string): any {
+        try {
+            return JSON.parse(response);
+        } catch {
+            // Try cleaning and parsing once more
+            const cleaned = this.cleanClaudeResponse(response);
+            return JSON.parse(cleaned);
+        }
+    }
+
+    /**
+     * Parse summary response from Claude with smart handling
+     */
+    private parseSummaryResponse(response: string, threadId: ThreadId): TweetSummaryObject | null {
+        try {
+            const parsed = this.parseClaudeResponse(response);
             
-            if (parsed.id && parsed.summary && typeof parsed.summary === 'string') {
-                return {
-                    id: threadId,
-                    summary: parsed.summary
-                };
+            // Validate structure
+            if (!parsed.summary || typeof parsed.summary !== 'string') {
+                logger.error('Invalid summary response: missing or invalid summary field');
+                logger.debug(`Response: ${JSON.stringify(parsed)}`);
+                return null;
             }
             
-            logger.error("Invalid summary response format");
-            return null;
+            // Validate content
+            if (parsed.summary.length < 10 || parsed.summary.length > 200) {
+                logger.warn(`Summary length unusual: ${parsed.summary.length} characters`);
+            }
+            
+            // Check for forbidden words
+            const forbiddenWords = ['turras', 'hoy', 'hilo'];
+            const summaryLower = parsed.summary.toLowerCase();
+            const hasForbiddenWords = forbiddenWords.some(word => summaryLower.includes(word));
+            
+            if (hasForbiddenWords) {
+                logger.warn('Summary contains forbidden words');
+            }
+            
+            const result: TweetSummaryObject = {
+                id: threadId,
+                summary: parsed.summary
+            };
+            
+            // Validate against schema
+            const validation = safeWriteDatabase('tweets_summary.json', [result], true);
+            if (!validation.success) {
+                logger.error(`Summary validation failed: ${validation.error}`);
+                return null;
+            }
+            
+            return result;
+            
         } catch (error) {
             logger.error(`Failed to parse summary response: ${error}`);
+            logger.debug(`Response content: ${response.substring(0, 200)}...`);
             return null;
         }
     }
 
     /**
-     * Parse category response from Claude
+     * Parse category response from Claude with smart handling
      */
-    private parseCategoryResponse(response: string, threadId: ThreadId): CategorizedTweet | null {
+    private parseCategoryResponse(response: string, threadId: ThreadId): TweetMapObject | null {
         try {
-            const parsed = JSON.parse(response.trim());
+            const parsed = this.parseClaudeResponse(response);
             
-            if (parsed.id && parsed.categories && typeof parsed.categories === 'string') {
-                // Validate categories
-                const categories = parsed.categories.split(',').map((c: string) => c.trim());
-                const validCategories = categories.filter((c: string) => THREAD_CATEGORIES.includes(c));
-                
-                if (validCategories.length > 0) {
-                    return {
-                        id: threadId,
-                        categories: validCategories.join(',')
-                    };
-                }
+            // Validate structure
+            if (!parsed.categories || typeof parsed.categories !== 'string') {
+                logger.error('Invalid category response: missing or invalid categories field');
+                logger.debug(`Response: ${JSON.stringify(parsed)}`);
+                return null;
             }
             
-            logger.error("Invalid category response format");
-            return null;
+            // Validate and filter categories
+            const categories = parsed.categories.split(',').map((c: string) => c.trim());
+            const validCategories = categories.filter((c: string) => THREAD_CATEGORIES.includes(c));
+            
+            if (validCategories.length === 0) {
+                logger.error('No valid categories found in response');
+                logger.debug(`Provided categories: ${categories.join(', ')}`);
+                logger.debug(`Valid categories: ${THREAD_CATEGORIES.join(', ')}`);
+                return null;
+            }
+            
+            if (validCategories.length > 5) {
+                logger.warn(`Too many categories (${validCategories.length}), limiting to 5`);
+                validCategories.splice(5);
+            }
+            
+            const result: TweetMapObject = {
+                id: threadId,
+                categories: validCategories.join(',')
+            };
+            
+            // Validate against schema
+            const validation = safeWriteDatabase('tweets_map.json', [result], true);
+            if (!validation.success) {
+                logger.error(`Category validation failed: ${validation.error}`);
+                return null;
+            }
+            
+            logger.info(`Categories assigned: ${validCategories.join(', ')}`);
+            return result;
+            
         } catch (error) {
             logger.error(`Failed to parse category response: ${error}`);
+            logger.debug(`Response content: ${response.substring(0, 200)}...`);
             return null;
         }
     }
 
     /**
-     * Parse exam response from Claude
+     * Parse exam response from Claude with smart handling
      */
-    private parseExamResponse(response: string, threadId: ThreadId): TweetExam | null {
+    private parseExamResponse(response: string, threadId: ThreadId): TweetExamObject | null {
         try {
-            const parsed = JSON.parse(response.trim());
+            const parsed = this.parseClaudeResponse(response);
             
-            if (parsed.id && parsed.questions && Array.isArray(parsed.questions)) {
-                const validQuestions: QuizQuestion[] = [];
-                
-                for (const q of parsed.questions) {
-                    if (q.question && Array.isArray(q.options) && typeof q.answer === 'number') {
-                        // Convert from 1-based to 0-based indexing for internal storage
-                        const question: QuizQuestion = {
-                            question: q.question,
-                            options: q.options,
-                            answer: q.answer - 1  // Convert to 0-based
-                        };
-                        
-                        if (question.answer >= 0 && question.answer < question.options.length) {
-                            validQuestions.push(question);
-                        }
-                    }
-                }
-                
-                if (validQuestions.length > 0) {
-                    return {
-                        id: threadId,
-                        questions: validQuestions
-                    };
-                }
+            // Validate structure
+            if (!parsed.questions || !Array.isArray(parsed.questions)) {
+                logger.error('Invalid exam response: missing or invalid questions field');
+                logger.debug(`Response: ${JSON.stringify(parsed)}`);
+                return null;
             }
             
-            logger.error("Invalid exam response format");
-            return null;
+            if (parsed.questions.length === 0 || parsed.questions.length > 3) {
+                logger.warn(`Questions count unusual: ${parsed.questions.length} (expected 1-3)`);
+            }
+            
+            const validQuestions: ExamQuestion[] = [];
+            
+            for (const [index, q] of parsed.questions.entries()) {
+                if (!q.question || typeof q.question !== 'string') {
+                    logger.warn(`Question ${index + 1} missing or invalid question text`);
+                    continue;
+                }
+                
+                if (!Array.isArray(q.options) || q.options.length === 0 || q.options.length > 3) {
+                    logger.warn(`Question ${index + 1} has invalid options count: ${q.options?.length}`);
+                    continue;
+                }
+                
+                if (typeof q.answer !== 'number' || q.answer < 1 || q.answer > q.options.length) {
+                    logger.warn(`Question ${index + 1} has invalid answer index: ${q.answer}`);
+                    continue;
+                }
+                
+                // Convert from 1-based to 0-based indexing for internal storage
+                const question: ExamQuestion = {
+                    question: q.question,
+                    options: q.options,
+                    answer: q.answer - 1  // Convert to 0-based
+                };
+                
+                validQuestions.push(question);
+            }
+            
+            if (validQuestions.length === 0) {
+                logger.error('No valid questions found in exam response');
+                return null;
+            }
+            
+            const result: TweetExamObject = {
+                id: threadId,
+                questions: validQuestions
+            };
+            
+            // Validate against schema
+            const validation = safeWriteDatabase('tweets_exam.json', [result], true);
+            if (!validation.success) {
+                logger.error(`Exam validation failed: ${validation.error}`);
+                return null;
+            }
+            
+            logger.info(`Generated ${validQuestions.length} valid exam questions`);
+            return result;
+            
         } catch (error) {
             logger.error(`Failed to parse exam response: ${error}`);
+            logger.debug(`Response content: ${response.substring(0, 200)}...`);
             return null;
         }
     }
 
     /**
-     * Parse books response from Claude
+     * Parse books response from Claude with smart handling
      */
-    private parseBooksResponse(response: string): Partial<CurrentBook>[] {
+    private parseBooksResponse(response: string): Partial<BookObject>[] {
         try {
-            const parsed = JSON.parse(response.trim());
-            const books: Partial<CurrentBook>[] = [];
+            const parsed = this.parseClaudeResponse(response);
+            const books: Partial<BookObject>[] = [];
             
-            if (Array.isArray(parsed)) {
-                for (const book of parsed) {
-                    if (book.title && Array.isArray(book.categories)) {
-                        const validCategories = book.categories.filter((c: string) => BOOK_CATEGORIES.includes(c));
-                        if (validCategories.length > 0) {
-                            books.push({
-                                title: book.title,
-                                categories: validCategories
-                            });
-                        }
-                    }
-                }
+            if (!Array.isArray(parsed)) {
+                logger.error('Invalid books response: expected array');
+                logger.debug(`Response: ${JSON.stringify(parsed)}`);
+                return [];
             }
             
+            for (const [index, book] of parsed.entries()) {
+                if (!book.title || typeof book.title !== 'string') {
+                    logger.warn(`Book ${index + 1} missing or invalid title`);
+                    continue;
+                }
+                
+                if (!Array.isArray(book.categories) || book.categories.length === 0) {
+                    logger.warn(`Book ${index + 1} (${book.title}) missing or invalid categories`);
+                    continue;
+                }
+                
+                const validCategories = book.categories.filter((c: string) => {
+                    const isValid = BOOK_CATEGORIES.includes(c);
+                    if (!isValid) {
+                        logger.warn(`Invalid book category: ${c}`);
+                    }
+                    return isValid;
+                });
+                
+                if (validCategories.length === 0) {
+                    logger.warn(`Book ${index + 1} (${book.title}) has no valid categories`);
+                    continue;
+                }
+                
+                books.push({
+                    title: book.title,
+                    categories: validCategories
+                });
+                
+                logger.debug(`Book processed: ${book.title} -> [${validCategories.join(', ')}]`);
+            }
+            
+            logger.info(`Processed ${books.length} books with valid categories`);
             return books;
+            
         } catch (error) {
             logger.error(`Failed to parse books response: ${error}`);
+            logger.debug(`Response content: ${response.substring(0, 200)}...`);
             return [];
         }
     }
 
-    /**
-     * Update tweets_summary.json
-     */
-    private async updateTweetsSummary(newSummary: TweetSummary): Promise<void> {
-        const filePath = join(dbPath, 'tweets_summary.json');
-        
-        try {
-            const existing = JSON.parse(await Deno.readTextFile(filePath)) as TweetSummary[];
-            
-            // Remove existing entry for this ID
-            const filtered = existing.filter(s => s.id !== newSummary.id);
-            
-            // Add new entry
-            filtered.push(newSummary);
-            
-            // Write back to file
-            await Deno.writeTextFile(filePath, JSON.stringify(filtered, null, 2));
-            
-        } catch (error) {
-            logger.error(`Failed to update tweets_summary.json: ${error}`);
-            throw error;
-        }
-    }
-
-    /**
-     * Update tweets_map.json
-     */
-    private async updateTweetsMap(newMapping: CategorizedTweet): Promise<void> {
-        const filePath = join(dbPath, 'tweets_map.json');
-        
-        try {
-            const existing = JSON.parse(await Deno.readTextFile(filePath)) as CategorizedTweet[];
-            
-            // Remove existing entry for this ID
-            const filtered = existing.filter(m => m.id !== newMapping.id);
-            
-            // Add new entry
-            filtered.push(newMapping);
-            
-            // Write back to file
-            await Deno.writeTextFile(filePath, JSON.stringify(filtered, null, 2));
-            
-        } catch (error) {
-            logger.error(`Failed to update tweets_map.json: ${error}`);
-            throw error;
-        }
-    }
-
-    /**
-     * Update tweets_exam.json
-     */
-    private async updateTweetsExam(newExam: TweetExam): Promise<void> {
-        const filePath = join(dbPath, 'tweets_exam.json');
-        
-        try {
-            const existing = JSON.parse(await Deno.readTextFile(filePath)) as TweetExam[];
-            
-            // Remove existing entry for this ID
-            const filtered = existing.filter(e => e.id !== newExam.id);
-            
-            // Add new entry
-            filtered.push(newExam);
-            
-            // Write back to file
-            await Deno.writeTextFile(filePath, JSON.stringify(filtered, null, 2));
-            
-        } catch (error) {
-            logger.error(`Failed to update tweets_exam.json: ${error}`);
-            throw error;
-        }
-    }
-
-    /**
-     * Update books.json
-     */
-    private async updateBooks(newBooks: Partial<CurrentBook>[]): Promise<void> {
-        const filePath = join(dbPath, 'books.json');
-        
-        try {
-            const existing = JSON.parse(await Deno.readTextFile(filePath)) as CurrentBook[];
-            
-            // Update existing books with new category information
-            for (const newBook of newBooks) {
-                const existingIndex = existing.findIndex(b => b.title === newBook.title);
-                if (existingIndex >= 0 && newBook.categories && existing[existingIndex]) {
-                    existing[existingIndex]!.categories = newBook.categories;
-                }
-            }
-            
-            // Write back to file
-            await Deno.writeTextFile(filePath, JSON.stringify(existing, null, 2));
-            
-        } catch (error) {
-            logger.error(`Failed to update books.json: ${error}`);
-            throw error;
-        }
-    }
+    // Note: Database update methods removed - now using atomic operations in processWithClaude()
 
     /**
      * Create temporary directories
@@ -721,50 +936,7 @@ ${booksData}
         }
     }
 
-    /**
-     * Create backups of database files
-     */
-    private async createBackups(): Promise<void> {
-        const filesToBackup = [
-            'tweets_summary.json',
-            'tweets_map.json',
-            'tweets_exam.json',
-            'books.json'
-        ];
-
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-
-        for (const filename of filesToBackup) {
-            try {
-                const originalPath = join(dbPath, filename);
-                const backupPath = join(tempPath, 'backups', `${filename}.${timestamp}.backup`);
-                
-                await Deno.copyFile(originalPath, backupPath);
-                this.backupPaths.set(filename, backupPath);
-                
-                logger.debug(`Created backup: ${backupPath}`);
-            } catch (error) {
-                logger.warn(`Failed to backup ${filename}: ${error}`);
-            }
-        }
-    }
-
-    /**
-     * Rollback from backups
-     */
-    private async rollbackFromBackups(): Promise<void> {
-        logger.warn("Rolling back from backups...");
-
-        for (const [filename, backupPath] of this.backupPaths) {
-            try {
-                const originalPath = join(dbPath, filename);
-                await Deno.copyFile(backupPath, originalPath);
-                logger.info(`Restored ${filename} from backup`);
-            } catch (error) {
-                logger.error(`Failed to restore ${filename}: ${error}`);
-            }
-        }
-    }
+    // Note: Backup methods removed - now using atomic operations with built-in backup/restore
 }
 
 /**

@@ -136,7 +136,7 @@ async function processImageTweets(
 ): Promise<void> {
   const imagePromises = tweet.metadata!.imgs!.map(
     async (metadata: ImageMetadata) => {
-      const imageMetadata = { ...metadata, type: "image" as TweetMetadataType };
+      const imageMetadata = { ...metadata, type: TweetMetadataType.IMAGE };
       await enricher.downloadTweetMedia(
         { id: tweet.id, metadata: imageMetadata },
         undefined,

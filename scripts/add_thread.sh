@@ -17,8 +17,7 @@ fi
 echo "Scraping thread $id (auto-detecting username and content)"
 deno run --allow-all ./scripts/recorder.ts
 
-echo "Adding scraped tweet $id to turras.csv"
-deno run --allow-all ./scripts/add-scraped-tweet.ts $id
+# Note: turras.csv has been removed - scraping goes directly to tweets.json
 # To debug:
 # deno run --allow-all ./scripts/recorder.ts --test $id
 

@@ -57,7 +57,8 @@
         "epub-gen": "npm:epub-gen@^0.1.0",
         "dotenv": "npm:dotenv@^16.4.7",
         "openai": "npm:openai@^4.73.1",
-        "axios": "npm:axios@^1.7.9"
+        "axios": "npm:axios@^1.7.9",
+        "zod": "npm:zod@^3.22.4"
     },
     "lint": {
         "rules": {
@@ -88,23 +89,17 @@
         ]
     },
     "tasks": {
-        "dev": "deno run --allow-all --watch scripts/recorder.ts",
+        "add-thread": "./scripts/add_thread_optimized.sh",
         "scrape": "deno run --allow-all scripts/recorder.ts",
-        "validate": "deno run --allow-all scripts/validate-types.ts",
         "enrich": "deno run --allow-all scripts/tweets_enrichment.ts",
-        "books": "deno run --allow-all scripts/generate-books.ts",
-        "book-enrich": "deno run --allow-all scripts/book-enrichment.ts",
-        "algolia": "deno run --allow-all scripts/make-algolia-db.ts",
         "ai-process": "deno run --allow-all scripts/ai-prompt-processor.ts",
-        "images": "deno run --allow-all scripts/image-card-generator.ts",
-        "schema:validate": "deno run --allow-read scripts/validate-schemas.ts",
-        "schema:infer": "deno run --allow-read --allow-write scripts/infer-schemas.ts",
-        "flows:check": "deno run --allow-read scripts/check-data-flows.ts",
-        "check": "deno check scripts/tweets_enrichment.ts scripts/make-algolia-db.ts scripts/generate-books.ts scripts/validate-deno.ts scripts/test-deno-scripts.ts scripts/ai-prompt-processor.ts",
-        "lint": "deno lint scripts/tweets_enrichment.ts scripts/make-algolia-db.ts scripts/generate-books.ts scripts/validate-deno.ts scripts/test-deno-scripts.ts scripts/ai-prompt-processor.ts",
-        "fmt": "deno fmt scripts/",
-        "test": "deno test --allow-all scripts/",
-        "clean": "rm -rf .deno_cache"
+        "algolia": "deno run --allow-all scripts/make-algolia-db.ts",
+        "db-fix": "deno run --allow-all scripts/enhanced-validate-db-integrity.ts --fix",
+        "db-check": "deno run --allow-all scripts/enhanced-validate-db-integrity.ts",
+        "typecheck": "npm run lint && npx tsc --noEmit",
+        "check": "deno check scripts/*.ts",
+        "lint": "deno lint scripts/",
+        "fmt": "deno fmt scripts/"
     },
     "nodeModulesDir": "auto",
     "lock": false

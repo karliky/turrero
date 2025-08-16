@@ -33,12 +33,6 @@ interface FlowValidation {
 
 const DATA_FLOWS: FlowDependency[] = [
   {
-    file: 'turras.csv',
-    dependencies: [],
-    description: 'Master list of threads to scrape',
-    type: 'manual'
-  },
-  {
     file: 'glosario.csv', 
     dependencies: [],
     description: 'Glossary terms and definitions',
@@ -46,7 +40,7 @@ const DATA_FLOWS: FlowDependency[] = [
   },
   {
     file: 'tweets.json',
-    dependencies: ['turras.csv'],
+    dependencies: [],
     description: 'Scraped tweet data from X.com',
     script: 'recorder.ts',
     type: 'auto'

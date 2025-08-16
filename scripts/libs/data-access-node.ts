@@ -3,8 +3,8 @@
  * Node.js compatible version of data-access.ts
  */
 
-import { join } from 'path';
-import { readFile, writeFile } from 'fs/promises';
+import { join } from 'node:path';
+import { readFile, writeFile, copyFile, access } from 'node:fs/promises';
 import { readJsonFile, writeJsonFile, getDbPath } from './common-utils-node.ts';
 import type {
   Tweet,
@@ -26,91 +26,73 @@ import type {
 export class DataAccess {
   private dbPath: string;
 
-  constructor(scriptDir: string) {
-    this.dbPath = getDbPath(scriptDir);
+  constructor(dbPath: string) {
+    this.dbPath = dbPath;
   }
 
-  // Tweet-related data access
-  async getTweets(): Promise<Tweet[][]> {
-    return readJsonFile<Tweet[][]>(join(this.dbPath, 'tweets.json'));
+  // JSON data access (Node.js compatible)
+  async getTweets(): Promise<string> {
+    return await readFile(join(this.dbPath, 'tweets.json'), 'utf-8');
   }
 
-  async saveTweets(tweets: Tweet[][]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets.json'), tweets);
+  async saveTweets(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'tweets.json'), content, 'utf-8');
   }
 
-  async getTweetsEnriched(): Promise<EnrichedTweetData[]> {
-    return readJsonFile<EnrichedTweetData[]>(join(this.dbPath, 'tweets_enriched.json'));
+  async getTweetsEnriched(): Promise<string> {
+    return await readFile(join(this.dbPath, 'tweets_enriched.json'), 'utf-8');
   }
 
-  async saveTweetsEnriched(enrichments: EnrichedTweetData[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_enriched.json'), enrichments);
+  async saveTweetsEnriched(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'tweets_enriched.json'), content, 'utf-8');
   }
 
-  async getTweetsMap(): Promise<CategorizedTweet[]> {
-    return readJsonFile<CategorizedTweet[]>(join(this.dbPath, 'tweets_map.json'));
+  async getTweetsMap(): Promise<string> {
+    return await readFile(join(this.dbPath, 'tweets_map.json'), 'utf-8');
   }
 
-  async saveTweetsMap(map: CategorizedTweet[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_map.json'), map);
+  async saveTweetsMap(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'tweets_map.json'), content, 'utf-8');
   }
 
-  async getTweetsSummary(): Promise<TweetSummary[]> {
-    return readJsonFile<TweetSummary[]>(join(this.dbPath, 'tweets_summary.json'));
+  async getTweetsSummary(): Promise<string> {
+    return await readFile(join(this.dbPath, 'tweets_summary.json'), 'utf-8');
   }
 
-  async saveTweetsSummary(summaries: TweetSummary[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_summary.json'), summaries);
+  async saveTweetsSummary(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'tweets_summary.json'), content, 'utf-8');
   }
 
-  async getTweetsExam(): Promise<TweetExam[]> {
-    return readJsonFile<TweetExam[]>(join(this.dbPath, 'tweets_exam.json'));
+  async getTweetsExam(): Promise<string> {
+    return await readFile(join(this.dbPath, 'tweets_exam.json'), 'utf-8');
   }
 
-  async saveTweetsExam(exam: TweetExam[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_exam.json'), exam);
+  async saveTweetsExam(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'tweets_exam.json'), content, 'utf-8');
   }
 
-  async getTweetsDb(): Promise<SearchIndexEntry[]> {
-    return readJsonFile<SearchIndexEntry[]>(join(this.dbPath, 'tweets-db.json'));
+  async getBooks(): Promise<string> {
+    return await readFile(join(this.dbPath, 'books.json'), 'utf-8');
   }
 
-  async saveTweetsDb(db: SearchIndexEntry[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets-db.json'), db);
+  async saveBooks(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'books.json'), content, 'utf-8');
   }
 
-  async getTweetsPodcast(): Promise<PodcastEpisode[]> {
-    return readJsonFile<PodcastEpisode[]>(join(this.dbPath, 'tweets_podcast.json'));
+  async getBooksNotEnriched(): Promise<string> {
+    return await readFile(join(this.dbPath, 'books-not-enriched.json'), 'utf-8');
   }
 
-  async saveTweetsPodcast(podcast: PodcastEpisode[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_podcast.json'), podcast);
+  async saveBooksNotEnriched(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'books-not-enriched.json'), content, 'utf-8');
   }
 
-  // Book-related data access
-  async getBooks(): Promise<CurrentBook[]> {
-    return readJsonFile<CurrentBook[]>(join(this.dbPath, 'books.json'));
+  async getTweetsDb(): Promise<string> {
+    return await readFile(join(this.dbPath, 'tweets-db.json'), 'utf-8');
   }
 
-  async saveBooks(books: CurrentBook[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'books.json'), books);
-  }
-
-  async getBooksNotEnriched(): Promise<BookToEnrich[]> {
-    return readJsonFile<BookToEnrich[]>(join(this.dbPath, 'books-not-enriched.json'));
-  }
-
-  async saveBooksNotEnriched(books: BookToEnrich[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'books-not-enriched.json'), books);
-  }
-
-  // CSV data access (Node.js compatible)
-  async getTurrasCsv(): Promise<string> {
-    return await readFile(join(this.dbPath, 'turras.csv'), 'utf-8');
-  }
-
-  async saveTurrasCsv(content: string): Promise<void> {
-    await writeFile(join(this.dbPath, 'turras.csv'), content, 'utf-8');
+  async saveTweetsDb(content: string): Promise<void> {
+    await writeFile(join(this.dbPath, 'tweets-db.json'), content, 'utf-8');
   }
 
   async getGlosarioCsv(): Promise<string> {
@@ -121,13 +103,25 @@ export class DataAccess {
     await writeFile(join(this.dbPath, 'glosario.csv'), content, 'utf-8');
   }
 
-  // Graph data access
-  async getProcessedGraphData(): Promise<TurraNode[]> {
-    return readJsonFile<TurraNode[]>(join(this.dbPath, 'processed_graph_data.json'));
+  // Helper method to check if a file exists
+  async fileExists(filename: string): Promise<boolean> {
+    try {
+      await access(join(this.dbPath, filename));
+      return true;
+    } catch {
+      return false;
+    }
   }
 
-  async saveProcessedGraphData(data: TurraNode[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'processed_graph_data.json'), data);
+  // Helper method to create backup of a file
+  async createBackup(filename: string): Promise<string> {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const backupName = `${filename}.backup.${timestamp}`;
+    const originalPath = join(this.dbPath, filename);
+    const backupPath = join(this.dbPath, backupName);
+    
+    await copyFile(originalPath, backupPath);
+    return backupName;
   }
 }
 

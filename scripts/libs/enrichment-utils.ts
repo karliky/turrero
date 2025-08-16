@@ -10,7 +10,7 @@ import type {
     TweetMetadataType,
     ScriptLogger,
     EnrichedTweetData
-} from '@/infrastructure/types/index.ts';
+} from '../../infrastructure/types/index.ts';
 
 // ============================================================================
 // CONFIGURATION

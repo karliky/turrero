@@ -25,91 +25,73 @@ import type {
 export class DataAccess {
   private dbPath: string;
 
-  constructor(scriptDir: string) {
-    this.dbPath = getDbPath(scriptDir);
+  constructor(dbPath: string) {
+    this.dbPath = dbPath;
   }
 
-  // Tweet-related data access
-  async getTweets(): Promise<Tweet[][]> {
-    return readJsonFile<Tweet[][]>(join(this.dbPath, 'tweets.json'));
+  // JSON data access (Deno compatible)
+  async getTweets(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'tweets.json'));
   }
 
-  async saveTweets(tweets: Tweet[][]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets.json'), tweets);
+  async saveTweets(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'tweets.json'), content);
   }
 
-  async getTweetsEnriched(): Promise<EnrichedTweetData[]> {
-    return readJsonFile<EnrichedTweetData[]>(join(this.dbPath, 'tweets_enriched.json'));
+  async getTweetsEnriched(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'tweets_enriched.json'));
   }
 
-  async saveTweetsEnriched(enrichments: EnrichedTweetData[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_enriched.json'), enrichments);
+  async saveTweetsEnriched(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'tweets_enriched.json'), content);
   }
 
-  async getTweetsMap(): Promise<CategorizedTweet[]> {
-    return readJsonFile<CategorizedTweet[]>(join(this.dbPath, 'tweets_map.json'));
+  async getTweetsMap(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'tweets_map.json'));
   }
 
-  async saveTweetsMap(map: CategorizedTweet[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_map.json'), map);
+  async saveTweetsMap(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'tweets_map.json'), content);
   }
 
-  async getTweetsSummary(): Promise<TweetSummary[]> {
-    return readJsonFile<TweetSummary[]>(join(this.dbPath, 'tweets_summary.json'));
+  async getTweetsSummary(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'tweets_summary.json'));
   }
 
-  async saveTweetsSummary(summaries: TweetSummary[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_summary.json'), summaries);
+  async saveTweetsSummary(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'tweets_summary.json'), content);
   }
 
-  async getTweetsExam(): Promise<TweetExam[]> {
-    return readJsonFile<TweetExam[]>(join(this.dbPath, 'tweets_exam.json'));
+  async getTweetsExam(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'tweets_exam.json'));
   }
 
-  async saveTweetsExam(exam: TweetExam[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_exam.json'), exam);
+  async saveTweetsExam(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'tweets_exam.json'), content);
   }
 
-  async getTweetsDb(): Promise<SearchIndexEntry[]> {
-    return readJsonFile<SearchIndexEntry[]>(join(this.dbPath, 'tweets-db.json'));
+  async getBooks(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'books.json'));
   }
 
-  async saveTweetsDb(db: SearchIndexEntry[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets-db.json'), db);
+  async saveBooks(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'books.json'), content);
   }
 
-  async getTweetsPodcast(): Promise<PodcastEpisode[]> {
-    return readJsonFile<PodcastEpisode[]>(join(this.dbPath, 'tweets_podcast.json'));
+  async getBooksNotEnriched(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'books-not-enriched.json'));
   }
 
-  async saveTweetsPodcast(podcast: PodcastEpisode[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'tweets_podcast.json'), podcast);
+  async saveBooksNotEnriched(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'books-not-enriched.json'), content);
   }
 
-  // Book-related data access
-  async getBooks(): Promise<CurrentBook[]> {
-    return readJsonFile<CurrentBook[]>(join(this.dbPath, 'books.json'));
+  async getTweetsDb(): Promise<string> {
+    return await Deno.readTextFile(join(this.dbPath, 'tweets-db.json'));
   }
 
-  async saveBooks(books: CurrentBook[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'books.json'), books);
-  }
-
-  async getBooksNotEnriched(): Promise<BookToEnrich[]> {
-    return readJsonFile<BookToEnrich[]>(join(this.dbPath, 'books-not-enriched.json'));
-  }
-
-  async saveBooksNotEnriched(books: BookToEnrich[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'books-not-enriched.json'), books);
-  }
-
-  // CSV data access
-  async getTurrasCsv(): Promise<string> {
-    return await Deno.readTextFile(join(this.dbPath, 'turras.csv'));
-  }
-
-  async saveTurrasCsv(content: string): Promise<void> {
-    await Deno.writeTextFile(join(this.dbPath, 'turras.csv'), content);
+  async saveTweetsDb(content: string): Promise<void> {
+    await Deno.writeTextFile(join(this.dbPath, 'tweets-db.json'), content);
   }
 
   async getGlosarioCsv(): Promise<string> {
@@ -120,13 +102,25 @@ export class DataAccess {
     await Deno.writeTextFile(join(this.dbPath, 'glosario.csv'), content);
   }
 
-  // Graph data access
-  async getProcessedGraphData(): Promise<TurraNode[]> {
-    return readJsonFile<TurraNode[]>(join(this.dbPath, 'processed_graph_data.json'));
+  // Helper method to check if a file exists
+  async fileExists(filename: string): Promise<boolean> {
+    try {
+      await Deno.stat(join(this.dbPath, filename));
+      return true;
+    } catch {
+      return false;
+    }
   }
 
-  async saveProcessedGraphData(data: TurraNode[]): Promise<void> {
-    await writeJsonFile(join(this.dbPath, 'processed_graph_data.json'), data);
+  // Helper method to create backup of a file
+  async createBackup(filename: string): Promise<string> {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const backupName = `${filename}.backup.${timestamp}`;
+    const originalPath = join(this.dbPath, filename);
+    const backupPath = join(this.dbPath, backupName);
+    
+    await Deno.copyFile(originalPath, backupPath);
+    return backupName;
   }
 }
 
