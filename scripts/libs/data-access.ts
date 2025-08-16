@@ -16,7 +16,7 @@ import type {
   SearchIndexEntry,
   PodcastEpisode,
   TurraNode
-} from '@/infrastructure/types/index.ts';
+} from '../../infrastructure/types/index.ts';
 
 // ============================================================================
 // DATA ACCESS LAYER

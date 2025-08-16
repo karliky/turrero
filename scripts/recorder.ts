@@ -18,8 +18,12 @@ import {
 import type { Browser, Page } from "puppeteer-core";
 import { TweetMetadataType } from '../infrastructure/types/index.ts';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables (try .env.local first, then .env)
+try {
+    dotenv.config({ path: ".env.local" });
+} catch {
+    dotenv.config();
+}
 
 // Initialize logger
 const logger = createDenoLogger("recorder");
@@ -262,6 +266,83 @@ async function fetchSingleTweet(
     return { tweet, mustStop };
 }
 
+/**
+ * Auto-detect the correct username for a tweet by trying different approaches
+ */
+async function detectUsernameForTweet(page: Page, tweetId: string): Promise<string> {
+    const commonUsernames = ["Recuenco", "jlantunez", "recuenco"];
+    
+    // Try each username until we find one that works
+    for (const username of commonUsernames) {
+        try {
+            logger.debug(`Trying username: ${username} for tweet ID: ${tweetId}`);
+            await page.goto(`https://x.com/${username}/status/${tweetId}`, { 
+                waitUntil: 'networkidle0',
+                timeout: 30000 
+            });
+            
+            // Wait a bit for the page to load
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Check if we're redirected to a login page or error page
+            const currentUrl = page.url();
+            if (currentUrl.includes('/login') || currentUrl.includes('/signup')) {
+                logger.debug(`Username ${username} redirected to auth page, trying next...`);
+                continue;
+            }
+            
+            // Try to find tweet content to verify this is the right page
+            try {
+                await page.waitForSelector('div[data-testid="tweetText"]', { timeout: 5000 });
+                
+                // Extract the actual author from the page
+                const actualAuthor = await page.evaluate(() => {
+                    const url = window.location.href;
+                    const match = url.match(/x\.com\/([^\/]+)\/status/);
+                    return match ? match[1] : null;
+                });
+                
+                if (actualAuthor) {
+                    logger.info(`Successfully detected username: ${actualAuthor} for tweet ID: ${tweetId}`);
+                    return actualAuthor;
+                }
+            } catch (selectorError) {
+                logger.debug(`No tweet content found for username: ${username}, trying next...`);
+                continue;
+            }
+        } catch (error) {
+            logger.debug(`Failed to access tweet with username ${username}: ${error}`);
+            continue;
+        }
+    }
+    
+    // If all usernames fail, try without specifying a username (let X.com redirect)
+    try {
+        logger.debug(`Trying direct tweet access for ID: ${tweetId}`);
+        await page.goto(`https://x.com/i/status/${tweetId}`, { 
+            waitUntil: 'networkidle0',
+            timeout: 30000 
+        });
+        
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Check if we get redirected to the actual tweet
+        const finalUrl = page.url();
+        const match = finalUrl.match(/x\.com\/([^\/]+)\/status/);
+        if (match && match[1]) {
+            const detectedUsername = match[1];
+            logger.info(`Successfully detected username via redirect: ${detectedUsername} for tweet ID: ${tweetId}`);
+            return detectedUsername;
+        }
+    } catch (error) {
+        logger.debug(`Direct tweet access failed: ${error}`);
+    }
+    
+    // Last resort: default to Recuenco
+    logger.warn(`Could not detect username for tweet ${tweetId}, defaulting to Recuenco`);
+    return "Recuenco";
+}
+
 async function getAllTweets({
     page,
     author,
@@ -274,8 +355,14 @@ async function getAllTweets({
     outputFilePath: string;
 }): Promise<void> {
     for (const tweetId of tweetIds) {
+        // Auto-detect username if not provided
+        if (author === undefined) {
+            author = await detectUsernameForTweet(page, tweetId);
+            logger.info("Auto-detected author: ", author);
+        }
+        
         await page.goto(
-            `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
+            `https://x.com/${author}/status/${tweetId}`,
         );
         logger.debug("Waiting for selector");
         await page.waitForSelector('div[data-testid="tweetText"]');
@@ -284,12 +371,6 @@ async function getAllTweets({
             logger.debug("Cookies rejected, closed the popup");
         } catch {
             logger.debug("Could not reject cookies and close the popup");
-        }
-
-        if (author === undefined) {
-            const tweet = await parseTweet({ page });
-            author = tweet.author;
-            logger.info("Author found: ", author);
         }
 
         let stopped = false;
@@ -549,7 +630,11 @@ async function main() {
                 process.exit(1);
             }
 
-            await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
+            // Auto-detect the correct username for this tweet
+            const detectedUsername = await detectUsernameForTweet(page, tweetId);
+            logger.info(`Using detected username: ${detectedUsername} for tweet ID: ${tweetId}`);
+
+            await page.goto(`https://x.com/${detectedUsername}/status/${tweetId}`);
             logger.debug("Waiting for selector");
             await page.waitForSelector('div[data-testid="tweetText"]');
 

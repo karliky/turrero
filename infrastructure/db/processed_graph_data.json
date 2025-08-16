@@ -1694,8 +1694,7 @@
         "related_threads": [
             "1517738336210894850",
             "1494930305811111938",
-            "1479732314791886850",
-            "1494930415504789506"
+            "1479732314791886850"
         ]
     },
     {
@@ -3167,7 +3166,7 @@
         "likes": 831,
         "bookmarks": 120,
         "views": 113508,
-        "summary": "El metajuego y su impacto en la estrategia y competencia (1 de 2)",
+        "summary": "El metajuego y su impacto en la estrategia en entornos competitivos (1 de 2)",
         "categories": [
             "estrategia",
             "gaming",
@@ -3186,8 +3185,14 @@
         "likes": 372,
         "bookmarks": 61,
         "views": 31597,
-        "summary": "El metajuego y su impacto en la estrategia y competencia (2 de 2)",
-        "categories": [],
+        "summary": "El metajuego y su impacto en la estrategia en entornos competitivos (2 de 2)",
+        "categories": [
+            "estrategia",
+            "gaming",
+            "sistemas-complejos",
+            "lectura-de-señales",
+            "el-contexto-manda"
+        ],
         "related_threads": []
     }
 ]

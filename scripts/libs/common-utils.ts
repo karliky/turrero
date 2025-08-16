@@ -3,7 +3,7 @@
  */
 
 import { dirname, join } from '@std/path';
-import { createDenoLogger } from '@/infrastructure/logger.ts';
+import { createDenoLogger } from '../../infrastructure/logger.ts';
 
 // ============================================================================
 // PATH UTILITIES

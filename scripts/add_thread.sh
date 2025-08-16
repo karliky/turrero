@@ -1,18 +1,24 @@
 #!/bin/bash
 
-if [ "$#" -ne 2 ]; then
-    echo "Uso: $0 <id> <first_tweet_line>"
+if [ "$#" -ne 1 ]; then
+    echo "Uso: $0 <tweet_id>"
+    echo "Ejemplo: $0 967375698976477184"
     exit 1
 fi
 
 id=$1
-first_tweet_line=$2
 
-echo "Adding thread $id to turras.csv"
-deno run --allow-all ./scripts/add-new-tweet.ts $id "$first_tweet_line"
+# Validate that ID is numeric
+if ! [[ "$id" =~ ^[0-9]+$ ]]; then
+    echo "Error: El ID del tweet debe ser numérico"
+    exit 1
+fi
 
-echo "Obtaining thread $id"
+echo "Scraping thread $id (auto-detecting username and content)"
 deno run --allow-all ./scripts/recorder.ts
+
+echo "Adding scraped tweet $id to turras.csv"
+deno run --allow-all ./scripts/add-scraped-tweet.ts $id
 # To debug:
 # deno run --allow-all ./scripts/recorder.ts --test $id
 
@@ -28,11 +34,14 @@ deno run --allow-all ./scripts/generate-books.ts
 echo "Enriching books for thread $id" 
 deno run --allow-all ./scripts/book-enrichment.ts
 
+echo "Generating metadata images for thread $id"
+deno task images
+
 echo "Adding thread $id to graph" 
 python ./scripts/create_graph.py 
 
 echo "Moving metadata to public for thread $id"
-mv -v ./metadata/* ./public/metadata/
+mv -v ./scripts/metadata/* ./public/metadata/ 2>/dev/null || echo "No metadata files to move"
 
 echo "Generating prompts for thread $id"
 ./scripts/generate_prompts.sh $id

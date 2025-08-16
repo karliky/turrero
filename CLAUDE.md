@@ -28,7 +28,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `cd scripts && npm run generate-pdf` - Generate PDF from data (Node.js)
 
 ### Testing Individual Tweets
-- `deno task scrape --test $tweet_id` - Test scraping a single tweet
+- `deno task scrape --test $tweet_id` - Test scraping a single tweet (auto-detects username)
+- `deno run --allow-all scripts/recorder.ts --test $tweet_id` - Direct test with auto-detection
 
 ## Tech Stack & Architecture
 
@@ -87,23 +88,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Adding New X.com Threads
 
 **AUTOMATED METHOD (Recommended):**
-Use the Claude Code hook by typing: `add thread [thread_id] [first_tweet_text]`
-Example: `add thread 1234567890123456789 Este es el primer tweet del hilo`
+Use the Claude Code hook by typing: `add thread [thread_id]`
+Example: `add thread 1234567890123456789`
 
-The hook will automatically execute the complete 12-step workflow including AI processing.
+The system will automatically:
+- **Auto-detect the correct username** (no need to specify @username)
+- **Extract tweet content** after scraping (no need to provide first tweet text)
+- Execute the complete 12-step workflow including AI processing
 
 **MANUAL METHOD:**
-Use the automated script: `./scripts/add_thread.sh $thread_id $first_tweet_text`
+Use the automated script: `./scripts/add_thread.sh $thread_id`
+Example: `./scripts/add_thread.sh 1234567890123456789`
+
+**ENHANCED FEATURES:**
+- **Smart Username Detection**: Automatically finds the correct @username for any tweet ID
+- **Post-Scraping CSV Update**: Content is added to `turras.csv` after successful scraping
+- **Simplified Parameters**: Only tweet ID required - all other data is auto-detected
 
 Or follow the manual 11-step process:
-1. Add tweet to CSV: `npx tsx scripts/add-new-tweet.ts $id $first_tweet_line`
-2. Scrape: `deno --allow-all scripts/recorder.ts`
-3. Enrich: `npx tsx scripts/tweets_enrichment.ts`
-4. Generate cards: `node scripts/image-card-generator.js`
+1. Scrape with auto-detection: `deno run --allow-all scripts/recorder.ts`
+2. Add scraped content to CSV: `deno run --allow-all scripts/add-scraped-tweet.ts $tweet_id`
+3. Enrich: `deno run --allow-all scripts/tweets_enrichment.ts`
+4. Generate cards: `deno task images`
 5. Move metadata: `mv scripts/metadata/* public/metadata/`
-6. Update Algolia: `npx tsx scripts/make-algolia-db.ts`
-7. Generate books: `npx tsx scripts/generate-books.ts`
-8. Enrich books: `npx tsx scripts/book-enrichment.ts`
+6. Update Algolia: `deno run --allow-all scripts/make-algolia-db.ts`
+7. Generate books: `deno run --allow-all scripts/generate-books.ts`
+8. Enrich books: `deno run --allow-all scripts/book-enrichment.ts`
 9. Generate prompts: `./scripts/generate_prompts.sh`
 10. Process AI prompts with `ai-prompt-processor` agent: reads generated prompts, processes them with AI, and updates the corresponding JSON database files (`tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`)
 11. Update header date manually in `app/components/Header.tsx`
