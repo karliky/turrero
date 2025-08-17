@@ -381,6 +381,16 @@ export class TweetEnricher {
     }
 
     /**
+     * Downloads multiple media files in parallel
+     */
+    async downloadMediaParallel(
+        imageUrls: string[],
+        config: Partial<ParallelDownloadConfig> = {}
+    ): Promise<{ successful: string[], failed: Array<{url: string, error: string}> }> {
+        return downloadMediaParallel(imageUrls, config, this.logger);
+    }
+
+    /**
      * Downloads and processes tweet media
      */
     async downloadTweetMedia(
@@ -406,15 +416,6 @@ export class TweetEnricher {
         }
     }
 
-    /**
-     * Downloads multiple media files in parallel (wrapper for class usage)
-     */
-    async downloadMediaParallel(
-        imageUrls: string[],
-        config: Partial<ParallelDownloadConfig> = {}
-    ): Promise<{ successful: string[], failed: Array<{url: string, error: string}> }> {
-        return await downloadMediaParallel(imageUrls, config, this.logger);
-    }
 
     private async processUrlOnlyTweet(
         tweet: TweetForEnrichment, 

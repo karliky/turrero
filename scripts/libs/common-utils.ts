@@ -115,7 +115,7 @@ export interface BrowserConfig {
 }
 
 /**
- * Creates a standardized Puppeteer browser instance
+ * Creates a standardized Puppeteer browser instance (Deno-compatible)
  */
 export async function createBrowser(config: BrowserConfig = {}) {
   const puppeteer = await import('puppeteer');
@@ -123,6 +123,17 @@ export async function createBrowser(config: BrowserConfig = {}) {
     slowMo: config.slowMo || 200,
     headless: config.headless !== false, // default to headless
     devtools: config.devtools || false,
+    // Prevent Puppeteer from trying to clean up temp directories with Node.js fs API
+    ignoreDefaultArgs: ['--disable-dev-shm-usage'],
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-web-security',
+      '--disable-background-timer-throttling',
+      '--disable-backgrounding-occluded-windows',
+      '--disable-renderer-backgrounding'
+    ]
   });
 }
 

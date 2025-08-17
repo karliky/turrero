@@ -16,9 +16,9 @@ import {
 import type {
   ContextualError,
   EnrichedTweetData,
-  ImageMetadata,
   Tweet,
   TweetEmbedMetadata,
+  TweetImageMetadata,
 } from "../infrastructure/types/index.ts";
 import { TweetMetadataType } from "../infrastructure/types/index.ts";
 import type { Page } from "puppeteer";
@@ -68,7 +68,7 @@ async function processTweetLibrary(
       id: tweet.id,
       metadata: {
         ...tweet.metadata,
-      } as TweetForEnrichment["metadata"],
+      } as unknown as TweetForEnrichment["metadata"],
     };
 
     if (!shouldEnrichTweet(enrichmentTweet, enrichments)) continue;
@@ -84,7 +84,8 @@ async function processTweetForEnrichment(
 ): Promise<void> {
   const { embed } = tweet.metadata || {};
 
-  if (embed) {
+  // Only process as embedded tweet if embed has actual data (id, author, tweet)
+  if (embed && embed.id && embed.author && embed.tweet) {
     await processEmbeddedTweet(tweet, embed);
     return;
   }
@@ -96,7 +97,7 @@ async function processTweetForEnrichment(
     id: tweet.id,
     metadata: {
       ...tweet.metadata,
-    } as TweetForEnrichment["metadata"],
+    } as unknown as TweetForEnrichment["metadata"],
   };
 
   try {
@@ -136,7 +137,7 @@ async function processImageTweets(
   enricher: TweetEnricher,
 ): Promise<void> {
   // Extract all image URLs for parallel download
-  const imageUrls = tweet.metadata!.imgs!.map((img: ImageMetadata) => img.src);
+  const imageUrls = tweet.metadata!.imgs!.map((img: TweetImageMetadata) => img.img);
   
   if (imageUrls.length > 0) {
     logger.info(`Downloading ${imageUrls.length} images for tweet ${tweet.id} in parallel...`);
@@ -148,21 +149,27 @@ async function processImageTweets(
       directory: "./public/metadata"
     });
     
-    // Process successful downloads
-    for (const filePath of downloadResults.successful) {
-      const filename = filePath.split('/').pop() || '';
-      const matchingImg = tweet.metadata!.imgs!.find(img => 
-        img.src.includes(filename.replace(/\.[^.]+$/, ''))
-      );
+    // Create enriched entry for each successfully downloaded image
+    if (downloadResults.successful.length > 0) {
+      const existingEnrichments = await dataAccess.getTweetsEnriched();
       
-      if (matchingImg) {
-        const imageMetadata = { ...matchingImg, type: TweetMetadataType.IMAGE };
-        await enricher.downloadTweetMedia(
-          { id: tweet.id, metadata: { ...imageMetadata, img: filePath } },
-          undefined,
-          saveTweet,
-        );
+      for (const filePath of downloadResults.successful) {
+        const filename = filePath.split('/').pop() || '';
+        const localPath = `./metadata/${filename}`;
+        
+        existingEnrichments.push({
+          id: tweet.id,
+          type: "media",
+          media: "image",
+          title: "",
+          description: "",
+          url: "",
+          img: localPath,
+        });
       }
+      
+      await dataAccess.saveTweetsEnriched(existingEnrichments);
+      logger.info(`Enriched tweet ${tweet.id} with ${downloadResults.successful.length} images`);
     }
     
     // Log any failures
@@ -213,8 +220,10 @@ async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
 }
 
 // Run with standardized error handling
-runWithErrorHandling(
-  enrichTweets,
-  logger,
-  "Enriching tweets with metadata",
-);
+try {
+  await enrichTweets();
+  logger.info("Enrichment process completed successfully");
+} catch (error) {
+  logger.error("Enrichment process failed:", error);
+  // Don't re-throw the error to prevent file corruption on Puppeteer cleanup
+}

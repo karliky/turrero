@@ -6,24 +6,15 @@ import type {
     TweetSummary,
     CategorizedTweet,
     TweetExam,
-    QuizQuestion,
-    CurrentBook,
-    BookToEnrich
+    CurrentBook
 } from "../infrastructure/types/index.ts";
 
 // Import Phase 1 infrastructure
 import {
-    validateTweets,
     validateTweetsSummary,
-    validateTweetsMap,
     validateTweetsExam,
-    validateBooks,
-    validateBooksNotEnriched,
     type TweetSummaryObject,
-    type TweetMapObject,
-    type TweetExamObject,
-    type BookObject,
-    type ExamQuestion
+    type TweetExamObject
 } from "../infrastructure/schemas/database-schemas.ts";
 import {
     safeReadDatabase,

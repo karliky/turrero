@@ -726,6 +726,7 @@ export interface CurrentBook extends BookToEnrich {
 export interface ImageMetadata {
   img: string;
   url: string;
+  src: string;
   filename?: string;
   path?: string;
 }

@@ -322,7 +322,7 @@ async function fetchCompleteThread(
         const getStatValue = (el: Element | null): string => {
           const text = el?.getAttribute('aria-label') || '';
           const match = text.match(/(\d+(?:,\d+)*)/);
-          return match ? match[1] : '0';
+          return match?.[1] || '0';
         };
         
         // Extract metadata (images, embeds, etc.)

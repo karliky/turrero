@@ -30,19 +30,23 @@ export class DataAccess {
   }
 
   // JSON data access (Deno compatible)
-  async getTweets(): Promise<string> {
-    return await Deno.readTextFile(join(this.dbPath, 'tweets.json'));
+  async getTweets(): Promise<Tweet[][]> {
+    const content = await Deno.readTextFile(join(this.dbPath, 'tweets.json'));
+    return JSON.parse(content);
   }
 
-  async saveTweets(content: string): Promise<void> {
+  async saveTweets(tweets: Tweet[][]): Promise<void> {
+    const content = JSON.stringify(tweets, null, 4);
     await Deno.writeTextFile(join(this.dbPath, 'tweets.json'), content);
   }
 
-  async getTweetsEnriched(): Promise<string> {
-    return await Deno.readTextFile(join(this.dbPath, 'tweets_enriched.json'));
+  async getTweetsEnriched(): Promise<EnrichedTweetData[]> {
+    const content = await Deno.readTextFile(join(this.dbPath, 'tweets_enriched.json'));
+    return JSON.parse(content);
   }
 
-  async saveTweetsEnriched(content: string): Promise<void> {
+  async saveTweetsEnriched(enrichedTweets: EnrichedTweetData[]): Promise<void> {
+    const content = JSON.stringify(enrichedTweets, null, 4);
     await Deno.writeTextFile(join(this.dbPath, 'tweets_enriched.json'), content);
   }
 
@@ -143,10 +147,13 @@ export function createDataAccess(scriptDir: string): DataAccess {
  * Gets books that need enrichment (exist in books.json but lack categories)
  */
 export async function getBooksToEnrich(dataAccess: DataAccess): Promise<BookToEnrich[]> {
-  const [booksNotEnriched, currentBooks] = await Promise.all([
+  const [booksNotEnrichedStr, currentBooksStr] = await Promise.all([
     dataAccess.getBooksNotEnriched(),
     dataAccess.getBooks()
   ]);
+
+  const booksNotEnriched: BookToEnrich[] = JSON.parse(booksNotEnrichedStr);
+  const currentBooks: CurrentBook[] = JSON.parse(currentBooksStr);
 
   return booksNotEnriched.filter((book: BookToEnrich) => {
     const currentBook = currentBooks.find((cb: CurrentBook) => cb.id === book.id);

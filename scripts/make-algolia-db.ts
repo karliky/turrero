@@ -17,8 +17,7 @@ const logger = createScriptLogger("make-algolia-db");
 const dataAccess = createDataAccess(scriptDir);
 
 async function createAlgoliaDatabase(): Promise<void> {
-  const tweetsString = await dataAccess.getTweets();
-  const tweets = JSON.parse(tweetsString) as Tweet[][];
+  const tweets = await dataAccess.getTweets();
   const searchEntries = createSearchIndexEntries(tweets);
 
   await dataAccess.saveTweetsDb(JSON.stringify(searchEntries, null, 2));
