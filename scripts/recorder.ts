@@ -277,7 +277,58 @@ async function fetchCompleteThread(
   await page.waitForSelector('article[data-testid="tweet"]', { timeout: 10000 });
   await new Promise(resolve => setTimeout(resolve, 3000));
   
-  // Strategy 0: Check if this is a reply-based thread first
+  // Strategy 0: Search for and click "Show replies" button first
+  logger.debug("Searching for 'Show replies' button");
+  const showRepliesClicked = await page.evaluate(() => {
+    // Search for "Show replies" button using various selectors
+    const possibleSelectors = [
+      // Look for text content containing "Show replies"
+      'div[role="button"]',
+      'button[role="button"]', 
+      'span',
+      'div[class*="css-175oi2r"]',
+      'div[data-testid="cellInnerDiv"]'
+    ];
+    
+    for (const selector of possibleSelectors) {
+      const elements = Array.from(document.querySelectorAll(selector));
+      for (const element of elements) {
+        const text = element.textContent || '';
+        if (text.toLowerCase().includes('show replies') || 
+            text.toLowerCase().includes('show more replies') ||
+            text.toLowerCase().includes('read') && text.toLowerCase().includes('replies')) {
+          try {
+            (element as HTMLElement).click();
+            return true;
+          } catch (e) {
+            // Try clicking parent element
+            try {
+              if (element.parentElement) {
+                (element.parentElement as HTMLElement).click();
+                return true;
+              }
+            } catch (e2) {
+              // Continue searching
+            }
+          }
+        }
+      }
+    }
+    return false;
+  });
+  
+  if (showRepliesClicked) {
+    logger.debug("Successfully clicked 'Show replies' button, waiting for content to load");
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    // After clicking, do some scrolling to load all replies
+    for (let i = 0; i < 20; i++) {
+      await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+  }
+  
+  // Strategy 1: Check if this is a reply-based thread
   const hasReplies = await page.evaluate(() => {
     const replyButtons = Array.from(document.querySelectorAll('*'));
     return replyButtons.some(el => {
