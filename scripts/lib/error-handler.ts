@@ -4,7 +4,7 @@
  */
 
 import { logger } from './logger.ts';
-import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.4/ansi/colors.ts";
+import { colors as _colors } from "https://deno.land/x/cliffy@v1.0.0-rc.4/ansi/colors.ts";
 
 export interface ErrorContext {
   phase: string;
@@ -12,7 +12,7 @@ export interface ErrorContext {
   file?: string;
   threadId?: string;
   timestamp: Date;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface RecoveryAction {
@@ -443,7 +443,7 @@ export class ErrorHandler {
             stderr: 'piped'
           });
           
-          const { success, stdout, stderr } = await process.output();
+          const { success, stdout: _stdout, stderr } = await process.output();
           
           if (success) {
             logger.success('RECOVERY', `Recovery action successful: ${action.action}`);

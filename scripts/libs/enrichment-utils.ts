@@ -308,7 +308,7 @@ export async function downloadMediaParallel(
     
     // Create a semaphore for concurrency control
     const semaphore = new Array(finalConfig.maxConcurrency).fill(null);
-    let currentIndex = 0;
+    const _currentIndex = 0;
     
     const downloadPromises = imageUrls.map(async (url) => {
         // Wait for an available slot

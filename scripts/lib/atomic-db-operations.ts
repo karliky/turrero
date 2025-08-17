@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, existsSync, copyFileSync, unlinkSync } from 'node:fs';
-import { join, dirname, basename } from 'node:path';
+import { join, dirname as _dirname, basename as _basename } from 'node:path';
 import { 
   DATABASE_VALIDATORS, 
   DatabaseFileName,
@@ -175,7 +175,7 @@ export function safeWriteDatabase<T>(
 export function atomicMultiWrite(
   operations: Array<{
     fileName: DatabaseFileName;
-    data: any;
+    data: Tweet[] | TweetEnriched[] | TweetSummary | TweetMap | TweetExam | Book[] | BookNotEnriched[];
     skipValidation?: boolean;
   }>
 ): AtomicOperationResult<{ backups: DatabaseBackupInfo[] }> {

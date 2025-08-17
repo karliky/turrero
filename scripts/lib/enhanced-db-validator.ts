@@ -1,21 +1,21 @@
 #!/usr/bin/env -S deno run --allow-all
 
 import { existsSync, readFileSync } from 'node:fs';
-import { join, dirname, basename, extname } from 'node:path';
+import { join, dirname as _dirname, basename as _basename, extname } from 'node:path';
 import { 
   safeReadDatabase, 
   validateCrossFileConsistency,
   getAllTweetIds,
   type ConsistencyIssue,
-  type AtomicOperationResult
+  type AtomicOperationResult as _AtomicOperationResult
 } from './atomic-db-operations.ts';
 import { 
-  DATABASE_SCHEMAS,
-  type DatabaseFileName,
-  type Tweet,
-  type TweetEnriched,
-  type Book,
-  type BookNotEnriched
+  DATABASE_SCHEMAS as _DATABASE_SCHEMAS,
+  type DatabaseFileName as _DatabaseFileName,
+  type Tweet as _Tweet,
+  type TweetEnriched as _TweetEnriched,
+  type Book as _Book,
+  type BookNotEnriched as _BookNotEnriched
 } from '../../infrastructure/schemas/database-schemas.ts';
 
 // Extended validation configuration
@@ -103,8 +103,8 @@ export class EnhancedDatabaseValidator {
     // Enhanced validations
     await this.validateMetadataAssets();
     await this.validateTurraConsistency();
-    await this.validateSemanticDuplicates();
-    await this.validateAssetReferences();
+    this.validateSemanticDuplicates();
+    this.validateAssetReferences();
 
     return this.generateReport();
   }
@@ -197,13 +197,13 @@ export class EnhancedDatabaseValidator {
     };
 
     // Check usage in JSON database files
-    await this.checkJsonDatabaseUsage(asset);
+    this.checkJsonDatabaseUsage(asset);
     
     // Check usage in components and pages
     await this.checkCodeUsage(asset);
     
     // Check for special cases (library assets, etc.)
-    await this.checkSpecialUsage(asset);
+    this.checkSpecialUsage(asset);
 
     asset.isOrphaned = asset.usageCount === 0;
     return asset;
@@ -212,7 +212,7 @@ export class EnhancedDatabaseValidator {
   /**
    * Check asset usage in JSON database files
    */
-  private async checkJsonDatabaseUsage(asset: MetadataAsset): Promise<void> {
+  private checkJsonDatabaseUsage(asset: MetadataAsset): void {
     const databases = ['books.json', 'books-not-enriched.json', 'tweets_enriched.json'] as const;
     
     for (const dbFile of databases) {
@@ -251,7 +251,7 @@ export class EnhancedDatabaseValidator {
         if (dirEntry.isDirectory) {
           await this.searchInDirectory(fullPath, asset);
         } else if (this.isSearchableFile(dirEntry.name)) {
-          await this.searchInFile(fullPath, asset);
+          this.searchInFile(fullPath, asset);
         }
       }
     } catch (error) {
@@ -270,7 +270,7 @@ export class EnhancedDatabaseValidator {
   /**
    * Search for asset usage in a specific file
    */
-  private async searchInFile(filePath: string, asset: MetadataAsset): Promise<void> {
+  private searchInFile(filePath: string, asset: MetadataAsset): void {
     try {
       const content = readFileSync(filePath, 'utf-8');
       if (content.includes(asset.fileName)) {
@@ -278,7 +278,7 @@ export class EnhancedDatabaseValidator {
         const relativePath = filePath.replace(Deno.cwd(), '');
         asset.referencedIn.push(relativePath);
       }
-    } catch (error) {
+    } catch (_error) {
       // File might be binary or have permission issues, skip silently
     }
   }
@@ -286,7 +286,7 @@ export class EnhancedDatabaseValidator {
   /**
    * Check for special usage cases (library assets, dynamic references, etc.)
    */
-  private async checkSpecialUsage(asset: MetadataAsset): Promise<void> {
+  private checkSpecialUsage(asset: MetadataAsset): void {
     // Check if it's a library-related asset (book covers, etc.)
     if (asset.fileName.includes('book') || asset.fileName.match(/^\d+\.jpg$/)) {
       asset.usageCount++;
@@ -337,7 +337,7 @@ export class EnhancedDatabaseValidator {
   /**
    * Validate semantic duplicates (similar content, different IDs)
    */
-  private async validateSemanticDuplicates(): Promise<void> {
+  private validateSemanticDuplicates(): void {
     console.log('🔍 Checking for semantic duplicates...');
 
     // This is a placeholder for semantic duplicate detection
@@ -354,7 +354,7 @@ export class EnhancedDatabaseValidator {
       contentMap.get(normalizedContent)!.push(turra.id);
     }
 
-    for (const [content, ids] of contentMap.entries()) {
+    for (const [_content, ids] of contentMap.entries()) {
       if (ids.length > 1) {
         this.addIssue({
           type: 'semantic_duplicate',
@@ -373,7 +373,7 @@ export class EnhancedDatabaseValidator {
   /**
    * Validate asset references (check for broken image links)
    */
-  private async validateAssetReferences(): Promise<void> {
+  private validateAssetReferences(): void {
     console.log('🖼️ Validating asset references...');
 
     const databases = ['books.json', 'books-not-enriched.json', 'tweets_enriched.json'] as const;
@@ -381,7 +381,7 @@ export class EnhancedDatabaseValidator {
     for (const dbFile of databases) {
       const result = safeReadDatabase(dbFile);
       if (result.success && result.data) {
-        await this.checkDatabaseAssetReferences(dbFile, result.data);
+        this.checkDatabaseAssetReferences(dbFile, result.data);
       }
     }
   }
@@ -389,7 +389,7 @@ export class EnhancedDatabaseValidator {
   /**
    * Check asset references in a specific database
    */
-  private async checkDatabaseAssetReferences(dbFile: string, data: any): Promise<void> {
+  private checkDatabaseAssetReferences(dbFile: string, data: unknown): void {
     const content = JSON.stringify(data);
     const imageReferences = content.match(/\.(jpeg|jpg|png|svg|webp|avif)/gi) || [];
     

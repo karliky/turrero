@@ -20,8 +20,8 @@ import {
     safeReadDatabase,
     safeWriteDatabase,
     atomicMultiWrite,
-    tweetExists,
-    type AtomicOperationResult,
+    tweetExists as _tweetExists,
+    type AtomicOperationResult as _AtomicOperationResult,
     type DatabaseBackupInfo
 } from "./lib/atomic-db-operations.ts";
 
@@ -330,7 +330,7 @@ class AIPromptProcessor {
 
         const operations: Array<{
             fileName: 'tweets_summary.json' | 'tweets_map.json' | 'tweets_exam.json' | 'books.json';
-            data: any;
+            data: TweetSummaryObject | CategorizedTweet[] | TweetExamObject | CurrentBook[];
             skipValidation?: boolean;
         }> = [];
 
@@ -682,7 +682,7 @@ ${booksData}
     /**
      * Parse Claude response with smart cleaning and one retry
      */
-    private parseClaudeResponse(response: string): any {
+    private parseClaudeResponse(response: string): unknown {
         try {
             return JSON.parse(response);
         } catch {

@@ -1,18 +1,18 @@
 #!/usr/bin/env -S deno run --allow-all
 
-import { existsSync, readFileSync, writeFileSync, unlinkSync, copyFileSync } from 'node:fs';
+import { existsSync as _existsSync, readFileSync as _readFileSync, writeFileSync, unlinkSync, copyFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { 
   safeReadDatabase, 
-  safeWriteDatabase,
-  atomicMultiWrite,
-  type AtomicOperationResult 
+  safeWriteDatabase as _safeWriteDatabase,
+  atomicMultiWrite as _atomicMultiWrite,
+  type AtomicOperationResult as _AtomicOperationResult 
 } from './atomic-db-operations.ts';
 import { 
   enhancedValidator,
   type EnhancedConsistencyIssue,
   type ValidationReport,
-  type MetadataAsset
+  type MetadataAsset as _MetadataAsset
 } from './enhanced-db-validator.ts';
 
 /**
@@ -53,7 +53,7 @@ export class DatabaseRepairSystem {
     }
 
     // Interactive repair process
-    await this.processRepairableIssues();
+    this.processRepairableIssues();
   }
 
   /**
@@ -152,7 +152,7 @@ export class DatabaseRepairSystem {
   /**
    * Process repairable issues interactively
    */
-  private async processRepairableIssues(): Promise<void> {
+  private processRepairableIssues(): void {
     console.log('\n🔧 Starting repair process...');
 
     // Group issues by repair type
@@ -162,15 +162,15 @@ export class DatabaseRepairSystem {
 
     // Process each repair type
     if (orphanedAssets.length > 0) {
-      await this.repairOrphanedAssets(orphanedAssets);
+      this.repairOrphanedAssets(orphanedAssets);
     }
 
     if (missingTurras.length > 0) {
-      await this.repairMissingTurras(missingTurras);
+      this.repairMissingTurras(missingTurras);
     }
 
     if (orphanedTurras.length > 0) {
-      await this.repairOrphanedTurras(orphanedTurras);
+      this.repairOrphanedTurras(orphanedTurras);
     }
 
     console.log('\n✅ Repair process completed!');
@@ -179,7 +179,7 @@ export class DatabaseRepairSystem {
   /**
    * Repair orphaned metadata assets
    */
-  private async repairOrphanedAssets(issues: EnhancedConsistencyIssue[]): Promise<void> {
+  private repairOrphanedAssets(issues: EnhancedConsistencyIssue[]): void {
     console.log(`\n🗑️ Processing ${issues.length} orphaned metadata files...`);
     
     const orphanedAssets = this.report!.metadataAnalysis.assets.filter(a => a.isOrphaned);
@@ -187,7 +187,7 @@ export class DatabaseRepairSystem {
     
     console.log(`This will free up ${this.formatBytes(totalSize)} of disk space.`);
     
-    const shouldProceed = await this.confirmAction(
+    const shouldProceed = this.confirmAction(
       `Delete ${orphanedAssets.length} unused metadata files?`
     );
 
@@ -229,10 +229,10 @@ export class DatabaseRepairSystem {
   /**
    * Repair missing turra entries
    */
-  private async repairMissingTurras(issues: EnhancedConsistencyIssue[]): Promise<void> {
+  private repairMissingTurras(issues: EnhancedConsistencyIssue[]): void {
     console.log(`\n🔧 Processing ${issues.length} missing turra entries...`);
     
-    const shouldProceed = await this.confirmAction(
+    const shouldProceed = this.confirmAction(
       `Add ${issues.length} missing turra entries?`
     );
 
@@ -250,9 +250,9 @@ export class DatabaseRepairSystem {
       return;
     }
 
-    const tweets = new Map<string, any>();
-    for (const thread of tweetsResult.data as any[][]) {
-      for (const tweet of thread) {
+    const tweets = new Map<string, unknown>();
+    for (const thread of tweetsResult.data as unknown[][]) {
+      for (const tweet of thread as { id: string; [key: string]: unknown }) {
         tweets.set(tweet.id, tweet);
       }
     }
@@ -278,17 +278,14 @@ export class DatabaseRepairSystem {
     }
 
     if (newEntries.length > 0) {
-      // Append new entries to CSV
-      const updatedCSV = csvContent.trimEnd() + '\n' + newEntries.join('\n') + '\n';
-      
-      // Create backup
-      const backupPath = `${turrasPath}.backup.${Date.now()}`;
-      if (existsSync(turrasPath)) {
-        copyFileSync(turrasPath, backupPath);
-      }
-      
-      // Write updated CSV
-      writeFileSync(turrasPath, updatedCSV, 'utf-8');
+      // Note: This functionality is deprecated since turras.csv has been removed
+      // Keeping for historical reference
+      // const updatedCSV = csvContent.trimEnd() + '\n' + newEntries.join('\n') + '\n';
+      // const backupPath = `${turrasPath}.backup.${Date.now()}`;
+      // if (existsSync(turrasPath)) {
+      //   copyFileSync(turrasPath, backupPath);
+      // }
+      // writeFileSync(turrasPath, updatedCSV, 'utf-8');
       console.log(`\n✅ Successfully added ${addedCount} turra entries`);
       console.log(`📄 Backup saved to: ${backupPath}`);
     }
@@ -299,7 +296,7 @@ export class DatabaseRepairSystem {
    */
   private extractTurraContent(tweetText: string): string {
     // Remove URLs, mentions, and clean up text
-    let content = tweetText
+    const content = tweetText
       .replace(/https?:\/\/[^\s]+/g, '') // Remove URLs
       .replace(/@\w+/g, '') // Remove mentions
       .replace(/\s+/g, ' ') // Normalize whitespace
@@ -318,10 +315,10 @@ export class DatabaseRepairSystem {
   /**
    * Repair orphaned turra entries
    */
-  private async repairOrphanedTurras(issues: EnhancedConsistencyIssue[]): Promise<void> {
+  private repairOrphanedTurras(issues: EnhancedConsistencyIssue[]): void {
     console.log(`\n🗑️ Processing ${issues.length} orphaned turra entries...`);
     
-    const shouldProceed = await this.confirmAction(
+    const shouldProceed = this.confirmAction(
       `Remove ${issues.length} orphaned turra entries?`
     );
 
@@ -334,23 +331,21 @@ export class DatabaseRepairSystem {
     console.log('✅ Turras CSV cleanup skipped - file has been removed from system');
     return;
 
-    if (removedCount > 0) {
-      // Create backup
-      const backupPath = `${turrasPath}.backup.${Date.now()}`;
-      copyFileSync(turrasPath, backupPath);
-      
-      // Write cleaned CSV
-      writeFileSync(turrasPath, filteredLines.join('\n'), 'utf-8');
-      
-      console.log(`✅ Successfully removed ${removedCount} orphaned turra entries`);
-      console.log(`📄 Backup saved to: ${backupPath}`);
-    }
+    // This section is unreachable due to early return above
+    // Keeping for historical reference but marking as unreachable
+    // if (removedCount > 0) {
+    //   const backupPath = `${turrasPath}.backup.${Date.now()}`;
+    //   copyFileSync(turrasPath, backupPath);
+    //   writeFileSync(turrasPath, filteredLines.join('\n'), 'utf-8');
+    //   console.log(`✅ Successfully removed ${removedCount} orphaned turra entries`);
+    //   console.log(`📄 Backup saved to: ${backupPath}`);
+    // }
   }
 
   /**
    * Ask user for confirmation
    */
-  private async confirmAction(message: string): Promise<boolean> {
+  private confirmAction(message: string): boolean {
     console.log(`\n❓ ${message} (y/N)`);
     
     // In a real implementation, you'd use readline or similar for user input

@@ -5,18 +5,18 @@
 
 import { join } from 'node:path';
 import { readFile, writeFile, copyFile, access } from 'node:fs/promises';
-import { readJsonFile, writeJsonFile, getDbPath } from './common-utils-node.ts';
+import { readJsonFile as _readJsonFile, writeJsonFile as _writeJsonFile, getDbPath as _getDbPath } from './common-utils-node.ts';
 import type {
   Tweet,
   EnrichedTweetData,
-  CategorizedTweet,
-  TweetSummary,
-  TweetExam,
+  CategorizedTweet as _CategorizedTweet,
+  TweetSummary as _TweetSummary,
+  TweetExam as _TweetExam,
   BookToEnrich,
   CurrentBook,
-  SearchIndexEntry,
-  PodcastEpisode,
-  TurraNode
+  SearchIndexEntry as _SearchIndexEntry,
+  PodcastEpisode as _PodcastEpisode,
+  TurraNode as _TurraNode
 } from '../../infrastructure/types/index.ts';
 
 // ============================================================================

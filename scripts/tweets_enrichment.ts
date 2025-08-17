@@ -2,7 +2,7 @@ import {
   createBrowser,
   createScriptLogger,
   getScriptDirectory,
-  runWithErrorHandling,
+  runWithErrorHandling as _runWithErrorHandling,
 } from "./libs/common-utils.ts";
 import { createDataAccess } from "./libs/data-access.ts";
 import {
@@ -11,7 +11,7 @@ import {
   shouldEnrichTweet,
   TweetEnricher,
   type TweetForEnrichment,
-  downloadMediaParallel,
+  downloadMediaParallel as _downloadMediaParallel,
 } from "./libs/enrichment-utils.ts";
 import type {
   ContextualError,
@@ -159,7 +159,7 @@ async function processImageTweets(
         
         existingEnrichments.push({
           id: tweet.id,
-          type: "media",
+          type: TweetMetadataType.IMAGE,
           media: "image",
           title: "",
           description: "",

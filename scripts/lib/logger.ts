@@ -11,7 +11,7 @@ export interface LogEntry {
   phase: string;
   message: string;
   duration?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export type LogLevel = 'DEBUG' | 'INFO' | 'SUCCESS' | 'WARN' | 'ERROR' | 'CRITICAL';
@@ -66,7 +66,7 @@ export class Logger {
     return `${(ms / 60000).toFixed(1)}m`;
   }
 
-  private log(level: LogLevel, phase: string, message: string, metadata?: Record<string, any>) {
+  private log(level: LogLevel, phase: string, message: string, metadata?: Record<string, unknown>) {
     const entry: LogEntry = {
       timestamp: new Date(),
       level,
@@ -85,27 +85,27 @@ export class Logger {
     }
   }
 
-  debug(phase: string, message: string, metadata?: Record<string, any>) {
+  debug(phase: string, message: string, metadata?: Record<string, unknown>) {
     this.log('DEBUG', phase, message, metadata);
   }
 
-  info(phase: string, message: string, metadata?: Record<string, any>) {
+  info(phase: string, message: string, metadata?: Record<string, unknown>) {
     this.log('INFO', phase, message, metadata);
   }
 
-  success(phase: string, message: string, metadata?: Record<string, any>) {
+  success(phase: string, message: string, metadata?: Record<string, unknown>) {
     this.log('SUCCESS', phase, message, metadata);
   }
 
-  warn(phase: string, message: string, metadata?: Record<string, any>) {
+  warn(phase: string, message: string, metadata?: Record<string, unknown>) {
     this.log('WARN', phase, message, metadata);
   }
 
-  error(phase: string, message: string, metadata?: Record<string, any>) {
+  error(phase: string, message: string, metadata?: Record<string, unknown>) {
     this.log('ERROR', phase, message, metadata);
   }
 
-  critical(phase: string, message: string, metadata?: Record<string, any>) {
+  critical(phase: string, message: string, metadata?: Record<string, unknown>) {
     this.log('CRITICAL', phase, message, metadata);
   }
 
@@ -177,7 +177,7 @@ export class Logger {
     const baseMessage = `${progressBar} ${current}/${tracker.total} (${percentage}%)`;
     const fullMessage = message ? `${baseMessage} - ${message}` : baseMessage;
     
-    const metadata: any = {
+    const metadata: Record<string, unknown> = {
       current,
       total: tracker.total,
       percentage,
@@ -228,7 +228,7 @@ export class Logger {
   /**
    * Log a recoverable error with suggestions
    */
-  recoverableError(phase: string, error: string, suggestions: string[], metadata?: Record<string, any>) {
+  recoverableError(phase: string, error: string, suggestions: string[], metadata?: Record<string, unknown>) {
     this.error(phase, error, metadata);
     
     console.log(this.enableColors ? colors.yellow('  💡 Recovery suggestions:') : '  💡 Recovery suggestions:');

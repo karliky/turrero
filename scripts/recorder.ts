@@ -13,7 +13,7 @@ import {
   resolveBuildId,
 } from "@puppeteer/browsers";
 import type { Browser, Page } from "puppeteer-core";
-import { TweetMetadataType } from "../infrastructure/types/index.ts";
+import { TweetMetadataType as _TweetMetadataType } from "../infrastructure/types/index.ts";
 
 // Load environment variables (try .env.local first, then .env)
 try {
@@ -278,9 +278,9 @@ async function fetchCompleteThread(
   await new Promise(resolve => setTimeout(resolve, 2000)); // Allow time for all tweets to load
   
   // Get all tweet elements on the page
-  const tweets = await page.evaluate((authorUrl: string, tweetId: string) => {
+  const tweets = await page.evaluate((authorUrl: string, _tweetId: string) => {
     const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
-    const threadTweets: any[] = [];
+    const threadTweets: Tweet[] = [];
     
     for (const element of tweetElements) {
       try {
@@ -332,7 +332,7 @@ async function fetchCompleteThread(
           alt: (img as HTMLImageElement).alt || 'Image'
         }));
         
-        const metadata: any = {};
+        const metadata: TweetMetadata = {};
         if (imgs.length > 0) {
           metadata.type = 'image';
           metadata.imgs = imgs;

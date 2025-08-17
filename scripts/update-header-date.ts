@@ -9,7 +9,7 @@
  */
 
 import { logger } from './lib/logger.ts';
-import { TweetSchema } from '../infrastructure/schemas/database-schemas.ts';
+import { TweetSchema as _TweetSchema } from '../infrastructure/schemas/database-schemas.ts';
 
 interface DateAnalysis {
   newestTweetDate: Date | null;

@@ -99,7 +99,8 @@
         "typecheck": "npm run lint && npx tsc --noEmit",
         "check": "deno check scripts/*.ts",
         "lint": "deno lint scripts/",
-        "fmt": "deno fmt scripts/"
+        "fmt": "deno fmt scripts/",
+        "clean": "rm -rf .next out build .cache tsconfig.tsbuildinfo .deno .deno_cache vendor deno.lock prompt_*.txt turra_*.txt *.pyc *.pyo *.pyd logs thread_hook.log npm-debug.log* yarn-debug.log* yarn-error.log*"
     },
     "nodeModulesDir": "auto",
     "lock": false

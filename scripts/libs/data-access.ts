@@ -4,18 +4,18 @@
  */
 
 import { join } from '@std/path';
-import { readJsonFile, writeJsonFile, getDbPath } from './common-utils.ts';
+import { readJsonFile as _readJsonFile, writeJsonFile as _writeJsonFile, getDbPath } from './common-utils.ts';
 import type {
   Tweet,
   EnrichedTweetData,
-  CategorizedTweet,
-  TweetSummary,
-  TweetExam,
+  CategorizedTweet as _CategorizedTweet,
+  TweetSummary as _TweetSummary,
+  TweetExam as _TweetExam,
   BookToEnrich,
   CurrentBook,
-  SearchIndexEntry,
-  PodcastEpisode,
-  TurraNode
+  SearchIndexEntry as _SearchIndexEntry,
+  PodcastEpisode as _PodcastEpisode,
+  TurraNode as _TurraNode
 } from '../../infrastructure/types/index.ts';
 
 // ============================================================================

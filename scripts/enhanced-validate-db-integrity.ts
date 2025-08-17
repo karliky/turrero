@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-all
 
-import { enhancedValidator } from './lib/enhanced-db-validator.ts';
+import { enhancedValidator, type ValidationReport, type EnhancedConsistencyIssue, type MetadataAsset } from './lib/enhanced-db-validator.ts';
 import { repairSystem } from './lib/db-repair-system.ts';
 
 /**
@@ -27,7 +27,7 @@ function printColored(text: string, color: string): void {
 /**
  * Print validation report in a user-friendly format
  */
-function printValidationReport(report: any, verbose: boolean = false): void {
+function printValidationReport(report: ValidationReport, verbose: boolean = false): void {
   // Header with ASCII art
   printColored('\n' + '='.repeat(60), colors.bold + colors.cyan);
   printColored('🔍 ENHANCED DATABASE INTEGRITY VALIDATION', colors.bold + colors.cyan);
@@ -45,8 +45,8 @@ function printValidationReport(report: any, verbose: boolean = false): void {
   // Enhanced summary
   printColored('\n📊 SUMMARY OVERVIEW', colors.bold + colors.blue);
   console.log(`├── Total Issues Found: ${report.issues.length}`);
-  console.log(`├── 🚨 Critical Errors: ${report.issues.filter((i: any) => i.severity === 'error').length}`);
-  console.log(`├── ⚠️  Warnings: ${report.issues.filter((i: any) => i.severity === 'warning').length}`);
+  console.log(`├── 🚨 Critical Errors: ${report.issues.filter((i: EnhancedConsistencyIssue) => i.severity === 'error').length}`);
+  console.log(`├── ⚠️  Warnings: ${report.issues.filter((i: EnhancedConsistencyIssue) => i.severity === 'warning').length}`);
   console.log(`└── 📈 Overall Health: ${report.overallStatus}`);
 
   // Metadata analysis
@@ -57,8 +57,8 @@ function printValidationReport(report: any, verbose: boolean = false): void {
   console.log(`└── 💔 Broken References: ${report.metadataAnalysis.brokenReferences}`);
 
   if (report.metadataAnalysis.orphanedAssets > 0) {
-    const orphanedAssets = report.metadataAnalysis.assets.filter((a: any) => a.isOrphaned);
-    const totalSize = orphanedAssets.reduce((sum: number, a: any) => sum + a.size, 0);
+    const orphanedAssets = report.metadataAnalysis.assets.filter((a: MetadataAsset) => a.isOrphaned);
+    const totalSize = orphanedAssets.reduce((sum: number, a: MetadataAsset) => sum + a.size, 0);
     console.log(`    💾 Potential savings: ${formatBytes(totalSize)}`);
   }
 
@@ -85,8 +85,8 @@ function printValidationReport(report: any, verbose: boolean = false): void {
 
     if (verbose) {
       printColored('\n📋 DETAILED ISSUES', colors.bold);
-      const errorIssues = report.issues.filter((i: any) => i.severity === 'error');
-      const warningIssues = report.issues.filter((i: any) => i.severity === 'warning');
+      const errorIssues = report.issues.filter((i: EnhancedConsistencyIssue) => i.severity === 'error');
+      const warningIssues = report.issues.filter((i: EnhancedConsistencyIssue) => i.severity === 'warning');
 
       if (errorIssues.length > 0) {
         printColored('\n🚨 CRITICAL ERRORS', colors.red + colors.bold);
@@ -122,9 +122,9 @@ function printValidationReport(report: any, verbose: boolean = false): void {
   if (report.recommendations.length > 0) {
     printColored('\n💡 ACTIONABLE RECOMMENDATIONS', colors.bold + colors.blue);
     
-    const highPriority = report.recommendations.filter((r: any) => r.priority === 'high');
-    const mediumPriority = report.recommendations.filter((r: any) => r.priority === 'medium');
-    const lowPriority = report.recommendations.filter((r: any) => r.priority === 'low');
+    const highPriority = report.recommendations.filter((r) => r.priority === 'high');
+    const mediumPriority = report.recommendations.filter((r) => r.priority === 'medium');
+    const lowPriority = report.recommendations.filter((r) => r.priority === 'low');
 
     if (highPriority.length > 0) {
       printColored('\n🔥 HIGH PRIORITY', colors.red + colors.bold);
@@ -157,7 +157,7 @@ function printValidationReport(report: any, verbose: boolean = false): void {
   // Usage suggestions
   printColored('\n🚀 NEXT STEPS', colors.bold + colors.green);
   
-  const autoFixAvailable = report.recommendations.some((r: any) => r.autoFixAvailable);
+  const autoFixAvailable = report.recommendations.some((r) => r.autoFixAvailable);
   
   if (autoFixAvailable) {
     console.log('  1. 🔧 Run interactive repair: `deno task db:validate:fix`');
@@ -224,7 +224,7 @@ function formatBytes(bytes: number): string {
 /**
  * Save report to file
  */
-async function saveReportToFile(report: any, filePath: string): Promise<void> {
+async function saveReportToFile(report: ValidationReport, filePath: string): Promise<void> {
   try {
     const reportContent = await repairSystem.generateRepairReport();
     Deno.writeTextFileSync(filePath, reportContent);
@@ -244,7 +244,7 @@ async function main(): Promise<void> {
   const helpRequested = args.includes('--help') || args.includes('-h');
   const fixMode = args.includes('--fix') || args.includes('-f');
   const dryRun = args.includes('--dry-run');
-  const comprehensive = args.includes('--comprehensive') || args.includes('-c');
+  const _comprehensive = args.includes('--comprehensive') || args.includes('-c');
 
   if (helpRequested) {
     console.log(`

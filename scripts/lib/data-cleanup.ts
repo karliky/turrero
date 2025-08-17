@@ -10,7 +10,7 @@
 import { 
   validateCrossFileConsistency, 
   safeReadDatabase, 
-  safeWriteDatabase, 
+  safeWriteDatabase as _safeWriteDatabase, 
   atomicMultiWrite,
   cleanupOldBackups,
   type ConsistencyIssue 
@@ -119,7 +119,7 @@ function removeOrphanedBooks<T extends { id: string; turraId: string }>(
 /**
  * Main cleanup function
  */
-export async function cleanupDatabaseIntegrity(dryRun: boolean = false): Promise<CleanupResult> {
+export function cleanupDatabaseIntegrity(dryRun: boolean = false): CleanupResult {
   logger.info(`🧹 Starting database integrity cleanup ${dryRun ? '(DRY RUN)' : ''}`);
   
   try {
@@ -164,8 +164,8 @@ export async function cleanupDatabaseIntegrity(dryRun: boolean = false): Promise
 
     // Step 2: Clean orphaned records from all related databases
     const operations: Array<{
-      fileName: any;
-      data: any;
+      fileName: string;
+      data: unknown;
       skipValidation?: boolean;
     }> = [];
 
