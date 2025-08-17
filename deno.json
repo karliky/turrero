@@ -58,7 +58,8 @@
         "dotenv": "npm:dotenv@^16.4.7",
         "openai": "npm:openai@^4.73.1",
         "axios": "npm:axios@^1.7.9",
-        "zod": "npm:zod@^3.22.4"
+        "zod": "npm:zod@^3.22.4",
+        "twitter-downloader": "npm:twitter-downloader@^1.1.6"
     },
     "lint": {
         "rules": {
@@ -94,6 +95,7 @@
         "enrich": "deno run --allow-all scripts/tweets_enrichment.ts",
         "ai-process": "deno run --allow-all scripts/ai-prompt-processor.ts",
         "algolia": "deno run --allow-all scripts/make-algolia-db.ts",
+        "images": "deno run --allow-all scripts/download-thread-media.ts",
         "db-fix": "deno run --allow-all scripts/enhanced-validate-db-integrity.ts --fix",
         "db-check": "deno run --allow-all scripts/enhanced-validate-db-integrity.ts",
         "typecheck": "npm run lint && npx tsc --noEmit",

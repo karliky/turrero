@@ -431,7 +431,7 @@ export function createThreadPipeline(
       dependencies: ["enrich"],
       timeout: 90000, // 1.5 minutes
       executor: async () => {
-        await execCommand("deno", ["task", "images"]);
+        await execCommand("deno", ["task", "images", threadId]);
       },
     },
     {
@@ -451,11 +451,37 @@ export function createThreadPipeline(
       dependencies: ["metadata"],
       timeout: 10000,
       executor: async () => {
-        await execCommand("mv", [
-          "-v",
-          "./scripts/metadata/*",
-          "./public/metadata/",
-        ]);
+        const sourceDir = "./scripts/metadata";
+        const targetDir = "./public/metadata";
+        
+        // Check if source directory exists and has files
+        try {
+          const files = await Deno.readDir(sourceDir);
+          const fileList = [];
+          for await (const file of files) {
+            if (file.isFile) {
+              fileList.push(file.name);
+            }
+          }
+          
+          if (fileList.length === 0) {
+            console.log("No metadata files to move");
+            return;
+          }
+          
+          // Ensure target directory exists
+          await Deno.mkdir(targetDir, { recursive: true });
+          
+          // Move files individually
+          for (const fileName of fileList) {
+            const sourcePath = `${sourceDir}/${fileName}`;
+            const targetPath = `${targetDir}/${fileName}`;
+            await Deno.rename(sourcePath, targetPath);
+            console.log(`Moved ${fileName} to ${targetDir}`);
+          }
+        } catch (error) {
+          console.log(`No metadata directory or files to move: ${error}`);
+        }
       },
     },
     {
