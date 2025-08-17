@@ -154,7 +154,6 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     return {
       type: imgs.length > 0 ? 'image' : undefined,
       imgs: imgs.length > 0 ? imgs : undefined,
-      embed: { tweet: undefined },
     } as unknown as TweetMetadata;
   });
 
@@ -265,107 +264,648 @@ async function fetchSingleTweet(
 /**
  * Fetch all tweets in a thread from the current page
  * This is the preferred method for thread scraping
+ * Now includes reply-based thread detection and extraction
  */
 async function fetchCompleteThread(
   page: Page,
   expectedAuthor: string,
   threadId: string
 ): Promise<Tweet[]> {
-  logger.debug(`Fetching complete thread for ${threadId}`);
+  logger.debug(`Fetching complete thread for ${threadId} by author ${expectedAuthor}`);
   
   // Wait for the thread to load completely
   await page.waitForSelector('article[data-testid="tweet"]', { timeout: 10000 });
-  await new Promise(resolve => setTimeout(resolve, 2000)); // Allow time for all tweets to load
+  await new Promise(resolve => setTimeout(resolve, 3000));
   
-  // Get all tweet elements on the page
-  const tweets = await page.evaluate((authorUrl: string, _tweetId: string) => {
-    const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
-    const threadTweets: Tweet[] = [];
+  // Strategy 0: Check if this is a reply-based thread first
+  const hasReplies = await page.evaluate(() => {
+    const replyButtons = Array.from(document.querySelectorAll('*'));
+    return replyButtons.some(el => {
+      const text = el.textContent || '';
+      return text.includes('replies') || text.includes('Read') && text.includes('replies');
+    });
+  });
+  
+  if (hasReplies) {
+    logger.debug("Reply-based thread detected, attempting direct approach");
     
-    for (const element of tweetElements) {
-      try {
-        // Extract tweet ID
-        const timeElement = element.querySelector('time');
-        const timeParent = timeElement?.parentElement as HTMLAnchorElement;
-        const href = timeParent?.href;
+    // Strategy: Navigate directly to /with_replies endpoint
+    const repliesUrl = `https://x.com/${expectedAuthor}/status/${threadId}/with_replies`;
+    logger.debug(`Trying replies URL: ${repliesUrl}`);
+    
+    try {
+      await page.goto(repliesUrl, { waitUntil: 'networkidle', timeout: 15000 });
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      // Scroll to load all replies
+      let previousHeight = 0;
+      let unchangedCount = 0;
+      
+      for (let i = 0; i < 40; i++) {
+        await page.evaluate(() => window.scrollBy(0, window.innerHeight * 1.5));
+        await new Promise(resolve => setTimeout(resolve, 2000));
         
-        if (!href) continue;
-        
-        const idMatch = href.match(/status\/(\d+)/);
-        if (!idMatch) continue;
-        
-        const currentTweetId = idMatch[1];
-        
-        // Extract tweet text
-        const textElement = element.querySelector('[data-testid="tweetText"]');
-        const tweetText = textElement?.textContent || '';
-        
-        if (!tweetText.trim()) continue;
-        
-        // Extract author information
-        const authorElement = element.querySelector('[data-testid="User-Name"] a');
-        const authorHref = (authorElement as HTMLAnchorElement)?.href;
-        
-        if (!authorHref || !authorHref.includes(authorUrl.split('/').pop() || '')) {
-          continue; // Skip tweets not from the expected author
+        const currentHeight = await page.evaluate(() => document.body.scrollHeight);
+        if (currentHeight === previousHeight) {
+          unchangedCount++;
+          if (unchangedCount >= 4) break;
+        } else {
+          unchangedCount = 0;
+          previousHeight = currentHeight;
         }
-        
-        // Extract timestamp
-        const timeValue = timeElement?.getAttribute('datetime');
-        
-        // Extract stats
-        const replyElement = element.querySelector('[data-testid="reply"]');
-        const retweetElement = element.querySelector('[data-testid="retweet"]');
-        const likeElement = element.querySelector('[data-testid="like"]');
-        const bookmarkElement = element.querySelector('[data-testid="bookmark"]');
-        
-        const getStatValue = (el: Element | null): string => {
-          const text = el?.getAttribute('aria-label') || '';
-          const match = text.match(/(\d+(?:,\d+)*)/);
-          return match?.[1] || '0';
-        };
-        
-        // Extract metadata (images, embeds, etc.)
-        const imgElements = element.querySelectorAll('img[src*="pbs.twimg.com"]');
-        const imgs = Array.from(imgElements).map(img => ({
-          src: (img as HTMLImageElement).src,
-          alt: (img as HTMLImageElement).alt || 'Image'
-        }));
-        
-        const metadata: TweetMetadata = {};
-        if (imgs.length > 0) {
-          metadata.type = 'image';
-          metadata.imgs = imgs;
-          metadata.embed = {};
-        }
-        
-        const tweet = {
-          tweet: tweetText,
-          author: authorHref,
-          id: currentTweetId,
-          metadata: metadata,
-          time: timeValue || new Date().toISOString(),
-          stats: {
-            replies: getStatValue(replyElement),
-            retweets: getStatValue(retweetElement),
-            likes: getStatValue(likeElement),
-            bookmarks: getStatValue(bookmarkElement),
-            views: '0' // Views are not easily accessible in this context
-          }
-        };
-        
-        threadTweets.push(tweet);
-      } catch (error) {
-        console.log('Error processing tweet element:', error);
-        continue;
       }
+      
+      // Extract all tweets including replies
+      const replyTweets = await page.evaluate((expectedUsername: string) => {
+        const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+        const threadTweets: Tweet[] = [];
+        
+        for (const element of tweetElements) {
+          try {
+            const timeElement = element.querySelector('time');
+            const timeParent = timeElement?.parentElement as HTMLAnchorElement;
+            const href = timeParent?.href;
+            
+            if (!href) continue;
+            
+            const idMatch = href.match(/status\/(\d+)/);
+            if (!idMatch) continue;
+            
+            const currentTweetId = idMatch[1];
+            
+            const textElement = element.querySelector('[data-testid="tweetText"]');
+            const tweetText = textElement?.textContent || '';
+            
+            if (!tweetText.trim()) continue;
+            
+            // Check if this is from the expected author
+            const authorElement = element.querySelector('[data-testid="User-Name"] a');
+            const authorHref = (authorElement as HTMLAnchorElement)?.href;
+            
+            if (!authorHref || !authorHref.toLowerCase().includes(expectedUsername.toLowerCase())) {
+              continue;
+            }
+            
+            const timeValue = timeElement?.getAttribute('datetime');
+            
+            const replyElement = element.querySelector('[data-testid="reply"]');
+            const retweetElement = element.querySelector('[data-testid="retweet"]');
+            const likeElement = element.querySelector('[data-testid="like"]');
+            const bookmarkElement = element.querySelector('[data-testid="bookmark"]');
+            
+            const getStatValue = (el: Element | null): string => {
+              const text = el?.getAttribute('aria-label') || '';
+              const match = text.match(/(\d+(?:,\d+)*)/);
+              return match?.[1] || '0';
+            };
+            
+            const imgElements = element.querySelectorAll('img[src*="pbs.twimg.com"]');
+            const imgs = Array.from(imgElements).map(img => ({
+              src: (img as HTMLImageElement).src,
+              alt: (img as HTMLImageElement).alt || 'Image'
+            }));
+            
+            const metadata: TweetMetadata = {};
+            if (imgs.length > 0) {
+              metadata.type = 'image';
+              metadata.imgs = imgs;
+            }
+            
+            const tweet = {
+              tweet: tweetText,
+              author: authorHref,
+              id: currentTweetId,
+              metadata: metadata,
+              time: timeValue || new Date().toISOString(),
+              stats: {
+                replies: getStatValue(replyElement),
+                retweets: getStatValue(retweetElement),
+                likes: getStatValue(likeElement),
+                bookmarks: getStatValue(bookmarkElement),
+                views: '0'
+              }
+            };
+            
+            threadTweets.push(tweet);
+          } catch (error) {
+            continue;
+          }
+        }
+        
+        return threadTweets;
+      }, expectedAuthor);
+      
+      if (replyTweets.length > 5) {
+        logger.debug(`Reply-based extraction yielded ${replyTweets.length} tweets`);
+        const uniqueTweets = replyTweets.filter((tweet, index, array) => 
+          array.findIndex(t => t.id === tweet.id) === index
+        );
+        uniqueTweets.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
+        return uniqueTweets;
+      }
+    } catch (error) {
+      logger.debug("Direct replies approach failed, continuing with normal strategies");
     }
-    
-    return threadTweets;
-  }, expectedAuthor, threadId);
+  }
   
-  logger.info(`Found ${tweets.length} tweets in thread ${threadId}`);
-  return tweets;
+  // Strategy: Scroll first to load content, then try to expand
+  let allTweets: Tweet[] = [];
+  let bestCount = 0;
+  
+  // Phase 1: Try expansion approach
+  const hasThreadIndicator = await page.evaluate(() => {
+    const threadIndicators = [
+      'Show this thread',
+      'Show more replies', 
+      'thread',
+      'hilo',
+      '🧵'
+    ];
+    
+    const pageText = document.body.textContent || '';
+    return threadIndicators.some(indicator => 
+      pageText.toLowerCase().includes(indicator.toLowerCase())
+    );
+  });
+
+  if (hasThreadIndicator) {
+    logger.debug("Thread indicator found, attempting expansion + careful scrolling");
+    
+    try {
+      const clicked = await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('div[role="button"], a[role="button"], span'));
+        for (const button of buttons) {
+          const text = button.textContent || '';
+          if (text.toLowerCase().includes('show this thread') || 
+              text.toLowerCase().includes('more replies') ||
+              text.toLowerCase().includes('hilo') ||
+              text.includes('🧵')) {
+            (button as HTMLElement).click();
+            return true;
+          }
+        }
+        return false;
+      });
+      
+      if (clicked) {
+        logger.debug("Successfully clicked thread expansion button");
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        
+        // Light scrolling after expansion to reveal more content
+        for (let i = 0; i < 10; i++) {
+          await page.evaluate(() => {
+            window.scrollBy(0, window.innerHeight * 0.5);
+          });
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Check for "Show more" buttons every few scrolls  
+          if (i % 3 === 0) {
+            try {
+              await page.evaluate(() => {
+                const buttons = Array.from(document.querySelectorAll('div[role="button"], span'));
+                for (const button of buttons) {
+                  const text = (button.textContent || '').toLowerCase();
+                  if (text.includes('show more') || text.includes('more replies')) {
+                    (button as HTMLElement).click();
+                    break;
+                  }
+                }
+              });
+              await new Promise(resolve => setTimeout(resolve, 2000));
+            } catch (error) {
+              // Ignore click errors
+            }
+          }
+        }
+        
+        // Extract tweets after expansion + scrolling
+        const expandedTweets = await page.evaluate((expectedUsername: string) => {
+          const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+          const threadTweets: Tweet[] = [];
+          
+          for (const element of tweetElements) {
+            try {
+              const timeElement = element.querySelector('time');
+              const timeParent = timeElement?.parentElement as HTMLAnchorElement;
+              const href = timeParent?.href;
+              
+              if (!href) continue;
+              
+              const idMatch = href.match(/status\/(\d+)/);
+              if (!idMatch) continue;
+              
+              const currentTweetId = idMatch[1];
+              
+              const textElement = element.querySelector('[data-testid="tweetText"]');
+              const tweetText = textElement?.textContent || '';
+              
+              if (!tweetText.trim()) continue;
+              
+              const authorElement = element.querySelector('[data-testid="User-Name"] a');
+              const authorHref = (authorElement as HTMLAnchorElement)?.href;
+              
+              if (!authorHref || !authorHref.toLowerCase().includes(expectedUsername.toLowerCase())) {
+                continue;
+              }
+              
+              const timeValue = timeElement?.getAttribute('datetime');
+              
+              const replyElement = element.querySelector('[data-testid="reply"]');
+              const retweetElement = element.querySelector('[data-testid="retweet"]');
+              const likeElement = element.querySelector('[data-testid="like"]');
+              const bookmarkElement = element.querySelector('[data-testid="bookmark"]');
+              
+              const getStatValue = (el: Element | null): string => {
+                const text = el?.getAttribute('aria-label') || '';
+                const match = text.match(/(\d+(?:,\d+)*)/);
+                return match?.[1] || '0';
+              };
+              
+              const imgElements = element.querySelectorAll('img[src*="pbs.twimg.com"]');
+              const imgs = Array.from(imgElements).map(img => ({
+                src: (img as HTMLImageElement).src,
+                alt: (img as HTMLImageElement).alt || 'Image'
+              }));
+              
+              const metadata: TweetMetadata = {};
+              if (imgs.length > 0) {
+                metadata.type = 'image';
+                metadata.imgs = imgs;
+              }
+              
+              const tweet = {
+                tweet: tweetText,
+                author: authorHref,
+                id: currentTweetId,
+                metadata: metadata,
+                time: timeValue || new Date().toISOString(),
+                stats: {
+                  replies: getStatValue(replyElement),
+                  retweets: getStatValue(retweetElement),
+                  likes: getStatValue(likeElement),
+                  bookmarks: getStatValue(bookmarkElement),
+                  views: '0'
+                }
+              };
+              
+              threadTweets.push(tweet);
+            } catch (error) {
+              continue;
+            }
+          }
+          
+          return threadTweets;
+        }, expectedAuthor);
+        
+        if (expandedTweets.length > bestCount) {
+          allTweets = expandedTweets;
+          bestCount = expandedTweets.length;
+          logger.debug(`Expansion approach yielded ${bestCount} tweets`);
+        }
+      }
+    } catch (error) {
+      logger.debug("Could not expand thread automatically");
+    }
+  }
+  
+  // Phase 2: If we didn't get a good result, try traditional scrolling on fresh page
+  if (bestCount < 5) {
+    logger.debug("Trying fresh page approach with traditional scrolling");
+    
+    // Reload the page for a fresh start
+    await page.goto(`https://x.com/${expectedAuthor}/status/${threadId}`);
+    await page.waitForSelector('article[data-testid="tweet"]');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    
+    // Traditional scrolling approach
+    let currentTweetCount = 0;
+    let stableCount = 0;
+    let scrollAttempts = 0;
+    const maxScrollAttempts = 100; // Aumentado significativamente
+    const maxStableAttempts = 8; // Más intentos estables
+    
+    do {
+      const previousTweetCount = currentTweetCount;
+      
+      await page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
+      currentTweetCount = await page.evaluate((authorName: string) => {
+        const articles = document.querySelectorAll('article[data-testid="tweet"]');
+        let count = 0;
+        for (const article of articles) {
+          const authorElement = article.querySelector('[data-testid="User-Name"] a');
+          const authorHref = (authorElement as HTMLAnchorElement)?.href;
+          if (authorHref && authorHref.toLowerCase().includes(authorName.toLowerCase())) {
+            count++;
+          }
+        }
+        return count;
+      }, expectedAuthor);
+      
+      if (currentTweetCount === previousTweetCount) {
+        stableCount++;
+      } else {
+        stableCount = 0;
+        logger.debug(`Traditional scroll ${scrollAttempts + 1}: Found ${currentTweetCount} tweets`);
+      }
+      
+      scrollAttempts++;
+      
+    } while (stableCount < maxStableAttempts && scrollAttempts < maxScrollAttempts);
+    
+    // Extract tweets from traditional approach
+    const traditionalTweets = await page.evaluate((expectedUsername: string) => {
+      const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+      const threadTweets: Tweet[] = [];
+      
+      for (const element of tweetElements) {
+        try {
+          const timeElement = element.querySelector('time');
+          const timeParent = timeElement?.parentElement as HTMLAnchorElement;
+          const href = timeParent?.href;
+          
+          if (!href) continue;
+          
+          const idMatch = href.match(/status\/(\d+)/);
+          if (!idMatch) continue;
+          
+          const currentTweetId = idMatch[1];
+          
+          const textElement = element.querySelector('[data-testid="tweetText"]');
+          const tweetText = textElement?.textContent || '';
+          
+          if (!tweetText.trim()) continue;
+          
+          const authorElement = element.querySelector('[data-testid="User-Name"] a');
+          const authorHref = (authorElement as HTMLAnchorElement)?.href;
+          
+          if (!authorHref || !authorHref.toLowerCase().includes(expectedUsername.toLowerCase())) {
+            continue;
+          }
+          
+          const timeValue = timeElement?.getAttribute('datetime');
+          
+          const replyElement = element.querySelector('[data-testid="reply"]');
+          const retweetElement = element.querySelector('[data-testid="retweet"]');
+          const likeElement = element.querySelector('[data-testid="like"]');
+          const bookmarkElement = element.querySelector('[data-testid="bookmark"]');
+          
+          const getStatValue = (el: Element | null): string => {
+            const text = el?.getAttribute('aria-label') || '';
+            const match = text.match(/(\d+(?:,\d+)*)/);
+            return match?.[1] || '0';
+          };
+          
+          const imgElements = element.querySelectorAll('img[src*="pbs.twimg.com"]');
+          const imgs = Array.from(imgElements).map(img => ({
+            src: (img as HTMLImageElement).src,
+            alt: (img as HTMLImageElement).alt || 'Image'
+          }));
+          
+          const metadata: TweetMetadata = {};
+          if (imgs.length > 0) {
+            metadata.type = 'image';
+            metadata.imgs = imgs;
+          }
+          
+          const tweet = {
+            tweet: tweetText,
+            author: authorHref,
+            id: currentTweetId,
+            metadata: metadata,
+            time: timeValue || new Date().toISOString(),
+            stats: {
+              replies: getStatValue(replyElement),
+              retweets: getStatValue(retweetElement),
+              likes: getStatValue(likeElement),
+              bookmarks: getStatValue(bookmarkElement),
+              views: '0'
+            }
+          };
+          
+          threadTweets.push(tweet);
+        } catch (error) {
+          continue;
+        }
+      }
+      
+      return threadTweets;
+    }, expectedAuthor);
+    
+    if (traditionalTweets.length > bestCount) {
+      allTweets = traditionalTweets;
+      bestCount = traditionalTweets.length;
+      logger.debug(`Traditional approach yielded ${bestCount} tweets`);
+    }
+  }
+  
+  // Phase 3: Ultra-aggressive approach - multiple strategies combined
+  if (bestCount < 25) { // Si aún no tenemos suficientes tweets
+    logger.debug("Attempting ultra-aggressive multi-strategy approach");
+    
+    // Solo un intento pero mucho más eficiente
+    for (let attempt = 0; attempt < 1; attempt++) {
+      await page.goto(`https://x.com/${expectedAuthor}/status/${threadId}`);
+      await page.waitForSelector('article[data-testid="tweet"]');
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Búsqueda exhaustiva de botones de expansión
+      for (let expansionAttempt = 0; expansionAttempt < 5; expansionAttempt++) {
+        await page.evaluate(() => {
+          const possibleButtons = [
+            ...Array.from(document.querySelectorAll('div[role="button"], a[role="button"], span, button')),
+            ...Array.from(document.querySelectorAll('[data-testid="reply"], [data-testid="retweet"]'))
+          ];
+          
+          for (const button of possibleButtons) {
+            const text = (button.textContent || '').toLowerCase();
+            const ariaLabel = button.getAttribute('aria-label') || '';
+            
+            if (text.includes('show this thread') || 
+                text.includes('show more') ||
+                text.includes('more replies') ||
+                text.includes('hilo') ||
+                text.includes('thread') ||
+                text.includes('🧵') ||
+                ariaLabel.toLowerCase().includes('thread') ||
+                ariaLabel.toLowerCase().includes('more')) {
+              try {
+                (button as HTMLElement).click();
+              } catch (e) {
+                // Ignore click errors
+              }
+            }
+          }
+        });
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+      
+      // Scroll ultra-agresivo con detección de contenido nuevo
+      let previousHeight = 0;
+      let unchangedCount = 0;
+      const maxUnchangedAttempts = 6;
+      
+      for (let scrollIndex = 0; scrollIndex < 80; scrollIndex++) { // Hasta 80 scrolls
+        // Alternar entre diferentes tipos de scroll
+        if (scrollIndex % 3 === 0) {
+          // Scroll completo hacia abajo
+          await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        } else if (scrollIndex % 3 === 1) {
+          // Scroll gradual
+          await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+        } else {
+          // Scroll intermedio
+          await page.evaluate(() => window.scrollBy(0, window.innerHeight * 1.5));
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Verificar si el contenido ha cambiado
+        const currentHeight = await page.evaluate(() => document.body.scrollHeight);
+        if (currentHeight === previousHeight) {
+          unchangedCount++;
+          if (unchangedCount >= maxUnchangedAttempts) {
+            logger.debug(`No new content after ${unchangedCount} attempts, stopping scroll`);
+            break;
+          }
+          // Si hemos hecho más de 30 scrolls sin cambios, ser más agresivo
+          if (scrollIndex > 30 && unchangedCount >= 3) {
+            logger.debug(`After ${scrollIndex} scrolls with ${unchangedCount} unchanged, stopping early`);
+            break;
+          }
+        } else {
+          unchangedCount = 0;
+          previousHeight = currentHeight;
+        }
+        
+        // Cada 10 scrolls, intentar hacer click en posibles botones
+        if (scrollIndex % 10 === 0) {
+          await page.evaluate(() => {
+            const buttons = Array.from(document.querySelectorAll('div[role="button"], span'));
+            for (const button of buttons) {
+              const text = (button.textContent || '').toLowerCase();
+              if (text.includes('show more') || text.includes('load more') || text.includes('more tweets')) {
+                try {
+                  (button as HTMLElement).click();
+                } catch (e) {}
+              }
+            }
+          });
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+      
+      // Extraer tweets después de este intento agresivo
+      const aggressiveTweets = await page.evaluate((expectedUsername: string) => {
+        const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+        const threadTweets: Tweet[] = [];
+        
+        for (const element of tweetElements) {
+          try {
+            const timeElement = element.querySelector('time');
+            const timeParent = timeElement?.parentElement as HTMLAnchorElement;
+            const href = timeParent?.href;
+            
+            if (!href) continue;
+            
+            const idMatch = href.match(/status\/(\d+)/);
+            if (!idMatch) continue;
+            
+            const currentTweetId = idMatch[1];
+            
+            const textElement = element.querySelector('[data-testid="tweetText"]');
+            const tweetText = textElement?.textContent || '';
+            
+            if (!tweetText.trim()) continue;
+            
+            const authorElement = element.querySelector('[data-testid="User-Name"] a');
+            const authorHref = (authorElement as HTMLAnchorElement)?.href;
+            
+            if (!authorHref || !authorHref.toLowerCase().includes(expectedUsername.toLowerCase())) {
+              continue;
+            }
+            
+            const timeValue = timeElement?.getAttribute('datetime');
+            
+            const replyElement = element.querySelector('[data-testid="reply"]');
+            const retweetElement = element.querySelector('[data-testid="retweet"]');
+            const likeElement = element.querySelector('[data-testid="like"]');
+            const bookmarkElement = element.querySelector('[data-testid="bookmark"]');
+            
+            const getStatValue = (el: Element | null): string => {
+              const text = el?.getAttribute('aria-label') || '';
+              const match = text.match(/(\d+(?:,\d+)*)/);
+              return match?.[1] || '0';
+            };
+            
+            const imgElements = element.querySelectorAll('img[src*="pbs.twimg.com"]');
+            const imgs = Array.from(imgElements).map(img => ({
+              src: (img as HTMLImageElement).src,
+              alt: (img as HTMLImageElement).alt || 'Image'
+            }));
+            
+            const metadata: TweetMetadata = {};
+            if (imgs.length > 0) {
+              metadata.type = 'image';
+              metadata.imgs = imgs;
+            }
+            
+            const tweet = {
+              tweet: tweetText,
+              author: authorHref,
+              id: currentTweetId,
+              metadata: metadata,
+              time: timeValue || new Date().toISOString(),
+              stats: {
+                replies: getStatValue(replyElement),
+                retweets: getStatValue(retweetElement),
+                likes: getStatValue(likeElement),
+                bookmarks: getStatValue(bookmarkElement),
+                views: '0'
+              }
+            };
+            
+            threadTweets.push(tweet);
+          } catch (error) {
+            continue;
+          }
+        }
+        
+        return threadTweets;
+      }, expectedAuthor);
+      
+      if (aggressiveTweets.length > bestCount) {
+        allTweets = aggressiveTweets;
+        bestCount = aggressiveTweets.length;
+        logger.debug(`Ultra-aggressive approach attempt ${attempt + 1} yielded ${bestCount} tweets`);
+        
+        // Si encontramos el texto objetivo, podemos parar
+        const hasTargetText = aggressiveTweets.some(tweet => 
+          tweet.tweet.includes('P.D.III: Otro mini arco de hilos relevantes')
+        );
+        if (hasTargetText) {
+          logger.info("Found target text! Thread appears complete.");
+          break;
+        }
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 5000));
+    }
+  }
+  
+  // Final cleanup and sorting
+  const uniqueTweets = allTweets.filter((tweet, index, array) => 
+    array.findIndex(t => t.id === tweet.id) === index
+  );
+  
+  uniqueTweets.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
+  
+  logger.info(`Found ${uniqueTweets.length} tweets in thread ${threadId} by ${expectedAuthor}`);
+  return uniqueTweets;
 }
 
 /**
@@ -569,7 +1109,7 @@ async function getAllTweets({
     }
 
     // Use the new complete thread fetching method
-    const threadTweets = await fetchCompleteThread(page, `https://x.com/${author}`, tweetId);
+    const threadTweets = await fetchCompleteThread(page, author, tweetId);
     
     if (threadTweets.length > 0) {
       // Read existing tweets

@@ -103,9 +103,9 @@ async function processTweetForEnrichment(
   try {
     if (tweet.metadata?.type === TweetMetadataType.CARD) {
       await enricher.downloadTweetMedia(enrichmentTweet, page, saveTweet);
-    } else if (tweet.metadata?.imgs) {
-      await processImageTweets(tweet, enricher);
     }
+    // Note: Image processing is now handled by download-thread-media.ts
+    // Only cards are processed here to avoid duplication
   } catch (error: unknown) {
     handleEnrichmentError(error, tweet);
   }
@@ -132,55 +132,8 @@ async function processEmbeddedTweet(
   await dataAccess.saveTweetsEnriched(existingEnrichments);
 }
 
-async function processImageTweets(
-  tweet: Tweet,
-  enricher: TweetEnricher,
-): Promise<void> {
-  // Extract all image URLs for parallel download
-  const imageUrls = tweet.metadata!.imgs!.map((img: TweetImageMetadata) => img.img);
-  
-  if (imageUrls.length > 0) {
-    logger.info(`Downloading ${imageUrls.length} images for tweet ${tweet.id} in parallel...`);
-    
-    // Use parallel download for better performance
-    const downloadResults = await enricher.downloadMediaParallel(imageUrls, {
-      maxConcurrency: 6,
-      retryAttempts: 3,
-      directory: "./public/metadata"
-    });
-    
-    // Create enriched entry for each successfully downloaded image
-    if (downloadResults.successful.length > 0) {
-      const existingEnrichments = await dataAccess.getTweetsEnriched();
-      
-      for (const filePath of downloadResults.successful) {
-        const filename = filePath.split('/').pop() || '';
-        const localPath = `./metadata/${filename}`;
-        
-        existingEnrichments.push({
-          id: tweet.id,
-          type: TweetMetadataType.IMAGE,
-          media: "image",
-          title: "",
-          description: "",
-          url: "",
-          img: localPath,
-        });
-      }
-      
-      await dataAccess.saveTweetsEnriched(existingEnrichments);
-      logger.info(`Enriched tweet ${tweet.id} with ${downloadResults.successful.length} images`);
-    }
-    
-    // Log any failures
-    if (downloadResults.failed.length > 0) {
-      logger.warn(`Failed to download ${downloadResults.failed.length} images for tweet ${tweet.id}`);
-      for (const failure of downloadResults.failed) {
-        logger.error(`Failed: ${failure.url} - ${failure.error}`);
-      }
-    }
-  }
-}
+// processImageTweets function removed - image processing is now handled by download-thread-media.ts
+// This ensures no duplication and proper path management
 
 function handleEnrichmentError(error: unknown, tweet: Tweet): void {
   const contextError = error as ContextualError;

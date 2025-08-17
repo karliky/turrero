@@ -53,3 +53,4 @@ Use: `deno task add-thread [thread_id]` or `add thread [thread_id]`
 - Maintain strict type safety across all files
 - Run `npm run lint` and `deno task lint` to verify compliance
 - Update type definitions when modifying data structures
+- When you need to debug using MCP Playwright, use the cookies.txt in order to to be logged prior to accessing x.com

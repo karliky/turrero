@@ -31,7 +31,7 @@ async function generateBooks(): Promise<void> {
   );
 
   await dataAccess.saveBooksNotEnriched(
-    filteredBooks as unknown as BookToEnrich[],
+    JSON.stringify(filteredBooks, null, 4)
   );
   logger.info("Books generation completed successfully!");
 }

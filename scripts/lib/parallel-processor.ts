@@ -381,14 +381,24 @@ export function createThreadPipeline(
       dependencies: [],
       timeout: 120000, // 2 minutes
       executor: async () => {
-        await execDenoScript("scripts/recorder.ts");
+        await execCommand("deno", ["run", "--allow-all", "scripts/recorder.ts", threadId]);
+      },
+    },
+    {
+      id: "download-media",
+      name: "Download Media",
+      description: "Download thread images and update tweets_enriched.json",
+      dependencies: ["scrape"],
+      timeout: 90000, // 1.5 minutes
+      executor: async () => {
+        await execCommand("deno", ["task", "images", threadId]);
       },
     },
     {
       id: "enrich",
       name: "Enrich Tweets",
-      description: "Extract metadata and enrich tweet data",
-      dependencies: ["scrape"],
+      description: "Extract metadata and enrich tweet data (cards and embeds)",
+      dependencies: ["download-media"],
       timeout: 60000, // 1 minute
       executor: async () => {
         await execDenoScript("scripts/tweets_enrichment.ts");
@@ -398,7 +408,7 @@ export function createThreadPipeline(
       id: "algolia",
       name: "Generate Algolia Index",
       description: "Create search index for Algolia",
-      dependencies: ["scrape"],
+      dependencies: ["enrich"],
       timeout: 30000, // 30 seconds
       executor: async () => {
         await execDenoScript("scripts/make-algolia-db.ts");
@@ -408,7 +418,7 @@ export function createThreadPipeline(
       id: "books-generate",
       name: "Generate Books",
       description: "Extract book references from tweets",
-      dependencies: ["scrape"],
+      dependencies: ["enrich"],
       timeout: 30000,
       executor: async () => {
         await execDenoScript("scripts/generate-books.ts");
@@ -425,16 +435,6 @@ export function createThreadPipeline(
       },
     },
     {
-      id: "metadata",
-      name: "Generate Metadata",
-      description: "Generate metadata images for social sharing",
-      dependencies: ["enrich"],
-      timeout: 90000, // 1.5 minutes
-      executor: async () => {
-        await execCommand("deno", ["task", "images", threadId]);
-      },
-    },
-    {
       id: "graph",
       name: "Update Graph",
       description: "Add thread to visualization graph",
@@ -442,46 +442,6 @@ export function createThreadPipeline(
       timeout: 30000,
       executor: async () => {
         await execCommand("python", ["./scripts/create_graph.py"]);
-      },
-    },
-    {
-      id: "move-metadata",
-      name: "Move Metadata",
-      description: "Move metadata files to public directory",
-      dependencies: ["metadata"],
-      timeout: 10000,
-      executor: async () => {
-        const sourceDir = "./scripts/metadata";
-        const targetDir = "./public/metadata";
-        
-        // Check if source directory exists and has files
-        try {
-          const files = await Deno.readDir(sourceDir);
-          const fileList = [];
-          for await (const file of files) {
-            if (file.isFile) {
-              fileList.push(file.name);
-            }
-          }
-          
-          if (fileList.length === 0) {
-            console.log("No metadata files to move");
-            return;
-          }
-          
-          // Ensure target directory exists
-          await Deno.mkdir(targetDir, { recursive: true });
-          
-          // Move files individually
-          for (const fileName of fileList) {
-            const sourcePath = `${sourceDir}/${fileName}`;
-            const targetPath = `${targetDir}/${fileName}`;
-            await Deno.rename(sourcePath, targetPath);
-            console.log(`Moved ${fileName} to ${targetDir}`);
-          }
-        } catch (error) {
-          console.log(`No metadata directory or files to move: ${error}`);
-        }
       },
     },
     {

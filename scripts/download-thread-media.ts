@@ -3,14 +3,15 @@
 /**
  * Download Thread Media Script
  * 
- * Downloads images and videos from a Twitter thread using twitter-downloader
- * and saves them to the metadata directory.
+ * Downloads images and videos from a Twitter thread and updates tweets_enriched.json
+ * with correct paths to the downloaded media files.
  */
 
 import { join } from "https://deno.land/std@0.224.0/path/mod.ts";
 import { ensureDir } from "https://deno.land/std@0.224.0/fs/mod.ts";
 import { createDenoLogger } from "../infrastructure/logger.ts";
 import { createDataAccess } from "./libs/data-access.ts";
+import type { EnrichedTweetData } from "../infrastructure/types/index.ts";
 
 const logger = createDenoLogger('thread-media-downloader');
 
@@ -19,6 +20,7 @@ interface MediaItem {
   type: 'image' | 'video';
   tweetId: string;
   filename: string;
+  tweetText: string;
 }
 
 async function downloadThreadMedia(threadId: string): Promise<void> {
@@ -67,20 +69,22 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
     const mediaItems: MediaItem[] = [];
     
     for (const tweet of threadTweets) {
-      // Check for images in metadata.imgs
+      // Check for images in metadata.imgs (exclude profile/avatar images)
       if (tweet.metadata?.imgs && Array.isArray(tweet.metadata.imgs)) {
-        for (let i = 0; i < tweet.metadata.imgs.length; i++) {
-          const img = tweet.metadata.imgs[i];
-          if (img.src) {
+        let contentImageIndex = 1;
+        for (const img of tweet.metadata.imgs) {
+          if (img.src && !isProfileImage(img.src)) {
             const extension = getFileExtension(img.src, 'image');
-            const filename = `${tweet.id}_img_${i + 1}${extension}`;
+            const filename = `${tweet.id}_img_${contentImageIndex}${extension}`;
             
             mediaItems.push({
               url: img.src,
               type: 'image',
               tweetId: tweet.id,
-              filename: filename
+              filename: filename,
+              tweetText: tweet.tweet || ''
             });
+            contentImageIndex++;
           }
         }
       }
@@ -88,7 +92,7 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
       // Check for other media structures
       if (tweet.media && Array.isArray(tweet.media)) {
         for (const media of tweet.media) {
-          if (media.url) {
+          if (media.url && !isProfileImage(media.url)) {
             const mediaType = media.type || (media.url.includes('.mp4') ? 'video' : 'image');
             const extension = getFileExtension(media.url, mediaType);
             const filename = `${tweet.id}_${media.url.split('/').pop()?.split('?')[0] || 'media'}${extension}`;
@@ -97,7 +101,8 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
               url: media.url,
               type: mediaType,
               tweetId: tweet.id,
-              filename: filename
+              filename: filename,
+              tweetText: tweet.tweet || ''
             });
           }
         }
@@ -107,13 +112,14 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
       if (tweet.photos && Array.isArray(tweet.photos)) {
         for (let i = 0; i < tweet.photos.length; i++) {
           const photo = tweet.photos[i];
-          if (photo.url) {
+          if (photo.url && !isProfileImage(photo.url)) {
             const filename = `${tweet.id}_photo_${i + 1}.jpg`;
             mediaItems.push({
               url: photo.url,
               type: 'image',
               tweetId: tweet.id,
-              filename: filename
+              filename: filename,
+              tweetText: tweet.tweet || ''
             });
           }
         }
@@ -127,18 +133,18 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
     
     logger.info(`Found ${mediaItems.length} media items to download`);
     
-    // Create metadata directory
-    const metadataDir = join(scriptDir, "metadata");
-    await ensureDir(metadataDir);
+    // Create public/metadata directory
+    const publicMetadataDir = join(scriptDir, "..", "public", "metadata");
+    await ensureDir(publicMetadataDir);
     
     // Download media items
-    let downloaded = 0;
+    const downloadedItems: MediaItem[] = [];
     let failed = 0;
     
     for (const item of mediaItems) {
       try {
-        await downloadMediaItem(item, metadataDir);
-        downloaded++;
+        await downloadMediaItem(item, publicMetadataDir);
+        downloadedItems.push(item);
         logger.info(`✓ Downloaded: ${item.filename}`);
       } catch (error) {
         failed++;
@@ -146,7 +152,13 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
       }
     }
     
-    logger.info(`Media download completed: ${downloaded} successful, ${failed} failed`);
+    logger.info(`Media download completed: ${downloadedItems.length} successful, ${failed} failed`);
+    
+    // Update tweets_enriched.json with downloaded media
+    if (downloadedItems.length > 0) {
+      await updateTweetsEnriched(threadTweets, downloadedItems, dataAccess);
+      logger.info(`✓ Updated tweets_enriched.json with ${downloadedItems.length} media entries`);
+    }
     
   } catch (error) {
     logger.error(`Failed to download thread media: ${error}`);
@@ -172,6 +184,14 @@ async function downloadMediaItem(item: MediaItem, targetDir: string): Promise<vo
   await Deno.writeFile(targetPath, new Uint8Array(arrayBuffer));
 }
 
+function isProfileImage(url: string): boolean {
+  // Filter out profile/avatar images
+  return url.includes('/profile_images/') || 
+         url.includes('/profile_banners/') ||
+         url.includes('_profile') ||
+         url.includes('avatar');
+}
+
 function getFileExtension(url: string, mediaType: string): string {
   // Extract extension from URL
   const urlParts = url.split('?')[0].split('.');
@@ -184,6 +204,54 @@ function getFileExtension(url: string, mediaType: string): string {
   
   // Fallback based on media type
   return mediaType === 'video' ? '.mp4' : '.jpg';
+}
+
+/**
+ * Update tweets_enriched.json with downloaded media while preserving existing enrichments
+ */
+async function updateTweetsEnriched(
+  threadTweets: any[], 
+  downloadedItems: MediaItem[], 
+  dataAccess: any
+): Promise<void> {
+  try {
+    // Get existing enrichments
+    const existingEnrichments: EnrichedTweetData[] = await dataAccess.getTweetsEnriched();
+    
+    // Get the thread ID from the first tweet
+    const threadId = threadTweets[0]?.id;
+    if (!threadId) return;
+    
+    // Remove existing image entries for this thread only (preserve other types)
+    const preservedEnrichments = existingEnrichments.filter((entry: EnrichedTweetData) => {
+      const isFromThisThread = threadTweets.some(tweet => tweet.id === entry.id);
+      const isImageType = entry.type === 'image';
+      
+      // Preserve if: not from this thread OR not an image type
+      return !isFromThisThread || !isImageType;
+    });
+    
+    // Create new enrichment entries for downloaded media
+    const newMediaEntries: EnrichedTweetData[] = downloadedItems.map((item: MediaItem) => ({
+      id: item.tweetId,
+      type: "image",
+      media: item.type,
+      title: "",
+      description: item.tweetText.substring(0, 100),
+      url: "",
+      img: `/metadata/${item.filename}`
+    }));
+    
+    // Combine preserved and new entries
+    const updatedEnrichments = [...preservedEnrichments, ...newMediaEntries];
+    
+    // Save updated enrichments
+    await dataAccess.saveTweetsEnriched(updatedEnrichments);
+    
+  } catch (error) {
+    logger.error(`Failed to update tweets_enriched.json: ${error}`);
+    throw error;
+  }
 }
 
 // Main execution
