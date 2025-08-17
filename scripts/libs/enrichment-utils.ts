@@ -25,6 +25,25 @@ export function configureEnvironment(): void {
     Deno.env.set('NODE_TLS_REJECT_UNAUTHORIZED', '0');
 }
 
+/**
+ * Configuration for parallel downloads
+ */
+export interface ParallelDownloadConfig {
+    maxConcurrency: number;
+    retryAttempts: number;
+    retryDelayMs: number;
+    timeoutMs: number;
+    directory: string;
+}
+
+export const DEFAULT_PARALLEL_CONFIG: ParallelDownloadConfig = {
+    maxConcurrency: 6,
+    retryAttempts: 3,
+    retryDelayMs: 1000,
+    timeoutMs: 30000,
+    directory: "./public/metadata"
+};
+
 // ============================================================================
 // TYPES
 // ============================================================================
@@ -183,7 +202,7 @@ export interface DownloadConfig {
  */
 export async function downloadMedia(
     imageUrl: string, 
-    config: DownloadConfig = { directory: "./metadata" }
+    config: DownloadConfig = { directory: "./public/metadata" }
 ): Promise<string> {
     const response = await fetch(imageUrl);
     if (!response.ok) {
@@ -196,14 +215,141 @@ export async function downloadMedia(
     // Extract filename from URL or generate one
     const url = new URL(imageUrl);
     const filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
-    const filePath = `${config.directory}/${filename}`;
+    
+    // Resolve directory path relative to project root
+    const projectRoot = Deno.cwd().includes('/scripts') ? 
+        Deno.cwd().replace('/scripts', '') : Deno.cwd();
+    const absoluteDir = config.directory.startsWith('./') ? 
+        `${projectRoot}/${config.directory.slice(2)}` : config.directory;
+    const filePath = `${absoluteDir}/${filename}`;
     
     // Ensure directory exists
-    await Deno.mkdir(config.directory, { recursive: true });
+    await Deno.mkdir(absoluteDir, { recursive: true });
     
     // Write file
     await Deno.writeFile(filePath, bytes);
     return filePath;
+}
+
+/**
+ * Downloads media with retry logic and timeout
+ */
+async function downloadMediaWithRetry(
+    imageUrl: string,
+    config: ParallelDownloadConfig,
+    logger?: ScriptLogger
+): Promise<string> {
+    let lastError: Error | null = null;
+    
+    for (let attempt = 1; attempt <= config.retryAttempts; attempt++) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), config.timeoutMs);
+            
+            const response = await fetch(imageUrl, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const arrayBuffer = await response.arrayBuffer();
+            const bytes = new Uint8Array(arrayBuffer);
+            
+            // Extract filename from URL or generate one
+            const url = new URL(imageUrl);
+            const filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
+            
+            // Resolve directory path relative to project root
+            const projectRoot = Deno.cwd().includes('/scripts') ? 
+                Deno.cwd().replace('/scripts', '') : Deno.cwd();
+            const absoluteDir = config.directory.startsWith('./') ? 
+                `${projectRoot}/${config.directory.slice(2)}` : config.directory;
+            const filePath = `${absoluteDir}/${filename}`;
+            
+            // Ensure directory exists
+            await Deno.mkdir(absoluteDir, { recursive: true });
+            
+            // Write file
+            await Deno.writeFile(filePath, bytes);
+            
+            if (logger) {
+                logger.debug(`Downloaded: ${filename} (${bytes.length} bytes)`);
+            }
+            
+            return filePath;
+            
+        } catch (error) {
+            lastError = error instanceof Error ? error : new Error(String(error));
+            
+            if (attempt < config.retryAttempts) {
+                const delay = config.retryDelayMs * Math.pow(2, attempt - 1); // Exponential backoff
+                if (logger) {
+                    logger.warn(`Download attempt ${attempt} failed for ${imageUrl}, retrying in ${delay}ms: ${lastError.message}`);
+                }
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+    }
+    
+    throw new Error(`Failed to download ${imageUrl} after ${config.retryAttempts} attempts: ${lastError?.message}`);
+}
+
+/**
+ * Downloads multiple media files in parallel with concurrency control
+ */
+export async function downloadMediaParallel(
+    imageUrls: string[],
+    config: Partial<ParallelDownloadConfig> = {},
+    logger?: ScriptLogger
+): Promise<{ successful: string[], failed: Array<{url: string, error: string}> }> {
+    const finalConfig = { ...DEFAULT_PARALLEL_CONFIG, ...config };
+    const results = { successful: [] as string[], failed: [] as Array<{url: string, error: string}> };
+    
+    // Create a semaphore for concurrency control
+    const semaphore = new Array(finalConfig.maxConcurrency).fill(null);
+    let currentIndex = 0;
+    
+    const downloadPromises = imageUrls.map(async (url) => {
+        // Wait for an available slot
+        await new Promise<void>((resolve) => {
+            const checkSlot = () => {
+                const slotIndex = semaphore.findIndex(slot => slot === null);
+                if (slotIndex !== -1) {
+                    semaphore[slotIndex] = url;
+                    resolve();
+                } else {
+                    setTimeout(checkSlot, 10);
+                }
+            };
+            checkSlot();
+        });
+        
+        try {
+            const filePath = await downloadMediaWithRetry(url, finalConfig, logger);
+            results.successful.push(filePath);
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            results.failed.push({ url, error: errorMessage });
+            if (logger) {
+                logger.error(`Failed to download ${url}: ${errorMessage}`);
+            }
+        } finally {
+            // Release the slot
+            const slotIndex = semaphore.findIndex(slot => slot === url);
+            if (slotIndex !== -1) {
+                semaphore[slotIndex] = null;
+            }
+        }
+    });
+    
+    await Promise.all(downloadPromises);
+    
+    if (logger) {
+        logger.info(`Parallel download completed: ${results.successful.length} successful, ${results.failed.length} failed`);
+    }
+    
+    return results;
 }
 
 /**
@@ -258,6 +404,16 @@ export class TweetEnricher {
             this.logger.error("Failed to download tweet media:", error);
             throw error;
         }
+    }
+
+    /**
+     * Downloads multiple media files in parallel (wrapper for class usage)
+     */
+    async downloadMediaParallel(
+        imageUrls: string[],
+        config: Partial<ParallelDownloadConfig> = {}
+    ): Promise<{ successful: string[], failed: Array<{url: string, error: string}> }> {
+        return await downloadMediaParallel(imageUrls, config, this.logger);
     }
 
     private async processUrlOnlyTweet(

@@ -13,7 +13,13 @@ import {
 } from '../../infrastructure/schemas/database-schemas.ts';
 
 // Database file paths configuration  
-const DB_BASE_PATH = join(Deno.cwd(), 'infrastructure', 'db');
+const getDbBasePath = () => {
+  const cwd = Deno.cwd();
+  // If running from scripts directory, go up one level
+  const projectRoot = cwd.endsWith('/scripts') ? join(cwd, '..') : cwd;
+  return join(projectRoot, 'infrastructure', 'db');
+};
+const DB_BASE_PATH = getDbBasePath();
 const BACKUP_EXTENSION = '.backup';
 
 export interface AtomicOperationResult<T> {
@@ -236,7 +242,7 @@ export function validateCrossFileConsistency(): ConsistencyIssue[] {
   
   try {
     // Read all database files
-    const tweetsResult = safeReadDatabase<Tweet>('tweets.json');
+    const tweetsResult = safeReadDatabase<Tweet[][]>('tweets.json');
     const enrichedResult = safeReadDatabase<TweetEnriched>('tweets_enriched.json');
     const summaryResult = safeReadDatabase<TweetSummary>('tweets_summary.json');
     const mapResult = safeReadDatabase<TweetMap>('tweets_map.json');
@@ -385,7 +391,7 @@ export function validateCrossFileConsistency(): ConsistencyIssue[] {
  * Utility function to get all tweet IDs from the database
  */
 export function getAllTweetIds(): string[] {
-  const result = safeReadDatabase<Tweet>('tweets.json');
+  const result = safeReadDatabase<Tweet[][]>('tweets.json');
   if (!result.success || !result.data) {
     return [];
   }
@@ -404,7 +410,7 @@ export function getAllTweetIds(): string[] {
  * Utility function to check if a tweet ID exists
  */
 export function tweetExists(tweetId: string): boolean {
-  const result = safeReadDatabase<Tweet>('tweets.json');
+  const result = safeReadDatabase<Tweet[][]>('tweets.json');
   if (!result.success || !result.data) {
     return false;
   }

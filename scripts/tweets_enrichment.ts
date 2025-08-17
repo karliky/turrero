@@ -11,6 +11,7 @@ import {
   shouldEnrichTweet,
   TweetEnricher,
   type TweetForEnrichment,
+  downloadMediaParallel,
 } from "./libs/enrichment-utils.ts";
 import type {
   ContextualError,
@@ -134,18 +135,44 @@ async function processImageTweets(
   tweet: Tweet,
   enricher: TweetEnricher,
 ): Promise<void> {
-  const imagePromises = tweet.metadata!.imgs!.map(
-    async (metadata: ImageMetadata) => {
-      const imageMetadata = { ...metadata, type: TweetMetadataType.IMAGE };
-      await enricher.downloadTweetMedia(
-        { id: tweet.id, metadata: imageMetadata },
-        undefined,
-        saveTweet,
+  // Extract all image URLs for parallel download
+  const imageUrls = tweet.metadata!.imgs!.map((img: ImageMetadata) => img.src);
+  
+  if (imageUrls.length > 0) {
+    logger.info(`Downloading ${imageUrls.length} images for tweet ${tweet.id} in parallel...`);
+    
+    // Use parallel download for better performance
+    const downloadResults = await enricher.downloadMediaParallel(imageUrls, {
+      maxConcurrency: 6,
+      retryAttempts: 3,
+      directory: "./public/metadata"
+    });
+    
+    // Process successful downloads
+    for (const filePath of downloadResults.successful) {
+      const filename = filePath.split('/').pop() || '';
+      const matchingImg = tweet.metadata!.imgs!.find(img => 
+        img.src.includes(filename.replace(/\.[^.]+$/, ''))
       );
-    },
-  );
-
-  await Promise.all(imagePromises);
+      
+      if (matchingImg) {
+        const imageMetadata = { ...matchingImg, type: TweetMetadataType.IMAGE };
+        await enricher.downloadTweetMedia(
+          { id: tweet.id, metadata: { ...imageMetadata, img: filePath } },
+          undefined,
+          saveTweet,
+        );
+      }
+    }
+    
+    // Log any failures
+    if (downloadResults.failed.length > 0) {
+      logger.warn(`Failed to download ${downloadResults.failed.length} images for tweet ${tweet.id}`);
+      for (const failure of downloadResults.failed) {
+        logger.error(`Failed: ${failure.url} - ${failure.error}`);
+      }
+    }
+  }
 }
 
 function handleEnrichmentError(error: unknown, tweet: Tweet): void {

@@ -21,7 +21,7 @@ async function createAlgoliaDatabase(): Promise<void> {
   const tweets = JSON.parse(tweetsString) as Tweet[][];
   const searchEntries = createSearchIndexEntries(tweets);
 
-  await dataAccess.saveTweetsDb(searchEntries);
+  await dataAccess.saveTweetsDb(JSON.stringify(searchEntries, null, 2));
 
   logger.info(
     `Created Algolia database with ${searchEntries.length} searchable entries`,
