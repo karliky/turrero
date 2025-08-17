@@ -152,7 +152,7 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
       }));
 
     return {
-      type: imgs.length > 0 ? TweetMetadataType.IMAGE : undefined,
+      type: imgs.length > 0 ? 'image' : undefined,
       imgs: imgs.length > 0 ? imgs : undefined,
       embed: { tweet: undefined },
     } as unknown as TweetMetadata;
