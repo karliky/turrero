@@ -93,3 +93,4 @@ scripts/prompt_*.txt
 .tmp_*
 tsconfig.tsbuildinfo
 *.log
+.playwright-mcp/

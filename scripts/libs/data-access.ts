@@ -132,7 +132,7 @@ export class DataAccess {
  * Creates a data access instance for a script
  */
 export function createDataAccess(scriptDir: string): DataAccess {
-  return new DataAccess(scriptDir);
+  return new DataAccess(getDbPath(scriptDir));
 }
 
 // ============================================================================

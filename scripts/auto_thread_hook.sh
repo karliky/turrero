@@ -55,12 +55,12 @@ select_pipeline() {
        [[ -f "$project_root/scripts/lib/parallel-processor.ts" ]] && \
        [[ -f "$project_root/scripts/lib/atomic-db-operations.ts" ]]; then
         
-        # Quick validation test
-        if deno run --allow-read --allow-env "$project_root/scripts/lib/parallel-processor.ts" --help &>/dev/null 2>&1; then
+        # Quick validation test - check if optimized pipeline script exists and is executable
+        if [[ -x "$project_root/scripts/add_thread_optimized.sh" ]]; then
             echo "optimized"
             return 0
         else
-            log_warn "⚠️ Optimized pipeline validation failed, falling back to legacy"
+            log_warn "⚠️ Optimized pipeline validation failed, falling back to legacy" >&2
         fi
     fi
     

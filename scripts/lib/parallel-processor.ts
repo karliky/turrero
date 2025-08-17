@@ -99,10 +99,10 @@ export class ParallelThreadProcessor {
    */
   async execute(): Promise<PipelineResult> {
     this.startTime = Date.now();
-    this.logger.info(`=€ Starting parallel pipeline for thread ${this.threadId}`);
+    this.logger.info(`âš¡ Starting parallel pipeline for thread ${this.threadId}`);
     
     if (this.options.dryRun) {
-      this.logger.info('= DRY RUN MODE - No actual changes will be made');
+      this.logger.info('= DRY RUN MODE - No actual changes will be made');
     }
 
     try {
@@ -116,7 +116,7 @@ export class ParallelThreadProcessor {
       const failedTasks = results.filter(r => !r.success);
       
       if (failedTasks.length > 0 && this.options.rollbackOnFailure) {
-        this.logger.warn('  Some tasks failed, initiating rollback...');
+        this.logger.warn('ï¿½ Some tasks failed, initiating rollback...');
         await this.rollbackChanges();
       }
 
@@ -129,7 +129,7 @@ export class ParallelThreadProcessor {
       };
 
     } catch (error) {
-      this.logger.error(`=¥ Pipeline execution failed: ${error}`);
+      this.logger.error(`=ï¿½ Pipeline execution failed: ${error}`);
       
       if (this.options.rollbackOnFailure) {
         await this.rollbackChanges();
@@ -288,7 +288,7 @@ export class ParallelThreadProcessor {
   private logProgress(completed: number, total: number): void {
     const percentage = ((completed / total) * 100).toFixed(1);
     const elapsed = ((Date.now() - this.startTime) / 1000).toFixed(1);
-    this.logger.info(`=Ê Progress: ${completed}/${total} (${percentage}%) - Elapsed: ${elapsed}s`);
+    this.logger.info(`=ï¿½ Progress: ${completed}/${total} (${percentage}%) - Elapsed: ${elapsed}s`);
   }
 
   /**
@@ -345,7 +345,7 @@ export async function createThreadPipeline(
   const processor = new ParallelThreadProcessor(threadId, options);
   const logger = createDenoLogger('pipeline-factory');
   
-  logger.info(`<× Building pipeline for thread ${threadId}`);
+  logger.info(`<ï¿½ Building pipeline for thread ${threadId}`);
 
   // Define pipeline tasks with dependencies
   const tasks: PipelineTask[] = [

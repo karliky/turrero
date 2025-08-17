@@ -263,6 +263,112 @@ async function fetchSingleTweet(
 }
 
 /**
+ * Fetch all tweets in a thread from the current page
+ * This is the preferred method for thread scraping
+ */
+async function fetchCompleteThread(
+  page: Page,
+  expectedAuthor: string,
+  threadId: string
+): Promise<Tweet[]> {
+  logger.debug(`Fetching complete thread for ${threadId}`);
+  
+  // Wait for the thread to load completely
+  await page.waitForSelector('article[data-testid="tweet"]', { timeout: 10000 });
+  await new Promise(resolve => setTimeout(resolve, 2000)); // Allow time for all tweets to load
+  
+  // Get all tweet elements on the page
+  const tweets = await page.evaluate((authorUrl: string, tweetId: string) => {
+    const tweetElements = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+    const threadTweets: any[] = [];
+    
+    for (const element of tweetElements) {
+      try {
+        // Extract tweet ID
+        const timeElement = element.querySelector('time');
+        const timeParent = timeElement?.parentElement as HTMLAnchorElement;
+        const href = timeParent?.href;
+        
+        if (!href) continue;
+        
+        const idMatch = href.match(/status\/(\d+)/);
+        if (!idMatch) continue;
+        
+        const currentTweetId = idMatch[1];
+        
+        // Extract tweet text
+        const textElement = element.querySelector('[data-testid="tweetText"]');
+        const tweetText = textElement?.textContent || '';
+        
+        if (!tweetText.trim()) continue;
+        
+        // Extract author information
+        const authorElement = element.querySelector('[data-testid="User-Name"] a');
+        const authorHref = (authorElement as HTMLAnchorElement)?.href;
+        
+        if (!authorHref || !authorHref.includes(authorUrl.split('/').pop() || '')) {
+          continue; // Skip tweets not from the expected author
+        }
+        
+        // Extract timestamp
+        const timeValue = timeElement?.getAttribute('datetime');
+        
+        // Extract stats
+        const replyElement = element.querySelector('[data-testid="reply"]');
+        const retweetElement = element.querySelector('[data-testid="retweet"]');
+        const likeElement = element.querySelector('[data-testid="like"]');
+        const bookmarkElement = element.querySelector('[data-testid="bookmark"]');
+        
+        const getStatValue = (el: Element | null): string => {
+          const text = el?.getAttribute('aria-label') || '';
+          const match = text.match(/(\d+(?:,\d+)*)/);
+          return match ? match[1] : '0';
+        };
+        
+        // Extract metadata (images, embeds, etc.)
+        const imgElements = element.querySelectorAll('img[src*="pbs.twimg.com"]');
+        const imgs = Array.from(imgElements).map(img => ({
+          src: (img as HTMLImageElement).src,
+          alt: (img as HTMLImageElement).alt || 'Image'
+        }));
+        
+        const metadata: any = {};
+        if (imgs.length > 0) {
+          metadata.type = 'image';
+          metadata.imgs = imgs;
+          metadata.embed = {};
+        }
+        
+        const tweet = {
+          tweet: tweetText,
+          author: authorHref,
+          id: currentTweetId,
+          metadata: metadata,
+          time: timeValue || new Date().toISOString(),
+          stats: {
+            replies: getStatValue(replyElement),
+            retweets: getStatValue(retweetElement),
+            likes: getStatValue(likeElement),
+            bookmarks: getStatValue(bookmarkElement),
+            views: '0' // Views are not easily accessible in this context
+          }
+        };
+        
+        threadTweets.push(tweet);
+      } catch (error) {
+        console.log('Error processing tweet element:', error);
+        continue;
+      }
+    }
+    
+    return threadTweets;
+  }, expectedAuthor, threadId);
+  
+  logger.info(`Found ${tweets.length} tweets in thread ${threadId}`);
+  return tweets;
+}
+
+/**
  * Optimized username detection that's much faster than the previous approach
  * Uses the generic URL pattern and extracts username from page content
  */
@@ -462,140 +568,30 @@ async function getAllTweets({
       logger.debug("Could not reject cookies and close the popup");
     }
 
-    let stopped = false;
-    const tweets: Tweet[] = [];
-
-    while (!stopped) {
-      const { tweet, mustStop } = await fetchSingleTweet({
-        page,
-        expectedAuthor: author,
-      });
-
-      if (mustStop) {
-        stopped = true;
-        const existingTweets = JSON.parse(
-          await Deno.readTextFile(outputFilePath),
-        );
-        existingTweets.push(tweets);
-        await Deno.writeTextFile(
-          outputFilePath,
-          JSON.stringify(existingTweets, null, 4),
-        );
-        author = undefined;
-        break;
-      }
-
-      tweets.push(tweet);
-      logger.debug("finding lastTweetFound");
-      logger.debug("Navigating to next tweet");
-
-      try {
-        await page.waitForSelector(
-          'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-          { timeout: 5000 },
-        );
-
-        const debugInfo = await page.evaluate(() => {
-          const currentTweet = document.querySelector(
-            'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-          );
-          const cellDiv = currentTweet?.closest(
-            'div[data-testid="cellInnerDiv"]',
-          );
-          const nextSibling = cellDiv?.nextElementSibling;
-          const nextNextSibling = nextSibling?.nextElementSibling;
-
-          return {
-            hasTweet: !!currentTweet,
-            hasCellDiv: !!cellDiv,
-            hasNextSibling: !!nextSibling,
-            hasNextNextSibling: !!nextNextSibling,
-            nextSiblingHtml: nextNextSibling?.innerHTML?.slice(
-              0,
-              100,
-            ),
-          };
-        });
-        logger.debug("Debug DOM structure:", debugInfo);
-
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        await Promise.all([
-          page.waitForSelector('div[role="progressbar"]', {
-            hidden: true,
-          }),
-          page.evaluate(() => {
-            return new Promise<void>((resolve, reject) => {
-              const maxAttempts = 3;
-              let attempts = 0;
-
-              const tryClick = () => {
-                attempts++;
-                const currentTweet = document.querySelector(
-                  'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-                );
-                if (!currentTweet) {
-                  if (attempts < maxAttempts) {
-                    setTimeout(tryClick, 500);
-                    return;
-                  }
-                  reject(
-                    new Error(
-                      "Could not find current tweet",
-                    ),
-                  );
-                  return;
-                }
-
-                const cellDiv = currentTweet.closest(
-                  'div[data-testid="cellInnerDiv"]',
-                );
-                if (!cellDiv) {
-                  if (attempts < maxAttempts) {
-                    setTimeout(tryClick, 500);
-                    return;
-                  }
-                  reject(
-                    new Error("Could not find cell div"),
-                  );
-                  return;
-                }
-
-                const nextTweet = cellDiv.nextElementSibling
-                  ?.nextElementSibling?.querySelector(
-                    'article[data-testid="tweet"]',
-                  ) as HTMLElement;
-                if (!nextTweet) {
-                  if (attempts < maxAttempts) {
-                    setTimeout(tryClick, 500);
-                    return;
-                  }
-                  reject(
-                    new Error("Could not find next tweet"),
-                  );
-                  return;
-                }
-
-                nextTweet.click();
-                resolve();
-              };
-
-              tryClick();
-            });
-          }),
-          page.waitForNavigation({ timeout: 10000 }),
-        ]);
-      } catch (error) {
-        logger.error("Navigation error:", error);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        await page.reload();
-        await page.waitForSelector(
-          'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-          { timeout: 5000 },
-        );
-        continue;
-      }
+    // Use the new complete thread fetching method
+    const threadTweets = await fetchCompleteThread(page, `https://x.com/${author}`, tweetId);
+    
+    if (threadTweets.length > 0) {
+      // Read existing tweets
+      const existingTweets = JSON.parse(
+        await Deno.readTextFile(outputFilePath),
+      );
+      
+      // Add the complete thread as an array
+      existingTweets.push(threadTweets);
+      
+      // Save updated tweets
+      await Deno.writeTextFile(
+        outputFilePath,
+        JSON.stringify(existingTweets, null, 4),
+      );
+      
+      logger.info(`Successfully added thread ${tweetId} with ${threadTweets.length} tweets`);
+    } else {
+      logger.warn(`No tweets found for thread ${tweetId}`);
     }
+    
+    author = undefined; // Reset for next thread
   }
 }
 
@@ -796,6 +792,12 @@ async function main() {
       );
       // Note: turras.csv has been removed - tweets now come directly from existing tweets.json
       const tweets: TweetCSV[] = [];
+      
+      // If a tweet ID is provided as argument, add it to the processing list
+      if (args.length > 0 && args[0] && /^\d{15,20}$/.test(args[0])) {
+        tweets.push({ id: args[0] } as TweetCSV);
+        logger.info(`Adding tweet ID from argument: ${args[0]}`);
+      }
 
       const existingTweets = existingTweetsData.reduce(
         (acc: string[], tweets: Tweet[]) => {
