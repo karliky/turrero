@@ -25,6 +25,60 @@ try {
 // Initialize logger
 const logger = createDenoLogger("recorder");
 
+// Progress bar utilities
+class ProgressBar {
+  private total: number;
+  private current: number = 0;
+  private width: number = 50;
+  private lastUpdate: number = 0;
+  private startTime: number;
+
+  constructor(total: number) {
+    this.total = total;
+    this.startTime = Date.now();
+  }
+
+  update(current: number, status?: string) {
+    this.current = current;
+    const now = Date.now();
+    
+    // Only update every 200ms to avoid flickering
+    if (now - this.lastUpdate < 200 && current < this.total) return;
+    this.lastUpdate = now;
+
+    const percentage = Math.round((current / this.total) * 100);
+    const filled = Math.round((current / this.total) * this.width);
+    const empty = this.width - filled;
+    
+    const bar = '█'.repeat(filled) + '░'.repeat(empty);
+    const elapsed = (now - this.startTime) / 1000;
+    const rate = current / elapsed;
+    const eta = current > 0 ? Math.round((this.total - current) / rate) : 0;
+    
+    const statusText = status ? ` | ${status}` : '';
+    const progressText = `🔍 [${bar}] ${percentage}% (${current}/${this.total}) ETA: ${eta}s${statusText}`;
+    
+    // Clear line and write progress
+    Deno.stdout.writeSync(new TextEncoder().encode(`\r${' '.repeat(120)}\r${progressText}`));
+    
+    if (current >= this.total) {
+      Deno.stdout.writeSync(new TextEncoder().encode('\n'));
+    }
+  }
+
+  complete(summary?: string) {
+    this.update(this.total);
+    if (summary) {
+      console.log(`✅ ${summary}`);
+    }
+  }
+
+  fail(error: string) {
+    Deno.stdout.writeSync(new TextEncoder().encode(`\r${' '.repeat(120)}\r`));
+    console.log(`❌ ${error}`);
+  }
+}
+
 const __dirname = dirname(new URL(import.meta.url).pathname);
 
 // Define device configuration for iPhone 15 Pro Max
@@ -145,15 +199,66 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
       } as unknown as TweetMetadata;
     }
 
+    // Extract media (images and videos/GIFs)
+    const mediaItems: Array<{ src: string; alt: string; type?: string }> = [];
+
+    // Extract static images (legacy method for compatibility)
     const imgs = Array.from(article.querySelectorAll('img[alt="Image"]'))
       .map((img: Element) => ({
         src: (img as HTMLImageElement).src,
         alt: (img as HTMLImageElement).alt,
       }));
 
+    // Add legacy images to media items
+    imgs.forEach(img => {
+      if (img.src.includes('pbs.twimg.com') && 
+          !img.src.includes('/profile_images/') && 
+          !img.src.includes('/profile_banners/') && 
+          !img.src.includes('_profile') && 
+          !img.src.includes('avatar')) {
+        mediaItems.push({
+          src: img.src,
+          alt: img.alt,
+          type: "image"
+        });
+      }
+    });
+
+    // Extract videos/GIFs
+    const videoElements = article.querySelectorAll('video');
+    Array.from(videoElements).forEach((video) => {
+      const poster = (video as HTMLVideoElement).poster;
+      if (poster && poster.includes('pbs.twimg.com')) {
+        // Use poster image URL as the source for download
+        mediaItems.push({
+          src: poster,
+          alt: "Video",
+          type: "video"
+        });
+      }
+    });
+
+    // Also look for video thumbnails in img elements
+    const videoThumbs = article.querySelectorAll(
+      'img[src*="video_thumb"], img[src*="ext_tw_video_thumb"], img[src*="amplify_video_thumb"], img[src*="tweet_video_thumb"]'
+    );
+    Array.from(videoThumbs).forEach((thumb) => {
+      const thumbSrc = (thumb as HTMLImageElement).src;
+      mediaItems.push({
+        src: thumbSrc,
+        alt: "Video thumbnail",
+        type: "video"
+      });
+    });
+
+    // Determine type and format for compatibility
+    const hasVideo = mediaItems.some(item => item.type === "video");
+    const type = hasVideo ? "video" : (mediaItems.length > 0 ? "image" : undefined);
+    const finalImgs = mediaItems.length > 0 ? mediaItems.map(item => ({ src: item.src, alt: item.alt })) : undefined;
+
     return {
-      type: imgs.length > 0 ? "image" : undefined,
-      imgs: imgs.length > 0 ? imgs : undefined,
+      type: type,
+      imgs: finalImgs,
     } as unknown as TweetMetadata;
   });
 
@@ -291,9 +396,13 @@ async function fetchCompleteThread(
   let noNewTweetsCount = 0;
   const maxScrollAttempts = 10;
 
+  console.log('🚀 Starting thread scraping process...');
+  const progressBar = new ProgressBar(maxScrollAttempts);
+
   // Scroll and collect tweets until no new ones are found
   for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
-    logger.debug(`Scroll attempt ${attempt + 1}/${maxScrollAttempts}`);
+    const statusText = `Collecting tweets (${allTweets.length} found)`;
+    progressBar.update(attempt + 1, statusText);
 
     // Extract all tweets currently visible on the page
     const threadTweets = await page.evaluate((expectedUsername: string) => {
@@ -356,19 +465,61 @@ async function fetchCompleteThread(
             return match?.[1] || "0";
           };
 
-          // Extract images if present
+          // Extract media (images and videos/GIFs)
+          const mediaItems: Array<{ src: string; alt: string; type?: string }> = [];
+
+          // Extract static images
           const imgElements = element.querySelectorAll(
             'img[src*="pbs.twimg.com"]',
           );
-          const imgs = Array.from(imgElements).map((img) => ({
-            src: (img as HTMLImageElement).src,
-            alt: (img as HTMLImageElement).alt || "Image",
-          }));
+          Array.from(imgElements).forEach((img) => {
+            const imgSrc = (img as HTMLImageElement).src;
+            // Skip profile images and other non-content images
+            if (!imgSrc.includes('/profile_images/') && 
+                !imgSrc.includes('/profile_banners/') && 
+                !imgSrc.includes('_profile') && 
+                !imgSrc.includes('avatar')) {
+              mediaItems.push({
+                src: imgSrc,
+                alt: (img as HTMLImageElement).alt || "Image",
+                type: "image"
+              });
+            }
+          });
+
+          // Extract videos/GIFs
+          const videoElements = element.querySelectorAll('video');
+          Array.from(videoElements).forEach((video) => {
+            const poster = (video as HTMLVideoElement).poster;
+            if (poster && poster.includes('pbs.twimg.com')) {
+              // Use poster image URL as the source for download
+              mediaItems.push({
+                src: poster,
+                alt: "Video",
+                type: "video"
+              });
+            }
+          });
+
+          // Also look for video thumbnails in img elements
+          const videoThumbs = element.querySelectorAll(
+            'img[src*="video_thumb"], img[src*="ext_tw_video_thumb"], img[src*="amplify_video_thumb"], img[src*="tweet_video_thumb"]'
+          );
+          Array.from(videoThumbs).forEach((thumb) => {
+            const thumbSrc = (thumb as HTMLImageElement).src;
+            mediaItems.push({
+              src: thumbSrc,
+              alt: "Video thumbnail",
+              type: "video"
+            });
+          });
 
           const metadata: TweetMetadata = {};
-          if (imgs.length > 0) {
-            metadata.type = "image";
-            metadata.imgs = imgs;
+          if (mediaItems.length > 0) {
+            // Determine primary type based on what media is found
+            const hasVideo = mediaItems.some(item => item.type === "video");
+            metadata.type = hasVideo ? "video" : "image";
+            metadata.imgs = mediaItems.map(item => ({ src: item.src, alt: item.alt }));
           }
 
           // Create tweet object
@@ -408,15 +559,12 @@ async function fetchCompleteThread(
     if (allTweets.length === previousTweetCount) {
       noNewTweetsCount++;
       if (noNewTweetsCount >= 3) {
-        logger.debug(
-          "No new tweets found in 3 consecutive attempts, stopping scroll",
-        );
+        progressBar.complete(`Scraping completed: ${allTweets.length} tweets found`);
         break;
       }
     } else {
       noNewTweetsCount = 0;
       previousTweetCount = allTweets.length;
-      logger.debug(`Found ${allTweets.length} tweets so far`);
     }
 
     // Scroll down to load more content
@@ -455,6 +603,11 @@ async function fetchCompleteThread(
     } catch (error) {
       // Ignore errors from clicking buttons
     }
+  }
+
+  // Ensure progress bar is completed if we exited the loop early
+  if (noNewTweetsCount < 3) {
+    progressBar.complete(`Scraping completed: ${allTweets.length} tweets found`);
   }
 
   // Sort chronologically
@@ -729,7 +882,18 @@ async function getAllTweets({
   tweetIds: string[];
   outputFilePath: string;
 }): Promise<void> {
-  for (const tweetId of tweetIds) {
+  if (tweetIds.length === 0) {
+    console.log('No new tweets to process.');
+    return;
+  }
+
+  console.log(`🔍 Processing ${tweetIds.length} thread(s)...`);
+  const threadProgressBar = new ProgressBar(tweetIds.length);
+
+  for (let i = 0; i < tweetIds.length; i++) {
+    const tweetId = tweetIds[i];
+    const statusText = `Thread ${tweetId.substring(0, 8)}...`;
+    threadProgressBar.update(i + 1, statusText);
     // Auto-detect username if not provided
     if (author === undefined) {
       author = await detectUsernameForTweet(page, tweetId);
@@ -775,6 +939,8 @@ async function getAllTweets({
 
     author = undefined; // Reset for next thread
   }
+
+  threadProgressBar.complete(`Completed processing ${tweetIds.length} thread(s)`);
 }
 
 // Main execution
@@ -824,11 +990,14 @@ async function main() {
         downloadedBytes: number,
         totalBytes: number,
       ) => {
-        logger.info(
-          `Download progress: ${
-            Math.round((downloadedBytes / totalBytes) * 100)
-          }%`,
+        const percentage = Math.round((downloadedBytes / totalBytes) * 100);
+        // Use a simple line overwrite for Chrome download progress
+        Deno.stdout.writeSync(
+          new TextEncoder().encode(`\r🌐 Installing Chrome: ${percentage}%`)
         );
+        if (percentage === 100) {
+          Deno.stdout.writeSync(new TextEncoder().encode('\n'));
+        }
       },
     });
   } catch (error) {
@@ -836,7 +1005,7 @@ async function main() {
     const errorMessage = error instanceof Error ? error.message : String(error);
     const errorCode = (error as any)?.code;
     const errorErrno = (error as any)?.errno;
-    
+
     if (
       errorMessage.includes("ENOTEMPTY") ||
       errorMessage.includes("directory not empty") ||
@@ -1042,12 +1211,12 @@ async function main() {
 
 main().catch((error) => {
   const logger = createDenoLogger("recorder");
-  
+
   // Handle ENOTEMPTY errors gracefully (Chrome cache cleanup issues)
   const errorMessage = error instanceof Error ? error.message : String(error);
   const errorCode = (error as any)?.code;
   const errorErrno = (error as any)?.errno;
-  
+
   if (
     errorMessage.includes("ENOTEMPTY") ||
     errorMessage.includes("directory not empty") ||

@@ -15,11 +15,67 @@ import type { EnrichedTweetData } from "../infrastructure/types/index.ts";
 
 const logger = createDenoLogger('thread-media-downloader');
 
+// Progress bar utilities
+class ProgressBar {
+  private total: number;
+  private current: number = 0;
+  private width: number = 50;
+  private lastUpdate: number = 0;
+  private startTime: number;
+
+  constructor(total: number) {
+    this.total = total;
+    this.startTime = Date.now();
+  }
+
+  update(current: number, status?: string) {
+    this.current = current;
+    const now = Date.now();
+    
+    // Only update every 200ms to avoid flickering
+    if (now - this.lastUpdate < 200 && current < this.total) return;
+    this.lastUpdate = now;
+
+    const percentage = Math.round((current / this.total) * 100);
+    const filled = Math.round((current / this.total) * this.width);
+    const empty = this.width - filled;
+    
+    const bar = '█'.repeat(filled) + '░'.repeat(empty);
+    const elapsed = (now - this.startTime) / 1000;
+    const rate = current / elapsed;
+    const eta = current > 0 ? Math.round((this.total - current) / rate) : 0;
+    
+    // Use simpler approach - just overwrite the line
+    const statusText = status ? ` | ${status}` : '';
+    const progressText = `📦 [${bar}] ${percentage}% (${current}/${this.total}) ETA: ${eta}s${statusText}`;
+    
+    // Clear line and write progress
+    Deno.stdout.writeSync(new TextEncoder().encode(`\r${' '.repeat(120)}\r${progressText}`));
+    
+    if (current >= this.total) {
+      Deno.stdout.writeSync(new TextEncoder().encode('\n'));
+    }
+  }
+
+  complete(summary?: string) {
+    this.update(this.total);
+    if (summary) {
+      console.log(`✅ ${summary}`);
+    }
+  }
+
+  fail(error: string) {
+    process.stdout.write('\r\x1b[K');
+    console.log(`❌ ${error}`);
+  }
+}
+
 interface MediaItem {
   url: string;
   type: 'image' | 'video';
   tweetId: string;
-  filename: string;
+  filename: string; // Original filename (for logging)
+  actualFilename?: string; // SHA256-based filename (set after download)
   tweetText: string;
 }
 
@@ -72,19 +128,36 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
       // Check for images in metadata.imgs (exclude profile/avatar images)
       if (tweet.metadata?.imgs && Array.isArray(tweet.metadata.imgs)) {
         let contentImageIndex = 1;
+        let videoIndex = 1;
+        
         for (const img of tweet.metadata.imgs) {
           if (img.src && !isProfileImage(img.src)) {
-            const extension = getFileExtension(img.src, 'image');
-            const filename = `${tweet.id}_img_${contentImageIndex}${extension}`;
+            // Determine if this is a video thumbnail based on URL patterns
+            const isVideoThumb = img.src.includes('video_thumb') || 
+                               img.src.includes('ext_tw_video_thumb') || 
+                               img.src.includes('amplify_video_thumb') || 
+                               img.src.includes('tweet_video_thumb') ||
+                               tweet.metadata.type === 'video';
+            
+            const mediaType = isVideoThumb ? 'video' : 'image';
+            const extension = getFileExtension(img.src, mediaType);
+            
+            let filename: string;
+            if (isVideoThumb) {
+              filename = `${tweet.id}_video_${videoIndex}${extension}`;
+              videoIndex++;
+            } else {
+              filename = `${tweet.id}_img_${contentImageIndex}${extension}`;
+              contentImageIndex++;
+            }
             
             mediaItems.push({
               url: img.src,
-              type: 'image',
+              type: mediaType,
               tweetId: tweet.id,
               filename: filename,
               tweetText: tweet.tweet || ''
             });
-            contentImageIndex++;
           }
         }
       }
@@ -131,28 +204,35 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
       return;
     }
     
-    logger.info(`Found ${mediaItems.length} media items to download`);
+    logger.info(`Found ${mediaItems.length} media items to download (${mediaItems.filter(m => m.type === 'video').length} videos, ${mediaItems.filter(m => m.type === 'image').length} images)`);
     
     // Create public/metadata directory
     const publicMetadataDir = join(scriptDir, "..", "public", "metadata");
     await ensureDir(publicMetadataDir);
     
-    // Download media items
+    // Download media items with progress bar
     const downloadedItems: MediaItem[] = [];
     let failed = 0;
     
-    for (const item of mediaItems) {
+    console.log('🚀 Starting download process...');
+    const progressBar = new ProgressBar(mediaItems.length);
+    
+    for (let i = 0; i < mediaItems.length; i++) {
+      const item = mediaItems[i];
+      const itemType = item.type === 'video' ? '📹' : '🖼️';
+      const statusText = `${itemType} ${item.filename.substring(0, 30)}${item.filename.length > 30 ? '...' : ''}`;
+      
       try {
-        await downloadMediaItem(item, publicMetadataDir);
+        await downloadMediaItem(item, publicMetadataDir, false);
         downloadedItems.push(item);
-        logger.info(`✓ Downloaded: ${item.filename}`);
+        progressBar.update(i + 1, statusText);
       } catch (error) {
         failed++;
-        logger.error(`✗ Failed to download ${item.filename}: ${error}`);
+        progressBar.update(i + 1, `❌ Failed: ${statusText}`);
       }
     }
     
-    logger.info(`Media download completed: ${downloadedItems.length} successful, ${failed} failed`);
+    progressBar.complete(`Download completed: ${downloadedItems.length} successful, ${failed} failed`);
     
     // Update tweets_enriched.json with downloaded media
     if (downloadedItems.length > 0) {
@@ -166,10 +246,8 @@ async function downloadThreadMedia(threadId: string): Promise<void> {
   }
 }
 
-async function downloadMediaItem(item: MediaItem, targetDir: string): Promise<void> {
-  const targetPath = join(targetDir, item.filename);
-  
-  // Download the media file
+async function downloadMediaItem(item: MediaItem, targetDir: string, showProgress: boolean = false): Promise<void> {
+  // Download the media file first to get its content
   const response = await fetch(item.url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -181,7 +259,38 @@ async function downloadMediaItem(item: MediaItem, targetDir: string): Promise<vo
   }
   
   const arrayBuffer = await response.arrayBuffer();
-  await Deno.writeFile(targetPath, new Uint8Array(arrayBuffer));
+  const uint8Array = new Uint8Array(arrayBuffer);
+  
+  // Calculate SHA256 hash of the content
+  const hashBuffer = await crypto.subtle.digest('SHA-256', uint8Array);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  
+  // Get file extension from original filename
+  const extension = item.filename.includes('.') ? item.filename.substring(item.filename.lastIndexOf('.')) : '.jpg';
+  const sha256Filename = `${hashHex}${extension}`;
+  const targetPath = join(targetDir, sha256Filename);
+  
+  // Check if file already exists with this hash
+  try {
+    await Deno.stat(targetPath);
+    // File already exists, no need to write again
+    if (showProgress) {
+      logger.debug(`📋 File already exists: ${sha256Filename} (skipping download)`);
+    }
+    item.actualFilename = sha256Filename;
+    return;
+  } catch {
+    // File doesn't exist, proceed with download
+  }
+  
+  // Write the file with SHA256 name
+  await Deno.writeFile(targetPath, uint8Array);
+  item.actualFilename = sha256Filename;
+  
+  if (showProgress) {
+    logger.debug(`💾 Saved as: ${sha256Filename} (${uint8Array.length} bytes)`);
+  }
 }
 
 function isProfileImage(url: string): boolean {
@@ -222,24 +331,24 @@ async function updateTweetsEnriched(
     const threadId = threadTweets[0]?.id;
     if (!threadId) return;
     
-    // Remove existing image entries for this thread only (preserve other types)
+    // Remove existing image and video entries for this thread only (preserve other types)
     const preservedEnrichments = existingEnrichments.filter((entry: EnrichedTweetData) => {
       const isFromThisThread = threadTweets.some(tweet => tweet.id === entry.id);
-      const isImageType = entry.type === 'image';
+      const isMediaType = entry.type === 'image' || entry.type === 'video';
       
-      // Preserve if: not from this thread OR not an image type
-      return !isFromThisThread || !isImageType;
+      // Preserve if: not from this thread OR not a media type
+      return !isFromThisThread || !isMediaType;
     });
     
     // Create new enrichment entries for downloaded media
     const newMediaEntries: EnrichedTweetData[] = downloadedItems.map((item: MediaItem) => ({
       id: item.tweetId,
-      type: "image",
+      type: item.type === 'video' ? 'video' : 'image',
       media: item.type,
       title: "",
       description: item.tweetText.substring(0, 100),
       url: "",
-      img: `/metadata/${item.filename}`
+      img: `/metadata/${item.actualFilename || item.filename}`
     }));
     
     // Combine preserved and new entries
