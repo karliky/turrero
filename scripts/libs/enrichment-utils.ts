@@ -86,13 +86,26 @@ export class YouTubeProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
-        const data = await response.text();
-        const $ = cheerio.load(data);
-        
-        tweet.metadata.media = "youtube";
-        tweet.metadata.description = $('meta[name=description]').attr('content') || '';
-        tweet.metadata.title = $('meta[name=title]').attr('content') || '';
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            const data = await response.text();
+            const $ = cheerio.load(data);
+            
+            tweet.metadata.media = "youtube";
+            tweet.metadata.description = $('meta[name=description]').attr('content') || '';
+            tweet.metadata.title = $('meta[name=title]').attr('content') || '';
+        } catch (error) {
+            console.warn(`Failed to process YouTube URL ${url}:`, error);
+            // Set fallback values
+            tweet.metadata.media = "youtube";
+            tweet.metadata.description = '';
+            tweet.metadata.title = '';
+        }
     }
 }
 
@@ -109,15 +122,20 @@ export class GoodReadsProcessor implements MediaProcessor {
             throw new Error('Page instance required for GoodReads processing');
         }
         
-        await Promise.all([
-            page.goto(url), 
-            page.waitForNavigation(), 
-            page.waitForSelector('h1')
-        ]);
-        
-        const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
-        tweet.metadata.media = "goodreads";
-        tweet.metadata.title = title || '';
+        try {
+            // Add timeout to prevent hanging
+            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 });
+            await page.waitForSelector('h1', { timeout: 5000 });
+            
+            const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
+            tweet.metadata.media = "goodreads";
+            tweet.metadata.title = title || '';
+        } catch (error) {
+            console.warn(`Failed to process GoodReads URL ${url}:`, error);
+            // Set fallback values
+            tweet.metadata.media = "goodreads";
+            tweet.metadata.title = '';
+        }
     }
 }
 
@@ -130,21 +148,34 @@ export class WikipediaProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
-        const data = await response.text();
-        const $ = cheerio.load(data);
-        
-        tweet.metadata.media = "wikipedia";
-        tweet.metadata.title = $('h1').text().trim();
-        tweet.metadata.description = $("div[id=mw-content-text] p")
-            .slice(0, 2)
-            .map((_index, el) => $(el).text())
-            .get()
-            .join("")
-            .trim();
-        
-        // Prevent ban from Wikipedia servers
-        await new Promise(r => setTimeout(r, 1000));
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            const data = await response.text();
+            const $ = cheerio.load(data);
+            
+            tweet.metadata.media = "wikipedia";
+            tweet.metadata.title = $('h1').text().trim();
+            tweet.metadata.description = $("div[id=mw-content-text] p")
+                .slice(0, 2)
+                .map((_index, el) => $(el).text())
+                .get()
+                .join("")
+                .trim();
+            
+            // Prevent ban from Wikipedia servers
+            await new Promise(r => setTimeout(r, 1000));
+        } catch (error) {
+            console.warn(`Failed to process Wikipedia URL ${url}:`, error);
+            // Set fallback values
+            tweet.metadata.media = "wikipedia";
+            tweet.metadata.title = '';
+            tweet.metadata.description = '';
+        }
     }
 }
 
@@ -157,13 +188,26 @@ export class LinkedInProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
-        const data = await response.text();
-        const $ = cheerio.load(data);
-        
-        tweet.metadata.media = "linkedin";
-        tweet.metadata.title = $('h1').text().trim();
-        tweet.metadata.description = $('meta[name=description]').attr('content') || '';
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            const data = await response.text();
+            const $ = cheerio.load(data);
+            
+            tweet.metadata.media = "linkedin";
+            tweet.metadata.title = $('h1').text().trim();
+            tweet.metadata.description = $('meta[name=description]').attr('content') || '';
+        } catch (error) {
+            console.warn(`Failed to process LinkedIn URL ${url}:`, error);
+            // Set fallback values
+            tweet.metadata.media = "linkedin";
+            tweet.metadata.title = '';
+            tweet.metadata.description = '';
+        }
     }
 }
 
@@ -359,7 +403,15 @@ export async function expandUrl(shortUrl?: string): Promise<string | undefined> 
     if (!shortUrl) return undefined;
     
     try {
-        const response = await fetch(shortUrl, { redirect: 'follow' });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
+        const response = await fetch(shortUrl, { 
+            redirect: 'follow',
+            signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
         return response.url; // This will be the final URL after redirects
     } catch (error) {
         console.warn(`Failed to expand URL ${shortUrl}:`, error);

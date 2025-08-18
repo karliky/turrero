@@ -31,28 +31,43 @@ const dataAccess = createDataAccess(scriptDir);
 configureEnvironment();
 
 async function enrichTweets(): Promise<void> {
+  logger.info("Starting enrichTweets function");
+  
+  logger.info("Creating browser...");
   const browser = await createBrowser({ slowMo: 200 });
+  logger.info("Browser created successfully");
+  
+  logger.info("Creating new page...");
   const page = await browser.newPage();
+  logger.info("Page created successfully");
+  
   const enricher = new TweetEnricher(logger);
+  logger.info("TweetEnricher instance created");
 
   try {
+    logger.info("Loading tweets and enrichments...");
     const [tweets, enrichments] = await Promise.all([
       dataAccess.getTweets(),
       dataAccess.getTweetsEnriched(),
     ]);
+    logger.info(`Loaded ${tweets.length} tweet libraries and ${enrichments.length} enrichments`);
 
-    for (const tweetLibrary of tweets) {
+    for (let i = 0; i < tweets.length; i++) {
+      logger.info(`Processing tweet library ${i + 1}/${tweets.length}`);
       await processTweetLibrary(
-        tweetLibrary as Tweet[],
+        tweets[i] as Tweet[],
         enrichments,
         enricher,
         page,
       );
+      logger.info(`Completed tweet library ${i + 1}/${tweets.length}`);
     }
 
     logger.info("Tweet enrichment completed successfully!");
   } finally {
+    logger.info("Closing browser...");
     await browser.close();
+    logger.info("Browser closed successfully");
   }
 }
 
