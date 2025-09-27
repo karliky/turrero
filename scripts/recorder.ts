@@ -381,13 +381,13 @@ async function fetchCompleteThread(
 
   // Navigate directly to the tweet - X.com will load the full thread context
   await page.goto(`https://x.com/${expectedAuthor}/status/${threadId}`, {
-    waitUntil: "networkidle0",
-    timeout: 30000,
+    waitUntil: "domcontentloaded",
+    timeout: 60000,
   });
 
   // Wait for content to load
   await page.waitForSelector('article[data-testid="tweet"]', {
-    timeout: 10000,
+    timeout: 30000,
   });
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
@@ -637,8 +637,8 @@ async function detectUsernameForTweet(
 
     // Use the generic URL pattern directly - no need to try different usernames
     await page.goto(`https://x.com/i/status/${tweetId}`, {
-      waitUntil: "networkidle0",
-      timeout: 30000,
+      waitUntil: "domcontentloaded",
+      timeout: 60000,
     });
 
     // Check if the page loaded successfully (don't wait for tweet content yet)
@@ -904,7 +904,9 @@ async function getAllTweets({
       `https://x.com/${author}/status/${tweetId}`,
     );
     logger.debug("Waiting for selector");
-    await page.waitForSelector('div[data-testid="tweetText"]');
+    await page.waitForSelector('div[data-testid="tweetText"]', {
+      timeout: 30000,
+    });
     try {
       await rejectCookies(page);
       logger.debug("Cookies rejected, closed the popup");
@@ -1149,7 +1151,9 @@ async function main() {
 
       await page.goto(`https://x.com/${detectedUsername}/status/${tweetId}`);
       logger.debug("Waiting for selector");
-      await page.waitForSelector('div[data-testid="tweetText"]');
+      await page.waitForSelector('div[data-testid="tweetText"]', {
+        timeout: 30000,
+      });
 
       const tweet = await parseTweet({ page });
       try {

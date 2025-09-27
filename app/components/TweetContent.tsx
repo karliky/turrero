@@ -55,7 +55,14 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
   };
 
   const normalizeImagePath = (path: string): string => {
-    return path?.startsWith('./') ? path.substring(1) : path;
+    if (!path) return '';
+    
+    // Handle multiple path formats
+    if (path.startsWith('./')) return path.substring(1);
+    if (path.startsWith('/')) return path;
+    
+    // Ensure absolute path
+    return '/' + path;
   };
 
   const renderEmbed = (embed: EnrichedTweetMetadata): React.ReactElement | null => {
@@ -93,6 +100,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
         );
 
       case 'media':
+      case 'image':
         const MediaImage = (
           <Image
             src={normalizeImagePath(embed.img || '')}

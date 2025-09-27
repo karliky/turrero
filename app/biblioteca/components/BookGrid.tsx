@@ -11,6 +11,19 @@ interface BookGridProps {
   categoriesMap: { [key: string]: string };
 }
 
+const DEFAULT_BOOK_IMAGE = '/images/default-book-cover.jpg';
+
+const normalizeImagePath = (path: string): string => {
+  if (!path) return '';
+  
+  // Handle multiple path formats
+  if (path.startsWith('./')) return path.substring(1);
+  if (path.startsWith('/')) return path;
+  
+  // Ensure absolute path
+  return '/' + path;
+};
+
 export default function BookGrid({ books, categories, categoriesMap }: BookGridProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -59,7 +72,7 @@ export default function BookGrid({ books, categories, categoriesMap }: BookGridP
             >
               <div className="relative aspect-[2/3] mb-2 rounded-lg overflow-hidden">
                 <Image
-                  src={book.img ? book.img.replace('./', '/') : '/metadata/SJJzT3AT_11.jpeg'}
+                  src={book.img ? normalizeImagePath(book.img) : DEFAULT_BOOK_IMAGE}
                   alt={book.title}
                   fill
                   className="object-contain transition-all duration-200 group-hover:scale-105 grayscale group-hover:grayscale-0"

@@ -15,6 +15,19 @@ import type { EnrichedTweetData } from "../infrastructure/types/index.ts";
 
 const logger = createDenoLogger('thread-media-downloader');
 
+/**
+ * Generate short hash (8 chars) compatible with existing filename system
+ * Combines parts of SHA256 hash to maintain uniqueness while keeping compatibility
+ */
+function generateShortHash(fullHashHex: string): string {
+  // Take first 4 chars + middle 2 + last 2 chars for better distribution
+  // This maintains compatibility with existing short filenames like "-6ONSlnQ", "2Oog5v4a"
+  const first4 = fullHashHex.substring(0, 4);
+  const middle2 = fullHashHex.substring(16, 18);
+  const last2 = fullHashHex.substring(62, 64);
+  return first4 + middle2 + last2;
+}
+
 // Progress bar utilities
 class ProgressBar {
   private total: number;
@@ -266,9 +279,12 @@ async function downloadMediaItem(item: MediaItem, targetDir: string, showProgres
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   
+  // Generate short hash (8 chars) compatible with existing system
+  const shortHash = generateShortHash(hashHex);
+  
   // Get file extension from original filename
   const extension = item.filename.includes('.') ? item.filename.substring(item.filename.lastIndexOf('.')) : '.jpg';
-  const sha256Filename = `${hashHex}${extension}`;
+  const sha256Filename = `${shortHash}${extension}`;
   const targetPath = join(targetDir, sha256Filename);
   
   // Check if file already exists with this hash
@@ -334,7 +350,7 @@ async function updateTweetsEnriched(
     // Remove existing image and video entries for this thread only (preserve other types)
     const preservedEnrichments = existingEnrichments.filter((entry: EnrichedTweetData) => {
       const isFromThisThread = threadTweets.some(tweet => tweet.id === entry.id);
-      const isMediaType = entry.type === 'image' || entry.type === 'video';
+      const isMediaType = ['image', 'video', 'card', 'media'].includes(entry.type);
       
       // Preserve if: not from this thread OR not a media type
       return !isFromThisThread || !isMediaType;

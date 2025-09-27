@@ -100,7 +100,10 @@ export default async function TurraPage({ params }: Params) {
   if (!mainTweet) {
     notFound();
   }
-  const words = summary.split(' ');
+  
+  // Use first tweet content as fallback if no summary exists
+  const displaySummary = summary || mainTweet.tweet.slice(0, 100) + (mainTweet.tweet.length > 100 ? '...' : '');
+  const words = displaySummary.split(' ');
   const coloredWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
   const author: Author = fromXtoAuthor(mainTweet.author);
