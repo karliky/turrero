@@ -251,14 +251,74 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
       });
     });
 
+    // Check for embedded/quoted tweets - try multiple selectors
+    let quotedTweet = article.querySelector('div[data-testid="quoteTweet"]');
+    
+    // If not found, try alternative selectors for quoted tweets
+    if (!quotedTweet) {
+      // Look for elements containing "Quote" text (current X.com structure)
+      const quoteElements = Array.from(article.querySelectorAll('*')).filter(el => 
+        el.textContent?.includes('Quote') && 
+        el.querySelector('a[href*="/status/"]') &&
+        el.children.length > 0
+      );
+      quotedTweet = quoteElements[0] as Element || null;
+    }
+    
+    let embedData = undefined;
+    
+    if (quotedTweet) {
+      try {
+        // Extract embedded tweet data with improved selectors
+        let embeddedAuthor = quotedTweet.querySelector('[data-testid="User-Name"] a')?.textContent?.trim() || '';
+        let embeddedText = quotedTweet.querySelector('[data-testid="tweetText"]')?.textContent?.trim() || '';
+        const embeddedLink = quotedTweet.querySelector('a[href*="/status/"]') as HTMLAnchorElement;
+        const embeddedId = embeddedLink?.href.match(/status\/(\d+)/)?.[1] || '';
+        
+        // Fallback for author extraction if standard selector fails
+        if (!embeddedAuthor) {
+          const authorElements = Array.from(quotedTweet.querySelectorAll('*')).filter(el => 
+            el.textContent?.includes('@') && el.textContent?.includes('Verified account')
+          );
+          embeddedAuthor = authorElements[0]?.textContent?.trim() || 'Unknown Author';
+        }
+        
+        // Fallback for text extraction if standard selector fails
+        if (!embeddedText) {
+          // Look for text content that's not the author info
+          const textElements = Array.from(quotedTweet.querySelectorAll('*')).filter(el => {
+            const text = el.textContent?.trim();
+            return text && 
+                   text.length > 20 && 
+                   !text.includes('@') && 
+                   !text.includes('Verified account') &&
+                   !text.includes('Quote');
+          });
+          embeddedText = textElements[0]?.textContent?.trim() || '';
+        }
+        
+        if (embeddedId && (embeddedText || embeddedAuthor !== 'Unknown Author')) {
+          embedData = {
+            id: embeddedId,
+            author: embeddedAuthor,
+            tweet: embeddedText || 'Quoted tweet content'
+          };
+        }
+      } catch (error) {
+        // Ignore embed extraction errors and continue
+      }
+    }
+
     // Determine type and format for compatibility
     const hasVideo = mediaItems.some(item => item.type === "video");
-    const type = hasVideo ? "video" : (mediaItems.length > 0 ? "image" : undefined);
+    const hasEmbed = embedData !== undefined;
+    const type = hasEmbed ? "embed" : (hasVideo ? "video" : (mediaItems.length > 0 ? "image" : undefined));
     const finalImgs = mediaItems.length > 0 ? mediaItems.map(item => ({ src: item.src, alt: item.alt })) : undefined;
 
     return {
       type: type,
       imgs: finalImgs,
+      embed: embedData
     } as unknown as TweetMetadata;
   });
 
@@ -515,9 +575,39 @@ async function fetchCompleteThread(
           });
 
           const metadata: TweetMetadata = {};
-          if (mediaItems.length > 0) {
-            // Determine primary type based on what media is found
-            const hasVideo = mediaItems.some(item => item.type === "video");
+          
+          // Check for embedded/quoted tweets
+          const quotedTweet = element.querySelector('div[data-testid="quoteTweet"]');
+          let embedData = undefined;
+          
+          if (quotedTweet) {
+            try {
+              // Extract embedded tweet data
+              const embeddedAuthor = quotedTweet.querySelector('[data-testid="User-Name"] a')?.textContent?.trim() || '';
+              const embeddedText = quotedTweet.querySelector('[data-testid="tweetText"]')?.textContent?.trim() || '';
+              const embeddedLink = quotedTweet.querySelector('a[href*="/status/"]') as HTMLAnchorElement;
+              const embeddedId = embeddedLink?.href.match(/status\/(\d+)/)?.[1] || '';
+              
+              if (embeddedId && embeddedText) {
+                embedData = {
+                  id: embeddedId,
+                  author: embeddedAuthor,
+                  tweet: embeddedText
+                };
+              }
+            } catch (error) {
+              // Ignore embed extraction errors and continue
+            }
+          }
+          
+          // Determine metadata type and content
+          const hasVideo = mediaItems.some(item => item.type === "video");
+          const hasEmbed = embedData !== undefined;
+          
+          if (hasEmbed) {
+            metadata.type = "embed";
+            metadata.embed = embedData;
+          } else if (mediaItems.length > 0) {
             metadata.type = hasVideo ? "video" : "image";
             metadata.imgs = mediaItems.map(item => ({ src: item.src, alt: item.alt }));
           }

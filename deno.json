@@ -91,6 +91,7 @@
     },
     "tasks": {
         "add-thread": "./scripts/add_thread_optimized.sh",
+        "delete-turra": "deno run --allow-read --allow-write --allow-run scripts/delete-turra.ts",
         "scrape": "deno run --allow-all scripts/recorder.ts",
         "enrich": "deno run --allow-all scripts/tweets_enrichment.ts",
         "ai-process": "deno run --allow-all scripts/ai-prompt-processor.ts",

@@ -120,9 +120,15 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
         );
 
       case 'embed':
+      case 'embeddedTweet':
+        // Handle incomplete embeddedTweet data
+        const embeddedTweetId = embed.embeddedTweetId || embed.id;
+        const author = embed.author || 'Unknown Author';
+        const tweetText = embed.tweet || 'Embedded tweet content unavailable';
+        
         return (
           <a
-            href={`https://x.com/${getEmbeddedAuthorHandle(embed.author || '')}/status/${embed.embeddedTweetId}`}
+            href={`https://x.com/${getEmbeddedAuthorHandle(author)}/status/${embeddedTweetId}`}
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-4"
@@ -131,10 +137,10 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
               <div className="flex items-center gap-2 mb-2">
                 <FaTwitter className="text-whiskey-500" />
                 <span className="text-sm font-medium text-whiskey-900">
-                  {embed.author}
+                  {author}
                 </span>
               </div>
-              <p className="text-whiskey-800">{embed.tweet}</p>
+              <p className="text-whiskey-800">{tweetText}</p>
             </div>
           </a>
         );

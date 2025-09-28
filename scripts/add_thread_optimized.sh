@@ -194,12 +194,8 @@ validate_execution() {
     
     log_info "🔍 Running post-execution validation..."
     
-    # Check if thread was added to tweets.json
-    if deno run --allow-all -e "
-        import { tweetExists } from './scripts/lib/atomic-db-operations.ts';
-        const exists = tweetExists('$thread_id');
-        console.log(exists ? 'EXISTS' : 'NOT_FOUND');
-    " | grep -q "EXISTS"; then
+    # Check if thread was added to tweets.json using simple grep
+    if grep -q "$thread_id" "$PROJECT_ROOT/infrastructure/db/tweets.json" 2>/dev/null; then
         log_success "✅ Thread $thread_id successfully added to database"
     else
         log_warn "⚠️ Thread $thread_id not found in database - may be part of existing thread"

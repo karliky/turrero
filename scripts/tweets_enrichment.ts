@@ -137,11 +137,10 @@ async function processEmbeddedTweet(
   const existingEnrichments = await dataAccess.getTweetsEnriched();
   existingEnrichments.push({
     id: tweet.id,
-    type: "embeddedTweet",
-    media: "embedded",
-    title: embed.author,
-    description: embed.tweet,
-    url: `https://x.com/${embed.author}/status/${embed.id}`,
+    type: "embed",
+    embeddedTweetId: embed.id,
+    author: embed.author,
+    tweet: embed.tweet,
   });
 
   await dataAccess.saveTweetsEnriched(existingEnrichments);
