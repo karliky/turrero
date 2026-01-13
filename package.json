@@ -35,7 +35,7 @@
     "infrastructure": "file:infrastructure",
     "jimp": "^1.6.0",
     "lodash.groupby": "^4.6.0",
-    "next": "^15.1.3",
+    "next": "15.1.11",
     "node-fetch": "^3.3.2",
     "preline": "^2.7.0",
     "react": "^19.1.1",
