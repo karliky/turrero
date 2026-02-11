@@ -137,6 +137,12 @@ export class TweetProvider {
     return this.enrichedTweets.find(t => normalizeId(t.id) === normalizedId);
   }
 
+  /** Returns all enrichments for a tweet (e.g. image + embed) so both can be rendered */
+  public getAllEnrichedTweetData(id: string): EnrichedTweetMetadata[] {
+    const normalizedId = normalizeId(id);
+    return this.enrichedTweets.filter(t => normalizeId(t.id) === normalizedId);
+  }
+
   public getExamById(id: string): TweetExam | undefined {
     const normalizedId = normalizeId(id);
     const threadId = extractThreadId(normalizedId);

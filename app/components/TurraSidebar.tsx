@@ -17,7 +17,7 @@ export function TurraSidebar({ exam, thread }: TurraSidebarProps): React.ReactEl
   // Create instance and get enriched data on the server
   const tweetProvider = new TweetProvider();
   const enrichedData = thread
-    .map((tweet) => tweetProvider.getEnrichedTweetData(tweet.id))
+    .flatMap((tweet) => tweetProvider.getAllEnrichedTweetData(tweet.id))
     .filter(
       (data): data is EnrichedTweetMetadata =>
         !!data && (!!data.url || !!data.embeddedTweetId)

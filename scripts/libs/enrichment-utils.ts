@@ -328,20 +328,20 @@ export class TweetEnricher {
 
 /**
  * Checks if a tweet should be enriched.
- * Re-processes tweets that have an embed with id "unknown" so we can try to resolve the ID from tweets.json.
+ * Re-processes when: no enrichment yet; embed with id "unknown"; or has embed but no embed-type enrichment (e.g. only image so far).
  */
 export function shouldEnrichTweet(tweet: TweetForEnrichment, enrichments: EnrichedTweetData[]): boolean {
     if (!tweet.metadata) return false;
 
-    const { embed } = tweet.metadata;
-    const existing = enrichments.find((_tweet: EnrichedTweetData) => tweet.id === _tweet.id);
-    if (!existing) {
-        const alreadyEnrichedByEmbedId = embed && enrichments.some((_tweet: EnrichedTweetData) => embed.id === _tweet.id);
-        return !alreadyEnrichedByEmbedId;
-    }
-    if (existing.type === "embed" && (existing.embeddedTweetId === "unknown" || !existing.embeddedTweetId)) {
-        return true;
-    }
+    const allForThisTweet = enrichments.filter((_tweet: EnrichedTweetData) => _tweet.id === tweet.id);
+    const hasEmbedEnrichment = allForThisTweet.some((e) => e.type === "embed");
+    const hasUnknownEmbed = allForThisTweet.some(
+        (e) => e.type === "embed" && (e.embeddedTweetId === "unknown" || !e.embeddedTweetId),
+    );
+
+    if (allForThisTweet.length === 0) return true;
+    if (hasUnknownEmbed) return true;
+    if (tweet.metadata.embed && !hasEmbedEnrichment) return true;
     return false;
 }
 

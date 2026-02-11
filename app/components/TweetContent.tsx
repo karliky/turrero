@@ -46,8 +46,9 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     });
   };
 
-  const getEmbedding = (tweet: Tweet): EnrichedTweetMetadata | undefined => {
-    return new TweetProvider().getEnrichedTweetData(tweet.id);
+  const tweetProvider = new TweetProvider();
+  const getEmbeddings = (tweet: Tweet): EnrichedTweetMetadata[] => {
+    return tweetProvider.getAllEnrichedTweetData(tweet.id);
   };
 
   const getEmbeddedAuthorHandle = (author: string): string => {
@@ -145,13 +146,16 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     }
   };
 
-  const embed = getEmbedding(tweet);
+  const embeddings = getEmbeddings(tweet);
   return (
     <div id={id}>
       <p className="text-lg leading-relaxed text-whiskey-800">
         {renderMentions(tweet.tweet)}
       </p>
-      {embed && renderEmbed(embed)}
+      {embeddings.map((embed, i) => {
+        const rendered = renderEmbed(embed);
+        return rendered ? <div key={`${id}-${i}`}>{rendered}</div> : null;
+      })}
     </div>
   );
 } 

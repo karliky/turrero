@@ -88,6 +88,17 @@ async function processTweetForEnrichment(
 ): Promise<void> {
   const { embed } = tweet.metadata || {};
 
+  // When tweet has both images and embed, process both so image and embed card both show (skip image if already present)
+  if (tweet.metadata?.imgs?.length && embed) {
+    const existing = await dataAccess.getTweetsEnriched();
+    const hasImage = existing.some(
+      (e) => e.id === tweet.id && (e.type === "image" || e.type === "media"),
+    );
+    if (!hasImage) await processImageTweets(tweet, enricher);
+    await processEmbeddedTweet(tweet, embed, allTweetsFlat);
+    return;
+  }
+
   if (embed) {
     await processEmbeddedTweet(tweet, embed, allTweetsFlat);
     return;
@@ -95,7 +106,6 @@ async function processTweetForEnrichment(
 
   if (!isValidMetadataType(tweet.metadata?.type)) return;
 
-  // Convert Tweet to TweetForEnrichment
   const enrichmentTweet: TweetForEnrichment = {
     id: tweet.id,
     metadata: {
@@ -208,16 +218,19 @@ async function processEmbeddedTweet(
     : `@${embed.author}`;
 
   const existingEnrichments = await dataAccess.getTweetsEnriched();
-  const withoutThisTweet = existingEnrichments.filter((e) => e.id !== tweet.id);
-  withoutThisTweet.push({
-    id: tweet.id,
-    type: "embed",
-    embeddedTweetId,
-    author: authorDisplay,
-    tweet: embed.tweet,
-  });
-
-  await dataAccess.saveTweetsEnriched(withoutThisTweet);
+  const alreadyHasEmbed = existingEnrichments.some(
+    (e) => e.id === tweet.id && e.type === "embed",
+  );
+  if (!alreadyHasEmbed) {
+    existingEnrichments.push({
+      id: tweet.id,
+      type: "embed",
+      embeddedTweetId,
+      author: authorDisplay,
+      tweet: embed.tweet,
+    });
+    await dataAccess.saveTweetsEnriched(existingEnrichments);
+  }
 }
 
 async function processImageTweets(
