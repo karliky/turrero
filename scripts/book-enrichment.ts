@@ -11,6 +11,7 @@ import {
     mergeEnrichedBooks
 } from './libs/data-access.ts';
 import type { BookToEnrich, CurrentBook } from '../infrastructure/types/index.ts';
+import { mapToFrontendCategories } from './libs/category-mapper.ts';
 
 const scriptDir = getScriptDirectory(import.meta.url);
 const logger = createScriptLogger('book-enrichment');
@@ -21,31 +22,36 @@ async function enrichBooksWithCategories(): Promise<void> {
 
     logger.info('Pending books to enrich:', booksToEnrich.length);
 
-    if (booksToEnrich.length === 0) {
-        logger.info('No books need enrichment');
-        return;
-    }
+    if (booksToEnrich.length > 0) {
+        const browser = await createBrowser({ slowMo: 10 });
+        const page = await browser.newPage();
 
-    const browser = await createBrowser({ slowMo: 10 });
-    const page = await browser.newPage();
+        // Set desktop user agent and viewport to get full HTML
+        await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+        await page.setViewport({ width: 1920, height: 1080 });
 
-    // Set desktop user agent and viewport to get full HTML
-    await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-    await page.setViewport({ width: 1920, height: 1080 });
-
-    try {
-        for (const book of booksToEnrich) {
-            await enrichBookCategories(page, book);
-            await saveEnrichedBooks(booksToEnrich);
+        try {
+            for (const book of booksToEnrich) {
+                await enrichBookCategories(page, book);
+            }
+            logger.info('Goodreads scraping completed for new books');
+        } finally {
+            await browser.close();
         }
-        
-        logger.info('Book enrichment completed successfully');
-    } finally {
-        await browser.close();
+    } else {
+        logger.info('No new books need Goodreads enrichment');
     }
+
+    // Always remap categories for ALL books (new + existing)
+    await remapAllBookCategories(booksToEnrich);
+    logger.info('Book enrichment completed successfully');
 }
 
 async function enrichBookCategories(page: Page, book: BookToEnrich): Promise<void> {
+    if (!book.url) {
+        logger.warn(`No URL for book: ${book.title}`);
+        return;
+    }
     await page.goto(book.url, { waitUntil: 'networkidle2' });
 
     // Debug: Check what HTML we're getting
@@ -81,22 +87,31 @@ async function enrichBookCategories(page: Page, book: BookToEnrich): Promise<voi
     );
     
     if (categories.length > 0) {
-        book.categories = categories;
+        book.goodreadsCategories = categories;
+        book.categories = mapToFrontendCategories(categories);
     }
 }
 
-async function saveEnrichedBooks(enrichedBooks: BookToEnrich[]): Promise<void> {
+async function remapAllBookCategories(enrichedBooks: BookToEnrich[]): Promise<void> {
     const currentBooks = await dataAccess.getBooks();
     const mergedBooks = mergeEnrichedBooks(currentBooks, enrichedBooks);
-    
-    // Ensure all books have categories property
+
+    // Ensure all books have categories and apply frontend mapping
     const booksWithCategories = mergedBooks.map((book: CurrentBook) => {
-        if (!('categories' in book)) {
-            (book as CurrentBook).categories = [];
+        // If book has goodreadsCategories, re-derive frontend categories from them
+        if (book.goodreadsCategories && book.goodreadsCategories.length > 0) {
+            book.categories = mapToFrontendCategories(book.goodreadsCategories);
+        } else if (book.categories && book.categories.length > 0) {
+            // Legacy books without goodreadsCategories: treat existing categories
+            // as Goodreads tags, save them, and map to frontend
+            book.goodreadsCategories = [...book.categories];
+            book.categories = mapToFrontendCategories(book.goodreadsCategories);
+        } else {
+            book.categories = [];
         }
         return book;
     });
-    
+
     await dataAccess.saveBooks(booksWithCategories);
 }
 

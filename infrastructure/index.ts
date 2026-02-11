@@ -23,6 +23,7 @@ export interface Book {
   turraId: string;
   title: string;
   categories: string[];
+  goodreadsCategories?: string[];
 }
 
 export interface GlossaryTerm {

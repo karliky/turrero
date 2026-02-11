@@ -713,7 +713,9 @@ export interface BookToEnrich {
   url?: string;
   image?: string;
   sourceThreadId?: string;
+  turraId?: string;
   categories?: string[];
+  goodreadsCategories?: string[];
 }
 
 /** Current book with potential enrichment data */
