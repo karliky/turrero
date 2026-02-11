@@ -190,8 +190,22 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                 if (textDivs.length >= 3) description = textDivs[2].textContent?.trim() || "";
             }
 
+            // Detect media type from domain
+            let media = undefined;
+            if (domain) {
+                const domainLower = domain.toLowerCase();
+                if (domainLower.includes('goodreads')) {
+                    media = 'goodreads';
+                } else if (domainLower.includes('youtube') || domainLower.includes('youtu.be')) {
+                    media = 'youtube';
+                } else if (domainLower.includes('amazon')) {
+                    media = 'amazon';
+                }
+            }
+
             return {
                 type: 'card',
+                media: media,
                 img: imgElement ? imgElement.src : "",
                 url: linkElement ? linkElement.href : "",
                 domain: domain || undefined,

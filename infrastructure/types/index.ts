@@ -146,6 +146,8 @@ export interface EnrichedTweetData {
   url?: string;
   /** Media source (youtube, goodreads, etc) */
   media?: string;
+  /** Card domain (e.g., goodreads.com, youtube.com) */
+  domain?: string;
   /** Card description */
   description?: string;
   /** Card title */

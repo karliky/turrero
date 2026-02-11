@@ -3,23 +3,23 @@ import {
   createScriptLogger,
   getScriptDirectory,
   runWithErrorHandling,
-} from "@/scripts/libs/common-utils.ts";
-import { createDataAccess } from "@/scripts/libs/data-access.ts";
+} from "./libs/common-utils.ts";
+import { createDataAccess } from "./libs/data-access.ts";
 import {
   configureEnvironment,
   isValidMetadataType,
   shouldEnrichTweet,
   TweetEnricher,
   type TweetForEnrichment,
-} from "@/scripts/libs/enrichment-utils.ts";
+} from "./libs/enrichment-utils.ts";
 import type {
   ContextualError,
   EnrichedTweetData,
   ImageMetadata,
   Tweet,
   TweetEmbedMetadata,
-} from "@/infrastructure/types/index.ts";
-import { TweetMetadataType } from "@/infrastructure/types/index.ts";
+} from "../infrastructure/types/index.ts";
+import { TweetMetadataType } from "../infrastructure/types/index.ts";
 import type { Page } from "puppeteer";
 
 const scriptDir = getScriptDirectory(import.meta.url);
@@ -136,7 +136,10 @@ async function processImageTweets(
 ): Promise<void> {
   const imagePromises = tweet.metadata!.imgs!.map(
     async (metadata: ImageMetadata) => {
-      const imageMetadata = { ...metadata, type: "image" as TweetMetadataType };
+      const imageMetadata = {
+        ...metadata,
+        type: "image" as TweetMetadataType,
+      };
       await enricher.downloadTweetMedia(
         { id: tweet.id, metadata: imageMetadata },
         undefined,
@@ -175,6 +178,7 @@ async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
     id: tweet.id,
     type: tweet.metadata.type || "unknown",
     media: tweet.metadata.media || "unknown",
+    domain: tweet.metadata.domain || "",
     title: tweet.metadata.title || "",
     description: tweet.metadata.description || "",
     url: tweet.metadata.url || "",
