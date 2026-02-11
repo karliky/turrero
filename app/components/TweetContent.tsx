@@ -59,13 +59,19 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     return path?.startsWith('./') ? path.substring(1) : path;
   };
 
+  const isYoutubeCard = (e: EnrichedTweetMetadata) =>
+    e.domain === "youtube.com" || e.media === "youtube";
+  const youtubeSearchHref = (e: EnrichedTweetMetadata) =>
+    e.url?.trim() || `https://www.youtube.com/results?search_query=${encodeURIComponent(e.title?.trim() || "")}`;
+
   const renderEmbed = (embed: EnrichedTweetMetadata): React.ReactElement | null => {
     switch (embed.type) {
-      case 'card':
+      case 'card': {
+        const href = isYoutubeCard(embed) ? youtubeSearchHref(embed) : (embed.url || "#");
         return (
           <div className="flex justify-center mt-4">
             <a 
-              href={embed.url} 
+              href={href}
               target="_blank" 
               rel="noopener noreferrer"
               className="overflow-hidden rounded-lg border border-whiskey-200 hover:border-whiskey-300 transition-colors inline-block max-w-[400px]"
@@ -78,6 +84,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
                     width={400}
                     height={266}
                     className="h-auto grayscale hover:grayscale-0 transition-all duration-300"
+                    unoptimized={!embed.img.includes(".")}
                   />
                 </div>
               )}
@@ -95,9 +102,43 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
             </a>
           </div>
         );
+      }
 
       case 'image':
-      case 'media':
+      case 'media': {
+        if (isYoutubeCard(embed)) {
+          return (
+            <div className="flex justify-center mt-4">
+              <a
+                href={youtubeSearchHref(embed)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="overflow-hidden rounded-lg border border-whiskey-200 hover:border-whiskey-300 transition-colors inline-block max-w-[400px]"
+              >
+                {embed.img && (
+                  <div className="relative">
+                    <Image
+                      src={normalizeImagePath(embed.img)}
+                      alt={embed.title || ""}
+                      width={400}
+                      height={266}
+                      className="h-auto grayscale hover:grayscale-0 transition-all duration-300"
+                      unoptimized={!embed.img.includes(".")}
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  {embed.domain && (
+                    <p className="text-xs text-whiskey-500 mb-1">{embed.domain}</p>
+                  )}
+                  <h3 className="font-medium text-whiskey-900 text-sm">
+                    {embed.title?.trim() || "YouTube"}
+                  </h3>
+                </div>
+              </a>
+            </div>
+          );
+        }
         const MediaImage = (
           <Image
             src={normalizeImagePath(embed.img || '')}
@@ -105,6 +146,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
             width={300}
             height={200}
             className="h-auto w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-300"
+            unoptimized={embed.img ? !embed.img.includes(".") : false}
           />
         );
 
@@ -115,6 +157,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
               </div>
           </div>
         );
+      }
 
       case 'embed': {
         const handle = getEmbeddedAuthorHandle(embed.author || '');
