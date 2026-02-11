@@ -4509,5 +4509,224 @@
         "categories": [
             "Nonfiction"
         ]
+    },
+    {
+        "id": "1756234871276486764",
+        "type": "card",
+        "img": "./metadata/nGwpPwAy.jpeg",
+        "url": "https://www.goodreads.com/quotes/8692961-bernoulli-observed-that-most-people-dislike-risk-the-chance-of",
+        "media": "goodreads",
+        "title": "\n      “Bernoulli observed that most people dislike risk (the chance of receiving the lowest possible outcome), and if they are offered a choice between a gamble and an amount equal to its expected value they will pick the sure thing. In fact a risk-averse decision maker will choose a sure thing that is less than expected value, in effect paying a premium to avoid the uncertainty.”\n    \n    ",
+        "turraId": "1756234748685373544",
+        "categories": []
+    },
+    {
+        "id": "1883056010094329902",
+        "type": "card",
+        "img": "./metadata/_fle01mz.jpeg",
+        "url": "https://www.goodreads.com/en/book/show/29775340-george-lucas",
+        "media": "goodreads",
+        "title": "George Lucas: A Life",
+        "turraId": "1883055789553676359",
+        "categories": [
+            "Biography",
+            "Nonfiction",
+            "Star Wars",
+            "Film",
+            "Audiobook",
+            "Biography Memoir",
+            "History"
+        ]
+    },
+    {
+        "id": "1883056011046531342",
+        "type": "card",
+        "img": "./metadata/w9q8ajgU.jpeg",
+        "url": "https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned",
+        "media": "goodreads",
+        "title": "Why Greatness Cannot Be Planned: The Myth of the Objective",
+        "turraId": "1883055789553676359",
+        "categories": [
+            "Philosophy",
+            "Nonfiction",
+            "Science",
+            "Business",
+            "Psychology",
+            "Self Help",
+            "Artificial Intelligence"
+        ]
+    },
+    {
+        "id": "1883056015509192996",
+        "type": "card",
+        "img": "./metadata/Tu7W0eQO.jpeg",
+        "url": "https://www.goodreads.com/book/show/588138.The_Hero_With_a_Thousand_Faces",
+        "media": "goodreads",
+        "title": "The Hero With a Thousand Faces",
+        "turraId": "1883055789553676359",
+        "categories": [
+            "Nonfiction",
+            "Mythology",
+            "Philosophy",
+            "Psychology",
+            "Writing",
+            "History",
+            "Religion"
+        ]
+    },
+    {
+        "id": "1893203406069624864",
+        "type": "card",
+        "img": "./metadata/E-sntC1y.jpeg",
+        "url": "https://www.goodreads.com/book/show/24812.The_Complete_Calvin_and_Hobbes",
+        "media": "goodreads",
+        "title": "The Complete Calvin and Hobbes",
+        "turraId": "1893203295725871217",
+        "categories": [
+            "Comics",
+            "Humor",
+            "Graphic Novels",
+            "Fiction",
+            "Classics",
+            "Comedy",
+            "Graphic Novels Comics"
+        ]
+    },
+    {
+        "id": "1494930467971338245",
+        "type": "card",
+        "img": "./metadata/sj3_OhUg.jpeg",
+        "url": "https://www.goodreads.com/book/show/19013459-the-buyout-of-america",
+        "media": "goodreads",
+        "title": "The Buyout of America: How Private Equity Will Cause the Next Great Credit Crisis",
+        "turraId": "1494930305811111938",
+        "categories": [
+            "Business",
+            "Economics",
+            "Finance",
+            "Nonfiction",
+            "Politics"
+        ]
+    },
+    {
+        "id": "1888123741885886589",
+        "type": "card",
+        "img": "./metadata/nisBPGX6.jpeg",
+        "url": "https://www.goodreads.com/book/show/146225.Undercurrents",
+        "media": "goodreads",
+        "title": "Undercurrents: The Hidden Wiring of Modern Music",
+        "turraId": "1888123731865702418",
+        "categories": [
+            "Music",
+            "Nonfiction",
+            "Cultural Studies",
+            "Essays",
+            "History",
+            "Cultural",
+            "Art"
+        ]
+    },
+    {
+        "id": "1888123794067222896",
+        "type": "card",
+        "img": "./metadata/_VvTiSMO.jpeg",
+        "url": "https://www.goodreads.com/book/show/27397.A_Civil_Action",
+        "media": "goodreads",
+        "title": "A Civil Action",
+        "turraId": "1888123731865702418",
+        "categories": [
+            "Nonfiction",
+            "Law",
+            "History",
+            "Legal",
+            "True Crime",
+            "Environment",
+            "Crime"
+        ]
+    },
+    {
+        "id": "1888123795166097696",
+        "type": "card",
+        "img": "./metadata/Er_tqeog.jpeg",
+        "url": "https://www.goodreads.com/book/show/108402.Power_in_Movement",
+        "media": "goodreads",
+        "title": "Power in Movement: Social Movements and Contentious Politics",
+        "turraId": "1888123731865702418",
+        "categories": [
+            "Politics",
+            "Sociology",
+            "Political Science",
+            "Nonfiction",
+            "Social Movements",
+            "Academic",
+            "History"
+        ]
+    },
+    {
+        "id": "1888123796168532300",
+        "type": "card",
+        "img": "./metadata/Xyycl3NA.jpeg",
+        "url": "https://www.goodreads.com/book/show/60627426-el-libro-de-la-inteligencia-colectiva",
+        "media": "goodreads",
+        "title": "El libro de la Inteligencia colectiva",
+        "turraId": "1888123731865702418",
+        "categories": []
+    },
+    {
+        "id": "1888123797166862764",
+        "type": "card",
+        "img": "./metadata/Qgu2VJNP.jpeg",
+        "url": "https://www.goodreads.com/book/show/218688993-c-mo-impulsar-la-inteligencia-colectiva",
+        "media": "goodreads",
+        "title": "Cómo impulsar la inteligencia colectiva",
+        "turraId": "1888123731865702418",
+        "categories": []
+    },
+    {
+        "id": "1999746237570957812",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Fixer Upper Books",
+        "description": "",
+        "url": "https://www.goodreads.com/shelf/show/fixer-upper",
+        "img": "",
+        "turraId": "1999746151839338739",
+        "categories": []
+    },
+    {
+        "id": "1999746239634575835",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Savage Mind",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/782026.The_Savage_Mind",
+        "img": "./metadata/soKhvf48",
+        "turraId": "1999746151839338739",
+        "categories": [
+            "Anthropology",
+            "Philosophy",
+            "Nonfiction",
+            "Psychology",
+            "Sociology",
+            "Theory",
+            "France"
+        ]
+    },
+    {
+        "id": "1999746240548945938",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Death by Fire: Sati, Dowry Death, and Female Infanticid…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/127667.Death_by_Fire",
+        "img": "./metadata/e5XXxEU6",
+        "turraId": "1999746151839338739",
+        "categories": [
+            "Nonfiction",
+            "India"
+        ]
     }
 ]

@@ -6446,5 +6446,37 @@
         "answer": 2
       }
     ]
-  }
+  },
+  {
+    "id": "1999746151839338739",
+    "questions": [
+      {
+        "question": "¿Qué propone el texto como alternativa al Private Equity tradicional?",
+        "options": [
+          "CFU (Company Fixer Upper)",
+          "ETF inmobiliario",
+          "IPO directa"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "En el texto, ¿qué es un fixer-upper en real estate?",
+        "options": [
+          "Vivienda con reformas significativas",
+          "Vivienda nueva a estrenar",
+          "Alquiler temporal"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Cuál es el objetivo de un Turnaround Target en el enfoque tipo CFU?",
+        "options": [
+          "Comprar barato, arreglar y vender",
+          "Mantener sin cambios 10 años",
+          "Evitar invertir capital"
+        ],
+        "answer": 1
+      }
+    ]
+  } 
 ]

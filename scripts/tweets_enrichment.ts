@@ -117,6 +117,18 @@ async function processEmbeddedTweet(
     `Processing embedded tweet: ${embed.id} for tweet ${tweet.id}`,
   );
 
+  // Skip if embed ID is unknown or invalid
+  if (!embed.id || embed.id === "unknown" || embed.id.trim() === "") {
+    logger.warn(
+      `Skipping embedded tweet with invalid ID for tweet ${tweet.id}`,
+    );
+    return;
+  }
+
+  // Extract clean handle from author (format: "Full Name\n@handle" or similar)
+  const handleMatch = embed.author?.match(/@(\w+)/);
+  const cleanHandle = handleMatch ? handleMatch[1] : embed.author;
+
   const existingEnrichments = await dataAccess.getTweetsEnriched();
   existingEnrichments.push({
     id: tweet.id,
@@ -124,7 +136,7 @@ async function processEmbeddedTweet(
     media: "embedded",
     title: embed.author,
     description: embed.tweet,
-    url: `https://x.com/${embed.author}/status/${embed.id}`,
+    url: `https://x.com/${cleanHandle}/status/${embed.id}`,
   });
 
   await dataAccess.saveTweetsEnriched(existingEnrichments);
@@ -177,7 +189,7 @@ async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
   const enrichedData = {
     id: tweet.id,
     type: tweet.metadata.type || "unknown",
-    media: tweet.metadata.media || "unknown",
+    media: tweet.metadata.media || "", // Empty string instead of "unknown"
     domain: tweet.metadata.domain || "",
     title: tweet.metadata.title || "",
     description: tweet.metadata.description || "",

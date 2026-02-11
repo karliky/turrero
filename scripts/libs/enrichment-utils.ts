@@ -3,14 +3,14 @@
  * Reduces complexity in tweets_enrichment.ts
  */
 
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import type { Page } from 'puppeteer';
-import type { 
-    ImageMetadata, 
+import type {
+    ImageMetadata,
     TweetMetadataType,
     ScriptLogger,
     EnrichedTweetData
-} from '@/infrastructure/types/index.ts';
+} from '../../infrastructure/types/index.ts';
 
 // ============================================================================
 // CONFIGURATION
@@ -86,16 +86,22 @@ export class GoodReadsProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string, page: Page): Promise<void> {
+        // If scraper already captured domain and title, skip re-scraping
+        if (tweet.metadata.domain === 'goodreads.com' && tweet.metadata.title) {
+            tweet.metadata.media = "goodreads";
+            return;
+        }
+
         if (!page) {
             throw new Error('Page instance required for GoodReads processing');
         }
-        
+
         await Promise.all([
-            page.goto(url), 
-            page.waitForNavigation(), 
-            page.waitForSelector('h1')
+            page.goto(url),
+            page.waitForNavigation(),
+            page.waitForSelector('h1', { timeout: 30000 })
         ]);
-        
+
         const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
         tweet.metadata.media = "goodreads";
         tweet.metadata.title = title || '';

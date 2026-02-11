@@ -2,15 +2,15 @@ import {
   createScriptLogger,
   getScriptDirectory,
   runWithErrorHandling,
-} from "@/scripts/libs/common-utils.ts";
+} from "./libs/common-utils.ts";
 import {
   createDataAccess,
   getBooksFromGoodReads,
-} from "@/scripts/libs/data-access.ts";
+} from "./libs/data-access.ts";
 import type {
   BookToEnrich,
   EnrichedTweetData,
-} from "@/infrastructure/types/index.ts";
+} from "../infrastructure/types/index.ts";
 
 const scriptDir = getScriptDirectory(import.meta.url);
 const logger = createScriptLogger("generate-books");

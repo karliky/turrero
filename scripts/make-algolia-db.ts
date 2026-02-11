@@ -7,9 +7,9 @@ import {
   createScriptLogger,
   getScriptDirectory,
   runWithErrorHandling,
-} from "@/scripts/libs/common-utils.ts";
-import { createDataAccess } from "@/scripts/libs/data-access.ts";
-import type { SearchIndexEntry, Tweet } from "@/infrastructure/types/index.ts";
+} from "./libs/common-utils.ts";
+import { createDataAccess } from "./libs/data-access.ts";
+import type { SearchIndexEntry, Tweet } from "../infrastructure/types/index.ts";
 import { createCompositeId } from "../infrastructure/utils/id-utils.ts";
 
 const scriptDir = getScriptDirectory(import.meta.url);

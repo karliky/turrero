@@ -9,24 +9,28 @@ id=$1
 first_tweet_line=$2
 
 echo "Adding thread $id to turras.csv"
-npx tsx ./scripts/add-new-tweet.ts $id "$first_tweet_line"
+deno run --allow-all ./scripts/add-new-tweet.ts $id "$first_tweet_line"
 
 echo "Obtaining thread $id"
 deno run --allow-all ./scripts/recorder.ts
 # To debug:
 # deno run --allow-all ./scripts/recorder.ts --test $id
 
-echo "Enriching tweets for thread $id" 
-npx tsx ./scripts/tweets_enrichment.ts
+echo "Enriching tweets for thread $id"
+deno task enrich
+
+# Note: image-card-generator.ts doesn't exist yet, skipping image generation
+# echo "Generating metadata images for thread $id"
+# deno task images
 
 echo "Generating algolia index for thread $id"
-npx tsx ./scripts/make-algolia-db.ts
+deno task algolia
 
 echo "Generating books for thread $id"
-npx tsx ./scripts/generate-books.ts
+deno task books
 
-echo "Enriching books for thread $id" 
-npx tsx ./scripts/book-enrichment.ts
+echo "Enriching books for thread $id"
+deno task book-enrich
 
 echo "Adding thread $id to graph" 
 python ./scripts/create_graph.py 
