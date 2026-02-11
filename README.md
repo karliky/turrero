@@ -8,7 +8,7 @@ easy-to-navigate format.
 ## Features
 
 - **Clean, minimalist design** focused on thread readability
-- **Automatic embedding** of images and cards from X.com
+- **Automatic embedding** of images, cards and quoted tweets from X.com (embedded tweet IDs resolved from text when scraping misses them)
 - **Advanced search** with Algolia-powered indexing
 - **Category-based navigation** for organized thread discovery
 - **Interactive quizzes** for educational threads
@@ -159,28 +159,18 @@ tweet text.
 
 Alternatively you could use the following steps:
 
-1. `node ./scripts/add-new-tweet.js $id $first_tweet_line` to add the first
-   tweet id (thread id) and the first tweet text to ontop of the turras.csv file
-2. `deno --allow-all scripts/recorder.ts`. This will scrap it and save it into
-   tweets.json
-3. `node ./scripts/tweets_enrichment.js`
-4. `node ./scripts/image-card-generator.js`
-5. Move the `./scripts/metadata` content into `public/metadata`, you can use the
-   following command `mv -v ./metadata/* ./public/metadata/`
-6. `node ./scripts/make-algolia-db.js` then update the index in the Algolia
-   service, clear the index and fetch the `db/tweets-db.json` file
-7. `node ./scripts/generate-books.js` this will update the
-   `db/books-not-enriched.json`
-8. `node ./scripts/book-enrichment.js` this will output the list of books you
-   should use in the last prompt to get the category of books and update the
-   `db/books.json`
-9. Use the `./scripts/generate_prompts.sh` to generate the prompts to be used
-   with ChatGPT (or the LLM of your choice) and obtain the summary, categories
-   and questions to include in `db/tweets_summary.json`, `db/tweets_map.json`
-   and `db/tweets_exam.json` respectively
-10. Change manually the date on the file `components/header.js` to the latest
-    update date
-11. Verify that everything is fine by running `npm run dev` on the root folder
+1. `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"` to add the first
+   tweet id (thread id) and the first tweet text to the top of `infrastructure/db/turras.csv`
+2. `deno task scrape` — scrapes the thread and appends it to `infrastructure/db/tweets.json`
+3. `deno task enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs by matching text in tweets.json)
+4. Generate metadata images (e.g. `node scripts/image-card-generator.js` if available), then move `scripts/metadata/*` to `public/metadata/`
+5. `deno task algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
+6. `deno task books` — updates `infrastructure/db/books-not-enriched.json`
+7. `deno task book-enrich` — book enrichment; use the output in the last prompt to update `infrastructure/db/books.json`
+8. Run `./scripts/generate_prompts.sh` and use the prompts with your LLM to fill `db/tweets_summary.json`, `db/tweets_map.json`, and `db/tweets_exam.json`
+9. Update the latest date in `app/components/Header.tsx`
+10. Regenerate graph data: `python3 scripts/create_graph.py`
+11. Verify with `npm run dev`
 
 The data source that contains the x.com threads and metadata is located under
 `/infrastructure`.
@@ -192,12 +182,13 @@ manually edited.
 
 ## Debug
 
-if a single tweet fails, test to download and parse it in isolation without
-consequences by using the scrapper like this:
+To test scraping a single tweet in isolation (no changes to `tweets.json`):
 
-`node ./scripts/recorder.js --test id`
+```bash
+deno task scrape -- --test $tweet_id
+```
 
-Read the comments in it to figure out better debug.
+Check the script and logs for more debugging options.
 
 ## Claude Code Hook Setup
 
