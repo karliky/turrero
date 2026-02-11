@@ -121,7 +121,10 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
      */
     await new Promise((r) => setTimeout(r, 100));
     logger.debug("Waiting for progress bar");
-    await page.waitForSelector('div[role="progressbar"]', { hidden: true });
+    await page.waitForSelector('div[role="progressbar"]', {
+        hidden: true,
+        timeout: 30000 // 30 seconds timeout to prevent infinite waiting
+    });
 
     const urlParts = page.url().split("/").slice(-1);
     if (urlParts.length === 0 || !urlParts[0]) {
@@ -402,11 +405,39 @@ async function getAllTweets({
     outputFilePath: string;
 }): Promise<void> {
     for (const tweetId of tweetIds) {
-        await page.goto(
-            `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
-        );
+        // Check if page is still valid before continuing
+        if (page.isClosed()) {
+            logger.warn("Page is closed, stopping scraping");
+            break;
+        }
+
+        try {
+            await page.goto(
+                `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
+            );
+        } catch (error) {
+            if (error instanceof Error &&
+                (error.message.includes("detached") ||
+                 error.message.includes("Connection closed"))) {
+                logger.error("Navigation failed - page detached or connection closed:", error.message);
+                break;
+            }
+            throw error;
+        }
+
         logger.debug("Waiting for selector");
-        await page.waitForSelector('div[data-testid="tweetText"]');
+        try {
+            await page.waitForSelector('div[data-testid="tweetText"]');
+        } catch (error) {
+            if (error instanceof Error &&
+                (error.message.includes("detached") ||
+                 error.message.includes("Connection closed"))) {
+                logger.error("Wait for selector failed - page detached or connection closed:", error.message);
+                break;
+            }
+            throw error;
+        }
+
         try {
             await rejectCookies(page);
             logger.debug("Cookies rejected, closed the popup");
@@ -415,19 +446,41 @@ async function getAllTweets({
         }
 
         if (author === undefined) {
-            const tweet = await parseTweet({ page });
-            author = tweet.author;
-            logger.info("Author found: ", author);
+            try {
+                const tweet = await parseTweet({ page });
+                author = tweet.author;
+                logger.info("Author found: ", author);
+            } catch (error) {
+                if (error instanceof Error &&
+                    (error.message.includes("detached") ||
+                     error.message.includes("Connection closed"))) {
+                    logger.error("Parse tweet failed - page detached or connection closed:", error.message);
+                    break;
+                }
+                throw error;
+            }
         }
 
         let stopped = false;
         const tweets: Tweet[] = [];
 
         while (!stopped) {
-            const { tweet, mustStop } = await fetchSingleTweet({
-                page,
-                expectedAuthor: author,
-            });
+            let tweet, mustStop;
+            try {
+                ({ tweet, mustStop } = await fetchSingleTweet({
+                    page,
+                    expectedAuthor: author,
+                }));
+            } catch (error) {
+                if (error instanceof Error &&
+                    (error.message.includes("detached") ||
+                     error.message.includes("Connection closed"))) {
+                    logger.error("Fetch tweet failed - page detached or connection closed:", error.message);
+                    stopped = true;
+                    break;
+                }
+                throw error;
+            }
 
             if (mustStop) {
                 stopped = true;
@@ -481,6 +534,7 @@ async function getAllTweets({
                 await Promise.all([
                     page.waitForSelector('div[role="progressbar"]', {
                         hidden: true,
+                        timeout: 30000
                     }),
                     page.evaluate(() => {
                         return new Promise<void>((resolve, reject) => {
@@ -730,8 +784,16 @@ async function main() {
         }
     } finally {
         logger.info("¡Estaré aquí mismo!");
-        await page.close();
-        await browser.close();
+        try {
+            await page.close();
+        } catch (error) {
+            logger.debug("Page already closed or connection lost:", error);
+        }
+        try {
+            await browser.close();
+        } catch (error) {
+            logger.debug("Browser already closed or connection lost:", error);
+        }
     }
 }
 
