@@ -46,6 +46,9 @@ interface TweetMetadata {
     imgs?: Array<{ img: string; url: string }>;
     img?: string;
     url?: string;
+    domain?: string;       // Extracted from card.layoutSmall.detail (e.g., "goodreads.com", "youtube.com")
+    title?: string;        // Extracted from card.layoutSmall.detail (e.g., book title, video title)
+    description?: string;  // Extracted from card.layoutSmall.detail (snippet/preview text)
     embed?: {
         type?: string;
         id?: string;
@@ -170,10 +173,27 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             // Try multiple selectors to handle different card layouts
             const linkElement = card.querySelector("a[href]") as HTMLAnchorElement;
 
+            // Extract additional metadata from card.layoutSmall.detail if present
+            // Structure: 3 divs with spans containing: 1) domain, 2) title, 3) description
+            let domain = "";
+            let title = "";
+            let description = "";
+
+            const cardDetail = article.querySelector('div[data-testid="card.layoutSmall.detail"], div[data-testid="card.layoutLarge.detail"]');
+            if (cardDetail) {
+                const textDivs = cardDetail.querySelectorAll('div[dir="auto"]');
+                if (textDivs.length >= 1) domain = textDivs[0].textContent?.trim() || "";
+                if (textDivs.length >= 2) title = textDivs[1].textContent?.trim() || "";
+                if (textDivs.length >= 3) description = textDivs[2].textContent?.trim() || "";
+            }
+
             return {
                 type: 'card',
                 img: imgElement ? imgElement.src : "",
                 url: linkElement ? linkElement.href : "",
+                domain: domain || undefined,
+                title: title || undefined,
+                description: description || undefined,
                 imgs: undefined,
                 embed: undefined,
             } as unknown as TweetMetadata;
