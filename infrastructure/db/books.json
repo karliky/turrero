@@ -6263,5 +6263,42 @@
             "Nonfiction",
             "India"
         ]
+    },
+    {
+        "id": "1900814377407619409",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Celubrious: A Celebration of Life: A Collection of Read…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/5942201-celubrious",
+        "img": "./metadata/EQdAKcd3.jpg",
+        "turraId": "1900814275511210417",
+        "categories": []
+    },
+    {
+        "id": "1900814378439413792",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Silent Night: The Remarkable Christmas Truce of 1914",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/41491.Silent_Night?ref=nav_sb_ss_1_17",
+        "img": "./metadata/4pqR-mDH.jpg",
+        "turraId": "1900814275511210417",
+        "goodreadsCategories": [
+            "History",
+            "Nonfiction",
+            "Christmas",
+            "Mystery",
+            "World War I",
+            "War",
+            "Holiday"
+        ],
+        "categories": [
+            "History",
+            "Nonfiction",
+            "Fiction"
+        ]
     }
 ]
