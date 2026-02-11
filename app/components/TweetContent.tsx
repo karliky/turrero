@@ -190,6 +190,19 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
   };
 
   const embeddings = getEmbeddings(tweet);
+  const hasCard = embeddings.some((e) => e.type === "card");
+  const hasMedia = embeddings.some((e) => e.type === "image" || e.type === "media");
+  // Fallback: show images from raw tweet metadata when no media in enriched data
+  const fallbackImgs =
+    !hasMedia && tweet.metadata?.imgs?.length ? tweet.metadata.imgs : [];
+  // Fallback: show card (link preview) from raw metadata when no card in enriched data
+  const fallbackCard =
+    !hasCard &&
+    tweet.metadata?.type === "card" &&
+    (tweet.metadata?.url || tweet.metadata?.title)
+      ? tweet.metadata
+      : null;
+
   return (
     <div id={id}>
       <p className="text-lg leading-relaxed text-whiskey-800">
@@ -199,6 +212,67 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
         const rendered = renderEmbed(embed);
         return rendered ? <div key={`${id}-${i}`}>{rendered}</div> : null;
       })}
+      {fallbackCard && (
+        <div className="not-prose flex justify-center mt-4" data-fallback-card>
+          <a
+            href={fallbackCard.url || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="overflow-hidden rounded-lg border border-whiskey-200 hover:border-whiskey-300 transition-colors inline-block max-w-[400px] w-full bg-whiskey-50/50 p-0"
+          >
+            {fallbackCard.img && (
+              <div className="relative">
+                <Image
+                  src={fallbackCard.img.startsWith("/") || fallbackCard.img.startsWith(".")
+                    ? normalizeImagePath(fallbackCard.img)
+                    : fallbackCard.img
+                  }
+                  alt={fallbackCard.title || ""}
+                  width={400}
+                  height={266}
+                  className="h-auto grayscale hover:grayscale-0 transition-all duration-300"
+                  unoptimized={!fallbackCard.img.includes(".")}
+                />
+              </div>
+            )}
+            <div className="p-4">
+              {fallbackCard.domain && (
+                <p className="text-xs text-whiskey-500 mb-1">{fallbackCard.domain}</p>
+              )}
+              <h3 className="font-medium text-whiskey-900 text-sm">
+                {fallbackCard.title?.trim() ? fallbackCard.title : fallbackCard.url}
+              </h3>
+              {fallbackCard.description && (
+                <p className="mt-1 text-xs text-whiskey-600">{fallbackCard.description}</p>
+              )}
+            </div>
+          </a>
+        </div>
+      )}
+      {fallbackImgs.length > 0 && (
+        <div className="not-prose mt-4 max-w-[400px] mx-auto">
+          <div className="overflow-hidden rounded-lg border border-whiskey-200 hover:border-whiskey-300 transition-colors space-y-2">
+            {fallbackImgs.map((item, i) => (
+              <a
+                key={`${id}-fallback-${i}`}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Image
+                  src={item.img}
+                  alt=""
+                  width={400}
+                  height={300}
+                  className="h-auto w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-300"
+                  unoptimized={!item.img.startsWith("/") && !item.img.includes("./")}
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
