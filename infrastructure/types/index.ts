@@ -122,6 +122,8 @@ export interface EnrichedTweetMetadata {
   url?: string;
   /** Media file path */
   media?: string;
+  /** Card domain (e.g., goodreads.com, youtube.com) */
+  domain?: string;
   /** Card description */
   description?: string;
   /** Card title */

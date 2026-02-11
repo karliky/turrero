@@ -81,6 +81,9 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
                 </div>
               )}
               <div className="p-4">
+                {embed.domain && (
+                  <p className="text-xs text-whiskey-500 mb-1">{embed.domain}</p>
+                )}
                 <h3 className="font-medium text-whiskey-900 text-sm">
                   {embed.title?.trim() ? embed.title : embed.url}
                 </h3>
