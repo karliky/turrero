@@ -115,13 +115,15 @@ export interface EnrichedTweetMetadata {
   /** Tweet ID */
   id: TweetId;
   /** Type of enrichment */
-  type: 'card' | 'embed' | 'media';
+  type: 'card' | 'embed' | 'media' | 'image' | 'embeddedTweet';
   /** Image URL for cards/media */
   img?: string;
   /** External URL for cards */
   url?: string;
   /** Media file path */
   media?: string;
+  /** Card domain (e.g., goodreads.com, youtube.com) */
+  domain?: string;
   /** Card description */
   description?: string;
   /** Card title */
@@ -146,10 +148,14 @@ export interface EnrichedTweetData {
   url?: string;
   /** Media source (youtube, goodreads, etc) */
   media?: string;
+  /** Card domain (e.g., goodreads.com, youtube.com) */
+  domain?: string;
   /** Card description */
   description?: string;
   /** Card title */
   title?: string;
+  /** Embedded tweet ID (for type "embed") */
+  embeddedTweetId?: TweetId;
   /** Embedded tweet author */
   author?: string;
   /** Embedded tweet content */
@@ -709,7 +715,9 @@ export interface BookToEnrich {
   url?: string;
   image?: string;
   sourceThreadId?: string;
+  turraId?: string;
   categories?: string[];
+  goodreadsCategories?: string[];
 }
 
 /** Current book with potential enrichment data */

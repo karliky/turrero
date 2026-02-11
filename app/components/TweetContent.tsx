@@ -81,6 +81,9 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
                 </div>
               )}
               <div className="p-4">
+                {embed.domain && (
+                  <p className="text-xs text-whiskey-500 mb-1">{embed.domain}</p>
+                )}
                 <h3 className="font-medium text-whiskey-900 text-sm">
                   {embed.title?.trim() ? embed.title : embed.url}
                 </h3>
@@ -92,6 +95,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
           </div>
         );
 
+      case 'image':
       case 'media':
         const MediaImage = (
           <Image
@@ -111,10 +115,14 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
           </div>
         );
 
-      case 'embed':
+      case 'embed': {
+        const handle = getEmbeddedAuthorHandle(embed.author || '');
+        const href = embed.embeddedTweetId && embed.embeddedTweetId !== 'unknown'
+          ? `https://x.com/${handle}/status/${embed.embeddedTweetId}`
+          : `https://x.com/${handle}`;
         return (
           <a
-            href={`https://x.com/${getEmbeddedAuthorHandle(embed.author || '')}/status/${embed.embeddedTweetId}`}
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-4"
@@ -130,6 +138,10 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
             </div>
           </a>
         );
+      }
+
+      default:
+        return null;
     }
   };
 

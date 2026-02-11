@@ -121,7 +121,18 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
      */
     await new Promise((r) => setTimeout(r, 100));
     logger.debug("Waiting for progress bar");
-    await page.waitForSelector('div[role="progressbar"]', { hidden: true });
+    try {
+        await page.waitForSelector('div[role="progressbar"]', {
+            hidden: true,
+            timeout: 30000 // 30 seconds timeout to prevent infinite waiting
+        });
+    } catch (error) {
+        if (error instanceof Error &&
+            (error.message.includes("detached") || error.message.includes("Connection closed"))) {
+            throw new Error("Page detached or connection closed while waiting for progress bar");
+        }
+        throw error;
+    }
 
     const urlParts = page.url().split("/").slice(-1);
     if (urlParts.length === 0 || !urlParts[0]) {
@@ -187,8 +198,22 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                 if (textDivs.length >= 3) description = textDivs[2].textContent?.trim() || "";
             }
 
+            // Detect media type from domain
+            let media = undefined;
+            if (domain) {
+                const domainLower = domain.toLowerCase();
+                if (domainLower.includes('goodreads')) {
+                    media = 'goodreads';
+                } else if (domainLower.includes('youtube') || domainLower.includes('youtu.be')) {
+                    media = 'youtube';
+                } else if (domainLower.includes('amazon')) {
+                    media = 'amazon';
+                }
+            }
+
             return {
                 type: 'card',
+                media: media,
                 img: imgElement ? imgElement.src : "",
                 url: linkElement ? linkElement.href : "",
                 domain: domain || undefined,
@@ -255,28 +280,32 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
         if (!embedId) {
             const clickableContainer = embeddedTweetContainer.querySelector('div[role="link"][tabindex="0"]') as HTMLElement;
             if (clickableContainer) {
-                // The embed exists but ID might be in parent link or time element
-                const timeElement = embeddedTweetContainer.querySelector('time') as HTMLTimeElement;
-                if (timeElement) {
-                    // We found an embedded tweet structure, use a placeholder ID from time
-                    embedId = timeElement.dateTime; // Fallback to timestamp
-                }
+                // The embed exists but we couldn't find the ID
+                // Leave embedId empty rather than using a timestamp
+                embedId = "";
             }
         }
 
-        // Extract author name from User-Name div
+        // Extract author handle from User-Name div
+        // User-Name contains full name, @handle, ·, and date all with \n separators
+        // We need to extract ONLY the @handle
         const authorElement = embeddedTweetContainer.querySelector('div[data-testid="User-Name"]') as HTMLElement;
-        const authorText = authorElement?.innerText || "";
+        const authorFullText = authorElement?.innerText || "";
+
+        // Extract just the @handle by finding text that starts with @
+        // Format is typically: "Full Name\n@handle\n·\ndate"
+        const handleMatch = authorFullText.match(/@(\w+)/);
+        const authorHandle = handleMatch ? handleMatch[1] : ""; // Extract handle without @
 
         // Extract tweet text
         const tweetTextElement = embeddedTweetContainer.querySelector('div[data-testid="tweetText"]') as HTMLElement;
         const tweetText = tweetTextElement?.innerText || "";
 
-        // Return embed data if we have text and author, even without full ID
-        return (authorText && tweetText) ? {
+        // Return embed data if we have text and author handle, even without full ID
+        return (authorHandle && tweetText) ? {
             type: "embed",
             id: embedId || "unknown",
-            author: authorText,
+            author: authorHandle, // Use clean handle without @
             tweet: tweetText,
         } : null;
     });
@@ -402,11 +431,39 @@ async function getAllTweets({
     outputFilePath: string;
 }): Promise<void> {
     for (const tweetId of tweetIds) {
-        await page.goto(
-            `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
-        );
+        // Check if page is still valid before continuing
+        if (page.isClosed()) {
+            logger.warn("Page is closed, stopping scraping");
+            break;
+        }
+
+        try {
+            await page.goto(
+                `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
+            );
+        } catch (error) {
+            if (error instanceof Error &&
+                (error.message.includes("detached") ||
+                 error.message.includes("Connection closed"))) {
+                logger.error("Navigation failed - page detached or connection closed:", error.message);
+                break;
+            }
+            throw error;
+        }
+
         logger.debug("Waiting for selector");
-        await page.waitForSelector('div[data-testid="tweetText"]');
+        try {
+            await page.waitForSelector('div[data-testid="tweetText"]');
+        } catch (error) {
+            if (error instanceof Error &&
+                (error.message.includes("detached") ||
+                 error.message.includes("Connection closed"))) {
+                logger.error("Wait for selector failed - page detached or connection closed:", error.message);
+                break;
+            }
+            throw error;
+        }
+
         try {
             await rejectCookies(page);
             logger.debug("Cookies rejected, closed the popup");
@@ -415,19 +472,41 @@ async function getAllTweets({
         }
 
         if (author === undefined) {
-            const tweet = await parseTweet({ page });
-            author = tweet.author;
-            logger.info("Author found: ", author);
+            try {
+                const tweet = await parseTweet({ page });
+                author = tweet.author;
+                logger.info("Author found: ", author);
+            } catch (error) {
+                if (error instanceof Error &&
+                    (error.message.includes("detached") ||
+                     error.message.includes("Connection closed"))) {
+                    logger.error("Parse tweet failed - page detached or connection closed:", error.message);
+                    break;
+                }
+                throw error;
+            }
         }
 
         let stopped = false;
         const tweets: Tweet[] = [];
 
         while (!stopped) {
-            const { tweet, mustStop } = await fetchSingleTweet({
-                page,
-                expectedAuthor: author,
-            });
+            let tweet, mustStop;
+            try {
+                ({ tweet, mustStop } = await fetchSingleTweet({
+                    page,
+                    expectedAuthor: author,
+                }));
+            } catch (error) {
+                if (error instanceof Error &&
+                    (error.message.includes("detached") ||
+                     error.message.includes("Connection closed"))) {
+                    logger.error("Fetch tweet failed - page detached or connection closed:", error.message);
+                    stopped = true;
+                    break;
+                }
+                throw error;
+            }
 
             if (mustStop) {
                 stopped = true;
@@ -481,6 +560,7 @@ async function getAllTweets({
                 await Promise.all([
                     page.waitForSelector('div[role="progressbar"]', {
                         hidden: true,
+                        timeout: 30000
                     }),
                     page.evaluate(() => {
                         return new Promise<void>((resolve, reject) => {
@@ -702,6 +782,15 @@ async function main() {
                 join(__dirname, "../infrastructure/db/turras.csv"),
             );
 
+            logger.debug("Total tweets in CSV:", tweets.length);
+            const emptyIds = tweets.filter((t) => !t.id || t.id.trim() === "");
+            if (emptyIds.length > 0) {
+                logger.warn("Found tweets with empty IDs in CSV:", emptyIds.length);
+                emptyIds.forEach((tweet, index) => {
+                    logger.warn(`Empty ID tweet ${index + 1}:`, JSON.stringify(tweet, null, 2));
+                });
+            }
+
             const existingTweets = existingTweetsData.reduce(
                 (acc: string[], tweets: Tweet[]) => {
                     if (tweets && tweets.length > 0 && tweets[0]) {
@@ -714,9 +803,15 @@ async function main() {
 
             const tweetIds = tweets
                 .map((tweet) => tweet.id)
+                .filter((id) => id && id.trim() !== "") // Filter out empty IDs
                 .filter((id) => !existingTweets.includes(id));
 
             logger.info("Processing a total of tweets:", tweetIds.length);
+            if (tweetIds.length > 0) {
+                logger.info("Tweet IDs to process:", tweetIds);
+            } else {
+                logger.info("No tweets to process - all threads are up to date");
+            }
 
             await getAllTweets({
                 page,
@@ -730,8 +825,16 @@ async function main() {
         }
     } finally {
         logger.info("¡Estaré aquí mismo!");
-        await page.close();
-        await browser.close();
+        try {
+            await page.close();
+        } catch (error) {
+            logger.debug("Page already closed or connection lost:", error);
+        }
+        try {
+            await browser.close();
+        } catch (error) {
+            logger.debug("Browser already closed or connection lost:", error);
+        }
     }
 }
 

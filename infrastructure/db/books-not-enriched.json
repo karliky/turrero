@@ -2518,5 +2518,38 @@
         "media": "goodreads",
         "title": "Cómo impulsar la inteligencia colectiva",
         "turraId": "1888123731865702418"
+    },
+    {
+        "id": "1999746237570957812",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Fixer Upper Books",
+        "description": "",
+        "url": "https://www.goodreads.com/shelf/show/fixer-upper",
+        "img": "",
+        "turraId": "1999746151839338739"
+    },
+    {
+        "id": "1999746239634575835",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Savage Mind",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/782026.The_Savage_Mind",
+        "img": "./metadata/soKhvf48",
+        "turraId": "1999746151839338739"
+    },
+    {
+        "id": "1999746240548945938",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Death by Fire: Sati, Dowry Death, and Female Infanticid…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/127667.Death_by_Fire",
+        "img": "./metadata/e5XXxEU6",
+        "turraId": "1999746151839338739"
     }
 ]

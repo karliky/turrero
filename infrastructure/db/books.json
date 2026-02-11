@@ -10,6 +10,10 @@
         "categories": [
             "Business",
             "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Personal Development"
         ]
     },
     {
@@ -21,6 +25,11 @@
         "title": "Mediocracia: Cuando los mediocres toman el poder",
         "turraId": "1610940502609723393",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Politics",
             "Philosophy",
             "Nonfiction",
@@ -39,6 +48,13 @@
         "title": "Crucial Conversations: Tools for Talking When Stakes are High",
         "turraId": "1604019306349592577",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Leadership",
@@ -60,6 +76,12 @@
             "Nonfiction",
             "Psychology",
             "Self Help",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Self Help",
             "Philosophy",
             "Politics",
             "Communication",
@@ -75,6 +97,12 @@
         "title": "Homo Ludens: A Study of the Play Element in Culture",
         "turraId": "1601483220029161473",
         "categories": [
+            "Nonfiction",
+            "History",
+            "Games",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Nonfiction",
             "History",
@@ -96,6 +124,12 @@
             "Nonfiction",
             "History",
             "Technology",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "History",
+            "Technology",
             "Computer Science",
             "Computers",
             "Science",
@@ -111,6 +145,11 @@
         "title": "Kill All Normies: Online Culture Wars from 4chan and Tumblr to Trump and the Alt-Right",
         "turraId": "1598965646620086272",
         "categories": [
+            "Nonfiction",
+            "History",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Politics",
             "Sociology",
@@ -129,6 +168,11 @@
         "title": "Conformity: The Power of Social Influences",
         "turraId": "1598965646620086272",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Sociology",
             "Nonfiction",
@@ -151,6 +195,13 @@
             "Nonfiction",
             "Science",
             "Self Help",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Self Help",
             "Sociology",
             "History",
             "Politics"
@@ -165,6 +216,10 @@
         "title": "Hello, I'm Special: How Individuality Became the New Conformity",
         "turraId": "1598965646620086272",
         "categories": [
+            "Nonfiction",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Sociology",
             "Cultural",
@@ -182,6 +237,11 @@
         "categories": [
             "Business",
             "Psychology",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Psychology",
             "Classics",
             "Nonfiction"
         ]
@@ -195,6 +255,13 @@
         "title": "Managing the Unexpected: Resilient Performance in an Age of Uncertainty",
         "turraId": "1596391703774367744",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Management",
@@ -217,6 +284,13 @@
             "Nonfiction",
             "Self Help",
             "Business",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Self Help",
+            "Business",
             "Philosophy",
             "Personal Development",
             "Productivity"
@@ -234,6 +308,11 @@
             "Nonfiction",
             "Psychology",
             "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Science"
         ]
     },
     {
@@ -245,6 +324,14 @@
         "title": "Do Nothing: How to Break Away from Overworking, Overdoing, and Underliving",
         "turraId": "1596391703774367744",
         "categories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development",
+            "Business",
+            "Health"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Self Help",
             "Psychology",
@@ -265,6 +352,11 @@
         "categories": [
             "Biography",
             "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Biography",
+            "Nonfiction",
             "Art",
             "Poetry",
             "History",
@@ -282,6 +374,10 @@
         "turraId": "1593870067128627200",
         "categories": [
             "Business",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Business",
             "Entrepreneurship",
             "Nonfiction",
             "Management"
@@ -296,6 +392,9 @@
         "title": "Fearful Symmetry: A Study of William Blake",
         "turraId": "1593870067128627200",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Poetry",
             "Literary Criticism",
             "Nonfiction",
@@ -314,6 +413,13 @@
         "title": "Black Box Thinking: Why Some People Never Learn from Their Mistakes - But Some Do",
         "turraId": "1591345649848487936",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Business",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "Business",
@@ -337,6 +443,14 @@
             "Self Help",
             "Personal Development",
             "Education",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development",
+            "Education",
             "Business",
             "Productivity"
         ]
@@ -350,6 +464,11 @@
         "title": "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail",
         "turraId": "1586258861190676482",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Entrepreneurship",
@@ -371,6 +490,13 @@
             "Nonfiction",
             "Self Help",
             "Psychology",
+            "Health",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
             "Mental Health",
             "Health",
             "Audiobook",
@@ -386,6 +512,13 @@
         "title": "Trying Not to Try: The Art and Science of Spontaneity",
         "turraId": "1583704982129643520",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Self Help",
+            "Science",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Nonfiction",
             "Psychology",
@@ -408,6 +541,14 @@
             "Nonfiction",
             "Science",
             "Self Help",
+            "Business",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Self Help",
             "Sociology",
             "Business",
             "Personal Development"
@@ -422,6 +563,11 @@
         "title": "Understanding Media: The Extensions of Man",
         "turraId": "1576087451524907008",
         "categories": [
+            "Nonfiction",
+            "Technology",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Philosophy",
             "Sociology",
@@ -441,6 +587,9 @@
         "turraId": "1576087451524907008",
         "categories": [
             "Biography"
+        ],
+        "goodreadsCategories": [
+            "Biography"
         ]
     },
     {
@@ -452,6 +601,12 @@
         "title": "Wooden on Leadership: How to Create a Winning Organization",
         "turraId": "1573548479888105473",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Leadership",
             "Business",
             "Sports",
@@ -470,6 +625,11 @@
         "title": "Metaphysics: A Very Short Introduction",
         "turraId": "1571042180965498881",
         "categories": [
+            "Nonfiction",
+            "Science",
+            "Education"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Nonfiction",
             "Metaphysics",
@@ -488,6 +648,12 @@
         "title": "Primates: The Fearless Science of Jane Goodall, Dian Fossey, and Biruté Galdikas",
         "turraId": "1568482191230787585",
         "categories": [
+            "Fiction",
+            "Nonfiction",
+            "Science",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Graphic Novels",
             "Nonfiction",
             "Science",
@@ -509,6 +675,12 @@
             "Science",
             "Nonfiction",
             "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Science",
+            "Nonfiction",
+            "Psychology",
             "Anthropology",
             "Evolution",
             "Biology",
@@ -527,6 +699,11 @@
             "Business",
             "Economics",
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Economics",
+            "Nonfiction"
         ]
     },
     {
@@ -538,6 +715,13 @@
         "title": "Loonshots: How to Nurture the Crazy Ideas That Win Wars, Cure Diseases, and Transform Industries",
         "turraId": "1550748648845238272",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Science",
+            "Psychology",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Leadership",
@@ -559,6 +743,12 @@
             "Psychology",
             "Nonfiction",
             "Self Help",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Self Help",
             "Science",
             "Social Science",
             "Philosophy",
@@ -574,6 +764,11 @@
         "title": "The Sorites Principle: How to harness the power of perseverance",
         "turraId": "1543107844043673600",
         "categories": [
+            "Business",
+            "Personal Development",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Productivity",
             "Nonfiction"
         ]
@@ -587,6 +782,12 @@
         "title": "Demonic Males: Apes and the Origins of Human Violence",
         "turraId": "1538038532874420225",
         "categories": [
+            "Science",
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Science",
             "Nonfiction",
             "Psychology",
@@ -606,6 +807,10 @@
         "turraId": "1538038532874420225",
         "categories": [
             "History",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "History",
             "Religion",
             "Nonfiction",
             "Politics",
@@ -623,6 +828,11 @@
         "title": "The Great Leveler: Violence and the History of Inequality from the Stone Age to the Twenty-First Century",
         "turraId": "1538038532874420225",
         "categories": [
+            "History",
+            "Economics",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "History",
             "Economics",
             "Nonfiction",
@@ -644,6 +854,12 @@
             "Business",
             "Nonfiction",
             "History",
+            "Economics"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "History",
             "Economics",
             "Management",
             "Finance",
@@ -659,6 +875,9 @@
         "title": "The Spiral of Silence: Public Opinion--Our Social Skin",
         "turraId": "1535521789585117185",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Politics",
             "Nonfiction",
             "Philosophy",
@@ -677,6 +896,9 @@
         "title": "Social Pathology: A Systematic Approach To The Theory Of Sociopathic Behavior",
         "turraId": "1535521789585117185",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Sociology"
         ]
     },
@@ -689,6 +911,11 @@
         "title": "Outsiders",
         "turraId": "1535521789585117185",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Education"
+        ],
+        "goodreadsCategories": [
             "Sociology",
             "Nonfiction",
             "Psychology",
@@ -707,6 +934,10 @@
         "title": "On Writing: A Memoir of the Craft",
         "turraId": "1532990633580929025",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Writing",
             "Memoir",
@@ -727,6 +958,10 @@
         "categories": [
             "Nonfiction",
             "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Science"
         ]
     },
     {
@@ -738,6 +973,11 @@
         "title": "The Human Brand",
         "turraId": "1527905242376962054",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Psychology"
@@ -754,6 +994,10 @@
         "categories": [
             "Business",
             "Technology"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Technology"
         ]
     },
     {
@@ -765,6 +1009,10 @@
         "title": "The One to One Future",
         "turraId": "1525356646448381952",
         "categories": [
+            "Business",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Entrepreneurship",
             "Nonfiction",
@@ -780,6 +1028,10 @@
         "title": "The Elephant in the Room: Silence and Denial in Everyday Life",
         "turraId": "1522830977088819203",
         "categories": [
+            "Nonfiction",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Sociology",
             "Psychology",
             "Nonfiction",
@@ -796,6 +1048,13 @@
         "title": "Bayesian Statistics the Fun Way: Understanding Statistics and Probability with Star Wars, Lego, and Rubber Ducks",
         "turraId": "1520307318931570688",
         "categories": [
+            "Science",
+            "Nonfiction",
+            "Technology",
+            "Business",
+            "Artificial Intelligence"
+        ],
+        "goodreadsCategories": [
             "Mathematics",
             "Science",
             "Nonfiction",
@@ -818,6 +1077,14 @@
             "Nonfiction",
             "Psychology",
             "Personal Development",
+            "Health",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Self Help",
+            "Nonfiction",
+            "Psychology",
+            "Personal Development",
             "Communication",
             "Mental Health",
             "Leadership"
@@ -832,6 +1099,12 @@
         "title": "The Assertiveness Guide for Women: How to Communicate Your Needs, Set Healthy Boundaries, and Transform Your Relationships",
         "turraId": "1517738336210894850",
         "categories": [
+            "Self Help",
+            "Nonfiction",
+            "Psychology",
+            "Health"
+        ],
+        "goodreadsCategories": [
             "Self Help",
             "Nonfiction",
             "Psychology",
@@ -850,6 +1123,12 @@
         "title": "Dublinés",
         "turraId": "1515034112725241860",
         "categories": [
+            "Fiction",
+            "Biography",
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Graphic Novels",
             "Biography",
             "Nonfiction",
@@ -870,6 +1149,10 @@
         "categories": [
             "Psychology",
             "Education"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Education"
         ]
     },
     {
@@ -881,6 +1164,10 @@
         "title": "Virtual Cities: An Atlas and Exploration of Video Game Cities",
         "turraId": "1510161914772471813",
         "categories": [
+            "Games",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Video Games",
             "Nonfiction",
             "Art",
@@ -901,6 +1188,12 @@
         "categories": [
             "Nonfiction",
             "Biography",
+            "Business",
+            "Health"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Biography",
             "Memoir",
             "Business",
             "Biography Memoir",
@@ -917,6 +1210,13 @@
         "title": "Losing Our Minds: The Challenge of Defining Mental Illness",
         "turraId": "1505081147595833345",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Health",
+            "Science",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Mental Health",
@@ -936,6 +1236,12 @@
         "turraId": "1505081147595833345",
         "categories": [
             "Nonfiction",
+            "History",
+            "Biography",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
             "True Crime",
             "History",
             "Biography",
@@ -953,6 +1259,10 @@
         "title": "A Team of Leaders: Empowering Every Member to Take Ownership, Demonstrate Initiative, and Deliver Results",
         "turraId": "1500015623090360324",
         "categories": [
+            "Business",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Leadership",
             "Business",
             "Management",
@@ -968,6 +1278,13 @@
         "title": "Tribal Leadership: Leveraging Natural Groups to Build a Thriving Organization",
         "turraId": "1497479266354794497",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Psychology",
+            "Personal Development",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Leadership",
             "Nonfiction",
@@ -986,6 +1303,11 @@
         "title": "Cultish: The Language of Fanaticism",
         "turraId": "1487312375351029760",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Audiobook",
             "Psychology",
@@ -1007,6 +1329,11 @@
             "Business",
             "Nonfiction",
             "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Psychology"
         ]
     },
     {
@@ -1018,6 +1345,13 @@
         "title": "Daring Greatly: How the Courage to Be Vulnerable Transforms the Way We Live, Love, Parent, and Lead",
         "turraId": "1484786680439746562",
         "categories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Self Help",
             "Psychology",
@@ -1036,6 +1370,10 @@
         "title": "Confess: The Autobiography",
         "turraId": "1479732314791886850",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Music",
             "Nonfiction",
             "Biography",
@@ -1058,6 +1396,12 @@
             "Nonfiction",
             "Technology",
             "Biography"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Technology",
+            "Biography"
         ]
     },
     {
@@ -1071,6 +1415,10 @@
         "categories": [
             "Biography",
             "Games"
+        ],
+        "goodreadsCategories": [
+            "Biography",
+            "Games"
         ]
     },
     {
@@ -1082,6 +1430,11 @@
         "title": "Aha! Insight",
         "turraId": "1469583058563121153",
         "categories": [
+            "Science",
+            "Nonfiction",
+            "Games"
+        ],
+        "goodreadsCategories": [
             "Mathematics",
             "Science",
             "Nonfiction",
@@ -1100,6 +1453,9 @@
         "title": "Ingenuity in Mathematics",
         "turraId": "1469583058563121153",
         "categories": [
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Mathematics"
         ]
     },
@@ -1112,6 +1468,13 @@
         "title": "Game Over, Press Start to Continue: How Nintendo Conquered the World",
         "turraId": "1461944993900380165",
         "categories": [
+            "Nonfiction",
+            "Games",
+            "History",
+            "Business",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Video Games",
             "History",
@@ -1134,6 +1497,13 @@
             "Nonfiction",
             "History",
             "Economics",
+            "Biography"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "History",
+            "Economics",
             "Biography",
             "Management",
             "Leadership"
@@ -1148,6 +1518,13 @@
         "title": "The Smartest Guys in the Room: The Amazing Rise and Scandalous Fall of Enron",
         "turraId": "1456867302494834690",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
+            "History",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Finance",
@@ -1170,6 +1547,12 @@
             "Nonfiction",
             "Technology",
             "History"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Technology",
+            "History"
         ]
     },
     {
@@ -1181,6 +1564,10 @@
         "title": "Denial: Why Business Leaders Fail to Look Facts in the Face---And What to Do about It",
         "turraId": "1456867302494834690",
         "categories": [
+            "Business",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Leadership",
             "Management",
@@ -1196,6 +1583,13 @@
         "title": "Winning",
         "turraId": "1456867302494834690",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Biography",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Leadership",
             "Management",
@@ -1215,6 +1609,12 @@
         "turraId": "1456867302494834690",
         "categories": [
             "Economics",
+            "Education",
+            "Nonfiction",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Economics",
             "Textbooks",
             "Reference",
             "Business"
@@ -1229,6 +1629,12 @@
         "title": "Superfuel: Thorium, the Green Energy Source for the Future",
         "turraId": "1451786307403927553",
         "categories": [
+            "Science",
+            "Nonfiction",
+            "Technology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Science",
             "Nonfiction",
             "Physics",
@@ -1249,6 +1655,13 @@
         "categories": [
             "Economics",
             "Nonfiction",
+            "Business",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Economics",
+            "Nonfiction",
             "Finance",
             "Business",
             "Psychology",
@@ -1265,6 +1678,10 @@
         "title": "Good Strategy Bad Strategy: The Difference and Why It Matters",
         "turraId": "1449265748019453954",
         "categories": [
+            "Business",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Leadership",
@@ -1286,6 +1703,12 @@
             "Business",
             "Nonfiction",
             "Economics",
+            "Biography"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
             "Buisness",
             "Finance",
             "Management",
@@ -1301,6 +1724,12 @@
         "title": "Primates: The Fearless Science of Jane Goodall, Dian Fossey, and Biruté Galdikas",
         "turraId": "1446745515501264896",
         "categories": [
+            "Fiction",
+            "Nonfiction",
+            "Science",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Graphic Novels",
             "Nonfiction",
             "Science",
@@ -1319,6 +1748,13 @@
         "title": "Doing Good Better: How Effective Altruism Can Help You Make a Difference",
         "turraId": "1446745515501264896",
         "categories": [
+            "Nonfiction",
+            "Economics",
+            "Self Help",
+            "Business",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Philosophy",
             "Economics",
@@ -1339,6 +1775,11 @@
         "categories": [
             "History",
             "Nonfiction",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
+            "History",
+            "Nonfiction",
             "Ireland",
             "Historical",
             "Irish Literature",
@@ -1355,6 +1796,10 @@
         "title": "Furious George: My Forty Years Surviving NBA Divas, Clueless GMs, and Poor Shot Selection",
         "turraId": "1439130053267316738",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Sports",
             "Basketball",
             "Nonfiction",
@@ -1371,6 +1816,13 @@
         "title": "The No Asshole Rule: Building a Civilized Workplace and Surviving One That Isn't",
         "turraId": "1436601048978890753",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Leadership",
@@ -1390,6 +1842,11 @@
         "turraId": "1434087755198386177",
         "categories": [
             "Business",
+            "Nonfiction",
+            "Economics"
+        ],
+        "goodreadsCategories": [
+            "Business",
             "Management",
             "Nonfiction",
             "Philosophy",
@@ -1407,6 +1864,12 @@
         "title": "Videogames: In The Beginning",
         "turraId": "1411191931669987332",
         "categories": [
+            "Games",
+            "History",
+            "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Games",
             "Video Games",
             "Game Design",
@@ -1427,6 +1890,11 @@
         "categories": [
             "Science",
             "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Science",
+            "Nonfiction",
             "Food",
             "History",
             "Audiobook",
@@ -1444,6 +1912,10 @@
         "turraId": "1406126552463470593",
         "categories": [
             "Biography",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Biography",
             "Music",
             "Nonfiction"
         ]
@@ -1457,6 +1929,13 @@
         "title": "The War of Art: Winning the Inner Creative Battle",
         "turraId": "1403645471596453888",
         "categories": [
+            "Nonfiction",
+            "Self Help",
+            "Business",
+            "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Writing",
             "Self Help",
@@ -1477,6 +1956,10 @@
         "categories": [
             "Business",
             "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Personal Development"
         ]
     },
     {
@@ -1488,6 +1971,11 @@
         "title": "Managing With Power: Politics and Influence in Organizations",
         "turraId": "1403645471596453888",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Management",
             "Leadership",
@@ -1508,6 +1996,11 @@
         "categories": [
             "Biography",
             "Nonfiction",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Biography",
+            "Nonfiction",
             "Autobiography",
             "Memoir",
             "Audiobook",
@@ -1525,6 +2018,9 @@
         "turraId": "1398571638170529792",
         "categories": [
             "Technology"
+        ],
+        "goodreadsCategories": [
+            "Technology"
         ]
     },
     {
@@ -1536,6 +2032,13 @@
         "title": "The Elephant in the Brain: Hidden Motives in Everyday Life",
         "turraId": "1393482549306044416",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Self Help",
+            "Economics"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Science",
@@ -1557,6 +2060,12 @@
             "Psychology",
             "Nonfiction",
             "Science",
+            "Health"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
             "Neuroscience",
             "Brain",
             "Biology",
@@ -1572,6 +2081,11 @@
         "title": "The Righteous Mind: Why Good People Are Divided by Politics and Religion",
         "turraId": "1390935441591967746",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "Philosophy",
@@ -1590,6 +2104,9 @@
         "title": "In Defense of Nuance",
         "turraId": "1390935441591967746",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Philosophy"
         ]
     },
@@ -1602,6 +2119,14 @@
         "title": "Everything is Obvious: Once You Know the Answer",
         "turraId": "1388377995233071106",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Science",
+            "Business",
+            "Economics",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "Science",
@@ -1620,6 +2145,9 @@
         "title": "Éxito para perdedores",
         "turraId": "1388377995233071106",
         "categories": [
+            "Fiction"
+        ],
+        "goodreadsCategories": [
             "Graphic Novels",
             "Comics",
             "Graphic Novels Comics",
@@ -1636,6 +2164,9 @@
         "turraId": "1388377995233071106",
         "categories": [
             "History"
+        ],
+        "goodreadsCategories": [
+            "History"
         ]
     },
     {
@@ -1647,6 +2178,13 @@
         "title": "The Wisdom of Psychopaths: What Saints, Spies, and Serial Killers Can Teach Us About Success",
         "turraId": "1388377995233071106",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Self Help",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Science",
@@ -1665,6 +2203,11 @@
         "title": "Why Everyone (Else) Is a Hypocrite: Evolution and the Modular Mind",
         "turraId": "1388377995233071106",
         "categories": [
+            "Psychology",
+            "Science",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Science",
             "Nonfiction",
@@ -1686,6 +2229,11 @@
             "Economics",
             "Technology",
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Economics",
+            "Technology",
+            "Nonfiction"
         ]
     },
     {
@@ -1697,6 +2245,14 @@
         "title": "The Entrepreneurial State: Debunking Public vs. Private Sector Myths",
         "turraId": "1380770207384408065",
         "categories": [
+            "Economics",
+            "Nonfiction",
+            "Business",
+            "History",
+            "Technology",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Economics",
             "Politics",
             "Nonfiction",
@@ -1717,6 +2273,11 @@
         "categories": [
             "Economics",
             "Nonfiction",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Economics",
+            "Nonfiction",
             "Politics",
             "Business",
             "Sustainability",
@@ -1733,6 +2294,12 @@
         "title": "On Strategy: A Critical Analysis of the Vietnam War",
         "turraId": "1375697328561078276",
         "categories": [
+            "History",
+            "Fiction",
+            "Nonfiction",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "History",
             "Military History",
             "Military Fiction",
@@ -1751,6 +2318,11 @@
         "turraId": "1375697328561078276",
         "categories": [
             "History",
+            "Nonfiction",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
+            "History",
             "Philosophy",
             "Nonfiction",
             "War",
@@ -1768,6 +2340,12 @@
         "title": "Superfuel: Thorium, the Green Energy Source for the Future",
         "turraId": "1373170914226008064",
         "categories": [
+            "Science",
+            "Nonfiction",
+            "Technology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Science",
             "Nonfiction",
             "Physics",
@@ -1790,6 +2368,13 @@
             "Nonfiction",
             "Science",
             "Economics",
+            "Technology"
+        ],
+        "goodreadsCategories": [
+            "History",
+            "Nonfiction",
+            "Science",
+            "Economics",
             "Technology",
             "Environment",
             "Politics"
@@ -1804,6 +2389,11 @@
         "title": "What We Need to Do Now: For a Zero Carbon Future",
         "turraId": "1373170914226008064",
         "categories": [
+            "Nonfiction",
+            "Science",
+            "Economics"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Environment",
             "Science",
@@ -1829,6 +2419,15 @@
             "Economics",
             "Business",
             "History"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Biography",
+            "Science",
+            "Economics",
+            "Business",
+            "History"
         ]
     },
     {
@@ -1842,6 +2441,10 @@
         "categories": [
             "Business",
             "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Psychology"
         ]
     },
     {
@@ -1853,6 +2456,12 @@
         "title": "The Signals Are Talking: Why Today’s Fringe Is Tomorrow’s Mainstream",
         "turraId": "1368127688343490560",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Technology",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Technology",
@@ -1873,6 +2482,10 @@
         "categories": [
             "Science",
             "Business"
+        ],
+        "goodreadsCategories": [
+            "Science",
+            "Business"
         ]
     },
     {
@@ -1886,6 +2499,10 @@
         "categories": [
             "Nonfiction",
             "Technology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Technology"
         ]
     },
     {
@@ -1897,6 +2514,13 @@
         "title": "The Strategy Paradox: Why committing to success leads to failure",
         "turraId": "1368127688343490560",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Psychology",
+            "History",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Management",
@@ -1916,6 +2540,10 @@
         "turraId": "1368127688343490560",
         "categories": [
             "Economics",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Economics",
             "Politics",
             "Nonfiction"
         ]
@@ -1929,6 +2557,12 @@
         "title": "Black-And-White Thinking: The Burden of a Binary Brain in a Complex World",
         "turraId": "1365564279232028681",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Health"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Science",
@@ -1949,6 +2583,10 @@
         "categories": [
             "Nonfiction",
             "Business"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Business"
         ]
     },
     {
@@ -1960,6 +2598,10 @@
         "title": "Utopía: Tecnofuturos 2020",
         "turraId": "1363049095003316224",
         "categories": [
+            "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Futurism"
         ]
     },
@@ -1972,6 +2614,12 @@
         "title": "The Demographic Cliff: How to Survive and Prosper During the Great Deflation of 2014-2019",
         "turraId": "1357937382318886913",
         "categories": [
+            "Economics",
+            "Business",
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Economics",
             "Business",
             "Finance",
@@ -1992,6 +2640,12 @@
         "categories": [
             "Nonfiction",
             "Science",
+            "Economics",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Science",
             "Politics",
             "Sociology",
             "Economics",
@@ -2008,6 +2662,10 @@
         "title": "Red: My Uncensored Life in Rock",
         "turraId": "1350359247209553920",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Music",
             "Biography",
             "Nonfiction",
@@ -2026,6 +2684,10 @@
         "title": "No Regrets: A Rock 'n' Roll Memoir",
         "turraId": "1350359247209553920",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Music",
             "Biography",
             "Nonfiction",
@@ -2049,6 +2711,14 @@
             "Business",
             "Biography",
             "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Business",
+            "Biography",
+            "Personal Development",
             "Psychology",
             "Humor"
         ]
@@ -2062,6 +2732,10 @@
         "title": "Blitzed: Drugs in Nazi Germany",
         "turraId": "1347795536435404800",
         "categories": [
+            "History",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "History",
             "Nonfiction",
             "War",
@@ -2082,6 +2756,10 @@
         "categories": [
             "History",
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "History",
+            "Nonfiction"
         ]
     },
     {
@@ -2093,6 +2771,13 @@
         "title": "Influence: The Psychology of Persuasion",
         "turraId": "1342767594697191424",
         "categories": [
+            "Psychology",
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Business",
             "Nonfiction",
@@ -2111,6 +2796,12 @@
         "title": "Models. Behaving. Badly.: Why Confusing Illusion with Reality Can Lead to Disaster, on Wall Street and in Life",
         "turraId": "1342767594697191424",
         "categories": [
+            "Economics",
+            "Nonfiction",
+            "Science",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Finance",
             "Economics",
             "Nonfiction",
@@ -2129,6 +2820,9 @@
         "title": "Business Anthropology",
         "turraId": "1340160478316785666",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Anthropology"
         ]
     },
@@ -2141,6 +2835,12 @@
         "title": "Business Adventures",
         "turraId": "1340160478316785666",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Finance",
@@ -2159,6 +2859,12 @@
         "title": "The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power",
         "turraId": "1340160478316785666",
         "categories": [
+            "Nonfiction",
+            "Economics",
+            "Technology",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Politics",
             "Economics",
@@ -2182,6 +2888,14 @@
             "Business",
             "Biography",
             "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Business",
+            "Biography",
+            "Personal Development",
             "Psychology",
             "Humor"
         ]
@@ -2195,6 +2909,11 @@
         "title": "The Toyota Way to Lean Leadership: Achieving and Sustaining Excellence Through Leadership Development",
         "turraId": "1330075571116777474",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Leadership",
             "Nonfiction",
@@ -2217,6 +2936,13 @@
             "History",
             "Business",
             "Economics",
+            "Technology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "History",
+            "Business",
+            "Economics",
             "Politics",
             "Technology",
             "Sociology"
@@ -2231,6 +2957,11 @@
         "title": "The Innovator's Dilemma: The Revolutionary Book that Will Change the Way You Do Business",
         "turraId": "1330075571116777474",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Entrepreneurship",
@@ -2252,6 +2983,13 @@
             "Nonfiction",
             "Business",
             "Science",
+            "Psychology",
+            "Economics"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Business",
+            "Science",
             "Design",
             "Psychology",
             "Philosophy",
@@ -2267,6 +3005,11 @@
         "title": "Runnin' with the Devil: A Backstage Pass to the Wild Times, Loud Rock, and the Down and Dirty Truth Behind the Making of Van Halen",
         "turraId": "1317382505880866816",
         "categories": [
+            "Nonfiction",
+            "Biography",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Music",
             "Nonfiction",
             "Biography",
@@ -2285,6 +3028,10 @@
         "title": "Utopía: Tecnofuturos 2020",
         "turraId": "1619227404794306560",
         "categories": [
+            "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Futurism"
         ]
     },
@@ -2297,6 +3044,12 @@
         "title": "Teaming: How Organizations Learn, Innovate, and Compete in the Knowledge Economy",
         "turraId": "1616684654269980673",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Psychology",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Leadership",
             "Business",
             "Nonfiction",
@@ -2315,6 +3068,11 @@
         "title": "Conformity: The Power of Social Influences",
         "turraId": "1616684654269980673",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Sociology",
             "Nonfiction",
@@ -2337,6 +3095,13 @@
             "Nonfiction",
             "Science",
             "Business",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Business",
             "Self Help",
             "Sociology",
             "Audiobook"
@@ -2351,6 +3116,11 @@
         "title": "Cynical Theories: How Activist Scholarship Made Everything about Race, Gender, and Identity—and Why This Harms Everybody",
         "turraId": "1347795536435404800",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Politics",
             "Philosophy",
@@ -2369,6 +3139,9 @@
         "title": "Decoding Leadership Bullshit",
         "turraId": "1621752572087345152",
         "categories": [
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Leadership"
         ]
     },
@@ -2381,6 +3154,13 @@
         "title": "Skin in the Game: The Hidden Asymmetries in Daily Life",
         "turraId": "1621752572087345152",
         "categories": [
+            "Nonfiction",
+            "Business",
+            "Economics",
+            "Psychology",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Philosophy",
             "Business",
@@ -2402,6 +3182,12 @@
             "Psychology",
             "Nonfiction",
             "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Self Help",
             "Philosophy",
             "Relationships",
             "Personal Development",
@@ -2417,6 +3203,10 @@
         "title": "The Perils of \"Privilege\": Why Injustice Can't Be Solved by Accusing Others of Advantage",
         "turraId": "1624309145032597504",
         "categories": [
+            "Nonfiction",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Politics",
             "Social Justice",
@@ -2437,6 +3227,12 @@
         "categories": [
             "Nonfiction",
             "Biography",
+            "Self Help",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Biography",
             "Memoir",
             "Audiobook",
             "Self Help",
@@ -2453,6 +3249,9 @@
         "title": "Entitled: How Male Privilege Hurts Women",
         "turraId": "1624309145032597504",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Feminism",
             "Philosophy",
@@ -2472,6 +3271,12 @@
         "turraId": "1624309145032597504",
         "categories": [
             "Nonfiction",
+            "Biography",
+            "Business",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
             "Memoir",
             "Biography",
             "Business",
@@ -2489,6 +3294,12 @@
         "title": "Artificial Intelligence: A Modern Approach",
         "turraId": "1626829061723983872",
         "categories": [
+            "Technology",
+            "Artificial Intelligence",
+            "Science",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Computer Science",
             "Artificial Intelligence",
             "Science",
@@ -2507,6 +3318,12 @@
         "title": "Deep Learning",
         "turraId": "1626829061723983872",
         "categories": [
+            "Artificial Intelligence",
+            "Technology",
+            "Science",
+            "Education"
+        ],
+        "goodreadsCategories": [
             "Artificial Intelligence",
             "Computer Science",
             "Science",
@@ -2529,6 +3346,13 @@
             "Science",
             "Artificial Intelligence",
             "Technology",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Science",
+            "Artificial Intelligence",
+            "Technology",
             "Computer Science",
             "Business",
             "Programming"
@@ -2543,6 +3367,12 @@
         "title": "The Creativity Code: How AI Is Learning to Write, Paint and Think",
         "turraId": "1626829061723983872",
         "categories": [
+            "Science",
+            "Nonfiction",
+            "Technology",
+            "Artificial Intelligence"
+        ],
+        "goodreadsCategories": [
             "Science",
             "Nonfiction",
             "Technology",
@@ -2565,6 +3395,13 @@
             "Economics",
             "Business",
             "Science",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Economics",
+            "Business",
+            "Science",
             "Psychology",
             "Sociology",
             "Finance"
@@ -2579,6 +3416,12 @@
         "title": "Behavior Modification: What It Is and How to Do It",
         "turraId": "1649673649866113024",
         "categories": [
+            "Psychology",
+            "Education",
+            "Nonfiction",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Textbooks",
             "School",
@@ -2595,6 +3438,14 @@
         "title": "Tiny Habits: The Small Changes That Change Everything",
         "turraId": "1649673649866113024",
         "categories": [
+            "Self Help",
+            "Nonfiction",
+            "Psychology",
+            "Personal Development",
+            "Business",
+            "Health"
+        ],
+        "goodreadsCategories": [
             "Self Help",
             "Nonfiction",
             "Psychology",
@@ -2617,6 +3468,12 @@
             "Self Help",
             "Nonfiction",
             "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Self Help",
+            "Nonfiction",
+            "Personal Development"
         ]
     },
     {
@@ -2628,6 +3485,13 @@
         "title": "The Secret Thoughts of Successful Women",
         "turraId": "1647132462982524929",
         "categories": [
+            "Nonfiction",
+            "Self Help",
+            "Business",
+            "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Self Help",
             "Business",
@@ -2650,6 +3514,15 @@
             "Self Help",
             "Psychology",
             "Personal Development",
+            "Health",
+            "Business",
+            "Education"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development",
             "Mental Health",
             "Business",
             "Education"
@@ -2667,6 +3540,12 @@
             "Business",
             "Nonfiction",
             "Economics",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
             "Psychology",
             "Management"
         ]
@@ -2680,6 +3559,11 @@
         "title": "The Monkey's Paw",
         "turraId": "1642053681766883330",
         "categories": [
+            "Fiction",
+            "Nonfiction",
+            "Education"
+        ],
+        "goodreadsCategories": [
             "Horror",
             "Short Stories",
             "Classics",
@@ -2699,6 +3583,10 @@
         "turraId": "1642053681766883330",
         "categories": [
             "Biography",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Biography",
             "Art"
         ]
     },
@@ -2712,6 +3600,10 @@
         "turraId": "1642053681766883330",
         "categories": [
             "Biography",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Biography",
             "Art"
         ]
     },
@@ -2724,6 +3616,12 @@
         "title": "Rebels Against the Future: The Luddites and Their War on the Industrial Revolution: Lessons for the Computer Age",
         "turraId": "1639529423274913794",
         "categories": [
+            "History",
+            "Nonfiction",
+            "Technology",
+            "Education"
+        ],
+        "goodreadsCategories": [
             "History",
             "Nonfiction",
             "Technology",
@@ -2744,6 +3642,12 @@
         "categories": [
             "Business",
             "Nonfiction",
+            "Self Help",
+            "Economics"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
             "Entrepreneurship",
             "Self Help",
             "Economics",
@@ -2760,6 +3664,11 @@
         "title": "Bullshit Jobs: A Theory",
         "turraId": "1639529423274913794",
         "categories": [
+            "Nonfiction",
+            "Economics",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Economics",
             "Politics",
@@ -2783,6 +3692,14 @@
             "Business",
             "Biography",
             "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Business",
+            "Biography",
+            "Personal Development",
             "Psychology",
             "Humor"
         ]
@@ -2796,6 +3713,13 @@
         "title": "Loonshots: How to Nurture the Crazy Ideas That Win Wars, Cure Diseases, and Transform Industries",
         "turraId": "1634418954511822848",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Science",
+            "Psychology",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Leadership",
@@ -2815,6 +3739,10 @@
         "turraId": "1634418954511822848",
         "categories": [
             "Nonfiction",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
             "Science",
             "Climate Change",
             "Environment",
@@ -2832,6 +3760,12 @@
         "title": "Net Positive: How Courageous Companies Thrive by Giving More Than They Take",
         "turraId": "1634418954511822848",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Sustainability",
             "Nonfiction",
@@ -2853,6 +3787,12 @@
             "Business",
             "Nonfiction",
             "Economics",
+            "Biography"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
             "Buisness",
             "Finance",
             "Management",
@@ -2868,6 +3808,9 @@
         "title": "Creepy Archives, Vol. 1",
         "turraId": "1664860434845913089",
         "categories": [
+            "Fiction"
+        ],
+        "goodreadsCategories": [
             "Comics",
             "Horror",
             "Graphic Novels",
@@ -2887,6 +3830,10 @@
         "turraId": "1664860434845913089",
         "categories": [
             "History",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
+            "History",
             "Comics",
             "Horror"
         ]
@@ -2900,6 +3847,13 @@
         "title": "On the Psychology of Military Incompetence",
         "turraId": "1664860434845913089",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History",
+            "Fiction",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "History",
@@ -2919,6 +3873,9 @@
         "turraId": "1664860434845913089",
         "categories": [
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction"
         ]
     },
     {
@@ -2930,6 +3887,13 @@
         "title": "Persuasive Technology: Using Computers to Change What We Think and Do",
         "turraId": "1662345754642378753",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Technology",
+            "Science",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Design",
             "Technology",
@@ -2948,6 +3912,12 @@
         "title": "Don't Shoot the Dog!: The New Art of Teaching and Training",
         "turraId": "1662345754642378753",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Self Help",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Dogs",
             "Psychology",
@@ -2970,6 +3940,13 @@
             "Self Help",
             "Psychology",
             "Personal Development",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development",
             "Productivity",
             "Audiobook",
             "Business"
@@ -2984,6 +3961,13 @@
         "title": "Counselling for Toads: A Psychological Adventure",
         "turraId": "1662345754642378753",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Health",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Counselling",
@@ -3002,6 +3986,11 @@
         "title": "Liquid Modernity",
         "turraId": "1657283004727738368",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Sociology",
             "Nonfiction",
@@ -3021,6 +4010,9 @@
         "turraId": "1657283004727738368",
         "categories": [
             "Education"
+        ],
+        "goodreadsCategories": [
+            "Education"
         ]
     },
     {
@@ -3032,6 +4024,14 @@
         "title": "Predictably Irrational: The Hidden Forces That Shape Our Decisions",
         "turraId": "1654727164086960130",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Economics",
+            "Business",
+            "Science",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Economics",
@@ -3050,6 +4050,13 @@
         "title": "Punished by Rewards: The Trouble with Gold Stars, Incentive Plans, A's, Praise and Other Bribes",
         "turraId": "1654727164086960130",
         "categories": [
+            "Self Help",
+            "Education",
+            "Nonfiction",
+            "Psychology",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Parenting",
             "Education",
             "Nonfiction",
@@ -3069,6 +4076,13 @@
         "turraId": "1654727164086960130",
         "categories": [
             "Nonfiction",
+            "Business",
+            "Economics",
+            "Psychology",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
             "Philosophy",
             "Business",
             "Economics",
@@ -3086,6 +4100,11 @@
         "title": "Scaling Up: How a Few Companies Make It...and Why the Rest Don't",
         "turraId": "1652189268742209537",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Entrepreneurship",
             "Nonfiction",
@@ -3107,6 +4126,13 @@
             "Psychology",
             "Nonfiction",
             "Business",
+            "Science",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Business",
             "Sociology",
             "Science",
             "Self Help",
@@ -3122,6 +4148,12 @@
         "title": "The Five Dysfunctions of a Team: A Leadership Fable",
         "turraId": "1652189268742209537",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Leadership",
             "Nonfiction",
@@ -3143,6 +4175,13 @@
             "Nonfiction",
             "Self Help",
             "Psychology",
+            "Personal Development",
+            "Biography"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
             "Philosophy",
             "Personal Development",
             "Spirituality",
@@ -3161,6 +4200,12 @@
             "Psychology",
             "Science",
             "Nonfiction",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Science",
+            "Nonfiction",
             "Neuroscience",
             "Magic",
             "Brain",
@@ -3176,6 +4221,11 @@
         "title": "Eyewitnessing: The Uses of Images as Historical Evidence",
         "turraId": "1705467198033088737",
         "categories": [
+            "History",
+            "Nonfiction",
+            "Education"
+        ],
+        "goodreadsCategories": [
             "History",
             "Nonfiction",
             "Art",
@@ -3197,6 +4247,12 @@
             "Nonfiction",
             "Psychology",
             "Technology",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Technology",
             "Hackers",
             "Computer Science",
             "Computers",
@@ -3212,6 +4268,11 @@
         "title": "The Best of 2600: A Hacker Odyssey",
         "turraId": "1705467198033088737",
         "categories": [
+            "Nonfiction",
+            "Technology",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Computers",
             "Technology",
@@ -3232,6 +4293,14 @@
         "categories": [
             "Nonfiction",
             "History",
+            "Fiction",
+            "Psychology",
+            "Education",
+            "Biography"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "History",
             "Crime",
             "True Crime",
             "Psychology",
@@ -3249,6 +4318,10 @@
         "turraId": "1684876869949120512",
         "categories": [
             "Economics",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Economics",
             "Politics",
             "Nonfiction"
         ]
@@ -3262,6 +4335,11 @@
         "title": "Tommy: The Gun That Changed America",
         "turraId": "1684876869949120512",
         "categories": [
+            "Nonfiction",
+            "History",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "History",
             "Crime",
@@ -3280,6 +4358,13 @@
         "title": "Life Is in the Transitions: Mastering Change at Any Age",
         "turraId": "1682634975378644993",
         "categories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development",
+            "Business"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Self Help",
             "Psychology",
@@ -3302,6 +4387,13 @@
             "Self Help",
             "Psychology",
             "Business",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Business",
             "Personal Development",
             "Leadership",
             "Management"
@@ -3317,6 +4409,10 @@
         "turraId": "1680115317136146432",
         "categories": [
             "Nonfiction",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
             "Psychology",
             "Philosophy"
         ]
@@ -3330,6 +4426,12 @@
         "title": "The Experience Machine: How Our Minds Predict and Shape Reality",
         "turraId": "1680115317136146432",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Science",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "Philosophy",
@@ -3348,6 +4450,11 @@
         "title": "Surfing Uncertainty: Prediction, Action, and the Embodied Mind",
         "turraId": "1680115317136146432",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Psychology",
             "Nonfiction",
@@ -3371,6 +4478,14 @@
             "Business",
             "Personal Development",
             "Self Help",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Business",
+            "Personal Development",
+            "Self Help",
             "Leadership",
             "Science"
         ]
@@ -3384,6 +4499,13 @@
         "title": "Divergent Mind: Thriving in a World That Wasn't Designed for You",
         "turraId": "1677573783018696704",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Health",
+            "Self Help",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "Autistic Spectrum Disorder",
@@ -3406,6 +4528,13 @@
             "Nonfiction",
             "Science",
             "Technology",
+            "Business"
+        ],
+        "goodreadsCategories": [
+            "Artificial Intelligence",
+            "Nonfiction",
+            "Science",
+            "Technology",
             "Philosophy",
             "Computer Science",
             "Business"
@@ -3420,6 +4549,11 @@
         "title": "The Party's Over: Oil, War and the Fate of Industrial Societies",
         "turraId": "1667419646671179776",
         "categories": [
+            "Nonfiction",
+            "Science",
+            "Economics"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Politics",
             "Science",
@@ -3441,6 +4575,12 @@
             "Nonfiction",
             "Business",
             "Economics",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Business",
+            "Economics",
             "Finance",
             "History",
             "Politics",
@@ -3457,6 +4597,9 @@
         "turraId": "1667419646671179776",
         "categories": [
             "Economics"
+        ],
+        "goodreadsCategories": [
+            "Economics"
         ]
     },
     {
@@ -3468,6 +4611,12 @@
         "title": "The State of Affairs: Rethinking Infidelity",
         "turraId": "1730843036983120174",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Self Help",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Psychology",
             "Relationships",
@@ -3488,6 +4637,12 @@
         "categories": [
             "Nonfiction",
             "Business",
+            "History",
+            "Economics"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Business",
             "Politics",
             "History",
             "Economics",
@@ -3504,6 +4659,11 @@
         "title": "Mad World: An Oral History of New Wave Artists and Songs That Defined the 1980s",
         "turraId": "1723236412487553316",
         "categories": [
+            "Nonfiction",
+            "History",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Music",
             "Nonfiction",
             "History",
@@ -3527,6 +4687,14 @@
             "Economics",
             "Technology",
             "Science",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Economics",
+            "Technology",
+            "Science",
             "History",
             "Politics"
         ]
@@ -3540,6 +4708,14 @@
         "title": "Rise of the Robots: Technology and the Threat of a Jobless Future",
         "turraId": "1720721564465823881",
         "categories": [
+            "Nonfiction",
+            "Technology",
+            "Economics",
+            "Science",
+            "Business",
+            "Artificial Intelligence"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Technology",
             "Economics",
@@ -3563,6 +4739,14 @@
             "Economics",
             "Science",
             "Business",
+            "Artificial Intelligence"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Technology",
+            "Economics",
+            "Science",
+            "Business",
             "Artificial Intelligence",
             "Futurism"
         ]
@@ -3576,6 +4760,10 @@
         "title": "A History of Food in 100 Recipes",
         "turraId": "1741006814873821551",
         "categories": [
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Food",
             "History",
             "Nonfiction",
@@ -3594,6 +4782,10 @@
         "title": "Kitchen Confidential: Adventures in the Culinary Underbelly",
         "turraId": "1741006814873821551",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Food",
             "Memoir",
@@ -3614,6 +4806,13 @@
         "categories": [
             "Business",
             "Nonfiction",
+            "Self Help",
+            "Psychology",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
             "Leadership",
             "Self Help",
             "Communication",
@@ -3631,6 +4830,9 @@
         "turraId": "1738462543344005507",
         "categories": [
             "Business"
+        ],
+        "goodreadsCategories": [
+            "Business"
         ]
     },
     {
@@ -3642,6 +4844,11 @@
         "title": "Future Ready",
         "turraId": "1746066280782631368",
         "categories": [
+            "Business",
+            "Economics",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Finance",
             "Nonfiction"
@@ -3656,6 +4863,12 @@
         "title": "Great by Choice: Uncertainty, Chaos, and Luck—Why Some Thrive Despite Them All",
         "turraId": "1746066280782631368",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Leadership",
             "Nonfiction",
@@ -3677,6 +4890,13 @@
             "Business",
             "Nonfiction",
             "Self Help",
+            "Personal Development",
+            "Economics"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
             "Entrepreneurship",
             "Personal Development",
             "Finance",
@@ -3693,6 +4913,10 @@
         "turraId": "1743547711897342313",
         "categories": [
             "Health",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Health",
             "Sports"
         ]
     },
@@ -3705,6 +4929,11 @@
         "title": "A Conflict of Visions: Ideological Origins of Political Struggles",
         "turraId": "1748598237563412826",
         "categories": [
+            "Nonfiction",
+            "Economics",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Politics",
             "Philosophy",
             "Nonfiction",
@@ -3725,6 +4954,11 @@
         "categories": [
             "Psychology",
             "Nonfiction",
+            "Science"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
             "Science",
             "Politics",
             "Journalism"
@@ -3739,6 +4973,12 @@
         "title": "When Prophecy Fails: A Social and Psychological Study of a Modern Group that Predicted the Destruction of the World",
         "turraId": "1753677668996837620",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "History",
+            "Science"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Religion",
@@ -3757,6 +4997,10 @@
         "title": "Gretzky",
         "turraId": "1751154901659381958",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Sports",
             "Hockey",
             "Biography",
@@ -3775,6 +5019,12 @@
         "title": "MetaMaus: A Look Inside a Modern Classic, Maus",
         "turraId": "1751154901659381958",
         "categories": [
+            "Nonfiction",
+            "Fiction",
+            "History",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Graphic Novels",
             "Comics",
@@ -3795,6 +5045,10 @@
         "categories": [
             "Biography",
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Biography",
+            "Nonfiction"
         ]
     },
     {
@@ -3807,6 +5061,9 @@
         "turraId": "1758760266068590698",
         "categories": [
             "Fiction"
+        ],
+        "goodreadsCategories": [
+            "Fiction"
         ]
     },
     {
@@ -3818,6 +5075,11 @@
         "title": "Nazi Wives: The Women at the Top of Hitler's Germany",
         "turraId": "1758760266068590698",
         "categories": [
+            "History",
+            "Biography",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "History",
             "Biography",
             "Nonfiction"
@@ -3834,6 +5096,10 @@
         "categories": [
             "Psychology",
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction"
         ]
     },
     {
@@ -3845,6 +5111,9 @@
         "title": "El arte de tener siempre la razón y otros ensayos",
         "turraId": "1763816753929347384",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Philosophy"
         ]
@@ -3858,6 +5127,13 @@
         "title": "A Mind of Its Own: How Your Brain Distorts and Deceives",
         "turraId": "1763816753929347384",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Self Help",
+            "Health"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Nonfiction",
             "Science",
@@ -3876,6 +5152,9 @@
         "title": "Hieronymus White: A Bird Who Believed That He Always Was Right",
         "turraId": "1763816753929347384",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Poetry"
         ]
     },
@@ -3888,6 +5167,11 @@
         "title": "Alexander Hamilton",
         "turraId": "1768900222581624896",
         "categories": [
+            "History",
+            "Biography",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "History",
             "Biography",
             "Nonfiction",
@@ -3911,6 +5195,14 @@
             "Psychology",
             "Personal Development",
             "Business",
+            "Health"
+        ],
+        "goodreadsCategories": [
+            "Self Help",
+            "Nonfiction",
+            "Psychology",
+            "Personal Development",
+            "Business",
             "Leadership",
             "Health"
         ]
@@ -3924,6 +5216,10 @@
         "title": "Mythmaking: Self-Discovery and the Timeless Art of Memoir",
         "turraId": "1781573444485697867",
         "categories": [
+            "Nonfiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Writing",
             "Memoir",
             "Nonfiction"
@@ -3938,6 +5234,13 @@
         "title": "My Share of the Task: A Memoir",
         "turraId": "1796796569829687349",
         "categories": [
+            "Biography",
+            "Fiction",
+            "Business",
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Biography",
             "Military Fiction",
             "Leadership",
@@ -3956,6 +5259,10 @@
         "title": "Banned Books: The World's Most Controversial Books, Past and Present",
         "turraId": "1796796569829687349",
         "categories": [
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "History",
             "Books About Books",
@@ -3977,6 +5284,12 @@
             "Nonfiction",
             "Psychology",
             "Science",
+            "Health"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Science",
             "Medicine",
             "Medical",
             "Neuroscience",
@@ -3992,6 +5305,13 @@
         "title": "Einstein in Kafkaland: How Albert Fell Down the Rabbit Hole and Came Up With the Universe",
         "turraId": "1799313887285669975",
         "categories": [
+            "Fiction",
+            "Science",
+            "Nonfiction",
+            "History",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Graphic Novels",
             "Science",
             "Nonfiction",
@@ -4010,6 +5330,11 @@
         "title": "How Not to Be Wrong: The Art of Changing Your Mind",
         "turraId": "1801852274232218084",
         "categories": [
+            "Nonfiction",
+            "Biography",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Politics",
             "Audiobook",
@@ -4031,6 +5356,13 @@
             "Nonfiction",
             "Science",
             "Psychology",
+            "Health",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Science",
+            "Psychology",
             "Audiobook",
             "Health",
             "Self Help",
@@ -4046,6 +5378,12 @@
         "title": "The Untethered Soul: The Journey Beyond Yourself",
         "turraId": "1801852274232218084",
         "categories": [
+            "Self Help",
+            "Nonfiction",
+            "Psychology",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
             "Self Help",
             "Nonfiction",
             "Spirituality",
@@ -4066,6 +5404,12 @@
         "categories": [
             "Business",
             "Nonfiction",
+            "Psychology",
+            "Education"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
             "Sociology",
             "Leadership",
             "Psychology",
@@ -4084,6 +5428,10 @@
         "categories": [
             "Business",
             "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Personal Development"
         ]
     },
     {
@@ -4095,6 +5443,11 @@
         "title": "The Culture Map: Breaking Through the Invisible Boundaries of Global Business",
         "turraId": "1832301234105061777",
         "categories": [
+            "Nonfiction",
+            "Business",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Business",
             "Psychology",
@@ -4114,6 +5467,10 @@
         "turraId": "1832301234105061777",
         "categories": [
             "Fiction",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Fiction",
             "Classics",
             "Crime",
             "Thriller",
@@ -4131,6 +5488,11 @@
         "title": "Autopoiesis and Cognition: The Realization of the Living",
         "turraId": "1834829754488221846",
         "categories": [
+            "Nonfiction",
+            "Science",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Science",
             "Biology",
@@ -4151,6 +5513,11 @@
         "categories": [
             "Business",
             "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
             "Entrepreneurship",
             "Management",
             "Leadership",
@@ -4167,6 +5534,10 @@
         "title": "Social Systems",
         "turraId": "1834829754488221846",
         "categories": [
+            "Nonfiction",
+            "Economics"
+        ],
+        "goodreadsCategories": [
             "Sociology",
             "Philosophy",
             "Nonfiction",
@@ -4185,6 +5556,11 @@
         "title": "The Reasonable Robot: Artificial Intelligence and the Law",
         "turraId": "1837390467337490808",
         "categories": [
+            "Nonfiction",
+            "Technology",
+            "Artificial Intelligence"
+        ],
+        "goodreadsCategories": [
             "Law",
             "Nonfiction",
             "Technology",
@@ -4200,6 +5576,13 @@
         "title": "The Dip: A Little Book That Teaches You When to Quit",
         "turraId": "1839910136023847394",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Nonfiction",
             "Self Help",
@@ -4222,6 +5605,13 @@
             "Psychology",
             "Self Help",
             "Business",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Self Help",
+            "Business",
             "Personal Development",
             "Audiobook",
             "Leadership"
@@ -4236,6 +5626,13 @@
         "title": "Essentialism: The Disciplined Pursuit of Less",
         "turraId": "1839910136023847394",
         "categories": [
+            "Nonfiction",
+            "Self Help",
+            "Business",
+            "Personal Development",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Self Help",
             "Business",
@@ -4258,6 +5655,13 @@
             "Psychology",
             "Business",
             "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Business",
+            "Self Help",
             "Personal Development",
             "Audiobook",
             "Leadership"
@@ -4272,6 +5676,12 @@
         "title": "Marvel Comics: The Untold Story",
         "turraId": "1847550414226411917",
         "categories": [
+            "Nonfiction",
+            "History",
+            "Fiction",
+            "Biography"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "History",
             "Comics",
@@ -4291,6 +5701,12 @@
         "turraId": "1847550414226411917",
         "categories": [
             "Business",
+            "Economics",
+            "Biography",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Business",
             "Finance",
             "Biography",
             "Nonfiction"
@@ -4307,6 +5723,10 @@
         "categories": [
             "Education",
             "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Education",
+            "Personal Development"
         ]
     },
     {
@@ -4318,6 +5738,11 @@
         "title": "The Ayn Rand Cult",
         "turraId": "1857680297443164321",
         "categories": [
+            "Nonfiction",
+            "Biography",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Nonfiction",
             "Philosophy",
             "Biography",
@@ -4335,6 +5760,12 @@
         "title": "The Freud/Jung Letters",
         "turraId": "1857680297443164321",
         "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Biography",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Psychology",
             "Psychoanalysis",
             "Nonfiction",
@@ -4354,6 +5785,12 @@
         "categories": [
             "Business",
             "Nonfiction",
+            "Self Help",
+            "Personal Development"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
             "Management",
             "Leadership",
             "Self Help",
@@ -4370,6 +5807,12 @@
         "title": "The Art of Always Being Right",
         "turraId": "1860224907386273949",
         "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Fiction",
+            "Self Help"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "Nonfiction",
             "Psychology",
@@ -4395,6 +5838,15 @@
             "Economics",
             "Business",
             "History"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Biography",
+            "Science",
+            "Economics",
+            "Business",
+            "History"
         ]
     },
     {
@@ -4408,6 +5860,10 @@
         "categories": [
             "Psychology",
             "Economics"
+        ],
+        "goodreadsCategories": [
+            "Psychology",
+            "Economics"
         ]
     },
     {
@@ -4419,6 +5875,9 @@
         "title": "Aporetics: Rational Deliberation in the Face of Inconsistency",
         "turraId": "1865306644827029957",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Philosophy"
         ]
     },
@@ -4431,6 +5890,10 @@
         "title": "The Aporetic Tradition in Ancient Philosophy",
         "turraId": "1865306644827029957",
         "categories": [
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
             "Philosophy",
             "History"
         ]
@@ -4444,6 +5907,11 @@
         "title": "Blitzscaling: The Lightning-Fast Path to Building Massively Valuable Companies",
         "turraId": "1870373349282484488",
         "categories": [
+            "Business",
+            "Nonfiction",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "Business",
             "Entrepreneurship",
             "Nonfiction",
@@ -4462,6 +5930,9 @@
         "title": "The Little Book of Hermès: The Story of the Iconic Fashion House",
         "turraId": "1870373349282484488",
         "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
             "Fashion",
             "Nonfiction",
             "Art"
@@ -4478,6 +5949,10 @@
         "categories": [
             "History",
             "Biography"
+        ],
+        "goodreadsCategories": [
+            "History",
+            "Biography"
         ]
     },
     {
@@ -4489,6 +5964,14 @@
         "title": "Empires of Light: Edison, Tesla, Westinghouse, and the Race to Electrify the World",
         "turraId": "1877979196271550821",
         "categories": [
+            "History",
+            "Nonfiction",
+            "Science",
+            "Biography",
+            "Business",
+            "Technology"
+        ],
+        "goodreadsCategories": [
             "History",
             "Nonfiction",
             "Science",
@@ -4508,6 +5991,277 @@
         "turraId": "1877979196271550821",
         "categories": [
             "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction"
+        ]
+    },
+    {
+        "id": "1756234871276486764",
+        "type": "card",
+        "img": "./metadata/nGwpPwAy.jpeg",
+        "url": "https://www.goodreads.com/quotes/8692961-bernoulli-observed-that-most-people-dislike-risk-the-chance-of",
+        "media": "goodreads",
+        "title": "\n      “Bernoulli observed that most people dislike risk (the chance of receiving the lowest possible outcome), and if they are offered a choice between a gamble and an amount equal to its expected value they will pick the sure thing. In fact a risk-averse decision maker will choose a sure thing that is less than expected value, in effect paying a premium to avoid the uncertainty.”\n    \n    ",
+        "turraId": "1756234748685373544",
+        "categories": []
+    },
+    {
+        "id": "1883056010094329902",
+        "type": "card",
+        "img": "./metadata/_fle01mz.jpeg",
+        "url": "https://www.goodreads.com/en/book/show/29775340-george-lucas",
+        "media": "goodreads",
+        "title": "George Lucas: A Life",
+        "turraId": "1883055789553676359",
+        "categories": [
+            "Biography",
+            "Nonfiction",
+            "Fiction",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Biography",
+            "Nonfiction",
+            "Star Wars",
+            "Film",
+            "Audiobook",
+            "Biography Memoir",
+            "History"
+        ]
+    },
+    {
+        "id": "1883056011046531342",
+        "type": "card",
+        "img": "./metadata/w9q8ajgU.jpeg",
+        "url": "https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned",
+        "media": "goodreads",
+        "title": "Why Greatness Cannot Be Planned: The Myth of the Objective",
+        "turraId": "1883055789553676359",
+        "categories": [
+            "Nonfiction",
+            "Science",
+            "Business",
+            "Psychology",
+            "Self Help",
+            "Artificial Intelligence"
+        ],
+        "goodreadsCategories": [
+            "Philosophy",
+            "Nonfiction",
+            "Science",
+            "Business",
+            "Psychology",
+            "Self Help",
+            "Artificial Intelligence"
+        ]
+    },
+    {
+        "id": "1883056015509192996",
+        "type": "card",
+        "img": "./metadata/Tu7W0eQO.jpeg",
+        "url": "https://www.goodreads.com/book/show/588138.The_Hero_With_a_Thousand_Faces",
+        "media": "goodreads",
+        "title": "The Hero With a Thousand Faces",
+        "turraId": "1883055789553676359",
+        "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Mythology",
+            "Philosophy",
+            "Psychology",
+            "Writing",
+            "History",
+            "Religion"
+        ]
+    },
+    {
+        "id": "1893203406069624864",
+        "type": "card",
+        "img": "./metadata/E-sntC1y.jpeg",
+        "url": "https://www.goodreads.com/book/show/24812.The_Complete_Calvin_and_Hobbes",
+        "media": "goodreads",
+        "title": "The Complete Calvin and Hobbes",
+        "turraId": "1893203295725871217",
+        "categories": [
+            "Fiction",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Comics",
+            "Humor",
+            "Graphic Novels",
+            "Fiction",
+            "Classics",
+            "Comedy",
+            "Graphic Novels Comics"
+        ]
+    },
+    {
+        "id": "1494930467971338245",
+        "type": "card",
+        "img": "./metadata/sj3_OhUg.jpeg",
+        "url": "https://www.goodreads.com/book/show/19013459-the-buyout-of-america",
+        "media": "goodreads",
+        "title": "The Buyout of America: How Private Equity Will Cause the Next Great Credit Crisis",
+        "turraId": "1494930305811111938",
+        "categories": [
+            "Business",
+            "Economics",
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Business",
+            "Economics",
+            "Finance",
+            "Nonfiction",
+            "Politics"
+        ]
+    },
+    {
+        "id": "1888123741885886589",
+        "type": "card",
+        "img": "./metadata/nisBPGX6.jpeg",
+        "url": "https://www.goodreads.com/book/show/146225.Undercurrents",
+        "media": "goodreads",
+        "title": "Undercurrents: The Hidden Wiring of Modern Music",
+        "turraId": "1888123731865702418",
+        "categories": [
+            "Nonfiction",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Music",
+            "Nonfiction",
+            "Cultural Studies",
+            "Essays",
+            "History",
+            "Cultural",
+            "Art"
+        ]
+    },
+    {
+        "id": "1888123794067222896",
+        "type": "card",
+        "img": "./metadata/_VvTiSMO.jpeg",
+        "url": "https://www.goodreads.com/book/show/27397.A_Civil_Action",
+        "media": "goodreads",
+        "title": "A Civil Action",
+        "turraId": "1888123731865702418",
+        "categories": [
+            "Nonfiction",
+            "History",
+            "Fiction"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Law",
+            "History",
+            "Legal",
+            "True Crime",
+            "Environment",
+            "Crime"
+        ]
+    },
+    {
+        "id": "1888123795166097696",
+        "type": "card",
+        "img": "./metadata/Er_tqeog.jpeg",
+        "url": "https://www.goodreads.com/book/show/108402.Power_in_Movement",
+        "media": "goodreads",
+        "title": "Power in Movement: Social Movements and Contentious Politics",
+        "turraId": "1888123731865702418",
+        "categories": [
+            "Nonfiction",
+            "Education",
+            "History"
+        ],
+        "goodreadsCategories": [
+            "Politics",
+            "Sociology",
+            "Political Science",
+            "Nonfiction",
+            "Social Movements",
+            "Academic",
+            "History"
+        ]
+    },
+    {
+        "id": "1888123796168532300",
+        "type": "card",
+        "img": "./metadata/Xyycl3NA.jpeg",
+        "url": "https://www.goodreads.com/book/show/60627426-el-libro-de-la-inteligencia-colectiva",
+        "media": "goodreads",
+        "title": "El libro de la Inteligencia colectiva",
+        "turraId": "1888123731865702418",
+        "categories": []
+    },
+    {
+        "id": "1888123797166862764",
+        "type": "card",
+        "img": "./metadata/Qgu2VJNP.jpeg",
+        "url": "https://www.goodreads.com/book/show/218688993-c-mo-impulsar-la-inteligencia-colectiva",
+        "media": "goodreads",
+        "title": "Cómo impulsar la inteligencia colectiva",
+        "turraId": "1888123731865702418",
+        "categories": []
+    },
+    {
+        "id": "1999746237570957812",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Fixer Upper Books",
+        "description": "",
+        "url": "https://www.goodreads.com/shelf/show/fixer-upper",
+        "img": "",
+        "turraId": "1999746151839338739",
+        "categories": []
+    },
+    {
+        "id": "1999746239634575835",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Savage Mind",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/782026.The_Savage_Mind",
+        "img": "./metadata/soKhvf48",
+        "turraId": "1999746151839338739",
+        "categories": [
+            "Nonfiction",
+            "Psychology"
+        ],
+        "goodreadsCategories": [
+            "Anthropology",
+            "Philosophy",
+            "Nonfiction",
+            "Psychology",
+            "Sociology",
+            "Theory",
+            "France"
+        ]
+    },
+    {
+        "id": "1999746240548945938",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Death by Fire: Sati, Dowry Death, and Female Infanticid…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/127667.Death_by_Fire",
+        "img": "./metadata/e5XXxEU6",
+        "turraId": "1999746151839338739",
+        "categories": [
+            "Nonfiction"
+        ],
+        "goodreadsCategories": [
+            "Nonfiction",
+            "India"
         ]
     }
 ]

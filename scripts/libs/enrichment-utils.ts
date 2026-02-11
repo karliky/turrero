@@ -3,14 +3,14 @@
  * Reduces complexity in tweets_enrichment.ts
  */
 
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import type { Page } from 'puppeteer';
-import type { 
-    ImageMetadata, 
+import type {
+    ImageMetadata,
     TweetMetadataType,
     ScriptLogger,
     EnrichedTweetData
-} from '@/infrastructure/types/index.ts';
+} from '../../infrastructure/types/index.ts';
 
 // ============================================================================
 // CONFIGURATION
@@ -86,16 +86,22 @@ export class GoodReadsProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string, page: Page): Promise<void> {
+        // If scraper already captured domain and title, skip re-scraping
+        if (tweet.metadata.domain === 'goodreads.com' && tweet.metadata.title) {
+            tweet.metadata.media = "goodreads";
+            return;
+        }
+
         if (!page) {
             throw new Error('Page instance required for GoodReads processing');
         }
-        
+
         await Promise.all([
-            page.goto(url), 
-            page.waitForNavigation(), 
-            page.waitForSelector('h1')
+            page.goto(url),
+            page.waitForNavigation(),
+            page.waitForSelector('h1', { timeout: 30000 })
         ]);
-        
+
         const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
         tweet.metadata.media = "goodreads";
         tweet.metadata.title = title || '';
@@ -195,7 +201,15 @@ export async function downloadMedia(
     
     // Extract filename from URL or generate one
     const url = new URL(imageUrl);
-    const filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
+    let filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
+
+    // Twitter image URLs store the format in query params (e.g. ?format=png&name=small)
+    // Append as extension if the filename doesn't already have one
+    if (!filename.includes('.')) {
+        const format = url.searchParams.get('format') || 'jpg';
+        filename = `${filename}.${format}`;
+    }
+
     const filePath = `${config.directory}/${filename}`;
     
     // Ensure directory exists
@@ -313,17 +327,22 @@ export class TweetEnricher {
 // ============================================================================
 
 /**
- * Checks if a tweet should be enriched
+ * Checks if a tweet should be enriched.
+ * Re-processes tweets that have an embed with id "unknown" so we can try to resolve the ID from tweets.json.
  */
 export function shouldEnrichTweet(tweet: TweetForEnrichment, enrichments: EnrichedTweetData[]): boolean {
     if (!tweet.metadata) return false;
-    
+
     const { embed } = tweet.metadata;
-    const alreadyEnriched = enrichments.find((_tweet: EnrichedTweetData) => 
-        tweet.id === _tweet.id || (embed && embed.id === _tweet.id)
-    );
-    
-    return !alreadyEnriched;
+    const existing = enrichments.find((_tweet: EnrichedTweetData) => tweet.id === _tweet.id);
+    if (!existing) {
+        const alreadyEnrichedByEmbedId = embed && enrichments.some((_tweet: EnrichedTweetData) => embed.id === _tweet.id);
+        return !alreadyEnrichedByEmbedId;
+    }
+    if (existing.type === "embed" && (existing.embeddedTweetId === "unknown" || !existing.embeddedTweetId)) {
+        return true;
+    }
+    return false;
 }
 
 /**

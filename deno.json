@@ -35,7 +35,7 @@
         "@/": "./",
         "@/infrastructure/": "./infrastructure/",
         "@/scripts/": "./scripts/",
-        "@std/": "https://deno.land/std@0.224.0/",
+        "@std/path": "jsr:@std/path@^1.1.4",
         "puppeteer": "npm:puppeteer@^24.16.1",
         "csv": "https://deno.land/x/csv@v0.8.0/mod.ts",
         "dotenv": "https://deno.land/std@0.224.0/dotenv/mod.ts",
