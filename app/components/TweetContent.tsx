@@ -95,6 +95,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
           </div>
         );
 
+      case 'image':
       case 'media':
         const MediaImage = (
           <Image
@@ -133,6 +134,9 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
             </div>
           </a>
         );
+
+      default:
+        return null;
     }
   };
 
