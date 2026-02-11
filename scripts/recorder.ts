@@ -78,30 +78,66 @@ interface TweetCSV {
 }
 
 /**
+ * Parse a single CSV line respecting double-quoted fields (commas inside quotes don't split).
+ * RFC 4180-style: "field" can contain commas; "" inside a field is escaped quote.
+ */
+function parseCSVLine(line: string): string[] {
+    const fields: string[] = [];
+    let i = 0;
+    while (i < line.length) {
+        if (line[i] === '"') {
+            let field = "";
+            i++;
+            while (i < line.length) {
+                if (line[i] === '"') {
+                    if (line[i + 1] === '"') {
+                        field += '"';
+                        i += 2;
+                    } else {
+                        i++;
+                        break;
+                    }
+                } else {
+                    field += line[i];
+                    i++;
+                }
+            }
+            fields.push(field.trim());
+        } else {
+            const comma = line.indexOf(",", i);
+            const end = comma === -1 ? line.length : comma;
+            fields.push(line.slice(i, end).trim());
+            i = comma === -1 ? line.length : comma + 1;
+        }
+    }
+    return fields;
+}
+
+/**
  * Parse CSV file into an array of objects.
+ * Handles quoted fields so content with commas does not break the row.
  * @param filePath Path to the CSV file.
  * @returns Array of objects where each object represents a row in the CSV.
  */
 function parseCSV(filePath: string): TweetCSV[] {
     const csvContent = readFileSync(filePath, { encoding: "utf8" });
-    const lines = csvContent.split("\n");
+    const lines = csvContent.split("\n").filter((l) => l.trim().length > 0);
     if (lines.length === 0) {
         throw new Error("CSV file is empty");
     }
-    const headers = lines[0]!.split(",");
+    const headerNames = parseCSVLine(lines[0]!).map((h) => h.trim());
     return lines.slice(1).map((line: string) => {
-        const data = line.split(",");
-        const obj = headers.reduce(
+        const data = parseCSVLine(line);
+        const obj = headerNames.reduce(
             (
                 acc: { [key: string]: string },
                 nextKey: string,
                 index: number,
             ) => {
-                acc[nextKey.trim()] =
-                    data[index]?.replace(/(^"|"$)/g, "").trim() ?? "";
+                acc[nextKey] = data[index]?.trim() ?? "";
                 return acc;
             },
-            { id: "" }, // Initialize with required 'id' property
+            { id: "" },
         );
         return obj as TweetCSV;
     });
@@ -801,16 +837,32 @@ async function main() {
                 [],
             );
 
-            const tweetIds = tweets
+            const allCsvIds = tweets
                 .map((tweet) => tweet.id)
-                .filter((id) => id && id.trim() !== "") // Filter out empty IDs
-                .filter((id) => !existingTweets.includes(id));
+                .filter((id) => id && id.trim() !== "");
+            const tweetIds = allCsvIds.filter(
+                (id) => !existingTweets.includes(id),
+            );
+            const alreadyInDb = allCsvIds.filter((id) =>
+                existingTweets.includes(id),
+            );
 
             logger.info("Processing a total of tweets:", tweetIds.length);
             if (tweetIds.length > 0) {
                 logger.info("Tweet IDs to process:", tweetIds);
             } else {
-                logger.info("No tweets to process - all threads are up to date");
+                logger.info(
+                    "No tweets to process - all threads are up to date",
+                );
+                if (alreadyInDb.length > 0) {
+                    logger.info(
+                        "IDs already in tweets.json (skipped):",
+                        alreadyInDb.slice(0, 10).join(", ") +
+                            (alreadyInDb.length > 10
+                                ? ` ... and ${alreadyInDb.length - 10} more`
+                                : ""),
+                    );
+                }
             }
 
             await getAllTweets({
