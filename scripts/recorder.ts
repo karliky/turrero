@@ -593,80 +593,110 @@ async function getAllTweets({
 
                 await new Promise((resolve) => setTimeout(resolve, 1000));
 
-                await Promise.all([
-                    page.waitForSelector('div[role="progressbar"]', {
-                        hidden: true,
-                        timeout: 30000
-                    }),
-                    page.evaluate(() => {
-                        return new Promise<void>((resolve, reject) => {
-                            const maxAttempts = 3;
-                            let attempts = 0;
+                await page.waitForSelector('div[role="progressbar"]', {
+                    hidden: true,
+                    timeout: 30000
+                });
 
-                            const tryClick = () => {
-                                attempts++;
-                                const currentTweet = document.querySelector(
-                                    'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-                                );
-                                if (!currentTweet) {
-                                    if (attempts < maxAttempts) {
-                                        setTimeout(tryClick, 500);
-                                        return;
-                                    }
-                                    reject(
-                                        new Error(
-                                            "Could not find current tweet",
-                                        ),
-                                    );
+                const navResult = await page.evaluate(() => {
+                    return new Promise<{ clicked: boolean; endOfThread?: boolean }>((resolve) => {
+                        const maxAttempts = 3;
+                        let attempts = 0;
+
+                        const tryClick = () => {
+                            attempts++;
+                            const currentTweet = document.querySelector(
+                                'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+                            );
+                            if (!currentTweet) {
+                                if (attempts < maxAttempts) {
+                                    setTimeout(tryClick, 500);
                                     return;
                                 }
+                                resolve({ clicked: false });
+                                return;
+                            }
 
-                                const cellDiv = currentTweet.closest(
-                                    'div[data-testid="cellInnerDiv"]',
-                                );
-                                if (!cellDiv) {
-                                    if (attempts < maxAttempts) {
-                                        setTimeout(tryClick, 500);
-                                        return;
-                                    }
-                                    reject(
-                                        new Error("Could not find cell div"),
-                                    );
+                            const cellDiv = currentTweet.closest(
+                                'div[data-testid="cellInnerDiv"]',
+                            );
+                            if (!cellDiv) {
+                                if (attempts < maxAttempts) {
+                                    setTimeout(tryClick, 500);
                                     return;
                                 }
+                                resolve({ clicked: false });
+                                return;
+                            }
 
-                                const nextTweet = cellDiv.nextElementSibling
-                                    ?.nextElementSibling?.querySelector(
-                                        'article[data-testid="tweet"]',
-                                    ) as HTMLElement;
-                                if (!nextTweet) {
-                                    if (attempts < maxAttempts) {
-                                        setTimeout(tryClick, 500);
-                                        return;
-                                    }
-                                    reject(
-                                        new Error("Could not find next tweet"),
-                                    );
+                            const nextTweet = cellDiv.nextElementSibling
+                                ?.nextElementSibling?.querySelector(
+                                    'article[data-testid="tweet"]',
+                                ) as HTMLElement;
+                            if (!nextTweet) {
+                                if (attempts < maxAttempts) {
+                                    setTimeout(tryClick, 500);
                                     return;
                                 }
+                                resolve({ clicked: false, endOfThread: true });
+                                return;
+                            }
 
-                                nextTweet.click();
-                                resolve();
-                            };
+                            nextTweet.click();
+                            resolve({ clicked: true });
+                        };
 
-                            tryClick();
-                        });
-                    }),
-                    page.waitForNavigation({ timeout: 10000 }),
+                        tryClick();
+                    });
+                });
+
+                if (navResult.endOfThread) {
+                    logger.info("End of thread reached (no next tweet), saving and continuing");
+                    stopped = true;
+                    const existingTweets = JSON.parse(
+                        readFileSync(outputFilePath, "utf-8"),
+                    );
+                    existingTweets.push(tweets);
+                    writeFileSync(
+                        outputFilePath,
+                        JSON.stringify(existingTweets, null, 4),
+                    );
+                    author = undefined;
+                    break;
+                }
+
+                if (!navResult.clicked) {
+                    throw new Error("Could not find next tweet or current tweet");
+                }
+
+                // X no hace navegación real al cambiar de tweet (SPA); esperar a que cargue el siguiente
+                await Promise.race([
+                    page.waitForSelector('div[role="progressbar"]', { hidden: true, timeout: 15000 }),
+                    new Promise((r) => setTimeout(r, 4000)),
                 ]);
             } catch (error) {
                 logger.error("Navigation error:", error);
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 await page.reload();
-                await page.waitForSelector(
-                    'article[tabindex="-1"][role="article"][data-testid="tweet"]',
-                    { timeout: 5000 },
-                );
+                try {
+                    await page.waitForSelector(
+                        'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+                        { timeout: 8000 },
+                    );
+                } catch (reloadErr) {
+                    logger.error("Reload recovery failed, skipping thread", reloadErr);
+                    stopped = true;
+                    const existingTweets = JSON.parse(
+                        readFileSync(outputFilePath, "utf-8"),
+                    );
+                    existingTweets.push(tweets);
+                    writeFileSync(
+                        outputFilePath,
+                        JSON.stringify(existingTweets, null, 4),
+                    );
+                    author = undefined;
+                    break;
+                }
                 continue;
             }
         }
@@ -865,27 +895,70 @@ async function main() {
                 }
             }
 
-            await getAllTweets({
-                page,
-                author: undefined,
-                tweetIds,
-                outputFilePath: join(
-                    __dirname,
-                    "../infrastructure/db/tweets.json",
-                ),
-            });
+            const outputFilePath = join(
+                __dirname,
+                "../infrastructure/db/tweets.json",
+            );
+            let idsToProcess = tweetIds;
+            const maxRetries = 3;
+            let attempt = 0;
+
+            while (idsToProcess.length > 0 && attempt < maxRetries) {
+                try {
+                    await getAllTweets({
+                        page: page!,
+                        author: undefined,
+                        tweetIds: idsToProcess,
+                        outputFilePath,
+                    });
+                    break;
+                } catch (err) {
+                    attempt++;
+                    logger.warn("getAllTweets failed (attempt %s/%s):", attempt, maxRetries, err);
+                    if (page) {
+                        await page.close().catch(() => {});
+                        page = undefined;
+                    }
+                    if (browser) {
+                        await browser.close().catch(() => {});
+                        browser = undefined;
+                    }
+                    if (attempt >= maxRetries) {
+                        logger.error("Max retries reached, stopping.");
+                        throw err;
+                    }
+                    const currentData = JSON.parse(
+                        readFileSync(outputFilePath, "utf-8"),
+                    );
+                    const doneIds = currentData.reduce(
+                        (acc: string[], threads: Tweet[]) => {
+                            if (threads?.[0]?.id) acc.push(threads[0].id);
+                            return acc;
+                        },
+                        [],
+                    );
+                    idsToProcess = idsToProcess.filter((id) => !doneIds.includes(id));
+                    logger.info("Retrying with %s remaining threads", idsToProcess.length);
+                    browser = await puppeteer.launch(launchOptions);
+                    page = await browser.newPage();
+                    await page.setCookie(...cookies);
+                    await page.emulate(iPhone12);
+                }
+            }
         }
     } finally {
-        logger.info("¡Estaré aquí mismo!");
-        try {
-            await page.close();
-        } catch (error) {
-            logger.debug("Page already closed or connection lost:", error);
+        logger.info("Closing browser and page...");
+        if (page) {
+            await page.close().catch((err) => {
+                logger.debug("Page close (ignored):", err?.message ?? err);
+            });
+            page = undefined;
         }
-        try {
-            await browser.close();
-        } catch (error) {
-            logger.debug("Browser already closed or connection lost:", error);
+        if (browser) {
+            await browser.close().catch((err) => {
+                logger.debug("Browser close (ignored):", err?.message ?? err);
+            });
+            browser = undefined;
         }
     }
 }
