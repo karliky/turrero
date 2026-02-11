@@ -154,6 +154,8 @@ export interface EnrichedTweetData {
   description?: string;
   /** Card title */
   title?: string;
+  /** Embedded tweet ID (for type "embed") */
+  embeddedTweetId?: TweetId;
   /** Embedded tweet author */
   author?: string;
   /** Embedded tweet content */

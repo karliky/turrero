@@ -115,10 +115,14 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
           </div>
         );
 
-      case 'embed':
+      case 'embed': {
+        const handle = getEmbeddedAuthorHandle(embed.author || '');
+        const href = embed.embeddedTweetId && embed.embeddedTweetId !== 'unknown'
+          ? `https://x.com/${handle}/status/${embed.embeddedTweetId}`
+          : `https://x.com/${handle}`;
         return (
           <a
-            href={`https://x.com/${getEmbeddedAuthorHandle(embed.author || '')}/status/${embed.embeddedTweetId}`}
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-4"
@@ -134,6 +138,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
             </div>
           </a>
         );
+      }
 
       default:
         return null;
