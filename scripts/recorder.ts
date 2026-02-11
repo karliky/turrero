@@ -43,8 +43,13 @@ const iPhone12 = {
 
 interface TweetMetadata {
     type?: string;
-    imgs?: Array<{ src: string; alt: string }>;
+    imgs?: Array<{ img: string; url: string }>;
+    img?: string;
+    url?: string;
     embed?: {
+        type?: string;
+        id?: string;
+        author?: string;
         tweet?: string;
     };
 }
@@ -135,28 +140,131 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     // Log the tweet text and ID for debugging
     logger.debug(`Tweet ID: ${currentTweetId}, Text: ${tweet.slice(0, 50)}...`);
 
-    const metadata = await page.evaluate(() => {
-        const article = document.querySelector('article[role="article"]');
+    const metadata = await page.evaluate((tweetUrl: string) => {
+        // Use specific selector to target the CURRENT tweet's article, not just any article on the page
+        // tabindex="-1" identifies the main focused tweet (not replies or other tweets in the timeline)
+        const article = document.querySelector('article[tabindex="-1"][role="article"][data-testid="tweet"]');
         if (!article) {
             return {
                 type: undefined,
                 imgs: undefined,
-                embed: { tweet: undefined },
+                embed: undefined,
             } as unknown as TweetMetadata;
         }
 
-        const imgs = Array.from(article.querySelectorAll('img[alt="Image"]'))
-            .map((img: Element) => ({
-                src: (img as HTMLImageElement).src,
-                alt: (img as HTMLImageElement).alt,
-            }));
+        // Check for card first (Goodreads, article previews, etc.)
+        // Twitter uses multiple card formats:
+        // - Old: div[data-testid="card.wrapper"]
+        // - New small: div[data-testid="card.layoutSmall.detail"]
+        // - New large: div[data-testid="card.layoutLarge.detail"]
+        const card = article.querySelector(
+            'div[data-testid="card.wrapper"], ' +
+            'div[data-testid="card.layoutSmall.detail"], ' +
+            'div[data-testid="card.layoutLarge.detail"]'
+        );
+        if (card) {
+            // Try to find image - could be various formats
+            const imgElement = card.querySelector("img") as HTMLImageElement;
+
+            // Search for link more broadly - small cards often have links in media section or parent wrapper
+            // Try multiple selectors to handle different card layouts
+            const linkElement = card.querySelector("a[href]") as HTMLAnchorElement;
+
+            return {
+                type: 'card',
+                img: imgElement ? imgElement.src : "",
+                url: linkElement ? linkElement.href : "",
+                imgs: undefined,
+                embed: undefined,
+            } as unknown as TweetMetadata;
+        }
+
+        // Check for images and GIFs - only inside tweetPhoto containers to avoid false positives
+        // Note: X.com represents GIFs as <video> elements with poster thumbnails
+        const tweetPhotos = article.querySelectorAll('div[data-testid="tweetPhoto"]');
+        const imgs = Array.from(tweetPhotos)
+            .map((container, index) => {
+                // First check for regular images
+                const img = container.querySelector('img') as HTMLImageElement;
+                if (img) {
+                    return {
+                        img: img.src,
+                        url: `${tweetUrl}/photo/${index + 1}`,
+                    };
+                }
+
+                // Then check for GIFs (which are video elements in X.com)
+                const video = container.querySelector('video') as HTMLVideoElement;
+                if (video) {
+                    // Use poster image as thumbnail, or video src if no poster
+                    return {
+                        img: video.poster || video.src || "",
+                        url: `${tweetUrl}/photo/${index + 1}`,
+                    };
+                }
+
+                return null;
+            })
+            .filter((item): item is { img: string; url: string } => item !== null && item.img !== "");
 
         return {
-            type: imgs.length > 0 ? TweetMetadataType.IMAGE : undefined,
+            type: imgs.length > 0 ? 'media' : undefined,
             imgs: imgs.length > 0 ? imgs : undefined,
-            embed: { tweet: undefined },
+            embed: undefined,
         } as unknown as TweetMetadata;
+    }, page.url());
+
+    // Check for embedded tweet and extract if present - extract directly from DOM without navigation
+    const embedData = await page.evaluate(() => {
+        const tweetContainer = document.querySelector(
+            'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+        );
+        const embeddedTweetContainer = tweetContainer?.querySelector("div[aria-labelledby]");
+
+        if (!embeddedTweetContainer) return null;
+
+        // Extract embed ID from multiple possible sources
+        // Try 1: Look for direct link with /status/ in href
+        let embedId = "";
+        const embedLink = embeddedTweetContainer.querySelector('a[href*="/status/"]') as HTMLAnchorElement;
+        if (embedLink?.href) {
+            embedId = embedLink.href.split('/status/')[1]?.split('?')[0]?.split('/')[0] || "";
+        }
+
+        // Try 2: Look for clickable container with role="link" that might have the tweet
+        if (!embedId) {
+            const clickableContainer = embeddedTweetContainer.querySelector('div[role="link"][tabindex="0"]') as HTMLElement;
+            if (clickableContainer) {
+                // The embed exists but ID might be in parent link or time element
+                const timeElement = embeddedTweetContainer.querySelector('time') as HTMLTimeElement;
+                if (timeElement) {
+                    // We found an embedded tweet structure, use a placeholder ID from time
+                    embedId = timeElement.dateTime; // Fallback to timestamp
+                }
+            }
+        }
+
+        // Extract author name from User-Name div
+        const authorElement = embeddedTweetContainer.querySelector('div[data-testid="User-Name"]') as HTMLElement;
+        const authorText = authorElement?.innerText || "";
+
+        // Extract tweet text
+        const tweetTextElement = embeddedTweetContainer.querySelector('div[data-testid="tweetText"]') as HTMLElement;
+        const tweetText = tweetTextElement?.innerText || "";
+
+        // Return embed data if we have text and author, even without full ID
+        return (authorText && tweetText) ? {
+            type: "embed",
+            id: embedId || "unknown",
+            author: authorText,
+            tweet: tweetText,
+        } : null;
     });
+
+    if (embedData) {
+        metadata.embed = embedData;
+        logger.debug(`Detected embedded tweet: ${embedData.id} from ${embedData.author}`);
+    }
 
     await new Promise((r) => setTimeout(r, 100));
 
