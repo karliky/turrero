@@ -1,6 +1,6 @@
 'use client'
 import { EnrichedTweetMetadata, Tweet } from '../../infrastructure/types';
-import { FaYoutube, FaWikipediaW, FaBook, FaLinkedin } from "react-icons/fa";
+import { FaYoutube, FaWikipediaW, FaBook, FaLinkedin, FaLink } from "react-icons/fa";
 
 interface RelatedLinksProps {
   enrichedData: EnrichedTweetMetadata[];
@@ -20,12 +20,24 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     if (url.includes("goodreads.com")) return <FaBook className="text-xl" />;
     if (url.includes("wikipedia.org")) return <FaWikipediaW className="text-xl" />;
     if (url.includes("linkedin.com")) return <FaLinkedin className="text-xl" />;
-    return null;
+    return <FaLink className="text-xl" />;
   };
 
-  const cardLinks = enrichedData.filter(data => 
-    data.type === 'card' && data.url && isValidDomain(data.url)
-  );
+  const isValidCard = (data: EnrichedTweetMetadata) => {
+    if (data.type !== 'card') return false;
+    // Accept cards with a URL or a known domain (YouTube cards may have empty URLs)
+    return !!(data.url?.trim()) || !!(data.domain?.trim()) || !!(data.title?.trim());
+  };
+
+  const getEffectiveUrl = (data: EnrichedTweetMetadata): string => {
+    if (data.url?.trim()) return data.url;
+    if (data.domain?.includes('youtube.com') && data.title?.trim()) {
+      return `https://www.youtube.com/results?search_query=${encodeURIComponent(data.title.trim())}`;
+    }
+    return '#';
+  };
+
+  const cardLinks = enrichedData.filter(isValidCard);
   
   if (cardLinks.length === 0) return null;
 
@@ -39,14 +51,23 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     );
 
   const groupedLinks = cardLinks.reduce((acc, data) => {
-    if (!data.url) return acc;
-    
+    const domain = data.domain || data.url || '';
+
     let category = '';
-    if (data.url.includes('youtube.com')) category = 'Videos';
-    else if (data.url.includes('goodreads.com')) category = 'Libros';
-    else if (data.url.includes('wikipedia.org')) category = 'Wikipedia';
-    else if (data.url.includes('linkedin.com')) category = 'LinkedIn';
-    
+    if (domain.includes('youtube.com')) category = 'Videos';
+    else if (domain.includes('goodreads.com')) category = 'Libros';
+    else if (domain.includes('wikipedia.org')) category = 'Wikipedia';
+    else if (domain.includes('linkedin.com')) category = 'LinkedIn';
+    else {
+      // Use the actual domain name as category
+      try {
+        const hostname = domain.includes('://') ? new URL(domain).hostname : domain;
+        category = hostname.replace(/^www\./, '');
+      } catch {
+        category = domain;
+      }
+    }
+
     if (!acc[category]) acc[category] = [];
     acc[category]!.push(data);
     return acc;
@@ -65,7 +86,7 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
               {links.map((data, index) => (
                 <li key={index}>
                   <a
-                    href={data.url}
+                    href={getEffectiveUrl(data)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full text-left p-3 rounded-md transition-all duration-200
@@ -73,9 +94,9 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 mt-1">
-                        {data.url && getIcon(data.url)}
+                        {getIcon(data.domain || data.url || '')}
                       </div>
-                      <span className="line-clamp-2">{data.title}</span>
+                      <span className="line-clamp-2">{data.title?.trim() || data.url || data.domain}</span>
                     </div>
                   </a>
                 </li>

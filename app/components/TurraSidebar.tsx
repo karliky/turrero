@@ -20,7 +20,7 @@ export function TurraSidebar({ exam, thread }: TurraSidebarProps): React.ReactEl
     .flatMap((tweet) => tweetProvider.getAllEnrichedTweetData(tweet.id))
     .filter(
       (data): data is EnrichedTweetMetadata =>
-        !!data && (!!data.url || !!data.embeddedTweetId)
+        !!data && (!!data.url || !!data.embeddedTweetId || !!data.domain || !!data.title)
     );
 
   const hasPodcast = thread[0] ? tweetProvider.hasPodcast(thread[0].id) : false;
