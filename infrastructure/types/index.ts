@@ -115,7 +115,7 @@ export interface EnrichedTweetMetadata {
   /** Tweet ID */
   id: TweetId;
   /** Type of enrichment */
-  type: 'card' | 'embed' | 'media' | 'image' | 'embeddedTweet';
+  type: 'card' | 'embed' | 'media' | 'image';
   /** Image URL for cards/media */
   img?: string;
   /** External URL for cards */

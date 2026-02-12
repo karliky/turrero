@@ -288,6 +288,14 @@ async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
     img: tweet.metadata.img || "",
   } as EnrichedTweetData;
 
+  const isDuplicate = existingEnrichments.some(
+    (e) => e.id === enrichedData.id && e.type === enrichedData.type,
+  );
+  if (isDuplicate) {
+    logger.debug(`Skipping duplicate enrichment: ${enrichedData.id} (${enrichedData.type})`);
+    return;
+  }
+
   existingEnrichments.push(enrichedData);
   await dataAccess.saveTweetsEnriched(existingEnrichments);
 }
