@@ -379,16 +379,19 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             }
         }
 
-        // Extract author handle from User-Name div
-        // User-Name contains full name, @handle, ·, and date all with \n separators
-        // We need to extract ONLY the @handle
+        // Extract author from User-Name div
+        // User-Name innerText format: "Full Name\n@handle\n·\ndate"
         const authorElement = embeddedTweetContainer.querySelector('div[data-testid="User-Name"]') as HTMLElement;
         const authorFullText = authorElement?.innerText || "";
 
-        // Extract just the @handle by finding text that starts with @
-        // Format is typically: "Full Name\n@handle\n·\ndate"
+        const authorLines = authorFullText.split('\n').map(l => l.trim()).filter(Boolean);
+        const displayName = authorLines[0] || "";
         const handleMatch = authorFullText.match(/@(\w+)/);
-        const authorHandle = handleMatch ? handleMatch[1] : ""; // Extract handle without @
+        const authorHandle = handleMatch ? `@${handleMatch[1]}` : "";
+        // Store as "Display Name\n@handle" for consistent rendering
+        const authorDisplay = displayName && authorHandle
+            ? `${displayName}\n${authorHandle}`
+            : authorHandle || displayName;
 
         // Extract tweet text
         const tweetTextElement = embeddedTweetContainer.querySelector('div[data-testid="tweetText"]') as HTMLElement;
@@ -409,11 +412,11 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             }
         }
 
-        // Return embed data if we have text and author handle, even without full ID
-        return (authorHandle && tweetText) ? {
+        // Return embed data if we have text and author, even without full ID
+        return (authorDisplay && tweetText) ? {
             type: "embed",
             id: embedId || "unknown",
-            author: authorHandle, // Use clean handle without @
+            author: authorDisplay,
             tweet: tweetText,
             ...(embedUrl ? { url: embedUrl } : {}),
             ...(embedImg ? { img: embedImg } : {}),

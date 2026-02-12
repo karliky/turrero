@@ -205,6 +205,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
   const embeddings = getEmbeddings(tweet);
   const hasCard = embeddings.some((e) => e.type === "card" || isYoutubeCard(e));
   const hasMedia = embeddings.some((e) => e.type === "image" || e.type === "media");
+  const hasEmbed = embeddings.some((e) => e.type === "embed");
   // Fallback: show images from raw tweet metadata when no media in enriched data
   const fallbackImgs =
     !hasMedia && tweet.metadata?.imgs?.length ? tweet.metadata.imgs : [];
@@ -214,6 +215,11 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     tweet.metadata?.type === "card" &&
     (tweet.metadata?.url || tweet.metadata?.title)
       ? tweet.metadata
+      : null;
+  // Fallback: show embedded tweet from raw metadata when no embed in enriched data
+  const fallbackEmbed =
+    !hasEmbed && tweet.metadata?.embed?.author && tweet.metadata?.embed?.tweet
+      ? tweet.metadata.embed
       : null;
 
   return (
@@ -262,6 +268,41 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
           </a>
         </div>
       )}
+      {fallbackEmbed && (() => {
+        const handle = getEmbeddedAuthorHandle(fallbackEmbed.author || '');
+        const href = fallbackEmbed.url || (handle ? `https://x.com/${handle}` : '#');
+        return (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-4"
+            data-fallback-embed
+          >
+            <div className="p-4 border border-whiskey-200 rounded-lg hover:border-whiskey-300 transition-colors">
+              <div className="flex items-center gap-2 mb-2">
+                <FaTwitter className="text-whiskey-500" />
+                <span className="text-sm font-medium text-whiskey-900">
+                  {fallbackEmbed.author}
+                </span>
+              </div>
+              <p className="text-whiskey-800">{fallbackEmbed.tweet}</p>
+              {fallbackEmbed.img && (
+                <div className="mt-3 overflow-hidden rounded-lg">
+                  <Image
+                    src={normalizeImagePath(fallbackEmbed.img)}
+                    alt=""
+                    width={400}
+                    height={225}
+                    className="h-auto w-full grayscale hover:grayscale-0 transition-all duration-300"
+                    unoptimized={!fallbackEmbed.img.includes(".")}
+                  />
+                </div>
+              )}
+            </div>
+          </a>
+        );
+      })()}
       {fallbackImgs.length > 0 && (
         <div className="not-prose mt-4 max-w-[400px] mx-auto">
           <div className="overflow-hidden rounded-lg border border-whiskey-200 hover:border-whiskey-300 transition-colors space-y-2">
