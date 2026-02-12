@@ -2573,5 +2573,16 @@
         "url": "https://www.goodreads.com/book/show/41491.Silent_Night?ref=nav_sb_ss_1_17",
         "img": "./metadata/4pqR-mDH.jpg",
         "turraId": "1900814275511210417"
+    },
+    {
+        "id": "1903343552685596750",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The JOLT Effect: How High Performers Overcome Customer …",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/61418641-the-jolt-effect",
+        "img": "./metadata/G-eRNDuM.jpg",
+        "turraId": "1903343437719670927"
     }
 ]

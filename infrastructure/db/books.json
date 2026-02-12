@@ -6300,5 +6300,31 @@
             "Nonfiction",
             "Fiction"
         ]
+    },
+    {
+        "id": "1903343552685596750",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The JOLT Effect: How High Performers Overcome Customer …",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/61418641-the-jolt-effect",
+        "img": "./metadata/G-eRNDuM.jpg",
+        "turraId": "1903343437719670927",
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Entrepreneurship",
+            "Buisness",
+            "Audiobook",
+            "Psychology"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Psychology"
+        ]
     }
 ]

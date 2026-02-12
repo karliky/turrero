@@ -6314,5 +6314,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1903343437719670927",
+    "questions": [
+      {
+        "question": "¿Qué cambio clave hizo Nintendo con Wii frente a la “guerra de potencia”?",
+        "options": [
+          "Control por movimiento y accesibilidad",
+          "Más HD y gráficos realistas",
+          "Consola más cara y potente"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Según el texto, ¿contra qué decía Iwata que competía Nintendo?",
+        "options": [
+          "Indiferencia hacia los videojuegos",
+          "Sony y Microsoft",
+          "Sega y EA"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué condición destaca el texto para un sidestepping efectivo?",
+        "options": [
+          "Acertar en varias patas del sistema",
+          "Ganar solo por marketing",
+          "Ser el más potente"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
