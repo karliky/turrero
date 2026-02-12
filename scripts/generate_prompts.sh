@@ -20,6 +20,7 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $summary_file
     cat $turra_file >> $summary_file
     echo "</text>" >> $summary_file
+    echo "In markdown format." >> $summary_file
     echo "Prompt generado para infrastructure/db/tweets_summary.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
@@ -57,6 +58,7 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $map_file
     cat $turra_file >> $map_file
     echo "</text>" >> $map_file
+    echo "In markdown format." >> $map_file
     echo "Prompt generado para infrastructure/db/tweets_map.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
@@ -68,6 +70,7 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $exam_file
     cat $turra_file >> $exam_file
     echo "</text>" >> $exam_file
+    echo "In markdown format." >> $exam_file
     echo "Prompt generado para infrastructure/db/tweets_exam.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
