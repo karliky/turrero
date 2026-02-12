@@ -6346,5 +6346,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1905877658904183080",
+    "questions": [
+      {
+        "question": "¿Qué se afirma sobre el maltrato a personas con AACC en el texto?",
+        "options": [
+          "Es frecuente y no trivial (incluye bullying)",
+          "Es inevitable por naturaleza",
+          "Es un mito mediático"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Para qué sirven los mean field games según el texto?",
+        "options": [
+          "Modelar decisiones de muchos agentes con expectativas futuras",
+          "Predecir con precisión lineal cualquier sistema",
+          "Medir CI individual con exactitud"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué idea central se defiende sobre talento superdotado y un país/empresa?",
+        "options": [
+          "Conviene protegerlo e incentivarlo por su impacto sistémico",
+          "Debe ignorarse por ser “culto al individuo”",
+          "Solo importa si produce métricas directas inmediatas"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
