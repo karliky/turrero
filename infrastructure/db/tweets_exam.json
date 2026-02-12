@@ -6282,5 +6282,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1898290632457679270",
+    "questions": [
+      {
+        "question": "¿Qué distingue O*NET al valorar una aptitud en una profesión?",
+        "options": [
+          "Importancia vs nivel requerido",
+          "Nivel vs salario",
+          "Importancia vs antigüedad"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Cómo define el texto la aptitud de complex problem solving (cps) en O*NET?",
+        "options": [
+          "Identificar problemas, revisar info, evaluar opciones, implementar soluciones",
+          "Memorizar procedimientos y aplicarlos",
+          "Optimizar tareas repetitivas"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué perfil aparece con mayor impacto de decisiones en la lista citada?",
+        "options": [
+          "Médicos de familia (100)",
+          "Controladores aéreos (96)",
+          "Directores ejecutivos (94)"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
