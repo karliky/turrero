@@ -161,9 +161,10 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
 
       case 'embed': {
         const handle = getEmbeddedAuthorHandle(embed.author || '');
-        const href = embed.embeddedTweetId && embed.embeddedTweetId !== 'unknown'
+        const reconstructedUrl = embed.embeddedTweetId && embed.embeddedTweetId !== 'unknown'
           ? `https://x.com/${handle}/status/${embed.embeddedTweetId}`
           : `https://x.com/${handle}`;
+        const href = embed.url || reconstructedUrl;
         return (
           <a
             href={href}
@@ -179,6 +180,18 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
                 </span>
               </div>
               <p className="text-whiskey-800">{embed.tweet}</p>
+              {embed.img && (
+                <div className="mt-3 overflow-hidden rounded-lg">
+                  <Image
+                    src={normalizeImagePath(embed.img)}
+                    alt=""
+                    width={400}
+                    height={225}
+                    className="h-auto w-full grayscale hover:grayscale-0 transition-all duration-300"
+                    unoptimized={!embed.img.includes(".")}
+                  />
+                </div>
+              )}
             </div>
           </a>
         );
@@ -190,7 +203,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
   };
 
   const embeddings = getEmbeddings(tweet);
-  const hasCard = embeddings.some((e) => e.type === "card");
+  const hasCard = embeddings.some((e) => e.type === "card" || isYoutubeCard(e));
   const hasMedia = embeddings.some((e) => e.type === "image" || e.type === "media");
   // Fallback: show images from raw tweet metadata when no media in enriched data
   const fallbackImgs =

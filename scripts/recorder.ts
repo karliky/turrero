@@ -3,7 +3,7 @@
 
 import dotenv from "dotenv";
 import { dirname } from "@std/path";
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import process from "node:process";
 import puppeteer from "puppeteer-core";
@@ -25,6 +25,38 @@ dotenv.config();
 const logger = createDenoLogger("recorder");
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
+
+// --- Incremental save & completion tracking ---
+
+const completedPath = join(__dirname, "../infrastructure/db/.scrape_completed.json");
+
+function saveThreadProgress(
+    outputFilePath: string,
+    threadId: string,
+    threadTweets: Tweet[],
+): void {
+    const data: Tweet[][] = JSON.parse(readFileSync(outputFilePath, "utf-8"));
+    const idx = data.findIndex((t) => t.length > 0 && t[0]?.id === threadId);
+    if (idx !== -1) {
+        data[idx] = threadTweets;
+    } else {
+        data.push(threadTweets);
+    }
+    const tmpPath = outputFilePath + ".tmp";
+    writeFileSync(tmpPath, JSON.stringify(data, null, 4));
+    renameSync(tmpPath, outputFilePath);
+}
+
+function loadCompleted(): Set<string> {
+    if (!existsSync(completedPath)) return new Set();
+    return new Set(JSON.parse(readFileSync(completedPath, "utf-8")) as string[]);
+}
+
+function markCompleted(threadId: string): void {
+    const completed = loadCompleted();
+    completed.add(threadId);
+    writeFileSync(completedPath, JSON.stringify([...completed], null, 2));
+}
 
 // Define device configuration for iPhone 12
 const iPhone12 = {
@@ -54,6 +86,8 @@ interface TweetMetadata {
         id?: string;
         author?: string;
         tweet?: string;
+        url?: string;
+        img?: string;
     };
 }
 
@@ -262,7 +296,18 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
 
         // Check for images and GIFs - only inside tweetPhoto containers to avoid false positives
         // Note: X.com represents GIFs as <video> elements with poster thumbnails
-        const tweetPhotos = article.querySelectorAll('div[data-testid="tweetPhoto"]');
+        // Exclude tweetPhotos inside the embedded tweet container (div[aria-labelledby])
+        // to avoid misattributing embed media to the main tweet.
+        // We find the specific embed container first, then check containment —
+        // using closest() would be too broad since ancestor elements may also have aria-labelledby.
+        const allAriaContainers = article.querySelectorAll('div[aria-labelledby]');
+        const embeddedContainer = Array.from(allAriaContainers).find(
+            el => el.querySelector('div[data-testid="User-Name"]')
+        ) ?? null;
+        const allTweetPhotos = article.querySelectorAll('div[data-testid="tweetPhoto"]');
+        const tweetPhotos = Array.from(allTweetPhotos).filter(
+            el => !embeddedContainer || !embeddedContainer.contains(el)
+        );
         const imgs = Array.from(tweetPhotos)
             .map((container, index) => {
                 // First check for regular images
@@ -300,15 +345,20 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
         const tweetContainer = document.querySelector(
             'article[tabindex="-1"][role="article"][data-testid="tweet"]',
         );
-        const embeddedTweetContainer = tweetContainer?.querySelector("div[aria-labelledby]");
+        const allEmbedCandidates = tweetContainer?.querySelectorAll('div[aria-labelledby]') ?? [];
+        const embeddedTweetContainer = Array.from(allEmbedCandidates).find(
+            el => el.querySelector('div[data-testid="User-Name"]')
+        ) ?? null;
 
         if (!embeddedTweetContainer) return null;
 
-        // Extract embed ID from multiple possible sources
+        // Extract embed ID and URL from multiple possible sources
         // Try 1: Look for direct link with /status/ in href
         let embedId = "";
+        let embedUrl = "";
         const embedLink = embeddedTweetContainer.querySelector('a[href*="/status/"]') as HTMLAnchorElement;
         if (embedLink?.href) {
+            embedUrl = embedLink.href;
             embedId = embedLink.href.split('/status/')[1]?.split('?')[0]?.split('/')[0] || "";
         }
 
@@ -316,6 +366,13 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
         if (!embedId) {
             const clickableContainer = embeddedTweetContainer.querySelector('div[role="link"][tabindex="0"]') as HTMLElement;
             if (clickableContainer) {
+                // Try to extract URL from any anchor inside the clickable container
+                if (!embedUrl) {
+                    const anyLink = clickableContainer.querySelector('a[href*="/status/"]') as HTMLAnchorElement;
+                    if (anyLink?.href) {
+                        embedUrl = anyLink.href;
+                    }
+                }
                 // The embed exists but we couldn't find the ID
                 // Leave embedId empty rather than using a timestamp
                 embedId = "";
@@ -337,12 +394,29 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
         const tweetTextElement = embeddedTweetContainer.querySelector('div[data-testid="tweetText"]') as HTMLElement;
         const tweetText = tweetTextElement?.innerText || "";
 
+        // Extract image/GIF from embedded tweet (if any)
+        let embedImg = "";
+        const embedTweetPhoto = embeddedTweetContainer.querySelector('div[data-testid="tweetPhoto"]');
+        if (embedTweetPhoto) {
+            const video = embedTweetPhoto.querySelector('video') as HTMLVideoElement;
+            if (video) {
+                embedImg = video.poster || video.src || "";
+            } else {
+                const img = embedTweetPhoto.querySelector('img') as HTMLImageElement;
+                if (img) {
+                    embedImg = img.src || "";
+                }
+            }
+        }
+
         // Return embed data if we have text and author handle, even without full ID
         return (authorHandle && tweetText) ? {
             type: "embed",
             id: embedId || "unknown",
             author: authorHandle, // Use clean handle without @
             tweet: tweetText,
+            ...(embedUrl ? { url: embedUrl } : {}),
+            ...(embedImg ? { img: embedImg } : {}),
         } : null;
     });
 
@@ -466,17 +540,34 @@ async function getAllTweets({
     tweetIds: string[];
     outputFilePath: string;
 }): Promise<void> {
-    for (const tweetId of tweetIds) {
+    for (const [threadIndex, tweetId] of tweetIds.entries()) {
+        const threadStart = Date.now();
+        logger.info(`[${threadIndex + 1}/${tweetIds.length}] Starting thread ${tweetId}`);
+
         // Check if page is still valid before continuing
         if (page.isClosed()) {
             logger.warn("Page is closed, stopping scraping");
             break;
         }
 
+        // --- Resume detection ---
+        const existingData: Tweet[][] = JSON.parse(readFileSync(outputFilePath, "utf-8"));
+        const existingThread = existingData.find((t) => t.length > 0 && t[0]?.id === tweetId);
+
+        let tweets: Tweet[] = [];
+        let initialUrl: string;
+
+        if (existingThread && existingThread.length > 0) {
+            const lastSaved = existingThread[existingThread.length - 1]!;
+            tweets = [...existingThread];
+            logger.info(`Resuming thread ${tweetId} from tweet ${tweets.length} (last: ${lastSaved.id})`);
+            initialUrl = `https://x.com/${author || "Recuenco"}/status/${lastSaved.id}`;
+        } else {
+            initialUrl = `https://x.com/${author || "Recuenco"}/status/${tweetId}`;
+        }
+
         try {
-            await page.goto(
-                `https://x.com/${author || "Recuenco"}/status/${tweetId}`,
-            );
+            await page.goto(initialUrl);
         } catch (error) {
             if (error instanceof Error &&
                 (error.message.includes("detached") ||
@@ -524,7 +615,6 @@ async function getAllTweets({
         }
 
         let stopped = false;
-        const tweets: Tweet[] = [];
 
         while (!stopped) {
             let tweet, mustStop;
@@ -545,21 +635,19 @@ async function getAllTweets({
             }
 
             if (mustStop) {
-                stopped = true;
-                const existingTweets = JSON.parse(
-                    readFileSync(outputFilePath, "utf-8"),
-                );
-                existingTweets.push(tweets);
-                writeFileSync(
-                    outputFilePath,
-                    JSON.stringify(existingTweets, null, 4),
-                );
+                markCompleted(tweetId);
+                logger.info(`[${threadIndex + 1}/${tweetIds.length}] Thread ${tweetId} completed: ${tweets.length} tweets [${Math.round((Date.now() - threadStart) / 1000)}s]`);
                 author = undefined;
                 break;
             }
 
-            tweets.push(tweet);
-            logger.debug("finding lastTweetFound");
+            // Dedup guard: skip if already saved (happens on resume — first iteration re-parses last saved tweet)
+            if (!tweets.some((t) => t.id === tweet.id)) {
+                tweets.push(tweet);
+                saveThreadProgress(outputFilePath, tweetId, tweets);
+                logger.info(`[${threadIndex + 1}/${tweetIds.length}] Tweet ${tweets.length} (${tweet.id}) [${Math.round((Date.now() - threadStart) / 1000)}s]`);
+            }
+
             logger.debug("Navigating to next tweet");
 
             try {
@@ -651,16 +739,9 @@ async function getAllTweets({
                 });
 
                 if (navResult.endOfThread) {
-                    logger.info("End of thread reached (no next tweet), saving and continuing");
-                    stopped = true;
-                    const existingTweets = JSON.parse(
-                        readFileSync(outputFilePath, "utf-8"),
-                    );
-                    existingTweets.push(tweets);
-                    writeFileSync(
-                        outputFilePath,
-                        JSON.stringify(existingTweets, null, 4),
-                    );
+                    logger.info("End of thread reached (no next tweet)");
+                    markCompleted(tweetId);
+                    logger.info(`[${threadIndex + 1}/${tweetIds.length}] Thread ${tweetId} completed: ${tweets.length} tweets [${Math.round((Date.now() - threadStart) / 1000)}s]`);
                     author = undefined;
                     break;
                 }
@@ -676,24 +757,30 @@ async function getAllTweets({
                 ]);
             } catch (error) {
                 logger.error("Navigation error:", error);
+
+                const isDetached = error instanceof Error &&
+                    (error.message.includes("detached") ||
+                     error.message.includes("Connection closed") ||
+                     error.message.includes("Target closed"));
+
+                if (isDetached || page.isClosed()) {
+                    logger.warn("Page detached — stopping thread (data already saved).");
+                    stopped = true;
+                    author = undefined;
+                    break;
+                }
+
+                // Page still alive — try reload recovery
                 await new Promise((resolve) => setTimeout(resolve, 2000));
-                await page.reload();
                 try {
+                    await page.reload();
                     await page.waitForSelector(
                         'article[tabindex="-1"][role="article"][data-testid="tweet"]',
                         { timeout: 8000 },
                     );
                 } catch (reloadErr) {
-                    logger.error("Reload recovery failed, skipping thread", reloadErr);
+                    logger.error("Reload recovery failed", reloadErr);
                     stopped = true;
-                    const existingTweets = JSON.parse(
-                        readFileSync(outputFilePath, "utf-8"),
-                    );
-                    existingTweets.push(tweets);
-                    writeFileSync(
-                        outputFilePath,
-                        JSON.stringify(existingTweets, null, 4),
-                    );
                     author = undefined;
                     break;
                 }
@@ -734,6 +821,8 @@ async function main() {
     const args = process.argv.slice(2);
     const testIndex = args.indexOf("--test");
     const testMode = testIndex !== -1;
+    const fixTweetIndex = args.indexOf("--fix-tweet");
+    const fixTweetMode = fixTweetIndex !== -1;
 
     // Ensure Chrome is installed
     const buildId = await resolveBuildId(
@@ -763,12 +852,17 @@ async function main() {
             headless: false,
             slowMo: 50,
         }
+        : fixTweetMode
+        ? {
+            headless: true,
+            slowMo: 100,
+        }
         : {
             headless: true,
             slowMo: Math.floor(Math.random() * 150) + 750,
         };
 
-    logger.info(testMode ? "Launching test mode..." : "Launching...");
+    logger.info(testMode ? "Launching test mode..." : fixTweetMode ? "Launching fix-tweet mode..." : "Launching...");
 
     const launchOptions: Record<string, unknown> = {
         ...browserProps,
@@ -837,19 +931,116 @@ async function main() {
 
             await fetchSingleTweet({ page, expectedAuthor: tweet.author });
             logger.info("Correct exit");
+        } else if (fixTweetMode) {
+            const tweetIdsToFix = args.slice(fixTweetIndex + 1);
+            if (tweetIdsToFix.length === 0) {
+                logger.error("Provide one or more tweet IDs after --fix-tweet");
+                process.exit(1);
+            }
+
+            const tweetsPath = join(__dirname, "../infrastructure/db/tweets.json");
+            const data: Tweet[][] = JSON.parse(readFileSync(tweetsPath, "utf-8"));
+
+            // Locate each tweet in the data structure
+            const targets: Array<{ tweetId: string; threadIdx: number; tweetIdx: number }> = [];
+            for (const id of tweetIdsToFix) {
+                let found = false;
+                for (let ti = 0; ti < data.length; ti++) {
+                    const thread = data[ti]!;
+                    const tweetIdx = thread.findIndex((t) => t.id === id);
+                    if (tweetIdx !== -1) {
+                        targets.push({ tweetId: id, threadIdx: ti, tweetIdx });
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    logger.error(`Tweet ${id} not found in any thread`);
+                    process.exit(1);
+                }
+            }
+
+            logger.info(`Fixing ${targets.length} tweet(s)...`);
+
+            // Navigate and re-parse each tweet
+            for (const target of targets) {
+                const oldTweet = data[target.threadIdx]![target.tweetIdx]!;
+                logger.info(`Re-scraping tweet ${target.tweetId} (was: "${oldTweet.tweet.slice(0, 60)}...")`);
+
+                await page!.goto(`https://x.com/Recuenco/status/${target.tweetId}`);
+                await page!.waitForSelector('div[data-testid="tweetText"]');
+
+                try { await rejectCookies(page!); } catch { /* cookie popup not present */ }
+
+                const newTweet = await parseTweet({ page: page! });
+                data[target.threadIdx]![target.tweetIdx] = newTweet;
+
+                logger.info(`  -> New: "${newTweet.tweet.slice(0, 60)}..." | metadata: ${newTweet.metadata.type ?? "none"}`);
+            }
+
+            // Atomic save
+            const tmpPath = tweetsPath + ".tmp";
+            writeFileSync(tmpPath, JSON.stringify(data, null, 4));
+            renameSync(tmpPath, tweetsPath);
+            logger.info(`Saved ${targets.length} fixed tweet(s) to tweets.json`);
+
+            // Remove from enriched so enrichment picks them up fresh
+            const enrichedPath = join(__dirname, "../infrastructure/db/tweets_enriched.json");
+            const enriched = JSON.parse(readFileSync(enrichedPath, "utf-8")) as Array<{ id: string }>;
+            const fixedIds = new Set(tweetIdsToFix);
+            const remaining = enriched.filter((e) => !fixedIds.has(e.id));
+            if (remaining.length < enriched.length) {
+                const enrichedTmpPath = enrichedPath + ".tmp";
+                writeFileSync(enrichedTmpPath, JSON.stringify(remaining, null, 4));
+                renameSync(enrichedTmpPath, enrichedPath);
+                logger.info(`Removed ${enriched.length - remaining.length} enrichment(s) — run 'deno task enrich' to regenerate`);
+            }
         } else {
-            const existingTweetsData = JSON.parse(
-                readFileSync(
-                    join(__dirname, "../infrastructure/db/tweets.json"),
-                    "utf-8",
-                ),
+            const tweetsPath = join(__dirname, "../infrastructure/db/tweets.json");
+            const outputFilePath = tweetsPath;
+
+            // --- Handle --rescrape <threadId> ---
+            const rescrapeIndex = args.indexOf("--rescrape");
+            if (rescrapeIndex !== -1) {
+                const threadId = args[rescrapeIndex + 1];
+                if (!threadId) {
+                    logger.error("Provide thread ID after --rescrape");
+                    process.exit(1);
+                }
+
+                const tweetsData: Tweet[][] = JSON.parse(readFileSync(tweetsPath, "utf-8"));
+                const idx = tweetsData.findIndex((t) => t.length > 0 && t[0]?.id === threadId);
+                if (idx !== -1) {
+                    const ids = tweetsData[idx]!.map((t) => t.id);
+                    tweetsData.splice(idx, 1);
+                    writeFileSync(tweetsPath, JSON.stringify(tweetsData, null, 4));
+
+                    const enrichedPath = join(__dirname, "../infrastructure/db/tweets_enriched.json");
+                    const enriched = JSON.parse(readFileSync(enrichedPath, "utf-8")) as Array<{ id: string }>;
+                    const idSet = new Set(ids);
+                    const filtered = enriched.filter((e) => !idSet.has(e.id));
+                    writeFileSync(enrichedPath, JSON.stringify(filtered, null, 4));
+                    logger.info(`Removed thread ${threadId}: ${ids.length} tweets + ${enriched.length - filtered.length} enrichments`);
+                } else {
+                    logger.info(`Thread ${threadId} not found in tweets.json — will scrape as new`);
+                }
+
+                const completedSet = loadCompleted();
+                completedSet.delete(threadId);
+                writeFileSync(completedPath, JSON.stringify([...completedSet], null, 2));
+                logger.info(`Cleared completion flag for ${threadId}`);
+                // Falls through to normal scrape — picked up as "new"
+            }
+
+            const existingTweetsData: Tweet[][] = JSON.parse(
+                readFileSync(tweetsPath, "utf-8"),
             );
-            const tweets = parseCSV(
+            const csvTweets = parseCSV(
                 join(__dirname, "../infrastructure/db/turras.csv"),
             );
 
-            logger.debug("Total tweets in CSV:", tweets.length);
-            const emptyIds = tweets.filter((t) => !t.id || t.id.trim() === "");
+            logger.debug("Total tweets in CSV:", csvTweets.length);
+            const emptyIds = csvTweets.filter((t) => !t.id || t.id.trim() === "");
             if (emptyIds.length > 0) {
                 logger.warn("Found tweets with empty IDs in CSV:", emptyIds.length);
                 emptyIds.forEach((tweet, index) => {
@@ -858,47 +1049,48 @@ async function main() {
             }
 
             const existingTweets = existingTweetsData.reduce(
-                (acc: string[], tweets: Tweet[]) => {
-                    if (tweets && tweets.length > 0 && tweets[0]) {
-                        acc.push(tweets[0].id);
+                (acc: string[], threads: Tweet[]) => {
+                    if (threads && threads.length > 0 && threads[0]) {
+                        acc.push(threads[0].id);
                     }
                     return acc;
                 },
                 [],
             );
 
-            const allCsvIds = tweets
+            // Bootstrap: first time, seed completed set from existing threads
+            if (!existsSync(completedPath)) {
+                const allExistingIds = existingTweetsData
+                    .filter((t: Tweet[]) => t.length > 0)
+                    .map((t: Tweet[]) => t[0]!.id);
+                writeFileSync(completedPath, JSON.stringify(allExistingIds, null, 2));
+                logger.info(`Bootstrap: marked ${allExistingIds.length} existing threads as completed`);
+            }
+
+            const completed = loadCompleted();
+
+            const allCsvIds = csvTweets
                 .map((tweet) => tweet.id)
                 .filter((id) => id && id.trim() !== "");
-            const tweetIds = allCsvIds.filter(
+
+            const newIds = allCsvIds.filter(
                 (id) => !existingTweets.includes(id),
             );
-            const alreadyInDb = allCsvIds.filter((id) =>
-                existingTweets.includes(id),
+            const incompleteIds = allCsvIds.filter(
+                (id) => existingTweets.includes(id) && !completed.has(id),
             );
+            const tweetIds = [...incompleteIds, ...newIds];
 
-            logger.info("Processing a total of tweets:", tweetIds.length);
+            logger.info(`Threads — new: ${newIds.length}, resume: ${incompleteIds.length}, done: ${completed.size}`);
+
             if (tweetIds.length > 0) {
                 logger.info("Tweet IDs to process:", tweetIds);
             } else {
                 logger.info(
                     "No tweets to process - all threads are up to date",
                 );
-                if (alreadyInDb.length > 0) {
-                    logger.info(
-                        "IDs already in tweets.json (skipped):",
-                        alreadyInDb.slice(0, 10).join(", ") +
-                            (alreadyInDb.length > 10
-                                ? ` ... and ${alreadyInDb.length - 10} more`
-                                : ""),
-                    );
-                }
             }
 
-            const outputFilePath = join(
-                __dirname,
-                "../infrastructure/db/tweets.json",
-            );
             let idsToProcess = tweetIds;
             const maxRetries = 3;
             let attempt = 0;
@@ -927,17 +1119,9 @@ async function main() {
                         logger.error("Max retries reached, stopping.");
                         throw err;
                     }
-                    const currentData = JSON.parse(
-                        readFileSync(outputFilePath, "utf-8"),
-                    );
-                    const doneIds = currentData.reduce(
-                        (acc: string[], threads: Tweet[]) => {
-                            if (threads?.[0]?.id) acc.push(threads[0].id);
-                            return acc;
-                        },
-                        [],
-                    );
-                    idsToProcess = idsToProcess.filter((id) => !doneIds.includes(id));
+                    // Re-check completed set for threads that finished before crash
+                    const updatedCompleted = loadCompleted();
+                    idsToProcess = idsToProcess.filter((id) => !updatedCompleted.has(id));
                     logger.info("Retrying with %s remaining threads", idsToProcess.length);
                     browser = await puppeteer.launch(launchOptions);
                     page = await browser.newPage();

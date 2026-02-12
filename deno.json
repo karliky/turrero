@@ -90,6 +90,8 @@
     "tasks": {
         "dev": "deno run --allow-all --watch scripts/recorder.ts",
         "scrape": "deno run --allow-all scripts/recorder.ts",
+        "rescrape": "deno run --allow-all scripts/recorder.ts --rescrape",
+        "fix-tweet": "deno run --allow-all scripts/recorder.ts --fix-tweet",
         "validate": "deno run --allow-all scripts/validate-types.ts",
         "enrich": "deno run --allow-all scripts/tweets_enrichment.ts",
         "books": "deno run --allow-all scripts/generate-books.ts",

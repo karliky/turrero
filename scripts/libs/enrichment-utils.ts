@@ -5,11 +5,11 @@
 
 import * as cheerio from 'cheerio';
 import type { Page } from 'puppeteer';
-import type {
-    ImageMetadata,
+import {
     TweetMetadataType,
-    ScriptLogger,
-    EnrichedTweetData
+    type ImageMetadata,
+    type ScriptLogger,
+    type EnrichedTweetData
 } from '../../infrastructure/types/index.ts';
 
 // ============================================================================
@@ -296,7 +296,9 @@ export class TweetEnricher {
         
         delete tweet.metadata.embed;
         tweet.metadata.img = filePath;
-        tweet.metadata.type = 'image' as TweetMetadataType;
+        if (tweet.metadata.type !== TweetMetadataType.CARD) {
+            tweet.metadata.type = 'image' as TweetMetadataType;
+        }
         
         if (onSave) onSave(tweet);
     }

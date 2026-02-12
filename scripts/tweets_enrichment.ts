@@ -222,13 +222,16 @@ async function processEmbeddedTweet(
     (e) => e.id === tweet.id && e.type === "embed",
   );
   if (!alreadyHasEmbed) {
-    existingEnrichments.push({
+    const embedEntry: EnrichedTweetData = {
       id: tweet.id,
       type: "embed",
       embeddedTweetId,
       author: authorDisplay,
       tweet: embed.tweet,
-    });
+    };
+    if (embed.url) embedEntry.url = embed.url;
+    if (embed.img) embedEntry.img = embed.img;
+    existingEnrichments.push(embedEntry);
     await dataAccess.saveTweetsEnriched(existingEnrichments);
   }
 }

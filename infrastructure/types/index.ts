@@ -42,6 +42,8 @@ export interface TweetEmbedMetadata {
   id: TweetId;
   author: string;
   tweet: string;
+  url?: string;
+  img?: string;
 }
 
 /** Image metadata within a tweet */
