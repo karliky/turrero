@@ -2584,5 +2584,16 @@
         "url": "https://www.goodreads.com/book/show/61418641-the-jolt-effect",
         "img": "./metadata/G-eRNDuM.jpg",
         "turraId": "1903343437719670927"
+    },
+    {
+        "id": "1908407175770177730",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Muay Thai Basics: Introductory Thai Boxing Techniques",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/661185.Muay_Thai_Basics",
+        "img": "./metadata/cMvPwpua.jpg",
+        "turraId": "1908407119902024001"
     }
 ]

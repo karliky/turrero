@@ -6378,5 +6378,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1908407119902024001",
+    "questions": [
+      {
+        "question": "¿Qué concepto físico se usa para explicar el equilibrio al esquivar?",
+        "options": [
+          "Centro de gravedad",
+          "Energía potencial",
+          "Fricción cinética"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué debe ocurrir para mantener el equilibrio tras mover el cuerpo al esquivar?",
+        "options": [
+          "Reubicar el CdG dentro de la base de soporte",
+          "Mantener el CdG en el punto inicial",
+          "Eliminar la tensión muscular"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Según el texto, ¿qué implica el sidestepping en una empresa?",
+        "options": [
+          "Reajuste orquestado y cambio de posiciones de poder",
+          "Solo reflejos rápidos",
+          "Seguir igual y esperar"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
