@@ -6326,5 +6326,24 @@
             "Self Help",
             "Psychology"
         ]
+    },
+    {
+        "id": "1908407175770177730",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Muay Thai Basics: Introductory Thai Boxing Techniques",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/661185.Muay_Thai_Basics",
+        "img": "./metadata/cMvPwpua.jpg",
+        "turraId": "1908407119902024001",
+        "goodreadsCategories": [
+            "Martial Arts",
+            "War"
+        ],
+        "categories": [
+            "Nonfiction",
+            "History"
+        ]
     }
 ]

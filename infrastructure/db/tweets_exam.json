@@ -6410,5 +6410,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1918555369426522309",
+    "questions": [
+      {
+        "question": "¿Qué aborda el texto como tema central aplicado a empresas?",
+        "options": [
+          "Decadencia y pasado glorioso",
+          "Estrategia de pricing",
+          "Automatización de ventas"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué obra se usa como vehículo principal para hablar de decadencia empresarial?",
+        "options": [
+          "Ventiladores Clyde",
+          "Wimbledon Green",
+          "La decadencia de Occidente"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Según el texto, ¿por qué es fácil analizar la decadencia empresarial a posteriori?",
+        "options": [
+          "Porque hay tiempo para reflexionar tras las heridas",
+          "Porque siempre hay datos perfectos",
+          "Porque los ciclos se predicen con precisión"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
