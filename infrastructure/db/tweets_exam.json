@@ -6474,5 +6474,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1923622497406140517",
+    "questions": [
+      {
+        "question": "Según el texto, ¿qué condición hace más viable que el mismo liderazgo lidere la reinvención?",
+        "options": [
+          "Admitir errores y cambiar enfoque",
+          "Negar fallos y sostener el plan",
+          "Recortar costes sin tocar la estrategia"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué ejemplo se presenta como reinvención con un outsider manteniendo parte del equipo directivo?",
+        "options": [
+          "IBM con Louis Gerstner",
+          "Kodak con su cúpula histórica",
+          "Blockbuster con John Antioco"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué efecto se atribuye al burnout en organizaciones bajo presión según el texto?",
+        "options": [
+          "Menos productividad y más errores",
+          "Más innovación y mejor foco",
+          "Sin impacto medible"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]

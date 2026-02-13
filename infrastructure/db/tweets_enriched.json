@@ -26299,5 +26299,143 @@
         "description": "",
         "url": "https://x.com/Recuenco/status/1921093033174429862/photo/1",
         "img": "./metadata/GqkX7j7XwAANFjQ.jpg"
+    },
+    {
+        "id": "1918555371750203759",
+        "type": "card",
+        "media": "youtube",
+        "domain": "youtube.com",
+        "title": "Extreme - Decadence Dance",
+        "description": "",
+        "url": "",
+        "img": "./metadata/mYa76W8U.jpg"
+    },
+    {
+        "id": "1921092903595606417",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Mañana plato fuera de carta. Siempre habrá tiempo para volver al arco macro de la decadencia empresarial."
+    },
+    {
+        "id": "1921093004007272463",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1921093004007272463/photo/1",
+        "img": "./metadata/GqkX5_aWEAEr7Y3.png"
+    },
+    {
+        "id": "1923622498626609658",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Mañana seguimos con el arco pendiente.\nShow must go on.",
+        "img": "https://pbs.twimg.com/tweet_video_thumb/GrERsWzWIAAre5J.jpg"
+    },
+    {
+        "id": "1923622501663334493",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Leadership Without Easy Answers",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/6638.Leadership_Without_Easy_Answers",
+        "img": "./metadata/_JGMcYhO.jpg"
+    },
+    {
+        "id": "1923622510462902758",
+        "type": "embed",
+        "embeddedTweetId": "1309774209590210561",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Estoy convencido que en la estrategia de Jobs influyó de manera crítica el hecho de que solo tuvieran caja para 18 meses antes de quebrar cuando retomó el control de Apple.",
+        "img": "https://pbs.twimg.com/tweet_video_thumb/Ei1Asn-XsAAmz7k.jpg"
+    },
+    {
+        "id": "1923622522504773914",
+        "type": "embed",
+        "embeddedTweetId": "989046458728042497",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Le ha pasado a Kodak. Le ha pasado a Blockbuster.. Le pasó a BlackBerry. Los modelos de negocio funcionan hasta que dejan de funcionar."
+    },
+    {
+        "id": "1923622525344346115",
+        "type": "embed",
+        "embeddedTweetId": "1363076484483715072",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "En el entrego a la suerte un porcentaje brutal, y del porcentaje brutal que le corresponde a la suerte, el timing se lleva la parte del leon.",
+        "img": "https://pbs.twimg.com/tweet_video_thumb/Euqe1V-WgAM4_y2.jpg"
+    },
+    {
+        "id": "1923622532382371858",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Stress Effect: Why Smart Leaders Make Dumb Decision…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/7724243-the-stress-effect",
+        "img": "./metadata/-T1GW1kA.jpg"
+    },
+    {
+        "id": "1923622542704554379",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1923622542704554379/photo/1",
+        "img": "./metadata/GrIUgaOW8AAix07.jpg"
+    },
+    {
+        "id": "1923622558101881195",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1923622558101881195/photo/1",
+        "img": "./metadata/GrIUhSLX0AAfzhs.jpg"
+    },
+    {
+        "id": "1923622566528274468",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1923622566528274468/photo/1",
+        "img": "./metadata/GrIUhv0XYAABRWj.jpg"
+    },
+    {
+        "id": "1923622568013013429",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Who Says Elephants Can't Dance? Inside IBM's Historic T…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/603985.Who_Says_Elephants_Can_t_Dance_Inside_IBM_s_Historic_Turnaround",
+        "img": "./metadata/pv0gfbRF.jpg"
+    },
+    {
+        "id": "1923622569002881420",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Innovator's Dilemma: When New Technologies Cause Gr…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/26160019-the-innovator-s-dilemma",
+        "img": "./metadata/CB8-NtEq.jpg"
+    },
+    {
+        "id": "1923622569967554777",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "That Will Never Work: The Birth of Netflix and the Amaz…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/44428950-that-will-never-work",
+        "img": ""
     }
 ]

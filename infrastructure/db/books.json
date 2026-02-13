@@ -6345,5 +6345,130 @@
             "Nonfiction",
             "History"
         ]
+    },
+    {
+        "id": "1923622501663334493",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Leadership Without Easy Answers",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/6638.Leadership_Without_Easy_Answers",
+        "img": "./metadata/_JGMcYhO.jpg",
+        "turraId": "1923622497406140517",
+        "goodreadsCategories": [
+            "Leadership",
+            "Business",
+            "Nonfiction",
+            "Management",
+            "Self Help",
+            "Professional Development",
+            "Personal Development"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help",
+            "Personal Development"
+        ]
+    },
+    {
+        "id": "1923622532382371858",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Stress Effect: Why Smart Leaders Make Dumb Decision…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/7724243-the-stress-effect",
+        "img": "./metadata/-T1GW1kA.jpg",
+        "turraId": "1923622497406140517",
+        "goodreadsCategories": [
+            "Leadership",
+            "Nonfiction",
+            "Business",
+            "Self Help"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction",
+            "Self Help"
+        ]
+    },
+    {
+        "id": "1923622568013013429",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Who Says Elephants Can't Dance? Inside IBM's Historic T…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/603985.Who_Says_Elephants_Can_t_Dance_Inside_IBM_s_Historic_Turnaround",
+        "img": "./metadata/pv0gfbRF.jpg",
+        "turraId": "1923622497406140517",
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Biography",
+            "Leadership",
+            "Management",
+            "History",
+            "Buisness"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction",
+            "Biography",
+            "History"
+        ]
+    },
+    {
+        "id": "1923622569002881420",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Innovator's Dilemma: When New Technologies Cause Gr…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/26160019-the-innovator-s-dilemma",
+        "img": "./metadata/CB8-NtEq.jpg",
+        "turraId": "1923622497406140517",
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Entrepreneurship",
+            "Management",
+            "Leadership",
+            "Technology",
+            "Startup"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction",
+            "Technology"
+        ]
+    },
+    {
+        "id": "1923622569967554777",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "That Will Never Work: The Birth of Netflix and the Amaz…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/44428950-that-will-never-work",
+        "img": "",
+        "turraId": "1923622497406140517",
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction",
+            "Biography",
+            "Audiobook",
+            "Entrepreneurship",
+            "Memoir",
+            "Technology"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction",
+            "Biography",
+            "Technology"
+        ]
     }
 ]
