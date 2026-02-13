@@ -6862,5 +6862,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1936303239193878741",
+        "questions": [
+            {
+                "question": "¿Cuál es uno de los principales motivos por los que las empresas familiares suelen fracasar en la tercera generación?",
+                "options": [
+                    "Falta de comunicación",
+                    "Alta innovación",
+                    "Expansión internacional"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué empresa mencionada en el texto ejemplifica una crisis derivada de conflictos internos y falta de gobernanza clara?",
+                "options": [
+                    "Gucci",
+                    "Walmart",
+                    "BMW"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué frase latina resalta la importancia de la audacia en la gestión empresarial?",
+                "options": [
+                    "Fortuna audentes iuvat",
+                    "Mala fortuna",
+                    "Silencio"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]
