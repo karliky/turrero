@@ -6647,5 +6647,24 @@
         "img": "./metadata/8m6eW2IG.jpg",
         "turraId": "1938855177471021516",
         "categories": []
+    },
+    {
+        "id": "1943924587667784096",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Marketing 6.0: The Future Is Immersive",
+        "description": "Rediscover the fundamentals of marketing along with the…",
+        "url": "https://www.goodreads.com/es/book/show/140691008-marketing-6-0",
+        "img": "./metadata/ZBZRXpVo.jpg",
+        "turraId": "1943924463415820480",
+        "goodreadsCategories": [
+            "Business",
+            "Nonfiction"
+        ],
+        "categories": [
+            "Business",
+            "Nonfiction"
+        ]
     }
 ]

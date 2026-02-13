@@ -6958,5 +6958,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1943924463415820480",
+        "questions": [
+            {
+                "question": "¿Qué concepto representa el CPS en el contexto del marketing según el texto?",
+                "options": [
+                    "un conjunto de herramientas",
+                    "una solución estandarizada",
+                    "una respuesta problem-centric"
+                ],
+                "answer": 3
+            },
+            {
+                "question": "¿Cuál es el propósito principal del Insight Lab según el artículo?",
+                "options": [
+                    "crear campañas publicitarias",
+                    "operar la complejidad en contexto empresarial",
+                    "desarrollar nuevas tecnologías"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "Según el texto, ¿por qué se demanda talento senior as-a-service?",
+                "options": [
+                    "para generar ingresos extra",
+                    "para resolver problemas con conocimiento de negocio",
+                    "para reemplazar la IA"
+                ],
+                "answer": 2
+            }
+        ]
     }
 ]
