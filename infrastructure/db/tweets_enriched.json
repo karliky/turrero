@@ -29948,5 +29948,114 @@
         "description": "A straightforward and accessible explainer of new and u…",
         "url": "https://www.goodreads.com/book/show/181728813-digitally-curious",
         "img": "./metadata/bM84spxY.jpg"
+    },
+    {
+        "id": "1964221678713438241",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "Bienvenidos de nuevo al fascinante mundo de los hilos turras. Después de un descanso de la temporada anterior, que fue muy intensa, volvemos a la carga con más cosas interesantes alrededor del CPS y su Universo relacionado. Vamos allá.",
+        "url": "https://x.com/Recuenco/status/1964221678713438241/photo/1",
+        "img": "./metadata/G0JRNJSW4AAE0Xr.jpg"
+    },
+    {
+        "id": "1964221705905132001",
+        "type": "card",
+        "media": "youtube",
+        "domain": "youtube.com",
+        "title": "Iron Maiden - Flight Of Icarus (Official Video)",
+        "description": "",
+        "url": "",
+        "img": "./metadata/PyNgNoe7.jpg"
+    },
+    {
+        "id": "1964221757499347025",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "@SingularSolving @JoshCableFuture @aparachiqui @itstime_tothink El CPS nos exige humildad intelectual: El trabajar sin certidumbres, realizando hipótesis y teniendo la capacidad de tirar un modelo mental a la basura en el instante en que aparece un dato o una realidad que nos permite construir una hipótesis más sólida.",
+        "url": "https://x.com/Recuenco/status/1964221757499347025/photo/1",
+        "img": "./metadata/G0JRRi2WAAAFbeB.jpg",
+        "video": "https://video.twimg.com/tweet_video/G0JRRi2WAAAFbeB.mp4"
+    },
+    {
+        "id": "1964221785857024314",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "@SingularSolving @JoshCableFuture @aparachiqui @itstime_tothink En nuestro proceso de exploración de la caverna poco hollada, hemos ido poniendo señales a lo boy scout para que la gente pueda recorrer nuestro camino de una manera menos tortuosa, lenta y dolorosa que la que hemos llevado los trailblazers.",
+        "url": "https://x.com/Recuenco/status/1964221785857024314/photo/1",
+        "img": "./metadata/G0JRTfIWkAAs7Ck.png"
+    },
+    {
+        "id": "1966774476374159750",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "En el hilo turras de mañana profundizaremos en la primera línea de las tres que describimos en el ultimo hilo: Todo aquello que no sea CPS terminará implementado via IA. \nBajen conmigo a la sima.",
+        "img": "https://pbs.twimg.com/tweet_video_thumb/G0p1xMOXcAAUU1H.jpg",
+        "video": "https://video.twimg.com/tweet_video/G0p1xMOXcAAUU1H.mp4"
+    },
+    {
+        "id": "1966774486763556894",
+        "type": "embed",
+        "embeddedTweetId": "1639529480887894018",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "En realidad el CPS es algo que el ser humano ha estado realizando de manera sistemática desde los albores de la humanidad. \nSiempre digo que el primero que se comió un percebe estaba realmente hambriento. \nhttps://\nx.com/Recuenco/statu\ns/1309763660336726016?s=20\n…"
+    },
+    {
+        "id": "1966774488898412955",
+        "type": "embed",
+        "embeddedTweetId": "1964221761194475633",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "No CPS  IA: Todo aquello que no sea CPS es susceptible de ser automatizable, sistematizable, y a largo plazo, eventualmente sustituido en su integridad por IA y mecanismos similares."
+    },
+    {
+        "id": "1966774502777319431",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Mollick describiendo mi concepto de hojarasca intelectual/ teatro de la erudición. x.com/dpereirapaz/st…"
+    },
+    {
+        "id": "1966774509324685573",
+        "type": "embed",
+        "embeddedTweetId": "1964221762247209074",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Esta dicotomía no está planteada de manera antitética, sino que por regla general cualquier problema demanda de actuaciones CPS y no CPS en diferentes medidas que sumadas dan la totalidad del problema. \nUn poco como la Ley de Conservación de la Probabilidad, P(CPS)+P(!CPS)=100%"
+    },
+    {
+        "id": "1966774522280833375",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "@Fer_Threepwood La madre que me quiso. Turra limit hits. Vamos a ver si encapsulamos todo lo que hemos estado hablando en detalle.",
+        "url": "https://x.com/Recuenco/status/1966774522280833375/photo/1",
+        "img": "./metadata/G0tjAEuXMAEe1Ki.jpg",
+        "video": "https://video.twimg.com/tweet_video/G0tjAEuXMAEe1Ki.mp4"
+    },
+    {
+        "id": "1966774534977032540",
+        "type": "card",
+        "media": "",
+        "domain": "link.springer.com",
+        "title": "Limits of AI - theoretical, practical, ethical",
+        "description": "This book discusses both the perspectives and the limitations of artificial intelligence (AI) technology. A key technology with great expectations.",
+        "url": "https://link.springer.com/book/10.1007/978-3-662-68290-6?error=cookies_not_supported&code=bb536efc-3437-4974-a174-959852bf4e3a",
+        "img": ""
+    },
+    {
+        "id": "1966774540668727406",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "@Fer_Threepwood @joantubau @Kapital P.D. III: Y ojito, que la semana que viene tenemos otro melón del nueve:",
+        "url": "https://x.com/Recuenco/status/1966774540668727406/photo/1",
+        "img": "./metadata/G0tjBZYWAAAI4jc.png"
     }
 ]

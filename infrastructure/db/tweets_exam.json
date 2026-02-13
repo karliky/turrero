@@ -7086,5 +7086,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1966774475191435728",
+        "questions": [
+            {
+                "question": "¿Cuál es la \"Primera extensión\" según el texto?",
+                "options": [
+                    "Cualquier proceso complejo de naturaleza intelectual que se pueda modelar de manera determinista terminará recogido y encapsulado por una IA",
+                    "Todo proceso complejo tiende a convertirse en algo perteneciente al sentido común",
+                    "La extensión trata sobre la coexistencia del CPS con el know how tradicional"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Quién realizó el experimento del sándwich de pollo desde cero?",
+                "options": [
+                    "Andy George",
+                    "Ethan Mollick",
+                    "Fer Threedwood"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es la principal implicación de la revolución de la IA mencionada en el texto?",
+                "options": [
+                    "El trabajo inaccesible para la máquina permanece en el CPS",
+                    "Las cadenas de suministro se vuelven más simples",
+                    "La IA reemplaza por completo al conocimiento humano"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]
