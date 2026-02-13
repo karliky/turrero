@@ -6830,5 +6830,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1933784125086769389",
+        "questions": [
+            {
+                "question": "¿Cuál fue el objetivo principal del estudio de Festinger sobre los Buscadores?",
+                "options": [
+                    "Observar cómo reaccionan ante la refutación de una creencia",
+                    "Medir su nivel de religiosidad",
+                    "Investigar sus prácticas de canalización"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué describe el término \"truth coping\"?",
+                "options": [
+                    "Racionalizar el fracaso de una profecía",
+                    "Abandonar la creencia",
+                    "Cambiar de líder"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según Festinger, ¿qué factor aumenta la intensidad de la disonancia cognitiva?",
+                "options": [
+                    "El grado de compromiso con la creencia",
+                    "La edad del miembro",
+                    "El número de seguidores"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]

@@ -6568,5 +6568,42 @@
             "Fiction",
             "Self Help"
         ]
+    },
+    {
+        "id": "1933784218766565411",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Cults in Our Midst: The Continuing Fight Against Their …",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/27601.Cults_in_Our_Midst",
+        "img": "./metadata/u-_Nngk7.jpg",
+        "turraId": "1933784125086769389",
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Cults",
+            "Psychology",
+            "Religion",
+            "True Crime",
+            "History",
+            "Sociology"
+        ],
+        "categories": [
+            "Nonfiction",
+            "Psychology",
+            "History"
+        ]
+    },
+    {
+        "id": "1933784219722961019",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Investigating the Stanford Prison Experiment: History o…",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/200635660-investigating-the-stanford-prison-experiment",
+        "img": "./metadata/HE6LgjHZ.jpg",
+        "turraId": "1933784125086769389",
+        "categories": []
     }
 ]
