@@ -29498,5 +29498,102 @@
         "description": "Rediscover the fundamentals of marketing along with the…",
         "url": "https://www.goodreads.com/es/book/show/140691008-marketing-6-0",
         "img": "./metadata/ZBZRXpVo.jpg"
+    },
+    {
+        "id": "1943924463415820480",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "En el hilo turras de hoy vamos a hablar de una serie de conceptos relacionados con la accionabilidad de nuestras propuestas CPS al problema actual del Marketing/Publicidad, y de algunos conceptos con los que estamos jugando, como el Insight Lab. Vamos a ello.",
+        "url": "https://x.com/Recuenco/status/1943924463415820480/photo/1",
+        "img": "./metadata/Gvo0_1EWgAAhHyF.png"
+    },
+    {
+        "id": "1943924479937159170",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "@SingularSolving Como cualquier cosa que aspire a resolver problemática de aguas arriba (problemática estratégica) nos encontramos con el primer y obvio escollo: El statu quo nos quiere abatir como sea.",
+        "url": "https://x.com/Recuenco/status/1943924479937159170/photo/1",
+        "img": "./metadata/Gvo1AyaXwAAdDXf.png"
+    },
+    {
+        "id": "1943924483858817472",
+        "type": "card",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "The illusion of data as “objective” conceals that it rarely shows you the whole picture. Making decisions based on the easiest data to…",
+        "url": "https://uxdesign.cc/nikes-25b-blunder-shows-us-the-limits-of-data-driven-ad30b6e3d938?gi=e927ca593c28",
+        "img": "./metadata/NsTS3JVw.jpg"
+    },
+    {
+        "id": "1943924502439567457",
+        "type": "card",
+        "media": "youtube",
+        "domain": "youtube.com",
+        "title": "Ez Come Ez Go",
+        "description": "",
+        "url": "",
+        "img": "./metadata/-_dQAI1f.jpg"
+    },
+    {
+        "id": "1946458392903467300",
+        "type": "embed",
+        "embeddedTweetId": "1340179497879003136",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "El Factor X: Todo lo relativo al factor humano: Psicología, Antropología, Sociología, Etnografía...",
+        "img": "https://pbs.twimg.com/tweet_video_thumb/EplGJVcW8AAcfVe.jpg",
+        "video": "https://video.twimg.com/tweet_video/EplGJVcW8AAcfVe.mp4"
+    },
+    {
+        "id": "1946458394769891769",
+        "type": "embed",
+        "embeddedTweetId": "1941523881279488238",
+        "author": "Mertxe Pasamontes\n@Mertxe",
+        "tweet": " INTRO — OBSERVADORA, NO GURÚ\n\nEste hilo no es de una experta en marketing.\nSoy freelance desde hace 25+ años, y lo que cuento aquí lo vi pasar en directo.\nNo vendo cursos ni embudos milagrosos. Pero sí sé observar. Y vi cómo esta burbuja se inflaba.\n\n\nhttps://\nx.com/nudpiedo/statu\ns/1941416464168181821\n…",
+        "url": "https://x.com/Mertxe/status/1941523881279488238"
+    },
+    {
+        "id": "1946458401224929498",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Dr. Fou - FouAnalytics\n@acfou",
+        "tweet": "you can't measure \"attention\" (neither can the attention vendors)\n\nbut you CAN measure \"attentiveness\"\n\n\nhttps://\nlinkedin.com/pulse/you-cant\n-measure-attention-can-attentiveness-dr-augustine-fou-qy0pe\n…"
+    },
+    {
+        "id": "1946458423375151484",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "21/\nTal vez mañana midamos intención. O confianza. Y siempre hallaremos la forma de mostrar esos datos de forma autocomplaciente para decirnos que vamos bien.",
+        "url": "https://x.com/spinae_es/status/1946458423375151484/photo/1",
+        "img": "./metadata/GwMzcS0WsAM3lTK.jpg",
+        "video": "https://video.twimg.com/tweet_video/GwMzcS0WsAM3lTK.mp4"
+    },
+    {
+        "id": "1946460129190179210",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "23/\nOjalá la atención sea un KPI (entre otros) que ayude a medir lo realmente importante: la relevancia de la marca para las personas.\nEn un mundo de ruido, solo sobrevivirán las marcas relevantes. #finhilo",
+        "url": "https://x.com/spinae_es/status/1946460129190179210/photo/1",
+        "img": "./metadata/GwM3GnpXYAAHS-u.jpg",
+        "video": "https://video.twimg.com/tweet_video/GwM3GnpXYAAHS-u.mp4"
+    },
+    {
+        "id": "1946460253362495878",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "24/\nFeliz día",
+        "url": "https://x.com/spinae_es/status/1946460253362495878/photo/1",
+        "img": "./metadata/GwM3R2qW0AAxufM.jpg",
+        "video": "https://video.twimg.com/tweet_video/GwM3R2qW0AAxufM.mp4"
     }
 ]

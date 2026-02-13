@@ -6990,5 +6990,37 @@
                 "answer": 2
             }
         ]
+    },
+    {
+        "id": "1946458392903467300",
+        "questions": [
+            {
+                "question": "¿Cuál es el principal elemento que según el texto ayuda a sostener la atención de los consumidores?",
+                "options": [
+                    "Confianza",
+                    "Frecuencia de anuncios",
+                    "Precio bajo"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según el texto, ¿qué implica la economía de la atención?",
+                "options": [
+                    "La atención se vuelve más valiosa con más información",
+                    "La atención es ilimitada",
+                    "La atención se mide por impresiones"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué se debe evitar al tratar la atención como KPI?",
+                "options": [
+                    "Convertirla en objetivo en sí misma",
+                    "Medirla junto con la intención",
+                    "Usarla para comparar marcas"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]
