@@ -7022,5 +7022,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1948986689642213508",
+        "questions": [
+            {
+                "question": "¿Qué rol deben asumir los CTOs y CIOs según UCPS?",
+                "options": [
+                    "Elegir stack",
+                    "Dictar estrategia",
+                    "Soportar sistemas"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué sucede con la competitividad al llegar la commoditización?",
+                "options": [
+                    "Crece ventaja",
+                    "Se absorbe negocio",
+                    "Aumenta innovación"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es la falla principal de la transformación digital según el texto?",
+                "options": [
+                    "Falta tecnología",
+                    "Falta cultura",
+                    "Falta marketing"
+                ],
+                "answer": 2
+            }
+        ]
     }
 ]
