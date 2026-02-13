@@ -2650,5 +2650,27 @@
         "url": "https://www.goodreads.com/book/show/44428950-that-will-never-work",
         "img": "",
         "turraId": "1923622497406140517"
+    },
+    {
+        "id": "1923622504544796832",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Leading Change",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/51370.Leading_Change",
+        "img": "./metadata/6TsOFY_T.jpg",
+        "turraId": "1923622497406140517"
+    },
+    {
+        "id": "1926142312746238461",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Name of the Game",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/602517.The_Name_of_the_Game",
+        "img": "./metadata/dHCrxtrQ.jpg",
+        "turraId": "1926142175105995150"
     }
 ]

@@ -6506,5 +6506,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1926142175105995150",
+    "questions": [
+      {
+        "question": "¿Qué factores se señalan como motores típicos de la obsolescencia de sectores?",
+        "options": [
+          "Avances tecnológicos + hábitos de consumo + disrupciones económicas",
+          "Sólo mala gestión interna",
+          "Exclusivamente regulación pública"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué ejemplo se usa para ilustrar un pivotaje de negocio muy antiguo?",
+        "options": [
+          "Nintendo empezó fabricando hanafuda",
+          "GM empezó como fábrica de máquinas de escribir",
+          "Ford empezó como marca de bicicletas"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué documenta Roger & Me (1989) según el texto?",
+        "options": [
+          "El cierre de plantas de GM en Flint y su impacto social",
+          "La fusión Studebaker-Packard como éxito",
+          "El auge del automóvil en 1902"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
