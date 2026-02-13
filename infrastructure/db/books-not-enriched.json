@@ -3029,5 +3029,16 @@
         "url": "https://www.goodreads.com/es/book/show/140691008-marketing-6-0",
         "img": "./metadata/ZBZRXpVo.jpg",
         "turraId": "1943924463415820480"
+    },
+    {
+        "id": "1964221797986971791",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Digitally Curious: Your Guide to Navigating the Future …",
+        "description": "A straightforward and accessible explainer of new and u…",
+        "url": "https://www.goodreads.com/book/show/181728813-digitally-curious",
+        "img": "./metadata/bM84spxY.jpg",
+        "turraId": "1964221678713438241"
     }
 ]

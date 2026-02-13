@@ -7054,5 +7054,37 @@
                 "answer": 2
             }
         ]
+    },
+    {
+        "id": "1964221678713438241",
+        "questions": [
+            {
+                "question": "¿Qué disciplina se considera esencial para el mundo contemporáneo según el texto?",
+                "options": [
+                    "CPS",
+                    "Management Science",
+                    "Consultoría Estratégica"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué característica define los problemas que requieren CPS?",
+                "options": [
+                    "Con precedentes claros",
+                    "Sencillos y repetibles",
+                    "Sin precedentes"
+                ],
+                "answer": 3
+            },
+            {
+                "question": "¿Cuáles son los tres pilares estratégicos mencionados?",
+                "options": [
+                    "No CPS IA, Altas Capacidades CPS, CPS Hispano",
+                    "Automatización, Innovación, Liderazgo",
+                    "Investigación, Desarrollo, Implementación"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]
