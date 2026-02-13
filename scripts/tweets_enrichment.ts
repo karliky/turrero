@@ -8,6 +8,7 @@ import { createDataAccess } from "./libs/data-access.ts";
 import {
   configureEnvironment,
   deriveGifUrl,
+  GenericCardProcessor,
   isValidMetadataType,
   shouldEnrichTweet,
   TweetEnricher,
@@ -56,6 +57,10 @@ async function enrichTweets(): Promise<void> {
     // Retroactive GIF patching: add video URLs to existing enrichment entries
     // that have tweet_video_thumb poster images but no video field
     await patchExistingGifEntries(allTweetsFlat);
+
+    // Retroactive description patching: fetch og:description for card entries
+    // that have a URL but no description
+    await patchExistingDescriptions();
 
     logger.info("Tweet enrichment completed successfully!");
   } finally {
@@ -320,6 +325,49 @@ async function patchExistingGifEntries(allTweetsFlat: Tweet[]): Promise<void> {
   if (patchCount > 0) {
     await dataAccess.saveTweetsEnriched(enrichments);
     logger.info(`Retroactive GIF patch: added video URLs to ${patchCount} enrichment entries`);
+  }
+}
+
+async function patchExistingDescriptions(): Promise<void> {
+  const enrichments = await dataAccess.getTweetsEnriched();
+  const processor = new GenericCardProcessor();
+
+  const candidates = enrichments.filter(
+    (e) => e.type === "card" && e.url && (!e.description || e.description === ""),
+  );
+
+  if (candidates.length === 0) return;
+
+  const total = candidates.length;
+  logger.info(`Description patch: ${total} cards without description, fetching...`);
+  let patchCount = 0;
+
+  for (let i = 0; i < candidates.length; i++) {
+    const entry = candidates[i]!;
+    const url = entry.url!; // Filtered above: e.url is truthy
+
+    if ((i + 1) % 20 === 0 || i === 0) {
+      logger.info(`Description patch: ${i + 1}/${total} (found ${patchCount} so far)`);
+    }
+
+    const fakeTweet: TweetForEnrichment = {
+      id: entry.id,
+      metadata: { description: entry.description || "", url },
+    };
+
+    await processor.process(fakeTweet, url);
+
+    if (fakeTweet.metadata.description) {
+      entry.description = fakeTweet.metadata.description;
+      patchCount++;
+    }
+  }
+
+  if (patchCount > 0) {
+    await dataAccess.saveTweetsEnriched(enrichments);
+    logger.info(`Description patch: added descriptions to ${patchCount} card entries`);
+  } else {
+    logger.info("Description patch: no new descriptions found");
   }
 }
 

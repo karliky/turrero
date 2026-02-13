@@ -86,10 +86,32 @@ export class GoodReadsProcessor implements MediaProcessor {
         return url.includes("goodreads.com") && !url.includes("user_challenges");
     }
 
-    async process(tweet: TweetForEnrichment, url: string, page: Page): Promise<void> {
-        // If scraper already captured domain and title, skip re-scraping
+    async process(tweet: TweetForEnrichment, url: string, page?: Page): Promise<void> {
+        tweet.metadata.media = "goodreads";
+
+        // If scraper already captured domain and title, just fetch description if missing
         if (tweet.metadata.domain === 'goodreads.com' && tweet.metadata.title) {
-            tweet.metadata.media = "goodreads";
+            if (!tweet.metadata.description) {
+                try {
+                    const response = await fetch(url, {
+                        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; bot)' },
+                        redirect: 'follow',
+                    });
+                    if (response.ok) {
+                        const html = await response.text();
+                        const $ = cheerio.load(html);
+                        const description =
+                            $('meta[property="og:description"]').attr('content') ||
+                            $('meta[name="description"]').attr('content') ||
+                            '';
+                        if (description.trim()) {
+                            tweet.metadata.description = description.trim();
+                        }
+                    }
+                } catch {
+                    // Description is optional
+                }
+            }
             return;
         }
 
@@ -104,7 +126,6 @@ export class GoodReadsProcessor implements MediaProcessor {
         ]);
 
         const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
-        tweet.metadata.media = "goodreads";
         tweet.metadata.title = title || '';
     }
 }
@@ -155,6 +176,42 @@ export class LinkedInProcessor implements MediaProcessor {
     }
 }
 
+/**
+ * Generic card processor — fallback for any URL without a specialized processor.
+ * Fetches og:description or meta description from the target page.
+ */
+export class GenericCardProcessor implements MediaProcessor {
+    canProcess(_url: string): boolean {
+        return true; // Fallback — catches everything not matched above
+    }
+
+    async process(tweet: TweetForEnrichment, url: string): Promise<void> {
+        if (tweet.metadata.description) return; // Already has description
+
+        try {
+            const response = await fetch(url, {
+                headers: { 'User-Agent': 'Mozilla/5.0 (compatible; bot)' },
+                redirect: 'follow',
+            });
+            if (!response.ok) return;
+
+            const html = await response.text();
+            const $ = cheerio.load(html);
+
+            const description =
+                $('meta[property="og:description"]').attr('content') ||
+                $('meta[name="description"]').attr('content') ||
+                '';
+
+            if (description.trim()) {
+                tweet.metadata.description = description.trim();
+            }
+        } catch {
+            // Silently skip — description is optional
+        }
+    }
+}
+
 // ============================================================================
 // MEDIA PROCESSOR REGISTRY
 // ============================================================================
@@ -164,7 +221,8 @@ export class MediaProcessorRegistry {
         new YouTubeProcessor(),
         new GoodReadsProcessor(),
         new WikipediaProcessor(),
-        new LinkedInProcessor()
+        new LinkedInProcessor(),
+        new GenericCardProcessor() // Must be last — fallback for unmatched domains
     ];
 
     async processKnownDomain(tweet: TweetForEnrichment, url: string, page?: Page): Promise<void> {
