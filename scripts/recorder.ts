@@ -188,22 +188,14 @@ function extractAuthorUrl(url: string): string {
 
 async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     /**
-     * Wait for progress bar to disappear
+     * Wait for progress bar to disappear — use race with timeout so frame detach doesn't crash
      */
     await new Promise((r) => setTimeout(r, 100));
     logger.debug("Waiting for progress bar");
-    try {
-        await page.waitForSelector('div[role="progressbar"]', {
-            hidden: true,
-            timeout: 30000 // 30 seconds timeout to prevent infinite waiting
-        });
-    } catch (error) {
-        if (error instanceof Error &&
-            (error.message.includes("detached") || error.message.includes("Connection closed"))) {
-            throw new Error("Page detached or connection closed while waiting for progress bar");
-        }
-        throw error;
-    }
+    await Promise.race([
+        page.waitForSelector('div[role="progressbar"]', { hidden: true, timeout: 10000 }).catch(() => {}),
+        new Promise((r) => setTimeout(r, 3000)),
+    ]);
 
     const urlParts = page.url().split("/").slice(-1);
     if (urlParts.length === 0 || !urlParts[0]) {
@@ -576,11 +568,11 @@ async function getAllTweets({
         try {
             await page.goto(initialUrl);
         } catch (error) {
-            if (error instanceof Error &&
-                (error.message.includes("detached") ||
-                 error.message.includes("Connection closed"))) {
-                logger.error("Navigation failed - page detached or connection closed:", error.message);
-                break;
+            const errMsg = error instanceof Error
+                ? `${error.message} ${error.cause instanceof Error ? error.cause.message : ''}`
+                : String(error);
+            if (errMsg.includes("detached") || errMsg.includes("Connection closed") || errMsg.includes("Navigating frame")) {
+                throw new Error(`Navigation to thread ${tweetId} failed — frame detached`);
             }
             throw error;
         }
@@ -589,11 +581,11 @@ async function getAllTweets({
         try {
             await page.waitForSelector('div[data-testid="tweetText"]');
         } catch (error) {
-            if (error instanceof Error &&
-                (error.message.includes("detached") ||
-                 error.message.includes("Connection closed"))) {
-                logger.error("Wait for selector failed - page detached or connection closed:", error.message);
-                break;
+            const errMsg = error instanceof Error
+                ? `${error.message} ${error.cause instanceof Error ? error.cause.message : ''}`
+                : String(error);
+            if (errMsg.includes("detached") || errMsg.includes("Connection closed")) {
+                throw new Error(`Wait for tweetText in thread ${tweetId} failed — frame detached`);
             }
             throw error;
         }
@@ -631,12 +623,12 @@ async function getAllTweets({
                     expectedAuthor: author,
                 }));
             } catch (error) {
-                if (error instanceof Error &&
-                    (error.message.includes("detached") ||
-                     error.message.includes("Connection closed"))) {
-                    logger.error("Fetch tweet failed - page detached or connection closed:", error.message);
-                    stopped = true;
-                    break;
+                const errMsg = error instanceof Error
+                    ? `${error.message} ${error.cause instanceof Error ? error.cause.message : ''}`
+                    : String(error);
+                if (errMsg.includes("detached") || errMsg.includes("Connection closed")) {
+                    logger.error("Fetch tweet failed - page detached or connection closed:", errMsg);
+                    throw new Error(`Frame detached mid-thread at fetchSingleTweet`);
                 }
                 throw error;
             }
@@ -688,10 +680,11 @@ async function getAllTweets({
 
                 await new Promise((resolve) => setTimeout(resolve, 1000));
 
-                await page.waitForSelector('div[role="progressbar"]', {
-                    hidden: true,
-                    timeout: 30000
-                });
+                // Wait for any loading spinner to finish — but don't crash if frame detaches
+                await Promise.race([
+                    page.waitForSelector('div[role="progressbar"]', { hidden: true, timeout: 10000 }).catch(() => {}),
+                    new Promise((r) => setTimeout(r, 3000)),
+                ]);
 
                 const navResult = await page.evaluate(() => {
                     return new Promise<{ clicked: boolean; endOfThread?: boolean }>((resolve) => {
@@ -759,22 +752,22 @@ async function getAllTweets({
 
                 // X no hace navegación real al cambiar de tweet (SPA); esperar a que cargue el siguiente
                 await Promise.race([
-                    page.waitForSelector('div[role="progressbar"]', { hidden: true, timeout: 15000 }),
+                    page.waitForSelector('div[role="progressbar"]', { hidden: true, timeout: 10000 }).catch(() => {}),
                     new Promise((r) => setTimeout(r, 4000)),
                 ]);
             } catch (error) {
                 logger.error("Navigation error:", error);
 
-                const isDetached = error instanceof Error &&
-                    (error.message.includes("detached") ||
-                     error.message.includes("Connection closed") ||
-                     error.message.includes("Target closed"));
+                const errorMsg = error instanceof Error
+                    ? `${error.message} ${error.cause instanceof Error ? error.cause.message : ''}`
+                    : String(error);
+                const isDetached = errorMsg.includes("detached") ||
+                    errorMsg.includes("Connection closed") ||
+                    errorMsg.includes("Target closed");
 
                 if (isDetached || page.isClosed()) {
-                    logger.warn("Page detached — stopping thread (data already saved).");
-                    stopped = true;
-                    author = undefined;
-                    break;
+                    logger.warn("Page detached — throwing to trigger retry with fresh browser.");
+                    throw new Error(`Frame detached mid-thread ${tweetIds[threadIndex]} at tweet ${tweets.length}`);
                 }
 
                 // Page still alive — try reload recovery
@@ -1099,7 +1092,7 @@ async function main() {
             }
 
             let idsToProcess = tweetIds;
-            const maxRetries = 3;
+            const maxRetries = 6;
             let attempt = 0;
 
             while (idsToProcess.length > 0 && attempt < maxRetries) {
