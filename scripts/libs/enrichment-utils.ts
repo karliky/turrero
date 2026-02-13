@@ -35,6 +35,7 @@ export interface TweetForEnrichment {
         type?: TweetMetadataType | string;
         url?: string;
         img?: string;
+        video?: string;
         title?: string;
         description?: string;
         media?: string;
@@ -292,14 +293,20 @@ export class TweetEnricher {
         tweet: TweetForEnrichment,
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
+        // Derive GIF URL from poster before downloading (URL will be replaced with local path)
+        if (!tweet.metadata.video && tweet.metadata.img) {
+            const derived = deriveGifUrl(tweet.metadata.img);
+            if (derived) tweet.metadata.video = derived;
+        }
+
         const filePath = await downloadMedia(tweet.metadata.img!);
-        
+
         delete tweet.metadata.embed;
         tweet.metadata.img = filePath;
         if (tweet.metadata.type !== TweetMetadataType.CARD) {
             tweet.metadata.type = 'image' as TweetMetadataType;
         }
-        
+
         if (onSave) onSave(tweet);
     }
 
@@ -322,6 +329,23 @@ export class TweetEnricher {
         
         if (onSave) onSave(tweet);
     }
+}
+
+// ============================================================================
+// GIF DETECTION UTILITIES
+// ============================================================================
+
+/**
+ * Derives a GIF MP4 URL from a Twitter video poster thumbnail URL.
+ * Poster URLs follow: pbs.twimg.com/tweet_video_thumb/{ID}?format=jpg&name=small
+ * MP4 URLs follow:    video.twimg.com/tweet_video/{ID}.mp4
+ */
+export function deriveGifUrl(posterUrl: string): string | undefined {
+    const match = posterUrl.match(/tweet_video_thumb\/([^?]+)/);
+    if (!match?.[1]) return undefined;
+    // If the ID already has an extension (e.g., GrIUe8_WAAAcQ2A.jpg), strip it
+    const cleanId = match[1].replace(/\.[^.]+$/, '');
+    return `https://video.twimg.com/tweet_video/${cleanId}.mp4`;
 }
 
 // ============================================================================

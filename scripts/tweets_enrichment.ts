@@ -7,6 +7,7 @@ import {
 import { createDataAccess } from "./libs/data-access.ts";
 import {
   configureEnvironment,
+  deriveGifUrl,
   isValidMetadataType,
   shouldEnrichTweet,
   TweetEnricher,
@@ -51,6 +52,10 @@ async function enrichTweets(): Promise<void> {
         allTweetsFlat,
       );
     }
+
+    // Retroactive GIF patching: add video URLs to existing enrichment entries
+    // that have tweet_video_thumb poster images but no video field
+    await patchExistingGifEntries(allTweetsFlat);
 
     logger.info("Tweet enrichment completed successfully!");
   } finally {
@@ -231,6 +236,7 @@ async function processEmbeddedTweet(
     };
     if (embed.url) embedEntry.url = embed.url;
     if (embed.img) embedEntry.img = embed.img;
+    if (embed.video) embedEntry.video = embed.video;
     existingEnrichments.push(embedEntry);
     await dataAccess.saveTweetsEnriched(existingEnrichments);
   }
@@ -242,12 +248,16 @@ async function processImageTweets(
 ): Promise<void> {
   const imagePromises = tweet.metadata!.imgs!.map(
     async (metadata: ImageMetadata) => {
-      const imageMetadata = {
+      const imageMetadata: Record<string, unknown> = {
         ...metadata,
         type: "image" as TweetMetadataType,
       };
+      // Pass through video field for GIFs
+      if (metadata.video) {
+        imageMetadata.video = metadata.video;
+      }
       await enricher.downloadTweetMedia(
-        { id: tweet.id, metadata: imageMetadata },
+        { id: tweet.id, metadata: imageMetadata as TweetForEnrichment["metadata"] },
         undefined,
         saveTweet,
       );
@@ -255,6 +265,62 @@ async function processImageTweets(
   );
 
   await Promise.all(imagePromises);
+}
+
+/**
+ * Retroactively patches existing enrichment entries with video URLs.
+ * For image/media entries: matches by position with raw tweet imgs to get video URLs,
+ * or derives MP4 URL from tweet_video_thumb poster pattern.
+ */
+async function patchExistingGifEntries(allTweetsFlat: Tweet[]): Promise<void> {
+  const enrichments = await dataAccess.getTweetsEnriched();
+  const tweetMap = new Map<string, Tweet>();
+  for (const t of allTweetsFlat) {
+    tweetMap.set(t.id, t);
+  }
+
+  let patchCount = 0;
+
+  // Group enrichment entries by tweet ID to track position among image/media entries
+  const positionCounters = new Map<string, number>();
+
+  for (const entry of enrichments) {
+    if (entry.video) continue; // Already has video
+    if (entry.type !== "image" && entry.type !== "media" && entry.type !== "embed") continue;
+
+    if (entry.type === "embed") {
+      // For embeds, check if img contains tweet_video_thumb pattern
+      if (entry.img) {
+        const derived = deriveGifUrl(entry.img);
+        if (derived) {
+          entry.video = derived;
+          patchCount++;
+        }
+      }
+      continue;
+    }
+
+    // For image/media entries, match by position with raw tweet imgs
+    const tweet = tweetMap.get(entry.id);
+    const rawImgs = tweet?.metadata?.imgs || [];
+    const pos = positionCounters.get(entry.id) || 0;
+    positionCounters.set(entry.id, pos + 1);
+
+    const rawImg = rawImgs[pos];
+    if (rawImg) {
+      // Try explicit video field first, then derive from poster URL
+      const videoUrl = rawImg.video || deriveGifUrl(rawImg.img);
+      if (videoUrl) {
+        entry.video = videoUrl;
+        patchCount++;
+      }
+    }
+  }
+
+  if (patchCount > 0) {
+    await dataAccess.saveTweetsEnriched(enrichments);
+    logger.info(`Retroactive GIF patch: added video URLs to ${patchCount} enrichment entries`);
+  }
 }
 
 function handleEnrichmentError(error: unknown, tweet: Tweet): void {
@@ -289,6 +355,7 @@ async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
     description: tweet.metadata.description || "",
     url: tweet.metadata.url || "",
     img: tweet.metadata.img || "",
+    ...(tweet.metadata.video ? { video: tweet.metadata.video } : {}),
   } as EnrichedTweetData;
 
   const isDuplicate = existingEnrichments.some(

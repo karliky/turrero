@@ -44,12 +44,16 @@ export interface TweetEmbedMetadata {
   tweet: string;
   url?: string;
   img?: string;
+  /** MP4 URL for embedded GIFs */
+  video?: string;
 }
 
 /** Image metadata within a tweet */
 export interface TweetImageMetadata {
   img: string;
   url: string;
+  /** MP4 URL for GIFs (video elements on X.com) */
+  video?: string;
 }
 
 /** Complete tweet metadata structure */
@@ -136,6 +140,8 @@ export interface EnrichedTweetMetadata {
   author?: string;
   /** Embedded tweet content */
   tweet?: string;
+  /** MP4 URL for GIFs */
+  video?: string;
 }
 
 /** Enriched tweet data structure as stored in tweets_enriched.json */
@@ -162,6 +168,8 @@ export interface EnrichedTweetData {
   author?: string;
   /** Embedded tweet content */
   tweet?: string;
+  /** MP4 URL for GIFs */
+  video?: string;
 }
 
 // ============================================================================
@@ -736,6 +744,8 @@ export interface CurrentBook extends BookToEnrich {
 export interface ImageMetadata {
   img: string;
   url: string;
+  /** MP4 URL for GIFs */
+  video?: string;
   filename?: string;
   path?: string;
 }

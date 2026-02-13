@@ -75,7 +75,7 @@ const iPhone12 = {
 
 interface TweetMetadata {
     type?: string;
-    imgs?: Array<{ img: string; url: string }>;
+    imgs?: Array<{ img: string; url: string; video?: string }>;
     img?: string;
     url?: string;
     domain?: string;       // Extracted from card.layoutSmall.detail (e.g., "goodreads.com", "youtube.com")
@@ -88,6 +88,7 @@ interface TweetMetadata {
         tweet?: string;
         url?: string;
         img?: string;
+        video?: string;
     };
 }
 
@@ -322,16 +323,16 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                 // Then check for GIFs (which are video elements in X.com)
                 const video = container.querySelector('video') as HTMLVideoElement;
                 if (video) {
-                    // Use poster image as thumbnail, or video src if no poster
                     return {
-                        img: video.poster || video.src || "",
+                        img: video.poster || "",
                         url: `${tweetUrl}/photo/${index + 1}`,
+                        video: video.src || "",
                     };
                 }
 
                 return null;
             })
-            .filter((item): item is { img: string; url: string } => item !== null && item.img !== "");
+            .filter((item): item is { img: string; url: string; video?: string } => item !== null && item.img !== "");
 
         return {
             type: imgs.length > 0 ? 'media' : undefined,
@@ -399,11 +400,13 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
 
         // Extract image/GIF from embedded tweet (if any)
         let embedImg = "";
+        let embedVideo = "";
         const embedTweetPhoto = embeddedTweetContainer.querySelector('div[data-testid="tweetPhoto"]');
         if (embedTweetPhoto) {
             const video = embedTweetPhoto.querySelector('video') as HTMLVideoElement;
             if (video) {
-                embedImg = video.poster || video.src || "";
+                embedImg = video.poster || "";
+                embedVideo = video.src || "";
             } else {
                 const img = embedTweetPhoto.querySelector('img') as HTMLImageElement;
                 if (img) {
@@ -420,6 +423,7 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             tweet: tweetText,
             ...(embedUrl ? { url: embedUrl } : {}),
             ...(embedImg ? { img: embedImg } : {}),
+            ...(embedVideo ? { video: embedVideo } : {}),
         } : null;
     });
 

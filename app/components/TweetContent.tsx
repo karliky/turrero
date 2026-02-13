@@ -2,6 +2,7 @@ import { FaTwitter } from "react-icons/fa";
 import { TweetProvider } from "../../infrastructure/TweetProvider";
 import { Tweet, EnrichedTweetMetadata, TweetContentProps } from "../../infrastructure/types";
 import Image from 'next/image';
+import { GifVideo } from "./GifVideo";
 
 export function TweetContent({ tweet, id }: TweetContentProps) {
   const renderMentions = (text: string): (string | React.ReactElement | null)[] => {
@@ -139,7 +140,12 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
             </div>
           );
         }
-        const MediaImage = (
+        const MediaContent = embed.video ? (
+          <GifVideo
+            src={embed.video}
+            poster={normalizeImagePath(embed.img || '')}
+          />
+        ) : (
           <Image
             src={normalizeImagePath(embed.img || '')}
             alt=""
@@ -153,7 +159,7 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
         return (
           <div className="mt-4 max-w-[400px] mx-auto">
               <div className="overflow-hidden rounded-lg border border-whiskey-200 hover:border-whiskey-300 transition-colors">
-                {MediaImage}
+                {MediaContent}
               </div>
           </div>
         );
@@ -182,14 +188,21 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
               <p className="text-whiskey-800">{embed.tweet}</p>
               {embed.img && (
                 <div className="mt-3 overflow-hidden rounded-lg">
-                  <Image
-                    src={normalizeImagePath(embed.img)}
-                    alt=""
-                    width={400}
-                    height={225}
-                    className="h-auto w-full grayscale hover:grayscale-0 transition-all duration-300"
-                    unoptimized={!embed.img.includes(".")}
-                  />
+                  {embed.video ? (
+                    <GifVideo
+                      src={embed.video}
+                      poster={normalizeImagePath(embed.img)}
+                    />
+                  ) : (
+                    <Image
+                      src={normalizeImagePath(embed.img)}
+                      alt=""
+                      width={400}
+                      height={225}
+                      className="h-auto w-full grayscale hover:grayscale-0 transition-all duration-300"
+                      unoptimized={!embed.img.includes(".")}
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -202,13 +215,50 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     }
   };
 
-  const embeddings = getEmbeddings(tweet);
+  const rawEmbeddings = getEmbeddings(tweet);
+
+  // Inject video URLs into enriched entries from raw tweet data.
+  // Enriched image/media entries are created in the same order as raw metadata.imgs,
+  // so we match by position. Also derive MP4 from tweet_video_thumb poster URLs.
+  const deriveGifVideoUrl = (posterUrl: string): string | undefined => {
+    const match = posterUrl.match(/tweet_video_thumb\/([^?.]+)/);
+    if (!match?.[1]) return undefined;
+    return `https://video.twimg.com/tweet_video/${match[1]}.mp4`;
+  };
+
+  const rawImgs = tweet.metadata?.imgs || [];
+  let imgIdx = 0;
+  const embeddings = rawEmbeddings.map((e) => {
+    if (e.type === 'image' || e.type === 'media') {
+      const rawImg = rawImgs[imgIdx];
+      imgIdx++;
+      if (!e.video) {
+        // Try raw tweet data first, then derive from poster URL patterns
+        const videoUrl =
+          rawImg?.video ||
+          (rawImg?.img ? deriveGifVideoUrl(rawImg.img) : undefined) ||
+          (e.img ? deriveGifVideoUrl(e.img) : undefined);
+        if (videoUrl) return { ...e, video: videoUrl };
+      }
+    }
+    return e;
+  });
+
   const hasCard = embeddings.some((e) => e.type === "card" || isYoutubeCard(e));
   const hasMedia = embeddings.some((e) => e.type === "image" || e.type === "media");
   const hasEmbed = embeddings.some((e) => e.type === "embed");
   // Fallback: show images from raw tweet metadata when no media in enriched data
-  const fallbackImgs =
-    !hasMedia && tweet.metadata?.imgs?.length ? tweet.metadata.imgs : [];
+  // Also derive video URLs for GIFs that were scraped before video capture was added
+  const fallbackImgs = (!hasMedia && tweet.metadata?.imgs?.length
+    ? tweet.metadata.imgs
+    : []
+  ).map((img) => {
+    if (!img.video && img.img) {
+      const derived = deriveGifVideoUrl(img.img);
+      if (derived) return { ...img, video: derived };
+    }
+    return img;
+  });
   // Fallback: show card (link preview) from raw metadata when no card in enriched data
   const fallbackCard =
     !hasCard &&
@@ -217,10 +267,13 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
       ? tweet.metadata
       : null;
   // Fallback: show embedded tweet from raw metadata when no embed in enriched data
-  const fallbackEmbed =
+  const fallbackEmbedRaw =
     !hasEmbed && tweet.metadata?.embed?.author && tweet.metadata?.embed?.tweet
       ? tweet.metadata.embed
       : null;
+  const fallbackEmbed = fallbackEmbedRaw && !fallbackEmbedRaw.video && fallbackEmbedRaw.img
+    ? { ...fallbackEmbedRaw, video: deriveGifVideoUrl(fallbackEmbedRaw.img) }
+    : fallbackEmbedRaw;
 
   return (
     <div id={id}>
@@ -289,14 +342,21 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
               <p className="text-whiskey-800">{fallbackEmbed.tweet}</p>
               {fallbackEmbed.img && (
                 <div className="mt-3 overflow-hidden rounded-lg">
-                  <Image
-                    src={normalizeImagePath(fallbackEmbed.img)}
-                    alt=""
-                    width={400}
-                    height={225}
-                    className="h-auto w-full grayscale hover:grayscale-0 transition-all duration-300"
-                    unoptimized={!fallbackEmbed.img.includes(".")}
-                  />
+                  {fallbackEmbed.video ? (
+                    <GifVideo
+                      src={fallbackEmbed.video}
+                      poster={normalizeImagePath(fallbackEmbed.img)}
+                    />
+                  ) : (
+                    <Image
+                      src={normalizeImagePath(fallbackEmbed.img)}
+                      alt=""
+                      width={400}
+                      height={225}
+                      className="h-auto w-full grayscale hover:grayscale-0 transition-all duration-300"
+                      unoptimized={!fallbackEmbed.img.includes(".")}
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -314,14 +374,21 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Image
-                  src={item.img}
-                  alt=""
-                  width={400}
-                  height={300}
-                  className="h-auto w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-300"
-                  unoptimized={!item.img.startsWith("/") && !item.img.includes("./")}
-                />
+                {item.video ? (
+                  <GifVideo
+                    src={item.video}
+                    poster={item.img}
+                  />
+                ) : (
+                  <Image
+                    src={item.img}
+                    alt=""
+                    width={400}
+                    height={300}
+                    className="h-auto w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-300"
+                    unoptimized={!item.img.startsWith("/") && !item.img.includes("./")}
+                  />
+                )}
               </a>
             ))}
           </div>
