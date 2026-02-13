@@ -2672,5 +2672,27 @@
         "url": "https://www.goodreads.com/book/show/602517.The_Name_of_the_Game",
         "img": "./metadata/dHCrxtrQ.jpg",
         "turraId": "1926142175105995150"
+    },
+    {
+        "id": "1928694957348368755",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "When Breath Becomes Air",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/25899336-when-breath-becomes-air",
+        "img": "./metadata/c4d_bx5E.jpg",
+        "turraId": "1928694865052741791"
+    },
+    {
+        "id": "1928694958401138959",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Siddhartha",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/52036.Siddhartha",
+        "img": "./metadata/YQ7txLl1.jpg",
+        "turraId": "1928694865052741791"
     }
 ]

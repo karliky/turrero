@@ -27769,5 +27769,123 @@
         "description": "",
         "url": "https://x.com/Recuenco/status/1926142297906778339/photo/1",
         "img": "./metadata/GrsINaxWIAAEj-X.jpg"
+    },
+    {
+        "id": "1926142310271656315",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1926142310271656315/photo/1",
+        "img": "./metadata/GrsIORgWYAI9KxN.png"
+    },
+    {
+        "id": "1928694866545942998",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "Hoy toca bolo en Santander y luego graduación de mi hija, así que veo el hilo de mañana en globo. A pesar de que tengo clarísimo que quiero hablar de truth coping.",
+        "img": "https://pbs.twimg.com/tweet_video_thumb/GsKzmMyXcAAC5wk.jpg",
+        "video": "https://video.twimg.com/tweet_video/GsKzmMyXcAAC5wk.mp4"
+    },
+    {
+        "id": "1928694872090738861",
+        "type": "embed",
+        "embeddedTweetId": "unknown",
+        "author": "Javier G. Recuenco\n@Recuenco",
+        "tweet": "El cerebro está comprometido con la supervivencia, no con la realidad. x.com/CiberVallejo/s…"
+    },
+    {
+        "id": "1928694881431572618",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1928694881431572618/photo/1",
+        "img": "./metadata/GsQZxgSXQAAULBt.png"
+    },
+    {
+        "id": "1928694911861182581",
+        "type": "embed",
+        "embeddedTweetId": "1703793714802422212",
+        "author": "Martinez\n@MrtnzAlvrz",
+        "tweet": "Es muy injusto la verdad. A Sagunto la jodieron bien. Este libro me gustó mucho.",
+        "url": "https://x.com/MrtnzAlvrz/status/1703793714802422212/photo/1",
+        "img": "https://pbs.twimg.com/media/F6UXWjhWcAAI738?format=jpg&name=medium"
+    },
+    {
+        "id": "1928694918593098027",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1928694918593098027/photo/1",
+        "img": "./metadata/GsQZznaW0AEthHi.jpg",
+        "video": "https://video.twimg.com/tweet_video/GsQZznaW0AEthHi.mp4"
+    },
+    {
+        "id": "1928694930911748224",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1928694930911748224/photo/1",
+        "img": "./metadata/GsQZ0A-XsAAIYZC.jpg",
+        "video": "https://video.twimg.com/tweet_video/GsQZ0A-XsAAIYZC.mp4"
+    },
+    {
+        "id": "1928694946329989200",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1928694946329989200/photo/1",
+        "img": "./metadata/GsQZ05BWAAAbPZ7.jpg",
+        "video": "https://video.twimg.com/tweet_video/GsQZ05BWAAAbPZ7.mp4"
+    },
+    {
+        "id": "1928694954039144934",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1928694954039144934/photo/1",
+        "img": "./metadata/GsQZ1nxXoAA42cN.jpg"
+    },
+    {
+        "id": "1928694957348368755",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "When Breath Becomes Air",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/25899336-when-breath-becomes-air",
+        "img": "./metadata/c4d_bx5E.jpg"
+    },
+    {
+        "id": "1928694958401138959",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Siddhartha",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/52036.Siddhartha",
+        "img": "./metadata/YQ7txLl1.jpg"
+    },
+    {
+        "id": "1928723090852171870",
+        "type": "image",
+        "media": "",
+        "domain": "",
+        "title": "",
+        "description": "",
+        "url": "https://x.com/Recuenco/status/1928723090852171870/photo/1",
+        "img": "./metadata/GsQzbW5XQAANWIK.jpg"
     }
 ]

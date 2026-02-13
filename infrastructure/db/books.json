@@ -6518,5 +6518,55 @@
             "Fiction",
             "History"
         ]
+    },
+    {
+        "id": "1928694957348368755",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "When Breath Becomes Air",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/25899336-when-breath-becomes-air",
+        "img": "./metadata/c4d_bx5E.jpg",
+        "turraId": "1928694865052741791",
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Memoir",
+            "Biography",
+            "Medicine",
+            "Book Club",
+            "Audiobook",
+            "Medical"
+        ],
+        "categories": [
+            "Nonfiction",
+            "Biography",
+            "Health"
+        ]
+    },
+    {
+        "id": "1928694958401138959",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Siddhartha",
+        "description": "",
+        "url": "https://www.goodreads.com/book/show/52036.Siddhartha",
+        "img": "./metadata/YQ7txLl1.jpg",
+        "turraId": "1928694865052741791",
+        "goodreadsCategories": [
+            "Classics",
+            "Fiction",
+            "Philosophy",
+            "Spirituality",
+            "Religion",
+            "Literature",
+            "Buddhism"
+        ],
+        "categories": [
+            "Nonfiction",
+            "Fiction",
+            "Self Help"
+        ]
     }
 ]

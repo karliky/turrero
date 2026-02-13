@@ -6538,5 +6538,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1928694865052741791",
+    "questions": [
+      {
+        "question": "¿Cómo define el texto el 'truth coping'?",
+        "options": [
+          "Mecanismos para afrontar verdades incómodas",
+          "Técnicas para manipular a otros",
+          "Método para predecir el futuro"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Cuál de estos ejemplos aparece como mecanismo de truth coping?",
+        "options": [
+          "Negación o evitación",
+          "Optimización de costes",
+          "Gamificación de objetivos"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Según el texto, ¿qué debe entender un 'CPSer' sobre el truth coping?",
+        "options": [
+          "Que gestionarlo es parte de su responsabilidad",
+          "Que debe ignorarlo para ser objetivo",
+          "Que solo aplica a problemas personales"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
