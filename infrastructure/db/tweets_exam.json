@@ -6442,5 +6442,37 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "1921092901930484128",
+    "questions": [
+      {
+        "question": "¿Qué decide hacer el autor con este texto?",
+        "options": [
+          "Convertirlo en una elegía a su madre",
+          "Explicar un tema técnico",
+          "Analizar una estrategia empresarial"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué obras usa como referencias principales para explicar el duelo?",
+        "options": [
+          "Novelas gráficas del mundo del cómic",
+          "Tratados médicos",
+          "Clásicos de la literatura universal"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "¿Qué experiencia personal se menciona como parte del contexto del duelo y el cuidado?",
+        "options": [
+          "Internar a su madre tras un ictus y visitarla durante casi dos años",
+          "Mudarse al extranjero por trabajo",
+          "Abrir una empresa de ropa"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]
