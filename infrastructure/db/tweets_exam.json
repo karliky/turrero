@@ -6926,5 +6926,37 @@
                 "answer": 2
             }
         ]
+    },
+    {
+        "id": "1941416464168181821",
+        "questions": [
+            {
+                "question": "¿Qué concepto resume la filosofía del CPS según el autor?",
+                "options": [
+                    "El presupuesto determina la actuación",
+                    "El problema determina la actuación",
+                    "La audiencia determina la actuación"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es la principal consecuencia del fraude publicitario mencionado?",
+                "options": [
+                    "Aumento de impresiones",
+                    "Desviación de presupuesto",
+                    "Mejora del ROI"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué herramienta se compara con una 'caja negra'?",
+                "options": [
+                    "LLM",
+                    "Meta",
+                    "CPC"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]

@@ -6635,5 +6635,17 @@
             "Economics",
             "Self Help"
         ]
+    },
+    {
+        "id": "1938855257926238564",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Experimentación online: Metodología, estrategia, datos …",
+        "description": "Discover and share books you love on Goodreads.",
+        "url": "https://www.goodreads.com/book/show/221713495-experimentaci-n-online",
+        "img": "./metadata/8m6eW2IG.jpg",
+        "turraId": "1938855177471021516",
+        "categories": []
     }
 ]
