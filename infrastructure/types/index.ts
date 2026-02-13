@@ -63,6 +63,9 @@ export interface TweetMetadata {
   imgs?: TweetImageMetadata[];
   img?: string;
   url?: string;
+  title?: string;
+  domain?: string;
+  description?: string;
 }
 
 /** Core tweet structure as scraped from X.com */
