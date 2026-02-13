@@ -9,6 +9,7 @@ import {
   configureEnvironment,
   deriveGifUrl,
   GenericCardProcessor,
+  isBlobUrl,
   isValidMetadataType,
   shouldEnrichTweet,
   TweetEnricher,
@@ -314,7 +315,9 @@ async function patchExistingGifEntries(allTweetsFlat: Tweet[]): Promise<void> {
     const rawImg = rawImgs[pos];
     if (rawImg) {
       // Try explicit video field first, then derive from poster URL
-      const videoUrl = rawImg.video || deriveGifUrl(rawImg.img);
+      // Safety net: skip blob: URLs that may have leaked from DOM scraping
+      const rawVideo = isBlobUrl(rawImg.video) ? undefined : rawImg.video;
+      const videoUrl = rawVideo || deriveGifUrl(rawImg.img);
       if (videoUrl) {
         entry.video = videoUrl;
         patchCount++;

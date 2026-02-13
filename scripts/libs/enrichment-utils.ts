@@ -394,6 +394,14 @@ export class TweetEnricher {
 // ============================================================================
 
 /**
+ * Checks if a URL is a blob: URL (useless outside the browser context).
+ * Used as a safety net to prevent blob URLs from leaking into the database.
+ */
+export function isBlobUrl(url: string | undefined): boolean {
+    return url?.startsWith('blob:') ?? false;
+}
+
+/**
  * Derives a GIF MP4 URL from a Twitter video poster thumbnail URL.
  * Poster URLs follow: pbs.twimg.com/tweet_video_thumb/{ID}?format=jpg&name=small
  * MP4 URLs follow:    video.twimg.com/tweet_video/{ID}.mp4

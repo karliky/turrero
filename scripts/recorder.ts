@@ -15,7 +15,7 @@ import {
     install,
     resolveBuildId,
 } from "@puppeteer/browsers";
-import type { Browser, Page } from "puppeteer-core";
+import type { Browser, CookieParam, Page } from "puppeteer-core";
 import { TweetMetadataType } from '../infrastructure/types/index.ts';
 
 // Load environment variables
@@ -112,6 +112,94 @@ interface TweetCSV {
     [key: string]: string;
 }
 
+// --- GraphQL video URL interception ---
+// X.com uploaded videos use blob: URLs in the DOM which are useless for playback.
+// The real MP4 URLs are only in GraphQL API responses (extended_entities.media[].video_info.variants).
+// We intercept these responses and cache the URLs keyed by media_id_str.
+const interceptedVideoUrls = new Map<string, string>();
+
+/**
+ * Recursively walks a GraphQL JSON response looking for video media entries
+ * with extended_entities.media[].video_info.variants, and caches the best
+ * MP4 URL keyed by media_id_str.
+ */
+function extractVideoUrlsFromGraphQL(obj: unknown): void {
+    if (obj === null || obj === undefined || typeof obj !== 'object') return;
+
+    if (Array.isArray(obj)) {
+        for (const item of obj) {
+            extractVideoUrlsFromGraphQL(item);
+        }
+        return;
+    }
+
+    const record = obj as Record<string, unknown>;
+
+    // Check if this object looks like a media entry with video_info
+    // X.com GraphQL uses `id_str` (not `media_id_str`) for the media ID
+    const mediaId = (record.id_str ?? record.media_id_str) as string | undefined;
+    if (
+        mediaId &&
+        typeof mediaId === 'string' &&
+        (record.type === 'video' || record.type === 'animated_gif') &&
+        record.video_info &&
+        typeof record.video_info === 'object'
+    ) {
+        const videoInfo = record.video_info as Record<string, unknown>;
+        const variants = videoInfo.variants;
+        if (Array.isArray(variants)) {
+            const mp4Variants = variants
+                .filter((v): v is Record<string, unknown> =>
+                    typeof v === 'object' && v !== null &&
+                    (v as Record<string, unknown>).content_type === 'video/mp4' &&
+                    typeof (v as Record<string, unknown>).bitrate === 'number'
+                )
+                .sort((a, b) => (b.bitrate as number) - (a.bitrate as number));
+
+            if (mp4Variants.length > 0 && typeof mp4Variants[0]!.url === 'string') {
+                interceptedVideoUrls.set(mediaId, mp4Variants[0]!.url as string);
+                logger.debug(`Intercepted video URL for media ${mediaId}: ${(mp4Variants[0]!.url as string).slice(0, 80)}...`);
+            }
+        }
+    }
+
+    // Recurse into all values
+    for (const value of Object.values(record)) {
+        extractVideoUrlsFromGraphQL(value);
+    }
+}
+
+/**
+ * Extracts the numeric media ID from a Twitter video poster/thumbnail URL.
+ * - ext_tw_video_thumb/1948986741710278656/pu/img/... → "1948986741710278656"
+ * - tweet_video_thumb/1234567890 → "1234567890" (strip non-numeric suffix)
+ */
+function extractMediaIdFromPoster(posterUrl: string): string | undefined {
+    // Uploaded videos: ext_tw_video_thumb/{numeric_id}/...
+    const extMatch = posterUrl.match(/ext_tw_video_thumb\/(\d+)/);
+    if (extMatch?.[1]) return extMatch[1];
+
+    // GIF videos: tweet_video_thumb/{id} — id may have non-numeric chars
+    const gifMatch = posterUrl.match(/tweet_video_thumb\/([^?/]+)/);
+    if (gifMatch?.[1]) return gifMatch[1].replace(/\.[^.]+$/, '');
+
+    return undefined;
+}
+
+/**
+ * Polls the interceptedVideoUrls cache for a media ID, with timeout.
+ * GraphQL responses may arrive slightly after DOM evaluation completes.
+ */
+async function waitForInterceptedVideo(mediaId: string, timeoutMs = 3000): Promise<string | undefined> {
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+        const url = interceptedVideoUrls.get(mediaId);
+        if (url) return url;
+        await new Promise(r => setTimeout(r, 200));
+    }
+    return undefined;
+}
+
 /**
  * Parse a single CSV line respecting double-quoted fields (commas inside quotes don't split).
  * RFC 4180-style: "field" can contain commas; "" inside a field is escaped quote.
@@ -184,6 +272,28 @@ function extractAuthorUrl(url: string): string {
         throw new Error("Invalid URL format: cannot extract author");
     }
     return author;
+}
+
+/**
+ * Creates and configures a new page with cookies, device emulation, and GraphQL response interceptor.
+ */
+async function setupPage(browser: Browser, cookies: CookieParam[]): Promise<Page> {
+    const page = await browser.newPage();
+    await page.setCookie(...cookies);
+    await page.emulate(iPhone12);
+
+    page.on('response', async (response) => {
+        const url = response.url();
+        if (!url.includes('/graphql/')) return;
+        try {
+            const json = await response.json();
+            extractVideoUrlsFromGraphQL(json);
+        } catch {
+            // Skip non-JSON responses (e.g. 204, binary)
+        }
+    });
+
+    return page;
 }
 
 async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
@@ -326,6 +436,25 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             })
             .filter((item): item is { img: string; url: string; video?: string } => item !== null && item.img !== "");
 
+        // On mobile, uploaded videos are NOT inside tweetPhoto — they're in standalone videoPlayer containers.
+        // Check for these if no media was found via tweetPhoto.
+        if (imgs.length === 0) {
+            const videoPlayers = article.querySelectorAll('div[data-testid="videoPlayer"]');
+            const mainVideoPlayers = Array.from(videoPlayers).filter(
+                el => !embeddedContainer || !embeddedContainer.contains(el)
+            );
+            for (const vp of mainVideoPlayers) {
+                const video = vp.querySelector('video') as HTMLVideoElement;
+                if (video && video.poster) {
+                    imgs.push({
+                        img: video.poster,
+                        url: `${tweetUrl}/video/1`,
+                        video: video.src || "",
+                    });
+                }
+            }
+        }
+
         return {
             type: imgs.length > 0 ? 'media' : undefined,
             imgs: imgs.length > 0 ? imgs : undefined,
@@ -422,6 +551,44 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     if (embedData) {
         metadata.embed = embedData;
         logger.debug(`Detected embedded tweet: ${embedData.id} from ${embedData.author}`);
+    }
+
+    // --- Post-process: replace blob: URLs with intercepted real video URLs ---
+    if (metadata.imgs) {
+        for (const img of metadata.imgs) {
+            // Clear useless blob: URLs
+            if (img.video?.startsWith('blob:')) {
+                delete img.video;
+            }
+            // Try to resolve video URL from GraphQL interceptor
+            if (!img.video && img.img) {
+                const mediaId = extractMediaIdFromPoster(img.img);
+                if (mediaId) {
+                    const resolved = interceptedVideoUrls.get(mediaId)
+                        ?? await waitForInterceptedVideo(mediaId, 3000);
+                    if (resolved) {
+                        img.video = resolved;
+                        logger.debug(`Resolved video for media ${mediaId}: ${resolved.slice(0, 80)}...`);
+                    }
+                }
+            }
+        }
+    }
+    if (metadata.embed) {
+        if (metadata.embed.video?.startsWith('blob:')) {
+            delete metadata.embed.video;
+        }
+        if (!metadata.embed.video && metadata.embed.img) {
+            const mediaId = extractMediaIdFromPoster(metadata.embed.img);
+            if (mediaId) {
+                const resolved = interceptedVideoUrls.get(mediaId)
+                    ?? await waitForInterceptedVideo(mediaId, 3000);
+                if (resolved) {
+                    metadata.embed.video = resolved;
+                    logger.debug(`Resolved embed video for media ${mediaId}: ${resolved.slice(0, 80)}...`);
+                }
+            }
+        }
     }
 
     await new Promise((r) => setTimeout(r, 100));
@@ -875,9 +1042,7 @@ async function main() {
     
     browser = await puppeteer.launch(launchOptions);
 
-    page = await browser.newPage();
-
-    const cookies = [
+    const cookies: CookieParam[] = [
         { name: "twid", value: process.env.twid || "", domain: "x.com" },
         {
             name: "auth_token",
@@ -904,10 +1069,7 @@ async function main() {
         },
     ];
 
-    logger.debug("Setting cookies");
-    await page.setCookie(...cookies);
-
-    await page.emulate(iPhone12);
+    page = await setupPage(browser, cookies);
 
     try {
         if (testMode) {
@@ -1124,9 +1286,7 @@ async function main() {
                     idsToProcess = idsToProcess.filter((id) => !updatedCompleted.has(id));
                     logger.info("Retrying with %s remaining threads", idsToProcess.length);
                     browser = await puppeteer.launch(launchOptions);
-                    page = await browser.newPage();
-                    await page.setCookie(...cookies);
-                    await page.emulate(iPhone12);
+                    page = await setupPage(browser, cookies);
                 }
             }
         }

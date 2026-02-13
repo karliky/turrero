@@ -152,13 +152,31 @@ Or follow the manual process:
 - Must be moved to `public/metadata/` for web access
 - Images optimized for social media sharing (OpenGraph, Twitter Cards)
 
-### Animated GIF Support
-- X.com represents GIFs as `<video>` elements inside `div[data-testid="tweetPhoto"]`
-- **Scraper** (`scripts/recorder.ts`): captures `video.src` (MP4 URL) alongside `video.poster` (thumbnail)
-- **Enrichment** (`scripts/tweets_enrichment.ts`): passes `video` field through; `patchExistingGifEntries()` retroactively derives MP4 URLs from `tweet_video_thumb` poster patterns
-- **Rendering** (`app/components/GifVideo.tsx`): `"use client"` component with `useRef` + `useEffect` calling `video.play()` programmatically (SSR-streamed `<video autoplay>` doesn't reliably autoplay)
-- **Video proxy** (`app/api/tweet-video/[...path]/route.ts`): proxies `video.twimg.com` requests to bypass CDN 403 Forbidden (Twitter checks `Referer` header and blocks non-Twitter domains)
-- URL pattern: `pbs.twimg.com/tweet_video_thumb/{ID}` (poster) → `video.twimg.com/tweet_video/{ID}.mp4` (video)
+### Video & GIF Support
+- X.com has two types of video media: **GIFs** (`tweet_video/`) and **uploaded videos** (`ext_tw_video/`)
+- Both are `<video>` elements in X.com's DOM, but with different behaviors and URL patterns
+
+#### GIFs (tweet_video)
+- DOM: `<video>` inside `div[data-testid="tweetPhoto"]` with direct MP4 `src`
+- URL pattern: poster `pbs.twimg.com/tweet_video_thumb/{ID}` → video `video.twimg.com/tweet_video/{ID}.mp4`
+- Rendering: autoplay, loop, muted, no controls
+
+#### Uploaded Videos (ext_tw_video)
+- DOM (mobile): `<video>` inside `div[data-testid="videoPlayer"]` (NOT `tweetPhoto`) with `blob:` src
+- DOM (desktop): may be inside `tweetPhoto > videoPlayer` with `blob:` src
+- URL pattern: poster `pbs.twimg.com/ext_tw_video_thumb/{ID}/pu/img/...` → video `video.twimg.com/ext_tw_video/{ID}/pu/vid/avc1/.../file.mp4`
+- Real MP4 URLs only available via GraphQL API responses (`extended_entities.media[].video_info.variants`)
+- Rendering: autoplay muted, controls visible, no loop
+
+#### Scraper Pipeline
+- **GraphQL interceptor** (`scripts/recorder.ts`): `page.on('response')` intercepts GraphQL responses, walks JSON recursively to find `video_info.variants`, caches best MP4 URL by `id_str` in `interceptedVideoUrls` Map
+- **DOM extraction** (`parseTweet()`): checks `tweetPhoto` containers first, falls back to standalone `videoPlayer` containers for uploaded videos on mobile
+- **Post-processing** (`parseTweet()`): replaces `blob:` URLs with real URLs from interceptor cache; uses `extractMediaIdFromPoster()` to match poster thumbnails to cached video URLs
+- **Enrichment** (`scripts/tweets_enrichment.ts`): `patchExistingGifEntries()` derives GIF URLs from poster patterns; `isBlobUrl()` safety net filters leaked blob URLs
+
+#### Infrastructure
+- **Rendering** (`app/components/GifVideo.tsx`): `"use client"` component; auto-detects GIF vs uploaded video from URL pattern (`ext_tw_video` → controls + no loop)
+- **Video proxy** (`app/api/tweet-video/[...path]/route.ts`): proxies `video.twimg.com` requests to bypass CDN 403 Forbidden (Twitter checks `Referer` header); catch-all `[...path]` handles both `tweet_video/` and `ext_tw_video/` paths
 - Data model: `video?: string` field on `TweetImageMetadata`, `TweetEmbedMetadata`, `EnrichedTweetMetadata`, `EnrichedTweetData`
 
 ### Search Integration
