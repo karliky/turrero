@@ -6894,5 +6894,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1938855177471021516",
+        "questions": [
+            {
+                "question": "¿Cuál es la principal crítica al marketing actual según el texto?",
+                "options": [
+                    "Demasiado centrado en la creatividad",
+                    "Se enfoca en la atención del consumidor",
+                    "Funciona aguas abajo sin abordar el origen"
+                ],
+                "answer": 3
+            },
+            {
+                "question": "¿Qué se menciona como una de las fugas ocultas en la publicidad programática?",
+                "options": [
+                    "Falta de datos",
+                    "Bots e impresiones inútiles",
+                    "Costos de producción"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es el objetivo propuesto para cambiar el modelo de marketing actual?",
+                "options": [
+                    "Comprar alcance barato",
+                    "Construir relevancia cara y auténtica",
+                    "Ignorar la estadística"
+                ],
+                "answer": 2
+            }
+        ]
     }
 ]
