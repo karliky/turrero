@@ -38,9 +38,7 @@ python ./scripts/create_graph.py
 echo "Moving metadata to public for thread $id"
 mv -v ./metadata/* ./public/metadata/
 
-echo "Generating prompts for thread $id"
-./scripts/generate_prompts.sh $id
+echo "Processing thread $id with local AI (summary, categories, exam)..."
+deno task ai-local $id
 
-echo "Make sure to modify the following files tweets_summary.json, tweets_exam.json y tweets_map.json"
-echo "Delete manually the prompt txt files and the turra txt file"
-echo "Please update the date on components/header.tsx" 
+echo "Please update the date on components/header.tsx"

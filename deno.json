@@ -105,6 +105,7 @@
         "lint": "deno lint scripts/tweets_enrichment.ts scripts/make-algolia-db.ts scripts/generate-books.ts scripts/validate-deno.ts scripts/test-deno-scripts.ts",
         "fmt": "deno fmt scripts/",
         "test": "deno test --allow-all scripts/",
+        "ai-local": "deno run --allow-all scripts/local-ai-enrichment.ts",
         "clean": "rm -rf .deno_cache"
     },
     "nodeModulesDir": "auto",

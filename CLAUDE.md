@@ -16,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `deno task books` - Generate book references
 - `deno task algolia` - Update Algolia search index
 - `deno task validate` - Validate Deno scripts and types
+- `deno task ai-local $threadId` - Generate summary, categories, and exam via local Ollama
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
 
 ### Development Pipeline Commands
@@ -90,12 +91,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Use the Claude Code hook by typing: `add thread [thread_id] [first_tweet_text]`
 Example: `add thread 1234567890123456789 Este es el primer tweet del hilo`
 
-The hook will automatically execute the complete 12-step workflow including AI processing.
+The hook will automatically execute the complete workflow including AI processing.
 
 **MANUAL METHOD:**
 Use the automated script: `./scripts/add_thread.sh $thread_id $first_tweet_text`
 
-Or follow the manual 11-step process:
+Or follow the manual process:
 1. Add tweet to CSV: `npx tsx scripts/add-new-tweet.ts $id $first_tweet_line`
 2. Scrape: `deno --allow-all scripts/recorder.ts`
 3. Enrich: `npx tsx scripts/tweets_enrichment.ts`
@@ -104,10 +105,9 @@ Or follow the manual 11-step process:
 6. Update Algolia: `npx tsx scripts/make-algolia-db.ts`
 7. Generate books: `npx tsx scripts/generate-books.ts`
 8. Enrich books: `npx tsx scripts/book-enrichment.ts`
-9. Generate prompts: `./scripts/generate_prompts.sh`
-10. Process AI prompts with `ai-prompt-processor` agent: reads generated prompts, processes them with AI, and updates the corresponding JSON database files (`tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`)
-11. Update header date manually in `app/components/Header.tsx`
-12. Test with `npm run dev`
+9. AI enrichment: `deno task ai-local $id` (generates summary, categories, exam via local Ollama)
+10. Update header date manually in `app/components/Header.tsx`
+11. Test with `npm run dev`
 
 ### Deno Usage
 - Required permissions: `--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run`
@@ -117,7 +117,7 @@ Or follow the manual 11-step process:
 ### Environment Setup
 - Node.js version management with nvm recommended
 - Puppeteer browser installation: `npx @puppeteer/browsers install chrome`
-- Environment variables in `.env` for X/Twitter credentials
+- Environment variables in `.env` for X/Twitter credentials and `OLLAMA_MODEL` (default: `llama3.2`)
 
 ## Code Architecture Patterns
 

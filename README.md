@@ -2,22 +2,23 @@
 
 Welcome to the El Turrero Post project! This website is designed to showcase the
 x.com threads of Javier G. Recuenco who specializes in complexity science. The
-goal of the website is to present the he's tweets in a visually pleasing and
+goal of the website is to present his tweets in a visually pleasing and
 easy-to-navigate format.
 
 ## Features
 
 - **Clean, minimalist design** focused on thread readability
-- **Automatic embedding** of images, cards and quoted tweets from X.com (embedded tweet IDs resolved from text when scraping misses them)
+- **Automatic embedding** of images, cards, animated GIFs and quoted tweets from X.com (embedded tweet IDs resolved from text when scraping misses them)
 - **Advanced search** with Algolia-powered indexing
 - **Category-based navigation** for organized thread discovery
 - **Interactive quizzes** for educational threads
 - **Book recommendations** extracted from thread content
+- **Local AI enrichment** via Ollama for automated summary, categorization, and exam generation
 - **Standardized ID system** for consistent data handling
 - **Real-time validation** pipeline for data integrity
 - **Responsive design** optimized for all devices
 
-## Kown bugs or improvements
+## Known bugs or improvements
 
 - Add blocks: #preguntaalrecu y latest 25 cronologic turras
 - Show cards with card design (for those with url)
@@ -66,6 +67,7 @@ The website is built using:
 - **Deno 1.41+** for primary data processing scripts
 - **Python 3.8+** for graph generation
 - **Puppeteer** for web scraping X.com threads
+- **Ollama** for local AI enrichment (summary, categories, exam generation)
 - **Hybrid Architecture**: Node.js frontend + Deno scripts for optimal performance
 
 You can handle node.js versions by using nvm, for example:
@@ -134,9 +136,10 @@ npx @puppeteer/browsers install chrome
 ```
 
 4. Create a `.env` file with your X/Twitter credentials (see `.env.example` for
-   required fields)
-5. Start the development server: `npm run dev`
-6. Open the website in your browser: `http://localhost:3000`
+   required fields) and optionally set `OLLAMA_MODEL` (default: `llama3.2`)
+5. Install Ollama from https://ollama.com and pull your model: `ollama pull llama3.2`
+6. Start the development server: `npm run dev`
+7. Open the website in your browser: `http://localhost:3000`
 
 ## Adding new threads
 
@@ -149,7 +152,7 @@ If you have the Claude Code hook configured, simply type:
 add thread 1234567890123456789 This is the first tweet text
 ```
 
-Claude will automatically detect this pattern and execute the complete 12-step workflow including AI processing.
+Claude will automatically detect this pattern and execute the complete workflow including AI processing.
 
 **Using the Script (Semi-Automated):**
 
@@ -166,10 +169,10 @@ Alternatively you could use the following steps:
 4. Generate metadata images (e.g. `node scripts/image-card-generator.js` if available), then move `scripts/metadata/*` to `public/metadata/`
 5. `deno task algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
 6. `deno task books` — updates `infrastructure/db/books-not-enriched.json`
-7. `deno task book-enrich` — book enrichment; use the output in the last prompt to update `infrastructure/db/books.json`
-8. Run `./scripts/generate_prompts.sh` and use the prompts with your LLM to fill `db/tweets_summary.json`, `db/tweets_map.json`, and `db/tweets_exam.json`
-9. Update the latest date in `app/components/Header.tsx`
-10. Regenerate graph data: `python3 scripts/create_graph.py`
+7. `deno task book-enrich` — book enrichment
+8. `deno task ai-local $id` — generates summary, categories, and exam via local Ollama
+9. Regenerate graph data: `python3 scripts/create_graph.py`
+10. Update the latest date in `app/components/Header.tsx`
 11. Verify with `npm run dev`
 
 The data source that contains the x.com threads and metadata is located under
@@ -231,8 +234,8 @@ add thread 1234567890123456789 Test thread content
 ### 3. Hook Features
 
 - **Automatic Detection**: Recognizes thread addition patterns
-- **Complete Workflow**: Executes all 12 steps automatically
-- **AI Processing**: Integrates with `ai-prompt-processor` agent
+- **Complete Workflow**: Executes all steps automatically
+- **AI Processing**: Uses local Ollama for summary, categories, and exam generation
 - **Error Handling**: Provides feedback and logs issues
 - **Safe Execution**: Always exits successfully to avoid blocking Claude
 
