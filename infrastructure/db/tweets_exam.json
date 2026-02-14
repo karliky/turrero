@@ -7118,5 +7118,229 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1984528930691236007",
+        "questions": [
+            {
+                "question": "¿Cuál es el objetivo de las leyendas urbanas según Brunvand?",
+                "options": [
+                    "Explicar lo inexplicable",
+                    "Divertir al público",
+                    "Garantizar la verdad"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué papel juega Hollywood en la construcción del mito fronterizo?",
+                "options": [
+                    "Romanticiza la conquista",
+                    "Corrige errores históricos",
+                    "Evita la propaganda"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué mecanismo acelera la exageración de los mitos según el artículo de Scientific American?",
+                "options": [
+                    "Dinámicas psicológicas",
+                    "Tecnología moderna",
+                    "Fuerzas gravitacionales"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "1981980820278591851",
+        "questions": [
+            {
+                "question": "Según el texto, ¿cuál es una función principal de la mentira blanca?",
+                "options": [
+                    "Facilita la interacción",
+                    "Promueve la desconfianza",
+                    "Aumenta el conflicto"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cómo define el texto el autoengaño?",
+                "options": [
+                    "Una mentira intencional",
+                    "Una creencia falsa sobre uno mismo",
+                    "Una forma de manipulación"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál es uno de los riesgos del autoengaño mencionado?",
+                "options": [
+                    "Mejora la toma de decisiones",
+                    "Puede llevar a decisiones erróneas",
+                    "Fortalece la autoestima"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "1979441618634600909",
+        "questions": [
+            {
+                "question": "Según el texto, ¿cuál es el objetivo principal de la charla sobre #laverdadseinventa?",
+                "options": [
+                    "Demostrar técnicas de marketing digital",
+                    "Reivindicar la importancia de cada persona en la concreción de negocios",
+                    "Analizar casos de estudio de CPS"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué método propone Neil Rackham para mejorar la relevancia en las ventas?",
+                "options": [
+                    "SPIN selling",
+                    "Cold calling",
+                    "Email marketing"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "En el contexto de la personotecnia, ¿qué representa la \"oferta\" cuando se trata de la anti-personotecnia?",
+                "options": [
+                    "Una herramienta de validación personal",
+                    "Un análisis de mercado",
+                    "Un informe financiero"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "1976916522657628448",
+        "questions": [
+            {
+                "question": "¿Cuál es la función principal de la Personotecnia según el texto?",
+                "options": [
+                    "Controlar cuerpos físicos",
+                    "Diseñar marcos de interpretación",
+                    "Unir cuerpos como la física"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué fórmula tentativa utiliza la Personotecnia para medir la coherencia?",
+                "options": [
+                    "Coherencia ≈ (Narrativa + Ritual) ÷ (Ruido × Volatilidad)",
+                    "Coherencia ≈ (Narrativa × Ritual × Fiabilidad) ÷ (Ruido × Volatilidad)",
+                    "Coherencia ≈ (Narrativa × Ritual) × Fiabilidad"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué término describe la capacidad de dos personas entenderse sin hablar según el texto?",
+                "options": [
+                    "Entrelazamiento simbólico",
+                    "Sinestesia",
+                    "Resonancia cognitiva"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "1974364866405367953",
+        "questions": [
+            {
+                "question": "¿Cuál es la herramienta principal utilizada para gestionar el curso del Master CPS?",
+                "options": [
+                    "CANVAS",
+                    "Moodle",
+                    "Blackboard"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es uno de los temas que se abordan en el Master según la estructura de temas?",
+                "options": [
+                    "Metodología RPC",
+                    "Finanzas corporativas",
+                    "Marketing digital"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué característica destaca la experiencia de los compañeros en el Master?",
+                "options": [
+                    "Trabajo en equipo con equipos aleatorios",
+                    "Estudio individual sin colaboración",
+                    "Asistencia presencial obligatoria"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "1971825115165028522",
+        "questions": [
+            {
+                "question": "¿Cuál es el tercer pilar estratégico mencionado al inicio del texto?",
+                "options": [
+                    "El CPS Hispano",
+                    "La creatividad",
+                    "La rebeldía"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué concepto se critica por la falta de argumentos IQ driven?",
+                "options": [
+                    "La literalidad",
+                    "La metafórica",
+                    "El entusiasmo"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es la postura sobre el idealismo según el texto?",
+                "options": [
+                    "Es un compromiso con la realidad",
+                    "Es un concepto que les es muy querido a los luteranos",
+                    "Es una ideología sin sentido"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "1969289174655045782",
+        "questions": [
+            {
+                "question": "Según el texto, ¿qué representa la convergencia entre CPS y AACC?",
+                "options": [
+                    "fusión de sistemas de conocimiento y talento creativo",
+                    "conflicto entre tecnología y humanidades",
+                    "desconexión entre procesos y capacidades"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es la altura media de un jugador de la NBA mencionada?",
+                "options": [
+                    "2,01 metros",
+                    "1,90 metros",
+                    "2,20 metros"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según el texto, ¿qué suele pasar con las personas de altas capacidades en su época?",
+                "options": [
+                    "son ampliamente valoradas",
+                    "son incomprendidas y subestimadas",
+                    "son ignoradas por la ciencia"
+                ],
+                "answer": 2
+            }
+        ]
     }
 ]

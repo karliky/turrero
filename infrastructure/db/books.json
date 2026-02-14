@@ -6678,5 +6678,212 @@
         "img": "./metadata/bM84spxY.jpg",
         "turraId": "1964221678713438241",
         "categories": []
+    },
+    {
+        "id": "1984528939885191490",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Vanishing Hitchhiker: American Urban Legends and Th…",
+        "description": "The groundbreaking book that launched America's urban l…",
+        "url": "https://www.goodreads.com/book/show/40957.The_Vanishing_Hitchhiker",
+        "img": "./metadata/tKtew_qG.jpg",
+        "turraId": "1984528930691236007",
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Folklore",
+            "Horror",
+            "Urban Legends",
+            "History",
+            "Sociology",
+            "Reference"
+        ],
+        "categories": [
+            "Nonfiction",
+            "Fiction",
+            "History"
+        ]
+    },
+    {
+        "id": "1984528946482827369",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Big Book of Urban Legends",
+        "description": "This collection of strange and bizarre anecdotal tales …",
+        "url": "https://www.goodreads.com/book/show/423123.The_Big_Book_of_Urban_Legends",
+        "img": "./metadata/nXtC94NW.jpg",
+        "turraId": "1984528930691236007",
+        "goodreadsCategories": [
+            "Comics",
+            "Graphic Novels",
+            "Nonfiction",
+            "Folklore",
+            "Humor",
+            "Horror",
+            "Urban Legends"
+        ],
+        "categories": [
+            "Fiction",
+            "Nonfiction"
+        ]
+    },
+    {
+        "id": "1984528949251105005",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "A Short Story of Myth",
+        "description": "Human beings have always been myth makers. . . So begin…",
+        "url": "https://www.goodreads.com/book/show/9119552-a-short-story-of-myth",
+        "img": "./metadata/x6JYGTXZ.jpg",
+        "turraId": "1984528930691236007",
+        "goodreadsCategories": [
+            "Nonfiction",
+            "History",
+            "Mythology",
+            "Religion",
+            "Philosophy",
+            "Anthropology",
+            "Historical"
+        ],
+        "categories": [
+            "Nonfiction",
+            "History"
+        ]
+    },
+    {
+        "id": "1981980840520298565",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Folly of Fools: The Logic of Deceit and Self-Decept…",
+        "description": "Whether it’s in a cockpit at takeoff or the planning of…",
+        "url": "https://www.goodreads.com/book/show/13033022-the-folly-of-fools",
+        "img": "./metadata/3rfv-YVW.jpg",
+        "turraId": "1981980820278591851",
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Science",
+            "Philosophy",
+            "Biology",
+            "Evolution",
+            "Sociology"
+        ],
+        "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Science"
+        ]
+    },
+    {
+        "id": "1981980880504533339",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Gaslight Effect: How to Spot and Survive the Hidden…",
+        "description": "Are You Being Gaslighted?Check for these telltale signs…",
+        "url": "https://www.goodreads.com/es/book/show/36520721-the-gaslight-effect",
+        "img": "./metadata/zah7tFWK.jpg",
+        "turraId": "1981980820278591851",
+        "goodreadsCategories": [
+            "Psychology",
+            "Self Help",
+            "Nonfiction",
+            "Relationships",
+            "Mental Health",
+            "Abuse",
+            "Personal Development"
+        ],
+        "categories": [
+            "Psychology",
+            "Self Help",
+            "Nonfiction",
+            "Health",
+            "Personal Development"
+        ]
+    },
+    {
+        "id": "1981980881494409227",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Status Game: On Human Life and How to Play It",
+        "description": "For centuries, philosophers and scholars have described…",
+        "url": "https://www.goodreads.com/book/show/58642436-the-status-game",
+        "img": "./metadata/Z63L-uXV.jpg",
+        "turraId": "1981980820278591851",
+        "goodreadsCategories": [
+            "Psychology",
+            "Nonfiction",
+            "Sociology",
+            "Philosophy",
+            "Self Help",
+            "Science",
+            "Audiobook"
+        ],
+        "categories": [
+            "Psychology",
+            "Nonfiction",
+            "Self Help",
+            "Science"
+        ]
+    },
+    {
+        "id": "1971829218926526763",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Lo Barroco",
+        "description": "Madrid. 19 cm. 174 p., 8 lám. Encuadernación en tapa du…",
+        "url": "https://www.goodreads.com/book/show/39715965-lo-barroco",
+        "img": "./metadata/JQFM7fR8.jpg",
+        "turraId": "1971825115165028522",
+        "goodreadsCategories": [
+            "Art"
+        ],
+        "categories": [
+            "Nonfiction"
+        ]
+    },
+    {
+        "id": "1971829319212454298",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "L'impresa responsabile: Un'intervista su Adriano Olivet…",
+        "description": "Un'impresa capace di creare profitto non solo per grati…",
+        "url": "https://www.goodreads.com/book/show/23273468-l-impresa-responsabile",
+        "img": "./metadata/6jx2JF_4.jpg",
+        "turraId": "1971825115165028522",
+        "categories": []
+    },
+    {
+        "id": "1969289279793779162",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Genius in All of Us: Why Everything You've Been Tol…",
+        "description": "With irresistibly persuasive vigor, David Shenk debunks…",
+        "url": "https://www.goodreads.com/book/show/7012191-the-genius-in-all-of-us",
+        "img": "./metadata/V4UiqNg-.jpg",
+        "turraId": "1969289174655045782",
+        "goodreadsCategories": [
+            "Nonfiction",
+            "Psychology",
+            "Science",
+            "Self Help",
+            "Education",
+            "Genetics",
+            "Biology"
+        ],
+        "categories": [
+            "Nonfiction",
+            "Psychology",
+            "Science",
+            "Self Help",
+            "Education"
+        ]
     }
 ]
