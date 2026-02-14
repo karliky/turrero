@@ -103,7 +103,7 @@ export default async function TurraPage({ params }: Params) {
   const words = summary.split(' ');
   const coloredWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
-  const author: Author = fromXtoAuthor(mainTweet.author);
+  const author: Author = fromXtoAuthor(mainTweet.author, mainTweet.authorName);
   return (
     <main className="min-h-screen">
       {/* Back Navigation */}

@@ -95,6 +95,7 @@ interface TweetMetadata {
 interface Tweet {
     tweet: string;
     author: string;
+    authorName?: string;
     id: string;
     metadata: TweetMetadata;
     time: string;
@@ -811,6 +812,25 @@ async function rejectCookies(page: Page): Promise<void> {
     });
 }
 
+async function extractAuthorName(page: Page): Promise<string> {
+    return await page.evaluate(() => {
+        const article = document.querySelector(
+            'article[tabindex="-1"][role="article"][data-testid="tweet"]',
+        );
+        const userNameDiv = article?.querySelector(
+            'div[data-testid="User-Name"]',
+        ) as HTMLElement | null;
+        if (!userNameDiv) return "";
+
+        const lines = userNameDiv.innerText
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+        return lines[0] || "";
+    });
+}
+
 async function fetchSingleTweet(
     { page, expectedAuthor }: { page: Page; expectedAuthor: string },
 ): Promise<{ tweet: Tweet; mustStop: boolean }> {
@@ -937,6 +957,13 @@ async function getAllTweets({
             // Dedup guard: skip if already saved (happens on resume — first iteration re-parses last saved tweet)
             if (!tweets.some((t) => t.id === tweet.id)) {
                 tweets.push(tweet);
+                if (tweets.length === 1 && !tweets[0]?.authorName) {
+                    try {
+                        tweets[0]!.authorName = await extractAuthorName(page);
+                    } catch (error) {
+                        logger.warn(`Could not extract authorName for thread ${tweetId}:`, error);
+                    }
+                }
                 saveThreadProgress(outputFilePath, tweetId, tweets);
                 logger.info(`[${threadIndex + 1}/${tweetIds.length}] Tweet ${tweets.length} (${tweet.id}) [${Math.round((Date.now() - threadStart) / 1000)}s]`);
             }
@@ -1226,6 +1253,7 @@ async function main() {
             let tweet: Tweet;
             try {
                 tweet = await parseTweet({ page });
+                tweet.authorName = await extractAuthorName(page);
             } catch (error) {
                 const errMsg = error instanceof Error ? error.message : String(error);
                 if (errMsg.includes("detached") || errMsg.includes("Connection closed")) {
@@ -1233,6 +1261,7 @@ async function main() {
                     await page.goto(testUrl, { waitUntil: 'networkidle2' });
                     await page.waitForSelector('div[data-testid="tweetText"]');
                     tweet = await parseTweet({ page });
+                    tweet.authorName = await extractAuthorName(page);
                 } else {
                     throw error;
                 }
@@ -1306,6 +1335,9 @@ async function main() {
                         await page!.waitForSelector('div[data-testid="tweetText"]');
                         try { await rejectCookies(page!); } catch { /* cookie popup not present */ }
                         newTweet = await parseTweet({ page: page! });
+                        if (target.tweetIdx === 0) {
+                            newTweet.authorName = await extractAuthorName(page!);
+                        }
                         break;
                     } catch (error) {
                         const errMsg = error instanceof Error ? error.message : String(error);

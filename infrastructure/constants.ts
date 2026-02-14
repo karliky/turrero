@@ -11,12 +11,19 @@ export interface Author {
   readonly YOUTUBE: string;
 }
 
-export const fromXtoAuthor = (x: string): Author => {
-  // I don't like this, but it's a quick fix
+export const fromXtoAuthor = (x: string, displayName?: string): Author => {
   if (x === AUTHORS.RECUENCO.X) return AUTHORS.RECUENCO;
   if (x === AUTHORS.VICTOR.X) return AUTHORS.VICTOR;
-  
-  return AUTHORS.CPSCOMUNIDAD;
+  if (x === AUTHORS.CPSCOMUNIDAD.X) return AUTHORS.CPSCOMUNIDAD;
+
+  const normalizedX = x.replace(/\/+$/, "");
+  const handle = normalizedX.split("/").pop() || "unknown";
+
+  return {
+    NAME: displayName?.trim() || `@${handle}`,
+    X: normalizedX,
+    YOUTUBE: "",
+  };
 }
 
 export const AUTHORS: Authors = {
@@ -37,4 +44,3 @@ export const AUTHORS: Authors = {
     YOUTUBE: "https://www.youtube.com/results?search_query=Javier+Recuenco"
   }
 } as const;
-

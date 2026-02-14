@@ -78,6 +78,8 @@ export interface Tweet {
   time: string;
   /** Author handle or profile URL */
   author: string;
+  /** Display name from DOM (stored on the first tweet of a thread) */
+  authorName?: string;
   /** Additional metadata (images, embeds, etc.) */
   metadata?: TweetMetadata;
   /** Engagement statistics */
