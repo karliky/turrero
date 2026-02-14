@@ -29,7 +29,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `cd scripts && npm run generate-pdf` - Generate PDF from data (Node.js)
 
 ### Testing Individual Tweets
-- `deno task scrape --test $tweet_id` - Test scraping a single tweet
+- `deno task scrape -- --test $tweet_id` - Test scraping a single tweet
+- `deno task scrape -- --fix-tweet <tweet_id...>` - Re-scrape specific tweet IDs for metadata backfill
 
 ## Tech Stack & Architecture
 
@@ -97,17 +98,16 @@ The hook will automatically execute the complete workflow including AI processin
 Use the automated script: `./scripts/add_thread.sh $thread_id $first_tweet_text`
 
 Or follow the manual process:
-1. Add tweet to CSV: `npx tsx scripts/add-new-tweet.ts $id $first_tweet_line`
-2. Scrape: `deno --allow-all scripts/recorder.ts`
-3. Enrich: `npx tsx scripts/tweets_enrichment.ts`
+1. Add tweet to CSV: `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"`
+2. Scrape: `deno task scrape`
+3. Enrich: `deno task enrich`
 4. Generate cards: `node scripts/image-card-generator.js`
 5. Move metadata: `mv scripts/metadata/* public/metadata/`
-6. Update Algolia: `npx tsx scripts/make-algolia-db.ts`
-7. Generate books: `npx tsx scripts/generate-books.ts`
-8. Enrich books: `npx tsx scripts/book-enrichment.ts`
+6. Update Algolia: `deno task algolia`
+7. Generate books: `deno task books`
+8. Enrich books: `deno task book-enrich`
 9. AI enrichment: `deno task ai-local $id` (generates summary, categories, exam via local Ollama)
-10. Update header date manually in `app/components/Header.tsx`
-11. Test with `npm run dev`
+10. Test with `npm run dev` (header "last update" is derived automatically from latest tweet date)
 
 ### Deno Usage
 - Required permissions: `--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run`
@@ -237,3 +237,10 @@ Or follow the manual process:
 - Use append-only or merge strategies for database updates
 - Validate data integrity after any database modifications
 - Create backups before major data transformations
+
+### Card Metadata Contract
+- `domain` must contain a real hostname (for grouping and icon/category logic)
+- `title` is the primary card label shown in UI (X card text or fetched page title)
+- `description` is secondary preview text from page metadata
+- Legacy `caption` is deprecated and should be migrated to `title` during backfills
+- Preferred backfill flow: `deno task scrape -- --fix-tweet ...` followed by `deno task enrich`

@@ -165,15 +165,16 @@ Alternatively you could use the following steps:
 1. `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"` to add the first
    tweet id (thread id) and the first tweet text to the top of `infrastructure/db/turras.csv`
 2. `deno task scrape` — scrapes the thread and appends it to `infrastructure/db/tweets.json`
-3. `deno task enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs by matching text in tweets.json)
+3. `deno task enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs and normalizes card fields)
 4. Generate metadata images (e.g. `node scripts/image-card-generator.js` if available), then move `scripts/metadata/*` to `public/metadata/`
 5. `deno task algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
 6. `deno task books` — updates `infrastructure/db/books-not-enriched.json`
 7. `deno task book-enrich` — book enrichment
 8. `deno task ai-local $id` — generates summary, categories, and exam via local Ollama
 9. Regenerate graph data: `python3 scripts/create_graph.py`
-10. Update the latest date in `app/components/Header.tsx`
-11. Verify with `npm run dev`
+10. Verify with `npm run dev`
+
+The “last update” date in the header is derived automatically from the most recent tweet in the data.
 
 The data source that contains the x.com threads and metadata is located under
 `/infrastructure`.
@@ -190,6 +191,22 @@ To test scraping a single tweet in isolation (no changes to `tweets.json`):
 ```bash
 deno task scrape -- --test $tweet_id
 ```
+
+### Backfill Card Metadata
+
+Use this when a link card has wrong/missing title or domain, or when legacy `caption`
+data needs to be migrated.
+
+```bash
+deno task scrape -- --fix-tweet <tweet_id_1> <tweet_id_2> ...
+deno task enrich
+```
+
+Card field contract:
+- `domain`: real hostname (for grouping and icon/category logic)
+- `title`: visible card label (from X card text or fetched page title)
+- `description`: page summary/preview text
+- `caption`: deprecated legacy field; should not be used going forward
 
 Check the script and logs for more debugging options.
 
