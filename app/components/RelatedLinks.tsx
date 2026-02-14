@@ -10,13 +10,14 @@ interface RelatedLinksProps {
 export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
   const isValidDomain = (url: string) => {
     return url.includes("youtube.com") ||
+           url.includes("youtu.be") ||
            (url.includes("goodreads.com") && !url.includes("user_challenges")) ||
            url.includes("wikipedia.org") ||
            url.includes("linkedin.com");
   };
 
   const getIcon = (url: string) => {
-    if (url.includes("youtube.com")) return <FaYoutube className="text-xl" />;
+    if (url.includes("youtube.com") || url.includes("youtu.be")) return <FaYoutube className="text-xl" />;
     if (url.includes("goodreads.com")) return <FaBook className="text-xl" />;
     if (url.includes("wikipedia.org")) return <FaWikipediaW className="text-xl" />;
     if (url.includes("linkedin.com")) return <FaLinkedin className="text-xl" />;
@@ -38,8 +39,6 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
   };
 
   const cardLinks = enrichedData.filter(isValidCard);
-  
-  if (cardLinks.length === 0) return null;
 
   const simpleLinks = thread
     .flatMap(tweet => {
@@ -54,7 +53,7 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     const domain = data.domain || data.url || '';
 
     let category = '';
-    if (domain.includes('youtube.com')) category = 'Videos';
+    if (domain.includes('youtube.com') || domain.includes('youtu.be')) category = 'Videos';
     else if (domain.includes('goodreads.com')) category = 'Libros';
     else if (domain.includes('wikipedia.org')) category = 'Wikipedia';
     else if (domain.includes('linkedin.com')) category = 'LinkedIn';

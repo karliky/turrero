@@ -117,6 +117,7 @@ interface TweetCSV {
 // The real MP4 URLs are only in GraphQL API responses (extended_entities.media[].video_info.variants).
 // We intercept these responses and cache the URLs keyed by media_id_str.
 const interceptedVideoUrls = new Map<string, string>();
+const interceptedCardUrls = new Map<string, string>(); // tweetId → expanded YouTube/card URL
 
 /**
  * Recursively walks a GraphQL JSON response looking for video media entries
@@ -166,6 +167,46 @@ function extractVideoUrlsFromGraphQL(obj: unknown): void {
     // Recurse into all values
     for (const value of Object.values(record)) {
         extractVideoUrlsFromGraphQL(value);
+    }
+}
+
+/**
+ * Recursively walks a GraphQL JSON response looking for tweet entities with
+ * YouTube/youtu.be URLs, and caches the expanded URL keyed by tweet id_str/rest_id.
+ */
+function extractCardUrlsFromGraphQL(obj: unknown): void {
+    if (obj === null || obj === undefined || typeof obj !== 'object') return;
+
+    if (Array.isArray(obj)) {
+        for (const item of obj) {
+            extractCardUrlsFromGraphQL(item);
+        }
+        return;
+    }
+
+    const record = obj as Record<string, unknown>;
+
+    // Look for tweet-like objects with rest_id/id_str and entities.urls
+    const tweetId = (record.rest_id ?? record.id_str) as string | undefined;
+    if (tweetId && typeof tweetId === 'string') {
+        const legacy = record.legacy as Record<string, unknown> | undefined;
+        const entities = (legacy?.entities ?? record.entities) as Record<string, unknown> | undefined;
+        const urls = entities?.urls as Array<Record<string, unknown>> | undefined;
+        if (Array.isArray(urls)) {
+            for (const urlEntry of urls) {
+                const expanded = urlEntry.expanded_url as string | undefined;
+                if (expanded && typeof expanded === 'string' &&
+                    (expanded.includes('youtube.com') || expanded.includes('youtu.be'))) {
+                    interceptedCardUrls.set(tweetId, expanded);
+                    logger.debug(`Intercepted card URL for tweet ${tweetId}: ${expanded}`);
+                }
+            }
+        }
+    }
+
+    // Recurse into all values
+    for (const value of Object.values(record)) {
+        extractCardUrlsFromGraphQL(value);
     }
 }
 
@@ -288,6 +329,7 @@ async function setupPage(browser: Browser, cookies: CookieParam[]): Promise<Page
         try {
             const json = await response.json();
             extractVideoUrlsFromGraphQL(json);
+            extractCardUrlsFromGraphQL(json);
         } catch {
             // Skip non-JSON responses (e.g. 204, binary)
         }
@@ -355,7 +397,7 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
 
             // Search for link more broadly - small cards often have links in media section or parent wrapper
             // Try multiple selectors to handle different card layouts
-            const linkElement = card.querySelector("a[href]") as HTMLAnchorElement;
+            const linkElement = (card.querySelector("a[href]") || card.closest("a[href]")) as HTMLAnchorElement;
 
             // Extract additional metadata from card.layoutSmall.detail if present
             // Structure: 3 divs with spans containing: 1) domain, 2) title, 3) description
@@ -588,6 +630,15 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                     logger.debug(`Resolved embed video for media ${mediaId}: ${resolved.slice(0, 80)}...`);
                 }
             }
+        }
+    }
+
+    // Post-process card URLs: fill empty card URLs from GraphQL interceptor
+    if (metadata.type === 'card' && !metadata.url && metadata.domain) {
+        const graphqlUrl = interceptedCardUrls.get(currentTweetId);
+        if (graphqlUrl) {
+            (metadata as Record<string, unknown>).url = graphqlUrl;
+            logger.debug(`Resolved card URL for tweet ${currentTweetId}: ${graphqlUrl}`);
         }
     }
 
@@ -985,6 +1036,18 @@ async function main() {
     process.on("SIGINT", cleanup);
     process.on("SIGTERM", cleanup);
 
+    // Suppress uncatchable Puppeteer CDP JSON parse errors (Chrome sends malformed
+    // CDP messages for certain large GraphQL responses — crashes Connection.onMessage).
+    // These are non-fatal: the response interceptor simply misses that one response.
+    process.on("unhandledRejection", (reason: unknown) => {
+        if (reason instanceof SyntaxError && String(reason).includes("Bad escaped character")) {
+            logger.warn("CDP JSON parse error (non-fatal, suppressed):", (reason as Error).message);
+            return;
+        }
+        // Re-throw anything else
+        throw reason;
+    });
+
     const args = process.argv.slice(2);
     const testIndex = args.indexOf("--test");
     const testMode = testIndex !== -1;
@@ -1079,11 +1142,26 @@ async function main() {
                 process.exit(1);
             }
 
-            await page.goto(`https://x.com/Recuenco/status/${tweetId}`);
+            const testUrl = `https://x.com/Recuenco/status/${tweetId}`;
+            await page.goto(testUrl, { waitUntil: 'networkidle2' });
             logger.debug("Waiting for selector");
             await page.waitForSelector('div[data-testid="tweetText"]');
 
-            const tweet = await parseTweet({ page });
+            let tweet: Tweet;
+            try {
+                tweet = await parseTweet({ page });
+            } catch (error) {
+                const errMsg = error instanceof Error ? error.message : String(error);
+                if (errMsg.includes("detached") || errMsg.includes("Connection closed")) {
+                    logger.warn("Frame detached on first attempt, retrying with fresh navigation...");
+                    await page.goto(testUrl, { waitUntil: 'networkidle2' });
+                    await page.waitForSelector('div[data-testid="tweetText"]');
+                    tweet = await parseTweet({ page });
+                } else {
+                    throw error;
+                }
+            }
+
             try {
                 await rejectCookies(page);
                 logger.debug("Cookies rejected, closed the popup");
@@ -1092,6 +1170,7 @@ async function main() {
             }
 
             await fetchSingleTweet({ page, expectedAuthor: tweet.author });
+            logger.info("Test result:", JSON.stringify(tweet, null, 2));
             logger.info("Correct exit");
         } else if (fixTweetMode) {
             const tweetIdsToFix = args.slice(fixTweetIndex + 1);
@@ -1122,40 +1201,79 @@ async function main() {
                 }
             }
 
-            logger.info(`Fixing ${targets.length} tweet(s)...`);
+            // Track which tweets were already fixed (resumable — skip tweets with card URL already populated)
+            const enrichedPath = join(__dirname, "../infrastructure/db/tweets_enriched.json");
+            const enrichedBefore = JSON.parse(readFileSync(enrichedPath, "utf-8")) as Array<{ id: string; type?: string; url?: string }>;
+            const alreadyFixed = new Set(
+                enrichedBefore
+                    .filter(e => e.type === "card" && e.url && e.url.length > 0)
+                    .map(e => e.id)
+            );
 
-            // Navigate and re-parse each tweet
-            for (const target of targets) {
+            const pendingTargets = targets.filter(t => !alreadyFixed.has(t.tweetId));
+            logger.info(`Fixing ${pendingTargets.length} tweet(s) (${targets.length - pendingTargets.length} already have URLs, skipped)...`);
+
+            const maxRetries = 3;
+            let fixedCount = 0;
+            const fixedIds = new Set<string>();
+
+            // Navigate and re-parse each tweet — save after EVERY tweet for crash resilience
+            for (const target of pendingTargets) {
                 const oldTweet = data[target.threadIdx]![target.tweetIdx]!;
-                logger.info(`Re-scraping tweet ${target.tweetId} (was: "${oldTweet.tweet.slice(0, 60)}...")`);
+                logger.info(`[${fixedCount + 1}/${pendingTargets.length}] Re-scraping tweet ${target.tweetId} (was: "${oldTweet.tweet.slice(0, 60)}...")`);
 
-                await page!.goto(`https://x.com/Recuenco/status/${target.tweetId}`);
-                await page!.waitForSelector('div[data-testid="tweetText"]');
+                let newTweet: Tweet | undefined;
+                for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                    try {
+                        const tweetUrl = `https://x.com/Recuenco/status/${target.tweetId}`;
+                        await page!.goto(tweetUrl, { waitUntil: 'networkidle2' });
+                        await page!.waitForSelector('div[data-testid="tweetText"]');
+                        try { await rejectCookies(page!); } catch { /* cookie popup not present */ }
+                        newTweet = await parseTweet({ page: page! });
+                        break;
+                    } catch (error) {
+                        const errMsg = error instanceof Error ? error.message : String(error);
+                        const isFatal = errMsg.includes("detached") || errMsg.includes("Connection closed") || errMsg.includes("Target closed");
+                        if (isFatal && attempt < maxRetries) {
+                            logger.warn(`  Attempt ${attempt}/${maxRetries} failed, restarting browser...`);
+                            await page!.close().catch(() => {});
+                            await browser!.close().catch(() => {});
+                            browser = await puppeteer.launch(launchOptions);
+                            page = await setupPage(browser, cookies);
+                            continue;
+                        }
+                        logger.error(`  Failed after ${attempt} attempts for tweet ${target.tweetId}: ${errMsg}`);
+                        break;
+                    }
+                }
 
-                try { await rejectCookies(page!); } catch { /* cookie popup not present */ }
+                if (newTweet) {
+                    data[target.threadIdx]![target.tweetIdx] = newTweet;
+                    fixedCount++;
+                    fixedIds.add(target.tweetId);
+                    logger.info(`  -> New: "${newTweet.tweet.slice(0, 60)}..." | metadata: ${newTweet.metadata.type ?? "none"} | url: ${newTweet.metadata.url || "(empty)"}`);
 
-                const newTweet = await parseTweet({ page: page! });
-                data[target.threadIdx]![target.tweetIdx] = newTweet;
+                    // Save after EVERY tweet — crash-resilient
+                    const incTmp = tweetsPath + ".tmp";
+                    writeFileSync(incTmp, JSON.stringify(data, null, 4));
+                    renameSync(incTmp, tweetsPath);
 
-                logger.info(`  -> New: "${newTweet.tweet.slice(0, 60)}..." | metadata: ${newTweet.metadata.type ?? "none"}`);
+                    // Also remove this tweet's enrichment immediately so it gets regenerated
+                    const enrichedNow = JSON.parse(readFileSync(enrichedPath, "utf-8")) as Array<{ id: string }>;
+                    const filtered = enrichedNow.filter((e) => e.id !== target.tweetId);
+                    if (filtered.length < enrichedNow.length) {
+                        const eTmp = enrichedPath + ".tmp";
+                        writeFileSync(eTmp, JSON.stringify(filtered, null, 4));
+                        renameSync(eTmp, enrichedPath);
+                    }
+                } else {
+                    logger.warn(`  Skipped tweet ${target.tweetId} (all retries failed)`);
+                }
             }
 
-            // Atomic save
-            const tmpPath = tweetsPath + ".tmp";
-            writeFileSync(tmpPath, JSON.stringify(data, null, 4));
-            renameSync(tmpPath, tweetsPath);
-            logger.info(`Saved ${targets.length} fixed tweet(s) to tweets.json`);
-
-            // Remove from enriched so enrichment picks them up fresh
-            const enrichedPath = join(__dirname, "../infrastructure/db/tweets_enriched.json");
-            const enriched = JSON.parse(readFileSync(enrichedPath, "utf-8")) as Array<{ id: string }>;
-            const fixedIds = new Set(tweetIdsToFix);
-            const remaining = enriched.filter((e) => !fixedIds.has(e.id));
-            if (remaining.length < enriched.length) {
-                const enrichedTmpPath = enrichedPath + ".tmp";
-                writeFileSync(enrichedTmpPath, JSON.stringify(remaining, null, 4));
-                renameSync(enrichedTmpPath, enrichedPath);
-                logger.info(`Removed ${enriched.length - remaining.length} enrichment(s) — run 'deno task enrich' to regenerate`);
+            logger.info(`Fixed ${fixedCount}/${pendingTargets.length} tweet(s)`);
+            if (fixedCount > 0) {
+                logger.info(`Run 'deno task enrich' to regenerate enrichments for fixed tweets`);
             }
         } else {
             const tweetsPath = join(__dirname, "../infrastructure/db/tweets.json");

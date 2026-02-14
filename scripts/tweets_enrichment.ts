@@ -8,6 +8,7 @@ import { createDataAccess } from "./libs/data-access.ts";
 import {
   configureEnvironment,
   deriveGifUrl,
+  expandUrl,
   GenericCardProcessor,
   isBlobUrl,
   isValidMetadataType,
@@ -58,6 +59,9 @@ async function enrichTweets(): Promise<void> {
     // Retroactive GIF patching: add video URLs to existing enrichment entries
     // that have tweet_video_thumb poster images but no video field
     await patchExistingGifEntries(allTweetsFlat);
+
+    // Retroactive card URL patching: resolve empty card URLs from tweet text t.co links
+    await patchExistingCardUrls(allTweetsFlat);
 
     // Retroactive description patching: fetch og:description for card entries
     // that have a URL but no description
@@ -328,6 +332,64 @@ async function patchExistingGifEntries(allTweetsFlat: Tweet[]): Promise<void> {
   if (patchCount > 0) {
     await dataAccess.saveTweetsEnriched(enrichments);
     logger.info(`Retroactive GIF patch: added video URLs to ${patchCount} enrichment entries`);
+  }
+}
+
+/**
+ * Retroactively patches card entries that have a domain but empty URL.
+ * Finds t.co links in the raw tweet text, expands them, and checks if
+ * the expanded URL matches the card domain (e.g. youtube.com/youtu.be).
+ */
+async function patchExistingCardUrls(allTweetsFlat: Tweet[]): Promise<void> {
+  const enrichments = await dataAccess.getTweetsEnriched();
+  const tweetMap = new Map<string, Tweet>();
+  for (const t of allTweetsFlat) {
+    tweetMap.set(t.id, t);
+  }
+
+  const candidates = enrichments.filter(
+    (e) => e.type === "card" && (!e.url || e.url === "") && e.domain,
+  );
+
+  if (candidates.length === 0) return;
+
+  logger.info(`Card URL patch: ${candidates.length} cards with empty URL, resolving...`);
+  let patchCount = 0;
+
+  for (const entry of candidates) {
+    const tweet = tweetMap.get(entry.id);
+    if (!tweet?.tweet) continue;
+
+    // Extract t.co links from tweet text
+    const tcoLinks = tweet.tweet.match(/https?:\/\/t\.co\/\w+/g);
+    if (!tcoLinks) continue;
+
+    for (const tcoLink of tcoLinks) {
+      const expanded = await expandUrl(tcoLink);
+      if (!expanded) continue;
+
+      // Check if expanded URL matches the card domain
+      const domain = entry.domain!.toLowerCase();
+      const expandedLower = expanded.toLowerCase();
+      if (
+        (domain.includes('youtube') && (expandedLower.includes('youtube.com') || expandedLower.includes('youtu.be'))) ||
+        (domain.includes('goodreads') && expandedLower.includes('goodreads.com')) ||
+        (domain.includes('wikipedia') && expandedLower.includes('wikipedia.org')) ||
+        (domain.includes('linkedin') && expandedLower.includes('linkedin.com')) ||
+        expandedLower.includes(domain)
+      ) {
+        entry.url = expanded;
+        patchCount++;
+        break;
+      }
+    }
+  }
+
+  if (patchCount > 0) {
+    await dataAccess.saveTweetsEnriched(enrichments);
+    logger.info(`Card URL patch: resolved ${patchCount} empty card URLs`);
+  } else {
+    logger.info("Card URL patch: no URLs resolved");
   }
 }
 
