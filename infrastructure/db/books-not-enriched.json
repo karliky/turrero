@@ -3139,5 +3139,93 @@
         "url": "https://www.goodreads.com/book/show/7012191-the-genius-in-all-of-us",
         "img": "./metadata/V4UiqNg-.jpg",
         "turraId": "1969289174655045782"
+    },
+    {
+        "id": "2017499175676452890",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Rethinking Chronic Absenteeism: Why Schools Can't Solve…",
+        "description": "A call for community-based approaches to reducing the b…",
+        "url": "https://www.goodreads.com/book/show/218693225-rethinking-chronic-absenteeism",
+        "img": "./metadata/j2ajkRiy.jpg",
+        "turraId": "2017499037503541482"
+    },
+    {
+        "id": "2012420160221810755",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Power and Subversion in Game of Thrones: Critical Essay…",
+        "description": "This collection of essays examines the structures of po…",
+        "url": "https://www.goodreads.com/book/show/60015942-power-and-subversion-in-game-of-thrones",
+        "img": "./metadata/B5qcjRjq.jpg",
+        "turraId": "2012420052809892175"
+    },
+    {
+        "id": "2012420642797477937",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Contextual Intelligence",
+        "description": "2013 Leadership Book Award for Innovation and Cutting-E…",
+        "url": "https://www.goodreads.com/book/show/25130838-contextual-intelligence",
+        "img": "./metadata/9iO6kIUv.jpg",
+        "turraId": "2012420052809892175"
+    },
+    {
+        "id": "1992135476401061903",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Bad Company: Private Equity and the Death of the Americ…",
+        "description": "A damning indictment of the private equity industry tol…",
+        "url": "https://www.goodreads.com/book/show/218671853-bad-company",
+        "img": "./metadata/k-RcVs42.jpg",
+        "turraId": "1992135396793200730"
+    },
+    {
+        "id": "1992135477374144861",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "Boards Under Crisis: Decision-Making in the Age of Unce…",
+        "description": "Discover and share books you love on Goodreads.",
+        "url": "https://www.goodreads.com/book/show/216311884-boards-under-crisis",
+        "img": "./metadata/ErlS3MDF.jpg",
+        "turraId": "1992135396793200730"
+    },
+    {
+        "id": "2020049539210645576",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "El pequeño libro de la influencia y la persuasión (Span…",
+        "description": "Todas las personas persuadimos aunque en la mayoría de …",
+        "url": "https://www.goodreads.com/book/show/36530286-el-peque-o-libro-de-la-influencia-y-la-persuasi-n",
+        "img": "./metadata/8qrE-GVI.jpg",
+        "turraId": "2020049464229028201"
+    },
+    {
+        "id": "2009896685762154854",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Essential Joseph Schumpeter (Essential Scholars)",
+        "description": "Joseph Schumpeter is one of the most accomplished econo…",
+        "url": "https://www.goodreads.com/book/show/53927110-the-essential-joseph-schumpeter",
+        "img": "./metadata/xeqj9TY3.jpg",
+        "turraId": "2009896595203018960"
+    },
+    {
+        "id": "1994665963912868257",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "The Big Short: Inside the Doomsday Machine",
+        "description": "The #1 New York Times bestseller: \"It is the work of ou…",
+        "url": "https://www.goodreads.com/book/show/26889576-the-big-short",
+        "img": "./metadata/1kgzA5Ft.jpg",
+        "turraId": "1994665880878186846"
     }
 ]

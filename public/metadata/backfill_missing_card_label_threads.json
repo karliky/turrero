@@ -1,0 +1,3513 @@
+{
+  "threads": [
+    {
+      "threadId": "1761287914493796842",
+      "count": 11,
+      "hasTco": true
+    },
+    {
+      "threadId": "1573548479888105473",
+      "count": 8,
+      "hasTco": false
+    },
+    {
+      "threadId": "1489874989809639424",
+      "count": 7,
+      "hasTco": false
+    },
+    {
+      "threadId": "1365564279232028681",
+      "count": 7,
+      "hasTco": false
+    },
+    {
+      "threadId": "1492405460682657792",
+      "count": 6,
+      "hasTco": false
+    },
+    {
+      "threadId": "1451786307403927553",
+      "count": 6,
+      "hasTco": false
+    },
+    {
+      "threadId": "1626829061723983872",
+      "count": 6,
+      "hasTco": false
+    },
+    {
+      "threadId": "1610940502609723393",
+      "count": 5,
+      "hasTco": false
+    },
+    {
+      "threadId": "1540473939503288321",
+      "count": 5,
+      "hasTco": false
+    },
+    {
+      "threadId": "1449265748019453954",
+      "count": 5,
+      "hasTco": false
+    },
+    {
+      "threadId": "1413787729079545858",
+      "count": 5,
+      "hasTco": false
+    },
+    {
+      "threadId": "1383300151763103751",
+      "count": 5,
+      "hasTco": false
+    },
+    {
+      "threadId": "1743547711897342313",
+      "count": 5,
+      "hasTco": false
+    },
+    {
+      "threadId": "1794224768574476545",
+      "count": 5,
+      "hasTco": true
+    },
+    {
+      "threadId": "1586258861190676482",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1497479266354794497",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1487312375351029760",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1482274923313782784",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1416256929526161408",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1388377995233071106",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1380770207384408065",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1327534186140487680",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1621752572087345152",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1652189268742209537",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1766352097409134910",
+      "count": 4,
+      "hasTco": true
+    },
+    {
+      "threadId": "1786636941607260240",
+      "count": 4,
+      "hasTco": true
+    },
+    {
+      "threadId": "1791716794312318984",
+      "count": 4,
+      "hasTco": true
+    },
+    {
+      "threadId": "1779018888203608064",
+      "count": 4,
+      "hasTco": true
+    },
+    {
+      "threadId": "2020049464229028201",
+      "count": 4,
+      "hasTco": true
+    },
+    {
+      "threadId": "1997212613571117548",
+      "count": 4,
+      "hasTco": false
+    },
+    {
+      "threadId": "1591345649848487936",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1588784557284794368",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1538038532874420225",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1467051970422878210",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1454341690022670339",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1439130053267316738",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1396010920174837761",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1393482549306044416",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1360494110092713986",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1352890795897061378",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1350359247209553920",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1347795536435404800",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1325000695897071616",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1314815631229935617",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1616684654269980673",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1647132462982524929",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1664860434845913089",
+      "count": 3,
+      "hasTco": true
+    },
+    {
+      "threadId": "1675028035836182528",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1723236412487553316",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1741006814873821551",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1845017839423369267",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1862770042686845320",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1784107483444687237",
+      "count": 3,
+      "hasTco": true
+    },
+    {
+      "threadId": "1898290632457679270",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "2002288705726304422",
+      "count": 3,
+      "hasTco": false
+    },
+    {
+      "threadId": "1596391703774367744",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1568482191230787585",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1543107844043673600",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1535521789585117185",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1525356646448381952",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1515034112725241860",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1510161914772471813",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1507611365288161280",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1502547574263361538",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1500015623090360324",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1494930305811111938",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1484786680439746562",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1464529976540241923",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1461944993900380165",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1456867302494834690",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1446745515501264896",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1434087755198386177",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1418850632396677122",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1378251639639920641",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1373170914226008064",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1370628575775367168",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1355414699400175616",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1319891330307338240",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1297462657503694848",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1270594048617824257",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1260101741904834560",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1636989624567443457",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1667419646671179776",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1733397009418096842",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1753677668996837620",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1758760266068590698",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1842453861094609097",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1850051280107983315",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1852267188519854245",
+      "count": 2,
+      "hasTco": true
+    },
+    {
+      "threadId": "1867841781313769674",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1877979196271550821",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1880543676876874203",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1768900222581624896",
+      "count": 2,
+      "hasTco": true
+    },
+    {
+      "threadId": "1938855177471021516",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1943924463415820480",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1984528930691236007",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "2012420052809892175",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "2022575861296230582",
+      "count": 2,
+      "hasTco": false
+    },
+    {
+      "threadId": "1604019306349592577",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1601483220029161473",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1598965646620086272",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1593870067128627200",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1583704982129643520",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1578640745979846662",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1576087451524907008",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1545639451765997568",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1532990633580929025",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1527905242376962054",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1520307318931570688",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1517738336210894850",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1494930415504789506",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1472134392361500672",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1421353440224104449",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1406126552463470593",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1401066568034009088",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1375697328561078276",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1368127688343490560",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1357937382318886913",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1342767594697191424",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1340160478316785666",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1337670943276224513",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1335136099258294273",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1330075571116777474",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1307211330349420545",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1299619999200485377",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1312274974464499713",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1259054408983289856",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1257924003068555269",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "989041980549287936",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1619227404794306560",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1614168029876600833",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1624309145032597504",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1649673649866113024",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1642053681766883330",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1639529423274913794",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1634418954511822848",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1657283004727738368",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1654727164086960130",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1718136430130520294",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1705467198033088737",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1700404761428738437",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1684876869949120512",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1677573783018696704",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1730843036983120174",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1720721564465823881",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1751154901659381958",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1781573444485697867",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1796796569829687349",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1799313887285669975",
+      "count": 1,
+      "hasTco": true
+    },
+    {
+      "threadId": "1804386948938699148",
+      "count": 1,
+      "hasTco": true
+    },
+    {
+      "threadId": "1832301234105061777",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1834829754488221846",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1837390467337490808",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1839910136023847394",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1857680297443164321",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1860224907386273949",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1865306644827029957",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1893203295725871217",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1806938762129101276",
+      "count": 1,
+      "hasTco": true
+    },
+    {
+      "threadId": "1999746151839338739",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1900814275511210417",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1903343437719670927",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1905877658904183080",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1926142175105995150",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1981980820278591851",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "2017499037503541482",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "2009896595203018960",
+      "count": 1,
+      "hasTco": false
+    },
+    {
+      "threadId": "1994665880878186846",
+      "count": 1,
+      "hasTco": false
+    }
+  ],
+  "missing": [
+    {
+      "threadId": "1610940502609723393",
+      "tweetId": "1610940544099696641",
+      "domain": "starterstory.com",
+      "url": "https://www.starterstory.com/boring-business-ideas",
+      "description": "Interested in starting a profitable business that many people won't touch?  We have searched for some relatively boring "
+    },
+    {
+      "threadId": "1610940502609723393",
+      "tweetId": "1610940549866954752",
+      "domain": "en.as.com",
+      "url": "https://en.as.com/latest_news/chatgpt-explains-what-it-is-and-highlights-its-limitations-n/",
+      "description": "The open platform is a sibling model to InstructGPT, and is growing in popularity by the day."
+    },
+    {
+      "threadId": "1610940502609723393",
+      "tweetId": "1610940566379831296",
+      "domain": "fherediaharo.medium.com",
+      "url": "https://fherediaharo.medium.com/el-nps-y-la-ley-de-campbell-cuando-la-m%C3%A9trica-y-la-meta-se-confunden-a66e1bbd446d",
+      "description": "Toda medida convertida en fin en sí misma es una mala medida."
+    },
+    {
+      "threadId": "1610940502609723393",
+      "tweetId": "1610940568372117505",
+      "domain": "hoopshabit.com",
+      "url": "https://hoopshabit.com/2022/12/12/luka-doncic-dallas-mavericks-fading/",
+      "description": "Luka Doncic is having an incredible season, but the Dallas Mavericks are struggling. Is his patience with the Dallas Mav"
+    },
+    {
+      "threadId": "1610940502609723393",
+      "tweetId": "1610940582313984000",
+      "domain": "hoopshype.com",
+      "url": "https://hoopshype.com/lists/most-overpaid-players-nba-history-hayward-mutombo-parsons/",
+      "description": ""
+    },
+    {
+      "threadId": "1604019306349592577",
+      "tweetId": "1604019326604001283",
+      "domain": "nytimes.com",
+      "url": "https://www.nytimes.com/2010/04/27/world/27powerpoint.html",
+      "description": "PowerPoint has crept into the daily lives of U.S. military commanders and reached the level of near obsession."
+    },
+    {
+      "threadId": "1601483220029161473",
+      "tweetId": "1601483300069150721",
+      "domain": "ncbi.nlm.nih.gov",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8870796/",
+      "description": "In this study, the authors investigated if two distinct types of video gameplay improved undergraduates’ problem-solving"
+    },
+    {
+      "threadId": "1598965646620086272",
+      "tweetId": "1598965648746496001",
+      "domain": "knowyourmeme.com",
+      "url": "https://knowyourmeme.com/memes/normie",
+      "description": "Normie is a pejorative label for an individual who is deemed to be boringly conventional or mainstream by those who iden"
+    },
+    {
+      "threadId": "1596391703774367744",
+      "tweetId": "1596391725563809792",
+      "domain": "thenewatlantis.com",
+      "url": "https://www.thenewatlantis.com/publications/the-limits-of-information",
+      "description": "Daniel N. Robinson on the gaps between scientific explanation and human experience"
+    },
+    {
+      "threadId": "1596391703774367744",
+      "tweetId": "1596391764331372545",
+      "domain": "aeon.co",
+      "url": "https://aeon.co/ideas/let-the-soul-dangle-how-mind-wandering-spurs-creativity",
+      "description": "‘Let the soul dangle’: what neuroaesthetics can tell us about the benefits of mind-wandering and contemplating art"
+    },
+    {
+      "threadId": "1593870067128627200",
+      "tweetId": "1593870069116928001",
+      "domain": "dle.rae.es",
+      "url": "https://dle.rae.es/visionario",
+      "description": "1. adj. Dicho de una persona: Que, por su fantasía exaltada, se figura y cree con facilidad cosas quiméricas. U. t. c. s"
+    },
+    {
+      "threadId": "1591345649848487936",
+      "tweetId": "1591345654118449152",
+      "domain": "snackdinner.com",
+      "url": "https://www.snackdinner.com/home/throwing-spaghetti-at-the-wall",
+      "description": ""
+    },
+    {
+      "threadId": "1591345649848487936",
+      "tweetId": "1591345663270424577",
+      "domain": "quora.com",
+      "url": "https://www.quora.com/What-is-the-origin-of-the-idiom-keep-throwing-the-spaghetti-at-the-wall-until-something-sticks-as-a-problem-solving-technique/answer/Catherine-Weasel?ch=10&oid=217967214&share=262ae557&srid=uf4osX&target_type=answer",
+      "description": "Catherine Weasel's answer: I have never heard the phrase with spaghetti in, nor heard it used to describe a problem-solv"
+    },
+    {
+      "threadId": "1591345649848487936",
+      "tweetId": "1591345686641102849",
+      "domain": "blackrock.com",
+      "url": "https://www.blackrock.com/corporate/investor-relations/larry-fink-ceo-letter",
+      "description": "In his annual 2022 letter to CEO's, BlackRock's Larry Fink discusses how effective stakeholder capitalism creates and su"
+    },
+    {
+      "threadId": "1588784557284794368",
+      "tweetId": "1588784652902342656",
+      "domain": "thepullrequest.com",
+      "url": "https://www.thepullrequest.com/p/everything-is-an-ad-network",
+      "description": "How to pay for Web 3"
+    },
+    {
+      "threadId": "1588784557284794368",
+      "tweetId": "1588784654588514305",
+      "domain": "mostrecommendedbooks.com",
+      "url": "https://www.mostrecommendedbooks.com/elon-musk-books",
+      "description": "Discover books recommended by Elon Musk. Browse the complete reading recommendations and find your next great read."
+    },
+    {
+      "threadId": "1588784557284794368",
+      "tweetId": "1588784655423119360",
+      "domain": "waitbutwhy.com",
+      "url": "https://waitbutwhy.com/2017/03/elon-musk-post-series.html",
+      "description": "When you pick up the phone, you don't expect Elon Musk to be on the other line."
+    },
+    {
+      "threadId": "1586258861190676482",
+      "tweetId": "1586258863497646080",
+      "domain": "seekingalpha.com",
+      "url": "https://seekingalpha.com/article/4549320-meta-platforms-is-doomed-doomed-we-tell-you",
+      "description": ""
+    },
+    {
+      "threadId": "1586258861190676482",
+      "tweetId": "1586258935304146944",
+      "domain": "thecoldwire.com",
+      "url": "https://www.thecoldwire.com/did-mark-zuckerberg-steal-facebook/",
+      "description": ""
+    },
+    {
+      "threadId": "1586258861190676482",
+      "tweetId": "1586258939372572673",
+      "domain": "businessinsider.com",
+      "url": "https://www.businessinsider.com/mark-zuckerberg-control-facebook-whistleblower-key-man-risk-2021-10",
+      "description": "Mark Zuckerberg's \"unilateral control\" was a key topic for lawmakers at a whistleblower hearing this month. Experts say "
+    },
+    {
+      "threadId": "1586258861190676482",
+      "tweetId": "1586258993374269440",
+      "domain": "shepherd.com",
+      "url": "https://shepherd.com/best-books/halloween",
+      "description": "Lisa Morton shares the 5 best books on the history of Halloween. Have you read The Book of Hallowe'en?"
+    },
+    {
+      "threadId": "1583704982129643520",
+      "tweetId": "1583705011485540354",
+      "domain": "dle.rae.es",
+      "url": "https://dle.rae.es/conducto",
+      "description": "1. m. Canal, comúnmente tapado, que sirve para dar paso y salida a las aguas y otras cosas. 2. m. Cada uno de los tubos "
+    },
+    {
+      "threadId": "1578640745979846662",
+      "tweetId": "1578640880021405699",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/diario/2009/04/17/opinion/1239919211_850215.html",
+      "description": "Los seres humanos tienen diversas formas de abordar el conocimiento. La ciencia es aquella que más se protege contra la "
+    },
+    {
+      "threadId": "1576087451524907008",
+      "tweetId": "1576088562432294912",
+      "domain": "contemporarythinkers.org",
+      "url": "https://contemporarythinkers.org/tom-wolfe/essay/hes-right/",
+      "description": "Excerpt: There are currently hundreds of studs of the business world, breakfast food package designers, television net w"
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548493393825794",
+      "domain": "grada3.com",
+      "url": "https://www.grada3.com/2022/08/31/declaraciones-sergio-scariolo-rudy-fernandez-inicio-eurobasket/",
+      "description": ""
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548528168833024",
+      "domain": "as.com",
+      "url": "https://as.com/baloncesto/2022/08/03/reportajes/1659518397_516540.html",
+      "description": "El Eurobasket 2022 tiene uno de los carteles más impresionantes que ha visto el torneo. España, en pleno cambio de ciclo"
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548539174608896",
+      "domain": "cadenaser.com",
+      "url": "https://cadenaser.com/ser/2017/09/17/deportes/1505680539_707370.html",
+      "description": "El conjunto esloveno se coronó rey de Europa tras derrotar al conjunto de Djordjevic en una grandísima final | Cadena SE"
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548540151955458",
+      "domain": "mundodeportivo.com",
+      "url": "https://www.mundodeportivo.com/baloncesto/nba/20220511/1001802848/doncic-todos-duros-ganando-cabreo-suns-mavericks-booker.html",
+      "description": "Luka Doncic se marchó muy cabreado tras la derrota de los Dallas Mavericks en la pista de los Phoenix Suns, que vapulear"
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548547349282817",
+      "domain": "elimparcial.es",
+      "url": "https://www.elimparcial.es/noticia/242937/deportes/eurobasket-2022.-la-espana-de-la-garra-la-defensa-y-rudy-luchara-por-las-medallas.html",
+      "description": "El bloque de Scariolo volvió a remontar, en este caso a Finlandia (100-90), y accede a las semifinales contra pronóstico"
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548559387054081",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/television/2022-05-27/el-dialogo-entre-valdano-y-ancelotti-uno-no-decide-ser-tranquilo.html",
+      "description": "El argentino sabe bien lo que son las remontadas agónicas que ha repetido el Madrid del italiano. Ambos comparten el sos"
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548576487227394",
+      "domain": "eldesmarque.com",
+      "url": "https://www.eldesmarque.com/fiba-eurobasket/noticias/1585089-la-falta-de-respeto-de-francia-a-espana-en-el-eurobasket-mal-perder-ante-el-campeon?ssp",
+      "description": ""
+    },
+    {
+      "threadId": "1573548479888105473",
+      "tweetId": "1573548603280424965",
+      "domain": "marca.com",
+      "url": "https://www.marca.com/baloncesto/eurobasket/2022/09/23/632d83e9e2704eb8798b45c3.html",
+      "description": "Le acompañó en la concentración y le sirvió de estímulo en un torneo"
+    },
+    {
+      "threadId": "1568482191230787585",
+      "tweetId": "1568482233769402370",
+      "domain": "grantwinney.com",
+      "url": "https://grantwinney.com/10-great-comics-for-the-nerdy/",
+      "description": ""
+    },
+    {
+      "threadId": "1568482191230787585",
+      "tweetId": "1568482283648065537",
+      "domain": "history.com",
+      "url": "https://www.history.com/this-day-in-history/primatologist-dian-fossey-found-murdered-in-rwanda",
+      "description": "On December 27, 1985, primatologist and conservationist Dr. Dian Fossey is found murdered in her cabin at Karisoke, a..."
+    },
+    {
+      "threadId": "1545639451765997568",
+      "tweetId": "1545639509320138752",
+      "domain": "samsommers.com",
+      "url": "https://samsommers.com/",
+      "description": "Sam Sommers is a teacher and researcher of social psychology at Tufts University. He is also an author and sought after "
+    },
+    {
+      "threadId": "1543107844043673600",
+      "tweetId": "1543107921281777664",
+      "domain": "quantamagazine.org",
+      "url": "https://www.quantamagazine.org/entanglement-made-simple-20160428/",
+      "description": "How quantum entanglement connects with the “many worlds” of quantum theory."
+    },
+    {
+      "threadId": "1543107844043673600",
+      "tweetId": "1543107922783240192",
+      "domain": "pubmed.ncbi.nlm.nih.gov",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27172936/",
+      "description": "In a remaining lifetime perspective, all-cause and excess mortality after hip fracture was higher even over two decades "
+    },
+    {
+      "threadId": "1540473939503288321",
+      "tweetId": "1540473940564385793",
+      "domain": "theathletic.com",
+      "url": "https://theathletic.com/3304946/2022/05/16/nba-draft-lottery-guide/",
+      "description": "How does the NBA Draft Lottery work? How did it come to exist? What sort of odds does each team have? What should you wa"
+    },
+    {
+      "threadId": "1540473939503288321",
+      "tweetId": "1540473991198121985",
+      "domain": "brainyquote.com",
+      "url": "https://www.brainyquote.com/quotes/h_l_mencken_129796",
+      "description": "\"For every complex problem there is an answer...\" - H. L. Mencken quotes from BrainyQuote.com"
+    },
+    {
+      "threadId": "1540473939503288321",
+      "tweetId": "1540474007065137154",
+      "domain": "nola.com",
+      "url": "https://www.nola.com/sports/betting/article_b83385de-f350-11ec-87cc-f3f808302960.html",
+      "description": ""
+    },
+    {
+      "threadId": "1540473939503288321",
+      "tweetId": "1540474056981598210",
+      "domain": "reverbnation.com",
+      "url": "https://www.reverbnation.com/clockworkillusion",
+      "description": "Metal | Orem, UT"
+    },
+    {
+      "threadId": "1540473939503288321",
+      "tweetId": "1540474057895862272",
+      "domain": "unir.net",
+      "url": "https://www.unir.net/empresa/programa-resolucion-problemas-complejos/",
+      "description": ""
+    },
+    {
+      "threadId": "1538038532874420225",
+      "tweetId": "1538038534984159232",
+      "domain": "lasillarota.com",
+      "url": "https://lasillarota.com/la-cadera-de-eva/2022/1/12/que-es-el-bropiating-la-violencia-intelectual-contra-mujeres-312238.html",
+      "description": "¿Alguna vez un hombre se apropió de tus ideas creativas?"
+    },
+    {
+      "threadId": "1538038532874420225",
+      "tweetId": "1538038536640790531",
+      "domain": "develpreneur.com",
+      "url": "https://develpreneur.com/intellectual-violence-a-short-sighted-anti-pattern/",
+      "description": "While the intellectual violence anti-pattern sounds shocking and over-the-top, it is common and often subtle while hidin"
+    },
+    {
+      "threadId": "1538038532874420225",
+      "tweetId": "1538038603670069248",
+      "domain": "bbvaopenmind.com",
+      "url": "https://www.bbvaopenmind.com/ciencia/investigacion/joseph-lister-el-hombre-que-esterilizo-la-cirugia/",
+      "description": "BBVA te trae la mejor información sobre economía, salud financiera, innovación y sostenibilidad. Además de nuestros podc"
+    },
+    {
+      "threadId": "1535521789585117185",
+      "tweetId": "1535521798401495041",
+      "domain": "jaimerodriguezdesantiago.com",
+      "url": "https://www.jaimerodriguezdesantiago.com/kaizen/116-la-espiral-del-silencio/",
+      "description": ""
+    },
+    {
+      "threadId": "1535521789585117185",
+      "tweetId": "1535521878630080512",
+      "domain": "dailymotion.com",
+      "url": "https://www.dailymotion.com/video/x52ogmo",
+      "description": ""
+    },
+    {
+      "threadId": "1532990633580929025",
+      "tweetId": "1532990681857368064",
+      "domain": "theobjective.com",
+      "url": "https://theobjective.com/lifestyle/2022-06-01/reglas-tener-buena-vida-filosofos/",
+      "description": "El estoicismo, la escuela filosófica de la Antigua Grecia. Aunque han pasado más de dos mil años desde su nacimiento, su"
+    },
+    {
+      "threadId": "1527905242376962054",
+      "tweetId": "1527905346819436544",
+      "domain": "shows.acast.com",
+      "url": "https://shows.acast.com/thework/episodes/dave-snowden-on-culture-as-emergent-and-why-it-cant-be-built",
+      "description": ""
+    },
+    {
+      "threadId": "1525356646448381952",
+      "tweetId": "1525356680539783169",
+      "domain": "digitalcontentnext.org",
+      "url": "https://digitalcontentnext.org/blog/2016/06/16/google-and-facebook-devour-the-ad-and-data-pie-scraps-for-everyone-else/",
+      "description": "Last week, IAB/PWC released its quarterly U.S. advertising report, which was quickly followed by a “groundhog day” press"
+    },
+    {
+      "threadId": "1525356646448381952",
+      "tweetId": "1525356681424781313",
+      "domain": "forbes.com",
+      "url": "https://www.forbes.com/sites/augustinefou/2021/02/22/the-devil-is-the-details-of-ad-measurement/?sh=5ef636c22343",
+      "description": ""
+    },
+    {
+      "threadId": "1520307318931570688",
+      "tweetId": "1520307350279708672",
+      "domain": "larazon.es",
+      "url": "https://www.larazon.es/cultura/20210620/o5bfda4lhrbyfd3if44ogmb5z4.html",
+      "description": "Frank Zappa, el músico infinito que se burló de los Beatles y la Velvet Underground"
+    },
+    {
+      "threadId": "1517738336210894850",
+      "tweetId": "1517738353814290432",
+      "domain": "sciencedirect.com",
+      "url": "https://www.sciencedirect.com/science/article/pii/S1877042810022317",
+      "description": ""
+    },
+    {
+      "threadId": "1515034112725241860",
+      "tweetId": "1515034153577861122",
+      "domain": "crashonline.org.uk",
+      "url": "https://www.crashonline.org.uk/24/gargoyle.htm",
+      "description": "Few software houses have encountered the success that Gargoyle Games has enjoyed and remained in the background of the i"
+    },
+    {
+      "threadId": "1515034112725241860",
+      "tweetId": "1515034178026409984",
+      "domain": "i2insights.org",
+      "url": "https://i2insights.org/2019/02/26/knowledge-asymmetry/",
+      "description": "By Max Kemman How can tasks and goals among partners in a collaboration be effectively negotiated, especially when one p"
+    },
+    {
+      "threadId": "1510161914772471813",
+      "tweetId": "1510161979125735424",
+      "domain": "kwize.com",
+      "url": "https://kwize.com/quote/2925",
+      "description": "Arthur Conan Doyle quote about stimulating from The Hound of the Baskervilles: “There is nothing more stimulating than a"
+    },
+    {
+      "threadId": "1510161914772471813",
+      "tweetId": "1510162008368418820",
+      "domain": "undpress.nd.edu",
+      "url": "https://undpress.nd.edu/9780268101626/piers-plowman-and-the-poetics-of-enigma/",
+      "description": "In this book, Curtis Gruenler proposes that the concept of the enigmatic, latent in a wide range of medieval thinking ab"
+    },
+    {
+      "threadId": "1507611365288161280",
+      "tweetId": "1507611395583619074",
+      "domain": "lagranburbuja.com",
+      "url": "https://www.lagranburbuja.com/",
+      "description": "Descubre el libro “Marketing Online, la Gran Burbuja del Siglo XXI” y apoya el manifiesto #ExplotaLaBurbuja por una publ"
+    },
+    {
+      "threadId": "1507611365288161280",
+      "tweetId": "1507611397861031936",
+      "domain": "echaleku.com",
+      "url": "https://echaleku.com/el-99-de-las-teorias-sobre-embudos-o-funnels-de-marketing-y-ventas-son-incorrectas-o-estan-incompletas/",
+      "description": "Últimamente observo en muchas universidades y escuelas de negocios en las que doy clase, que los alumnos han escuchado y"
+    },
+    {
+      "threadId": "1502547574263361538",
+      "tweetId": "1502547608585314304",
+      "domain": "es.coachesvoice.com",
+      "url": "https://es.coachesvoice.com/otra-vision-de-los-galacticos-lopez-caro/",
+      "description": "Zinedine Zidane, David Bechkam, Raúl González, Roberto Carlos... Juan Ramón López Caro recuerda su etapa al frente del R"
+    },
+    {
+      "threadId": "1502547574263361538",
+      "tweetId": "1502547618009866246",
+      "domain": "elconfidencial.com",
+      "url": "https://www.elconfidencial.com/espana/andalucia/2022-01-29/sngular-compra-corunet-acilia-13-m_3366223/",
+      "description": "La firma tecnológica debutó en el BME Growth hace dos meses con buen resultado y analiza nuevas adquisiciones con la que"
+    },
+    {
+      "threadId": "1500015623090360324",
+      "tweetId": "1500015682402066451",
+      "domain": "quora.com",
+      "url": "https://www.quora.com/Is-Ted-Kaczynski-a-genius",
+      "description": "Answer (1 of 13): Define “genius”.\n\nKaczynski has a very high raw IQ in comparison to general society, although probably"
+    },
+    {
+      "threadId": "1500015623090360324",
+      "tweetId": "1500015684042035201",
+      "domain": "facebook.com",
+      "url": "https://www.facebook.com/unsupportedbrowser",
+      "description": "Inicia sesión en Facebook para empezar a compartir y conectar con tus amigos, familiares y las personas que conoces."
+    },
+    {
+      "threadId": "1497479266354794497",
+      "tweetId": "1497479287393374208",
+      "domain": "eltelevisero.huffingtonpost.es",
+      "url": "https://eltelevisero.huffingtonpost.es/2021/06/han-dicho-que-era-tonta-miguel-angel-rodriguez-se-cuela-en-la-entrevista-de-bertin-a-diaz-ayuso/",
+      "description": "Isabel Díaz Ayuso y Bertín Osborne sorprenden en la promoción del especial de 'Mi casa es la tuya', que se emitirá próxi"
+    },
+    {
+      "threadId": "1497479266354794497",
+      "tweetId": "1497479302648053763",
+      "domain": "as.com",
+      "url": "https://as.com/diarioas/2022/02/22/actualidad/1645517786_371417.html",
+      "description": "La diputada popular insiste en la Cadena Ser en la necesidad de convocar un congreso cuanto antes e indica que Ayuso ser"
+    },
+    {
+      "threadId": "1497479266354794497",
+      "tweetId": "1497479303491166210",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/espana/2021-03-15/sanchez-iglesias-historia-de-un-breve-matrimonio-de-conveniencia.html",
+      "description": "La relación ha estado marcada por la suspicacia, aunque en varias ocasiones han actuado de árbitros entre sus respectiva"
+    },
+    {
+      "threadId": "1497479266354794497",
+      "tweetId": "1497479305156341762",
+      "domain": "historia.nationalgeographic.com.es",
+      "url": "https://historia.nationalgeographic.com.es/a/claudio-emperador-despreciado_15736",
+      "description": ""
+    },
+    {
+      "threadId": "1494930415504789506",
+      "tweetId": "1494930466192990210",
+      "domain": "vox.com",
+      "url": "https://www.vox.com/the-goods/2020/1/6/21024740/private-equity-taylor-swift-toys-r-us-elizabeth-warren",
+      "description": "Private equity led to the closing of Toys R Us and cost 30,000 workers their jobs — and it’s hardly the only example of "
+    },
+    {
+      "threadId": "1494930305811111938",
+      "tweetId": "1494930369560432641",
+      "domain": "elconfidencial.com",
+      "url": "https://www.elconfidencial.com/deportes/formula-1/2021-12-14/fernando-alonso-alpine-f1-marcel-budkowski_3340481/",
+      "description": "En su regreso, el asturiano cierra la temporada con un buen bagaje personal y, sobre todo, con la esperanza de que Alpin"
+    },
+    {
+      "threadId": "1494930305811111938",
+      "tweetId": "1494930391291072512",
+      "domain": "weforum.org",
+      "url": "https://www.weforum.org/agenda/2015/11/my-locker-room-rally-cry-for-women-in-private-equity/",
+      "description": ""
+    },
+    {
+      "threadId": "1492405460682657792",
+      "tweetId": "1492405486213292033",
+      "domain": "elmundo.es",
+      "url": "https://www.elmundo.es/deportes/futbol/2022/02/08/6202a52321efa07d678b45a0.html",
+      "description": "Una fuente del Barcelona trata de definir la situaci�n actual del gobierno de Joan Laporta: &laquo;En el club hay dos ba"
+    },
+    {
+      "threadId": "1492405460682657792",
+      "tweetId": "1492405490730610688",
+      "domain": "iusport.com",
+      "url": "https://iusport.com/art/117490/aprobadas-las-modificaciones-de-la-ley-del-deporte-sobre-avales-y-sad",
+      "description": "Aparte del contenido económico, que es el verdadero objeto de la Ley, la Ley de Presupuestos ha introducido algunos camb"
+    },
+    {
+      "threadId": "1492405460682657792",
+      "tweetId": "1492405516794052610",
+      "domain": "sport.es",
+      "url": "https://www.sport.es/es/noticias/barca/adios-rakuten-barca-busca-sponsor-12072140#:~:text=Rakuten%20firm%C3%B3%20en%20octubre%20de,final%20de%20la%20presente%20temporada",
+      "description": "La empresa japonesa ya ha tomado la decisión de no continuar vinculado al Barça"
+    },
+    {
+      "threadId": "1492405460682657792",
+      "tweetId": "1492405519188992001",
+      "domain": "fifa.com",
+      "url": "https://www.fifa.com/es/the-future-of-football/news/wenger-expone-perspectivas-futbol-del-futuro",
+      "description": "Arsène Wenger expuso a los medios de comunicación sus perspectivas sobre el \"fútbol del futuro\" en una presentación porm"
+    },
+    {
+      "threadId": "1492405460682657792",
+      "tweetId": "1492405520015278084",
+      "domain": "ecaeurope.com",
+      "url": "https://www.ecaeurope.com/",
+      "description": ""
+    },
+    {
+      "threadId": "1492405460682657792",
+      "tweetId": "1492405556581126147",
+      "domain": "es.ara.cat",
+      "url": "https://es.ara.cat/deportes/fc-barcelona/relevo-rakuten-barca-valora-ofertas-empresas-mundo-tecnologico_1_4226809.html",
+      "description": "El sector de las criptomonedas también está interesado en la camiseta azulgrana, pero no genera consenso en el club"
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489875465334624259",
+      "domain": "fitworld.mx",
+      "url": "https://fitworld.mx/spinning-pros-y-contras/",
+      "description": ""
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489875797989015553",
+      "domain": "unir.net",
+      "url": "https://www.unir.net/empresa/programa-resolucion-problemas-complejos/",
+      "description": ""
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489877237163827200",
+      "domain": "kqed.org",
+      "url": "https://www.kqed.org/perspectives/201601138907/duck-syndrome",
+      "description": "Ducks seem to glide effortless across a lake while paddling furiously below the surface. High achieving medical students"
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489877776815509505",
+      "domain": "jotdown.es",
+      "url": "https://www.jotdown.es/2022/02/viktor-pankrashkin-final-de-la-urss/",
+      "description": "El siglo XX fue especialmente convulso en Rusia. El país anduvo sumido de manera casi constante en revoluciones, contrar"
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489877915575672832",
+      "domain": "culturacolectiva.com",
+      "url": "https://culturacolectiva.com/cine/encanto-abuela-alma-madrigal-inspiracion-latina/",
+      "description": "\"Encanto\", la nueva película de Disney, que recientemente tuvo su estreno en México, continúa con el propósito de mirar "
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489878868651610116",
+      "domain": "npr.org",
+      "url": "https://www.npr.org/sections/health-shots/2015/01/12/375663920/the-doctor-who-championed-hand-washing-and-saved-women-s-lives?t=1644047041467",
+      "description": ""
+    },
+    {
+      "threadId": "1489874989809639424",
+      "tweetId": "1489878961559674882",
+      "domain": "impulsecreative.com",
+      "url": "https://impulsecreative.com/blog/thinkers-or-doers-on-your-marketing-team",
+      "description": "When it comes to building success through your marketing team, the make up of thinkers versus doers is important. What i"
+    },
+    {
+      "threadId": "1487312375351029760",
+      "tweetId": "1487312376085024768",
+      "domain": "sumapositiva.com",
+      "url": "https://www.sumapositiva.com/p/complejidad-generacion-de-demanda",
+      "description": "por Javier G. Recuenco"
+    },
+    {
+      "threadId": "1487312375351029760",
+      "tweetId": "1487312379788595202",
+      "domain": "es.scribd.com",
+      "url": "https://es.scribd.com/document/465168524/Lectura-5-La-autosegmentacion-y-la-estrategia-de-precios-Obligatoria",
+      "description": "Este documento describe cómo una granja de pollos utilizó la autosegmentación para alimentar a los gallos y gallinas de "
+    },
+    {
+      "threadId": "1487312375351029760",
+      "tweetId": "1487312424197926914",
+      "domain": "news.mit.edu",
+      "url": "https://news.mit.edu/2018/study-twitter-false-news-travels-faster-true-stories-0308",
+      "description": "A new study by three MIT scholars has found that false news spreads more rapidly on the social network Twitter than real"
+    },
+    {
+      "threadId": "1487312375351029760",
+      "tweetId": "1487348077291876356",
+      "domain": "elmundo.es",
+      "url": "https://www.elmundo.es/loc/famosos/2022/01/29/61f4095321efa00b4b8b45a0.html",
+      "description": "De la semilla del tardofranquismo florecieron algunas de las manifestaciones art�sticas m�s notables del cine espa�ol. E"
+    },
+    {
+      "threadId": "1484786680439746562",
+      "tweetId": "1484786745187176450",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/ccaa/2015/12/16/catalunya/1450285425_008517.html",
+      "description": "Montse Aguer, nueva directora de los Museos Dalí, repasa los retos de uno de los centros culturales más visitados de Esp"
+    },
+    {
+      "threadId": "1484786680439746562",
+      "tweetId": "1484786834349637637",
+      "domain": "ft.com",
+      "url": "https://www.ft.com/content/c1b19d78-9881-11e7-a652-cde3f882dd7b",
+      "description": "The Swiss Life leader on returning to work after cancer treatment"
+    },
+    {
+      "threadId": "1482274923313782784",
+      "tweetId": "1482274925142552578",
+      "domain": "cadena100.es",
+      "url": "https://www.cadena100.es/trending-topic/noticias/las-reacciones-publicacion-nomina-gerard-pique-twitter-entre-indignacion-aplauso-20220108_1716542",
+      "description": "Los seguidores del futbolista del Barcelona se dividen después de que haya realizado un gesto inédito en el mundo del fú"
+    },
+    {
+      "threadId": "1482274923313782784",
+      "tweetId": "1482274982164115457",
+      "domain": "money.allwomenstalk.com",
+      "url": "https://money.allwomenstalk.com/things-used-as-money-in-the-past/",
+      "description": "Buckskins • Mirrors • Shells • Tobacco • Salt • More ..."
+    },
+    {
+      "threadId": "1482274923313782784",
+      "tweetId": "1482274989910937614",
+      "domain": "books.google.es",
+      "url": "https://books.google.es/books?id=h3Z3-cXSO4IC&lpg=PA36&ots=_cFOanVQ_8&dq=prices%20using%20sears%20roebuck%20catalog%20USSR&hl=es&pg=PA36#v=onepage&q=prices%20using%20sears%20roebuck%20catalog%20USSR&f=false",
+      "description": ""
+    },
+    {
+      "threadId": "1482274923313782784",
+      "tweetId": "1482274990837977091",
+      "domain": "math.stackexchange.com",
+      "url": "https://math.stackexchange.com/questions/91504/shadow-prices-in-linear-programming",
+      "description": "I am quite confused about the meaning of shadow price from explanations on the internet.\n\nIt can be understood as the va"
+    },
+    {
+      "threadId": "1472134392361500672",
+      "tweetId": "1472134458316836866",
+      "domain": "elmundo.es",
+      "url": "https://www.elmundo.es/tecnologia/2021/12/18/61bc93c121efa082788b4585.html",
+      "description": "Meta, la empresa antes conocida como Facebook, ha tenido que hacer frente a su primer caso de acoso sexual virtual. Se t"
+    },
+    {
+      "threadId": "1467051970422878210",
+      "tweetId": "1467051995634806788",
+      "domain": "spring.org.uk",
+      "url": "https://www.spring.org.uk/2022/05/curio.php",
+      "description": "This quality is very important for highly intelligent people."
+    },
+    {
+      "threadId": "1467051970422878210",
+      "tweetId": "1467052001565589506",
+      "domain": "seths.blog",
+      "url": "https://seths.blog/2018/06/its-not-for-everyone/",
+      "description": "“…but it might be for you.” That’s a home run. The stuff that’s for everyone, that’s easy to click, sniff, share, produc"
+    },
+    {
+      "threadId": "1467051970422878210",
+      "tweetId": "1467052002366693380",
+      "domain": "seths.blog",
+      "url": "https://seths.blog/2019/03/its-not-your-tribe/",
+      "description": "I didn’t say this clearly enough in my book. While there are a few outlier organizations and individuals who ‘have’ a tr"
+    },
+    {
+      "threadId": "1464529976540241923",
+      "tweetId": "1464530003530600451",
+      "domain": "ted.com",
+      "url": "https://www.ted.com/talks/sir_ken_robinson_changing_education_paradigms",
+      "description": "In this talk from RSA Animate, Sir Ken Robinson lays out the link between 3 troubling trends: rising drop-out rates, sch"
+    },
+    {
+      "threadId": "1464529976540241923",
+      "tweetId": "1464530024384585734",
+      "domain": "sumapositiva.com",
+      "url": "https://www.sumapositiva.com/p/complejidad-generacion-de-demanda",
+      "description": "por Javier G. Recuenco"
+    },
+    {
+      "threadId": "1461944993900380165",
+      "tweetId": "1461945019141701632",
+      "domain": "people.howstuffworks.com",
+      "url": "https://people.howstuffworks.com/8-funky-fads-of-the-1970s.htm",
+      "description": "The '70s saw some funky fads, like mood rings, disco balls, and roller skates. Explore the funkiest on this list of 8 fu"
+    },
+    {
+      "threadId": "1461944993900380165",
+      "tweetId": "1461945022652297225",
+      "domain": "quora.com",
+      "url": "https://www.quora.com/Did-J-P-Morgan-withdraw-backing-for-Teslas-wireless-power-transmitter-experiment-because-he-was-convinced-that-Tesla-would-make-it-available-for-free-and-he-wanted-an-energy-source-he-could-financially-control",
+      "description": "Answer (1 of 6): A2A \"Did J.P. Morgan withdraw backing for Tesla's wireless power transmitter...\"\n\nLet me stop right the"
+    },
+    {
+      "threadId": "1456867302494834690",
+      "tweetId": "1456867321360883715",
+      "domain": "washingtonpost.com",
+      "url": "https://www.washingtonpost.com/opinions/2020/03/03/jack-welchs-toxic-legacy/",
+      "description": ""
+    },
+    {
+      "threadId": "1456867302494834690",
+      "tweetId": "1456871216287977474",
+      "domain": "mitpress.mit.edu",
+      "url": "https://mitpress.mit.edu/9780262025768/",
+      "description": ""
+    },
+    {
+      "threadId": "1454341690022670339",
+      "tweetId": "1454341695219421187",
+      "domain": "advertisingwreckage.wordpress.com",
+      "url": "https://advertisingwreckage.wordpress.com/2009/09/30/los-conossieurs-de-la-ginebra/",
+      "description": "DISCLAIMER: Este es el último post de la trilogía del anunciante, que incluye Matrix revisited y ¿Es el anunciante un gi"
+    },
+    {
+      "threadId": "1454341690022670339",
+      "tweetId": "1454341847824928770",
+      "domain": "rte.ie",
+      "url": "https://www.rte.ie/brainstorm/2019/0911/1075239-can-we-trust-facebook-to-behave-responsibly-with-our-privacy/#:~:text=In%202010,%20Facebook%20boss%20and,the%20development%20of%20social%20media",
+      "description": "It is worth remembering that we have an universal, fundamental and legal right to privacy"
+    },
+    {
+      "threadId": "1454341690022670339",
+      "tweetId": "1454341849754263553",
+      "domain": "mg.co.za",
+      "url": "https://mg.co.za/article/2010-10-05-spanish-media-group-struggles-to-survive/",
+      "description": "For 34 years the giant media group has reaped the benefits of Spain's transition to democracy. But now it faces a radica"
+    },
+    {
+      "threadId": "1451786307403927553",
+      "tweetId": "1451786310075789318",
+      "domain": "lavanguardia.com",
+      "url": "https://www.lavanguardia.com/economia/20210924/7741248/por-que-disparado-precios-gas.html",
+      "description": "Los precios del gas en Europa se han disparado en las últimas semanas y han alcanzado un máximo de 25 dólares por millón"
+    },
+    {
+      "threadId": "1451786307403927553",
+      "tweetId": "1451786315826094084",
+      "domain": "libremercado.com",
+      "url": "https://www.libremercado.com/2021-10-07/panico-en-las-fabricas-espanolas-empiezan-a-parar-por-la-ruina-del-precio-de-la-luz-6825639/",
+      "description": "La escalada de los precios de la energía obliga a las fábricas de nuestro país a parar la producción durante los picos d"
+    },
+    {
+      "threadId": "1451786307403927553",
+      "tweetId": "1451786316681711618",
+      "domain": "lavozdegalicia.es",
+      "url": "https://www.lavozdegalicia.es/noticia/mercados/2021/04/18/cuenta-atras-apagon-nuclear/0003_202104SM18P12991.htm",
+      "description": "Hace diez a�os, poco despu�s del desastre de Fukushima, Merkel decidi� que la desconexi�n definitiva tendr�a lugar en el"
+    },
+    {
+      "threadId": "1451786307403927553",
+      "tweetId": "1451786320234299394",
+      "domain": "dw.com",
+      "url": "https://www.dw.com/es/un-sol-en-la-tierra-iter-y-mit-logran-grandes-avances-en-la-b%C3%BAsqueda-de-la-energ%C3%ADa-de-fusi%C3%B3n-nuclear/a-59148826",
+      "description": "La fusión nuclear ofrece la tentadora perspectiva de una fuente de energía sostenible que nunca podrá agotarse. Físicos "
+    },
+    {
+      "threadId": "1451786307403927553",
+      "tweetId": "1451786325137498112",
+      "domain": "advertisingwreckage.wordpress.com",
+      "url": "https://advertisingwreckage.wordpress.com/2009/09/30/los-conossieurs-de-la-ginebra/",
+      "description": "DISCLAIMER: Este es el último post de la trilogía del anunciante, que incluye Matrix revisited y ¿Es el anunciante un gi"
+    },
+    {
+      "threadId": "1451786307403927553",
+      "tweetId": "1451786407735869440",
+      "domain": "haimaneltroudi.com",
+      "url": "https://haimaneltroudi.com/quien-planta-tamarindos-cosecha-salud-y-bienestar/",
+      "description": "Asegura un dicho popular que “quien planta tamarindos no cosecha tamarindos”, porque - según creencias - este árbol tard"
+    },
+    {
+      "threadId": "1449265748019453954",
+      "tweetId": "1449265754692595712",
+      "domain": "bbvaopenmind.com",
+      "url": "https://www.bbvaopenmind.com/en/science/leading-figures/einsteins-miracle-year/",
+      "description": "The latest banks and financial services company and industry news with expert analysis from the BBVA, Banco Bilbao Vizca"
+    },
+    {
+      "threadId": "1449265748019453954",
+      "tweetId": "1449265757242728449",
+      "domain": "blinkist.com",
+      "url": "https://www.blinkist.com/en",
+      "description": "Blinkist offers the key insights from top nonfiction in a made-for-mobile format. Get up to 65% off audiobooks, too. Lea"
+    },
+    {
+      "threadId": "1449265748019453954",
+      "tweetId": "1449265813299646468",
+      "domain": "coglode.com",
+      "url": "https://www.coglode.com/research/price-value-bias",
+      "description": "How we frame a product’s price & features greatly affects its perceived value. - New research shows us how price framing"
+    },
+    {
+      "threadId": "1449265748019453954",
+      "tweetId": "1449265814226489344",
+      "domain": "www2.deloitte.com",
+      "url": "https://www2.deloitte.com/us/en/insights/deloitte-review/issue-19/behavioral-insights-psychology-of-pricing-strategy.html",
+      "description": ""
+    },
+    {
+      "threadId": "1449265748019453954",
+      "tweetId": "1449265816566996993",
+      "domain": "on5g.es",
+      "url": "https://on5g.es/cae-el-precio-del-servicio-fijo-y-movil-por-la-fuerte-competencia-en-europa/",
+      "description": ""
+    },
+    {
+      "threadId": "1446745515501264896",
+      "tweetId": "1446745516512055300",
+      "domain": "smithsonianmag.com",
+      "url": "https://www.smithsonianmag.com/science-nature/the-pros-to-being-a-psychopath-96723962/",
+      "description": "In a new book, Oxford research psychologist Kevin Dutton argues that psychopaths are poised to perform well under pressu"
+    },
+    {
+      "threadId": "1446745515501264896",
+      "tweetId": "1446745523621347329",
+      "domain": "ted.com",
+      "url": "https://www.ted.com/talks/jon_ronson_strange_answers_to_the_psychopath_test/transcript?language=en",
+      "description": "Is there a definitive line that divides crazy from sane? With a hair-raising delivery, Jon Ronson, author of The Psychop"
+    },
+    {
+      "threadId": "1439130053267316738",
+      "tweetId": "1439130201292746752",
+      "domain": "soymadridista.com",
+      "url": "https://soymadridista.com/2018/06/02/bernabeu-y-la-tormentosa-salida-de-di-stefano/",
+      "description": "Tengo la inmensa fortuna de haber tenido a Don Santiago Bernabéu muy presente en mi vida. Mi hermano Alfonso estudió des"
+    },
+    {
+      "threadId": "1439130053267316738",
+      "tweetId": "1439855655318396929",
+      "domain": "as.com",
+      "url": "https://as.com/futbol/2021/09/20/internacional/1632119726_066566.html",
+      "description": "El cambio de Messi ante el Lyon ha sorprendido al mundo. El Sanedrín de la SER analizó la actitud del argentino y tambié"
+    },
+    {
+      "threadId": "1439130053267316738",
+      "tweetId": "1439915043001409536",
+      "domain": "hoopshype.com",
+      "url": "https://hoopshype.com/rumor/1555358/",
+      "description": ""
+    },
+    {
+      "threadId": "1434087755198386177",
+      "tweetId": "1434087755198386177",
+      "domain": "abc.es",
+      "url": "https://www.abc.es/historia/abci-deciamos-ayer-frase-fray-luis-leon-jamas-pronuncio-tras-procesado-inquisicion-201902210252_noticia.html",
+      "description": "La tradición pone en labios del fraile la frase «decíamos ayer» («Dicebamus hesterna die») al retornar su cátedra tras a"
+    },
+    {
+      "threadId": "1434087755198386177",
+      "tweetId": "1434087828108029952",
+      "domain": "heavymental.es",
+      "url": "https://heavymental.es/2021/04/05/018-exito-comida-rapida-experiencia-usuario",
+      "description": ""
+    },
+    {
+      "threadId": "1421353440224104449",
+      "tweetId": "1421373992519278594",
+      "domain": "marketingdirecto.com",
+      "url": "https://www.marketingdirecto.com/punto-de-vista/la-columna/smalltown-boy-o-el-sindrome-del-homosexual-en-un-pueblo-pequeno-2",
+      "description": "Estos son Bronski Beat. El que canta es Jimmy Sommerville. No nos debería engañar la musicalidad bailona, o el cálido fa"
+    },
+    {
+      "threadId": "1418850632396677122",
+      "tweetId": "1418850712096813057",
+      "domain": "eldiario.es",
+      "url": "https://www.eldiario.es/sociedad/falta-legalizar-debe-derogarse-prohibicion_1_1482209.html",
+      "description": "Antonio Escohotado es filósofo, profesor universitario y un prolífico ensayista. Se hizo conocido por sus investigacione"
+    },
+    {
+      "threadId": "1418850632396677122",
+      "tweetId": "1418850737505947651",
+      "domain": "bolsamania.com",
+      "url": "https://www.bolsamania.com/noticias/empresas/dia-codere-berkeley-tres-chicharros-abismo-bolsa-espanola--8035312.html",
+      "description": "Dice el refrán que 'quien juega con fuego, acaba quemándose'. Y eso es lo que les está pasando a muchos inversores minor"
+    },
+    {
+      "threadId": "1416256929526161408",
+      "tweetId": "1416256934160830464",
+      "domain": "medium.com",
+      "url": "https://medium.com/ideas-into-action/ikigai-the-perfect-career-diagnostic-3de932834be7",
+      "description": "An Iterative Approach To Discovering Your True Purpose"
+    },
+    {
+      "threadId": "1416256929526161408",
+      "tweetId": "1416257003446472705",
+      "domain": "elcorreoweb.es",
+      "url": "https://elcorreoweb.es/opinion/columnas/la-noche-de-los-cristales-rotos-EL2841161",
+      "description": "Tergiversar la historia de esa manera es algo impresentable. Y más aún dar a entender que aquello fue la muerte del flam"
+    },
+    {
+      "threadId": "1416256929526161408",
+      "tweetId": "1416257004302131201",
+      "domain": "jotdown.es",
+      "url": "https://www.jotdown.es/2018/08/ricardo-pachon-el-flamenco-se-muere-solo-no-hace-falta-que-se-lo-carguen/",
+      "description": "En tan solo siete años, que discurrieron paralelos a la Transición española, Ricardo Pachón (Sevilla, 1937) abanderó una"
+    },
+    {
+      "threadId": "1416256929526161408",
+      "tweetId": "1416257062338711552",
+      "domain": "readersdigest.co.uk",
+      "url": "https://www.readersdigest.co.uk/culture/books/editor-s-picks/literary-lesbian-heroes-sylvia-beach",
+      "description": ""
+    },
+    {
+      "threadId": "1413787729079545858",
+      "tweetId": "1413787735408713728",
+      "domain": "elbierzonoticias.com",
+      "url": "https://www.elbierzonoticias.com/bierzo/boom-reconversion-cierre-mina-bierzo-carbon-generaciones-familia-20190215183549-nt.html",
+      "description": "La familia Calvete mantiene tres generaciones de mineros en Tremor de Arriba, que pasó de más de 3.000 habitantes con el"
+    },
+    {
+      "threadId": "1413787729079545858",
+      "tweetId": "1413787740060233735",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/diario/1985/01/05/opinion/473727608_850215.html",
+      "description": "CON EL comienzo del año, la reconversión naval ha entrado en una nueva fase. Según los datos proporcionados por el Insti"
+    },
+    {
+      "threadId": "1413787729079545858",
+      "tweetId": "1413787741083639810",
+      "domain": "elindependiente.com",
+      "url": "https://www.elindependiente.com/espana/2021/03/20/reconversion-tecnologica-el-salvavidas-de-los-astilleros-espanoles/",
+      "description": "Hubo un tiempo en el que las botaduras apenas eran noticia. Formaban parte del motor cotidiano de la economía. Hasta que"
+    },
+    {
+      "threadId": "1413787729079545858",
+      "tweetId": "1413787741939187718",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/diario/1989/03/08/economia/605314805_850215.html",
+      "description": "La puesta en marcha de una moderna acería en Ensidesa y el anuncio de nuevas líneas de producción en Altos Hornos de Viz"
+    },
+    {
+      "threadId": "1413787729079545858",
+      "tweetId": "1413787752601165825",
+      "domain": "hardzone.es",
+      "url": "https://hardzone.es/2012/04/16/el-ceo-de-seagate-dice-que-los-ssd-estan-lejos-de-sustituir-a-los-hd/",
+      "description": "El CEO de Seagate dice que los SSD están lejos de sustituir a los HD. No ve viable que los SSD sustituyan a los discos d"
+    },
+    {
+      "threadId": "1406126552463470593",
+      "tweetId": "1406126677747511297",
+      "domain": "blabbermouth.net",
+      "url": "https://blabbermouth.net/news/jake-e-lee-ray-gillen-never-told-me-he-had-aids",
+      "description": "During a recent appearance on Dean Delray's \"Let There Be Talk\" podcast, former OZZY OSBOURNE guitarist Jake E. Lee spok"
+    },
+    {
+      "threadId": "1401066568034009088",
+      "tweetId": "1401066585847222276",
+      "domain": "tecnofuturos.substack.com",
+      "url": "https://tecnofuturos.substack.com/p/la-pizarra-en-blanco",
+      "description": "¿Te vienes conmigo a cambiar el mundo o vas a seguir vendiendo agua azucarada toda tu vida?"
+    },
+    {
+      "threadId": "1396010920174837761",
+      "tweetId": "1396010999174553600",
+      "domain": "iagua.es",
+      "url": "https://www.iagua.es/noticias/estados-unidos/locken/17/03/28/enveneno-agua-potable-y-salvo-millones-vidas",
+      "description": "Esta es la historia del Doctor John L. Leal, quien en 1908, en Jersey City (EEUU), estuvo mezclando el agua de bebida de"
+    },
+    {
+      "threadId": "1396010920174837761",
+      "tweetId": "1396011008796368904",
+      "domain": "sesardic.wordpress.com",
+      "url": "https://sesardic.wordpress.com/2019/08/04/ta/",
+      "description": "Nassim Nicholas Taleb is, in my opinion, one of the most overrated “public intellectuals” today. Exhibit A is his awful "
+    },
+    {
+      "threadId": "1396010920174837761",
+      "tweetId": "1396011010683805699",
+      "domain": "insidehighered.com",
+      "url": "https://www.insidehighered.com/views/2011/01/31/where-world-carmen-de-macedo",
+      "description": "Neven Sesardic explains why he published a journal article under another name."
+    },
+    {
+      "threadId": "1393482549306044416",
+      "tweetId": "1393482550350393348",
+      "domain": "psicologiaymente.com",
+      "url": "https://psicologiaymente.com/organizaciones/teoria-de-burocracia-weber",
+      "description": "¿Qué es la teoría de la burocracia de Weber? Veamos qué propone el sociólogo Max Weber para describir el funcionamiento "
+    },
+    {
+      "threadId": "1393482549306044416",
+      "tweetId": "1393485560220721157",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/elpais/2018/04/05/eps/1522927807_984041.html",
+      "description": "En el garaje de ambulancias del <a href=\"https://www.regionaalhaigla.ee/en\" target=\"_blank\">North Estonia Medical Centre"
+    },
+    {
+      "threadId": "1393482549306044416",
+      "tweetId": "1393486287408140290",
+      "domain": "lavanguardia.com",
+      "url": "https://www.lavanguardia.com/politica/20121210/54356226401/rajoy-aplaza-promesa-reducir-administracion-2014.html",
+      "description": "Es una de las grandes apuestas del presidente Mariano Rajoy. Una reforma estructural de la Administración Pública que, e"
+    },
+    {
+      "threadId": "1388377995233071106",
+      "tweetId": "1388377999083507714",
+      "domain": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/the-red-wedding-of-soccer-how-twitter-reacted-to-the-european-super-leagues-dramatic-collapse-11619000867",
+      "description": ""
+    },
+    {
+      "threadId": "1388377995233071106",
+      "tweetId": "1388378037268402179",
+      "domain": "reasonwhy.es",
+      "url": "https://www.reasonwhy.es/actualidad/tertulia-errores-superliga-competicion-futbol-producto-comunicacion",
+      "description": "Profesionales del sector del marketing y la comunicación analizan los puntos débiles del lanzamiento de la Superliga y s"
+    },
+    {
+      "threadId": "1388377995233071106",
+      "tweetId": "1388378061985488901",
+      "domain": "marca.com",
+      "url": "https://www.marca.com/futbol/atletico/2021/04/21/607fed0b22601db8588b45cd.html",
+      "description": "Se acab� de momento la Superliga para el Atl�tico. El club madrile�o se ha convertido en el primero de los equipos espa�"
+    },
+    {
+      "threadId": "1388377995233071106",
+      "tweetId": "1388378064833425408",
+      "domain": "lagalerna.com",
+      "url": "https://www.lagalerna.com/bienvenidos-de-vuelta-al-redil-de-aleksander-ceferin/",
+      "description": "Cuarenta y ocho horas son suficientes para atestiguar dónde hay un hombre de honor y dónde hay un infeliz sin palabra ni"
+    },
+    {
+      "threadId": "1383300151763103751",
+      "tweetId": "1383300383410249733",
+      "domain": "ia.acs.org.au",
+      "url": "https://ia.acs.org.au/article/2019/facebook-to-pay--60m-for-fake-video-stats.html",
+      "description": "Lied to advertisers about viewership numbers."
+    },
+    {
+      "threadId": "1383300151763103751",
+      "tweetId": "1383300241525334023",
+      "domain": "personotecnia.wordpress.com",
+      "url": "https://personotecnia.wordpress.com/2010/09/03/hello-world/",
+      "description": "¿Como llega uno a tener que crear una palabra nueva para articular todo un concepto nuevo? En realidad, como la mayor pa"
+    },
+    {
+      "threadId": "1383300151763103751",
+      "tweetId": "1383300244226539530",
+      "domain": "publicidadsingular.wordpress.com",
+      "url": "https://publicidadsingular.wordpress.com/2012/05/22/facebook-no-hace-socios-a-sus-vacas/",
+      "description": "Gigantesco post de Juan Varela en Periodistas 21 sobre la oportunidad perdida de Facebook en su salida a bolsa. El argum"
+    },
+    {
+      "threadId": "1383300151763103751",
+      "tweetId": "1383300245589692420",
+      "domain": "personotecnia.wordpress.com",
+      "url": "https://personotecnia.wordpress.com/2012/04/07/personalienacion-o-lo-que-no-tiene-nombre-no-existe/",
+      "description": "Al acercarme a la ciudad sin nombre me di cuenta de que estaba maldita. Avanzaba por un valle terrible reseco bajo la lu"
+    },
+    {
+      "threadId": "1383300151763103751",
+      "tweetId": "1383300261800681475",
+      "domain": "forbes.com",
+      "url": "https://www.forbes.com/sites/alisondurkee/2020/08/11/facebook-faces-shrinking-popularity-but-researchers-warn-it-may-be-too-big-to-fail/",
+      "description": ""
+    },
+    {
+      "threadId": "1380770207384408065",
+      "tweetId": "1380770250451468288",
+      "domain": "marketingdirecto.com",
+      "url": "https://www.marketingdirecto.com/marketing-general/eventos-y-formacion/politica2-cero-javier-recuenco-un-politico-al-final-del-dia-es-un-producto-que-te-compras-o-no",
+      "description": "El fundador y consejero delegado de la empresa española Abypersonalize y profesor en el ICEMD, Javier Recuenco, realizó "
+    },
+    {
+      "threadId": "1380770207384408065",
+      "tweetId": "1380770257598619649",
+      "domain": "eldiario.es",
+      "url": "https://www.eldiario.es/cultura/musica/lecciones-rock-radical-vasco-rendueles_1_5060949.html",
+      "description": "El RRV fue una especie de caricatura musical de un momento social explosivo en el que se dirimieron conflictos políticos"
+    },
+    {
+      "threadId": "1380770207384408065",
+      "tweetId": "1380770264519221250",
+      "domain": "atlastecnologico.com",
+      "url": "https://atlastecnologico.com/",
+      "description": "Encuentra al mejor proveedor tecnológico para la transformación digital de tu empresa, en toda España y en una cuarta pa"
+    },
+    {
+      "threadId": "1380770207384408065",
+      "tweetId": "1380837426843820034",
+      "domain": "personotecnia.wordpress.com",
+      "url": "https://personotecnia.wordpress.com/2015/02/26/zdp-el-asesino-silencioso/",
+      "description": "Llevo mascullando este post meses. Es posiblemente el tema más importante que me afecta en estos momentos. En realidad a"
+    },
+    {
+      "threadId": "1378251639639920641",
+      "tweetId": "1378251804073426944",
+      "domain": "advertisingwreckage.wordpress.com",
+      "url": "https://advertisingwreckage.wordpress.com/2009/09/30/los-conossieurs-de-la-ginebra/",
+      "description": "DISCLAIMER: Este es el último post de la trilogía del anunciante, que incluye Matrix revisited y ¿Es el anunciante un gi"
+    },
+    {
+      "threadId": "1378251639639920641",
+      "tweetId": "1378251805155557377",
+      "domain": "advertisingwreckage.wordpress.com",
+      "url": "https://advertisingwreckage.wordpress.com/2014/06/05/cheap-gin/",
+      "description": "A veces uso esta expresión (O su equivalente en español, Ginebra de Garrafón) y normalmente tengo que pararme y explicar"
+    },
+    {
+      "threadId": "1375697328561078276",
+      "tweetId": "1375697522027548673",
+      "domain": "newhope.com",
+      "url": "https://www.newhope.com/managing-your-business/danone-outlines-2020-growth-strategy",
+      "description": "Danone will continue to expand capacity rapidly and build development platforms in fast-growing regions, particularly As"
+    },
+    {
+      "threadId": "1373170914226008064",
+      "tweetId": "1373170949076422656",
+      "domain": "elespanol.com",
+      "url": "https://www.elespanol.com/motor/20210128/madrid-abre-primera-hidrogenera-coche-hidrogeno-cerca/554446376_0.html",
+      "description": "Es la primera 'hidrogenera' de España en la que se puede repostar a 700 bares. Se utilizará para recargar una flota de 1"
+    },
+    {
+      "threadId": "1373170914226008064",
+      "tweetId": "1373171028592066560",
+      "domain": "techcrunch.com",
+      "url": "https://techcrunch.com/2021/02/24/can-solid-state-batteries-power-up-for-the-next-generation-of-evs/",
+      "description": "As the market for EVs shifts to include commercial vehicles, aerospace, off-roaders and microtransit, the commercial fut"
+    },
+    {
+      "threadId": "1370628575775367168",
+      "tweetId": "1370628709485588483",
+      "domain": "listennotes.com",
+      "url": "https://www.listennotes.com/es/podcasts/masters-of-privacy/javier-recuenco-mitos-y-j10CEcZO5oh/",
+      "description": "00:35:13 - Javier Recuenco es experto en personalización aplicada (Personotecnia) y resolución de problemas complejos, C"
+    },
+    {
+      "threadId": "1370628575775367168",
+      "tweetId": "1370628745376235521",
+      "domain": "psychologytoday.com",
+      "url": "https://www.psychologytoday.com/us/articles/201912/8-truths-about-intuition",
+      "description": "What to know about what you don’t know you know."
+    },
+    {
+      "threadId": "1368127688343490560",
+      "tweetId": "1368177061970522112",
+      "domain": "everipedia.org",
+      "url": "https://everipedia.org/wiki/lang_en/dr-ravi-kalakota",
+      "description": ""
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564280649568260",
+      "domain": "marketingweek.com",
+      "url": "https://www.marketingweek.com/ritson-bothism-cure-marketers-fascination-conflict/",
+      "description": "Marketing theory is a battle between opposing viewpoints, but an open mind and accurate data set will show you usually n"
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564307757490179",
+      "domain": "marketingweek.com",
+      "url": "https://www.marketingweek.com/wrong-real-marketing-effectiveness/",
+      "description": "Peter Field and Les Binet have shown us a model for how short- and long-term marketing work together but the reality is "
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564331895762947",
+      "domain": "personotecnia.wordpress.com",
+      "url": "https://personotecnia.wordpress.com/2012/08/15/ayn-rand-cristiano-ronaldo-y-la-personotecnia/",
+      "description": "Aquí creo que he batido todos los récords habidos y por haber en términos de mezclar churras con merinas. Pero hey, ¿qui"
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564336102645761",
+      "domain": "marketingweek.com",
+      "url": "https://www.marketingweek.com/why-social-media-is-mostly-a-waste-of-time-for-marketers-mark-ritson-presentation/",
+      "description": "Mark Ritson – academic, brand consultant and Marketing Week columnist – recently gave a talk entitled ‘Why Social Media "
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564337885114370",
+      "domain": "mi-3.com.au",
+      "url": "https://www.mi-3.com.au/29-04-2020/defence-communications-muppets",
+      "description": ""
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564339944624131",
+      "domain": "heavymental.es",
+      "url": "https://heavymental.es/2021/02/22/015-es-postmodernos-apoyar-malo-cobra-kai",
+      "description": ""
+    },
+    {
+      "threadId": "1365564279232028681",
+      "tweetId": "1365564425424494592",
+      "domain": "thehill.com",
+      "url": "https://thehill.com/changing-america/sustainability/energy/539478-like-hitting-the-jackpot-dallas-cowboys-owner-makes/",
+      "description": ""
+    },
+    {
+      "threadId": "1360494110092713986",
+      "tweetId": "1360500989908901888",
+      "domain": "abc.es",
+      "url": "https://www.abc.es/viajar/abci-esto-no-provenza-campo-lavanda-mas-increible-espana-201607230255_noticia.html",
+      "description": "Una fiesta mágica señala el comienzo de la recolección de la lavanda en Brihuega (Guadalajara)"
+    },
+    {
+      "threadId": "1360494110092713986",
+      "tweetId": "1360506236391854082",
+      "domain": "eldiario.es",
+      "url": "https://www.eldiario.es/castilla-la-mancha/emprende-a-diario/aromas-naturales-brihuega-traspasan-fronteras_132_3607668.html",
+      "description": "Javier Corral Caballero es un joven agricultor de 21 años que sigue en su explotación alcarreña una tradición de ya tres"
+    },
+    {
+      "threadId": "1360494110092713986",
+      "tweetId": "1360514598978416641",
+      "domain": "magnet.xataka.com",
+      "url": "https://magnet.xataka.com/preguntas-no-tan-frecuentes/75-datos-discurso-antonio-banderas-emprendedores-falsos",
+      "description": "Acaba de reflotar. Es la quinta o sexta vez que ocurre. En marzo de 2016 acudió Antonio Banderas al plató de El Hormigue"
+    },
+    {
+      "threadId": "1357937382318886913",
+      "tweetId": "1357943195653574656",
+      "domain": "help.twitter.com",
+      "url": "https://help.twitter.com/es/using-twitter/how-to-unfollow-on-twitter",
+      "description": "Puedes dejar de seguir a una persona en X desde un post, desde tu lista de seguimientos, desde la página de perfil de un"
+    },
+    {
+      "threadId": "1355414699400175616",
+      "tweetId": "1355470086111420416",
+      "domain": "forocoches.com",
+      "url": "https://forocoches.com/foro/showthread.php?t=539807",
+      "description": "Forocoches, el foro de coches, motor y mucho más."
+    },
+    {
+      "threadId": "1355414699400175616",
+      "tweetId": "1355501935705645059",
+      "domain": "expansion.com",
+      "url": "https://www.expansion.com/empresas/banca/2019/03/30/5c9ddb33468aeb5b5c8b45fd.html",
+      "description": "La transformaci�n digital se ha convertido en un objetivo universal que todo el tejido econ�mico tiene como prioridad. E"
+    },
+    {
+      "threadId": "1352890795897061378",
+      "tweetId": "1352899563703701504",
+      "domain": "researchgate.net",
+      "url": "https://www.researchgate.net/publication/237133296_Bramble_Bushes_in_a_Thicket_Narrative_and_the_Intangibles_of_Learning_Networks",
+      "description": "PDF | On Jan 1, 2007, Cynthia F. Kurtz and others published Bramble Bushes in a Thicket. Narrative and the Intangibles o"
+    },
+    {
+      "threadId": "1352890795897061378",
+      "tweetId": "1352913672155394049",
+      "domain": "idp.nature.com",
+      "url": "https://idp.nature.com/transit?redirect_uri=https%3A%2F%2Fwww.nature.com%2Farticles%2Fnature16059&code=33e12faa-031e-4456-9a13-ae5eeefd4410",
+      "description": "The spectral gap problem—whether the Hamiltonian of a quantum many-body problem is gapped or gapless—is rigorously prove"
+    },
+    {
+      "threadId": "1352890795897061378",
+      "tweetId": "1352938952370622464",
+      "domain": "personotecnia.wordpress.com",
+      "url": "https://personotecnia.wordpress.com/2015/02/26/zdp-el-asesino-silencioso/",
+      "description": "Llevo mascullando este post meses. Es posiblemente el tema más importante que me afecta en estos momentos. En realidad a"
+    },
+    {
+      "threadId": "1350359247209553920",
+      "tweetId": "1350367820039786496",
+      "domain": "celebritynetworth.com",
+      "url": "https://www.celebritynetworth.com/richest-celebrities/rock-stars/sammy-hagar-net-worth/",
+      "description": "What is Sammy Hagar's net worth?"
+    },
+    {
+      "threadId": "1350359247209553920",
+      "tweetId": "1350370583339524097",
+      "domain": "celebritynetworth.com",
+      "url": "https://www.celebritynetworth.com/richest-celebrities/rock-stars/gene-simmons-net-worth/",
+      "description": "What is Gene Simmons's net worth?"
+    },
+    {
+      "threadId": "1350359247209553920",
+      "tweetId": "1350372817171308544",
+      "domain": "jotdown.es",
+      "url": "https://www.jotdown.es/2021/01/recaudemos-cien-millones-para-francis-ford-coppola/",
+      "description": "Francis Ford Coppola ha admitido alguna vez que rodó El padrino III por dinero. Un admirable ejercicio de sinceridad. Y "
+    },
+    {
+      "threadId": "1347795536435404800",
+      "tweetId": "1347814867294679040",
+      "domain": "bbc.com",
+      "url": "https://www.bbc.com/news/world-us-canada-55578092",
+      "description": "The FBI is appealing to the public for help in bringing rioters to justice. Will this approach work?"
+    },
+    {
+      "threadId": "1347795536435404800",
+      "tweetId": "1347828501420847104",
+      "domain": "tonica.la",
+      "url": "https://www.tonica.la/geek/Se-informa-que-Hideo-Kojima-esta-trabajando-en-un-Silent-Hill-para-PS5-20201129-0002.html",
+      "description": ""
+    },
+    {
+      "threadId": "1347795536435404800",
+      "tweetId": "1350166512666107908",
+      "domain": "outofmygord.com",
+      "url": "https://outofmygord.com/2021/01/12/the-timeline-of-factfulness/",
+      "description": "After last Wednesday, when it seemed that our reality was splitting at the seams, I was surprised to see financial marke"
+    },
+    {
+      "threadId": "1342767594697191424",
+      "tweetId": "1342815262974898176",
+      "domain": "es.slideshare.net",
+      "url": "https://es.slideshare.net/jrecuenco/presentacin-fidelizacin-parte1esicv8",
+      "description": "El documento resume 30 mitos comunes sobre la lealtad de clientes. Algunos de los mitos discutidos incluyen que todos lo"
+    },
+    {
+      "threadId": "1340160478316785666",
+      "tweetId": "1340182220779216896",
+      "domain": "jaimerodriguezdesantiago.com",
+      "url": "https://www.jaimerodriguezdesantiago.com/kaizen/62-la-psicologia-de-charlie-munger-i-amor-odio-magos-y-hormigas/",
+      "description": ""
+    },
+    {
+      "threadId": "1337670943276224513",
+      "tweetId": "1337715183540719620",
+      "domain": "geogebra.org",
+      "url": "https://www.geogebra.org/m/q7pKgNnC",
+      "description": "Movimiento oscilatorio amortiguado"
+    },
+    {
+      "threadId": "1335136099258294273",
+      "tweetId": "1335177121656938502",
+      "domain": "advertisingwreckage.wordpress.com",
+      "url": "https://advertisingwreckage.wordpress.com/2010/11/03/el-teorema-de-povedilla/",
+      "description": "Antes de nada, hay que hacer constar una serie de cosas:• El teorema de Povedilla es más falso que La Princesa Caraboo. "
+    },
+    {
+      "threadId": "1330075571116777474",
+      "tweetId": "1330105649741639687",
+      "domain": "migueldelfresno.com",
+      "url": "https://migueldelfresno.com/2011/03/netnografia-etnografia-digital.html",
+      "description": ""
+    },
+    {
+      "threadId": "1327534186140487680",
+      "tweetId": "1327535414526218242",
+      "domain": "goodreads.com",
+      "url": "https://www.goodreads.com/user_challenges/19515746",
+      "description": ""
+    },
+    {
+      "threadId": "1327534186140487680",
+      "tweetId": "1327568000921325568",
+      "domain": "amazon.es",
+      "url": "https://www.amazon.es/Cynefin-Weaving-Sense-Making-Fabric-World/dp/1735379905/",
+      "description": "Cynefin - Weaving Sense-Making into the Fabric of Our World : Snowden, Dave, Greenberg, Riva, Bertsch, Boudewijn, Borcha"
+    },
+    {
+      "threadId": "1327534186140487680",
+      "tweetId": "1327571433002852353",
+      "domain": "outdoorlife.com",
+      "url": "https://www.outdoorlife.com/best-survival-books-ever-written/",
+      "description": "Survival experts Clay Hayes, Les Stroud, and Mike Glover give their picks for the best survival books."
+    },
+    {
+      "threadId": "1327534186140487680",
+      "tweetId": "1327575280186253313",
+      "domain": "marvel.fandom.com",
+      "url": "https://marvel.fandom.com/wiki/Fantastic_Four_Vol_1_252",
+      "description": "Featured Characters: Fantastic Four ⏴ Mister Fantastic ⏵ ⏴ Human Torch ⏵ ⏴ Invisible Girl ⏵ ⏴ The Thing ⏵ Supporting Cha"
+    },
+    {
+      "threadId": "1325000695897071616",
+      "tweetId": "1325057353029447680",
+      "domain": "csmonitor.com",
+      "url": "https://www.csmonitor.com/The-Culture/The-Home-Forum/2016/0324/Build-the-plane-while-you-re-flying-it",
+      "description": "A look at why a nonsensical idiom beloved in Silicon Valley has caught on so among the rest of us."
+    },
+    {
+      "threadId": "1325000695897071616",
+      "tweetId": "1325060010234220544",
+      "domain": "personotecnia.wordpress.com",
+      "url": "https://personotecnia.wordpress.com/2015/02/26/zdp-el-asesino-silencioso/",
+      "description": "Llevo mascullando este post meses. Es posiblemente el tema más importante que me afecta en estos momentos. En realidad a"
+    },
+    {
+      "threadId": "1325000695897071616",
+      "tweetId": "1325082909183717376",
+      "domain": "genius.com",
+      "url": "https://genius.com/The-supremes-you-cant-hurry-love-lyrics",
+      "description": "“You Can’t Hurry Love” is a song performed by American female vocal group and Motown Records' most commercially successf"
+    },
+    {
+      "threadId": "1319891330307338240",
+      "tweetId": "1319930926156185600",
+      "domain": "eu.usatoday.com",
+      "url": "https://eu.usatoday.com/story/money/2018/05/01/gibson-guitar-chapter-11-bankruptcy/567821002/",
+      "description": "The Nashville, Tenn.-based company, which provides guitars to stars like Keith Richards, Pete Townshend and Lenny Kravit"
+    },
+    {
+      "threadId": "1319891330307338240",
+      "tweetId": "1319935183785787393",
+      "domain": "vogue.es",
+      "url": "https://www.vogue.es/moda/modapedia/marcas/yves-saint-laurent/159",
+      "description": "Yves Saint Laurent, se ha convertido en la marca que da respuesta a la fusión del arte y la moda"
+    },
+    {
+      "threadId": "1307211330349420545",
+      "tweetId": "1307228879380246528",
+      "domain": "singularsolving.com",
+      "url": "https://singularsolving.com/orquestacion-estrategica/",
+      "description": "El rol del orquestador\nDesde pequeño siempre me ha fascinado la imagen del director de orquesta. Karajan, Toscanini, el "
+    },
+    {
+      "threadId": "1299619999200485377",
+      "tweetId": "1299619999200485377",
+      "domain": "as.com",
+      "url": "https://as.com/futbol/2020/08/29/primera/1598665769_427612.html",
+      "description": "Pugna entre Abu Dhabi y Qatar, los estados que financian a Manchester City y PSG, para lograr el fichaje del crack argen"
+    },
+    {
+      "threadId": "1314815631229935617",
+      "tweetId": "1314822420109365248",
+      "domain": "hoopshype.com",
+      "url": "https://hoopshype.com/gallery/kevin-durant-players-bench-press-nba-draft-combine/",
+      "description": "Physical strength is important for the average NBA player, but nowhere near as important as it is for NFL players. As su"
+    },
+    {
+      "threadId": "1314815631229935617",
+      "tweetId": "1314827328976039936",
+      "domain": "as.com",
+      "url": "https://as.com/baloncesto/2016/12/30/nba/1483095000_673097.html",
+      "description": "Daryl Morey se dejó llevar por el físico del pívot español en lugar de por sus ecuaciones matemáticas que auguraban un b"
+    },
+    {
+      "threadId": "1312274974464499713",
+      "tweetId": "1312278037585637377",
+      "domain": "eldefinido.cl",
+      "url": "https://eldefinido.cl/actualidad/plazapublica/6692/Fin-de-un-mito-Los-esquimales-nunca-tuvieron-40-nombres-para-la-nieve/",
+      "description": "No, no tienen cientos, ni siquiera decenas de formas de referirse a la nieve. Y de hecho, el"
+    },
+    {
+      "threadId": "1297462657503694848",
+      "tweetId": "1297465394253496321",
+      "domain": "medium.com",
+      "url": "https://medium.com/design-leadership-notebook/the-end-of-design-thinking-as-we-know-it-c96e64d3692c",
+      "description": "For years, Stanford has been teaching non designers to think like a designer. They called it design thinking. The term d"
+    },
+    {
+      "threadId": "1297462657503694848",
+      "tweetId": "1297467573790023681",
+      "domain": "singularsolving.com",
+      "url": "https://singularsolving.com/orquestacion-estrategica/",
+      "description": "El rol del orquestador\nDesde pequeño siempre me ha fascinado la imagen del director de orquesta. Karajan, Toscanini, el "
+    },
+    {
+      "threadId": "1270594048617824257",
+      "tweetId": "1270595336923418624",
+      "domain": "singularsolving.com",
+      "url": "https://singularsolving.com/orquestacion-estrategica/",
+      "description": "El rol del orquestador\nDesde pequeño siempre me ha fascinado la imagen del director de orquesta. Karajan, Toscanini, el "
+    },
+    {
+      "threadId": "1270594048617824257",
+      "tweetId": "1270608952573800452",
+      "domain": "towardsdatascience.com",
+      "url": "https://towardsdatascience.com/why-is-data-science-losing-its-charm-3f7780b443f5?gi=04b21ad99996",
+      "description": ""
+    },
+    {
+      "threadId": "1260101741904834560",
+      "tweetId": "1260111159241342977",
+      "domain": "books.google.es",
+      "url": "https://books.google.es/books/about/Epidemics_and_Society.html?id=CUXiwgEACAAJ&redir_esc=y",
+      "description": "As seen on &quot;60 Minutes&quot; a &quot;brilliant and sobering&quot; (Paul Kennedy, Wall Street Journal) look at the h"
+    },
+    {
+      "threadId": "1260101741904834560",
+      "tweetId": "1260113113111769089",
+      "domain": "inews.co.uk",
+      "url": "https://inews.co.uk/culture/television/silicon-valley-season-6-last-episode-tech-industry-372549",
+      "description": "After six seasons, Mike Judge's tech-bro comedy has come to an end at a time the industry needs skewering more than ever"
+    },
+    {
+      "threadId": "1259054408983289856",
+      "tweetId": "1259054408983289856",
+      "domain": "robertocolom.wordpress.com",
+      "url": "https://robertocolom.wordpress.com/2020/05/08/la-mente-de-la-colmena/",
+      "description": "El economista Garett Jones publicó ‘Hive Mind. How your nation’s IQ matters so much more than your own’ hace más o menos"
+    },
+    {
+      "threadId": "1257924003068555269",
+      "tweetId": "1257927966811660289",
+      "domain": "open.spotify.com",
+      "url": "https://open.spotify.com/episode/5xbG9B23SU11IFiRrUOhDI?si=mRjGvehzRIeMVg_FQlLmpQ",
+      "description": "Heavy Mental · Episode"
+    },
+    {
+      "threadId": "989041980549287936",
+      "tweetId": "989065406722781184",
+      "domain": "adweek.com",
+      "url": "https://www.adweek.com/agencies/ford-launches-global-creative-review-in-major-setback-for-wpp/",
+      "description": "The auto giant is calling on other agencies to pitch."
+    },
+    {
+      "threadId": "1619227404794306560",
+      "tweetId": "1619227544330330112",
+      "domain": "slatestarcodex.com",
+      "url": "https://slatestarcodex.com/2018/06/24/book-review-capital-in-the-twenty-first-century/",
+      "description": "[Epistemic status: I am not an economist. Many people who are economists have reviewed this book already. I review it on"
+    },
+    {
+      "threadId": "1616684654269980673",
+      "tweetId": "1616684688541728768",
+      "domain": "nationalww2museum.org",
+      "url": "https://www.nationalww2museum.org/war/articles/how-did-adolf-hitler-happen",
+      "description": "Adolf Hitler was appointed chancellor of Germany in 1933 following a series of electoral victories by the Nazi Party. He"
+    },
+    {
+      "threadId": "1616684654269980673",
+      "tweetId": "1616684728114987009",
+      "domain": "theguardian.com",
+      "url": "https://www.theguardian.com/politics/2022/aug/04/time-to-admit-it-brexit-has-been-an-unmitigated-disaster",
+      "description": "Letters: Emma Lilley on the extra costs and hassle faced by artists, Nick Inman on the absence of any measurable benefit"
+    },
+    {
+      "threadId": "1616684654269980673",
+      "tweetId": "1616684728941268993",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/espana/catalunya/2022-03-17/el-apoyo-a-la-independencia-de-cataluna-se-desploma-al-38.html",
+      "description": "El sondeo periódico de la Generalitat registra que el respaldo a la secesión cae a su nivel más bajo desde 2014"
+    },
+    {
+      "threadId": "1614168029876600833",
+      "tweetId": "1614168157253410816",
+      "domain": "thebigidea.nz",
+      "url": "https://thebigidea.nz/news/blogs/right-brained-web/2010/aug/73790-ragtag-leadership",
+      "description": ""
+    },
+    {
+      "threadId": "1314815631229935617",
+      "tweetId": "1314852120747814913",
+      "domain": "queensrycheofficial.com",
+      "url": "http://www.queensrycheofficial.com/music/operation-mindcrime/track/the-mission/",
+      "description": "(Chris DeGarmo) Lyrics: In the wooden chair Beside my window I wear a face born in the falling rain I talk to shadows fr"
+    },
+    {
+      "threadId": "1621752572087345152",
+      "tweetId": "1621752604672802816",
+      "domain": "dirigentesdigital.com",
+      "url": "https://dirigentesdigital.com/liderazgo/javier-g-recuenco--brutal--asalto-publicidad-mas-brutal-defensa",
+      "description": "Javier G. Recuenco es el CSO de Singular Solving, compañía que le ha dado una vuelta de tuerca al marketing y a la resol"
+    },
+    {
+      "threadId": "1621752572087345152",
+      "tweetId": "1621752642916458496",
+      "domain": "siliconangle.com",
+      "url": "https://siliconangle.com/2023/02/01/meta-announces-huge-share-buyback-efficiency-plans-stock-soars/",
+      "description": "Meta announces huge share buyback and efficiency plans and its stock soars - SiliconANGLE"
+    },
+    {
+      "threadId": "1621752572087345152",
+      "tweetId": "1621752680979828737",
+      "domain": "theatlantic.com",
+      "url": "https://www.theatlantic.com/magazine/archive/2006/06/the-management-myth/304883/",
+      "description": "Most of management theory is inane, writes our correspondent, the founder of a consulting firm. If you want to succeed i"
+    },
+    {
+      "threadId": "1621752572087345152",
+      "tweetId": "1621752682749755392",
+      "domain": "lamenteesmaravillosa.com",
+      "url": "https://lamenteesmaravillosa.com/corporate-animals-lo-absurdo-del-mundo-corporativo/",
+      "description": "Corporate Animals es tan olvidable como necesaria. No nos brinda nada nuevo, pero parodia el mundo de los negocios, de l"
+    },
+    {
+      "threadId": "1624309145032597504",
+      "tweetId": "1624309194278027266",
+      "domain": "fadeawayworld.net",
+      "url": "https://fadeawayworld.net/nba-media/dennis-rodman-regrets-saying-larry-bird-would-be-an-average-player-if-he-was-black-i-made-a-mistake-but-those-times-were-different-its-a-different-era-these-days-but-my-career-escalated-from-that-point",
+      "description": "Larry Bird is one of the greatest players in NBA history. Bird was an incredibly skilled player, especially on the offen"
+    },
+    {
+      "threadId": "1626829061723983872",
+      "tweetId": "1626829075409952769",
+      "domain": "uxdesign.cc",
+      "url": "https://uxdesign.cc/uncreative-will-ai-eat-human-creativity-alive-a7ef309e1f99?gi=0ba1b05686b6",
+      "description": "Humans have long prided themselves on their creativity and its resilience to AI, but combinations of AI tools suggest a "
+    },
+    {
+      "threadId": "1626829061723983872",
+      "tweetId": "1626829095513255939",
+      "domain": "britannica.com",
+      "url": "https://www.britannica.com/technology/artificial-intelligence/Is-strong-AI-possible",
+      "description": "Artificial intelligence (AI) is the ability of a digital computer or computer-controlled robot to perform tasks commonly"
+    },
+    {
+      "threadId": "1626829061723983872",
+      "tweetId": "1626829096406720513",
+      "domain": "lavanguardia.com",
+      "url": "https://www.lavanguardia.com/vida/20220625/8343723/inteligencia-artificial.html",
+      "description": "Judea Pearl, premio Fundación BBVA Fronteras del Conocimiento en Tecnologías de la Información, ha sentado las bases mat"
+    },
+    {
+      "threadId": "1626829061723983872",
+      "tweetId": "1626829122444881921",
+      "domain": "thehustle.co",
+      "url": "https://thehustle.co/the-insane-resurgence-of-vinyl-records/",
+      "description": "Vinyl has reclaimed its throne as the most-popular physical music format. But can the industry meet the demand?"
+    },
+    {
+      "threadId": "1626829061723983872",
+      "tweetId": "1626829125808685056",
+      "domain": "archdaily.pe",
+      "url": "https://www.archdaily.pe/pe/963809/el-valor-de-la-experiencia-no-tradicional-como-la-evolucion-de-nuestra-profesion-ha-mejorado-la-arquitectura",
+      "description": "El papel que desempeñan las profesiones distintas de la arquitectura para hacer que los proyectos sean más exitosos."
+    },
+    {
+      "threadId": "1626829061723983872",
+      "tweetId": "1626829128337874944",
+      "domain": "world.hey.com",
+      "url": "https://world.hey.com/jason/creativity-requires-optimism-1158ff2b",
+      "description": "Pessimism can spark an idea. Annoyance can drive ingenuity. Disappointment can redirect effort towards change. But creat"
+    },
+    {
+      "threadId": "1649673649866113024",
+      "tweetId": "1649676407037984769",
+      "domain": "bizneo.com",
+      "url": "https://www.bizneo.com/blog/plan-de-incentivos-laborales/",
+      "description": "6 ejemplos de cómo definir un plan de incentivos laborales en una gran empresa: el caso de Netflix, Facebook, Motorola, "
+    },
+    {
+      "threadId": "1647132462982524929",
+      "tweetId": "1647132538089996289",
+      "domain": "elrincondeaquiles.com",
+      "url": "https://elrincondeaquiles.com/podcast/recuenco/",
+      "description": "Javier González Recuenco vuelve a pasarse por El Rincón de Aquiles para hablarnos sobre la toma de decisiones."
+    },
+    {
+      "threadId": "1647132462982524929",
+      "tweetId": "1647132538849181699",
+      "domain": "jaimerodriguezdesantiago.com",
+      "url": "https://www.jaimerodriguezdesantiago.com/kaizen/160-las-leyes-de-la-estupidez-ingelitencia-hibris-y-chutzpah/",
+      "description": ""
+    },
+    {
+      "threadId": "1647132462982524929",
+      "tweetId": "1647132560978223104",
+      "domain": "ivoox.com",
+      "url": "https://www.ivoox.com/46-piensalo-otra-vez-think-again-con-javier-audios-mp3_rf_94033621_1.html",
+      "description": "Escucha este episodio de Charlando con libros - Adrián Sussudio gratis en iVoox. Piénsalo otra vez (Adam Grant). Con Jav"
+    },
+    {
+      "threadId": "1642053681766883330",
+      "tweetId": "1642053781637431296",
+      "domain": "techradar.com",
+      "url": "https://www.techradar.com/opinion/chatgpt-has-passed-the-turing-test-and-if-youre-freaked-out-youre-not-alone",
+      "description": "The debate on ChatGPT's repercussions goes on"
+    },
+    {
+      "threadId": "1639529423274913794",
+      "tweetId": "1639529500718542849",
+      "domain": "libroupgrade.com",
+      "url": "https://libroupgrade.com/",
+      "description": "Nuestro propósito con Upgrade es reunir en una única guía los temas que consideramos más relevantes para que te puedas c"
+    },
+    {
+      "threadId": "1636989624567443457",
+      "tweetId": "1636989748777480193",
+      "domain": "npr.org",
+      "url": "https://www.npr.org/2015/01/25/379787274/howd-a-cartoonist-sell-his-first-drawing-it-only-took-610-tries",
+      "description": ""
+    },
+    {
+      "threadId": "1636989624567443457",
+      "tweetId": "1636989749838729219",
+      "domain": "psych.nyu.edu",
+      "url": "https://www.psych.nyu.edu/gollwitzer/96BrunGoll_Failure.pdf",
+      "description": ""
+    },
+    {
+      "threadId": "1634418954511822848",
+      "tweetId": "1634418987269275650",
+      "domain": "globenewswire.com",
+      "url": "https://www.globenewswire.com/fr/news-release/2021/04/12/2208423/0/en/Global-Climate-Change-Consulting-Market-is-estimated-to-account-for-US-8-653-7-Mn-by-end-of-2028-Says-Coherent-Market-Insights-CMI.html",
+      "description": "SEATTLE, April  12, 2021  (GLOBE NEWSWIRE) -- Climate change is one of the most dangerous and pressing issues today, whi"
+    },
+    {
+      "threadId": "1664860434845913089",
+      "tweetId": "1664860457696481280",
+      "domain": "farfarfutures.wordpress.com",
+      "url": "https://farfarfutures.wordpress.com/2020/08/20/can-red-herrings-be-elegant/",
+      "description": "This includes minor spoilers for Monkey Island and Golf Peaks but they’re worth it. In 2018 Tom Hermans wrote up an exce"
+    },
+    {
+      "threadId": "1664860434845913089",
+      "tweetId": "1664860489229238273",
+      "domain": "dailymotion.com",
+      "url": "https://www.dailymotion.com/video/x7z398b",
+      "description": ""
+    },
+    {
+      "threadId": "1657283004727738368",
+      "tweetId": "1657283081890349056",
+      "domain": "middleeasteye.net",
+      "url": "https://www.middleeasteye.net/opinion/liz-truss-triumph-style-over-substance",
+      "description": "The new Conservative leader is a very modern phenomenon. Ideas don’t truly matter to her - what matters is gaining power"
+    },
+    {
+      "threadId": "1654727164086960130",
+      "tweetId": "1654727199465897985",
+      "domain": "dukechronicle.com",
+      "url": "https://www.dukechronicle.com/article/2021/08/duke-university-dan-ariely-fraudulent-data-colada-research-2012-2004-economics-psychology-statistics",
+      "description": ""
+    },
+    {
+      "threadId": "1652189268742209537",
+      "tweetId": "1652189278590337026",
+      "domain": "polygon.com",
+      "url": "https://www.polygon.com/23695923/mtg-aftermath-pinkerton-raid-leaked-cards",
+      "description": "March of the Machine: The Aftermath isn’t due out in stores until May"
+    },
+    {
+      "threadId": "1652189268742209537",
+      "tweetId": "1652189280381353984",
+      "domain": "reddit.com",
+      "url": "https://www.reddit.com/r/DnD/comments/10a4go6/wizards_of_the_coast_employee_breaks_silence_says/",
+      "description": ""
+    },
+    {
+      "threadId": "1652189268742209537",
+      "tweetId": "1652189281534767106",
+      "domain": "theguardian.com",
+      "url": "https://www.theguardian.com/games/2023/jan/12/dungeons-and-dragons-wizards-of-the-coast-ogl",
+      "description": "Wizards of the Coast, which owns the game, is preparing to change longstanding licensing rules"
+    },
+    {
+      "threadId": "1652189268742209537",
+      "tweetId": "1652189283959095300",
+      "domain": "washingtonpost.com",
+      "url": "https://www.washingtonpost.com/video-games/2023/01/19/dungeons-and-dragons-open-game-license-wizards-of-the-coast-explained/",
+      "description": ""
+    },
+    {
+      "threadId": "1718136430130520294",
+      "tweetId": "1718136484866215967",
+      "domain": "slate.com",
+      "url": "https://slate.com/culture/2020/02/the-good-place-finale-ending-explained-philosopher-cameos-analysis.html",
+      "description": "Plus: whether Ted Danson is really as nice as everyone says."
+    },
+    {
+      "threadId": "1705467198033088737",
+      "tweetId": "1705467200448913514",
+      "domain": "turnitin.com",
+      "url": "https://www.turnitin.com/es/productos/similarity",
+      "description": ""
+    },
+    {
+      "threadId": "1700404761428738437",
+      "tweetId": "1700404791304745266",
+      "domain": "lanacion.com.ar",
+      "url": "https://www.lanacion.com.ar/el-mundo/terrible-lapso-moral-nid125457/",
+      "description": "\"Terrible lapso moral\""
+    },
+    {
+      "threadId": "1684876869949120512",
+      "tweetId": "1684876896926883840",
+      "domain": "machinelearningmastery.com",
+      "url": "https://machinelearningmastery.com/different-results-each-time-in-machine-learning/",
+      "description": "Are you getting different results for your machine learning algorithm? Perhaps your results differ from a tutorial and y"
+    },
+    {
+      "threadId": "1677573783018696704",
+      "tweetId": "1677573817890217984",
+      "domain": "forbes.es",
+      "url": "https://forbes.es/forbes-w/142985/el-papel-de-la-mujer-en-las-carreras-stem/",
+      "description": "Sólo el 35% de los estudiantes matriculados en las carreras vinculadas a las STEM en la educación superior son mujeres y"
+    },
+    {
+      "threadId": "1675028035836182528",
+      "tweetId": "1675028109148520449",
+      "domain": "businessinsider.com",
+      "url": "https://www.businessinsider.com/ai-powered-drone-tried-killing-its-operator-in-military-simulation-2023-6",
+      "description": "The head of the US Air Force's AI Test and Operations warned that AI-enabled technology can behave in unpredictable and "
+    },
+    {
+      "threadId": "1675028035836182528",
+      "tweetId": "1675028110192910336",
+      "domain": "nationalgeographic.es",
+      "url": "https://www.nationalgeographic.es/historia/el-oficial-ruso-que-evito-una-catastrofe-nuclear-en-la-guerra-fria",
+      "description": ""
+    },
+    {
+      "threadId": "1675028035836182528",
+      "tweetId": "1675028118971592705",
+      "domain": "technologyreview.com",
+      "url": "https://www.technologyreview.com/2023/02/07/1067951/brains-week-order-chaos/",
+      "description": "The study shows that our brains exist between chaos and stability—a finding that could be used to help tweak them either"
+    },
+    {
+      "threadId": "1667419646671179776",
+      "tweetId": "1667419700140154882",
+      "domain": "sintetia.com",
+      "url": "https://www.sintetia.com/telepizza-secreto-pasta/",
+      "description": "Telepizza ha perdido su esencia. Es momento de dejar salir a los abogados y a los lobos de Wall Street y que entren los "
+    },
+    {
+      "threadId": "1667419646671179776",
+      "tweetId": "1667419748294852614",
+      "domain": "elconfidencial.com",
+      "url": "https://www.elconfidencial.com/empresas/2023-06-08/hacienda-impone-sancion-historica-cvc-javier-de-jaime_3659871/",
+      "description": "La Agencia Tributaria abre expediente al fondo británico, accionista de Naturgy y con derechos económicos en la LaLiga, "
+    },
+    {
+      "threadId": "1733397009418096842",
+      "tweetId": "1733397067907596615",
+      "domain": "rtve.es",
+      "url": "https://www.rtve.es/noticias/20210913/ocho-leyes-educativas-cuatro-decadas-democracia/2170094.shtml",
+      "description": "Cuarenta años sin una ley de educación estable: una sopa de siglas que repercute en la calidad de la enseñanza"
+    },
+    {
+      "threadId": "1733397009418096842",
+      "tweetId": "1733397082818416958",
+      "domain": "heavymental.es",
+      "url": "https://heavymental.es/recursos/complex-problem-solving-books",
+      "description": "Fecha de actualización: 26/4/2021"
+    },
+    {
+      "threadId": "1730843036983120174",
+      "tweetId": "1730843103513231371",
+      "domain": "geniolandia.com",
+      "url": "https://www.geniolandia.com/13125532/la-historia-de-la-pantomima",
+      "description": ""
+    },
+    {
+      "threadId": "1723236412487553316",
+      "tweetId": "1723236471266574471",
+      "domain": "cincodias.elpais.com",
+      "url": "https://cincodias.elpais.com/cincodias/2012/01/02/empresas/1325674737_850215.html",
+      "description": "El grupo de profesionales más senior de la empresa de consultoría de gestión Arthur D. Little han adquirido la firma a s"
+    },
+    {
+      "threadId": "1723236412487553316",
+      "tweetId": "1723236502509900255",
+      "domain": "inc.com",
+      "url": "https://www.inc.com/soren-kaplan/artificial-intelligence-ai-will-disrupt-consulting-industry.html",
+      "description": ""
+    },
+    {
+      "threadId": "1723236412487553316",
+      "tweetId": "1723236508864266341",
+      "domain": "mckinsey.com",
+      "url": "https://www.mckinsey.com/mgi/our-research/generative-ai-and-the-future-of-work-in-america",
+      "description": ""
+    },
+    {
+      "threadId": "1720721564465823881",
+      "tweetId": "1720721566231617626",
+      "domain": "openai.com",
+      "url": "https://openai.com/research/gpts-are-gpts",
+      "description": ""
+    },
+    {
+      "threadId": "1741006814873821551",
+      "tweetId": "1741006816002117794",
+      "domain": "weforum.org",
+      "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2023/",
+      "description": ""
+    },
+    {
+      "threadId": "1741006814873821551",
+      "tweetId": "1741006865712943119",
+      "domain": "facebook.com",
+      "url": "https://www.facebook.com/unsupportedbrowser",
+      "description": "Inicia sesión en Facebook para empezar a compartir y conectar con tus amigos, familiares y las personas que conoces."
+    },
+    {
+      "threadId": "1741006814873821551",
+      "tweetId": "1741006909702857169",
+      "domain": "mariskalrock.com",
+      "url": "https://mariskalrock.com/actualidad/joe-satriani-cuenta-como-eran-kirk-hammett-metallica-y-steve-vai-como-alumnos-de-guitarra/",
+      "description": "El maestro de la guitarra Joe Satriani recuerda cómo fue su experiencia con alumnos tan aventajados como Steve Vai o el "
+    },
+    {
+      "threadId": "1743547711897342313",
+      "tweetId": "1743547714648871021",
+      "domain": "tiktok.com",
+      "url": "https://www.tiktok.com/@lladosfitness/video/7287226832037055790",
+      "description": ""
+    },
+    {
+      "threadId": "1743547711897342313",
+      "tweetId": "1743547740624228485",
+      "domain": "nyaspubs.onlinelibrary.wiley.com",
+      "url": "https://nyaspubs.onlinelibrary.wiley.com/doi/abs/10.1196/annals.1365.035",
+      "description": ""
+    },
+    {
+      "threadId": "1743547711897342313",
+      "tweetId": "1743547742498979870",
+      "domain": "britannica.com",
+      "url": "https://www.britannica.com/science/callus-osteology",
+      "description": "Callus, in osteology, bony and cartilaginous material forming a connecting bridge across a bone fracture during repair. "
+    },
+    {
+      "threadId": "1743547711897342313",
+      "tweetId": "1743547746185867498",
+      "domain": "pubmed.ncbi.nlm.nih.gov",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21489527/",
+      "description": "The biology of fracture healing is a complex biological process that follows specific regenerative patterns and involves"
+    },
+    {
+      "threadId": "1743547711897342313",
+      "tweetId": "1743547768335904984",
+      "domain": "wealest.com",
+      "url": "https://www.wealest.com/articles/barbell-strategy",
+      "description": "The Barbell Strategy is an approach to uncertainty (risk) by Nassim Nicholas Taleb that uses two extremes - like weights"
+    },
+    {
+      "threadId": "1753677668996837620",
+      "tweetId": "1753677714052006281",
+      "domain": "jotdown.es",
+      "url": "https://www.jotdown.es/2019/11/god-terms/",
+      "description": "En su libro Hidden Persuasion, Marc Andrews y los doctores Van Baaren y Van Leeuwen repasaban treinta y tres reconocidas"
+    },
+    {
+      "threadId": "1753677668996837620",
+      "tweetId": "1753677774416466016",
+      "domain": "ultimahora.es",
+      "url": "https://www.ultimahora.es/noticias/local/2024/01/29/2095199/crisis-vox-baleares-estos-son-motivos-han-desencadenado.html",
+      "description": "Ultima Hora ha tenido acceso al documento interno en el que se incluyen capturas de wasap. Los diputados de la Vox se ha"
+    },
+    {
+      "threadId": "1751154901659381958",
+      "tweetId": "1751154910127595675",
+      "domain": "indianexpress.com",
+      "url": "https://indianexpress.com/article/technology/tech-news-technology/google-search-results-quality-dipping-research-9117213/",
+      "description": ""
+    },
+    {
+      "threadId": "1758760266068590698",
+      "tweetId": "1758760411245985811",
+      "domain": "rtve.es",
+      "url": "https://www.rtve.es/play/audios/las-tardes-de-rne/joseluis-martin-jueves/6918095/",
+      "description": "Hablamos con José Luis Martín, fundador y ex-editor de la mítica revista \"El Jueves\". Se publica el libro \"Desmemorias d"
+    },
+    {
+      "threadId": "1758760266068590698",
+      "tweetId": "1758760438563475639",
+      "domain": "reddit.com",
+      "url": "https://www.reddit.com/r/AlanMoore/comments/17loe9l/has_alan_moore_explained_his_politics_in_depth/",
+      "description": ""
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287970965832141",
+      "domain": "elpais.com",
+      "url": "https://elpais.com/icon/2022-11-15/eusebio-poncela-hui-de-madrid-porque-la-gente-con-con-las-drogas-no-te-deja-en-paz-mi-casa-parecia-la-de-keith-richards.html#",
+      "description": "El protagonista de títulos clave del cine español como ‘Arrebato’ o ‘La ley del deseo’ acaba de recibir el premio honorí"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287978385612823",
+      "domain": "es.studenta.com",
+      "url": "https://es.studenta.com/content/115161134/baroni-la-multidimensionalidad-de-los-problemas-sociales",
+      "description": ""
+    },
+    {
+      "threadId": "1766352097409134910",
+      "tweetId": "1766352205622227015",
+      "domain": "nerdlab-games.com",
+      "url": "https://nerdlab-games.com/061-fun-and-frustration-in-roguelike-deckbuilding-games-like-monster-train-and-slay-the-spire/",
+      "description": "Connect with the Nerdlab Community: Join the Nerdlab Discord  Join the Nerdlab CommunityNerdlab Website Nerdlab Facebook"
+    },
+    {
+      "threadId": "1781573444485697867",
+      "tweetId": "1781573528673771599",
+      "domain": "idp.springer.com",
+      "url": "https://idp.springer.com/transit?redirect_uri=https%3A%2F%2Flink.springer.com%2Fchapter%2F10.1007%2F978-94-015-9827-9_9&code=a782f648-c2d8-4fbe-a2b5-bab395a203a3",
+      "description": "All over the world, in different contexts, people are concerned with the question of how to promote creativity. The dime"
+    },
+    {
+      "threadId": "1786636941607260240",
+      "tweetId": "1786636984930157003",
+      "domain": "t.co",
+      "url": "https://t.co/0QkeiBB2cv",
+      "description": "Fue uno de los bases españoles más destacados de finales de los ochenta y noventa. José Miguel Antúnez (Madrid, 57 años)"
+    },
+    {
+      "threadId": "1786636941607260240",
+      "tweetId": "1786637032636256401",
+      "domain": "t.co",
+      "url": "https://t.co/OhrrkZ7ME5",
+      "description": "Este libro consigna en sus páginas ideas innovadoras qu…"
+    },
+    {
+      "threadId": "1786636941607260240",
+      "tweetId": "1786637033617666548",
+      "domain": "t.co",
+      "url": "https://t.co/YrHMYSMAr2",
+      "description": "A science-backed guide for navigating and thriving thro…"
+    },
+    {
+      "threadId": "1786636941607260240",
+      "tweetId": "1786637036050403481",
+      "domain": "t.co",
+      "url": "https://t.co/TP977GZhLX",
+      "description": "As the Orlando Magic fight to stay alive in the Playoffs, their coach Jamahl Mosley continues to put the team in a posit"
+    },
+    {
+      "threadId": "1791716794312318984",
+      "tweetId": "1791716884468904159",
+      "domain": "t.co",
+      "url": "https://t.co/hFkMus66cU",
+      "description": "\"The Room Where It Happens\" from the musical HAMILTONPerformed by Alex Lacamoire, Daveed Diggs, Leslie Odom Jr., Lin-Man"
+    },
+    {
+      "threadId": "1791716794312318984",
+      "tweetId": "1791716892027043992",
+      "domain": "t.co",
+      "url": "https://t.co/aRfGCUYPFL",
+      "description": "Carles Porta, periodista y creador de uno de los programas más potentes que existen en la actualidad: CRIMS, visita a Jo"
+    },
+    {
+      "threadId": "1791716794312318984",
+      "tweetId": "1791716899400618057",
+      "domain": "t.co",
+      "url": "https://t.co/v2Se5JODgL",
+      "description": ""
+    },
+    {
+      "threadId": "1791716794312318984",
+      "tweetId": "1791716900440850611",
+      "domain": "t.co",
+      "url": "https://t.co/ThwF6SjwsS",
+      "description": "Frank Chodorov adored the work of Albert Jay Nock, part…"
+    },
+    {
+      "threadId": "1794224768574476545",
+      "tweetId": "1794224770344497326",
+      "domain": "t.co",
+      "url": "https://t.co/rXY4TdqNf8",
+      "description": "Colección de turras de Javier G. Recuenco y la Comunidad CPS sobre resolución de problemas complejos, estrategia y más."
+    },
+    {
+      "threadId": "1794224768574476545",
+      "tweetId": "1794224855157481605",
+      "domain": "t.co",
+      "url": "https://t.co/OhD2iqTXGj",
+      "description": "Whether you're dealing with an under performing employe…"
+    },
+    {
+      "threadId": "1794224768574476545",
+      "tweetId": "1794224856143135191",
+      "domain": "t.co",
+      "url": "https://t.co/s82boqyF2j",
+      "description": "El libro LA POLÍTICA DEL DISIMULO de María Blanco en Casa del Libro: ¡descubre las mejores ofertas y envíos gratis!"
+    },
+    {
+      "threadId": "1794224768574476545",
+      "tweetId": "1794224857107808316",
+      "domain": "t.co",
+      "url": "https://t.co/WIH4onyJdq",
+      "description": "An alternate cover edition can be found here.  Pulitzer…"
+    },
+    {
+      "threadId": "1794224768574476545",
+      "tweetId": "1794224858026397729",
+      "domain": "t.co",
+      "url": "https://t.co/7Nmgc0WSHA",
+      "description": "Insights—like Darwin's understanding of the way evoluti…"
+    },
+    {
+      "threadId": "1796796569829687349",
+      "tweetId": "1796796687865741387",
+      "domain": "theguardian.com",
+      "url": "https://www.theguardian.com/news/datablog/2010/apr/29/mcchrystal-afghanistan-powerpoint-slide",
+      "description": "Is the 'Afghanistan Stability/COIN Dynamics – Security' slide a set of meaningless squiggles or a comprehensive guide to"
+    },
+    {
+      "threadId": "1799313887285669975",
+      "tweetId": "1799313953257824285",
+      "domain": "t.co",
+      "url": "https://t.co/KkgFJwkjKx",
+      "description": "Fans takes the reader on a journey through a constellat…"
+    },
+    {
+      "threadId": "1804386948938699148",
+      "tweetId": "1804386954550628595",
+      "domain": "t.co",
+      "url": "https://t.co/U6HqWSwdvG",
+      "description": "Based on his work at some of the world's largest compan…"
+    },
+    {
+      "threadId": "1832301234105061777",
+      "tweetId": "1832301268154343484",
+      "domain": "eleconomista.es",
+      "url": "https://www.eleconomista.es/empresas-finanzas/noticias/2413755/09/10/Lio-en-Gullon-la-ex-presidenta-celebra-la-junta-en-un-coche-con-la-oposicion-del-consejo.html",
+      "description": ""
+    },
+    {
+      "threadId": "1834829754488221846",
+      "tweetId": "1834829804111097961",
+      "domain": "webtoons.com",
+      "url": "https://www.webtoons.com/en/canvas/zen-pencils/the-two-wolves/viewer?title_no=36531&episode_no=34&webtoon-platform-redirect=true",
+      "description": "Cartoon Quotes from Inspirational Folks. Illustrated by Gavin Aung Than. Each comic is self-contained and can be read in"
+    },
+    {
+      "threadId": "1837390467337490808",
+      "tweetId": "1837390469849850125",
+      "domain": "turrero.vercel.app",
+      "url": "https://turrero.vercel.app/",
+      "description": "Colección de turras de Javier G. Recuenco y la Comunidad CPS sobre resolución de problemas complejos, estrategia y más."
+    },
+    {
+      "threadId": "1839910136023847394",
+      "tweetId": "1839910229032493115",
+      "domain": "pguru12.medium.com",
+      "url": "https://pguru12.medium.com/what-we-can-learn-from-scrat-3f872cf455f3",
+      "description": "Understanding Scrat, the running gag of the Ice Age media franchise who went on to become the mascot of the now-defunct "
+    },
+    {
+      "threadId": "1842453861094609097",
+      "tweetId": "1842453926831894726",
+      "domain": "mpfg.es",
+      "url": "https://mpfg.es/",
+      "description": ""
+    },
+    {
+      "threadId": "1842453861094609097",
+      "tweetId": "1842453934532649353",
+      "domain": "vimeo.com",
+      "url": "https://vimeo.com/1015999514?share=copy",
+      "description": ""
+    },
+    {
+      "threadId": "1845017839423369267",
+      "tweetId": "1845017900366639465",
+      "domain": "spinae.es",
+      "url": "https://spinae.es/",
+      "description": ""
+    },
+    {
+      "threadId": "1845017839423369267",
+      "tweetId": "1845017938975207835",
+      "domain": "esden.es",
+      "url": "https://esden.es/the-fashion-bs/master-industria-del-lujo/",
+      "description": "Descubre el Master en Industria del Lujo de Esden. El Master que te prepara para convertirte en un experto en el sector "
+    },
+    {
+      "threadId": "1845017839423369267",
+      "tweetId": "1845017940044730583",
+      "domain": "baekdal.com",
+      "url": "https://baekdal.com/",
+      "description": "Baekdal is your premium site for media reports and trend analysis. Subscribe from €7.55/month"
+    },
+    {
+      "threadId": "1850051280107983315",
+      "tweetId": "1850051297069638006",
+      "domain": "unir.net",
+      "url": "https://www.unir.net/actualidad/vida-academica/unir-en-el-top-de-universidades-en-los-rankings-del-csic/#:~:text=En%20t%C3%A9rminos%20generales,%20a%20nivel,investigaci%C3%B3n%20y%20universidades%20del%20ranking",
+      "description": ""
+    },
+    {
+      "threadId": "1850051280107983315",
+      "tweetId": "1850051342942765085",
+      "domain": "intercambio-ionico.com",
+      "url": "https://www.intercambio-ionico.com/p/la-gran-crisis-de-la-universidad",
+      "description": "Javier Recuenco (@Recuenco) y Juan Freire (@jfreire) no necesitan presentación, si quieres saber más sobre ellos te reco"
+    },
+    {
+      "threadId": "1852267188519854245",
+      "tweetId": "1852306492143079584",
+      "domain": "tn.com.ar",
+      "url": "https://tn.com.ar/sociedad/2023/04/02/a-10-anos-de-las-tragicas-inundaciones-en-la-plata-el-desastre-que-dejo-89-muertos-y-un-juicio-de-solo-un-dia/",
+      "description": "Las precipitaciones extraordinarias, el cambio climático y la desidia de las diferentes gestiones provinciales llevaron "
+    },
+    {
+      "threadId": "1857680297443164321",
+      "tweetId": "1857680416825585704",
+      "domain": "polymatas.com",
+      "url": "https://www.polymatas.com/impacto-ia-conquista-marte/",
+      "description": "Temas y preguntasDurante hora y media intentamos responder a las 5 preguntas propuestas por los seguidores de Polymatas:"
+    },
+    {
+      "threadId": "1860224907386273949",
+      "tweetId": "1860225001422471371",
+      "domain": "xkcd.com",
+      "url": "https://xkcd.com/386/",
+      "description": ""
+    },
+    {
+      "threadId": "1862770042686845320",
+      "tweetId": "1862772251231174864",
+      "domain": "researchgate.net",
+      "url": "https://www.researchgate.net/publication/280743759_Thirty_years_of_prospect_theory_in_economics_A_review_and_assessment",
+      "description": "Download Citation | Thirty years of prospect theory in economics: A review and assessment | Prospect theory, first descr"
+    },
+    {
+      "threadId": "1862770042686845320",
+      "tweetId": "1862772591712248070",
+      "domain": "scholar.google.com",
+      "url": "https://scholar.google.com/citations?user=5uHt_HsAAAAJ",
+      "description": "‪Professor of Economics, Cornell University‬ - ‪‪Citado por 29.340‬‬ - ‪Behavioral Economics‬"
+    },
+    {
+      "threadId": "1862770042686845320",
+      "tweetId": "1862772957900165529",
+      "domain": "aeaweb.org",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/jep.32.2.91",
+      "description": "Modeling Risk Aversion in Economics by Ted O'Donoghue and Jason Somerville. Published in volume 32, issue 2, pages 91-11"
+    },
+    {
+      "threadId": "1865306644827029957",
+      "tweetId": "1865306715261952122",
+      "domain": "tebeosfera.com",
+      "url": "https://www.tebeosfera.com/documentos/paradojas_bucles_y_vinetas_la_aporia_como_recurso_narrativo_en_el_comic.html",
+      "description": "Las paradojas son un recurso recurrente dentro del ámbito de las artes plásticas, del cine o de la literatura. El cómic "
+    },
+    {
+      "threadId": "1867841781313769674",
+      "tweetId": "1867841799500288307",
+      "domain": "nytimes.com",
+      "url": "https://www.nytimes.com/es/2022/01/20/espanol/vacunas-arnm-covid.html",
+      "description": "Las sorprendentes vacunas para la covid fabricadas por Pfizer-BioNTech y Moderna utilizaron descubrimientos sepultados  "
+    },
+    {
+      "threadId": "1867841781313769674",
+      "tweetId": "1867841856429576577",
+      "domain": "mailchi.mp",
+      "url": "https://mailchi.mp/bonillaware/algoritmo-cambio-mundo",
+      "description": "La historia de la fórmula matemática que consiguió eliminar la distancia entre nosotros y nuestros seres queridos."
+    },
+    {
+      "threadId": "1877979196271550821",
+      "tweetId": "1877979198721052760",
+      "domain": "timetoast.com",
+      "url": "https://www.timetoast.com/timelines/la-guerra-de-las-corrientes--2",
+      "description": ""
+    },
+    {
+      "threadId": "1877979196271550821",
+      "tweetId": "1877979213598208063",
+      "domain": "clickhole.com",
+      "url": "https://clickhole.com/his-go-to-move-5-other-times-thomas-edison-electrocuted-an-elephant-to-prove-some-kind-of-point/",
+      "description": ""
+    },
+    {
+      "threadId": "1893203295725871217",
+      "tweetId": "1893203328042947068",
+      "domain": "blueoceanstrategy.com",
+      "url": "https://www.blueoceanstrategy.com/what-is-blue-ocean-strategy/",
+      "description": "Blue Ocean Strategy is the simultaneous pursuit of differentiation and low cost to open up a new market space and create"
+    },
+    {
+      "threadId": "1880543676876874203",
+      "tweetId": "1880556680494350493",
+      "domain": "imdb.com",
+      "url": "https://www.imdb.com/es-es/title/tt0268978/",
+      "description": ""
+    },
+    {
+      "threadId": "1880543676876874203",
+      "tweetId": "1880556690434929143",
+      "domain": "hacking.finance",
+      "url": "https://www.hacking.finance/read/too-clever-by-half/",
+      "description": "Coyotes can change the world. Coyotes WILL change the world. But not if they misplay the meta-game. Not if they hang out"
+    },
+    {
+      "threadId": "1852267188519854245",
+      "tweetId": "1852309558510735834",
+      "domain": "t.co",
+      "url": "https://t.co/Fmyz9pDTxx",
+      "description": "Karl E. Weick has 14 books on Goodreads with 4013 ratings. Karl E. Weick’s most popular book is Managing the Unexpected:"
+    },
+    {
+      "threadId": "1664860434845913089",
+      "tweetId": "1664860456803024898",
+      "domain": "t.co",
+      "url": "https://t.co/lGs67Pj2TP",
+      "description": "The best video games have stories full of twists and turns, and these red herrings play a role in making sure players do"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287919724122243",
+      "domain": "t.co",
+      "url": "https://t.co/LdvNV7WG7S",
+      "description": "In January of 2005 I was working with group of coaches and sport scientists developing a new power based impulse-respons"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287921699541445",
+      "domain": "t.co",
+      "url": "https://t.co/f58bwoswpR",
+      "description": "Ever wonder why so many people cry during nose piercings?  Or exactly where a septum piercing is really supposed to go? "
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287924836946089",
+      "domain": "t.co",
+      "url": "https://t.co/gNJHDxzY6x",
+      "description": "Mac McClung’s life took off a year ago when he won the 2023 NBA All-Star Slam Dunk Contest as a G League player. Where i"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287939890245993",
+      "domain": "t.co",
+      "url": "https://t.co/5GjFK6d2ny",
+      "description": "What’s the meaning of life?  No really: what’s the meaning of your life?  It’s an age-old question, but you could argue "
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287955094675747",
+      "domain": "t.co",
+      "url": "https://t.co/rwqnJf0RwM",
+      "description": "A Masters practice round to remember for Jon Rahm after he produced a superb shot that skimmed off the water before slow"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287969904660489",
+      "domain": "t.co",
+      "url": "https://t.co/Jteqo30S8s",
+      "description": "Un capítulo muy especial para hablar de Antonio Escohotado con su hijo Jorge. Y por el camino: 🤓Lectura hiper-rápida🌀 "
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287974052929955",
+      "domain": "t.co",
+      "url": "https://t.co/4G112Rl1fx",
+      "description": "🎬 Disfruta de la película en FlixOlé a partir del 21 de enero de 2022. #Arrebato: https://ver.flixole.com/watch/249365a"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287975076262315",
+      "domain": "t.co",
+      "url": "https://t.co/NDQkodnrPL",
+      "description": "Lo que vale para los tipos, vale para las tipas también: no se puede cambiar de pasión!Francella es un capo- lo adoro po"
+    },
+    {
+      "threadId": "1761287914493796842",
+      "tweetId": "1761287979375489424",
+      "domain": "t.co",
+      "url": "https://t.co/XYRfKQ8ntk",
+      "description": "From the influential author of Dynamics in Action , how…"
+    },
+    {
+      "threadId": "1766352097409134910",
+      "tweetId": "1766352110151491918",
+      "domain": "t.co",
+      "url": "https://t.co/9eAf6LDRr6",
+      "description": "Disfruta de los vídeos y la música que te gustan, sube material original y comparte el contenido con tus amigos, tu fami"
+    },
+    {
+      "threadId": "1766352097409134910",
+      "tweetId": "1766352126773526704",
+      "domain": "t.co",
+      "url": "https://t.co/lS9TBtlkNV",
+      "description": "🌏 Obten la oferta exclusiva de NordVPN aquí ➼ https://nordvpn.com/baitybait. No hay riesgo con la garantía de devolució"
+    },
+    {
+      "threadId": "1766352097409134910",
+      "tweetId": "1766352207945896011",
+      "domain": "t.co",
+      "url": "https://t.co/UkqJsRhOD3",
+      "description": "Una colaboración entre SNGULAR y Singular Solving. Tecnología para resolver problemas complejos."
+    },
+    {
+      "threadId": "1768900222581624896",
+      "tweetId": "1768900334519255071",
+      "domain": "t.co",
+      "url": "https://t.co/NnC7Gho4bI",
+      "description": "Provided to YouTube by Atlantic RecordsThe Room Where It Happens · Leslie Odom Jr. · Lin-Manuel Miranda · Daveed Diggs ·"
+    },
+    {
+      "threadId": "1768900222581624896",
+      "tweetId": "1768900368153338292",
+      "domain": "t.co",
+      "url": "https://t.co/Vwr3KK2vus",
+      "description": "León. 21 cm. 178 p. il. Encuadernación en tapa blanda d…"
+    },
+    {
+      "threadId": "1779018888203608064",
+      "tweetId": "1779019003958018533",
+      "domain": "t.co",
+      "url": "https://t.co/gjmUZvzYOx",
+      "description": "\"O Superman,\" from Laurie Anderson's 1982 debut album, 'Big Science.' The album returned to vinyl for the first time in "
+    },
+    {
+      "threadId": "1779018888203608064",
+      "tweetId": "1779019011570725272",
+      "domain": "t.co",
+      "url": "https://t.co/7zvsP5Wteo",
+      "description": "This “wickedly pacey page-turner” (Total Film) unfurls …"
+    },
+    {
+      "threadId": "1779018888203608064",
+      "tweetId": "1779019012610859096",
+      "domain": "t.co",
+      "url": "https://t.co/b2imshMHn6",
+      "description": "In this entertaining and insightful essay, Mario Puzo c…"
+    },
+    {
+      "threadId": "1779018888203608064",
+      "tweetId": "1779019013684634000",
+      "domain": "t.co",
+      "url": "https://t.co/LsR6j8jnru",
+      "description": "Una oferta que no podrá rechazar. Así, con voz profunda…"
+    },
+    {
+      "threadId": "1784107483444687237",
+      "tweetId": "1784107534451700079",
+      "domain": "t.co",
+      "url": "https://t.co/E1tmfjxckt",
+      "description": "Esta vez has dado en el blancoCon dos flechas, tres dianas para ser exactosEs magia con precisiónDónde estás, cómo has v"
+    },
+    {
+      "threadId": "1784107483444687237",
+      "tweetId": "1784107570677879093",
+      "domain": "t.co",
+      "url": "https://t.co/pJ3jS8KTjm",
+      "description": "Some think that issues to do with scientific method are…"
+    },
+    {
+      "threadId": "1784107483444687237",
+      "tweetId": "1784107571780952551",
+      "domain": "t.co",
+      "url": "https://t.co/e9m6XkpoCS",
+      "description": "En su tercera edición, el festival Águila Suena rindió homenaje a la movida madrileña cuarenta años después de su eclosi"
+    },
+    {
+      "threadId": "1806938762129101276",
+      "tweetId": "1806938805062037656",
+      "domain": "t.co",
+      "url": "https://t.co/Da5bVPUBwe",
+      "description": ""
+    },
+    {
+      "threadId": "1999746151839338739",
+      "tweetId": "1999746208449876125",
+      "domain": "sherpacapital.es",
+      "url": "https://sherpacapital.es/",
+      "description": "Es una firma de capital privado con foco en Iberia, su expertise operacional único en el sector le permite alcanzar resu"
+    },
+    {
+      "threadId": "1900814275511210417",
+      "tweetId": "1900814282956161232",
+      "domain": "adictosaltrabajo.com",
+      "url": "https://adictosaltrabajo.com/2024/03/04/comentarios-post-evento-cpslive2024-muchas-opiniones-personales-sobre-el-cps/",
+      "description": "Opiniones personales sobre el evento CPSLive 2024, y una serie de reflexiones acerca cómo veo el sector CPS"
+    },
+    {
+      "threadId": "1898290632457679270",
+      "tweetId": "1898290667719160284",
+      "domain": "onetonline.org",
+      "url": "https://www.onetonline.org/help/online/scales",
+      "description": ""
+    },
+    {
+      "threadId": "1898290632457679270",
+      "tweetId": "1898290698845069399",
+      "domain": "onetonline.org",
+      "url": "https://www.onetonline.org/find/descriptor/result/2.B.2.i",
+      "description": ""
+    },
+    {
+      "threadId": "1898290632457679270",
+      "tweetId": "1898294664706330642",
+      "domain": "onetonline.org",
+      "url": "https://www.onetonline.org/find/descriptor/result/4.C.3.a.2.a",
+      "description": ""
+    },
+    {
+      "threadId": "1903343437719670927",
+      "tweetId": "1903343551389528368",
+      "domain": "anaitgames.com",
+      "url": "https://www.anaitgames.com/opinion/nintendo-switch-espiritu-iwata",
+      "description": "Qué hay y dónde se ve en la nueva consola de Nintendo la influencia de dos de sus nombres más reconocidos y celebrados d"
+    },
+    {
+      "threadId": "1905877658904183080",
+      "tweetId": "1905877744975597805",
+      "domain": "atlasobscura.com",
+      "url": "https://www.atlasobscura.com/articles/fanta-soda-origins-nazi-germany",
+      "description": "The soda was made from apple fibers and a cheese by-product."
+    },
+    {
+      "threadId": "1926142175105995150",
+      "tweetId": "1926142188393488409",
+      "domain": "nintendo.com",
+      "url": "https://www.nintendo.com/es-es/Noticias/2021/agosto/-Rememora-las-raices-de-Nintendo-con-hanafuda--2019412.html",
+      "description": "¡Domina las partidas de hanafuda como nadie gracias a estos consejos!"
+    },
+    {
+      "threadId": "1938855177471021516",
+      "tweetId": "1938855214225732010",
+      "domain": "dircomfidencial.com",
+      "url": "https://dircomfidencial.com/marketing/eeuu-permite-la-fusion-entre-omg-e-ipg-a-cambio-de-impedir-el-bloqueo-de-inversion-publicitaria-a-medios-por-su-ideologia-20250624-0402/",
+      "description": "La Comisión Federal de Comercio (FTC) obligará a la entidad resultante a entregar informes durante cinco años que demues"
+    },
+    {
+      "threadId": "1938855177471021516",
+      "tweetId": "1938855223650287691",
+      "domain": "newsroom.accenture.com",
+      "url": "https://newsroom.accenture.com/news/2025/david-droga-to-step-down-as-accenture-song-ceo-appointed-accenture-vice-chair",
+      "description": "Accenture today announced that after a transformative tenure as chief executive officer of Accenture Song, David Droga h"
+    },
+    {
+      "threadId": "1943924463415820480",
+      "tweetId": "1943924472198627534",
+      "domain": "t2o.com",
+      "url": "https://www.t2o.com/innovacion/personotecnia-la-transformacion-de-la-relacion-con-los-clientes/",
+      "description": "Javier Ruenco, CSO & Founder de Singular Solving, que nos explica al detalle todo lo que envuelve a la personotecnica, s"
+    },
+    {
+      "threadId": "1943924463415820480",
+      "tweetId": "1943924483858817472",
+      "domain": "uxdesign.cc",
+      "url": "https://uxdesign.cc/nikes-25b-blunder-shows-us-the-limits-of-data-driven-ad30b6e3d938?gi=e927ca593c28",
+      "description": "The illusion of data as “objective” conceals that it rarely shows you the whole picture. Making decisions based on the e"
+    },
+    {
+      "threadId": "1984528930691236007",
+      "tweetId": "1984528943504900388",
+      "domain": "scientificamerican.com",
+      "url": "https://www.scientificamerican.com/author/julien-d-huy/",
+      "description": "Julien d'Huy \u0003is a doctoral candidate in history at Pantheon-Sorbonne University in Paris. His multidisciplinary researc"
+    },
+    {
+      "threadId": "1984528930691236007",
+      "tweetId": "1984528994381791632",
+      "domain": "elliberal.cat",
+      "url": "https://www.elliberal.cat/2025/10/30/aznar-acierta-pujol-priorizo-inmigracion-musulmana/",
+      "description": "Aznar acierta: Pujol priorizó inmigración musulmana. Pese a las críticas recibidas, el análisis del expresidente es cert"
+    },
+    {
+      "threadId": "1981980820278591851",
+      "tweetId": "1981980842449637651",
+      "domain": "pubmed.ncbi.nlm.nih.gov",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21288379/",
+      "description": "In this article we argue that self-deception evolved to facilitate interpersonal deception by allowing people to avoid t"
+    },
+    {
+      "threadId": "2020049464229028201",
+      "tweetId": "2020049499440226663",
+      "domain": "comunidadcps.es",
+      "url": "https://www.comunidadcps.es/",
+      "description": "Te damos la bienvenida a la Comunidad #CPS La Comunidad #CPS es un ecosistema diverso y multidisciplinario compuesto por"
+    },
+    {
+      "threadId": "2020049464229028201",
+      "tweetId": "2020049519631581609",
+      "domain": "t.co",
+      "url": "https://t.co/B3D0YF4uwa",
+      "description": "The Journalist’s Resource helps to bridge the communications gap between academia and journalism. Our goal: more high-qu"
+    },
+    {
+      "threadId": "2020049464229028201",
+      "tweetId": "2020049520675942817",
+      "domain": "t.co",
+      "url": "https://t.co/rB5DuM9Q6L",
+      "description": ""
+    },
+    {
+      "threadId": "2020049464229028201",
+      "tweetId": "2020049521758138693",
+      "domain": "pewresearch.org",
+      "url": "https://www.pewresearch.org/",
+      "description": "Pew Research Center is a nonpartisan, nonadvocacy fact tank that informs the public about the issues, attitudes and tren"
+    },
+    {
+      "threadId": "2017499037503541482",
+      "tweetId": "2017499124673708442",
+      "domain": "elespanol.com",
+      "url": "https://www.elespanol.com/invertia/disruptores/ecosistema-startup/20241020/stop-silencio-enfermedad-mental-startups-anclalife-da-voz-herramientas-superarlo/894410668_0.html",
+      "description": "En el mes de la salud mental, la iniciativa, liderada por emprendedores top del ecosistema, crea comunidad para aflorar "
+    },
+    {
+      "threadId": "2012420052809892175",
+      "tweetId": "2012420390950461501",
+      "domain": "elperiodico.com",
+      "url": "https://www.elperiodico.com/es/politica/20251224/sanchez-peor-otono-leyes-congreso-inestabilidad-socios-125094733",
+      "description": "El Gobierno cierra el año con 28 leyes aprobadas, tres más que el año pasado, pero con muestras de desgaste en los últim"
+    },
+    {
+      "threadId": "2009896595203018960",
+      "tweetId": "2009896659229040878",
+      "domain": "pressreader.com",
+      "url": "https://www.pressreader.com/spain/expansion-nacional/20251231/281625311667095",
+      "description": "Digital newsstand featuring 7000+ of the world’s most popular newspapers & magazines. Enjoy unlimited reading on up to 5"
+    },
+    {
+      "threadId": "2002288705726304422",
+      "tweetId": "2002288761854480518",
+      "domain": "expansion.com",
+      "url": "https://www.expansion.com/mercados/2025/12/17/69419437468aebd3408b457d.html",
+      "description": "El enorme crecimiento de la banca en la sombra durante la �ltima d�cada ha puesto en guardia a los reguladores internaci"
+    },
+    {
+      "threadId": "2002288705726304422",
+      "tweetId": "2002288785527034006",
+      "domain": "ft.com",
+      "url": "https://www.ft.com/content/8c953f6d-3d30-4657-bda1-ba4c2911c8d8",
+      "description": "Asset manager blocks redemptions from one of its first private debt vehicles targeting wealthy individuals"
+    },
+    {
+      "threadId": "2002288705726304422",
+      "tweetId": "2002288815310790980",
+      "domain": "expansion.com",
+      "url": "https://www.expansion.com/empresas/2025/12/19/694522efe5fdea2c108b4574.html",
+      "description": "El capital riesgo es un actor esencial en la asignaci�n de recursos econ�micos, y su existencia es vital en cualquier ec"
+    },
+    {
+      "threadId": "1997212613571117548",
+      "tweetId": "1997212658441789618",
+      "domain": "app2top.com",
+      "url": "https://app2top.com/industry/ea-shares-fell-after-the-battlefront-ii-loot-box-scandal-110034.html",
+      "description": "Shares of the Electronic Arts gaming corporation fell by 2.5% after public criticism due to loot boxes in the new online"
+    },
+    {
+      "threadId": "1997212613571117548",
+      "tweetId": "1997212673964933614",
+      "domain": "bbc.com",
+      "url": "https://www.bbc.com/news/newsbeat-48701962",
+      "description": "A spokesperson for the company says the system is \"quite ethical\" and something gamers enjoy."
+    },
+    {
+      "threadId": "1997212613571117548",
+      "tweetId": "1997212709322965501",
+      "domain": "amazon.es",
+      "url": "https://www.amazon.es/dp/B0FTG3XHC4",
+      "description": "POWER AND PLAY: How a $55 Billion Deal Took Electronic Arts Off the Market : TURNER, DONALD J.: Amazon.es: Libros"
+    },
+    {
+      "threadId": "1997212613571117548",
+      "tweetId": "1997212710279283125",
+      "domain": "cesarastudillo.medium.com",
+      "url": "https://cesarastudillo.medium.com/los-tres-primeros-a%C3%B1os-de-pyro-studios-un-testimonio-621871b77f8a",
+      "description": "Todavía sobrecogido por las desagradables noticias sobre los procesos judiciales actualmente en curso contra los hermano"
+    },
+    {
+      "threadId": "1994665880878186846",
+      "tweetId": "1994665905318396053",
+      "domain": "expansion.com",
+      "url": "https://www.expansion.com/empresas/2025/09/22/68cfdd15468aeb55328b45a6.html",
+      "description": "Una de las grandes transformaciones del mapa corporativo global durante la �ltima d�cada ha sido el aumento del peso de "
+    },
+    {
+      "threadId": "2012420052809892175",
+      "tweetId": "2012420591341678630",
+      "domain": "as.com",
+      "url": "https://as.com/baloncesto/nba/kuminga-se-harta-y-exige-a-los-warriors-que-le-traspasen-f202601-n/",
+      "description": "La situación con el alero llega a su límite y el traspaso podría darse antes del 5 de febrero. Los Warriors, patas arrib"
+    },
+    {
+      "threadId": "2022575861296230582",
+      "tweetId": "2022575867763785948",
+      "domain": "world-gifted.org",
+      "url": "https://world-gifted.org/",
+      "description": "The World Council for Gifted and Talented Children (WCGTC) is a worldwide nonprofit organization providing advocacy & su"
+    },
+    {
+      "threadId": "2022575861296230582",
+      "tweetId": "2022575904501776485",
+      "domain": "bbc.com",
+      "url": "https://www.bbc.com/mundo/noticias-61647508",
+      "description": "La superdotación convirtió su infancia en un calvario al que logró sobrevivir a duras penas. Ahora ayuda a otros que com"
+    }
+  ]
+}

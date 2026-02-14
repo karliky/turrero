@@ -7342,5 +7342,389 @@
                 "answer": 2
             }
         ]
+    },
+    {
+        "id": "2020049464229028201",
+        "questions": [
+            {
+                "question": "¿Cuál es la fórmula del modelo B=MAP de BJ Fogg?",
+                "options": [
+                    "Motivación + Habilidad + Prompt",
+                    "Motivación x Habilidad x Prompt",
+                    "Motivación y Habilidad y Prompt"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál de estos no es uno de los siete principios de persuasión de Cialdini?",
+                "options": [
+                    "Reciprocidad",
+                    "Unidad",
+                    "Control"
+                ],
+                "answer": 3
+            },
+            {
+                "question": "¿Cuál de las siguientes no es un principio de la propaganda de Goebbels?",
+                "options": [
+                    "Repetición",
+                    "Silencio",
+                    "Veracidad"
+                ],
+                "answer": 3
+            }
+        ]
+    },
+    {
+        "id": "2017499037503541482",
+        "questions": [
+            {
+                "question": "Según el texto, ¿qué porcentaje de ausencias laborales en España son por incapacidad temporal (IT) en los últimos años?",
+                "options": [
+                    "Menor al 50%",
+                    "73-80%",
+                    "Más del 90%"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál de los siguientes factores se destaca como principal contribuyente al aumento del absentismo después de la pandemia?",
+                "options": [
+                    "El teletrabajo híbrido",
+                    "El aumento de salarios",
+                    "La reducción de vacantes"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "El texto menciona un aumento del 85% en ausencias por salud mental desde 2019. ¿Cuál es el valor correcto del aumento?",
+                "options": [
+                    "85%",
+                    "20-30%",
+                    "50-60%"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "2014969801395814716",
+        "questions": [
+            {
+                "question": "¿Cuál de las siguientes características define el arquetipo de la mujer resolutiva según el texto?",
+                "options": [
+                    "Ser la protagonista principal",
+                    "Resolver problemas de forma inesperada sin protagonismo",
+                    "Ser la antagonista del relato"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿En qué década se consolidó la carrera de Gracita Morales como icono de la comedia?",
+                "options": [
+                    "1940s",
+                    "1960s",
+                    "1980s"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué elemento distingue a la resolutiva de Gracita de la de Bettye McCartt?",
+                "options": [
+                    "Gracita usa humor, Bettye usa diplomacia",
+                    "Gracita es actriz, Bettye es escritora",
+                    "Gracita es inglesa, Bettye es española"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "2012420052809892175",
+        "questions": [
+            {
+                "question": "Según el texto, ¿por qué dejó Xabi Alonso el Madrid?",
+                "options": [
+                    "No comprendía el CPS",
+                    "Conflicto con jugadores",
+                    "Motivos financieros"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué concepto de Game of Thrones se utiliza para explicar la naturaleza del poder?",
+                "options": [
+                    "Dragones y tronos",
+                    "El poder es percepción según Varys",
+                    "Las maquinaciones de King's Landing"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Quién es descrito como un \"cuentista profesional\" que entiende la gestión del contexto?",
+                "options": [
+                    "Luis Enrique",
+                    "Stan",
+                    "Florentino"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "2009896595203018960",
+        "questions": [
+            {
+                "question": "¿Qué significa \"cul de sac empresarial\"?",
+                "options": [
+                    "Una calle sin salida para la empresa",
+                    "Un modelo de negocio rentable",
+                    "Un plan de expansión global"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es la idea central de la destrucción creativa según Schumpeter?",
+                "options": [
+                    "Innovaciones que destruyen industrias obsoletas",
+                    "Preservación de las empresas tradicionales",
+                    "Reducir la competencia"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué describe el dilema del innovador de Christensen?",
+                "options": [
+                    "Empresas líderes fallando ante innovaciones disruptivas",
+                    "Aumento de la rentabilidad inmediata",
+                    "Incremento de la calidad del producto"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "2004624575837958361",
+        "questions": [
+            {
+                "question": "¿Cuál metáfora utiliza el autor para describir los atractores?",
+                "options": [
+                    "fases de una estrella",
+                    "ejercicios de cardio",
+                    "ciclos de vacaciones"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué atractor se asocia con la consolidación de espacios hiperpersonales y la centrificación del cliente?",
+                "options": [
+                    "Megatendencias tecnológicas",
+                    "Relevance First",
+                    "Colapso de los acuerdos post WW2"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "Según el texto, ¿qué atractor representa el \"reshuffling\" de la jerarquía intelectual?",
+                "options": [
+                    "Agenda 2030",
+                    "Relevance First",
+                    "Triada estratégica"
+                ],
+                "answer": 3
+            }
+        ]
+    },
+    {
+        "id": "2002288705726304422",
+        "questions": [
+            {
+                "question": "¿Cuál es la principal crítica del autor al concepto de \"operar y optimizar\" dentro del PE?",
+                "options": [
+                    "a) Es esencial",
+                    "b) No es propio del PE",
+                    "c) Se sobrevalora"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué riesgo destaca el texto sobre la \"banca en la sombra\"?",
+                "options": [
+                    "a) Falta de regulación",
+                    "b) Exposición a crisis financieras",
+                    "c) Crecimiento rápido"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Qué estrategia propone el autor para romper el patrón de soluciones ineficaces?",
+                "options": [
+                    "a) Seguir lógica ordinaria",
+                    "b) Aplicar intervenciones paradójicas",
+                    "c) Evitar la intervención"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "1997212613571117548",
+        "questions": [
+            {
+                "question": "¿En qué año se fundó Electronic Arts?",
+                "options": [
+                    "1980",
+                    "1982",
+                    "1984"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cuál de estos títulos NO fue publicado originalmente por EA?",
+                "options": [
+                    "M.U.L.E.",
+                    "The Sims",
+                    "Call of Duty"
+                ],
+                "answer": 3
+            },
+            {
+                "question": "Tras la adquisición del PIF, ¿qué práctica se volvió más prominente en EA?",
+                "options": [
+                    "Microtransacciones",
+                    "Mejoras de gráficos",
+                    "Reducción de personal"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "1994665880878186846",
+        "questions": [
+            {
+                "question": "¿Cuál fue la tendencia del número de entidades de capital riesgo en España entre 2013 y 2024?",
+                "options": [
+                    "Aumento",
+                    "Disminución",
+                    "Sin cambio"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál fue la caída en la proporción de inversiones en capital semilla y startups en 2024 respecto a 2013?",
+                "options": [
+                    "Del 20,7% al 9%",
+                    "Del 9% al 20,7%",
+                    "No hubo caída"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Cuál es la crítica principal al mercado secundario según el texto?",
+                "options": [
+                    "Es una solución definitiva",
+                    "Es un parche que traslada riesgos",
+                    "No existe mercado secundario"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "1992135396793200730",
+        "questions": [
+            {
+                "question": "¿En qué episodio Sideshow Bob debuta como antagonista principal?",
+                "options": [
+                    "The Telltale Head",
+                    "Krusty Gets Busted",
+                    "Cape Feare"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Cómo se describe la personalidad de Sideshow Bob?",
+                "options": [
+                    "Inocente y alegre",
+                    "Culto y sofisticado",
+                    "Despreocupado"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿En qué episodio Bob intenta ser alcalde de Springfield mediante fraude electoral?",
+                "options": [
+                    "Sideshow Bob Roberts",
+                    "Sideshow Bob's Last Gleaming",
+                    "Cape Feare"
+                ],
+                "answer": 1
+            }
+        ]
+    },
+    {
+        "id": "1989585041949622370",
+        "questions": [
+            {
+                "question": "¿Quién es considerado el 'Rey de los Junk Bonds'?",
+                "options": [
+                    "Michael Milken",
+                    "Henry Kravis",
+                    "Jim Simons"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "En los años 70, el mercado financiero estadounidense estaba dominado por",
+                "options": [
+                    "Bonos de grado de inversión",
+                    "Acciones tecnológicas",
+                    "Bonos de alto rendimiento"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "La caída personal de Michael Milken ocurrió en",
+                "options": [
+                    "1987",
+                    "1989",
+                    "1990"
+                ],
+                "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "2022575861296230582",
+        "questions": [
+            {
+                "question": "¿Qué porcentaje de la población mundial se estima que tiene altas capacidades intelectuales (AACC)?",
+                "options": [
+                    "2-10%",
+                    "15-25%",
+                    "30-40%"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "En España, ¿qué porcentaje del alumnado está identificado formalmente como AACC?",
+                "options": [
+                    "0,84%",
+                    "5,3%",
+                    "12,7%"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según la OCDE, ¿qué porcentaje de titulados españoles trabaja por debajo de su nivel de cualificación?",
+                "options": [
+                    "36%",
+                    "55%",
+                    "22%"
+                ],
+                "answer": 1
+            }
+        ]
     }
 ]
