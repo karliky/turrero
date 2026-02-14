@@ -198,7 +198,7 @@ Use this when a link card has wrong/missing title or domain, or when legacy `cap
 data needs to be migrated.
 
 ```bash
-deno task scrape -- --fix-tweet <tweet_id_1> <tweet_id_2> ...
+deno task fix-tweet <tweet_id_1> <tweet_id_2> ...
 deno task enrich
 ```
 
