@@ -186,7 +186,7 @@ export class GenericCardProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        if (tweet.metadata.description) return; // Already has description
+        if (tweet.metadata.title && tweet.metadata.description) return;
 
         try {
             const response = await fetchWithTimeout(url, {
@@ -198,12 +198,23 @@ export class GenericCardProcessor implements MediaProcessor {
             const html = await response.text();
             const $ = cheerio.load(html);
 
+            const title =
+                $('meta[property="og:title"]').attr('content') ||
+                $('meta[name="twitter:title"]').attr('content') ||
+                $('meta[name="title"]').attr('content') ||
+                $('title').first().text() ||
+                '';
+
             const description =
                 $('meta[property="og:description"]').attr('content') ||
                 $('meta[name="description"]').attr('content') ||
                 '';
 
-            if (description.trim()) {
+            if (!tweet.metadata.title && title.trim()) {
+                tweet.metadata.title = title.trim();
+            }
+
+            if (!tweet.metadata.description && description.trim()) {
                 tweet.metadata.description = description.trim();
             }
         } catch {
@@ -310,6 +321,15 @@ export async function expandUrl(shortUrl?: string): Promise<string | undefined> 
     }
 }
 
+function extractDomainFromUrl(url?: string): string | undefined {
+    if (!url) return undefined;
+    try {
+        return new URL(url).hostname.replace(/^www\./i, "");
+    } catch {
+        return undefined;
+    }
+}
+
 // ============================================================================
 // ENRICHMENT STRATEGIES
 // ============================================================================
@@ -370,6 +390,9 @@ export class TweetEnricher {
         const url = await expandUrl(tweet.metadata.url);
         if (url) {
             tweet.metadata.url = url;
+            if (!tweet.metadata.domain) {
+                tweet.metadata.domain = extractDomainFromUrl(url);
+            }
             await this.mediaRegistry.processKnownDomain(tweet, url, page);
         }
         
@@ -414,6 +437,9 @@ export class TweetEnricher {
         }
         if (url) {
             tweet.metadata.url = url;
+            if (!tweet.metadata.domain) {
+                tweet.metadata.domain = extractDomainFromUrl(url);
+            }
             // Clean tweet content when we have a URL
             await this.mediaRegistry.processKnownDomain(tweet, url, page);
         }

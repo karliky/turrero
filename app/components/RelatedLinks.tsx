@@ -8,6 +8,38 @@ interface RelatedLinksProps {
 }
 
 export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
+  const isLikelyDomain = (value?: string): boolean => {
+    if (!value) return false;
+    const clean = value.replace(/^from\s+/i, "").trim().toLowerCase();
+    if (clean.includes(" ")) return false;
+    return /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(clean);
+  };
+
+  const normalizeDomain = (value: string): string =>
+    value.replace(/^from\s+/i, "").trim().toLowerCase().replace(/^www\./, '');
+
+  const extractHostname = (url?: string): string | undefined => {
+    if (!url || url === '#') return undefined;
+    try {
+      return new URL(url).hostname.replace(/^www\./, '').toLowerCase();
+    } catch {
+      return undefined;
+    }
+  };
+
+  const formatUrlForLabel = (url?: string): string | undefined => {
+    if (!url || url === '#') return undefined;
+    try {
+      const parsed = new URL(url);
+      const host = parsed.hostname.replace(/^www\./, '');
+      const path = parsed.pathname.replace(/\/$/, '');
+      const readable = `${host}${path}`;
+      return readable.length > 85 ? `${readable.slice(0, 82)}...` : readable;
+    } catch {
+      return undefined;
+    }
+  };
+
   const isValidDomain = (url: string) => {
     return url.includes("youtube.com") ||
            url.includes("youtu.be") ||
@@ -38,6 +70,26 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     return '#';
   };
 
+  const getResolvedDomain = (data: EnrichedTweetMetadata): string | undefined => {
+    if (isLikelyDomain(data.domain)) return normalizeDomain(data.domain!.trim());
+    const effectiveUrl = getEffectiveUrl(data);
+    return extractHostname(effectiveUrl);
+  };
+
+  const getCardLabel = (data: EnrichedTweetMetadata): string => {
+    const legacyCaption =
+      typeof (data as unknown as Record<string, unknown>).caption === 'string'
+        ? String((data as unknown as Record<string, unknown>).caption).trim()
+        : '';
+    const title = data.title?.trim() || legacyCaption;
+    if (title) return title;
+    const effectiveUrl = getEffectiveUrl(data);
+    const readableUrl = formatUrlForLabel(effectiveUrl);
+    if (readableUrl) return readableUrl;
+    const domain = getResolvedDomain(data);
+    return domain || 'Abrir enlace';
+  };
+
   const cardLinks = enrichedData.filter(isValidCard);
 
   const simpleLinks = thread
@@ -50,7 +102,7 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     );
 
   const groupedLinks = cardLinks.reduce((acc, data) => {
-    const domain = data.domain || data.url || '';
+    const domain = getResolvedDomain(data) || '';
 
     let category = '';
     if (domain.includes('youtube.com') || domain.includes('youtu.be')) category = 'Videos';
@@ -58,13 +110,7 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
     else if (domain.includes('wikipedia.org')) category = 'Wikipedia';
     else if (domain.includes('linkedin.com')) category = 'LinkedIn';
     else {
-      // Use the actual domain name as category
-      try {
-        const hostname = domain.includes('://') ? new URL(domain).hostname : domain;
-        category = hostname.replace(/^www\./, '');
-      } catch {
-        category = domain;
-      }
+      category = domain || 'Otros enlaces';
     }
 
     if (!acc[category]) acc[category] = [];
@@ -93,9 +139,9 @@ export function RelatedLinks({ enrichedData, thread }: RelatedLinksProps) {
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 mt-1">
-                        {getIcon(data.domain || data.url || '')}
+                        {getIcon(getResolvedDomain(data) || getEffectiveUrl(data))}
                       </div>
-                      <span className="line-clamp-2">{data.title?.trim() || data.url || data.domain}</span>
+                      <span className="line-clamp-2">{getCardLabel(data)}</span>
                     </div>
                   </a>
                 </li>

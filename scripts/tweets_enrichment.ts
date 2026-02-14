@@ -66,17 +66,81 @@ async function enrichTweets(): Promise<void> {
     // Retroactive card URL patching: resolve empty card URLs from tweet text t.co links
     await patchExistingCardUrls(allTweetsFlat);
 
+    // Retroactive card semantics patching:
+    // keep domain as real hostname and move accidental textual values/legacy caption to title
+    await patchCardDomainTitleSemantics();
+
     // Retroactive embed ID/URL patching: resolve unknown embed IDs from tweet text,
     // and reconstruct URLs for embeds with known IDs but missing URLs
     await patchExistingEmbedIds(allTweetsFlat);
 
-    // Retroactive description patching: fetch og:description for card entries
-    // that have a URL but no description
-    await patchExistingDescriptions();
+    // Retroactive card metadata patching:
+    // fetch title/description for card entries that still miss one of them
+    await patchExistingCardMetadata();
 
     logger.info("Tweet enrichment completed successfully!");
   } finally {
     await browser.close();
+  }
+}
+
+function isLikelyDomain(value?: string): boolean {
+  if (!value) return false;
+  const clean = value.replace(/^from\s+/i, "").trim().toLowerCase();
+  if (clean.includes(" ")) return false;
+  return /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(clean);
+}
+
+function getHostname(url?: string): string | undefined {
+  if (!url) return undefined;
+  try {
+    return new URL(url).hostname.replace(/^www\./i, "").toLowerCase();
+  } catch {
+    return undefined;
+  }
+}
+
+async function patchCardDomainTitleSemantics(): Promise<void> {
+  const enrichments = await dataAccess.getTweetsEnriched();
+  let patchCount = 0;
+
+  for (const entry of enrichments) {
+    if (entry.type !== "card") continue;
+
+    const legacyCaption = (entry as unknown as Record<string, unknown>).caption;
+    if ((!entry.title || entry.title.trim() === "") && typeof legacyCaption === "string" && legacyCaption.trim() !== "") {
+      entry.title = legacyCaption.trim();
+      patchCount++;
+    }
+
+    const rawDomain = entry.domain?.trim();
+    const hasValidDomain = isLikelyDomain(rawDomain);
+
+    // If domain contains textual content, treat it as title fallback and clean domain
+    if (rawDomain && !hasValidDomain) {
+      if (!entry.title || entry.title.trim() === "") {
+        entry.title = rawDomain;
+      }
+      entry.domain = "";
+      patchCount++;
+    }
+
+    // Fill/normalize domain from resolved URL when possible
+    const host = getHostname(entry.url);
+    if (host && (!entry.domain || entry.domain.trim() === "")) {
+      entry.domain = host;
+      patchCount++;
+    }
+
+    if ("caption" in (entry as unknown as Record<string, unknown>)) {
+      delete (entry as unknown as Record<string, unknown>).caption;
+      patchCount++;
+    }
+  }
+
+  if (patchCount > 0) {
+    await dataAccess.saveTweetsEnriched(enrichments);
+    logger.info(`Card semantics patch: normalized ${patchCount} domain/title field(s)`);
   }
 }
 
@@ -475,18 +539,24 @@ async function patchExistingEmbedIds(allTweetsFlat: Tweet[]): Promise<void> {
   }
 }
 
-async function patchExistingDescriptions(): Promise<void> {
+async function patchExistingCardMetadata(): Promise<void> {
   const enrichments = await dataAccess.getTweetsEnriched();
   const processor = new GenericCardProcessor();
 
   const candidates = enrichments.filter(
-    (e) => e.type === "card" && e.url && (!e.description || e.description === ""),
+    (e) =>
+      e.type === "card" &&
+      e.url &&
+      (
+        !e.description || e.description === "" ||
+        !e.title || e.title === ""
+      ),
   );
 
   if (candidates.length === 0) return;
 
   const total = candidates.length;
-  logger.info(`Description patch: ${total} cards without description, fetching...`);
+  logger.info(`Card metadata patch: ${total} cards missing title/description, fetching...`);
   let patchCount = 0;
 
   for (let i = 0; i < candidates.length; i++) {
@@ -494,27 +564,33 @@ async function patchExistingDescriptions(): Promise<void> {
     const url = entry.url!; // Filtered above: e.url is truthy
 
     if ((i + 1) % 20 === 0 || i === 0) {
-      logger.info(`Description patch: ${i + 1}/${total} (found ${patchCount} so far)`);
+      logger.info(`Card metadata patch: ${i + 1}/${total} (updated ${patchCount} so far)`);
     }
 
     const fakeTweet: TweetForEnrichment = {
       id: entry.id,
-      metadata: { description: entry.description || "", url },
+      metadata: { title: entry.title || "", description: entry.description || "", url },
     };
 
     await processor.process(fakeTweet, url);
 
-    if (fakeTweet.metadata.description) {
-      entry.description = fakeTweet.metadata.description;
+    if (
+      (fakeTweet.metadata.description && fakeTweet.metadata.description !== entry.description) ||
+      (fakeTweet.metadata.title && fakeTweet.metadata.title !== entry.title)
+    ) {
+      if (fakeTweet.metadata.title) entry.title = fakeTweet.metadata.title;
+      if (fakeTweet.metadata.description) {
+        entry.description = fakeTweet.metadata.description;
+      }
       patchCount++;
     }
   }
 
   if (patchCount > 0) {
     await dataAccess.saveTweetsEnriched(enrichments);
-    logger.info(`Description patch: added descriptions to ${patchCount} card entries`);
+    logger.info(`Card metadata patch: updated ${patchCount} card entries`);
   } else {
-    logger.info("Description patch: no new descriptions found");
+    logger.info("Card metadata patch: no new metadata found");
   }
 }
 
@@ -541,12 +617,18 @@ async function saveTweet(tweet: TweetForEnrichment): Promise<void> {
   const existingEnrichments = await dataAccess.getTweetsEnriched();
 
   // Ensure required fields are present
+  const legacyCaption = (tweet.metadata as Record<string, unknown>).caption;
+  const title =
+    tweet.metadata.title ||
+    (typeof legacyCaption === "string" ? legacyCaption : "") ||
+    "";
+
   const enrichedData = {
     id: tweet.id,
     type: tweet.metadata.type || "unknown",
     media: tweet.metadata.media || "", // Empty string instead of "unknown"
     domain: tweet.metadata.domain || "",
-    title: tweet.metadata.title || "",
+    title,
     description: tweet.metadata.description || "",
     url: tweet.metadata.url || "",
     img: tweet.metadata.img || "",

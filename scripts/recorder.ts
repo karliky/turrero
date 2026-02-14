@@ -79,8 +79,8 @@ interface TweetMetadata {
     img?: string;
     url?: string;
     domain?: string;       // Extracted from card.layoutSmall.detail (e.g., "goodreads.com", "youtube.com")
-    title?: string;        // Extracted from card.layoutSmall.detail (e.g., book title, video title)
-    description?: string;  // Extracted from card.layoutSmall.detail (snippet/preview text)
+    title?: string;        // Extracted from card text blocks (headline/caption shown by X)
+    description?: string;
     embed?: {
         type?: string;
         id?: string;
@@ -456,19 +456,42 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             // Try multiple selectors to handle different card layouts
             const linkElement = (card.querySelector("a[href]") || card.closest("a[href]")) as HTMLAnchorElement;
 
-            // Extract additional metadata from card.layoutSmall.detail if present
-            // Structure: 3 divs with spans containing: 1) domain, 2) title, 3) description
+            // Extract additional metadata from card.layoutSmall/detail if present.
+            // Keep semantics strict:
+            // - domain: only real host/domain labels
+            // - title: textual card content (headline/caption from X)
             let domain = "";
             let title = "";
-            let description = "";
 
             const cardDetail = article.querySelector('div[data-testid="card.layoutSmall.detail"], div[data-testid="card.layoutLarge.detail"]');
-            if (cardDetail) {
-                const textDivs = cardDetail.querySelectorAll('div[dir="auto"]');
-                if (textDivs.length >= 1) domain = textDivs[0]!.textContent?.trim() || "";
-                if (textDivs.length >= 2) title = textDivs[1]!.textContent?.trim() || "";
-                if (textDivs.length >= 3) description = textDivs[2]!.textContent?.trim() || "";
+            const textRoot = cardDetail || card;
+            const textDivs = textRoot.querySelectorAll('div[dir="auto"], span');
+            const textValues = Array.from(textDivs)
+                .map((el) => el.textContent?.trim() || "")
+                .filter(Boolean)
+                // Remove exact duplicates and very short noise tokens
+                .filter((value, idx, arr) => arr.indexOf(value) === idx && value.length > 1);
+
+            const normalizeDomainLabel = (value: string): string => {
+                const clean = value.replace(/^from\s+/i, "").trim();
+                return clean.toLowerCase();
+            };
+
+            const isLikelyDomain = (value: string): boolean => {
+                const normalized = normalizeDomainLabel(value);
+                if (normalized.includes(" ")) return false;
+                return /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(normalized);
+            };
+
+            const first = textValues[0] || "";
+            const hasDomainFirst = isLikelyDomain(first);
+            if (hasDomainFirst) {
+                domain = normalizeDomainLabel(first);
             }
+
+            const contentTexts = hasDomainFirst ? textValues.slice(1) : textValues;
+            if (contentTexts.length >= 1) title = contentTexts[0] || "";
+            if (!title && contentTexts.length >= 2) title = contentTexts[1] || "";
 
             // Detect media type from domain
             let media = undefined;
@@ -490,7 +513,6 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
                 url: linkElement ? linkElement.href : "",
                 domain: domain || undefined,
                 title: title || undefined,
-                description: description || undefined,
                 imgs: undefined,
                 embed: undefined,
             } as unknown as TweetMetadata;
@@ -1306,17 +1328,12 @@ async function main() {
                 }
             }
 
-            // Track which tweets were already fixed (resumable — skip tweets with card URL already populated)
+            // Re-scrape all explicitly requested tweet IDs.
+            // Old behavior skipped tweets that already had card URLs, but that prevents
+            // refreshing other fields (e.g. authorName/domain/title).
             const enrichedPath = join(__dirname, "../infrastructure/db/tweets_enriched.json");
-            const enrichedBefore = JSON.parse(readFileSync(enrichedPath, "utf-8")) as Array<{ id: string; type?: string; url?: string }>;
-            const alreadyFixed = new Set(
-                enrichedBefore
-                    .filter(e => e.type === "card" && e.url && e.url.length > 0)
-                    .map(e => e.id)
-            );
-
-            const pendingTargets = targets.filter(t => !alreadyFixed.has(t.tweetId));
-            logger.info(`Fixing ${pendingTargets.length} tweet(s) (${targets.length - pendingTargets.length} already have URLs, skipped)...`);
+            const pendingTargets = targets;
+            logger.info(`Fixing ${pendingTargets.length} tweet(s)...`);
 
             const maxRetries = 3;
             let fixedCount = 0;

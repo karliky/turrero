@@ -69,6 +69,51 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
     switch (embed.type) {
       case 'card': {
         const href = isYoutubeCard(embed) ? youtubeSearchHref(embed) : (embed.url || "#");
+        const legacyCaption =
+          typeof (embed as unknown as Record<string, unknown>).caption === "string"
+            ? String((embed as unknown as Record<string, unknown>).caption).trim()
+            : "";
+        const titleText = embed.title?.trim() || legacyCaption;
+        const descriptionText = embed.description?.trim();
+        const domainText = embed.domain?.trim();
+
+        const isValidDomainLabel = (value?: string): boolean => {
+          if (!value) return false;
+          const clean = value.replace(/^from\s+/i, "").trim();
+          // Avoid rendering non-domain text as the "domain" line
+          if (clean.includes(" ")) return false;
+          return /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(clean);
+        };
+        const formatUrlForLabel = (url?: string): string | undefined => {
+          if (!url || url === "#") return undefined;
+          try {
+            const parsed = new URL(url);
+            const host = parsed.hostname.replace(/^www\./, "");
+            const path = parsed.pathname.replace(/\/$/, "");
+            const readable = `${host}${path}`;
+            return readable.length > 85 ? `${readable.slice(0, 82)}...` : readable;
+          } catch {
+            return undefined;
+          }
+        };
+
+        const headline =
+          titleText ||
+          formatUrlForLabel(href) ||
+          (isValidDomainLabel(domainText) ? domainText : undefined) ||
+          "Abrir enlace";
+        const normalizeText = (value: string): string =>
+          value
+            .replace(/[“”"']/g, "")
+            .replace(/\s+/g, " ")
+            .trim()
+            .toLowerCase();
+        const secondaryText =
+          descriptionText &&
+          (!titleText || normalizeText(descriptionText) !== normalizeText(titleText))
+            ? descriptionText
+            : undefined;
+
         return (
           <div className="flex justify-center mt-4">
             <a 
@@ -90,14 +135,14 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
                 </div>
               )}
               <div className="p-4">
-                {embed.domain && (
-                  <p className="text-xs text-whiskey-500 mb-1">{embed.domain}</p>
+                {isValidDomainLabel(domainText) && (
+                  <p className="text-xs text-whiskey-500 mb-1">{domainText}</p>
                 )}
                 <h3 className="font-medium text-whiskey-900 text-sm">
-                  {embed.title?.trim() ? embed.title : embed.url}
+                  {headline}
                 </h3>
-                {embed.description && (
-                  <p className="mt-1 text-xs text-whiskey-600">{embed.description}</p>
+                {secondaryText && (
+                  <p className="mt-1 text-xs text-whiskey-600">{secondaryText}</p>
                 )}
               </div>
             </a>
@@ -311,12 +356,32 @@ export function TweetContent({ tweet, id }: TweetContentProps) {
               {fallbackCard.domain && (
                 <p className="text-xs text-whiskey-500 mb-1">{fallbackCard.domain}</p>
               )}
-              <h3 className="font-medium text-whiskey-900 text-sm">
-                {fallbackCard.title?.trim() ? fallbackCard.title : fallbackCard.url}
-              </h3>
-              {fallbackCard.description && (
-                <p className="mt-1 text-xs text-whiskey-600">{fallbackCard.description}</p>
-              )}
+              {(() => {
+                const legacyCaption =
+                  typeof (fallbackCard as unknown as Record<string, unknown>).caption === "string"
+                    ? String((fallbackCard as unknown as Record<string, unknown>).caption).trim()
+                    : "";
+                const title = fallbackCard.title?.trim() || legacyCaption;
+                const description = fallbackCard.description?.trim();
+                const normalizeText = (value: string): string =>
+                  value
+                    .replace(/[“”"']/g, "")
+                    .replace(/\s+/g, " ")
+                    .trim()
+                    .toLowerCase();
+                const showDescription =
+                  !!description && (!title || normalizeText(description) !== normalizeText(title));
+                return (
+                  <>
+                    <h3 className="font-medium text-whiskey-900 text-sm">
+                      {title || fallbackCard.url}
+                    </h3>
+                    {showDescription && (
+                      <p className="mt-1 text-xs text-whiskey-600">{description}</p>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           </a>
         </div>
