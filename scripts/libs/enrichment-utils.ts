@@ -68,7 +68,7 @@ export class YouTubeProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
         const data = await response.text();
         const $ = cheerio.load(data);
         
@@ -93,7 +93,7 @@ export class GoodReadsProcessor implements MediaProcessor {
         if (tweet.metadata.domain === 'goodreads.com' && tweet.metadata.title) {
             if (!tweet.metadata.description) {
                 try {
-                    const response = await fetch(url, {
+                    const response = await fetchWithTimeout(url, {
                         headers: { 'User-Agent': 'Mozilla/5.0 (compatible; bot)' },
                         redirect: 'follow',
                     });
@@ -139,7 +139,7 @@ export class WikipediaProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
         const data = await response.text();
         const $ = cheerio.load(data);
         
@@ -166,7 +166,7 @@ export class LinkedInProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
         const data = await response.text();
         const $ = cheerio.load(data);
         
@@ -189,7 +189,7 @@ export class GenericCardProcessor implements MediaProcessor {
         if (tweet.metadata.description) return; // Already has description
 
         try {
-            const response = await fetch(url, {
+            const response = await fetchWithTimeout(url, {
                 headers: { 'User-Agent': 'Mozilla/5.0 (compatible; bot)' },
                 redirect: 'follow',
             });
@@ -243,6 +243,22 @@ export interface DownloadConfig {
     directory: string;
 }
 
+const FETCH_TIMEOUT_MS = 20000;
+
+async function fetchWithTimeout(
+    input: string,
+    init?: RequestInit,
+    timeoutMs: number = FETCH_TIMEOUT_MS,
+): Promise<Response> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        return await fetch(input, { ...init, signal: controller.signal });
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
 /**
  * Downloads media with standardized configuration (Deno implementation)
  */
@@ -250,9 +266,9 @@ export async function downloadMedia(
     imageUrl: string, 
     config: DownloadConfig = { directory: "./metadata" }
 ): Promise<string> {
-    const response = await fetch(imageUrl);
+    const response = await fetchWithTimeout(imageUrl);
     if (!response.ok) {
-        throw new Error(`Failed to download image: ${response.statusText}`);
+        throw new Error(`Failed to download image (${response.status}): ${response.statusText}`);
     }
     
     const arrayBuffer = await response.arrayBuffer();
@@ -286,7 +302,7 @@ export async function expandUrl(shortUrl?: string): Promise<string | undefined> 
     if (!shortUrl) return undefined;
     
     try {
-        const response = await fetch(shortUrl, { redirect: 'follow' });
+        const response = await fetchWithTimeout(shortUrl, { redirect: 'follow' });
         return response.url; // This will be the final URL after redirects
     } catch (error) {
         console.warn(`Failed to expand URL ${shortUrl}:`, error);
@@ -305,6 +321,19 @@ export class TweetEnricher {
     constructor(logger: ScriptLogger) {
         this.mediaRegistry = new MediaProcessorRegistry();
         this.logger = logger;
+    }
+
+    private async tryDownloadMedia(
+        imageUrl: string,
+        tweetId: string,
+    ): Promise<string | undefined> {
+        try {
+            return await downloadMedia(imageUrl);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            this.logger.warn(`Skipping image download for tweet ${tweetId}: ${message}`);
+            return undefined;
+        }
     }
 
     /**
@@ -357,10 +386,12 @@ export class TweetEnricher {
             if (derived) tweet.metadata.video = derived;
         }
 
-        const filePath = await downloadMedia(tweet.metadata.img!);
+        const filePath = await this.tryDownloadMedia(tweet.metadata.img!, tweet.id);
 
         delete tweet.metadata.embed;
-        tweet.metadata.img = filePath;
+        if (filePath) {
+            tweet.metadata.img = filePath;
+        }
         if (tweet.metadata.type !== TweetMetadataType.CARD) {
             tweet.metadata.type = 'image' as TweetMetadataType;
         }
@@ -374,11 +405,13 @@ export class TweetEnricher {
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
         const [filePath, url] = await Promise.all([
-            downloadMedia(tweet.metadata.img!),
+            this.tryDownloadMedia(tweet.metadata.img!, tweet.id),
             expandUrl(tweet.metadata.url)
         ]);
-        
-        tweet.metadata.img = filePath;
+
+        if (filePath) {
+            tweet.metadata.img = filePath;
+        }
         if (url) {
             tweet.metadata.url = url;
             // Clean tweet content when we have a URL

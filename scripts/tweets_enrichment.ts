@@ -46,13 +46,16 @@ async function enrichTweets(): Promise<void> {
 
     const allTweetsFlat = (tweets as Tweet[][]).flat();
 
-    for (const tweetLibrary of tweets) {
+    for (const [libraryIndex, tweetLibrary] of tweets.entries()) {
+      logger.info(`Processing thread ${libraryIndex + 1}/${tweets.length} (${tweetLibrary.length} tweets)`);
       await processTweetLibrary(
         tweetLibrary as Tweet[],
         enrichments,
         enricher,
         page,
         allTweetsFlat,
+        libraryIndex + 1,
+        tweets.length,
       );
     }
 
@@ -83,8 +86,16 @@ async function processTweetLibrary(
   enricher: TweetEnricher,
   page: Page,
   allTweetsFlat: Tweet[],
+  libraryIndex: number,
+  totalLibraries: number,
 ): Promise<void> {
-  for (const tweet of tweets) {
+  for (const [tweetIndex, tweet] of tweets.entries()) {
+    if (tweetIndex > 0 && tweetIndex % 25 === 0) {
+      logger.info(
+        `Progress thread ${libraryIndex}/${totalLibraries}: ${tweetIndex}/${tweets.length}`,
+      );
+    }
+
     // Convert Tweet to TweetForEnrichment for shouldEnrichTweet check
     const enrichmentTweet: TweetForEnrichment = {
       id: tweet.id,
