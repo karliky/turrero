@@ -3,14 +3,14 @@
  * Reduces complexity in tweets_enrichment.ts
  */
 
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import type { Page } from 'puppeteer';
-import type { 
-    ImageMetadata, 
+import {
     TweetMetadataType,
-    ScriptLogger,
-    EnrichedTweetData
-} from '@/infrastructure/types/index.ts';
+    type ImageMetadata,
+    type ScriptLogger,
+    type EnrichedTweetData
+} from '../../infrastructure/types/index.ts';
 
 // ============================================================================
 // CONFIGURATION
@@ -35,6 +35,7 @@ export interface TweetForEnrichment {
         type?: TweetMetadataType | string;
         url?: string;
         img?: string;
+        video?: string;
         title?: string;
         description?: string;
         media?: string;
@@ -67,7 +68,7 @@ export class YouTubeProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
         const data = await response.text();
         const $ = cheerio.load(data);
         
@@ -85,19 +86,46 @@ export class GoodReadsProcessor implements MediaProcessor {
         return url.includes("goodreads.com") && !url.includes("user_challenges");
     }
 
-    async process(tweet: TweetForEnrichment, url: string, page: Page): Promise<void> {
+    async process(tweet: TweetForEnrichment, url: string, page?: Page): Promise<void> {
+        tweet.metadata.media = "goodreads";
+
+        // If scraper already captured domain and title, just fetch description if missing
+        if (tweet.metadata.domain === 'goodreads.com' && tweet.metadata.title) {
+            if (!tweet.metadata.description) {
+                try {
+                    const response = await fetchWithTimeout(url, {
+                        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; bot)' },
+                        redirect: 'follow',
+                    });
+                    if (response.ok) {
+                        const html = await response.text();
+                        const $ = cheerio.load(html);
+                        const description =
+                            $('meta[property="og:description"]').attr('content') ||
+                            $('meta[name="description"]').attr('content') ||
+                            '';
+                        if (description.trim()) {
+                            tweet.metadata.description = description.trim();
+                        }
+                    }
+                } catch {
+                    // Description is optional
+                }
+            }
+            return;
+        }
+
         if (!page) {
             throw new Error('Page instance required for GoodReads processing');
         }
-        
+
         await Promise.all([
-            page.goto(url), 
-            page.waitForNavigation(), 
-            page.waitForSelector('h1')
+            page.goto(url),
+            page.waitForNavigation(),
+            page.waitForSelector('h1', { timeout: 30000 })
         ]);
-        
+
         const title = await page.evaluate(() => document.querySelector('h1')?.textContent);
-        tweet.metadata.media = "goodreads";
         tweet.metadata.title = title || '';
     }
 }
@@ -111,7 +139,7 @@ export class WikipediaProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
         const data = await response.text();
         const $ = cheerio.load(data);
         
@@ -138,13 +166,60 @@ export class LinkedInProcessor implements MediaProcessor {
     }
 
     async process(tweet: TweetForEnrichment, url: string): Promise<void> {
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
         const data = await response.text();
         const $ = cheerio.load(data);
         
         tweet.metadata.media = "linkedin";
         tweet.metadata.title = $('h1').text().trim();
         tweet.metadata.description = $('meta[name=description]').attr('content') || '';
+    }
+}
+
+/**
+ * Generic card processor — fallback for any URL without a specialized processor.
+ * Fetches og:description or meta description from the target page.
+ */
+export class GenericCardProcessor implements MediaProcessor {
+    canProcess(_url: string): boolean {
+        return true; // Fallback — catches everything not matched above
+    }
+
+    async process(tweet: TweetForEnrichment, url: string): Promise<void> {
+        if (tweet.metadata.title && tweet.metadata.description) return;
+
+        try {
+            const response = await fetchWithTimeout(url, {
+                headers: { 'User-Agent': 'Mozilla/5.0 (compatible; bot)' },
+                redirect: 'follow',
+            });
+            if (!response.ok) return;
+
+            const html = await response.text();
+            const $ = cheerio.load(html);
+
+            const title =
+                $('meta[property="og:title"]').attr('content') ||
+                $('meta[name="twitter:title"]').attr('content') ||
+                $('meta[name="title"]').attr('content') ||
+                $('title').first().text() ||
+                '';
+
+            const description =
+                $('meta[property="og:description"]').attr('content') ||
+                $('meta[name="description"]').attr('content') ||
+                '';
+
+            if (!tweet.metadata.title && title.trim()) {
+                tweet.metadata.title = title.trim();
+            }
+
+            if (!tweet.metadata.description && description.trim()) {
+                tweet.metadata.description = description.trim();
+            }
+        } catch {
+            // Silently skip — description is optional
+        }
     }
 }
 
@@ -157,7 +232,8 @@ export class MediaProcessorRegistry {
         new YouTubeProcessor(),
         new GoodReadsProcessor(),
         new WikipediaProcessor(),
-        new LinkedInProcessor()
+        new LinkedInProcessor(),
+        new GenericCardProcessor() // Must be last — fallback for unmatched domains
     ];
 
     async processKnownDomain(tweet: TweetForEnrichment, url: string, page?: Page): Promise<void> {
@@ -178,6 +254,22 @@ export interface DownloadConfig {
     directory: string;
 }
 
+const FETCH_TIMEOUT_MS = 20000;
+
+async function fetchWithTimeout(
+    input: string,
+    init?: RequestInit,
+    timeoutMs: number = FETCH_TIMEOUT_MS,
+): Promise<Response> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        return await fetch(input, { ...init, signal: controller.signal });
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
 /**
  * Downloads media with standardized configuration (Deno implementation)
  */
@@ -185,9 +277,9 @@ export async function downloadMedia(
     imageUrl: string, 
     config: DownloadConfig = { directory: "./metadata" }
 ): Promise<string> {
-    const response = await fetch(imageUrl);
+    const response = await fetchWithTimeout(imageUrl);
     if (!response.ok) {
-        throw new Error(`Failed to download image: ${response.statusText}`);
+        throw new Error(`Failed to download image (${response.status}): ${response.statusText}`);
     }
     
     const arrayBuffer = await response.arrayBuffer();
@@ -195,7 +287,15 @@ export async function downloadMedia(
     
     // Extract filename from URL or generate one
     const url = new URL(imageUrl);
-    const filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
+    let filename = url.pathname.split('/').pop() || `image_${Date.now()}.jpg`;
+
+    // Twitter image URLs store the format in query params (e.g. ?format=png&name=small)
+    // Append as extension if the filename doesn't already have one
+    if (!filename.includes('.')) {
+        const format = url.searchParams.get('format') || 'jpg';
+        filename = `${filename}.${format}`;
+    }
+
     const filePath = `${config.directory}/${filename}`;
     
     // Ensure directory exists
@@ -213,11 +313,20 @@ export async function expandUrl(shortUrl?: string): Promise<string | undefined> 
     if (!shortUrl) return undefined;
     
     try {
-        const response = await fetch(shortUrl, { redirect: 'follow' });
+        const response = await fetchWithTimeout(shortUrl, { redirect: 'follow' });
         return response.url; // This will be the final URL after redirects
     } catch (error) {
         console.warn(`Failed to expand URL ${shortUrl}:`, error);
         return shortUrl; // Return original if expansion fails
+    }
+}
+
+function extractDomainFromUrl(url?: string): string | undefined {
+    if (!url) return undefined;
+    try {
+        return new URL(url).hostname.replace(/^www\./i, "");
+    } catch {
+        return undefined;
     }
 }
 
@@ -232,6 +341,19 @@ export class TweetEnricher {
     constructor(logger: ScriptLogger) {
         this.mediaRegistry = new MediaProcessorRegistry();
         this.logger = logger;
+    }
+
+    private async tryDownloadMedia(
+        imageUrl: string,
+        tweetId: string,
+    ): Promise<string | undefined> {
+        try {
+            return await downloadMedia(imageUrl);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            this.logger.warn(`Skipping image download for tweet ${tweetId}: ${message}`);
+            return undefined;
+        }
     }
 
     /**
@@ -268,6 +390,9 @@ export class TweetEnricher {
         const url = await expandUrl(tweet.metadata.url);
         if (url) {
             tweet.metadata.url = url;
+            if (!tweet.metadata.domain) {
+                tweet.metadata.domain = extractDomainFromUrl(url);
+            }
             await this.mediaRegistry.processKnownDomain(tweet, url, page);
         }
         
@@ -278,12 +403,22 @@ export class TweetEnricher {
         tweet: TweetForEnrichment,
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
-        const filePath = await downloadMedia(tweet.metadata.img!);
-        
+        // Derive GIF URL from poster before downloading (URL will be replaced with local path)
+        if (!tweet.metadata.video && tweet.metadata.img) {
+            const derived = deriveGifUrl(tweet.metadata.img);
+            if (derived) tweet.metadata.video = derived;
+        }
+
+        const filePath = await this.tryDownloadMedia(tweet.metadata.img!, tweet.id);
+
         delete tweet.metadata.embed;
-        tweet.metadata.img = filePath;
-        tweet.metadata.type = 'image' as TweetMetadataType;
-        
+        if (filePath) {
+            tweet.metadata.img = filePath;
+        }
+        if (tweet.metadata.type !== TweetMetadataType.CARD) {
+            tweet.metadata.type = 'image' as TweetMetadataType;
+        }
+
         if (onSave) onSave(tweet);
     }
 
@@ -293,13 +428,18 @@ export class TweetEnricher {
         onSave?: (tweet: TweetForEnrichment) => void
     ): Promise<void> {
         const [filePath, url] = await Promise.all([
-            downloadMedia(tweet.metadata.img!),
+            this.tryDownloadMedia(tweet.metadata.img!, tweet.id),
             expandUrl(tweet.metadata.url)
         ]);
-        
-        tweet.metadata.img = filePath;
+
+        if (filePath) {
+            tweet.metadata.img = filePath;
+        }
         if (url) {
             tweet.metadata.url = url;
+            if (!tweet.metadata.domain) {
+                tweet.metadata.domain = extractDomainFromUrl(url);
+            }
             // Clean tweet content when we have a URL
             await this.mediaRegistry.processKnownDomain(tweet, url, page);
         }
@@ -309,21 +449,51 @@ export class TweetEnricher {
 }
 
 // ============================================================================
+// GIF DETECTION UTILITIES
+// ============================================================================
+
+/**
+ * Checks if a URL is a blob: URL (useless outside the browser context).
+ * Used as a safety net to prevent blob URLs from leaking into the database.
+ */
+export function isBlobUrl(url: string | undefined): boolean {
+    return url?.startsWith('blob:') ?? false;
+}
+
+/**
+ * Derives a GIF MP4 URL from a Twitter video poster thumbnail URL.
+ * Poster URLs follow: pbs.twimg.com/tweet_video_thumb/{ID}?format=jpg&name=small
+ * MP4 URLs follow:    video.twimg.com/tweet_video/{ID}.mp4
+ */
+export function deriveGifUrl(posterUrl: string): string | undefined {
+    const match = posterUrl.match(/tweet_video_thumb\/([^?]+)/);
+    if (!match?.[1]) return undefined;
+    // If the ID already has an extension (e.g., GrIUe8_WAAAcQ2A.jpg), strip it
+    const cleanId = match[1].replace(/\.[^.]+$/, '');
+    return `https://video.twimg.com/tweet_video/${cleanId}.mp4`;
+}
+
+// ============================================================================
 // VALIDATION UTILITIES
 // ============================================================================
 
 /**
- * Checks if a tweet should be enriched
+ * Checks if a tweet should be enriched.
+ * Re-processes when: no enrichment yet; embed with id "unknown"; or has embed but no embed-type enrichment (e.g. only image so far).
  */
 export function shouldEnrichTweet(tweet: TweetForEnrichment, enrichments: EnrichedTweetData[]): boolean {
     if (!tweet.metadata) return false;
-    
-    const { embed } = tweet.metadata;
-    const alreadyEnriched = enrichments.find((_tweet: EnrichedTweetData) => 
-        tweet.id === _tweet.id || (embed && embed.id === _tweet.id)
+
+    const allForThisTweet = enrichments.filter((_tweet: EnrichedTweetData) => _tweet.id === tweet.id);
+    const hasEmbedEnrichment = allForThisTweet.some((e) => e.type === "embed");
+    const hasUnknownEmbed = allForThisTweet.some(
+        (e) => e.type === "embed" && (e.embeddedTweetId === "unknown" || !e.embeddedTweetId),
     );
-    
-    return !alreadyEnriched;
+
+    if (allForThisTweet.length === 0) return true;
+    if (hasUnknownEmbed) return true;
+    if (tweet.metadata.embed && !hasEmbedEnrichment) return true;
+    return false;
 }
 
 /**

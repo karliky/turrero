@@ -16,7 +16,7 @@ import type {
   SearchIndexEntry,
   PodcastEpisode,
   TurraNode
-} from '@/infrastructure/types/index.ts';
+} from '../../infrastructure/types/index.ts';
 
 // ============================================================================
 // DATA ACCESS LAYER
@@ -156,7 +156,10 @@ export async function getBooksToEnrich(dataAccess: DataAccess): Promise<BookToEn
 
   return booksNotEnriched.filter((book: BookToEnrich) => {
     const currentBook = currentBooks.find((cb: CurrentBook) => cb.id === book.id);
-    return currentBook && (!('categories' in currentBook) || (currentBook.categories && currentBook.categories.length === 0));
+    // Include books that:
+    // 1. Don't exist in books.json yet (new books)
+    // 2. OR exist but have no categories
+    return !currentBook || (!('categories' in currentBook) || (currentBook.categories && currentBook.categories.length === 0));
   });
 }
 
@@ -182,8 +185,16 @@ export async function getBooksFromGoodReads(dataAccess: DataAccess): Promise<Enr
  * Merges current books with enriched books
  */
 export function mergeEnrichedBooks(currentBooks: CurrentBook[], enrichedBooks: BookToEnrich[]): CurrentBook[] {
-  return currentBooks.map((currentBook: CurrentBook) => {
+  // Update existing books
+  const updated = currentBooks.map((currentBook: CurrentBook) => {
     const enrichedBook = enrichedBooks.find((book: BookToEnrich) => book.id === currentBook.id);
     return enrichedBook ? enrichedBook : currentBook;
   });
+
+  // Add new books that don't exist in currentBooks
+  const newBooks = enrichedBooks.filter((enrichedBook: BookToEnrich) =>
+    !currentBooks.some((currentBook: CurrentBook) => currentBook.id === enrichedBook.id)
+  );
+
+  return [...updated, ...newBooks];
 }

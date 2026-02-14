@@ -2,22 +2,23 @@
 
 Welcome to the El Turrero Post project! This website is designed to showcase the
 x.com threads of Javier G. Recuenco who specializes in complexity science. The
-goal of the website is to present the he's tweets in a visually pleasing and
+goal of the website is to present his tweets in a visually pleasing and
 easy-to-navigate format.
 
 ## Features
 
 - **Clean, minimalist design** focused on thread readability
-- **Automatic embedding** of images and cards from X.com
+- **Automatic embedding** of images, cards, animated GIFs and quoted tweets from X.com (embedded tweet IDs resolved from text when scraping misses them)
 - **Advanced search** with Algolia-powered indexing
 - **Category-based navigation** for organized thread discovery
 - **Interactive quizzes** for educational threads
 - **Book recommendations** extracted from thread content
+- **Local AI enrichment** via Ollama for automated summary, categorization, and exam generation
 - **Standardized ID system** for consistent data handling
 - **Real-time validation** pipeline for data integrity
 - **Responsive design** optimized for all devices
 
-## Kown bugs or improvements
+## Known bugs or improvements
 
 - Add blocks: #preguntaalrecu y latest 25 cronologic turras
 - Show cards with card design (for those with url)
@@ -66,6 +67,7 @@ The website is built using:
 - **Deno 1.41+** for primary data processing scripts
 - **Python 3.8+** for graph generation
 - **Puppeteer** for web scraping X.com threads
+- **Ollama** for local AI enrichment (summary, categories, exam generation)
 - **Hybrid Architecture**: Node.js frontend + Deno scripts for optimal performance
 
 You can handle node.js versions by using nvm, for example:
@@ -134,9 +136,10 @@ npx @puppeteer/browsers install chrome
 ```
 
 4. Create a `.env` file with your X/Twitter credentials (see `.env.example` for
-   required fields)
-5. Start the development server: `npm run dev`
-6. Open the website in your browser: `http://localhost:3000`
+   required fields) and optionally set `OLLAMA_MODEL` (default: `llama3.2`)
+5. Install Ollama from https://ollama.com and pull your model: `ollama pull llama3.2`
+6. Start the development server: `npm run dev`
+7. Open the website in your browser: `http://localhost:3000`
 
 ## Adding new threads
 
@@ -149,7 +152,7 @@ If you have the Claude Code hook configured, simply type:
 add thread 1234567890123456789 This is the first tweet text
 ```
 
-Claude will automatically detect this pattern and execute the complete 12-step workflow including AI processing.
+Claude will automatically detect this pattern and execute the complete workflow including AI processing.
 
 **Using the Script (Semi-Automated):**
 
@@ -159,28 +162,19 @@ tweet text.
 
 Alternatively you could use the following steps:
 
-1. `node ./scripts/add-new-tweet.js $id $first_tweet_line` to add the first
-   tweet id (thread id) and the first tweet text to ontop of the turras.csv file
-2. `deno --allow-all scripts/recorder.ts`. This will scrap it and save it into
-   tweets.json
-3. `node ./scripts/tweets_enrichment.js`
-4. `node ./scripts/image-card-generator.js`
-5. Move the `./scripts/metadata` content into `public/metadata`, you can use the
-   following command `mv -v ./metadata/* ./public/metadata/`
-6. `node ./scripts/make-algolia-db.js` then update the index in the Algolia
-   service, clear the index and fetch the `db/tweets-db.json` file
-7. `node ./scripts/generate-books.js` this will update the
-   `db/books-not-enriched.json`
-8. `node ./scripts/book-enrichment.js` this will output the list of books you
-   should use in the last prompt to get the category of books and update the
-   `db/books.json`
-9. Use the `./scripts/generate_prompts.sh` to generate the prompts to be used
-   with ChatGPT (or the LLM of your choice) and obtain the summary, categories
-   and questions to include in `db/tweets_summary.json`, `db/tweets_map.json`
-   and `db/tweets_exam.json` respectively
-10. Change manually the date on the file `components/header.js` to the latest
-    update date
-11. Verify that everything is fine by running `npm run dev` on the root folder
+1. `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"` to add the first
+   tweet id (thread id) and the first tweet text to the top of `infrastructure/db/turras.csv`
+2. `deno task scrape` — scrapes the thread and appends it to `infrastructure/db/tweets.json`
+3. `deno task enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs and normalizes card fields)
+4. Generate metadata images (e.g. `node scripts/image-card-generator.js` if available), then move `scripts/metadata/*` to `public/metadata/`
+5. `deno task algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
+6. `deno task books` — updates `infrastructure/db/books-not-enriched.json`
+7. `deno task book-enrich` — book enrichment
+8. `deno task ai-local $id` — generates summary, categories, and exam via local Ollama
+9. Regenerate graph data: `python3 scripts/create_graph.py`
+10. Verify with `npm run dev`
+
+The “last update” date in the header is derived automatically from the most recent tweet in the data.
 
 The data source that contains the x.com threads and metadata is located under
 `/infrastructure`.
@@ -192,12 +186,29 @@ manually edited.
 
 ## Debug
 
-if a single tweet fails, test to download and parse it in isolation without
-consequences by using the scrapper like this:
+To test scraping a single tweet in isolation (no changes to `tweets.json`):
 
-`node ./scripts/recorder.js --test id`
+```bash
+deno task scrape -- --test $tweet_id
+```
 
-Read the comments in it to figure out better debug.
+### Backfill Card Metadata
+
+Use this when a link card has wrong/missing title or domain, or when legacy `caption`
+data needs to be migrated.
+
+```bash
+deno task fix-tweet <tweet_id_1> <tweet_id_2> ...
+deno task enrich
+```
+
+Card field contract:
+- `domain`: real hostname (for grouping and icon/category logic)
+- `title`: visible card label (from X card text or fetched page title)
+- `description`: page summary/preview text
+- `caption`: deprecated legacy field; should not be used going forward
+
+Check the script and logs for more debugging options.
 
 ## Claude Code Hook Setup
 
@@ -240,8 +251,8 @@ add thread 1234567890123456789 Test thread content
 ### 3. Hook Features
 
 - **Automatic Detection**: Recognizes thread addition patterns
-- **Complete Workflow**: Executes all 12 steps automatically
-- **AI Processing**: Integrates with `ai-prompt-processor` agent
+- **Complete Workflow**: Executes all steps automatically
+- **AI Processing**: Uses local Ollama for summary, categories, and exam generation
 - **Error Handling**: Provides feedback and logs issues
 - **Safe Execution**: Always exits successfully to avoid blocking Claude
 

@@ -65,6 +65,9 @@ deno.lock
 .deno_cache/
 vendor/
 
+# Scraper state
+.scrape_completed.json
+
 # Claude Code hooks
 thread_hook.log
 tsconfig.tsbuildinfo

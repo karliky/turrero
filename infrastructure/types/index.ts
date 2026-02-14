@@ -42,12 +42,18 @@ export interface TweetEmbedMetadata {
   id: TweetId;
   author: string;
   tweet: string;
+  url?: string;
+  img?: string;
+  /** MP4 URL for embedded GIFs */
+  video?: string;
 }
 
 /** Image metadata within a tweet */
 export interface TweetImageMetadata {
   img: string;
   url: string;
+  /** MP4 URL for GIFs (video elements on X.com) */
+  video?: string;
 }
 
 /** Complete tweet metadata structure */
@@ -57,6 +63,9 @@ export interface TweetMetadata {
   imgs?: TweetImageMetadata[];
   img?: string;
   url?: string;
+  title?: string;
+  domain?: string;
+  description?: string;
 }
 
 /** Core tweet structure as scraped from X.com */
@@ -69,6 +78,8 @@ export interface Tweet {
   time: string;
   /** Author handle or profile URL */
   author: string;
+  /** Display name from DOM (stored on the first tweet of a thread) */
+  authorName?: string;
   /** Additional metadata (images, embeds, etc.) */
   metadata?: TweetMetadata;
   /** Engagement statistics */
@@ -115,13 +126,15 @@ export interface EnrichedTweetMetadata {
   /** Tweet ID */
   id: TweetId;
   /** Type of enrichment */
-  type: 'card' | 'embed' | 'media';
+  type: 'card' | 'embed' | 'media' | 'image';
   /** Image URL for cards/media */
   img?: string;
   /** External URL for cards */
   url?: string;
   /** Media file path */
   media?: string;
+  /** Card domain (e.g., goodreads.com, youtube.com) */
+  domain?: string;
   /** Card description */
   description?: string;
   /** Card title */
@@ -132,6 +145,8 @@ export interface EnrichedTweetMetadata {
   author?: string;
   /** Embedded tweet content */
   tweet?: string;
+  /** MP4 URL for GIFs */
+  video?: string;
 }
 
 /** Enriched tweet data structure as stored in tweets_enriched.json */
@@ -146,14 +161,20 @@ export interface EnrichedTweetData {
   url?: string;
   /** Media source (youtube, goodreads, etc) */
   media?: string;
+  /** Card domain (e.g., goodreads.com, youtube.com) */
+  domain?: string;
   /** Card description */
   description?: string;
   /** Card title */
   title?: string;
+  /** Embedded tweet ID (for type "embed") */
+  embeddedTweetId?: TweetId;
   /** Embedded tweet author */
   author?: string;
   /** Embedded tweet content */
   tweet?: string;
+  /** MP4 URL for GIFs */
+  video?: string;
 }
 
 // ============================================================================
@@ -709,7 +730,9 @@ export interface BookToEnrich {
   url?: string;
   image?: string;
   sourceThreadId?: string;
+  turraId?: string;
   categories?: string[];
+  goodreadsCategories?: string[];
 }
 
 /** Current book with potential enrichment data */
@@ -726,6 +749,8 @@ export interface CurrentBook extends BookToEnrich {
 export interface ImageMetadata {
   img: string;
   url: string;
+  /** MP4 URL for GIFs */
+  video?: string;
   filename?: string;
   path?: string;
 }

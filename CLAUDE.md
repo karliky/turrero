@@ -16,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `deno task books` - Generate book references
 - `deno task algolia` - Update Algolia search index
 - `deno task validate` - Validate Deno scripts and types
+- `deno task ai-local $threadId` - Generate summary, categories, and exam via local Ollama
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
 
 ### Development Pipeline Commands
@@ -28,7 +29,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `cd scripts && npm run generate-pdf` - Generate PDF from data (Node.js)
 
 ### Testing Individual Tweets
-- `deno task scrape --test $tweet_id` - Test scraping a single tweet
+- `deno task scrape -- --test $tweet_id` - Test scraping a single tweet
+- `deno task scrape -- --fix-tweet <tweet_id...>` - Re-scrape specific tweet IDs for metadata backfill
 
 ## Tech Stack & Architecture
 
@@ -90,24 +92,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Use the Claude Code hook by typing: `add thread [thread_id] [first_tweet_text]`
 Example: `add thread 1234567890123456789 Este es el primer tweet del hilo`
 
-The hook will automatically execute the complete 12-step workflow including AI processing.
+The hook will automatically execute the complete workflow including AI processing.
 
 **MANUAL METHOD:**
 Use the automated script: `./scripts/add_thread.sh $thread_id $first_tweet_text`
 
-Or follow the manual 11-step process:
-1. Add tweet to CSV: `npx tsx scripts/add-new-tweet.ts $id $first_tweet_line`
-2. Scrape: `deno --allow-all scripts/recorder.ts`
-3. Enrich: `npx tsx scripts/tweets_enrichment.ts`
+Or follow the manual process:
+1. Add tweet to CSV: `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"`
+2. Scrape: `deno task scrape`
+3. Enrich: `deno task enrich`
 4. Generate cards: `node scripts/image-card-generator.js`
 5. Move metadata: `mv scripts/metadata/* public/metadata/`
-6. Update Algolia: `npx tsx scripts/make-algolia-db.ts`
-7. Generate books: `npx tsx scripts/generate-books.ts`
-8. Enrich books: `npx tsx scripts/book-enrichment.ts`
-9. Generate prompts: `./scripts/generate_prompts.sh`
-10. Process AI prompts with `ai-prompt-processor` agent: reads generated prompts, processes them with AI, and updates the corresponding JSON database files (`tweets_summary.json`, `tweets_map.json`, `tweets_exam.json`, `books.json`)
-11. Update header date manually in `app/components/Header.tsx`
-12. Test with `npm run dev`
+6. Update Algolia: `deno task algolia`
+7. Generate books: `deno task books`
+8. Enrich books: `deno task book-enrich`
+9. AI enrichment: `deno task ai-local $id` (generates summary, categories, exam via local Ollama)
+10. Test with `npm run dev` (header "last update" is derived automatically from latest tweet date)
 
 ### Deno Usage
 - Required permissions: `--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run`
@@ -117,7 +117,7 @@ Or follow the manual 11-step process:
 ### Environment Setup
 - Node.js version management with nvm recommended
 - Puppeteer browser installation: `npx @puppeteer/browsers install chrome`
-- Environment variables in `.env` for X/Twitter credentials
+- Environment variables in `.env` for X/Twitter credentials and `OLLAMA_MODEL` (default: `llama3.2`)
 
 ## Code Architecture Patterns
 
@@ -151,6 +151,40 @@ Or follow the manual 11-step process:
 - Metadata images auto-generated in `scripts/metadata/`
 - Must be moved to `public/metadata/` for web access
 - Images optimized for social media sharing (OpenGraph, Twitter Cards)
+
+### Video & GIF Support
+- X.com has two types of video media: **GIFs** (`tweet_video/`) and **uploaded videos** (`ext_tw_video/`)
+- Both are `<video>` elements in X.com's DOM, but with different behaviors and URL patterns
+
+#### GIFs (tweet_video)
+- DOM: `<video>` inside `div[data-testid="tweetPhoto"]` with direct MP4 `src`
+- URL pattern: poster `pbs.twimg.com/tweet_video_thumb/{ID}` → video `video.twimg.com/tweet_video/{ID}.mp4`
+- Rendering: autoplay, loop, muted, no controls
+
+#### Uploaded Videos (ext_tw_video)
+- DOM (mobile): `<video>` inside `div[data-testid="videoPlayer"]` (NOT `tweetPhoto`) with `blob:` src
+- DOM (desktop): may be inside `tweetPhoto > videoPlayer` with `blob:` src
+- URL pattern: poster `pbs.twimg.com/ext_tw_video_thumb/{ID}/pu/img/...` → video `video.twimg.com/ext_tw_video/{ID}/pu/vid/avc1/.../file.mp4`
+- Real MP4 URLs only available via GraphQL API responses (`extended_entities.media[].video_info.variants`)
+- Rendering: autoplay muted, controls visible, no loop
+
+#### Embedded (Quoted) Tweets
+- DOM extraction tries `a[href*="/status/"]` inside embedded tweet container, but X.com mobile DOM often doesn't render this link → `id: "unknown"`
+- **GraphQL interceptor** (`scripts/recorder.ts`): `extractQuotedTweetFromGraphQL()` walks `quoted_status_result` in GraphQL JSON, extracts `rest_id` and `screen_name`, caches in `interceptedQuotedTweets` Map keyed by parent tweet's `rest_id`
+- **Post-processing** (`parseTweet()`): when embed ID is "unknown", looks up parent tweet in interceptor cache to fill `embed.id` and `embed.url`
+- **Enrichment** (`scripts/tweets_enrichment.ts`): `patchExistingEmbedIds()` retroactively resolves unknown IDs from tweet text URLs and reconstructs missing URLs from `@handle` + `embeddedTweetId`
+- Data model: `embeddedTweetId` and `url` on `EnrichedTweetData` (type "embed")
+
+#### Scraper Pipeline
+- **GraphQL interceptor** (`scripts/recorder.ts`): `page.on('response')` intercepts GraphQL responses, walks JSON recursively to find `video_info.variants`, caches best MP4 URL by `id_str` in `interceptedVideoUrls` Map; also extracts card URLs (`interceptedCardUrls`) and quoted tweet data (`interceptedQuotedTweets`)
+- **DOM extraction** (`parseTweet()`): checks `tweetPhoto` containers first, falls back to standalone `videoPlayer` containers for uploaded videos on mobile
+- **Post-processing** (`parseTweet()`): replaces `blob:` URLs with real URLs from interceptor cache; uses `extractMediaIdFromPoster()` to match poster thumbnails to cached video URLs; fills unknown embed IDs from quoted tweet cache
+- **Enrichment** (`scripts/tweets_enrichment.ts`): `patchExistingGifEntries()` derives GIF URLs from poster patterns; `isBlobUrl()` safety net filters leaked blob URLs; `patchExistingEmbedIds()` resolves unknown embed IDs and reconstructs missing URLs
+
+#### Infrastructure
+- **Rendering** (`app/components/GifVideo.tsx`): `"use client"` component; auto-detects GIF vs uploaded video from URL pattern (`ext_tw_video` → controls + no loop)
+- **Video proxy** (`app/api/tweet-video/[...path]/route.ts`): proxies `video.twimg.com` requests to bypass CDN 403 Forbidden (Twitter checks `Referer` header); catch-all `[...path]` handles both `tweet_video/` and `ext_tw_video/` paths
+- Data model: `video?: string` field on `TweetImageMetadata`, `TweetEmbedMetadata`, `EnrichedTweetMetadata`, `EnrichedTweetData`
 
 ### Search Integration
 - Algolia search requires index updates after content changes
@@ -203,3 +237,10 @@ Or follow the manual 11-step process:
 - Use append-only or merge strategies for database updates
 - Validate data integrity after any database modifications
 - Create backups before major data transformations
+
+### Card Metadata Contract
+- `domain` must contain a real hostname (for grouping and icon/category logic)
+- `title` is the primary card label shown in UI (X card text or fetched page title)
+- `description` is secondary preview text from page metadata
+- Legacy `caption` is deprecated and should be migrated to `title` during backfills
+- Preferred backfill flow: `deno task scrape -- --fix-tweet ...` followed by `deno task enrich`

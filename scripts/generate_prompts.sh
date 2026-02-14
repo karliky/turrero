@@ -10,7 +10,6 @@ turra_file="turra_$id.txt"
 summary_file="prompt_summary_$id.txt"
 map_file="prompt_map_$id.txt"
 exam_file="prompt_exam_$id.txt"
-books_file="prompt_books_$id.txt"
 
 echo "Extrayendo texto del hilo..."
 scripts/extract_thread_text.sh $id
@@ -21,6 +20,7 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $summary_file
     cat $turra_file >> $summary_file
     echo "</text>" >> $summary_file
+    echo "In markdown format." >> $summary_file
     echo "Prompt generado para infrastructure/db/tweets_summary.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
@@ -58,6 +58,7 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $map_file
     cat $turra_file >> $map_file
     echo "</text>" >> $map_file
+    echo "In markdown format." >> $map_file
     echo "Prompt generado para infrastructure/db/tweets_map.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
@@ -69,39 +70,13 @@ if [ -f "$turra_file" ]; then
     echo "<text>" >> $exam_file
     cat $turra_file >> $exam_file
     echo "</text>" >> $exam_file
+    echo "In markdown format." >> $exam_file
     echo "Prompt generado para infrastructure/db/tweets_exam.json ..."
 else
     echo "No se encontró ningún fichero con el ID proporcionado: $turra_file."
 fi
 
-echo "Generando prompt para infrastructure/db/tweets_books.json ..."
-echo "Categoriza estos libros en alguna de las siguientes categorías, puedes incluir varias si es necesario. Responde solo las categorías por libro, no expliques nada mas, no busques en internet, usa el contexto para llegar a conclusiones, nunca respondas categorias fuera de la lista que te proveo:" > $books_file
-echo "El formato de salida es en formato JSON donde espero este formato como ejemplo:" >> $books_file
-echo "<ejemplo>" >> $books_file
-echo "\"title\": \"Título del libro aquí\"," >> $books_file
-echo "\"categories\": [" >> $books_file
-echo "    \"Psychology\"," >> $books_file
-echo "    \"Nonfiction\"" >> $books_file
-echo "    ]" >> $books_file
-echo "</ejemplo>" >> $books_file
-echo "<Categorias>" >> $books_file
-echo "Nonfiction" >> $books_file
-echo "Psychology" >> $books_file
-echo "History" >> $books_file
-echo "Business" >> $books_file
-echo "Self Help" >> $books_file
-echo "Personal Development" >> $books_file
-echo "Technology" >> $books_file
-echo "Science" >> $books_file
-echo "Biography" >> $books_file
-echo "Health" >> $books_file
-echo "Economics" >> $books_file
-echo "Education" >> $books_file
-echo "Artificial Intelligence" >> $books_file
-echo "Games" >> $books_file
-echo "Fiction" >> $books_file
-echo "</categorias>" >> $books_file
-echo "<libros>" >> $books_file
-npx tsx scripts/book-enrichment.ts >> $books_file
-echo "</libros>" >> $books_file
-echo "Prompt generado para infrastructure/db/tweets_books.json ..."
+# Book categorization is now handled deterministically by the category mapper
+# in scripts/libs/category-mapper.ts during the book-enrichment step (deno task book-enrich).
+# No AI prompt needed for books anymore.
+echo "Book categorization is handled by category-mapper.ts during enrichment — skipping prompt generation."
