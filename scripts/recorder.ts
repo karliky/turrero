@@ -118,6 +118,7 @@ interface TweetCSV {
 // We intercept these responses and cache the URLs keyed by media_id_str.
 const interceptedVideoUrls = new Map<string, string>();
 const interceptedCardUrls = new Map<string, string>(); // tweetId → expanded YouTube/card URL
+const interceptedQuotedTweets = new Map<string, { quotedId: string; quotedUrl: string }>(); // parentTweetId → quoted tweet info
 
 /**
  * Recursively walks a GraphQL JSON response looking for video media entries
@@ -207,6 +208,60 @@ function extractCardUrlsFromGraphQL(obj: unknown): void {
     // Recurse into all values
     for (const value of Object.values(record)) {
         extractCardUrlsFromGraphQL(value);
+    }
+}
+
+/**
+ * Recursively walks a GraphQL JSON response looking for tweet objects that contain
+ * quoted tweets (via quoted_status_result), and caches the quoted tweet's ID and URL
+ * keyed by the parent tweet's rest_id.
+ */
+function extractQuotedTweetFromGraphQL(obj: unknown): void {
+    if (obj === null || obj === undefined || typeof obj !== 'object') return;
+
+    if (Array.isArray(obj)) {
+        for (const item of obj) {
+            extractQuotedTweetFromGraphQL(item);
+        }
+        return;
+    }
+
+    const record = obj as Record<string, unknown>;
+
+    // Look for tweet-like objects with rest_id and a quoted_status_result
+    const tweetId = record.rest_id as string | undefined;
+    if (tweetId && typeof tweetId === 'string') {
+        // Check for quoted_status_result (the standard GraphQL field for quoted tweets)
+        const quotedResult = record.quoted_status_result as Record<string, unknown> | undefined;
+        if (quotedResult && typeof quotedResult === 'object') {
+            // The quoted tweet data may be nested under "result" or "tweet"
+            const quotedTweet = (quotedResult.result ?? quotedResult) as Record<string, unknown>;
+            const quotedTweetInner = (quotedTweet.__typename === 'TweetWithVisibilityResults'
+                ? quotedTweet.tweet : quotedTweet) as Record<string, unknown>;
+            const quotedId = quotedTweetInner?.rest_id as string | undefined;
+
+            if (quotedId && typeof quotedId === 'string') {
+                // Extract the handle from the quoted tweet's core.user_results
+                let handle = '';
+                const core = quotedTweetInner.core as Record<string, unknown> | undefined;
+                const userResults = core?.user_results as Record<string, unknown> | undefined;
+                const userResult = userResults?.result as Record<string, unknown> | undefined;
+                const legacy = userResult?.legacy as Record<string, unknown> | undefined;
+                handle = (legacy?.screen_name as string) || '';
+
+                const quotedUrl = handle
+                    ? `https://x.com/${handle}/status/${quotedId}`
+                    : `https://x.com/i/status/${quotedId}`;
+
+                interceptedQuotedTweets.set(tweetId, { quotedId, quotedUrl });
+                logger.debug(`Intercepted quoted tweet for ${tweetId}: ${quotedId} (${quotedUrl})`);
+            }
+        }
+    }
+
+    // Recurse into all values
+    for (const value of Object.values(record)) {
+        extractQuotedTweetFromGraphQL(value);
     }
 }
 
@@ -330,6 +385,7 @@ async function setupPage(browser: Browser, cookies: CookieParam[]): Promise<Page
             const json = await response.json();
             extractVideoUrlsFromGraphQL(json);
             extractCardUrlsFromGraphQL(json);
+            extractQuotedTweetFromGraphQL(json);
         } catch {
             // Skip non-JSON responses (e.g. 204, binary)
         }
@@ -408,9 +464,9 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
             const cardDetail = article.querySelector('div[data-testid="card.layoutSmall.detail"], div[data-testid="card.layoutLarge.detail"]');
             if (cardDetail) {
                 const textDivs = cardDetail.querySelectorAll('div[dir="auto"]');
-                if (textDivs.length >= 1) domain = textDivs[0].textContent?.trim() || "";
-                if (textDivs.length >= 2) title = textDivs[1].textContent?.trim() || "";
-                if (textDivs.length >= 3) description = textDivs[2].textContent?.trim() || "";
+                if (textDivs.length >= 1) domain = textDivs[0]!.textContent?.trim() || "";
+                if (textDivs.length >= 2) title = textDivs[1]!.textContent?.trim() || "";
+                if (textDivs.length >= 3) description = textDivs[2]!.textContent?.trim() || "";
             }
 
             // Detect media type from domain
@@ -593,6 +649,26 @@ async function parseTweet({ page }: { page: Page }): Promise<Tweet> {
     if (embedData) {
         metadata.embed = embedData;
         logger.debug(`Detected embedded tweet: ${embedData.id} from ${embedData.author}`);
+    }
+
+    // Post-process: fill unknown embed IDs from GraphQL interceptor
+    if (metadata.embed && (metadata.embed.id === "unknown" || !metadata.embed.id)) {
+        const quoted = interceptedQuotedTweets.get(currentTweetId);
+        if (quoted) {
+            metadata.embed.id = quoted.quotedId;
+            if (!metadata.embed.url) {
+                metadata.embed.url = quoted.quotedUrl;
+            }
+            logger.debug(`Resolved embed ID for tweet ${currentTweetId} from GraphQL: ${quoted.quotedId}`);
+        }
+    }
+    // Also fill missing embed URL when ID is known but URL is missing
+    if (metadata.embed && metadata.embed.id && metadata.embed.id !== "unknown" && !metadata.embed.url) {
+        const quoted = interceptedQuotedTweets.get(currentTweetId);
+        if (quoted && quoted.quotedId === metadata.embed.id) {
+            metadata.embed.url = quoted.quotedUrl;
+            logger.debug(`Resolved embed URL for tweet ${currentTweetId} from GraphQL: ${quoted.quotedUrl}`);
+        }
     }
 
     // --- Post-process: replace blob: URLs with intercepted real video URLs ---
@@ -838,7 +914,7 @@ async function getAllTweets({
             try {
                 ({ tweet, mustStop } = await fetchSingleTweet({
                     page,
-                    expectedAuthor: author,
+                    expectedAuthor: author!,
                 }));
             } catch (error) {
                 const errMsg = error instanceof Error

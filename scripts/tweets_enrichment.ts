@@ -63,6 +63,10 @@ async function enrichTweets(): Promise<void> {
     // Retroactive card URL patching: resolve empty card URLs from tweet text t.co links
     await patchExistingCardUrls(allTweetsFlat);
 
+    // Retroactive embed ID/URL patching: resolve unknown embed IDs from tweet text,
+    // and reconstruct URLs for embeds with known IDs but missing URLs
+    await patchExistingEmbedIds(allTweetsFlat);
+
     // Retroactive description patching: fetch og:description for card entries
     // that have a URL but no description
     await patchExistingDescriptions();
@@ -189,14 +193,14 @@ function resolveEmbedIdFromTweets(
   });
 
   if (candidates.length === 0) return null;
-  if (candidates.length === 1) return candidates[0].id;
+  if (candidates.length === 1) return candidates[0]!.id;
 
   // Multiple matches: prefer same author (Recuenco, etc.)
   const withAuthor = candidates.filter((t) => {
     const a = (t.author ?? "").toLowerCase();
     return a.includes("recuenco") || a.includes(authorHandle);
   });
-  return (withAuthor.length >= 1 ? withAuthor[0] : candidates[0]).id;
+  return (withAuthor.length >= 1 ? withAuthor[0]! : candidates[0]!).id;
 }
 
 async function processEmbeddedTweet(
@@ -390,6 +394,73 @@ async function patchExistingCardUrls(allTweetsFlat: Tweet[]): Promise<void> {
     logger.info(`Card URL patch: resolved ${patchCount} empty card URLs`);
   } else {
     logger.info("Card URL patch: no URLs resolved");
+  }
+}
+
+/**
+ * Extracts the @handle from an embed author string.
+ * Author format is "Display Name\n@handle" or just "@handle".
+ */
+function getHandleFromEmbedAuthor(author: string): string | null {
+  const match = author.match(/@(\w+)/);
+  return match ? match[1]! : null;
+}
+
+/**
+ * Retroactively patches embed entries:
+ * 1. Resolves "unknown" embed IDs by extracting status IDs from tweet text URLs
+ * 2. Reconstructs missing URLs for embeds that have a known ID but no URL
+ */
+async function patchExistingEmbedIds(allTweetsFlat: Tweet[]): Promise<void> {
+  const enrichments = await dataAccess.getTweetsEnriched();
+  const tweetMap = new Map<string, Tweet>();
+  for (const t of allTweetsFlat) {
+    tweetMap.set(t.id, t);
+  }
+
+  const embedEntries = enrichments.filter((e) => e.type === "embed");
+  if (embedEntries.length === 0) return;
+
+  let idPatchCount = 0;
+  let urlPatchCount = 0;
+
+  for (const entry of embedEntries) {
+    // Case 1: Unknown embed ID — try to extract from tweet text URLs
+    if (entry.embeddedTweetId === "unknown" || !entry.embeddedTweetId) {
+      const tweet = tweetMap.get(entry.id);
+      if (tweet?.tweet) {
+        // Look for x.com/*/status/* or twitter.com/*/status/* URLs in tweet text
+        const statusMatch = tweet.tweet.match(
+          /(?:x\.com|twitter\.com)\/(\w+)\/status\/(\d+)/
+        );
+        if (statusMatch) {
+          const handle = statusMatch[1]!;
+          const statusId = statusMatch[2]!;
+          entry.embeddedTweetId = statusId;
+          if (!entry.url) {
+            entry.url = `https://x.com/${handle}/status/${statusId}`;
+            urlPatchCount++;
+          }
+          idPatchCount++;
+        }
+      }
+    }
+
+    // Case 2: Known embed ID but no URL — reconstruct from handle + ID
+    if (entry.embeddedTweetId && entry.embeddedTweetId !== "unknown" && !entry.url) {
+      const handle = getHandleFromEmbedAuthor(entry.author || "");
+      if (handle) {
+        entry.url = `https://x.com/${handle}/status/${entry.embeddedTweetId}`;
+        urlPatchCount++;
+      }
+    }
+  }
+
+  if (idPatchCount > 0 || urlPatchCount > 0) {
+    await dataAccess.saveTweetsEnriched(enrichments);
+    logger.info(
+      `Embed patch: resolved ${idPatchCount} unknown IDs, reconstructed ${urlPatchCount} missing URLs`
+    );
   }
 }
 

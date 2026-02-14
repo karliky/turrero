@@ -168,11 +168,18 @@ Or follow the manual process:
 - Real MP4 URLs only available via GraphQL API responses (`extended_entities.media[].video_info.variants`)
 - Rendering: autoplay muted, controls visible, no loop
 
+#### Embedded (Quoted) Tweets
+- DOM extraction tries `a[href*="/status/"]` inside embedded tweet container, but X.com mobile DOM often doesn't render this link → `id: "unknown"`
+- **GraphQL interceptor** (`scripts/recorder.ts`): `extractQuotedTweetFromGraphQL()` walks `quoted_status_result` in GraphQL JSON, extracts `rest_id` and `screen_name`, caches in `interceptedQuotedTweets` Map keyed by parent tweet's `rest_id`
+- **Post-processing** (`parseTweet()`): when embed ID is "unknown", looks up parent tweet in interceptor cache to fill `embed.id` and `embed.url`
+- **Enrichment** (`scripts/tweets_enrichment.ts`): `patchExistingEmbedIds()` retroactively resolves unknown IDs from tweet text URLs and reconstructs missing URLs from `@handle` + `embeddedTweetId`
+- Data model: `embeddedTweetId` and `url` on `EnrichedTweetData` (type "embed")
+
 #### Scraper Pipeline
-- **GraphQL interceptor** (`scripts/recorder.ts`): `page.on('response')` intercepts GraphQL responses, walks JSON recursively to find `video_info.variants`, caches best MP4 URL by `id_str` in `interceptedVideoUrls` Map
+- **GraphQL interceptor** (`scripts/recorder.ts`): `page.on('response')` intercepts GraphQL responses, walks JSON recursively to find `video_info.variants`, caches best MP4 URL by `id_str` in `interceptedVideoUrls` Map; also extracts card URLs (`interceptedCardUrls`) and quoted tweet data (`interceptedQuotedTweets`)
 - **DOM extraction** (`parseTweet()`): checks `tweetPhoto` containers first, falls back to standalone `videoPlayer` containers for uploaded videos on mobile
-- **Post-processing** (`parseTweet()`): replaces `blob:` URLs with real URLs from interceptor cache; uses `extractMediaIdFromPoster()` to match poster thumbnails to cached video URLs
-- **Enrichment** (`scripts/tweets_enrichment.ts`): `patchExistingGifEntries()` derives GIF URLs from poster patterns; `isBlobUrl()` safety net filters leaked blob URLs
+- **Post-processing** (`parseTweet()`): replaces `blob:` URLs with real URLs from interceptor cache; uses `extractMediaIdFromPoster()` to match poster thumbnails to cached video URLs; fills unknown embed IDs from quoted tweet cache
+- **Enrichment** (`scripts/tweets_enrichment.ts`): `patchExistingGifEntries()` derives GIF URLs from poster patterns; `isBlobUrl()` safety net filters leaked blob URLs; `patchExistingEmbedIds()` resolves unknown embed IDs and reconstructs missing URLs
 
 #### Infrastructure
 - **Rendering** (`app/components/GifVideo.tsx`): `"use client"` component; auto-detects GIF vs uploaded video from URL pattern (`ext_tw_video` → controls + no loop)
