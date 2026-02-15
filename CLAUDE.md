@@ -15,6 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `deno task enrich` - Run tweet enrichment process
 - `deno task books` - Generate book references
 - `deno task algolia` - Update Algolia search index
+- `deno task export-obsidian --id <thread_or_tweet_id> --out "<folder>"` - Export a turra as Obsidian markdown
 - `deno task validate` - Validate Deno scripts and types
 - `deno task ai-local $threadId` - Generate summary, categories, and exam via local Ollama
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
@@ -117,7 +118,13 @@ Or follow the manual process:
 ### Environment Setup
 - Node.js version management with nvm recommended
 - Puppeteer browser installation: `npx @puppeteer/browsers install chrome`
-- Environment variables in `.env` for X/Twitter credentials and `OLLAMA_MODEL` (default: `llama3.2`)
+- Environment variables in `.env` for X/Twitter credentials, `OLLAMA_MODEL` (default: `llama3.2`), and `OLLAMA_BASE_URL` (default: `http://localhost:11434`)
+
+### Obsidian Export Notes
+- `scripts/export-turra-obsidian.ts` creates a zettelkasten-style `atom` note from a thread ID or tweet ID
+- Markdown title uses `tweets_summary.json` when available
+- Optional `--with-key-ideas-ai` enables local AI-generated key ideas (Ollama), otherwise key ideas are omitted
+- File naming convention: `<thread_id>-<summary_slug>.md`
 
 ## Code Architecture Patterns
 

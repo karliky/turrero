@@ -210,6 +210,30 @@ Card field contract:
 
 Check the script and logs for more debugging options.
 
+## Exporting to Obsidian
+
+Export a turra as an Obsidian-friendly `atom` note:
+
+```bash
+deno task export-obsidian --id <thread_or_tweet_id> --out "/path/to/obsidian/folder" --overwrite
+```
+
+Notes:
+- Output filename format: `<thread_id>-<summary_slug>.md`
+- Title is sourced from `infrastructure/db/tweets_summary.json` when available
+- Categories are sourced from `infrastructure/db/tweets_map.json` and converted to snake_case tags
+- Link cards are sourced from `infrastructure/db/tweets_enriched.json`
+
+Optional AI key ideas (local model):
+
+```bash
+deno task export-obsidian --id <thread_or_tweet_id> --with-key-ideas-ai --key-ideas-count 5 --out "/path/to/obsidian/folder" --overwrite
+```
+
+AI configuration is read from `.env`:
+- `OLLAMA_MODEL` (example: `gpt-oss:20b`)
+- `OLLAMA_BASE_URL` (default: `http://localhost:11434`)
+
 ## Claude Code Hook Setup
 
 To enable the automated thread processing feature with Claude Code:
