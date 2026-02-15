@@ -7024,5 +7024,32 @@
             "Economics",
             "History"
         ]
+    },
+    {
+        "id": "1989585137755979986",
+        "type": "card",
+        "media": "goodreads",
+        "domain": "goodreads.com",
+        "title": "When Genius Failed: The Rise and Fall of Long-Term Capi…",
+        "description": "“A riveting account that reaches beyond the market land…",
+        "url": "https://www.goodreads.com/es/book/show/10669.When_Genius_Failed",
+        "img": "./metadata/vO7yew85.jpg",
+        "turraId": "1989585041949622370",
+        "goodreadsCategories": [
+            "Finance",
+            "Business",
+            "Nonfiction",
+            "Economics",
+            "History",
+            "Money",
+            "Biography"
+        ],
+        "categories": [
+            "Economics",
+            "Business",
+            "Nonfiction",
+            "History",
+            "Biography"
+        ]
     }
 ]

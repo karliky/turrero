@@ -1309,7 +1309,8 @@
         "img": "./metadata/-ga3vXlS.jpeg",
         "url": "https://waitbutwhy.com/2017/03/elon-musk-post-series.html",
         "description": "When you pick up the phone, you don't expect Elon Musk to be on the other line.",
-        "domain": "waitbutwhy.com"
+        "domain": "waitbutwhy.com",
+        "title": "The Elon Musk Post Series"
     },
     {
         "type": "embed",
@@ -3393,7 +3394,8 @@
         "img": "./metadata/mrYtO6EL.jpeg",
         "url": "https://lasillarota.com/la-cadera-de-eva/2022/1/12/que-es-el-bropiating-la-violencia-intelectual-contra-mujeres-312238.html",
         "description": "¿Alguna vez un hombre se apropió de tus ideas creativas?",
-        "domain": "lasillarota.com"
+        "domain": "lasillarota.com",
+        "title": "¿Qué es el bropiating?, la violencia intelectual contra mujeres"
     },
     {
         "id": "1538038536640790531",
@@ -4011,7 +4013,8 @@
         "img": "./metadata/wAQ5fJVa.jpeg",
         "url": "https://digitalcontentnext.org/blog/2016/06/16/google-and-facebook-devour-the-ad-and-data-pie-scraps-for-everyone-else/",
         "description": "Last week, IAB/PWC released its quarterly U.S. advertising report, which was quickly followed by a “groundhog day” press release from the IAB, the industry trade group for the advertising sector, announcing the rapid rise of digital ad revenue. The Report notes that first quarter U.S. internet ad revenues hit a record-setting high after the highest growth in four years hitting a “21% rise over the same time period in 2015.” We don’t dispute this number. We just think it’s important to highlight that only two IAB members are benefitting from this increasingly lopsided ecosystem.",
-        "domain": "digitalcontentnext.org"
+        "domain": "digitalcontentnext.org",
+        "title": "Google and Facebook devour the ad and data pie. Scraps for everyone else."
     },
     {
         "id": "1525356681424781313",
@@ -6531,7 +6534,8 @@
         "img": "./metadata/KTjebQVk.jpeg",
         "url": "https://money.allwomenstalk.com/things-used-as-money-in-the-past/",
         "description": "Buckskins • Mirrors • Shells • Tobacco • Salt • More ...",
-        "domain": "money.allwomenstalk.com"
+        "domain": "money.allwomenstalk.com",
+        "title": "8 Things Used as Money in the past ..."
     },
     {
         "id": "1482274989910937614",
@@ -7965,7 +7969,8 @@
         "img": "",
         "url": "https://mg.co.za/article/2010-10-05-spanish-media-group-struggles-to-survive/",
         "description": "For 34 years the giant media group has reaped the benefits of Spain's transition to democracy. But now it faces a radical overhaul.",
-        "domain": "mg.co.za"
+        "domain": "mg.co.za",
+        "title": "Spanish media group struggles to survive"
     },
     {
         "type": "embed",
@@ -17681,7 +17686,8 @@
         "img": "./metadata/8r4Qpntb.jpeg",
         "url": "https://dirigentesdigital.com/liderazgo/javier-g-recuenco--brutal--asalto-publicidad-mas-brutal-defensa",
         "description": "Javier G. Recuenco es el CSO de Singular Solving, compañía que le ha dado una vuelta de tuerca al marketing y a la resolución de",
-        "domain": "dirigentesdigital.com"
+        "domain": "dirigentesdigital.com",
+        "title": "Javier G. Recuenco: “Como es brutal el asalto de publicidad, se ha vuelto más brutal la defensa”"
     },
     {
         "id": "1621752614319792128",
@@ -27153,7 +27159,8 @@
         "type": "card",
         "img": "./metadata/xlgfbs25.jpeg",
         "url": "https://clickhole.com/his-go-to-move-5-other-times-thomas-edison-electrocuted-an-elephant-to-prove-some-kind-of-point/",
-        "domain": "clickhole.com"
+        "domain": "clickhole.com",
+        "title": "His Go-To Move: 5 Other Times Thomas Edison Electrocuted An Elephant To Prove Some Kind Of Point"
     },
     {
         "id": "1877979220724306329",
@@ -34241,7 +34248,7 @@
         "type": "card",
         "media": "",
         "domain": "t.co",
-        "title": "",
+        "title": "The Journalist's Resource - Informing the news with research",
         "description": "The Journalist’s Resource helps to bridge the communications gap between academia and journalism. Our goal: more high-quality research in the news stream.",
         "url": "https://t.co/B3D0YF4uwa",
         "img": "./metadata/HxfkvjHj.png"
@@ -34281,8 +34288,8 @@
         "type": "card",
         "media": "",
         "domain": "t.co",
-        "title": "",
-        "description": "",
+        "title": "Episodio 22.La transparencia cuántica con Eva Belmonte - La ingobernable",
+        "description": "Con la jueza Teresa Puchol hablamos del sistema judicial en España, de su situación actual y pasada para hacer un repaso completo a la situación de la judicatura nacional",
         "url": "https://t.co/rB5DuM9Q6L",
         "img": "./metadata/U5wf3Uu8.jpg"
     },
@@ -35437,7 +35444,7 @@
         "type": "card",
         "media": "",
         "domain": "cesarastudillo.medium.com",
-        "title": "",
+        "title": "Los tres primeros años de Pyro Studios: Un testimonio",
         "description": "Todavía sobrecogido por las desagradables noticias sobre los procesos judiciales actualmente en curso contra los hermanos Pérez Dolset…",
         "url": "https://cesarastudillo.medium.com/los-tres-primeros-a%C3%B1os-de-pyro-studios-un-testimonio-621871b77f8a",
         "img": "./metadata/kRH_eWgg.jpg"
@@ -36335,5 +36342,113 @@
         "description": "“A riveting account that reaches beyond the market land…",
         "url": "https://www.goodreads.com/es/book/show/10669.When_Genius_Failed",
         "img": "./metadata/vO7yew85.jpg"
+    },
+    {
+        "id": "1989585041949622370",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Bueno, pues en el hilo turras de hoy, levantamos el segundo sello del arco del Post Private Equity: El ciclo de las macrotendencias financieras y los días del futuro pasado. Vamos al tema.",
+        "url": "https://x.com/Recuenco/status/1989585041949622370/photo/1",
+        "img": "./metadata/G5xtDJxXIAAYDPu.jpg"
+    },
+    {
+        "id": "1989585114137772358",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "La madre que me quiso, turra limit hits, vamos a ver si resumimos el tema y la tesis con un cierto garbo. Más árido que tomar polvorones con Baileys.",
+        "url": "https://x.com/Recuenco/status/1989585114137772358/photo/1",
+        "img": "./metadata/G5xtHB8XMAAQriq.jpg",
+        "video": "https://video.twimg.com/tweet_video/G5xtHB8XMAAQriq.mp4"
+    },
+    {
+        "id": "1989585135776194697",
+        "type": "card",
+        "media": "",
+        "domain": "cnbc.com",
+        "title": "More private equity funds than McDonald's: PE giants forecast industry consolidation",
+        "description": "The widening gap followed a period of spending spree in the private equity industry in 2021, when money rushed into deals at ultra-low interest rates and high valuations.",
+        "url": "https://www.cnbc.com/2025/11/05/private-equity-consolidation-fund-manager-kkr-carlyle-eqt-cvc-secondaries.html",
+        "img": "./metadata/MFMtKjHS.jpg"
+    },
+    {
+        "id": "1302151057233997824",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Lo primero, vamos a examinar la literatura popular sobre lo que se considera un resolvedor de problemas complejos.\n\nEnter Winston Wolfe.",
+        "url": "https://x.com/Recuenco/status/1302151057233997824/photo/1",
+        "img": "./metadata/EhIres-VoAAh7pC.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhIres-VoAAh7pC.mp4"
+    },
+    {
+        "id": "1302157823120478208",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Conoce perfectamente su disciplina y es 100% fiable. Por supuesto, llega en nueve minutos y 37 segundos, aparca y llama a la puerta. Gestiona las expectativas.\n\nHace una promesa y la cumple.",
+        "url": "https://x.com/Recuenco/status/1302157823120478208/photo/1",
+        "img": "./metadata/EhIxog9WoAE_imH.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhIxog9WoAE_imH.mp4"
+    },
+    {
+        "id": "1302163232317153280",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Anota cuidadosamente las cosas, conoce todos los detalles al dedillo, no tiene miedo de dar malas noticias, empieza duro y termina suave... el sueño de cualquier Big 4.",
+        "url": "https://x.com/Recuenco/status/1302163232317153280/photo/1",
+        "img": "./metadata/EhI2jKMXcAEsPK8.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhI2jKMXcAEsPK8.mp4"
+    },
+    {
+        "id": "1302164507783987201",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Y a pesar de éste dechado de virtudes, sigues considerando que no es un CPS?? Por supuesto. Vamos a contrastarle con alguien que si es un CPS de verdad.\nEnter Gregory House.",
+        "url": "https://x.com/Recuenco/status/1302164507783987201/photo/1",
+        "img": "./metadata/EhI3trDXYAEgYc1.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhI3trDXYAEgYc1.mp4"
+    },
+    {
+        "id": "1302167446317600768",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Dejemos claro, por si alguien tenía alguna duda, que House es un médico penoso. No le gustan las consultas, no le gustan sus pacientes, es un drogadicto, tiene el mismo tacto que La Cosa y la misma empatía que Cruella de Vil.",
+        "url": "https://x.com/Recuenco/status/1302167446317600768/photo/1",
+        "img": "./metadata/EhI6YvWXYAA9hzV.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhI6YvWXYAA9hzV.mp4"
+    },
+    {
+        "id": "1302171985192067072",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "Naturalmente, al ser House un tropo basado en otro tropo (Sherlock Holmes) exhibe características que no tienen por qué ser plausibles. Es como el tropo de Haníbal Lecter: la mayor parte de los serial killers canibales tienen inteligencias por debajo de la media.",
+        "url": "https://x.com/Recuenco/status/1302171985192067072/photo/1",
+        "img": "./metadata/EhI-gnhXsAEJNyN.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhI-gnhXsAEJNyN.mp4"
+    },
+    {
+        "id": "1302172590048530432",
+        "type": "image",
+        "media": "",
+        "domain": "x.com",
+        "title": "Javier G. Recuenco (@Recuenco) on X",
+        "description": "En realidad, los profesionales del CPS son mucha gente con mucho talento heterogéneo orquestado, porque para improvisar hay que saber tocar mucho, que decía mi profesor de guitarra. Pero de eso hablaremos en otro hilo. #finhilo",
+        "url": "https://x.com/Recuenco/status/1302172590048530432/photo/1",
+        "img": "./metadata/EhI_EYuWoAAqqww.jpg",
+        "video": "https://video.twimg.com/tweet_video/EhI_EYuWoAAqqww.mp4"
     }
 ]

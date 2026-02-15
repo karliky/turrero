@@ -7726,5 +7726,37 @@
                 "answer": 1
             }
         ]
+    },
+    {
+        "id": "1302148427791253507",
+        "questions": [
+            {
+                "question": "¿Por qué Winston Wolfe no se considera un CPS según el texto?",
+                "options": [
+                    "Es un fixer + cleaner",
+                    "No sabe qué hacer",
+                    "Es un médico penoso"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "Según el texto, ¿qué caracteriza a un problema complejo?",
+                "options": [
+                    "El mayor número de expertos lo conocen",
+                    "La mayoría de expertos se declaran incompetentes",
+                    "Es cualquier problema grande"
+                ],
+                "answer": 2
+            },
+            {
+                "question": "¿Quién representa el enfoque táctico perfecto según el texto?",
+                "options": [
+                    "Gregory House",
+                    "Winston Wolfe",
+                    "Ambos"
+                ],
+                "answer": 2
+            }
+        ]
     }
 ]
