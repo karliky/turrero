@@ -516,10 +516,6 @@
         "categories": "futurismo-de-frontera,lectura-de-señales"
     },
     {
-        "id": "1302224331154612225",
-        "categories": "sociología"
-    },
-    {
         "id": "1297462657503694848",
         "categories": "estrategia"
     },
@@ -578,10 +574,6 @@
     {
         "id": "989041980549287936",
         "categories": "marketing"
-    },
-    {
-        "id": "967390304260239360",
-        "categories": "otras-turras-del-querer"
     },
     {
         "id": "1619227404794306560",
@@ -986,5 +978,9 @@
     {
         "id": "1302148427791253507",
         "categories": "resolución-de-problemas-complejos,estrategia,orquestación-cognitiva"
+    },
+    {
+        "id": "967375698976477184",
+        "categories": "marketing,estrategia,factor-x,trabajo-en-equipo,desarrollo-de-habilidades"
     }
 ]

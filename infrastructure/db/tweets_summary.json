@@ -128,10 +128,6 @@
         "summary": "La vaca se ordeña siempre de la misma manera hasta que revienta"
     },
     {
-        "id": "967390304260239360",
-        "summary": "Turra invitada: Propuesta de valor Customer centric y narrativa identificable"
-    },
-    {
         "id": "1581161865035407360",
         "summary": "Importancia del cuerpo calloso y el Test Astudillo"
     },
@@ -526,10 +522,6 @@
     {
         "id": "1304701603811913729",
         "summary": "Cómo una compañía emite señales de que su propuesta de valor está caducando"
-    },
-    {
-        "id": "1302224331154612225",
-        "summary": "El CPS es una skill básica para el emprendedor, pero es como el platino, un metal raro"
     },
     {
         "id": "1297462657503694848",
@@ -990,5 +982,9 @@
     {
         "id": "1302148427791253507",
         "summary": "Descubre la ruta para ser un solucionador de problemas complejos"
+    },
+    {
+        "id": "967375698976477184",
+        "summary": "Airbnb: De un Honda Civic a la revolución hotelera"
     }
 ]

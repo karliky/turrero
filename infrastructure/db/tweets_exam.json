@@ -4064,10 +4064,6 @@
         ]
     },
     {
-        "id": "1302224331154612225",
-        "questions": []
-    },
-    {
         "id": "1297462657503694848",
         "questions": [
             {
@@ -4546,10 +4542,6 @@
                 "answer": 2
             }
         ]
-    },
-    {
-        "id": "967390304260239360",
-        "questions": []
     },
     {
         "id": "1619227404794306560",
@@ -7756,6 +7748,38 @@
                     "Ambos"
                 ],
                 "answer": 2
+            }
+        ]
+    },
+    {
+        "id": "967375698976477184",
+        "questions": [
+            {
+                "question": "¿Cuál fue el origen de Airbnb?",
+                "options": [
+                    "Un blog llamado Airbed and Breakfast",
+                    "Una app de citas",
+                    "Una cadena hotelera"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué estrategia usaron para atraer usuarios en 2009?",
+                "options": [
+                    "Publicaron bots en Craiglist",
+                    "Compraron anuncios en Facebook",
+                    "Hicieron eventos en hoteles"
+                ],
+                "answer": 1
+            },
+            {
+                "question": "¿Qué concepto utilizó Julie Sepan para marketing?",
+                "options": [
+                    "High-Expectation Customer",
+                    "Low-Cost Host",
+                    "Guest Experience Only"
+                ],
+                "answer": 1
             }
         ]
     }
