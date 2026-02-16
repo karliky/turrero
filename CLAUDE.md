@@ -16,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `deno task books` - Generate book references
 - `deno task algolia` - Update Algolia search index
 - `deno task export-obsidian --id <thread_or_tweet_id> --out "<folder>"` - Export a turra as Obsidian markdown
+- `deno task export-obsidian-all --out "<folder>" --overwrite` - Batch export all turras to Obsidian markdown
 - `deno task validate` - Validate Deno scripts and types
 - `deno task ai-local $threadId` - Generate summary, categories, and exam via local Ollama
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
@@ -122,8 +123,10 @@ Or follow the manual process:
 
 ### Obsidian Export Notes
 - `scripts/export-turra-obsidian.ts` creates a zettelkasten-style `atom` note from a thread ID or tweet ID
+- `scripts/export-obsidian-all.ts` exports all thread IDs from `infrastructure/db/turras.csv` and writes retry/report files
 - Markdown title uses `tweets_summary.json` when available
 - Optional `--with-key-ideas-ai` enables local AI-generated key ideas (Ollama), otherwise key ideas are omitted
+- Batch mode enables AI key ideas by default and supports `--only-failed` to retry only failed IDs
 - File naming convention: `<thread_id>-<summary_slug>.md`
 
 ## Code Architecture Patterns

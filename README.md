@@ -234,6 +234,32 @@ AI configuration is read from `.env`:
 - `OLLAMA_MODEL` (example: `gpt-oss:20b`)
 - `OLLAMA_BASE_URL` (default: `http://localhost:11434`)
 
+### Batch export all turras
+
+Export all threads to markdown (AI key ideas enabled by default):
+
+```bash
+deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --overwrite
+```
+
+If there are failures, the script writes:
+- `<out>/_export_obsidian_failed_ids.txt` (IDs to retry)
+- `<out>/_export_obsidian_report.json` (full execution report)
+
+Retry only failed exports:
+
+```bash
+deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --only-failed --overwrite
+```
+
+Useful flags:
+- `--without-ai` disables local AI key ideas generation
+- `--key-ideas-count <n>` controls how many key ideas to request
+- `--key-ideas-model <model>` overrides `OLLAMA_MODEL`
+- `--ollama-url <url>` overrides `OLLAMA_BASE_URL`
+- `--limit <n>` test mode for first N turras
+- `--delay-ms <n>` adds delay between exports
+
 ## Claude Code Hook Setup
 
 To enable the automated thread processing feature with Claude Code:
