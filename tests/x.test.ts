@@ -1,5 +1,9 @@
 import { describe, expect, test, vi } from 'vitest';
-import { createXClient, normalizeThread, XApiError } from '../lib/x';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { createFileCache } from '../lib/cache';
+import { createXClient, createXClientFromEnv, fetchBearerToken, normalizeThread, XApiError } from '../lib/x';
 import { rootResponse, searchPage1, searchPage2 } from './fixtures/x-thread';
 
 function jsonResponse(body: unknown, status = 200, headers: Record<string, string> = {}): Response {
@@ -92,9 +96,26 @@ describe('createXClient', () => {
     expect(thread.tweets).toHaveLength(4);
     const urls = fetch.mock.calls.map(([url]) => new URL(String(url)));
     expect(urls.map((u) => u.pathname)).toEqual(['/2/tweets/1000', '/2/tweets/search/all', '/2/tweets/search/all']);
-    expect(urls[1]!.searchParams.get('query')).toBe('conversation_id:1000 from:autora');
-    expect(sleep).toHaveBeenCalledWith(1000);
+    expect(urls[1]!.searchParams.get('query')).toBe('conversation_id:1000 from:autora to:autora');
+    // 1 request per second between search pages
+    expect(sleep).toHaveBeenCalledTimes(1);
+    expect(sleep.mock.calls[0]![0]).toBeGreaterThan(900);
     expect(fetch.mock.calls[0]![1]).toMatchObject({ headers: { Authorization: 'Bearer token' } });
+  });
+
+  test('rebuilds old threads from the author posts of that day when conversation search finds nothing', async () => {
+    const fetch = fixtureFetch((url) => {
+      if (url.pathname !== '/2/tweets/search/all') return undefined;
+      const query = url.searchParams.get('query')!;
+      if (query.startsWith('conversation_id:')) return jsonResponse({ meta: { result_count: 0 } });
+      // from:autora during the day of the root tweet: the thread plus unrelated posts
+      expect(query).toBe('from:autora to:autora');
+      expect(url.searchParams.get('start_time')).toBe('2024-05-01T00:00:00.000Z');
+      return jsonResponse({ ...searchPage1, data: [...searchPage1.data!, ...searchPage2.data!], includes: { ...searchPage1.includes, media: [...searchPage1.includes!.media!, ...searchPage2.includes!.media!] }, meta: {} });
+    });
+    const thread = await createXClient({ bearerToken: 't', fetch, sleep: noSleep }).fetchThread('1000');
+    expect(thread.tweets.map((t) => t.id)).toEqual(['1000', '1001', '1002', '1005']);
+    expect(thread.warnings[0]).toMatch(/rebuilt/);
   });
 
   test('starts from the conversation root when given a later tweet', async () => {
@@ -115,6 +136,15 @@ describe('createXClient', () => {
     const thread = await createXClient({ bearerToken: 't', fetch, sleep }).fetchThread('1000');
     expect(thread.tweets).toHaveLength(4);
     expect(sleep.mock.calls[0]![0]).toBeGreaterThan(20_000);
+  });
+
+  test('retries transient server errors', async () => {
+    let failures = 2;
+    const fetch = fixtureFetch((url) => (url.pathname === '/2/tweets/1000' && failures-- > 0 ? jsonResponse({ title: 'Service Unavailable' }, 503) : undefined));
+    const sleep = vi.fn(noSleep);
+    const thread = await createXClient({ bearerToken: 't', fetch, sleep }).fetchThread('1000');
+    expect(thread.tweets).toHaveLength(4);
+    expect(sleep.mock.calls.slice(0, 2).map(([ms]) => ms)).toEqual([5_000, 15_000]);
   });
 
   test('reports deleted tweets as not found', async () => {
@@ -142,5 +172,59 @@ describe('createXClient', () => {
       url.pathname === '/2/tweets/1000' ? jsonResponse({ ...rootResponse, includes: { users: [] } }) : undefined,
     );
     await expect(createXClient({ bearerToken: 't', fetch, sleep: noSleep }).fetchThread('1000')).rejects.toThrow(/Author/);
+  });
+});
+
+describe('response cache', () => {
+  const tempCache = (options = {}) => createFileCache(mkdtempSync(join(tmpdir(), 'turrero-cache-')), options);
+
+  test('never pays twice for the same request', async () => {
+    const cache = tempCache();
+    const fetch = fixtureFetch();
+    await createXClient({ bearerToken: 't', fetch, sleep: noSleep, cache }).fetchThread('1000');
+    expect(fetch).toHaveBeenCalledTimes(3);
+
+    const secondFetch = fixtureFetch();
+    const thread = await createXClient({ bearerToken: 't', fetch: secondFetch, sleep: noSleep, cache }).fetchThread('1000');
+    expect(secondFetch).not.toHaveBeenCalled();
+    expect(thread.tweets).toHaveLength(4);
+  });
+
+  test('refresh skips cached responses but stores the new ones', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'turrero-cache-'));
+    await createXClient({ bearerToken: 't', fetch: fixtureFetch(), sleep: noSleep, cache: createFileCache(dir) }).fetchThread('1000');
+
+    const fetch = fixtureFetch();
+    await createXClient({ bearerToken: 't', fetch, sleep: noSleep, cache: createFileCache(dir, { refresh: true }) }).fetchThread('1000');
+    expect(fetch).toHaveBeenCalledTimes(3);
+  });
+
+  test('does not cache errors', async () => {
+    const cache = tempCache();
+    const client = createXClient({ bearerToken: 't', fetch: fixtureFetch(), sleep: noSleep, cache });
+    await expect(client.fetchThread('404')).rejects.toThrow();
+    const fetch = fixtureFetch();
+    await expect(createXClient({ bearerToken: 't', fetch, sleep: noSleep, cache }).fetchThread('404')).rejects.toThrow();
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('credentials', () => {
+  test('exchanges API key and secret for a bearer token', async () => {
+    const fetch = vi.fn(async (_input: string | URL | Request, _init?: RequestInit) => jsonResponse({ token_type: 'bearer', access_token: 'app-token' }));
+    expect(await fetchBearerToken('key', 'secret', fetch)).toBe('app-token');
+    const [url, init] = fetch.mock.calls[0]!;
+    expect(String(url)).toBe('https://api.x.com/oauth2/token');
+    expect(init).toMatchObject({ method: 'POST', body: 'grant_type=client_credentials' });
+    expect((init!.headers as Record<string, string>).Authorization).toBe(`Basic ${Buffer.from('key:secret').toString('base64')}`);
+  });
+
+  test('reports rejected credentials', async () => {
+    const fetch = vi.fn(async () => jsonResponse({ errors: [{ code: 99, message: 'Unable to verify your credentials' }] }, 403));
+    await expect(fetchBearerToken('key', 'bad', fetch)).rejects.toBeInstanceOf(XApiError);
+  });
+
+  test('requires some X credentials', async () => {
+    await expect(createXClientFromEnv(undefined, {})).rejects.toThrow(/X_API_KEY/);
   });
 });

@@ -22,3 +22,6 @@ npm-debug.log*
 data/*.db-journal
 data/*.db-wal
 data/*.db-shm
+
+# Cached responses of paid APIs (X, OpenAI)
+/.cache/

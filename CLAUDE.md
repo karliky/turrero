@@ -9,6 +9,7 @@ Guidance for Claude Code in this repository. Read README.md first: it describes 
 - `npm test` — vitest
 - `npm run db:migrate` — apply pending schema migrations to `data/turrero.db`
 - `npm run turra:add -- <url|id>` — import a turra from the X API and enrich it with OpenAI
+- `npm run turra:discover -- [--add]` — find (and import) the author's Saturday turras newer than the latest archived one
 - `npm run turra:sync -- <id> [--delete-missing]`, `npm run turra:enrich -- <id>`, `npm run turra:export-obsidian -- --out <dir>`
 
 When the user writes "add thread <id or url> …" or "añade la turra …", run `npm run turra:add -- <id or url>`.
@@ -22,6 +23,7 @@ When the user writes "add thread <id or url> …" or "añade la turra …", run 
 - Never edit `data/turrero.db` by hand; use the `turra:*` commands or add a migration in `data/migrations/NNNN_name.sql` (applied by `migrate()` in `lib/db.ts`, versioned with `PRAGMA user_version`).
 - Schema changes: new migration file + update `lib/types.ts`, `lib/store.ts`, `lib/queries.ts` and tests together.
 - Tests must not call X or OpenAI; use the fixtures in `tests/fixtures/` and fake clients.
+- X and OpenAI are paid per request: keep responses going through `lib/cache.ts` (`.cache/api/`) so the same request is never paid twice.
 - `node:sqlite` is used directly (no ORM). IDs are TEXT (X snowflakes exceed JS safe integers).
 - Client components must not import `lib/queries.ts`, `lib/db.ts` or anything that imports `node:sqlite`; share types via `lib/types.ts`.
 - Strict TypeScript (`exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`): prefer `| null` over optional fields in domain types.

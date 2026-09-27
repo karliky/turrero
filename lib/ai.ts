@@ -1,5 +1,6 @@
 // AI enrichment of a turra with OpenAI: title, categories, exam and categories of the linked books.
 import OpenAI from 'openai';
+import type { ResponseCache } from './cache';
 import { BOOK_CATEGORIES } from './site';
 import type { Category, ExamQuestion, Thread } from './types';
 
@@ -22,22 +23,31 @@ const MAX_INPUT_CHARS = 60_000;
 export function createOpenAiEnricher({
   client = new OpenAI(),
   model = process.env.OPENAI_MODEL || DEFAULT_OPENAI_MODEL,
-}: { client?: ChatClient; model?: string } = {}): Enricher {
+  cache,
+}: { client?: ChatClient; model?: string; cache?: ResponseCache } = {}): Enricher {
   return async (thread, categories) => {
     const bookUrls = [...new Set(thread.tweets.flatMap((t) => t.links.map((l) => l.url)).filter(isGoodreadsBook))];
-    const response = await client.chat.completions.create({
+    const request = {
       model,
       messages: [
-        { role: 'system', content: systemPrompt(categories) },
-        { role: 'user', content: userPrompt(thread, bookUrls) },
+        { role: 'system' as const, content: systemPrompt(categories) },
+        { role: 'user' as const, content: userPrompt(thread, bookUrls) },
       ],
       response_format: {
-        type: 'json_schema',
+        type: 'json_schema' as const,
         json_schema: { name: 'turra_enrichment', strict: true, schema: responseSchema(categories) },
       },
-    });
-    const content = response.choices[0]?.message.content;
-    if (!content) throw new Error('OpenAI returned an empty response');
+    };
+
+    // The same prompt is never paid twice; the raw answer is cached before validation
+    const cacheKey = `openai:${JSON.stringify(request)}`;
+    let content = cache?.read(cacheKey) as string | undefined;
+    if (content === undefined) {
+      const response = await client.chat.completions.create(request);
+      content = response.choices[0]?.message.content ?? undefined;
+      if (!content) throw new Error('OpenAI returned an empty response');
+      cache?.write(cacheKey, content);
+    }
     return validateEnrichment(JSON.parse(content), categories, bookUrls);
   };
 }

@@ -5,6 +5,7 @@ import { insertThread, replaceTweets, setThreadCategories, updateThreadEnrichmen
 import { tweetIdFromInput } from './text';
 import { XApiError, type XClient } from './x';
 import type { Enricher } from './ai';
+import { createImageStore, type ImageStore } from './images';
 
 const PROVISIONAL_TITLE_LENGTH = 90;
 
@@ -21,7 +22,13 @@ function threadIdOfTweet(db: Db, tweetId: string): string | null {
 }
 
 /** Imports a turra from its URL (or the id of any of its tweets), then enriches it with AI when possible. */
-export async function addTurra(db: Db, input: string, x: XClient, enrich: Enricher | null): Promise<IngestResult> {
+export async function addTurra(
+  db: Db,
+  input: string,
+  x: XClient,
+  enrich: Enricher | null,
+  storeImages: ImageStore = createImageStore(),
+): Promise<IngestResult> {
   const tweetId = tweetIdFromInput(input);
   const existing = threadIdOfTweet(db, tweetId);
   if (existing) throw new Error(`The turra ${existing} is already in the database (use turra:sync to refresh it)`);
@@ -29,6 +36,7 @@ export async function addTurra(db: Db, input: string, x: XClient, enrich: Enrich
   const fetched = await x.fetchThread(tweetId);
   const root = fetched.tweets[0]!;
   if (threadIdOfTweet(db, root.id)) throw new Error(`The turra ${root.id} is already in the database`);
+  const images = await storeImages(fetched.tweets);
 
   transaction(db, () => {
     upsertAuthor(db, fetched.author);
@@ -41,11 +49,11 @@ export async function addTurra(db: Db, input: string, x: XClient, enrich: Enrich
       podcastUrl: null,
       syncedAt: new Date().toISOString(),
     });
-    replaceTweets(db, root.id, fetched.tweets);
+    replaceTweets(db, root.id, images.tweets);
     rebuildSearch(db);
   });
 
-  const result: IngestResult = { threadId: root.id, tweets: fetched.tweets.length, enriched: false, warnings: [...fetched.warnings] };
+  const result: IngestResult = { threadId: root.id, tweets: fetched.tweets.length, enriched: false, warnings: [...fetched.warnings, ...images.warnings] };
   if (!enrich) {
     result.warnings.push('AI enrichment skipped: run `npm run turra:enrich` once OPENAI_API_KEY is configured');
     return result;
@@ -84,7 +92,7 @@ export async function syncTurra(
   db: Db,
   threadId: string,
   x: XClient,
-  { deleteMissing = false } = {},
+  { deleteMissing = false, storeImages = createImageStore() }: { deleteMissing?: boolean; storeImages?: ImageStore } = {},
 ): Promise<IngestResult & { deleted: boolean }> {
   if (!getThread(threadId, db)) throw new Error(`Unknown turra ${threadId}`);
 
@@ -103,6 +111,7 @@ export async function syncTurra(
     throw error;
   }
 
+  const images = await storeImages(fetched.tweets);
   transaction(db, () => {
     upsertAuthor(db, fetched.author);
     db.prepare('UPDATE threads SET published_at = ?, synced_at = ? WHERE id = ?').run(
@@ -110,10 +119,10 @@ export async function syncTurra(
       new Date().toISOString(),
       threadId,
     );
-    replaceTweets(db, threadId, fetched.tweets);
+    replaceTweets(db, threadId, images.tweets);
     rebuildSearch(db);
   });
-  return { threadId, tweets: fetched.tweets.length, enriched: false, warnings: fetched.warnings, deleted: false };
+  return { threadId, tweets: fetched.tweets.length, enriched: false, warnings: [...fetched.warnings, ...images.warnings], deleted: false };
 }
 
 function provisionalTitle(text: string): string {

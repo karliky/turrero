@@ -48,17 +48,20 @@ npm run dev                  # http://localhost:3000
 npm run turra:add -- https://x.com/usuario/status/123456789
 ```
 
-Acepta la URL o el id de cualquier tweet del hilo. Descarga el hilo completo, registra al autor si es nuevo, guarda los tweets y los enriquece con IA. Si la IA falla o no hay `OPENAI_API_KEY`, la turra queda guardada con un título provisional y se completa con `npm run turra:enrich -- <id>`.
+Acepta la URL o el id de cualquier tweet del hilo. Descarga sólo la cadena de tweets en la que el autor se responde a sí mismo (nunca las respuestas de otras personas), descarga las imágenes de las tarjetas de enlaces a `public/metadata/` (las de X caducan), registra al autor si es nuevo, guarda los tweets y los enriquece con IA. Si la IA falla o no hay `OPENAI_API_KEY`, la turra queda guardada con un título provisional y se completa con `npm run turra:enrich -- <id>`.
 
 Otros comandos:
 
 | Comando | Qué hace |
 |---|---|
+| `npm run turra:discover -- [--author Recuenco] [--since AAAA-MM-DD] [--add]` | Busca las turras del autor publicadas en sábado desde la última archivada (posts que mencionan "hilo"/"turra", con 8 tweets o más). Con `--add` las importa. |
 | `npm run turra:sync -- <id> [--delete-missing]` | Vuelve a descargar una turra de X conservando título, categorías y examen. Con `--delete-missing` la borra si ya no existe en X. |
-| `npm run turra:enrich -- <id>` | Regenera título, categorías y examen con OpenAI. |
+| `npm run turra:enrich -- <id> [--refresh]` | Regenera título, categorías y examen con OpenAI. |
 | `npm run turra:export-obsidian -- --out <carpeta> [--id <id>] [--overwrite]` | Exporta turras como notas Markdown para Obsidian. |
 
 Tras cualquier cambio, `data/turrero.db` se commitea como el resto del código.
+
+Las llamadas a X y a OpenAI son de pago, así que sus respuestas completas se guardan en `.cache/api/` (ignorado por git) y se reutilizan: repetir un `turra:add` o un `turra:enrich` no vuelve a pagar la misma petición. `turra:sync` siempre pide datos frescos (y actualiza la caché); `turra:enrich --refresh` fuerza una respuesta nueva de OpenAI.
 
 ## Tests y comprobaciones
 
@@ -74,7 +77,8 @@ Los tests no llaman a X ni a OpenAI: usan respuestas simuladas (`tests/fixtures/
 
 | Variable | Uso |
 |---|---|
-| `X_API_BEARER_TOKEN` | Token app-only de la API de X (`turra:add`, `turra:sync`). |
+| `X_API_KEY`, `X_API_KEY_SECRET` | Credenciales de la app de X (`turra:add`, `turra:sync`); con ellas se obtiene un token app-only. |
+| `X_API_BEARER_TOKEN` | Alternativa a las dos anteriores: el token app-only directamente. |
 | `OPENAI_API_KEY` | Enriquecimiento con IA (`turra:add`, `turra:enrich`). |
 | `OPENAI_MODEL` | Opcional; modelo de OpenAI (por defecto `gpt-5.4-mini`). |
 

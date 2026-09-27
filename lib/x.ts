@@ -1,9 +1,12 @@
 // Client for the official X API v2 (https://docs.x.com). App-only auth with a bearer token.
 // fetchThread() downloads a thread; normalizeThread() turns the raw responses into the domain model.
+import type { ResponseCache } from './cache';
 import type { Author, Link, Media, Quote, Tweet } from './types';
 
 const API_URL = 'https://api.x.com/2';
-const MAX_RATE_LIMIT_RETRIES = 3;
+const MAX_RATE_LIMIT_RETRIES = 3; // also used for transient 5xx errors
+const SEARCH_PATH = '/tweets/search/all';
+const DAY_MS = 24 * 3600_000;
 
 const PARAMS = {
   'tweet.fields':
@@ -126,19 +129,43 @@ export interface XThread {
   warnings: string[];
 }
 
+/** Minimal view of a post returned by searchPosts. */
+export interface PostSummary {
+  id: string;
+  createdAt: string;
+  text: string;
+  conversationId: string;
+}
+
 export interface XClient {
   fetchThread(tweetId: string): Promise<XThread>;
+  /** Full-archive search, e.g. `from:Recuenco -is:reply` between two instants. */
+  searchPosts(query: string, range: { startTime: string; endTime: string }): Promise<PostSummary[]>;
 }
 
 export interface XClientOptions {
   bearerToken: string;
   fetch?: typeof fetch;
   sleep?: (ms: number) => Promise<void>;
+  /** Successful responses are stored here and reused: X bills every post read. */
+  cache?: ResponseCache;
 }
 
-export function createXClient({ bearerToken, fetch: fetchFn = fetch, sleep = defaultSleep }: XClientOptions): XClient {
+export function createXClient({ bearerToken, fetch: fetchFn = fetch, sleep = defaultSleep, cache }: XClientOptions): XClient {
+  let lastSearchAt = 0;
+
   async function get<T>(path: string, params: Record<string, string>): Promise<RawResponse<T>> {
     const url = `${API_URL}${path}?${new URLSearchParams(params)}`;
+    const cached = cache?.read(url);
+    if (cached !== undefined) return cached as RawResponse<T>;
+
+    if (path === SEARCH_PATH) {
+      // Full-archive search allows 1 request per second
+      const wait = lastSearchAt + 1000 - Date.now();
+      if (wait > 0) await sleep(wait);
+      lastSearchAt = Date.now();
+    }
+
     for (let attempt = 0; ; attempt++) {
       const response = await fetchFn(url, { headers: { Authorization: `Bearer ${bearerToken}` } });
       if (response.status === 429 && attempt < MAX_RATE_LIMIT_RETRIES) {
@@ -147,10 +174,15 @@ export function createXClient({ bearerToken, fetch: fetchFn = fetch, sleep = def
         await sleep(Math.min(waitMs, 15 * 60_000));
         continue;
       }
+      if (response.status >= 500 && attempt < MAX_RATE_LIMIT_RETRIES) {
+        await sleep(5_000 * 3 ** attempt); // transient X outage: 5s, 15s, 45s
+        continue;
+      }
       const body = (await response.json().catch(() => ({}))) as RawResponse<T> & RawProblem;
       if (!response.ok) {
         throw problemToError(body.errors?.[0] ?? body, response.status);
       }
+      cache?.write(url, body);
       return body;
     }
   }
@@ -172,24 +204,83 @@ export function createXClient({ bearerToken, fetch: fetchFn = fetch, sleep = def
       const username = root.includes?.users?.find((u) => u.id === root.data!.author_id)?.username;
       if (!username) throw new XApiError(`Author of tweet ${root.data!.id} not found`, 404);
 
-      // Full-archive search returns the whole conversation regardless of its age
-      const pages: RawResponse<RawTweet[]>[] = [];
-      let nextToken: string | undefined;
-      do {
-        if (pages.length > 0) await sleep(1000); // endpoint limit: 1 request per second
-        const page = await get<RawTweet[]>('/tweets/search/all', {
+      // Full-archive search returns the whole conversation regardless of its age. Only the author's
+      // replies to itself are requested (to:): replies to or from other people are never stored, so never paid...
+      let pages = await searchAll({ ...PARAMS, query: `conversation_id:${root.data!.id} from:${username} to:${username}`, max_results: '500' });
+      const warnings: string[] = [];
+      if (!pages.some((page) => page.data?.some((tweet) => tweet.id !== root.data!.id))) {
+        // ...except for posts the conversation_id operator does not find (seen for months-old threads):
+        // rebuild it from the author's posts of that day, a request shared by every thread of the same day
+        const dayStart = Date.parse(`${root.data!.created_at.slice(0, 10)}T00:00:00Z`);
+        const end = Math.min(Math.max(dayStart + DAY_MS, Date.parse(root.data!.created_at) + 6 * 3600_000), Date.now() - 30_000);
+        pages = await searchAll({
           ...PARAMS,
-          query: `conversation_id:${root.data!.id} from:${username}`,
+          query: `from:${username} to:${username}`,
+          start_time: new Date(dayStart).toISOString(),
+          end_time: new Date(end).toISOString(),
           max_results: '500',
-          ...(nextToken ? { pagination_token: nextToken } : {}),
         });
-        pages.push(page);
-        nextToken = page.meta?.next_token;
-      } while (nextToken);
+        warnings.push('Thread rebuilt from the author posts of that day (conversation search returned nothing)');
+      }
+      const thread = normalizeThread(root, pages);
+      return { ...thread, warnings: [...warnings, ...thread.warnings] };
+    },
 
-      return normalizeThread(root, pages);
+    async searchPosts(query, { startTime, endTime }) {
+      const pages = await searchAll({
+        'tweet.fields': 'created_at,conversation_id,note_tweet',
+        query,
+        start_time: startTime,
+        end_time: endTime,
+        max_results: '100',
+      });
+      return pages.flatMap((page) => page.data ?? []).map((tweet) => ({
+        id: tweet.id,
+        createdAt: new Date(tweet.created_at).toISOString(),
+        text: note(tweet)?.text ?? tweet.text,
+        conversationId: tweet.conversation_id,
+      }));
     },
   };
+
+  async function searchAll(params: Record<string, string>): Promise<RawResponse<RawTweet[]>[]> {
+    const pages: RawResponse<RawTweet[]>[] = [];
+    let nextToken: string | undefined;
+    do {
+      const page = await get<RawTweet[]>(SEARCH_PATH, { ...params, ...(nextToken ? { pagination_token: nextToken } : {}) });
+      pages.push(page);
+      nextToken = page.meta?.next_token;
+    } while (nextToken);
+    return pages;
+  }
+}
+
+/** Exchanges the app's API key and secret for an app-only bearer token (OAuth 2.0 client credentials). */
+export async function fetchBearerToken(apiKey: string, apiSecret: string, fetchFn: typeof fetch = fetch): Promise<string> {
+  const credentials = Buffer.from(`${encodeURIComponent(apiKey)}:${encodeURIComponent(apiSecret)}`).toString('base64');
+  const response = await fetchFn('https://api.x.com/oauth2/token', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${credentials}`,
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    body: 'grant_type=client_credentials',
+  });
+  const body = (await response.json().catch(() => ({}))) as { access_token?: string } & RawResponse<unknown> & RawProblem;
+  if (!response.ok || !body.access_token) {
+    throw problemToError(body.errors?.[0] ?? { detail: 'Could not obtain an X API bearer token' }, response.status);
+  }
+  return body.access_token;
+}
+
+/** X client configured from X_API_BEARER_TOKEN, or from X_API_KEY + X_API_KEY_SECRET. */
+export async function createXClientFromEnv(cache?: ResponseCache, env: Record<string, string | undefined> = process.env): Promise<XClient> {
+  const options = cache ? { cache } : {};
+  if (env.X_API_BEARER_TOKEN) return createXClient({ bearerToken: env.X_API_BEARER_TOKEN, ...options });
+  if (env.X_API_KEY && env.X_API_KEY_SECRET) {
+    return createXClient({ bearerToken: await fetchBearerToken(env.X_API_KEY, env.X_API_KEY_SECRET), ...options });
+  }
+  throw new Error('Missing X API credentials: set X_API_BEARER_TOKEN, or X_API_KEY and X_API_KEY_SECRET (see .env.example)');
 }
 
 function defaultSleep(ms: number): Promise<void> {
