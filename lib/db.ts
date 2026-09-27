@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 export type Db = DatabaseSync;
 
-export const DB_PATH = join(process.cwd(), 'data', 'turrero.db');
+const DB_PATH = join(process.cwd(), 'data', 'turrero.db');
 const MIGRATIONS_DIR = join(process.cwd(), 'data', 'migrations');
 
 export function openDb(path: string = DB_PATH, { readOnly = false } = {}): Db {

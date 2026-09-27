@@ -23,7 +23,7 @@ describe('parseCount', () => {
 
 describe('snowflakeTime', () => {
   test('decodes the creation time from the id', () => {
-    // First tweet of a thread whose legacy date was wrong (it had the quoted tweet date)
+    // Root tweet of a real turra
     expect(snowflakeTime('1610940502609723393')).toBe('2023-01-05T10:05:20.306Z');
   });
 });

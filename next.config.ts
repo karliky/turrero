@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 // Category URLs used to contain accents; the canonical slugs are ASCII.
-const LEGACY_CATEGORY_SLUGS: Record<string, string> = {
+const ACCENTED_CATEGORY_URLS: Record<string, string> = {
   "resolución-de-problemas-complejos": "/resolucion-de-problemas-complejos",
   "sociología": "/sociologia",
   "gestión-del-talento": "/gestion-del-talento",
@@ -13,20 +13,16 @@ const LEGACY_CATEGORY_SLUGS: Record<string, string> = {
 };
 
 const nextConfig: NextConfig = {
-  images: {
-    unoptimized: true,
-    remotePatterns: [
-      { protocol: "https", hostname: "pbs.twimg.com", pathname: "/**" },
-    ],
-  },
+  // Images are served as-is (local /metadata files and pbs.twimg.com)
+  images: { unoptimized: true },
   // Route handlers that read the database at request time need the file in their bundle
   outputFileTracingIncludes: {
     "/api/search": ["./data/turrero.db"],
     "/turra/[id]": ["./data/turrero.db"],
   },
   async redirects() {
-    return Object.entries(LEGACY_CATEGORY_SLUGS).flatMap(([legacy, destination]) =>
-      [...new Set([`/${legacy}`, `/${encodeURIComponent(legacy)}`])].map((source) => ({
+    return Object.entries(ACCENTED_CATEGORY_URLS).flatMap(([accented, destination]) =>
+      [...new Set([`/${accented}`, `/${encodeURIComponent(accented)}`])].map((source) => ({
         source,
         destination,
         permanent: true,

@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { BOOK_CATEGORIES } from './site';
 import type { Category, ExamQuestion, Thread } from './types';
 
-export const DEFAULT_OPENAI_MODEL = 'gpt-5.4-mini';
+const DEFAULT_OPENAI_MODEL = 'gpt-5.4-mini';
 
 export interface Enrichment {
   title: string;
@@ -42,7 +42,7 @@ export function createOpenAiEnricher({
   };
 }
 
-export function isGoodreadsBook(url: string): boolean {
+function isGoodreadsBook(url: string): boolean {
   return /goodreads\.com\/(?:[a-z]{2}\/)?book\/show\//.test(url);
 }
 

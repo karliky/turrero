@@ -13,7 +13,6 @@ const eslintConfig = defineConfig([
     "dist/**",
     "coverage/**",
     "public/**",
-    "scripts/pdfs/**",
     "next-env.d.ts",
   ]),
   {

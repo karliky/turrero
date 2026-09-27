@@ -88,13 +88,6 @@ export function listThreadsNotByAuthor(handle: string, db: Db = getDb()): Thread
   return listSummaries('WHERE t.author_handle <> ? ORDER BY t.published_at DESC', [handle], db);
 }
 
-export function listThreadsByIds(ids: readonly string[], db: Db = getDb()): ThreadSummary[] {
-  const byId = new Map(
-    listSummaries(`WHERE t.id IN (${ids.map(() => '?').join(',')})`, [...ids], db).map((thread) => [thread.id, thread]),
-  );
-  return ids.flatMap((id) => byId.get(id) ?? []);
-}
-
 export function listThreadIds(db: Db = getDb()): string[] {
   return (db.prepare('SELECT id FROM threads ORDER BY published_at DESC').all() as Row[]).map((row) => str(row.id));
 }

@@ -27,16 +27,15 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug recorder (single tweet)",
+      "name": "Debug turra:add",
       "cwd": "${workspaceFolder}",
       "runtimeArgs": [
         "--import",
         "tsx"
       ],
-      "program": "${workspaceFolder}/scripts/recorder.ts",
+      "program": "${workspaceFolder}/scripts/turra-add.ts",
       "args": [
-        "--test",
-        "1867841814809461115"
+        "<x.com status URL>"
       ],
       "skipFiles": [
         "<node_internals>/**"
