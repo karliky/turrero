@@ -163,8 +163,13 @@ export class TweetProvider {
    * Gets a complete thread by thread ID or any tweet ID within the thread
    */
   public getThread(id: string): Tweet[] {
-    const normalizedId = normalizeId(id);
-    const threadId = extractThreadId(normalizedId);
+    let threadId: string;
+    try {
+      threadId = extractThreadId(normalizeId(id));
+    } catch {
+      // Malformed IDs (e.g. from arbitrary URLs) simply have no thread
+      return [];
+    }
     
     // Find the thread that contains the ID
     const thread = this.tweets.find(thread => 

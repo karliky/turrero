@@ -14,7 +14,6 @@ const NAVIGATION_LINKS = [
 
 const SUBMENU_LINKS = [
   { href: "/sobre-esta-web", label: "Sobre esta web", external: false },
-  { href: "/version-en-pdf", label: "Versión en PDF", external: false },
   { href: "/grafo-de-turras", label: "Grafo de Turras", external: false },
   { href: "https://cps.tonidorta.com/", label: "CPS Notebook", external: true },
 ] as const;
@@ -58,8 +57,8 @@ export default function Header() {
     );
   };
 
-  // Helper component for mobile hamburger button
-  const MobileMenuButton = () => (
+  // Mobile hamburger button
+  const mobileMenuButton = (
     <button 
       className="lg:hidden text-whiskey-700 hover:text-whiskey-900 transition-colors duration-200"
       onClick={toggleMobileMenu}
@@ -76,7 +75,7 @@ export default function Header() {
   );
 
   return (
-    <header className="bg-gradient-to-r from-whiskey-50 to-white border-b border-whiskey-100">
+    <header className="bg-linear-to-r from-whiskey-50 to-white border-b border-whiskey-100">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <span className="inline-flex items-center gap-x-1 text-2xl font-bold text-whiskey-900 transition-colors duration-200">
@@ -86,13 +85,13 @@ export default function Header() {
           </span>
         </div>
 
-        <MobileMenuButton />
+        {mobileMenuButton}
 
         <ul className={`${
           isMobileMenuOpen 
             ? 'absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-whiskey-100 z-50 lg:bg-transparent lg:shadow-none lg:border-none' 
             : 'hidden'
-        } lg:relative lg:flex lg:top-0 lg:shadow-none lg:space-x-8 w-full lg:w-auto flex-col lg:flex-row items-center`}>
+        } lg:relative lg:flex lg:top-0 lg:shadow-none lg:gap-8 w-full lg:w-auto flex-col lg:flex-row items-center`}>
           
           {/* Main navigation links */}
           {NAVIGATION_LINKS.map(({ href, label }) => (

@@ -3,6 +3,7 @@
  * Reduces complexity in tweets_enrichment.ts
  */
 
+import { mkdir, writeFile } from 'node:fs/promises';
 import * as cheerio from 'cheerio';
 import type { Page } from 'puppeteer';
 import {
@@ -21,8 +22,7 @@ import {
  */
 export function configureEnvironment(): void {
     // We need to set this to avoid SSL errors when downloading images
-    // Note: Deno has better TLS defaults, this is mainly for compatibility
-    Deno.env.set('NODE_TLS_REJECT_UNAUTHORIZED', '0');
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
 
 // ============================================================================
@@ -271,7 +271,7 @@ async function fetchWithTimeout(
 }
 
 /**
- * Downloads media with standardized configuration (Deno implementation)
+ * Downloads media with standardized configuration
  */
 export async function downloadMedia(
     imageUrl: string, 
@@ -299,15 +299,15 @@ export async function downloadMedia(
     const filePath = `${config.directory}/${filename}`;
     
     // Ensure directory exists
-    await Deno.mkdir(config.directory, { recursive: true });
+    await mkdir(config.directory, { recursive: true });
     
     // Write file
-    await Deno.writeFile(filePath, bytes);
+    await writeFile(filePath, bytes);
     return filePath;
 }
 
 /**
- * Resolves and expands shortened URLs (Deno implementation)
+ * Resolves and expands shortened URLs
  */
 export async function expandUrl(shortUrl?: string): Promise<string | undefined> {
     if (!shortUrl) return undefined;

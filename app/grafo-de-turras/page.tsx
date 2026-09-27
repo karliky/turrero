@@ -1,13 +1,12 @@
-import { TweetProvider } from '@/infrastructure/TweetProvider';
 import GraphVisualization from './GraphVisualization';
 import { FaArrowLeft, FaQuestionCircle } from "react-icons/fa";
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { AUTHORS } from '@/infrastructure/constants';
+import { getGraph } from '@/lib/queries';
+import { SITE } from '@/lib/site';
 
-export default async function GraphPage() {
-  const tweetProvider = new TweetProvider();
-  const nodes = tweetProvider.getGraphData();
+export default function GraphPage() {
+  const { nodes, edges } = getGraph();
 
   return (
     <main className="min-h-screen">
@@ -28,7 +27,7 @@ export default async function GraphPage() {
         {/* Header */}
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-3 text-whiskey-900 leading-tight">
-            Grafo de <span style={{ color: '#a5050b' }}>Turras</span>
+            Grafo de <span className="text-brand">Turras</span>
           </h1>
           <div className="flex items-center gap-4 mt-4">
             <p className="text-whiskey-600 flex-1">
@@ -48,7 +47,7 @@ export default async function GraphPage() {
 
         {/* Graph Container */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
-          <GraphVisualization nodes={nodes} />
+          <GraphVisualization nodes={nodes} edges={edges} />
         </div>
       </div>
     </main>
@@ -57,10 +56,10 @@ export default async function GraphPage() {
 
 export const metadata: Metadata = {
   title: 'Grafo de Turras',
-  description: `Visualización interactiva de las conexiones entre las turras de ${AUTHORS.MAIN}`,
+  description: `Visualización interactiva de las conexiones entre las turras de ${SITE.byline}`,
   openGraph: {
     title: 'Grafo de Turras - El Turrero Post',
-    description: `Visualización interactiva de las conexiones entre las turras de ${AUTHORS.MAIN}`,
+    description: `Visualización interactiva de las conexiones entre las turras de ${SITE.byline}`,
     images: ['/promo.png'],
   }
 }; 

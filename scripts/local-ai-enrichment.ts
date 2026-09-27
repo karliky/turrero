@@ -2,9 +2,8 @@
  * Local AI enrichment script using Ollama
  *
  * Generates summary, categories, and exam for a thread using a local Ollama model.
- * Replaces the manual generate_prompts.sh + ai-prompt-processor workflow.
  *
- * Usage: deno task ai-local <threadId>
+ * Usage: npm run ai-local -- <threadId>
  * Config: OLLAMA_MODEL env var (default: llama3.2)
  */
 
@@ -49,11 +48,11 @@ const VALID_CATEGORIES = [
 // ============================================================================
 
 function parseCliArgs(): string {
-  const threadId = Deno.args[0];
+  const threadId = process.argv.slice(2)[0];
   if (!threadId || !/^\d+$/.test(threadId)) {
-    console.error('Usage: deno task ai-local <threadId>');
+    console.error('Usage: npm run ai-local -- <threadId>');
     console.error('  threadId must be a numeric string');
-    Deno.exit(1);
+    process.exit(1);
   }
   return threadId;
 }
@@ -70,12 +69,12 @@ async function checkOllamaRunning(): Promise<void> {
   } catch {
     console.error(`Error: Ollama is not running at ${OLLAMA_BASE_URL}`);
     console.error('Start it with: ollama serve');
-    Deno.exit(1);
+    process.exit(1);
   }
 }
 
 function getModel(): string {
-  return Deno.env.get('OLLAMA_MODEL') || DEFAULT_MODEL;
+  return process.env['OLLAMA_MODEL'] || DEFAULT_MODEL;
 }
 
 async function ollamaGenerate(model: string, prompt: string, system?: string): Promise<string> {

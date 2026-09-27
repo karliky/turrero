@@ -2,12 +2,12 @@
 /// <reference lib="dom.iterable" />
 
 import dotenv from "dotenv";
-import { dirname } from "@std/path";
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import process from "node:process";
 import puppeteer from "puppeteer-core";
-import { createDenoLogger } from "../infrastructure/logger.ts";
+import { createLogger } from "../infrastructure/logger.ts";
 import {
     Browser as InstallBrowser,
     BrowserPlatform,
@@ -16,15 +16,14 @@ import {
     resolveBuildId,
 } from "@puppeteer/browsers";
 import type { Browser, CookieParam, Page } from "puppeteer-core";
-import { TweetMetadataType } from '../infrastructure/types/index.ts';
 
 // Load environment variables
 dotenv.config();
 
 // Initialize logger
-const logger = createDenoLogger("recorder");
+const logger = createLogger({ prefix: "recorder" });
 
-const __dirname = dirname(new URL(import.meta.url).pathname);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // --- Incremental save & completion tracking ---
 
@@ -1398,7 +1397,7 @@ async function main() {
 
             logger.info(`Fixed ${fixedCount}/${pendingTargets.length} tweet(s)`);
             if (fixedCount > 0) {
-                logger.info(`Run 'deno task enrich' to regenerate enrichments for fixed tweets`);
+                logger.info(`Run 'npm run enrich' to regenerate enrichments for fixed tweets`);
             }
         } else {
             const tweetsPath = join(__dirname, "../infrastructure/db/tweets.json");
@@ -1551,6 +1550,6 @@ async function main() {
 }
 
 main().catch((error) => {
-    const logger = createDenoLogger("recorder");
+    const logger = createLogger({ prefix: "recorder" });
     logger.error("Main function error:", error);
 });

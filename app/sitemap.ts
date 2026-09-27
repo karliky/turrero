@@ -1,84 +1,29 @@
-import { MetadataRoute } from 'next'
-import { TweetFacade } from '../infrastructure'
+import type { MetadataRoute } from 'next';
+import { listAuthors, listCategories, listNewest } from '@/lib/queries';
+import { SITE } from '@/lib/site';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://turrero.vercel.app'
-  const tweetFacade = new TweetFacade()
-  
-  // Get all tweets for dynamic routes
-  const allTweets = await tweetFacade.tweetProvider.getAllTweets()
-  const tweets = allTweets.flat()
-  
-  // Get all categories
-  const categories = tweetFacade.getCategories()
+export default function sitemap(): MetadataRoute.Sitemap {
+  const threads = listNewest(Number.MAX_SAFE_INTEGER);
+  const lastModified = threads[0] ? new Date(threads[0].publishedAt) : undefined;
 
-  // Static routes
-  const staticRoutes = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/glosario`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/biblioteca`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/hall-of-fame`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sobre-esta-web`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/version-en-pdf`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/grafo-de-turras`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contacto`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-  ]
+  const staticPages = [
+    { path: '', priority: 1 },
+    { path: '/glosario', priority: 0.8 },
+    { path: '/biblioteca', priority: 0.8 },
+    { path: '/hall-of-fame', priority: 0.8 },
+    { path: '/grafo-de-turras', priority: 0.7 },
+    { path: '/sobre-esta-web', priority: 0.5 },
+    { path: '/contacto', priority: 0.5 },
+  ].map(({ path, priority }) => ({ url: `${SITE.url}${path}`, lastModified, priority }));
 
-  // Category routes
-  const categoryRoutes = categories.map((category) => ({
-    url: `${baseUrl}/${category.toLowerCase().replace(/\s+/g, '-')}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 0.9,
-  }))
-
-  // Individual turra routes
-  const turraRoutes = tweets.map((tweet) => ({
-    url: `${baseUrl}/turra/${tweet.id}`,
-    lastModified: new Date(tweet.time),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
-
-  return [...staticRoutes, ...categoryRoutes, ...turraRoutes]
-} 
+  return [
+    ...staticPages,
+    ...listCategories().map((category) => ({ url: `${SITE.url}/${category.slug}`, lastModified, priority: 0.9 })),
+    ...listAuthors().map((author) => ({ url: `${SITE.url}/autor/${author.handle}`, lastModified, priority: 0.7 })),
+    ...threads.map((thread) => ({
+      url: `${SITE.url}/turra/${thread.id}`,
+      lastModified: new Date(thread.publishedAt),
+      priority: 0.6,
+    })),
+  ];
+}

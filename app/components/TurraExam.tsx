@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { TweetExamProps } from '../../infrastructure/types';
+import type { ExamQuestion } from '@/lib/types';
 import Confetti from 'react-confetti';
 
-export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElement {
+export function TurraExam({ questions }: { questions: ExamQuestion[] }): React.ReactElement {
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -37,32 +37,29 @@ export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElem
   };
 
   const handleCheckResults = (): void => {
-    if (selectedAnswers.length !== exam.questions.length) {
+    if (selectedAnswers.length !== questions.length) {
       alert('Por favor, responde todas las preguntas antes de comprobar los resultados');
       return;
     }
 
-    const correctAnswers = exam.questions.reduce((count, q, idx) => 
-      selectedAnswers[idx] === (q.answer - 1) ? count + 1 : count, 0
+    const correctAnswers = questions.reduce((count, q, idx) => 
+      selectedAnswers[idx] === q.answer ? count + 1 : count, 0
     );
     
-    const allCorrect = correctAnswers === exam.questions.length;
+    const allCorrect = correctAnswers === questions.length;
 
     if (allCorrect) {
       setShowConfetti(true);
     } else {
-      const firstWrongQuestionIndex = exam.questions.findIndex((q, idx) => 
-        selectedAnswers[idx] !== (q.answer - 1)
+      const firstWrongQuestionIndex = questions.findIndex((q, idx) => 
+        selectedAnswers[idx] !== q.answer
       );
       const questionElement = document.querySelector(`[data-question-index="${firstWrongQuestionIndex}"]`);
       questionElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     
     setShowResults(true);
-    
-    // Call onComplete callback if provided
-    onComplete?.(correctAnswers, exam.questions.length);
-  };
+      };
 
   return (
     <div>
@@ -85,10 +82,10 @@ export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElem
         </div>
       )}
       
-      <div className="space-y-4 bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-whiskey-200 shadow-sm">
+      <div className="space-y-4 bg-white/50 backdrop-blur-xs p-4 rounded-lg border border-whiskey-200 shadow-xs">
         <h2 className="text-lg font-bold text-whiskey-900">¿Cuánto has aprendido?</h2>
         <div className="space-y-4">
-          {exam.questions.map((question, qIndex) => (
+          {questions.map((question, qIndex) => (
             <div 
               key={qIndex} 
               className="space-y-3"
@@ -103,7 +100,7 @@ export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElem
                     className={`w-full text-left p-2 rounded-lg transition-all duration-200 border ${
                       selectedAnswers[qIndex] === oIndex
                         ? showResults
-                          ? selectedAnswers[qIndex] === (question.answer - 1)
+                          ? selectedAnswers[qIndex] === question.answer
                             ? 'bg-green-50 border-green-200 text-green-800'
                             : 'bg-red-50 border-red-200 text-red-800'
                           : 'bg-whiskey-50 border-whiskey-200 text-whiskey-800'
@@ -114,7 +111,7 @@ export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElem
                   </button>
                 ))}
               </div>
-              {showResults && selectedAnswers[qIndex] !== (question.answer - 1) && (
+              {showResults && selectedAnswers[qIndex] !== question.answer && (
                 <p className="text-red-600 text-sm mt-2">
                   Opción incorrecta.
                 </p>

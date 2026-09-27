@@ -1,24 +1,17 @@
 import dotenv from "dotenv";
+import OpenAI from "openai";
+import { existsSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { AUTHORS } from "../infrastructure/constants.ts";
+import { TweetMetadataType } from "../infrastructure/types/index.ts";
+import type { Tweet } from "../infrastructure/types/index.ts";
+import { getDbPath, getScriptDirectory } from "./libs/common-utils.ts";
+import { createDataAccess } from "./libs/data-access.ts";
+
 dotenv.config();
 
-import OpenAI from "openai";
-import fs from "node:fs";
-
-import Tweets from "../infrastructure/db/tweets.json" with { type: "json" };
-import TweetsEnrichements from "../infrastructure/db/tweets_enriched.json" with {
-  type: "json",
-};
-
-import { fileURLToPath } from "node:url";
-import path from "node:path";
-import { AUTHORS } from "../infrastructure/constants.js";
-import type { Tweet, EnrichmentResult, TweetMetadataType } from "../infrastructure/types/index.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
-const tweetId: string = process.argv[2];
+const scriptDir = getScriptDirectory(import.meta.url);
+const tweetId = process.argv[2];
 
 const replacements: Record<string, string> = {
   WEF: "Foro Económico Mundial",
@@ -31,53 +24,57 @@ const replacements: Record<string, string> = {
 };
 
 if (!tweetId) {
-  console.error("Please provide a tweet id");
+  console.error("Usage: npm run podcast -- <threadId>");
   process.exit(1);
 }
 
-if (!process.env.OPENAI_API_KEY) {
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) {
   console.error("Please provide OPENAI_API_KEY");
   process.exit(1);
 }
 
-const outputPath: string = __dirname + `/../db/podcast/${tweetId}.txt`;
+const openai = new OpenAI({ apiKey });
+const outputPath = join(getDbPath(scriptDir), "podcast", `${tweetId}.txt`);
 
-if (fs.existsSync(outputPath)) {
+if (existsSync(outputPath)) {
   console.error(
     "Podcast already exists for this tweet id. Please delete it first if you want to regenerate it.",
   );
   process.exit(1);
 }
 
-const tweetIndex = Tweets.findIndex((tweet: Tweet[]) => tweet[0].id === tweetId);
+const dataAccess = createDataAccess(scriptDir);
+const tweets = await dataAccess.getTweets();
+const enrichments = await dataAccess.getTweetsEnriched();
+const threadTweets = tweets.find((thread) => thread[0]?.id === tweetId);
 
-if (!tweetIndex) {
+if (!threadTweets) {
   console.error("Tweet not found");
   process.exit(1);
 }
 
-const thread: string = Tweets[tweetIndex].reduce((acc: string, t: Tweet) => {
+const thread: string = threadTweets.reduce((acc: string, t: Tweet) => {
   let paragraph = t.tweet;
 
-  if (t?.metadata?.embed?.type === TweetMetadataType.EMBED) {
+  const embed = t.metadata?.embed;
+  if (embed?.type === TweetMetadataType.EMBED) {
     paragraph += `
       TWEET PARA DAR CONTEXTO. AUTOR ${
-      t.metadata.embed.author.trim().replace(/\n/g, "")
+      (embed.author ?? "").trim().replace(/\n/g, "")
     }.
-      TWEET: ${t.metadata.embed.tweet}
+      TWEET: ${embed.tweet}
       CONTINUA TEXTO ORIGINAL:`;
   }
 
-  const hasEnrichment: EnrichmentResult | undefined = TweetsEnrichements.find((enrichment: EnrichmentResult) =>
-    enrichment.id === t.id
-  );
+  const enrichment = enrichments.find((item) => item.id === t.id);
   if (
-    hasEnrichment && hasEnrichment.type === TweetMetadataType.CARD &&
-    hasEnrichment.media === "goodreads"
+    enrichment && enrichment.type === TweetMetadataType.CARD &&
+    enrichment.media === "goodreads"
   ) {
-    console.log("MEDIA", hasEnrichment);
+    console.log("MEDIA", enrichment);
     paragraph += `
-      LIBRO PARA DAR CONTEXTO ${hasEnrichment.title}.
+      LIBRO PARA DAR CONTEXTO ${enrichment.title}.
       CONTINUA TEXTO ORIGINAL:`;
   }
 
@@ -109,24 +106,16 @@ const fullText: string = prompt + thread;
 console.log(fullText);
 
 async function main(): Promise<void> {
-  const result: string[] = [];
-  const stream = await openai.beta.chat.completions.stream({
+  const chatCompletion = await openai.chat.completions.create({
     model: "gpt-4",
     messages: [{ role: "user", content: fullText }],
-    stream: true,
   });
-
-  stream.on("content", (delta: string) => {
-    result.push(delta);
-  });
-
-  const chatCompletion = await stream.finalChatCompletion();
   const finalText = applyReplacements(
-    chatCompletion.choices[0].message.content || "",
+    chatCompletion.choices[0]?.message.content || "",
   );
-  fs.writeFileSync(outputPath, finalText);
+  writeFileSync(outputPath, finalText);
   console.log(`Estaré ahí mismo`);
   process.exit(0);
 }
 
-main();
+await main();

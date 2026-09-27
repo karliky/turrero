@@ -16,10 +16,10 @@ const scriptDir = getScriptDirectory(import.meta.url);
 const logger = createScriptLogger('add-tweet');
 
 // Validate command line arguments
-validateArgs(Deno.args, 2, "deno run --allow-all add-new-tweet.ts <tweetId> <tweetContent>");
+validateArgs(process.argv.slice(2), 2, "npm run add-tweet -- <tweetId> <tweetContent>");
 
-const tweetId = extractTweetId(Deno.args);
-const tweetContent = extractTweetContent(Deno.args);
+const tweetId = extractTweetId(process.argv.slice(2));
+const tweetContent = extractTweetContent(process.argv.slice(2));
 const filePath = getDbFilePath(scriptDir, 'turras.csv');
 
 async function addTweet(tweetId: string, tweetContent: string): Promise<void> {

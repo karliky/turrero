@@ -1,4 +1,5 @@
-#!/usr/bin/env -S deno run --allow-read
+import { readFile, stat } from 'node:fs/promises';
+import { isNotFound } from './libs/common-utils.ts';
 
 /**
  * Schema validation tool for Turrero database files
@@ -12,6 +13,26 @@ interface ValidationResult {
   valid: boolean;
   errors: string[];
   schema: string;
+}
+
+interface JsonSchema {
+  type?: string;
+  properties?: Record<string, JsonSchema>;
+  required?: string[];
+  items?: JsonSchema;
+  pattern?: string;
+  enum?: unknown[];
+  const?: unknown;
+  minItems?: number;
+  maxItems?: number;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
 }
 
 interface SchemaValidation {
@@ -70,25 +91,25 @@ const SCHEMA_MAPPINGS: SchemaValidation = {
   }
 };
 
-async function loadSchema(schemaPath: string): Promise<Record<string, unknown>> {
+async function loadSchema(schemaPath: string): Promise<JsonSchema> {
   try {
-    const schemaContent = await Deno.readTextFile(schemaPath);
+    const schemaContent = await readFile(schemaPath, 'utf8');
     return JSON.parse(schemaContent);
   } catch (error) {
-    throw new Error(`Failed to load schema ${schemaPath}: ${error.message}`);
+    throw new Error(`Failed to load schema ${schemaPath}: ${errorMessage(error)}`);
   }
 }
 
-async function loadData(dataPath: string): Promise<Record<string, unknown> | Array<Record<string, unknown>>> {
+async function loadData(dataPath: string): Promise<unknown> {
   try {
-    const dataContent = await Deno.readTextFile(dataPath);
+    const dataContent = await readFile(dataPath, 'utf8');
     return JSON.parse(dataContent);
   } catch (error) {
-    throw new Error(`Failed to load data ${dataPath}: ${error.message}`);
+    throw new Error(`Failed to load data ${dataPath}: ${errorMessage(error)}`);
   }
 }
 
-function validateBasicStructure(data: unknown, schema: Record<string, unknown>): string[] {
+function validateBasicStructure(data: unknown, schema: JsonSchema): string[] {
   const errors: string[] = [];
   
   // Check if data is array when schema expects array
@@ -106,7 +127,7 @@ function validateBasicStructure(data: unknown, schema: Record<string, unknown>):
   return errors;
 }
 
-function validateArrayItems(data: unknown[], itemSchema: Record<string, unknown>, maxSample: number = 100): string[] {
+function validateArrayItems(data: unknown[], itemSchema: JsonSchema, maxSample: number = 100): string[] {
   const errors: string[] = [];
   const sampleSize = Math.min(data.length, maxSample);
   
@@ -123,10 +144,14 @@ function validateArrayItems(data: unknown[], itemSchema: Record<string, unknown>
   return errors;
 }
 
-function validateObject(obj: unknown, schema: Record<string, unknown>, path: string = 'root'): string[] {
+function validateObject(obj: unknown, schema: JsonSchema, path: string = 'root'): string[] {
   const errors: string[] = [];
   
   if (!schema.properties) return errors;
+  if (!isRecord(obj)) {
+    errors.push(`${path}: Expected object`);
+    return errors;
+  }
   
   // Check required fields
   if (schema.required) {
@@ -138,7 +163,7 @@ function validateObject(obj: unknown, schema: Record<string, unknown>, path: str
   }
   
   // Check field types
-  for (const [fieldName, fieldSchema] of Object.entries((schema.properties as Record<string, unknown>) || {})) {
+  for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
     if (fieldName in obj) {
       const value = obj[fieldName];
       const fieldErrors = validateField(value, fieldSchema, `${path}.${fieldName}`);
@@ -149,7 +174,7 @@ function validateObject(obj: unknown, schema: Record<string, unknown>, path: str
   return errors;
 }
 
-function validateField(value: unknown, fieldSchema: Record<string, unknown>, path: string): string[] {
+function validateField(value: unknown, fieldSchema: JsonSchema, path: string): string[] {
   const errors: string[] = [];
   
   // Type validation
@@ -200,7 +225,7 @@ function validateField(value: unknown, fieldSchema: Record<string, unknown>, pat
   return errors;
 }
 
-async function validateFile(filename: string, config: { schemaPath: string; dataPath: string }): Promise<ValidationResult> {
+async function validateFile(filename: string, config: { schemaPath: string; dataPath: string; description: string }): Promise<ValidationResult> {
   console.log(`🔍 Validating ${filename}...`);
   
   try {
@@ -216,7 +241,7 @@ async function validateFile(filename: string, config: { schemaPath: string; data
     // Detailed validation based on schema type
     if (errors.length === 0) {
       if (schema.type === 'array') {
-        if (schema.items) {
+        if (schema.items && Array.isArray(data)) {
           const itemErrors = validateArrayItems(data, schema.items);
           errors.push(...itemErrors);
         }
@@ -237,11 +262,11 @@ async function validateFile(filename: string, config: { schemaPath: string; data
     };
     
   } catch (error) {
-    console.log(`  ❌ Validation failed: ${error.message}`);
+    console.log(`  ❌ Validation failed: ${errorMessage(error)}`);
     return {
       file: filename,
       valid: false,
-      errors: [error.message],
+      errors: [errorMessage(error)],
       schema: config.schemaPath
     };
   }
@@ -255,23 +280,23 @@ async function validateAllFiles(): Promise<ValidationResult[]> {
   for (const [filename, config] of Object.entries(SCHEMA_MAPPINGS)) {
     try {
       // Check if files exist
-      await Deno.stat(config.dataPath);
-      await Deno.stat(config.schemaPath);
+      await stat(config.dataPath);
+      await stat(config.schemaPath);
       
       const result = await validateFile(filename, config);
       results.push(result);
       
     } catch (error) {
-      if (error instanceof Deno.errors.NotFound) {
+      if (isNotFound(error)) {
         console.log(`⚠️  Skipping ${filename} - file not found`);
         continue;
       }
       
-      console.log(`❌ Error validating ${filename}: ${error.message}`);
+      console.log(`❌ Error validating ${filename}: ${errorMessage(error)}`);
       results.push({
         file: filename,
         valid: false,
-        errors: [`File access error: ${error.message}`],
+        errors: [`File access error: ${errorMessage(error)}`],
         schema: config.schemaPath
       });
     }
@@ -311,16 +336,14 @@ function printSummary(results: ValidationResult[]): void {
 }
 
 // Main execution
-if (import.meta.main) {
-  try {
-    const results = await validateAllFiles();
-    printSummary(results);
-    
-    const hasErrors = results.some(r => !r.valid);
-    Deno.exit(hasErrors ? 1 : 0);
-    
-  } catch (error) {
-    console.error('💥 Fatal error during validation:', error.message);
-    Deno.exit(1);
-  }
+try {
+  const results = await validateAllFiles();
+  printSummary(results);
+  
+  const hasErrors = results.some(r => !r.valid);
+  process.exit(hasErrors ? 1 : 0);
+  
+} catch (error) {
+  console.error('💥 Fatal error during validation:', error instanceof Error ? error.message : error);
+  process.exit(1);
 }

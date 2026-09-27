@@ -1,8 +1,11 @@
-import { join } from "@std/path";
+import { spawn } from 'node:child_process';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import {
   createScriptLogger,
   getProjectRoot,
   getScriptDirectory,
+  isNotFound,
   runWithErrorHandling,
 } from "./libs/common-utils.ts";
 
@@ -60,13 +63,13 @@ const turrasCsvPath = join(projectRoot, "infrastructure/db/turras.csv");
 
 function usage(): never {
   console.log(`Usage:
-  deno task export-obsidian-all --out <dir> [--overwrite] [--without-ai] [--key-ideas-count <n>] [--key-ideas-model <model>] [--ollama-url <url>] [--only-failed] [--failures-file <path>] [--report-file <path>] [--limit <n>] [--delay-ms <n>]
+  npm run export-obsidian-all -- --out <dir> [--overwrite] [--without-ai] [--key-ideas-count <n>] [--key-ideas-model <model>] [--ollama-url <url>] [--only-failed] [--failures-file <path>] [--report-file <path>] [--limit <n>] [--delay-ms <n>]
 
 Examples:
-  deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --overwrite
-  deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --only-failed --overwrite
+  npm run export-obsidian-all -- --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --overwrite
+  npm run export-obsidian-all -- --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --only-failed --overwrite
 `);
-  Deno.exit(1);
+  process.exit(1);
 }
 
 function parsePositiveInt(value: string, flagName: string): number {
@@ -245,7 +248,7 @@ function normalizeIdList(ids: string[]): string[] {
 }
 
 async function loadAllTurraIds(): Promise<string[]> {
-  const content = await Deno.readTextFile(turrasCsvPath);
+  const content = await readFile(turrasCsvPath, 'utf8');
   const lines = content.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   const ids = lines
     .slice(1) // skip header
@@ -255,14 +258,14 @@ async function loadAllTurraIds(): Promise<string[]> {
 
 async function loadFailedIds(failuresFile: string): Promise<string[]> {
   try {
-    const content = await Deno.readTextFile(failuresFile);
+    const content = await readFile(failuresFile, 'utf8');
     const ids = content
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter(Boolean);
     return normalizeIdList(ids);
   } catch (error) {
-    if (error instanceof Deno.errors.NotFound) {
+    if (isNotFound(error)) {
       return [];
     }
     throw error;
@@ -274,8 +277,8 @@ async function runSingleExport(
   options: BatchOptions,
 ): Promise<{ ok: boolean; durationMs: number; error?: string }> {
   const args = [
-    "run",
-    "--allow-all",
+    "--import",
+    "tsx",
     exportScriptPath,
     "--id",
     id,
@@ -299,22 +302,22 @@ async function runSingleExport(
   }
 
   const start = Date.now();
-  const command = new Deno.Command(Deno.execPath(), {
-    args,
-    stdout: "piped",
-    stderr: "piped",
+  const result = await new Promise<{ code: number; stdout: string; stderr: string }>((resolve, reject) => {
+    const child = spawn(process.execPath, args, { stdio: ["ignore", "pipe", "pipe"] });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (chunk: Buffer) => { stdout += chunk.toString(); });
+    child.stderr.on("data", (chunk: Buffer) => { stderr += chunk.toString(); });
+    child.on("error", reject);
+    child.on("close", (code) => resolve({ code: code ?? 1, stdout, stderr }));
   });
-
-  const result = await command.output();
   const durationMs = Date.now() - start;
 
   if (result.code === 0) {
     return { ok: true, durationMs };
   }
 
-  const stderr = new TextDecoder().decode(result.stderr || new Uint8Array());
-  const stdout = new TextDecoder().decode(result.stdout || new Uint8Array());
-  const fullError = `${stderr}\n${stdout}`.trim();
+  const fullError = `${result.stderr}\n${result.stdout}`.trim();
   const compactError = fullError.length > 3000 ? fullError.slice(-3000) : fullError;
 
   return {
@@ -331,7 +334,7 @@ async function sleep(ms: number): Promise<void> {
 
 function buildRetryCommand(options: BatchOptions): string {
   const parts = [
-    "deno task export-obsidian-all",
+    "npm run export-obsidian-all --",
     `--out \"${options.outDir}\"`,
     "--only-failed",
   ];
@@ -349,8 +352,8 @@ function buildRetryCommand(options: BatchOptions): string {
 }
 
 async function main(): Promise<void> {
-  const options = parseArgs(Deno.args);
-  await Deno.mkdir(options.outDir, { recursive: true });
+  const options = parseArgs(process.argv.slice(2));
+  await mkdir(options.outDir, { recursive: true });
 
   let ids = options.onlyFailed
     ? await loadFailedIds(options.failuresFile)
@@ -404,9 +407,10 @@ async function main(): Promise<void> {
   }
 
   const failedIds = failed.map((item) => item.id);
-  await Deno.writeTextFile(
+  await writeFile(
     options.failuresFile,
     failedIds.join("\n") + (failedIds.length ? "\n" : ""),
+    "utf8",
   );
 
   const report: ExportReport = {
@@ -435,7 +439,7 @@ async function main(): Promise<void> {
     failed,
   };
 
-  await Deno.writeTextFile(options.reportFile, JSON.stringify(report, null, 2));
+  await writeFile(options.reportFile, JSON.stringify(report, null, 2), 'utf8');
 
   logger.info(
     `Batch export finished. Success: ${successfulIds.length}, Failed: ${failed.length}. Report: ${options.reportFile}`,
@@ -445,7 +449,7 @@ async function main(): Promise<void> {
     logger.warn(`Failed IDs written to ${options.failuresFile}`);
     logger.warn(`Retry only failed with:`);
     logger.warn(buildRetryCommand(options));
-    Deno.exit(2);
+    process.exit(2);
   }
 }
 

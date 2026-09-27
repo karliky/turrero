@@ -7,7 +7,7 @@
   "items": {
     "type": "object",
     "properties": {
-      "id": {
+      "objectID": {
         "type": "string",
         "pattern": "^[0-9]+#[0-9]+$",
         "description": "Composite ID: threadId#tweetId"
@@ -22,6 +22,10 @@
         "description": "Tweet timestamp in ISO format"
       }
     },
-    "required": ["id", "tweet", "time"]
+    "required": [
+      "objectID",
+      "tweet",
+      "time"
+    ]
   }
 }

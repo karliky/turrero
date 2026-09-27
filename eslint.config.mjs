@@ -1,27 +1,21 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    ignores: [
-      ".next/**/*",
-      ".next/types/**/*",
-      "node_modules/**/*",
-      "out/**/*",
-      "build/**/*",
-      "dist/**/*",
-      "coverage/**/*"
-    ]
-  },
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  globalIgnores([
+    ".next/**",
+    "node_modules/**",
+    "out/**",
+    "build/**",
+    "dist/**",
+    "coverage/**",
+    "public/**",
+    "scripts/pdfs/**",
+    "next-env.d.ts",
+  ]),
   {
     rules: {
       // Strict TypeScript rules for source code
@@ -48,6 +42,6 @@ const eslintConfig = [
       "prefer-const": "error"
     }
   }
-];
+]);
 
 export default eslintConfig;

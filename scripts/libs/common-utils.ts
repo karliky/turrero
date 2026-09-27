@@ -2,19 +2,21 @@
  * Common utilities shared across scripts to eliminate code duplication
  */
 
-import { dirname, join } from '@std/path';
-import { createDenoLogger } from '../../infrastructure/logger.ts';
+import { readFile, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createLogger } from '../../infrastructure/logger.ts';
 
 // ============================================================================
 // PATH UTILITIES
 // ============================================================================
 
 /**
- * Gets the directory path for ES modules (Deno compatible)
+ * Gets the directory path for ES modules
  * Replaces duplicate __filename and __dirname patterns
  */
 export function getScriptDirectory(importMetaUrl: string): string {
-  return dirname(new URL(importMetaUrl).pathname);
+  return dirname(fileURLToPath(importMetaUrl));
 }
 
 /**
@@ -47,7 +49,7 @@ export function getDbFilePath(scriptDir: string, filename: string): string {
  * Eliminates duplicate logger initialization patterns
  */
 export function createScriptLogger(scriptName: string) {
-  return createDenoLogger(scriptName);
+  return createLogger({ prefix: scriptName });
 }
 
 // ============================================================================
@@ -59,7 +61,7 @@ export function createScriptLogger(scriptName: string) {
  */
 export async function readJsonFile<T = unknown>(filePath: string): Promise<T> {
   try {
-    const content = await Deno.readTextFile(filePath);
+    const content = await readFile(filePath, 'utf8');
     return JSON.parse(content);
   } catch (error) {
     throw new Error(`Failed to read JSON file ${filePath}: ${error}`);
@@ -72,7 +74,7 @@ export async function readJsonFile<T = unknown>(filePath: string): Promise<T> {
 export async function writeJsonFile<T = unknown>(filePath: string, data: T): Promise<void> {
   try {
     const content = JSON.stringify(data, null, 4);
-    await Deno.writeTextFile(filePath, content);
+    await writeFile(filePath, content, 'utf8');
   } catch (error) {
     throw new Error(`Failed to write JSON file ${filePath}: ${error}`);
   }
@@ -83,7 +85,7 @@ export async function writeJsonFile<T = unknown>(filePath: string, data: T): Pro
  */
 export async function readCsvFile(filePath: string): Promise<string> {
   try {
-    return await Deno.readTextFile(filePath);
+    return await readFile(filePath, 'utf8');
   } catch (error) {
     throw new Error(`Failed to read CSV file ${filePath}: ${error}`);
   }
@@ -94,10 +96,17 @@ export async function readCsvFile(filePath: string): Promise<string> {
  */
 export async function writeCsvFile(filePath: string, content: string): Promise<void> {
   try {
-    await Deno.writeTextFile(filePath, content);
+    await writeFile(filePath, content, 'utf8');
   } catch (error) {
     throw new Error(`Failed to write CSV file ${filePath}: ${error}`);
   }
+}
+
+/**
+ * Returns true when a filesystem error means the path does not exist
+ */
+export function isNotFound(error: unknown): boolean {
+  return error instanceof Error && (error as NodeJS.ErrnoException).code === 'ENOENT';
 }
 
 // ============================================================================
@@ -134,9 +143,9 @@ export async function createBrowser(config: BrowserConfig = {}) {
  * Validates command line arguments with standardized error handling
  */
 export function validateArgs(args: string[], minArgs: number, usage: string): void {
-  if (args.length < minArgs) { // Deno args don't include node and script name
+  if (args.length < minArgs) { // args exclude node binary and script path
     console.error(`Usage: ${usage}`);
-    Deno.exit(1);
+    process.exit(1);
   }
 }
 
@@ -144,7 +153,7 @@ export function validateArgs(args: string[], minArgs: number, usage: string): vo
  * Extracts and validates tweet ID from command line args
  */
 export function extractTweetId(args: string[]): string {
-  const tweetId = args[0]; // Deno args start from index 0
+  const tweetId = args[0];
   if (!tweetId || !/^\d+$/.test(tweetId)) {
     throw new Error('Invalid tweet ID. Must be a numeric string.');
   }
@@ -155,7 +164,7 @@ export function extractTweetId(args: string[]): string {
  * Extracts tweet content from command line args (handles spaces)
  */
 export function extractTweetContent(args: string[]): string {
-  return args.slice(1).join(' '); // Deno args start from index 0
+  return args.slice(1).join(' ');
 }
 
 // ============================================================================
@@ -186,7 +195,7 @@ export function formatCsvRow(columns: string[]): string {
 export function handleScriptError(error: unknown, logger: { error: (message: string) => void }, context: string): never {
   const errorMessage = error instanceof Error ? error.message : String(error);
   logger.error(`${context}: ${errorMessage}`);
-  Deno.exit(1);
+  process.exit(1);
 }
 
 /**

@@ -1,9 +1,11 @@
-import { join } from "@std/path";
+import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import dotenv from "dotenv";
 import {
   createScriptLogger,
   getProjectRoot,
   getScriptDirectory,
+  isNotFound,
   readJsonFile,
   runWithErrorHandling,
 } from "./libs/common-utils.ts";
@@ -59,20 +61,15 @@ const AI_KEY_IDEAS_RETRY_INPUT_CHARS = 6000;
 dotenv.config();
 
 function getEnvVar(name: string): string | undefined {
-  const fromDeno = Deno.env.get(name);
-  if (fromDeno?.trim()) return fromDeno.trim();
-
-  const fromProcess = process.env[name];
-  if (typeof fromProcess === "string" && fromProcess.trim()) return fromProcess.trim();
-
-  return undefined;
+  const value = process.env[name];
+  return value?.trim() ? value.trim() : undefined;
 }
 
 function printUsageAndExit(): never {
   console.log(
-    "Usage: deno task export-obsidian --id <tweet_or_thread_id> [--out <dir>] [--overwrite] [--stdout] [--with-key-ideas-ai] [--key-ideas-model <model>] [--ollama-url <url>] [--key-ideas-count <n>]",
+    "Usage: npm run export-obsidian -- --id <tweet_or_thread_id> [--out <dir>] [--overwrite] [--stdout] [--with-key-ideas-ai] [--key-ideas-model <model>] [--ollama-url <url>] [--key-ideas-count <n>]",
   );
-  Deno.exit(1);
+  process.exit(1);
 }
 
 function parseArgs(args: string[]): ExportOptions {
@@ -661,7 +658,7 @@ function buildMarkdown(params: {
 }
 
 async function main(): Promise<void> {
-  const options = parseArgs(Deno.args);
+  const options = parseArgs(process.argv.slice(2));
 
   const tweetsPath = join(projectRoot, "infrastructure/db/tweets.json");
   const summariesPath = join(projectRoot, "infrastructure/db/tweets_summary.json");
@@ -732,21 +729,21 @@ async function main(): Promise<void> {
     return;
   }
 
-  await Deno.mkdir(options.outDir, { recursive: true });
+  await mkdir(options.outDir, { recursive: true });
   const filePath = join(options.outDir, fileName);
 
   if (!options.overwrite) {
     try {
-      await Deno.stat(filePath);
+      await stat(filePath);
       throw new Error(`File already exists: ${filePath} (use --overwrite to replace)`);
     } catch (error) {
-      if (!(error instanceof Deno.errors.NotFound)) {
+      if (!isNotFound(error)) {
         throw error;
       }
     }
   }
 
-  await Deno.writeTextFile(filePath, markdown);
+  await writeFile(filePath, markdown, 'utf8');
   logger.info(`Exported thread ${threadId} to ${filePath}`);
 }
 

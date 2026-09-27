@@ -3,7 +3,8 @@
  * Eliminates duplicate JSON imports and provides type-safe data access
  */
 
-import { join } from '@std/path';
+import { readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { readJsonFile, writeJsonFile, getDbPath } from './common-utils.ts';
 import type {
   Tweet,
@@ -105,19 +106,19 @@ export class DataAccess {
 
   // CSV data access
   async getTurrasCsv(): Promise<string> {
-    return await Deno.readTextFile(join(this.dbPath, 'turras.csv'));
+    return await readFile(join(this.dbPath, 'turras.csv'), 'utf8');
   }
 
   async saveTurrasCsv(content: string): Promise<void> {
-    await Deno.writeTextFile(join(this.dbPath, 'turras.csv'), content);
+    await writeFile(join(this.dbPath, 'turras.csv'), content, 'utf8');
   }
 
   async getGlosarioCsv(): Promise<string> {
-    return await Deno.readTextFile(join(this.dbPath, 'glosario.csv'));
+    return await readFile(join(this.dbPath, 'glosario.csv'), 'utf8');
   }
 
   async saveGlosarioCsv(content: string): Promise<void> {
-    await Deno.writeTextFile(join(this.dbPath, 'glosario.csv'), content);
+    await writeFile(join(this.dbPath, 'glosario.csv'), content, 'utf8');
   }
 
   // Graph data access

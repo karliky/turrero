@@ -10,63 +10,55 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint` - Run ESLint checks
 - `npm start` - Start production server
 
-### Deno Script Commands (Primary)
-- `deno task scrape` - Run thread scraping tool
-- `deno task enrich` - Run tweet enrichment process
-- `deno task books` - Generate book references
-- `deno task algolia` - Update Algolia search index
-- `deno task export-obsidian --id <thread_or_tweet_id> --out "<folder>"` - Export a turra as Obsidian markdown
-- `deno task export-obsidian-all --out "<folder>" --overwrite` - Batch export all turras to Obsidian markdown
-- `deno task validate` - Validate Deno scripts and types
-- `deno task ai-local $threadId` - Generate summary, categories, and exam via local Ollama
+### Quality Checks
+- `npm run typecheck` - Type check app (`tsconfig.json`) and scripts (`scripts/tsconfig.json`)
+- `npm run check` - typecheck + lint + `flows:check` + `schema:validate`
+- `npm run schema:validate` / `npm run schema:infer` - Validate / regenerate `artifacts/db-schemas/`
+- `npm run flows:check` - Check data flow freshness between DB files
+
+### Data Script Commands (Node.js + tsx)
+- `npm run scrape` - Run thread scraping tool
+- `npm run enrich` - Run tweet enrichment process
+- `npm run books` / `npm run book-enrich` - Generate / enrich book references
+- `npm run algolia` - Generate Algolia search database (`tweets-db.json`)
+- `npm run graph` - Regenerate graph data (Python)
+- `npm run ai-local -- $threadId` - Generate summary, categories, and exam via local Ollama
+- `npm run export-obsidian -- --id <thread_or_tweet_id> --out "<folder>"` - Export a turra as Obsidian markdown
+- `npm run export-obsidian-all -- --out "<folder>" --overwrite` - Batch export all turras to Obsidian markdown
+- `npm run pdf` - Generate PDF/EPUB of all turras
+- `npm run podcast -- $threadId` - Generate podcast script via OpenAI
 - `./scripts/add_thread.sh $id $first_tweet_line` - Add new thread (automated workflow)
 
-### Development Pipeline Commands
-- `npm run pipeline:validate` - Validate both Next.js and Deno environments
-- `npm run pipeline:build` - Build complete project (Next.js + Deno compatibility)
-- `npm run pipeline:test` - Run all tests (Next.js + Deno scripts)
-- `npm run pipeline:full` - Complete validation → build → test pipeline
-
-### Legacy Node.js Commands
-- `cd scripts && npm run generate-pdf` - Generate PDF from data (Node.js)
-
 ### Testing Individual Tweets
-- `deno task scrape -- --test $tweet_id` - Test scraping a single tweet
-- `deno task scrape -- --fix-tweet <tweet_id...>` - Re-scrape specific tweet IDs for metadata backfill
+- `npm run scrape -- --test $tweet_id` - Test scraping a single tweet
+- `npm run fix-tweet -- <tweet_id...>` - Re-scrape specific tweet IDs for metadata backfill
 
 ## Tech Stack & Architecture
 
 ### Frontend
-- **Next.js 15** with App Router
+- **Next.js 16** with App Router (Turbopack)
 - **React 19** with TypeScript
-- **TailwindCSS** with Preline UI components
+- **Tailwind CSS 4** (theme tokens such as the whiskey palette live in `app/globals.css` under `@theme`)
 - Fonts: Geist Sans and Geist Mono
 
 ### Data & Infrastructure
-- **Hybrid Runtime Architecture**: Node.js for frontend, Deno for scripts
+- **Single runtime**: Node.js for both the frontend and the data scripts (scripts run with `tsx`)
 - **Data Storage**: JSON files in `infrastructure/db/`
-- **Scraping**: Puppeteer for X.com threads (Deno runtime)
-- **Image Processing**: Jimp for metadata card generation (Deno runtime)
-- **Search**: Algolia integration (Deno runtime)
+- **Scraping**: Puppeteer for X.com threads
+- **Social images**: `app/turra/[id]/opengraph-image.tsx` (generated at build time with `next/og`)
+- **Search**: Algolia (`algoliasearch/lite` v5 in `app/components/SearchBar.tsx`)
 
-### Scripts Environment (Modernized)
-- **Deno 1.41+** for primary scripts (enrichment, scraping, data processing)
-- **Node.js 22+** for Next.js frontend and legacy scripts
-- **Python 3.8+** for graph generation
-- **Dual validation pipeline** for both runtimes
-
-### Deno Configuration
-- **Import maps** configured in `deno.json` for seamless dependency resolution
-- **NPM package support** via `npm:` specifiers for Node.js compatibility
-- **Strict TypeScript** with enhanced type checking
-- **Built-in formatting and linting** with `deno fmt` and `deno lint`
+### Scripts Environment
+- **Node.js 22+** with `tsx` for all TypeScript scripts in `scripts/`
+- `scripts/package.json` marks the folder as ESM (`"type": "module"`); `scripts/tsconfig.json` holds the strict script config
+- **Python 3.8+** only for graph generation (`scripts/create_graph.py`)
 
 ## Project Structure
 
 ### Core Directories
 - `/app` - Next.js pages and components (App Router)
 - `/infrastructure` - Data layer with TypeScript utilities and JSON databases
-- `/scripts` - Data processing tools (Node.js, Deno, Python mix)
+- `/scripts` - Data processing tools (Node.js/TypeScript via tsx, plus one Python script)
 - `/public` - Static assets and generated metadata images
 
 ### Key Data Files (Auto-Generated - DO NOT EDIT)
@@ -100,21 +92,16 @@ The hook will automatically execute the complete workflow including AI processin
 Use the automated script: `./scripts/add_thread.sh $thread_id $first_tweet_text`
 
 Or follow the manual process:
-1. Add tweet to CSV: `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"`
-2. Scrape: `deno task scrape`
-3. Enrich: `deno task enrich`
-4. Generate cards: `node scripts/image-card-generator.js`
-5. Move metadata: `mv scripts/metadata/* public/metadata/`
-6. Update Algolia: `deno task algolia`
-7. Generate books: `deno task books`
-8. Enrich books: `deno task book-enrich`
-9. AI enrichment: `deno task ai-local $id` (generates summary, categories, exam via local Ollama)
+1. Add tweet to CSV: `npm run add-tweet -- $id "$first_tweet_line"`
+2. Scrape: `npm run scrape`
+3. Enrich: `npm run enrich`
+4. Move downloaded media: `mv metadata/* public/metadata/`
+5. Update Algolia: `npm run algolia`
+6. Generate books: `npm run books`
+7. Enrich books: `npm run book-enrich`
+8. Graph: `npm run graph`
+9. AI enrichment: `npm run ai-local -- $id` (generates summary, categories, exam via local Ollama)
 10. Test with `npm run dev` (header "last update" is derived automatically from latest tweet date)
-
-### Deno Usage
-- Required permissions: `--allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run`
-- Use `--allow-all` for development convenience
-- Deno config in `deno.json` with DOM and Deno libraries enabled
 
 ### Environment Setup
 - Node.js version management with nvm recommended
@@ -134,7 +121,6 @@ Or follow the manual process:
 ### Component Structure
 - Components in `/app/components/` using TypeScript and React 19
 - Consistent use of TailwindCSS classes with custom whiskey color palette
-- Preline UI components for complex interactions
 
 ### Data Flow
 1. Raw threads scraped from X.com → `tweets.json`
@@ -147,20 +133,17 @@ Or follow the manual process:
 - TypeScript utilities in `/infrastructure/`
 - Constants and author definitions in `constants.ts`
 - Data provider pattern for tweet access
-- Image metadata generation for social sharing
+- Open Graph images generated per turra via `opengraph-image.tsx`
 
 ## Special Considerations
 
-### Multi-Runtime Environment
-- Frontend and most scripts use Node.js
-- Thread scraping specifically uses Deno for modern runtime features
+### Runtime Environment
+- Frontend and all TypeScript scripts use Node.js (scripts via `tsx`)
 - Python used only for graph generation
-- Separate package.json files for root and scripts directory
 
 ### Image and Metadata Management
-- Metadata images auto-generated in `scripts/metadata/`
-- Must be moved to `public/metadata/` for web access
-- Images optimized for social media sharing (OpenGraph, Twitter Cards)
+- Tweet media is downloaded to `metadata/` during enrichment and must be moved to `public/metadata/` for web access
+- Social preview images are generated by `app/turra/[id]/opengraph-image.tsx`
 
 ### Video & GIF Support
 - X.com has two types of video media: **GIFs** (`tweet_video/`) and **uploaded videos** (`ext_tw_video/`)
@@ -206,7 +189,7 @@ Or follow the manual process:
 ### Agent and MCP Server Usage
 - **ALWAYS** use available specialized agents for tasks that match their descriptions
 - **PRIORITIZE** relevant MCP servers for enhanced functionality
-- Agents available: `glossary-terminology-manager`, `ai-prompt-processor`, `tweet-scraper-agent`, etc.
+- Agents available: `glossary-terminology-manager`, `tweet-scraper-agent`, etc.
 - MCP servers provide additional tools and capabilities beyond standard tools
 
 ### Claude Code Hook Integration
@@ -221,19 +204,18 @@ Or follow the manual process:
 - Always ask before running `git commit`, `git push`, or equivalent commands
 - Use proper commit messages following existing patterns when authorized
 
-### Hybrid Runtime Development
-- **Frontend Development**: Use Node.js commands (`npm run dev`, `npm run build`)
-- **Script Development**: Use Deno commands (`deno task`, `deno check`, `deno fmt`)
-- **Unified Pipeline**: Use `npm run pipeline:*` commands for full system validation
-- **Environment Validation**: Always run `npm run pipeline:validate` before deployment
-- **Type Checking**: Both `npx tsc --noEmit` (Node.js) and `deno check` (Deno) must pass
+### Development Workflow
+- **Frontend**: `npm run dev`, `npm run build`
+- **Scripts**: `npm run <script>` (see Data Script Commands); run a one-off script with `npx tsx scripts/<file>.ts`
+- **Validation**: Always run `npm run check` before deployment
+- **Type Checking**: `npm run typecheck` must pass (app + scripts)
 
 ### TypeScript and Type Safety
 - **ALWAYS** maintain TypeScript types up-to-date across all files
 - Update type definitions when modifying data structures
 - Ensure type safety in all new implementations and modifications
-- Run `npm run lint` (Node.js) and `deno task lint` (Deno) to verify compliance
-- **Strict mode enabled** in both environments with `exactOptionalPropertyTypes`
+- Run `npm run lint` to verify compliance
+- **Strict mode enabled** in both tsconfigs with `exactOptionalPropertyTypes`
 
 ### Requirements and Dependencies
 - **MAINTAIN** all requirements updated in PRD-create MCP server
@@ -253,4 +235,4 @@ Or follow the manual process:
 - `title` is the primary card label shown in UI (X card text or fetched page title)
 - `description` is secondary preview text from page metadata
 - Legacy `caption` is deprecated and should be migrated to `title` during backfills
-- Preferred backfill flow: `deno task scrape -- --fix-tweet ...` followed by `deno task enrich`
+- Preferred backfill flow: `npm run fix-tweet -- ...` followed by `npm run enrich`

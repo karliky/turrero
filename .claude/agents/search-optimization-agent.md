@@ -34,7 +34,7 @@ Your core responsibilities include:
 
 **Technical Implementation:**
 - Work with the Algolia API and configuration files
-- Understand the dual-runtime environment (Node.js for search, Deno for scraping)
+- All data scripts run on Node.js via `npm run <script>` (tsx)
 - Coordinate with the infrastructure layer TypeScript utilities
 - Ensure search integration works seamlessly with the Next.js App Router architecture
 

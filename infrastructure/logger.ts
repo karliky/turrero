@@ -119,8 +119,3 @@ export const logger = new Logger();
 export function createLogger(config: LoggerConfig): Logger {
   return new Logger(config);
 }
-
-// Deno-compatible logger for scripts
-export function createDenoLogger(prefix?: string): Logger {
-  return new Logger(prefix ? { prefix } : {});
-}

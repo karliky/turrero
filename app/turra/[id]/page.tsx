@@ -1,112 +1,62 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { FaArrowLeft } from "react-icons/fa";
-import { TweetProvider } from "../../../infrastructure/TweetProvider";
-import { TweetContent } from "../../components/TweetContent";
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { TweetContent } from "../../components/TweetContent";
 import { TurraSidebar } from '../../components/TurraSidebar';
-import { AUTHORS, Author, fromXtoAuthor } from "@/infrastructure/constants";
+import { getThread, getThreadIdOfTweet, listThreadIds } from "@/lib/queries";
+import { SITE, tweetUrl } from "@/lib/site";
 
 interface Params {
-  params: Promise<{
-    id: string;
-  }>;
+  params: Promise<{ id: string }>;
 }
 
-async function getTweetData(id: string) {
-  const tweetProvider = new TweetProvider();
-  const thread = tweetProvider.getThread(id);
-  
-  if (thread.length === 0) return null;
-  
-  const mainTweet = thread[0];
-  if (!mainTweet) return null;
-  
-  return {
-    thread,
-    summary: tweetProvider.getSummaryById(mainTweet.id),
-    categories: tweetProvider.getCategoryById(mainTweet.id),
-    exam: tweetProvider.getExamById(mainTweet.id),
-    author: mainTweet.author,
-  };
-}
+const WORDS_PER_MINUTE = 200;
 
-function normalizeText(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-    .replace(/\s+/g, '-'); // Replace spaces with hyphens
+export function generateStaticParams() {
+  return listThreadIds().map((id) => ({ id }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
-  const data = await getTweetData(id);
-  
-  if (!data) {
-    return {
-      title: 'Not Found',
-    };
-  }
+  const thread = getThread((await params).id);
+  if (!thread) return { title: 'Not Found' };
 
-  const ogImageUrl = `/api/og/${id}`;
-
+  // og:image and twitter:image come from the colocated opengraph-image.tsx
   return {
-    title: `${data.summary} - El Turrero Post - Las turras de ${AUTHORS.MAIN}`,
-    description: data.summary,
+    title: `${thread.title} — ${thread.author.name} | ${SITE.name}`,
+    description: thread.title,
     openGraph: {
-      title: data.summary,
-      description: data.summary,
-      images: [ogImageUrl],
+      title: thread.title,
+      description: thread.title,
     },
     twitter: {
       card: 'summary_large_image',
-      title: data.summary,
-      description: data.summary,
-      images: [ogImageUrl],
-    }
+      title: thread.title,
+      description: thread.title,
+    },
   };
 }
 
-export async function generateStaticParams() {
-  const tweetProvider = new TweetProvider();
-  const allThreads = tweetProvider.getAllTweets();
-  
-  return allThreads
-    .filter(thread => thread && thread[0])
-    .map(thread => ({
-      id: thread[0]!.id
-    }));
-}
-
-export const dynamic = 'force-static';
-export const revalidate = 3600; // Revalidate every hour
-
 export default async function TurraPage({ params }: Params) {
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
-
-  const data = await getTweetData(id);
-
-  if (!data) {
+  const { id } = await params;
+  const thread = getThread(id);
+  if (!thread) {
+    // Old URLs could point to any tweet of a thread
+    const threadId = getThreadIdOfTweet(id);
+    if (threadId) permanentRedirect(`/turra/${threadId}#${id}`);
     notFound();
   }
 
-  const { thread, summary, categories, exam } = data;
-  const mainTweet = thread[0];
-  if (!mainTweet) {
-    notFound();
-  }
-  const words = summary.split(' ');
-  const coloredWords = words.slice(0, 2).join(' ');
+  const words = thread.title.split(' ');
+  const highlightedWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
-  const author: Author = fromXtoAuthor(mainTweet.author, mainTweet.authorName);
+  const wordCount = thread.tweets.reduce((total, tweet) => total + tweet.text.split(/\s+/).length, 0);
+  const readingMinutes = Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
+
   return (
     <main className="min-h-screen">
-      {/* Back Navigation */}
       <nav className="border-whiskey-200">
         <div className="container mx-auto px-4 py-3">
           <Link
@@ -120,38 +70,28 @@ export default async function TurraPage({ params }: Params) {
       </nav>
 
       <div className="container mx-auto px-4 pt-2 pb-8 max-w-7xl">
-        {/* Article Header */}
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-3 text-whiskey-900 leading-tight">
-            <span style={{ color: '#a5050b' }}>{coloredWords}</span>{' '}
+            <span className="text-brand">{highlightedWords}</span>{' '}
             {remainingWords}
           </h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-whiskey-600 mb-3">
-            <span>Por{" "}
-            <a
-              href={author.X}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-whiskey-700 hover:text-whiskey-900 font-medium"
-            >
-                {author.NAME} 
-             </a>
-             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
-            <time>
-              Publicado el{" "}
-              {format(new Date(mainTweet.time), "d 'de' MMMM, yyyy", { locale: es })}
-            </time>
-            <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <span>
-              {Math.max(1, Math.ceil(
-                thread.reduce((wordCount, tweet) => 
-                  wordCount + tweet.tweet.split(/\s+/).length, 0) / 200
-              ))} min de lectura
+              Por{" "}
+              <Link href={`/autor/${thread.author.handle}`} className="text-whiskey-700 hover:text-whiskey-900 font-medium">
+                {thread.author.name}
+              </Link>
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
+            <time dateTime={thread.publishedAt}>
+              Publicado el{" "}
+              {format(new Date(thread.publishedAt), "d 'de' MMMM, yyyy", { locale: es })}
+            </time>
+            <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
+            <span>{readingMinutes} min de lectura</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <a
-              href={`${mainTweet.author}/status/${mainTweet.id}`}
+              href={tweetUrl(thread.author.handle, thread.id)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-whiskey-700 hover:text-whiskey-900 font-medium"
@@ -160,37 +100,30 @@ export default async function TurraPage({ params }: Params) {
             </a>
           </div>
 
-          {/* Add categories section */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm text-whiskey-600">Categoría(s) de esta turra:</span>
-            {categories.map((category, index) => (
-              <a
-                key={index}
-                href={`/${normalizeText(category)}`}
+            {thread.categories.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/${category.slug}`}
                 className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-whiskey-100 text-whiskey-800 hover:bg-whiskey-200 transition-colors"
               >
-                {category}
-              </a>
+                {category.name}
+              </Link>
             ))}
           </div>
         </header>
 
-        {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8">
-          {/* Article Content */}
           <article className="lg:col-span-8 prose prose-whiskey max-w-none">
             <div className="space-y-6">
-              {thread.map((tweet) => (
-                <TweetContent 
-                  key={tweet.id} 
-                  tweet={tweet}
-                  id={tweet.id}
-                />
+              {thread.tweets.map((tweet) => (
+                <TweetContent key={tweet.id} tweet={tweet} />
               ))}
             </div>
           </article>
 
-          <TurraSidebar {...(exam ? { exam } : {})} thread={thread} />
+          <TurraSidebar thread={thread} />
         </div>
       </div>
     </main>

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import PrelineScript from "./components/PrelineScript";
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import "./globals.css";
-import { AUTHORS } from '../infrastructure/constants';
+import { SITE } from '@/lib/site';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,25 +16,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://turrero.vercel.app'
-  ),
-  title: AUTHORS.MAIN,
-  description: `Biblioteca de hilos de ${AUTHORS.MAIN}`,
+  metadataBase: new URL(process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : SITE.url),
+  title: SITE.byline,
+  description: `Biblioteca de hilos de ${SITE.byline}`,
   openGraph: {
-    title: `El Turrero Post - Las turras de ${AUTHORS.MAIN}`,
-    description: `Colección de turras de ${AUTHORS.MAIN} sobre resolución de problemas complejos, estrategia y más.`,
-    url: 'https://turrero.vercel.app',
-    siteName: 'El Turrero Post',
+    title: `${SITE.name} - Las turras de ${SITE.byline}`,
+    description: SITE.description,
+    url: SITE.url,
+    siteName: SITE.name,
     locale: 'es_ES',
     type: 'website',
     images: ['/promo.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `El Turrero Post - Las turras de ${AUTHORS.MAIN}`,
-    description: `Colección de turras de ${AUTHORS.MAIN} sobre resolución de problemas complejos, estrategia y más.`,
-    site: '@recuenco',
+    title: `${SITE.name} - Las turras de ${SITE.byline}`,
+    description: SITE.description,
+    site: SITE.xHandle,
     images: ['/promo.png'],
   },
   robots: {
@@ -56,20 +53,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whiskey-50`}
         suppressHydrationWarning
       >
         <main className="min-h-screen flex flex-col">
           <Header />
-          <div className="flex-grow">
+          <div className="grow">
             {children}
           </div>
           <Footer />
         </main>
       </body>
-      <PrelineScript />
     </html>
   );
 }

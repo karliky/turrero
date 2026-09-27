@@ -1,11 +1,11 @@
-#!/usr/bin/env -S deno run --allow-read
 
 /**
  * Data flow dependency checker for Turrero database files
  * Validates that all data dependencies are satisfied and consistent
  */
 
-import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
+import { stat } from 'node:fs/promises';
+import { join } from 'node:path';
 
 interface FlowDependency {
   file: string;
@@ -115,10 +115,10 @@ const DATA_FLOWS: FlowDependency[] = [
 
 async function getFileStats(filePath: string): Promise<{ lastModified: Date; size: number } | null> {
   try {
-    const stat = await Deno.stat(filePath);
+    const fileStat = await stat(filePath);
     return {
-      lastModified: stat.mtime || new Date(0),
-      size: stat.size
+      lastModified: fileStat.mtime || new Date(0),
+      size: fileStat.size
     };
   } catch {
     return null;
@@ -350,7 +350,7 @@ function printSummary(results: FlowValidation[]): void {
       const flowDef = DATA_FLOWS.find(f => f.file === flow.file)!;
       console.log(`   ${flow.file} - ${flowDef.description}`);
       if (flowDef.script) {
-        console.log(`     Run: deno task ${flowDef.script.replace('.ts', '')}`);
+        console.log(`     Run: npx tsx scripts/${flowDef.script}`);
       }
     }
   }
@@ -362,17 +362,15 @@ function printSummary(results: FlowValidation[]): void {
 }
 
 // Main execution
-if (import.meta.main) {
-  try {
-    const results = await checkAllDataFlows();
-    await printDetailedReport(results);
-    printSummary(results);
-    
-    const hasErrors = results.some(r => !r.valid);
-    Deno.exit(hasErrors ? 1 : 0);
-    
-  } catch (error) {
-    console.error('💥 Fatal error during flow check:', error.message);
-    Deno.exit(1);
-  }
+try {
+  const results = await checkAllDataFlows();
+  await printDetailedReport(results);
+  printSummary(results);
+  
+  const hasErrors = results.some(r => !r.valid);
+  process.exit(hasErrors ? 1 : 0);
+  
+} catch (error) {
+  console.error('💥 Fatal error during flow check:', error instanceof Error ? error.message : error);
+  process.exit(1);
 }

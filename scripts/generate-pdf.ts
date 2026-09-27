@@ -6,11 +6,13 @@ import { cpus } from 'node:os';
 import sharp from 'sharp';
 import Epub from 'epub-gen';
 import { readFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
-import { createLogger } from '../infrastructure/logger.js';
-import type { Tweet, TweetSummary, CategorizedTweet, EnrichedTweetData, JsonContent } from '../infrastructure/types/index.js';
+import { createLogger } from '../infrastructure/logger.ts';
+import { fileURLToPath } from 'node:url';
+import type { Tweet, TweetSummary, CategorizedTweet, EnrichedTweetData } from '../infrastructure/types/index.ts';
 
 // Initialize logger
 const logger = createLogger({ prefix: 'generate-pdf' });
+const PROJECT_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 // Interfaces for this script
 interface ThreadData {
@@ -46,15 +48,14 @@ interface EpubOptions {
 }
 
 // Utility functions
-const readJsonFile = (filePath: string): JsonContent => {
-  const projectRoot = path.join(process.cwd(), '..');
-  return JSON.parse(readFileSync(path.join(projectRoot, filePath), 'utf-8'));
+const readJsonFile = <T>(filePath: string): T => {
+  return JSON.parse(readFileSync(path.join(PROJECT_ROOT, filePath), 'utf-8')) as T;
 };
 
 const normalizeImagePath = async (imagePath: string): Promise<string> => {
   if (!imagePath) return '';
   
-  const projectRoot = path.join(process.cwd(), '..');
+  const projectRoot = PROJECT_ROOT;
   const absolutePath = path.join(projectRoot, 'public', imagePath.replace(/^\.\//, ''));
   
   try {
@@ -92,6 +93,7 @@ const formatCategoryTitle = (category: string): string => {
 
 const generateTurraHtml = async (thread: Tweet[], summary: string, categories: string[]): Promise<string> => {
   const mainTweet = thread[0];
+  if (!mainTweet) throw new Error('Cannot render an empty thread');
   const enrichedTweets: EnrichedTweetData[] = readJsonFile('infrastructure/db/tweets_enriched.json');
   
   const renderEmbed = async (tweet: Tweet): Promise<string> => {
@@ -303,6 +305,7 @@ const generateTurraHtml = async (thread: Tweet[], summary: string, categories: s
 const generateEpubHtml = async (thread: Tweet[], summary: string, categories: string[]): Promise<string> => {
   // Similar to generateTurraHtml but with simplified styling for ebooks
   const mainTweet = thread[0];
+  if (!mainTweet) throw new Error('Cannot render an empty thread');
   const enrichedTweets: EnrichedTweetData[] = readJsonFile('infrastructure/db/tweets_enriched.json');
   
   const renderEmbed = async (tweet: Tweet): Promise<string> => {
@@ -473,6 +476,7 @@ const ORDERED_CATEGORIES = [
 
 async function generateThreadPDF(browser: Browser, thread: Tweet[], summary: string, tweetCategories: string[], tempDir: string): Promise<string> {
   const mainTweet = thread[0];
+  if (!mainTweet) throw new Error('Cannot render an empty thread');
   const page: Page = await browser.newPage();
   const html = await generateTurraHtml(thread, summary, tweetCategories);
   
@@ -521,7 +525,7 @@ const getImageForEpub = async (imagePath: string): Promise<string | null> => {
   if (!imagePath) return null;
   
   try {
-    const projectRoot = path.join(process.cwd(), '..');
+    const projectRoot = PROJECT_ROOT;
     const absolutePath = path.join(projectRoot, 'public', imagePath.replace(/^\.\//, ''));
     const tempDir = path.join(process.cwd(), 'temp_epub_images');
     
@@ -593,13 +597,13 @@ async function generateEbook(categories: string[], tweetsMap: CategorizedTweet[]
       .map((tweet: CategorizedTweet) => tweet.id);
 
     const categoryThreads = tweets
-      .filter((thread: Tweet[]) => categoryTweets.includes(thread[0].id))
-      .sort((a: Tweet[], b: Tweet[]) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
+      .filter((thread: Tweet[]) => categoryTweets.includes(thread[0]?.id ?? ''))
+      .sort((a: Tweet[], b: Tweet[]) => new Date(b[0]?.time ?? 0).getTime() - new Date(a[0]?.time ?? 0).getTime());
 
     for (const thread of categoryThreads) {
-      const summary = summaries.find((s: TweetSummary) => s.id === thread[0].id)?.summary || '';
+      const summary = summaries.find((s: TweetSummary) => s.id === thread[0]?.id)?.summary || '';
       const tweetCategories = tweetsMap
-        .find((t: CategorizedTweet) => t.id === thread[0].id)?.categories.split(',') || [];
+        .find((t: CategorizedTweet) => t.id === thread[0]?.id)?.categories.split(',') || [];
       
       chapters.push({
         title: summary,
@@ -657,7 +661,7 @@ async function generateEbook(categories: string[], tweetsMap: CategorizedTweet[]
     `
   };
 
-  const outputPath = path.join(process.cwd(), '..', 'public', 'turras.epub');
+  const outputPath = path.join(PROJECT_ROOT, 'public', 'turras.epub');
   await new Epub(options, outputPath).promise;
   logger.info(`📱 EPUB generated successfully at ${outputPath}`);
 
@@ -680,7 +684,8 @@ if (!isMainThread) {
       
       for (let i = 0; i < threads.length; i++) {
         const thread = threads[i];
-        workerLogger.info(`[Worker ${workerId}] Processing ${i + 1}/${threads.length} - Thread ID: ${thread.thread[0].id}`);
+        if (!thread) continue;
+        workerLogger.info(`[Worker ${workerId}] Processing ${i + 1}/${threads.length} - Thread ID: ${thread.thread[0]?.id}`);
         
         try {
           const pdfPath = await generateThreadPDF(
@@ -692,7 +697,7 @@ if (!isMainThread) {
           );
           pdfPaths.push(pdfPath);
         } catch (error) {
-          workerLogger.error(`[Worker ${workerId}] Failed to process thread ${thread.thread[0].id}:`, error);
+          workerLogger.error(`[Worker ${workerId}] Failed to process thread ${thread.thread[0]?.id}:`, error);
           // Continue with next thread instead of crashing the worker
         }
       }
@@ -715,9 +720,9 @@ if (!isMainThread) {
 
 async function main(): Promise<void> {
   logger.info('📚 Reading JSON files...');
-  const tweetsMap: CategorizedTweet[] = readJsonFile('../infrastructure/db/tweets_map.json');
-  const tweets: Tweet[][] = readJsonFile('../infrastructure/db/tweets.json');
-  const summaries: TweetSummary[] = readJsonFile('../infrastructure/db/tweets_summary.json');
+  const tweetsMap: CategorizedTweet[] = readJsonFile('infrastructure/db/tweets_map.json');
+  const tweets: Tweet[][] = readJsonFile('infrastructure/db/tweets.json');
+  const summaries: TweetSummary[] = readJsonFile('infrastructure/db/tweets_summary.json');
   
   const categories = ORDERED_CATEGORIES;
   
@@ -729,8 +734,8 @@ async function main(): Promise<void> {
       .map((tweet: CategorizedTweet) => tweet.id);
 
     const categoryThreads = tweets
-      .filter((thread: Tweet[]) => categoryTweetIds.includes(thread[0].id))
-      .sort((a: Tweet[], b: Tweet[]) => new Date(b[0].time).getTime() - new Date(a[0].time).getTime());
+      .filter((thread: Tweet[]) => categoryTweetIds.includes(thread[0]?.id ?? ''))
+      .sort((a: Tweet[], b: Tweet[]) => new Date(b[0]?.time ?? 0).getTime() - new Date(a[0]?.time ?? 0).getTime());
 
     categorizedTweets[category] = categoryThreads;
   });
@@ -763,10 +768,10 @@ async function main(): Promise<void> {
   logger.info('📊 Creating worker threads...');
   const numCPUs = cpus().length;
   const allThreads: ThreadData[] = categories.flatMap((category: string) => 
-    categorizedTweets[category].map((thread: Tweet[]) => ({
+    (categorizedTweets[category] ?? []).map((thread: Tweet[]) => ({
       thread,
-      summary: summaries.find((s: TweetSummary) => s.id === thread[0].id)?.summary || '',
-      categories: tweetsMap.find((t: CategorizedTweet) => t.id === thread[0].id)?.categories.split(',') || []
+      summary: summaries.find((s: TweetSummary) => s.id === thread[0]?.id)?.summary || '',
+      categories: tweetsMap.find((t: CategorizedTweet) => t.id === thread[0]?.id)?.categories.split(',') || []
     }))
   );
 
@@ -785,6 +790,7 @@ async function main(): Promise<void> {
     logger.info(`[Main] Worker ${i + 1} assigned ${workerThreads.length} threads`);
     
     const worker = new Worker(new URL(import.meta.url), {
+      execArgv: ["--import", "tsx"],
       workerData: { 
         threads: workerThreads, 
         tempDir,
@@ -841,7 +847,7 @@ async function main(): Promise<void> {
   }
 
   // Save the merged PDF
-  const outputPath = path.join(process.cwd(), '..', 'public', `turras.pdf`);
+  const outputPath = path.join(PROJECT_ROOT, 'public', `turras.pdf`);
   await merger.save(outputPath);
 
   // After PDF generation, generate EPUB

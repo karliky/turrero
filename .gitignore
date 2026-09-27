@@ -59,12 +59,6 @@ venv/
 SERENA.md
 logs/
 
-# Deno
-.deno/
-deno.lock
-.deno_cache/
-vendor/
-
 # Scraper state
 .scrape_completed.json
 

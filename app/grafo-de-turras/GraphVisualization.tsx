@@ -2,16 +2,24 @@
 
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { TurraNode } from '@/infrastructure/types';
+import type { GraphNode as GraphNodeData } from '@/lib/queries';
 import { FaSearchPlus, FaSearchMinus, FaExpand, FaTimes } from 'react-icons/fa';
 
-interface GraphNode extends TurraNode {
+interface GraphNode extends GraphNodeData {
   x?: number;
   y?: number;
   index?: number;
 }
 
-export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
+interface GraphEdge {
+  source: string;
+  target: string;
+}
+
+const escapeHtml = (text: string) =>
+  text.replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`);
+
+export default function GraphVisualization({ nodes, edges }: { nodes: GraphNode[]; edges: GraphEdge[] }) {
   const ref = useRef<SVGSVGElement>(null);
   const [legendVisible, setLegendVisible] = useState(false);
   const [helpVisible, setHelpVisible] = useState(false);
@@ -20,16 +28,13 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
     if (!ref.current) return;
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
-    const categories = Array.from(new Set(nodes.map(node => node.categories[0])));
+    const categories = Array.from(new Set(nodes.map(node => node.category)));
 
-    const links: { source: number; target: number }[] = [];
-    nodes.forEach((node, index) => {
-      node.related_threads.forEach(relatedId => {
-        const targetIndex = nodes.findIndex(n => n.id === relatedId);
-        if (targetIndex !== -1) {
-          links.push({ source: index, target: targetIndex });
-        }
-      });
+    const indexById = new Map(nodes.map((node, index) => [node.id, index]));
+    const links = edges.flatMap(({ source, target }) => {
+      const sourceIndex = indexById.get(source);
+      const targetIndex = indexById.get(target);
+      return sourceIndex === undefined || targetIndex === undefined ? [] : [{ source: sourceIndex, target: targetIndex }];
     });
 
     const container = ref.current.parentElement;
@@ -63,7 +68,7 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
           .range([3, 20]);
         return radiusScale(d.views);
       })
-      .attr("fill", d => color(d.categories[0] || 'default'));
+      .attr("fill", d => color(d.category || 'default'));
 
     if (legendVisible) {
       const legend = svg.append("g")
@@ -91,7 +96,7 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
       tooltip
         .html(`
           <p style="font-size: 12px; color: #666;">Tap fuera del nodo para cerrar</p>
-          <h3 style="font-weight:bold; color: #333;">${d.summary}</h3>   
+          <h3 style="font-weight:bold; color: #333;">${escapeHtml(d.title)}</h3>   
           <p style="color: #666;"><i>Views:</i> ${d.views}</p>
           <p style="color: #666;"><i>Likes:</i> ${d.likes}</p>
           <p style="color: #666;"><i>Replies:</i> ${d.replies}</p>
@@ -163,7 +168,7 @@ export default function GraphVisualization({ nodes }: { nodes: GraphNode[] }) {
       simulation.stop();
       return undefined;
     };
-  }, [nodes, legendVisible]);
+  }, [nodes, edges, legendVisible]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {

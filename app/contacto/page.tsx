@@ -14,9 +14,9 @@ export default function ContactPage() {
           alt=""
           fill
           className="object-cover"
-          priority
+          preload
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-whiskey-900/90 via-whiskey-800/85 to-whiskey-700/80" />
+        <div className="absolute inset-0 bg-linear-to-br from-whiskey-900/90 via-whiskey-800/85 to-whiskey-700/80" />
       </div>
 
       {/* Content */}

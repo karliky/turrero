@@ -805,7 +805,6 @@ export interface PathOperations {
 /** Environment variables interface */
 export interface ScriptEnvironment {
   NODE_ENV?: string;
-  DENO_ENV?: string;
   DEBUG?: string;
   [key: string]: string | undefined;
 }

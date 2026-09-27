@@ -52,7 +52,7 @@ Busca credenciales expuestas y verifica la configuración de seguridad.
 3. **Cargar variables** antes de ejecutar scripts:
    ```bash
    source .env.local
-   deno run --allow-all scripts/recorder.ts
+   npm run scrape
    ```
 
 ### Buenas Prácticas

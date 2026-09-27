@@ -1,108 +1,53 @@
 import React from 'react';
-import { TweetFacade } from "../infrastructure";
 import { CategoryCard } from './components/CategoryCard';
 import { AdvertisementCard } from './components/AdvertisementCard';
 import { HeaderDescription } from './components/HeaderDescription';
-import { AUTHORS } from '@/infrastructure/constants';
+import {
+  getAuthor,
+  getSiteStats,
+  listCategories,
+  listNewest,
+  listThreadsByCategory,
+  listThreadsNotByAuthor,
+  listTopByEngagement,
+} from '@/lib/queries';
+import { SITE } from '@/lib/site';
 
-async function getData() {
-  const tweetFacade = new TweetFacade();
-  const allTweets = await tweetFacade.tweetProvider.getAllTweets();
-  const tweets = allTweets.flat();
-  const categories = tweetFacade.getCategories();
-  const tweetsPerCategory = await Promise.all(categories.map(async category => {
-    if (category === 'top-25-turras') {
-      return tweetFacade.tweetProvider.getTop25Tweets()
-        .map(tweet => ({
-          ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-          engagement: 0
-        }));
-    }
-    if (category === 'las-más-nuevas') {
-      return tweetFacade.tweetProvider.get25newestTweets()
-        .map(tweet => ({
-          ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-          engagement: 0
-        }));
-    }
-    if (category === 'otros-autores') {
-      return tweetFacade.tweetProvider.filterAvoidTweetsByAuthor(AUTHORS.RECUENCO)
-        .map(tweet => ({
-          ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-          engagement: 0
-        }));
-    }
-    
-    const categoryTweets = await tweetFacade.tweetProvider.getTweetsByCategory(category);
-    return categoryTweets.length > 0 
-      ? categoryTweets
-          .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
-          .slice(0, 10)
-          .map(tweet => ({
-            ...tweet,
-            summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-            engagement: 0
-          }))
-      : [];
-  }));
-  const newestTweets = tweetFacade.tweetProvider.get25newestTweets();
-  const lastUpdateDate = newestTweets[0] ? new Date(newestTweets[0].time).toLocaleDateString('es-ES', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  }) : 'No hay datos';
-  return { categories, tweets, tweetsPerCategory, totalTweets: allTweets.length, lastUpdateDate };
-}
+const AD_AFTER_CARD = 5;
+const THREADS_PER_CATEGORY_CARD = 10;
 
-function formatCategoryTitle(category: string): string {
-  return category
-    .replace(/-/g, ' ')
-    .split(' ')
-    .map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.toLowerCase())
-    .join(' ');
-}
+export default function Home() {
+  const stats = getSiteStats();
+  const featuredAuthor = getAuthor(SITE.featuredAuthor);
 
-export default async function Home() {
-  const data = await getData();
-  const { categories, totalTweets, tweetsPerCategory } = data;
+  const cards = [
+    { key: 'top', title: 'Top 25 turras', threads: listTopByEngagement(25), showStats: true },
+    { key: 'newest', title: 'Las más nuevas', threads: listNewest(25), showStats: true },
+    { key: 'others', title: 'Otros autores', threads: listThreadsNotByAuthor(SITE.featuredAuthor), showStats: true },
+    ...listCategories().map((category) => ({
+      key: category.slug,
+      title: category.name,
+      href: `/${category.slug}`,
+      threads: listThreadsByCategory(category.slug).slice(0, THREADS_PER_CATEGORY_CARD),
+      showStats: false,
+    })),
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <HeaderDescription 
-        totalTweets={totalTweets}
-        lastUpdateDate={data.lastUpdateDate}
+      <HeaderDescription
+        totalThreads={stats.threads}
+        lastPublishedAt={stats.lastPublishedAt}
+        featuredAuthor={featuredAuthor}
       />
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {categories.map((category, index) => {
-          const categoryTweets = tweetsPerCategory[index];
-          if (index === 5) {
-            return (
-              <React.Fragment key={`group-${index}-${category}`}>
-                <CategoryCard 
-                  key={`category-${index}-${category}`}
-                  category={category}
-                  tweets={categoryTweets || []}
-                  formatCategoryTitle={formatCategoryTitle}
-                />
-                <AdvertisementCard key={`ad-${category}`} />
-              </React.Fragment>
-            );
-          }
-          
-          return (
-            <React.Fragment key={`group-${index}-${category}`}>
-              <CategoryCard 
-                key={`category-${index}-${category}`}
-                category={category}
-                tweets={categoryTweets || []}
-                formatCategoryTitle={formatCategoryTitle}
-              />
-            </React.Fragment>
-          );
-        })}
+        {cards.map(({ key, ...card }, index) => (
+          <React.Fragment key={key}>
+            <CategoryCard {...card} />
+            {index === AD_AFTER_CARD && <AdvertisementCard />}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

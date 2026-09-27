@@ -35,18 +35,19 @@ easy-to-navigate format.
 - **Backward Compatibility**: Automatic migration from legacy formats
 - **Validation Pipeline**: Comprehensive data integrity checks
 
-### Hybrid Runtime Architecture
-- **Frontend**: Next.js 15 with React 19 for optimal user experience
-- **Scripts**: Deno for data processing with modern JavaScript features
-- **Database**: JSON-based with strict schema validation
-- **Pipeline**: Automated validation and build processes
+### Single Runtime Architecture
+- **Frontend**: Next.js 16 (Turbopack) with React 19
+- **Scripts**: Node.js + TypeScript executed with [tsx](https://tsx.is)
+- **Database**: JSON-based with schema validation
+- **Validation**: `npm run check` (typecheck + lint + data flows + schemas)
 
-### Development Pipeline
+### Development Commands
 ```bash
-npm run pipeline:validate    # Validate both Node.js and Deno environments
-npm run pipeline:build      # Build complete project
-npm run pipeline:test       # Run all tests
-npm run pipeline:full       # Complete validation → build → test
+npm run dev          # Start the Next.js dev server
+npm run build        # Production build
+npm run typecheck    # Type check app (tsconfig.json) and scripts (scripts/tsconfig.json)
+npm run lint         # ESLint
+npm run check        # typecheck + lint + flows:check + schema:validate
 ```
 
 ## More resources
@@ -61,62 +62,20 @@ npm run pipeline:full       # Complete validation → build → test
 
 The website is built using:
 
-- **Next.js 15** with App Router for the frontend
-- **React 19** with TypeScript for components  
-- **Node.js 22+** for frontend and legacy scripts
-- **Deno 1.41+** for primary data processing scripts
-- **Python 3.8+** for graph generation
-- **Puppeteer** for web scraping X.com threads
+- **Next.js 16** with App Router and Turbopack
+- **React 19** with TypeScript
+- **Tailwind CSS 4**
+- **Node.js 22+** for the frontend and all data scripts (run with `tsx`)
+- **Python 3.8+** for graph generation (`npm run graph`)
+- **Puppeteer** for scraping X.com threads
 - **Ollama** for local AI enrichment (summary, categories, exam generation)
-- **Hybrid Architecture**: Node.js frontend + Deno scripts for optimal performance
 
 You can handle node.js versions by using nvm, for example:
 
 ```bash
-nvm use v23.3.0
-nvm alias default 23.3.0 # now should be forever default
+nvm use 22
+nvm alias default 22
 ```
-
-### Setting up Deno
-
-Slowly nodejs for the scrapping tools will be replaced fot deno.
-
-1. Install Deno:
-   - Using Shell (Mac, Linux):
-     ```bash
-     curl -fsSL https://deno.land/install.sh | sh
-     ```
-   - Using Homebrew (Mac):
-     ```bash
-     brew install deno
-     ```
-   - Other methods available at https://deno.com
-
-2. Verify installation: `deno --version` (should be 1.41 or higher)
-
-3. Configure environment:
-   - Add Deno to your path (if not done automatically)
-   - Set environment variables if needed:
-     ```bash
-     # Optional: Set custom cache directory
-     export DENO_DIR="$HOME/.cache/deno"
-     # Optional: Disable auto package.json resolution
-     export DENO_NO_PACKAGE_JSON=1
-     ```
-
-4. Install Deno VS Code extension for better development experience
-
-5. The scraping script requires these permissions:
-   ```bash
-   deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts
-   ```
-   Or use `--allow-all` for convenience during development
-
-6. Useful Deno commands:
-   - `deno fmt` - Format your code
-   - `deno lint` - Lint your code
-   - `deno test` - Run tests
-   - `deno task` - Run tasks defined in config
 
 ## Getting Started
 
@@ -162,17 +121,19 @@ tweet text.
 
 Alternatively you could use the following steps:
 
-1. `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"` to add the first
+1. `npm run add-tweet -- $id "$first_tweet_line"` to add the first
    tweet id (thread id) and the first tweet text to the top of `infrastructure/db/turras.csv`
-2. `deno task scrape` — scrapes the thread and appends it to `infrastructure/db/tweets.json`
-3. `deno task enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs and normalizes card fields)
-4. Generate metadata images (e.g. `node scripts/image-card-generator.js` if available), then move `scripts/metadata/*` to `public/metadata/`
-5. `deno task algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
-6. `deno task books` — updates `infrastructure/db/books-not-enriched.json`
-7. `deno task book-enrich` — book enrichment
-8. `deno task ai-local $id` — generates summary, categories, and exam via local Ollama
-9. Regenerate graph data: `python3 scripts/create_graph.py`
+2. `npm run scrape` — scrapes the thread and appends it to `infrastructure/db/tweets.json`
+3. `npm run enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs and normalizes card fields)
+4. Move downloaded media from `metadata/` to `public/metadata/`
+5. `npm run algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
+6. `npm run books` — updates `infrastructure/db/books-not-enriched.json`
+7. `npm run book-enrich` — book enrichment
+8. `npm run ai-local -- $id` — generates summary, categories, and exam via local Ollama
+9. `npm run graph` — regenerates graph data
 10. Verify with `npm run dev`
+
+Social preview images (`/turra/<id>/opengraph-image`) are generated automatically at build time.
 
 The “last update” date in the header is derived automatically from the most recent tweet in the data.
 
@@ -189,7 +150,7 @@ manually edited.
 To test scraping a single tweet in isolation (no changes to `tweets.json`):
 
 ```bash
-deno task scrape -- --test $tweet_id
+npm run scrape -- --test $tweet_id
 ```
 
 ### Backfill Card Metadata
@@ -198,8 +159,8 @@ Use this when a link card has wrong/missing title or domain, or when legacy `cap
 data needs to be migrated.
 
 ```bash
-deno task fix-tweet <tweet_id_1> <tweet_id_2> ...
-deno task enrich
+npm run fix-tweet -- <tweet_id_1> <tweet_id_2> ...
+npm run enrich
 ```
 
 Card field contract:
@@ -215,7 +176,7 @@ Check the script and logs for more debugging options.
 Export a turra as an Obsidian-friendly `atom` note:
 
 ```bash
-deno task export-obsidian --id <thread_or_tweet_id> --out "/path/to/obsidian/folder" --overwrite
+npm run export-obsidian -- --id <thread_or_tweet_id> --out "/path/to/obsidian/folder" --overwrite
 ```
 
 Notes:
@@ -227,7 +188,7 @@ Notes:
 Optional AI key ideas (local model):
 
 ```bash
-deno task export-obsidian --id <thread_or_tweet_id> --with-key-ideas-ai --key-ideas-count 5 --out "/path/to/obsidian/folder" --overwrite
+npm run export-obsidian -- --id <thread_or_tweet_id> --with-key-ideas-ai --key-ideas-count 5 --out "/path/to/obsidian/folder" --overwrite
 ```
 
 AI configuration is read from `.env`:
@@ -239,7 +200,7 @@ AI configuration is read from `.env`:
 Export all threads to markdown (AI key ideas enabled by default):
 
 ```bash
-deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --overwrite
+npm run export-obsidian-all -- --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --overwrite
 ```
 
 If there are failures, the script writes:
@@ -249,7 +210,7 @@ If there are failures, the script writes:
 Retry only failed exports:
 
 ```bash
-deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --only-failed --overwrite
+npm run export-obsidian-all -- --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --only-failed --overwrite
 ```
 
 Useful flags:

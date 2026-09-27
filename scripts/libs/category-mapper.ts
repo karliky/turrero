@@ -10,7 +10,7 @@
  * into the frontend set so every book is filterable in the UI.
  */
 
-const FRONTEND_CATEGORIES = [
+export const FRONTEND_CATEGORIES = [
   "Nonfiction",
   "Psychology",
   "History",

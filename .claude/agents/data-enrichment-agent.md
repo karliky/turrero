@@ -10,8 +10,7 @@ Your core responsibilities include:
 
 **Data Processing Pipeline:**
 - Execute the tweets enrichment process using `node scripts/tweets_enrichment.js`
-- Generate metadata cards with `node scripts/image-card-generator.js`
-- Move generated metadata from `scripts/metadata/` to `public/metadata/`
+- Move downloaded media from `metadata/` to `public/metadata/`
 - Update Algolia search database with `node scripts/make-algolia-db.js`
 - Process book references with `node scripts/generate-books.js` and `node scripts/book-enrichment.js`
 
@@ -29,7 +28,7 @@ Your core responsibilities include:
 
 **Workflow Management:**
 - Follow the established 11-step process for new thread integration
-- Maintain the dual runtime environment (Node.js for enrichment, Deno for scraping)
+- All scripts run on Node.js via `npm run <script>` (tsx); only graph generation uses Python
 - Coordinate with other project components (frontend, search, metadata)
 
 **Error Handling:**

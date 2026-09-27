@@ -1,4 +1,4 @@
-import { AUTHORS } from '@/infrastructure/constants';
+import { SITE, authorUrl } from '@/lib/site';
 import Image from 'next/image';
 
 export default function SobreEstaWeb() {
@@ -45,7 +45,7 @@ export default function SobreEstaWeb() {
                   <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
                     Javier G. Recuenco
                     <a
-                      href={AUTHORS.RECUENCO.X}
+                      href={authorUrl(SITE.featuredAuthor)}
                       className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -70,7 +70,7 @@ export default function SobreEstaWeb() {
                 <div className="md:w-1/3">
                   <Image
                     src="https://gurulibros.com/wp-content/uploads/2021/09/javier_g_recuenco.jpg"
-                    alt={AUTHORS.RECUENCO.NAME}
+                    alt="Javier G. Recuenco"
                     className="rounded-lg shadow-md w-full"
                     width={400}
                     height={400}

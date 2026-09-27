@@ -1,11 +1,12 @@
-#!/usr/bin/env -S deno run --allow-read --allow-write
 
 /**
  * Schema inference tool for Turrero database files
  * Analyzes JSON and CSV files to infer and update their schemas
  */
 
-import { join } from "https://deno.land/std@0.208.0/path/mod.ts";
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { isNotFound } from './libs/common-utils.ts';
+import { join } from 'node:path';
 
 interface InferredSchema {
   $schema: string;
@@ -13,7 +14,16 @@ interface InferredSchema {
   title: string;
   description: string;
   type: string;
+  items?: ObjectSchema;
+  properties?: Record<string, unknown>;
+  required?: string[];
   [key: string]: unknown;
+}
+
+interface ObjectSchema {
+  type: 'object';
+  properties: Record<string, unknown>;
+  required: string[];
 }
 
 interface FieldAnalysis {
@@ -226,18 +236,19 @@ function generateSchema(data: unknown, filename: string, config: { path: string;
     if (data.length > 0) {
       const itemFields = analyzeObject(data);
       
-      schema.items = {
+      const items: ObjectSchema = {
         type: 'object',
         properties: {},
         required: []
       };
+      schema.items = items;
       
       // Determine required fields (present in most items)
       const totalItems = Math.min(data.length, 100);
       const requiredThreshold = totalItems * 0.8; // 80% of items must have the field
       
       for (const [fieldName, analysis] of Object.entries(itemFields)) {
-        schema.items.properties[fieldName] = generateFieldSchema(fieldName, analysis);
+        items.properties[fieldName] = generateFieldSchema(fieldName, analysis);
         
         // Count how many items have this field
         let presentCount = 0;
@@ -248,29 +259,31 @@ function generateSchema(data: unknown, filename: string, config: { path: string;
         }
         
         if (presentCount >= requiredThreshold) {
-          schema.items.required.push(fieldName);
+          items.required.push(fieldName);
         }
       }
       
       // Sort required fields for consistency
-      schema.items.required.sort();
+      items.required.sort();
     }
   } else {
     // Object schema
     const fields = analyzeObject(data);
     
-    schema.properties = {};
-    schema.required = [];
+    const properties: Record<string, unknown> = {};
+    const required: string[] = [];
+    schema.properties = properties;
+    schema.required = required;
     
     for (const [fieldName, analysis] of Object.entries(fields)) {
-      schema.properties[fieldName] = generateFieldSchema(fieldName, analysis);
+      properties[fieldName] = generateFieldSchema(fieldName, analysis);
       
       if (!analysis.nullable) {
-        schema.required.push(fieldName);
+        required.push(fieldName);
       }
     }
     
-    schema.required.sort();
+    required.sort();
   }
   
   return schema;
@@ -281,7 +294,7 @@ async function inferSchemaForFile(filename: string, config: { path: string; desc
   
   try {
     // Load data
-    const dataContent = await Deno.readTextFile(config.path);
+    const dataContent = await readFile(config.path, 'utf8');
     const data = JSON.parse(dataContent);
     
     console.log(`  📊 Loaded ${Array.isArray(data) ? `${data.length} items` : '1 object'}`);
@@ -291,12 +304,12 @@ async function inferSchemaForFile(filename: string, config: { path: string; desc
     
     // Write schema
     const schemaPath = join('artifacts/db-schemas', filename.replace('.json', '.schema.json'));
-    await Deno.writeTextFile(schemaPath, JSON.stringify(schema, null, 2));
+    await writeFile(schemaPath, JSON.stringify(schema, null, 2), 'utf8');
     
     console.log(`  ✅ Schema written to ${schemaPath}`);
     
   } catch (error) {
-    console.log(`  ❌ Failed to process ${filename}: ${error.message}`);
+    console.log(`  ❌ Failed to process ${filename}: ${error instanceof Error ? error.message : error}`);
   }
 }
 
@@ -305,20 +318,20 @@ async function inferAllSchemas(): Promise<void> {
   
   // Ensure output directory exists
   try {
-    await Deno.mkdir('artifacts/db-schemas', { recursive: true });
+    await mkdir('artifacts/db-schemas', { recursive: true });
   } catch (_error) {
     // Directory might already exist
   }
   
   for (const [filename, config] of Object.entries(FILE_CONFIGS)) {
     try {
-      await Deno.stat(config.path);
+      await stat(config.path);
       await inferSchemaForFile(filename, config);
     } catch (error) {
-      if (error instanceof Deno.errors.NotFound) {
+      if (isNotFound(error)) {
         console.log(`⚠️  Skipping ${filename} - file not found`);
       } else {
-        console.log(`❌ Error processing ${filename}: ${error.message}`);
+        console.log(`❌ Error processing ${filename}: ${error instanceof Error ? error.message : error}`);
       }
     }
     
@@ -330,11 +343,9 @@ async function inferAllSchemas(): Promise<void> {
 }
 
 // Main execution
-if (import.meta.main) {
-  try {
-    await inferAllSchemas();
-  } catch (error) {
-    console.error('💥 Fatal error during schema inference:', error.message);
-    Deno.exit(1);
-  }
+try {
+  await inferAllSchemas();
+} catch (error) {
+  console.error('💥 Fatal error during schema inference:', error instanceof Error ? error.message : error);
+  process.exit(1);
 }
