@@ -50,6 +50,11 @@ describe('normalizeThread', () => {
     expect(long!.text).toBe('Texto largo completo de más de 280 caracteres');
   });
 
+  test('hides the @mentions X prepends to replies, like x.com does', () => {
+    expect(thread.tweets[2]!.text).toBe('Tercero con gif');
+    expect(thread.tweets[1]!.text.startsWith('Texto largo')).toBe(true);
+  });
+
   test('builds link cards from url entities', () => {
     expect(thread.tweets[0]!.links).toEqual([
       {

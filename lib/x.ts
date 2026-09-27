@@ -356,7 +356,7 @@ export function normalizeThread(root: RawResponse<RawTweet>, pages: RawResponse<
         quotedId,
         authorHandle: quotedAuthor?.username ?? null,
         authorName: quotedAuthor?.name ?? null,
-        text: expandText(quoted, null),
+        text: isReply(quoted) ? stripReplyMentions(expandText(quoted, null)) : expandText(quoted, null),
         media: toMedia(quoted.attachments?.media_keys),
       };
     } else if (quotedId) {
@@ -365,7 +365,7 @@ export function normalizeThread(root: RawResponse<RawTweet>, pages: RawResponse<
 
     return {
       id: raw.id,
-      text: expandText(raw, quotedId),
+      text: isReply(raw) ? stripReplyMentions(expandText(raw, quotedId)) : expandText(raw, quotedId),
       createdAt: new Date(raw.created_at).toISOString(),
       stats: {
         likes: metrics.like_count ?? 0,
@@ -387,6 +387,16 @@ export function normalizeThread(root: RawResponse<RawTweet>, pages: RawResponse<
     warnings,
   };
 }
+
+/**
+ * Replies start with the @handles of the conversation they answer (X adds them automatically
+ * and hides them when displaying the post). Mentions inside the sentence are kept.
+ */
+export function stripReplyMentions(text: string): string {
+  return text.replace(/^(?:@\w{1,15}\s+)+/, '');
+}
+
+const isReply = (tweet: RawTweet): boolean => references(tweet).some((ref) => ref.type === 'replied_to');
 
 /** A t.co link that only points to attached media or to the quoted tweet. */
 function isAttachmentUrl(entity: RawUrlEntity, quotedId: string | null): boolean {

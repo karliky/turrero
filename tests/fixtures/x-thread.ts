@@ -61,7 +61,7 @@ export const searchPage1: RawResponse<RawTweet[]> = {
       conversation_id: '1000',
       author_id: '1',
       created_at: '2024-05-01T08:02:00.000Z',
-      text: 'Tercero con gif',
+      text: '@autora @citado Tercero con gif',
       in_reply_to_user_id: '1',
       referenced_tweets: [{ type: 'replied_to', id: '1001' }],
       attachments: { media_keys: ['16_1'] },
@@ -72,7 +72,7 @@ export const searchPage1: RawResponse<RawTweet[]> = {
       author_id: '1',
       created_at: '2024-05-01T08:01:00.000Z',
       text: 'Texto truncado… https://t.co/quote',
-      note_tweet: { text: 'Texto largo completo de más de 280 caracteres https://t.co/quote' },
+      note_tweet: { text: '@citado Texto largo completo de más de 280 caracteres https://t.co/quote' },
       in_reply_to_user_id: '1',
       referenced_tweets: [
         { type: 'replied_to', id: '1000' },
