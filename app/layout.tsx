@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : SITE.url),
   title: SITE.byline,
   description: `Biblioteca de hilos de ${SITE.byline}`,
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: { url: '/android-chrome-192x192.png', sizes: '192x192' },
+  },
   // Every page is its own canonical, without query strings: /turras?orden=… counts as /turras
   alternates: { canonical: './' },
   openGraph: {

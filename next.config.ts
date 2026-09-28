@@ -9,6 +9,19 @@ const nextConfig: NextConfig = {
     "/api/search": ["./data/turrero.db"],
     "/turra/[id]": ["./data/turrero.db"],
   },
+  // Nothing at request time needs these: public/ is served by the CDN, sharp only processes images in the
+  // ebook script (images are unoptimized), and the rest are sources or local caches
+  outputFileTracingExcludes: {
+    "*": [
+      "./public/**",
+      "./node_modules/sharp/**",
+      "./node_modules/@img/**",
+      "./.cache/**",
+      "./data/categorization/**",
+      "./data/glossary/drafts/**",
+      "./design/**",
+    ],
+  },
   async headers() {
     return [
       {

@@ -7,6 +7,9 @@ export const alt = `${SITE.name} - Las turras de ${SITE.byline}`;
 export const size = OG_SIZE;
 export const contentType = 'image/png';
 
+// Only the pre-rendered cards exist: an unknown path is a static 404, not a function call
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return listCategories().map((category) => ({ category: category.slug }));
 }

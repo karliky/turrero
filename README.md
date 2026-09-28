@@ -33,7 +33,7 @@ El código está en `lib/` (dominio, base de datos, X, IA), `app/` (páginas) y 
 
 ## Puesta en marcha
 
-Requiere Node.js 22.13 o superior.
+Requiere Node.js 24 (la versión que usa Vercel, fijada en `engines`).
 
 ```bash
 npm install
