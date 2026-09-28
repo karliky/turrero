@@ -1,60 +1,44 @@
-import { TweetFacade, GlossaryTerm } from '@/infrastructure';
-import { Metadata } from 'next';
-import { AUTHORS } from '@/infrastructure/constants';
+import type { Metadata } from 'next';
+import { listGlossary } from '@/lib/queries';
+import { SITE } from '@/lib/site';
+import { GlossaryList } from './GlossaryList';
+// Old anchors (merged or renamed terms) → current slug
+import redirects from '../../data/glossary/redirects.json';
+
+const description = `Glosario de los conceptos que usan las turras de ${SITE.byline}: qué significan, de dónde vienen y en qué turra se explican.`;
 
 export const metadata: Metadata = {
-  title: 'Glosario CPS',
-  description: `Glosario de términos especializados utilizados en las turras de ${AUTHORS.MAIN}`,
+  title: `Glosario CPS | ${SITE.name}`,
+  description,
   openGraph: {
-    title: 'Glosario CPS - El Turrero Post',
-    description: `Glosario de términos especializados utilizados en las turras de ${AUTHORS.MAIN}`,
-    images: ['/promo.png'],
-  }
+    title: `Glosario CPS - ${SITE.name}`,
+    description,
+    images: ['/opengraph-image'],
+  },
 };
 
-export default async function GlosarioPage() {
-  const facade = new TweetFacade();
-  const terms = await facade.getGlossaryTerms();
+export default function GlosarioPage() {
+  const terms = listGlossary();
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-whiskey-800 mb-4">Glosario CPS</h1>
-      
-      <p className="text-gray-600 mb-8">
-        Aqui hay un glosario de la jerga especializada que se utiliza en las turras de {AUTHORS.MAIN}. 
-        Recoger y explicar estos términos es una tarea en curso, a la cual puedes contribuir editando este{" "}
-        <a href="https://github.com/karliky/turrero/blob/main/infrastructure/db/glosario.csv" className="text-brand hover:text-brand-dark underline">fichero CSV en GitHub</a>, recuerda que lo puedes importar y editar en Excel.
-      </p>
+    <main className="container mx-auto max-w-5xl px-4 py-8">
+      <header className="mb-6 max-w-3xl">
+        <h1 className="font-serif text-4xl font-bold text-whiskey-950">Glosario CPS</h1>
+        <p className="mt-3 text-lg leading-relaxed text-whiskey-900">
+          Las turras tienen su propio vocabulario: conceptos prestados de la teoría de la complejidad, la psicología o la estrategia, y
+          otros acuñados por Recuenco. Aquí están los {terms.length} que más se usan, explicados en llano y con la turra donde
+          aparecen.
+        </p>
+        <p className="mt-2 text-sm text-whiskey-800">
+          ¿Echas en falta alguno?{' '}
+          <a href={`${SITE.repository}/issues/new?title=Glosario:%20`} className="text-brand underline">
+            Propónlo en GitHub
+          </a>
+          .
+        </p>
+      </header>
 
-      <div className="overflow-x-auto shadow-lg rounded-lg">
-        <table className="min-w-full table-auto">
-          <thead className="bg-whiskey-800 text-white">
-            <tr>
-              <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider w-48">
-                Término
-              </th>
-              <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                Definición
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {terms.map((term: GlossaryTerm, index: number) => (
-              <tr 
-                key={index}
-                className="hover:bg-gray-50 transition-colors duration-200"
-              >
-                <td className="px-6 py-4 text-sm font-medium text-whiskey-800 w-48">
-                  {term.term}
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-pre-wrap">
-                  {term.definition}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+      <GlossaryList terms={terms} redirects={redirects} />
+    </main>
   );
-} 
+}

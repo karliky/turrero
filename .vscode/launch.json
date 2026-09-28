@@ -27,32 +27,20 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug fetch tweet 1867841814809461115",
-      "program": "${workspaceFolder}/scripts/recorder.js",
+      "name": "Debug turra:add",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--import",
+        "tsx"
+      ],
+      "program": "${workspaceFolder}/scripts/turra-add.ts",
       "args": [
-        "--test",
-        "1867841814809461115"
-        // "1860251366708396490",
+        "<x.com status URL>"
       ],
       "skipFiles": [
         "<node_internals>/**"
       ],
       "console": "integratedTerminal"
-    },
-    {
-      "name": "Deno recorder.ts",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "deno",
-      "runtimeArgs": [
-        "run",
-        "--inspect-brk",
-        "-A",
-        "${workspaceFolder}/scripts/recorder.ts"
-      ],
-      "outputCapture": "std",
-      "attachSimplePort": 9229
     }
   ]
 }

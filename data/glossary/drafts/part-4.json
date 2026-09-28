@@ -1,0 +1,1013 @@
+[
+  {
+    "candidate": "Arquitectura de incentivos",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco le dedica una trilogía y la usa como herramienta de diagnóstico en muchas turras.",
+    "entry": {
+      "term": "Arquitectura de incentivos",
+      "slug": "arquitectura-de-incentivos",
+      "aliases": [
+        "arquitectura de incentivos",
+        "arquitecturas de incentivos",
+        "arquitecturas dinámicas de incentivos",
+        "incentivo",
+        "incentivos"
+      ],
+      "short": "Conjunto de premios y castigos, explícitos o implícitos, que moldea lo que hacen las personas de una organización.",
+      "body": "Según Recuenco, una arquitectura de incentivos sirve para una cosa: modificar el comportamiento de un individuo o de un colectivo. Conductas económicas que parecen absurdas se vuelven lógicas cuando descubres los incentivos que hay debajo. Le dedicó una trilogía, donde avisa de que diseñar incentivos corporativos es «como subir al Everest sin oxígeno», porque mezcla la complejidad de la organización con la de la motivación humana.",
+      "origin": "Javier G. Recuenco",
+      "group": "estrategia",
+      "related": [
+        "incentivo-perverso",
+        "skin-in-the-game",
+        "huevos-de-serpiente",
+        "business-acumen",
+        "factor-x"
+      ],
+      "sources": [
+        {
+          "threadId": "1662345754642378753",
+          "tweetId": "1662345755758145538"
+        },
+        {
+          "threadId": "1357937382318886913",
+          "tweetId": "1357966224039108609"
+        },
+        {
+          "threadId": "1654727164086960130",
+          "tweetId": "1654727177089212417"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Blitzscaler",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene una turra propia sobre la mirada blitzscaler y vuelve en el arco del post private equity.",
+    "entry": {
+      "term": "Blitzscaling",
+      "slug": "blitzscaling",
+      "aliases": [
+        "blitzscaling",
+        "blitzscaler",
+        "mirada blitzscaler"
+      ],
+      "short": "Crecimiento relámpago que prima la velocidad sobre la eficiencia para engordar una empresa y venderla cuanto antes.",
+      "body": "Reid Hoffman y Chris Yeh acuñaron el término para el crecimiento rápido y agresivo de las startups. Recuenco habla de la «mirada blitzscaler»: llevar la lógica del private equity a cualquier negocio, sin compromiso con el largo plazo ni con el sentido de la compañía, solo engorde rápido y venta de la carcasa. Hay mucho dinero en ello, dice, pero no hay épica ni alma.",
+      "origin": "Reid Hoffman y Chris Yeh, «Blitzscaling»",
+      "group": "estrategia",
+      "related": [
+        "private-equity",
+        "lujo-humano",
+        "juego-infinito"
+      ],
+      "sources": [
+        {
+          "threadId": "1870373349282484488",
+          "tweetId": "1870373446464536752"
+        },
+        {
+          "threadId": "1870373349282484488",
+          "tweetId": "1870373381209534502"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Brainstorming",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Técnica genérica de manual; las turras no la usan ni la explican.",
+    "entry": null
+  },
+  {
+    "candidate": "Business Acumen",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Es uno de los cuatro pilares del CPS.",
+    "entry": {
+      "term": "Business acumen",
+      "slug": "business-acumen",
+      "aliases": [
+        "business acumen"
+      ],
+      "short": "Olfato para los negocios: estrategia, propuesta de valor y lectura de señales. Uno de los cuatro pilares del CPS.",
+      "body": "Recuenco divide el CPS en cuatro macrodisciplinas: ciencias de la complejidad, ecosistemas tecnológicos, Factor X y business acumen. Este último cubre todo lo relativo a contextos empresariales y comerciales. En su trilogía sobre incentivos lo resume como la forma de llevar la arquitectura de incentivos al kernel de la estrategia. Pone de ejemplo a Charlie Munger, que invierte apoyándose sobre todo en business acumen y Factor X.",
+      "origin": "Javier G. Recuenco",
+      "group": "estrategia",
+      "related": [
+        "estrategia",
+        "factor-x",
+        "ecosistemas-tecnologicos",
+        "ciencias-de-la-complejidad",
+        "arquitectura-de-incentivos"
+      ],
+      "sources": [
+        {
+          "threadId": "1340160478316785666",
+          "tweetId": "1340180316611350529"
+        },
+        {
+          "threadId": "1340160478316785666",
+          "tweetId": "1340176152967655424"
+        },
+        {
+          "threadId": "1649673649866113024",
+          "tweetId": "1649678429082583041"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Cinco Porqués (5 Whys)",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Técnica genérica de manual que no aparece en ninguna turra.",
+    "entry": null
+  },
+  {
+    "candidate": "Decision Makers",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco repite que el CPS es una disciplina de CEOs y decision makers.",
+    "entry": {
+      "term": "Decision makers",
+      "slug": "decision-makers",
+      "aliases": [
+        "decision makers",
+        "decision maker"
+      ],
+      "short": "Quienes de verdad toman las decisiones en una empresa, tengan o no el cargo que lo aparenta.",
+      "body": "Recuenco insiste en que el CPS es una disciplina de CEOs y decision makers: no se puede hacer desde la sombra, sino alineado con quien decide y con los recursos necesarios. A veces el acceso llega por el middle management, que conoce mejor el pulso de la compañía. Uno de sus diagnósticos habituales es la distancia entre los decision makers y los tecnólogos, que frena la transformación real.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "estrategia",
+        "ecosistemas-tecnologicos"
+      ],
+      "sources": [
+        {
+          "threadId": "1738462543344005507",
+          "tweetId": "1738462545411723563"
+        },
+        {
+          "threadId": "1639529423274913794",
+          "tweetId": "1639529446372962306"
+        },
+        {
+          "threadId": "1847550414226411917",
+          "tweetId": "1847550494882910580"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Déficit Asimétrico de Talento (DAT)",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "No aparece en ninguna turra del corpus; la idea de fingir ante un problema ya la cubre «pantomima».",
+    "entry": null
+  },
+  {
+    "candidate": "Estrategia",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco viene de la estrategia y tiene varias turras dedicadas a definirla.",
+    "entry": {
+      "term": "Estrategia",
+      "slug": "estrategia",
+      "aliases": [
+        "estrategia",
+        "kernel de estrategia",
+        "kernel de la estrategia"
+      ],
+      "short": "Resolver problemas: diagnóstico, política guía y acciones coherentes, en ese orden. Si no resuelve el problema, es mala estrategia.",
+      "body": "Recuenco viene de la estrategia empresarial y la define con Richard Rumelt: «la estrategia es problem solving». Sigue el kernel de Rumelt: primero el diagnóstico, luego las políticas guía y después las acciones coherentes, sin atajos. Se queja de que se llame estrategia a cualquier plan vistoso que no toca el problema real.",
+      "origin": "Richard Rumelt, «Good Strategy, Bad Strategy»",
+      "group": "estrategia",
+      "related": [
+        "business-acumen",
+        "sidestepping",
+        "metajuego"
+      ],
+      "sources": [
+        {
+          "threadId": "1522830977088819203",
+          "tweetId": "1522830981182504962"
+        },
+        {
+          "threadId": "1786636941607260240",
+          "tweetId": "1786636944849428623"
+        },
+        {
+          "threadId": "1794224768574476545",
+          "tweetId": "1794224771359498312"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Huevos de serpiente",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio de Recuenco con turra dedicada (caso Welch/GE) y citado en otras cuatro.",
+    "entry": {
+      "term": "Huevos de serpiente",
+      "slug": "huevos-de-serpiente",
+      "aliases": [
+        "huevos de serpiente",
+        "huevo de serpiente"
+      ],
+      "short": "Problema latente que un máximo directivo deja a su sucesor y que estalla cuando él ya se ha ido.",
+      "body": "Recuenco saca la idea del libro «Lights Out», sobre la caída de General Electric: Jack Welch dejó a Jeff Immelt el marrón de desmontar GE Capital en plena época post-Lehman Brothers. Las variantes van desde calcular que la empresa aguante justo hasta tu jubilación hasta vender activos para maquillar las cuentas antes de irte. En el origen suele haber un problema de agencia, y la vacuna es el skin in the game.",
+      "origin": "Javier G. Recuenco",
+      "group": "estrategia",
+      "related": [
+        "skin-in-the-game",
+        "arquitectura-de-incentivos",
+        "incentivo-perverso"
+      ],
+      "sources": [
+        {
+          "threadId": "1456867302494834690",
+          "tweetId": "1456867302494834690"
+        },
+        {
+          "threadId": "1649673649866113024",
+          "tweetId": "1649675913636749314"
+        },
+        {
+          "threadId": "1456867302494834690",
+          "tweetId": "1456870296686899201"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Incentivo",
+    "decision": "merge",
+    "mergeInto": "arquitectura-de-incentivos",
+    "reason": "Recuenco trata los incentivos siempre como arquitectura; es la misma entrada.",
+    "entry": null
+  },
+  {
+    "candidate": "Incentivo perverso",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Aparece en siete turras y la trilogía de incentivos lo explica con el efecto cobra.",
+    "entry": {
+      "term": "Incentivo perverso",
+      "slug": "incentivo-perverso",
+      "aliases": [
+        "incentivo perverso",
+        "incentivos perversos",
+        "efecto cobra"
+      ],
+      "short": "Incentivo que empuja a hacer justo lo contrario de lo que buscaba quien lo diseñó.",
+      "body": "Recuenco lo asocia al efecto cobra, las consecuencias imprevistas de un incentivo. En la empresa pone ejemplos concretos: premiar solo los ingresos empuja a engañar a los clientes, y premiar la velocidad baja la calidad. Avisa de que toda solución parcial genera problemas no previstos e incentivos perversos, y los ve también en los consejos de administración, junto a los huevos de serpiente.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "arquitectura-de-incentivos",
+        "huevos-de-serpiente"
+      ],
+      "sources": [
+        {
+          "threadId": "1654727164086960130",
+          "tweetId": "1654727192029323264"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Lujo humano",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio que Recuenco desarrolla al cerrar la turra sobre blitzscaling.",
+    "entry": {
+      "term": "Lujo humano",
+      "slug": "lujo-humano",
+      "aliases": [
+        "lujo humano"
+      ],
+      "short": "Lo humano y no escalable como bien escaso y caro cuando la IA abarata todo lo demás.",
+      "body": "Recuenco prevé que muchas empresas usarán la IA para multiplicar su producción, lo que subirá la calidad media pero disparará el coste diferencial del trabajo humano. La IA escalará productos que antes eran de lujo solo porque el acceso a la información era limitado. En cambio, el CPS y el pensamiento lateral humano se volverán un lujo; para los demás, «slides de McKinsey hechas en el avión por ChatGPT».",
+      "origin": "Javier G. Recuenco",
+      "group": "tecnologia",
+      "related": [
+        "blitzscaling",
+        "moat",
+        "centauro"
+      ],
+      "sources": [
+        {
+          "threadId": "1870373349282484488",
+          "tweetId": "1870373349282484488"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Mapas de Wardley",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Las turras no los usan; solo aparece un enlace a un tuit de Simon Wardley sin relación con los mapas.",
+    "entry": null
+  },
+  {
+    "candidate": "Mapas mentales",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Técnica genérica que las turras no usan ni explican.",
+    "entry": null
+  },
+  {
+    "candidate": "Metajuego",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene dos turras dedicadas (escritas por @nudpiedo) y Recuenco lo reutiliza.",
+    "entry": {
+      "term": "Metajuego",
+      "slug": "metajuego",
+      "aliases": [
+        "metajuego",
+        "metagame",
+        "M.E.T.A.",
+        "META permanente"
+      ],
+      "short": "El juego más allá del juego: leer qué táctica domina el entorno y anticipar cuándo dejará de hacerlo.",
+      "body": "Lo explicó @nudpiedo en dos turras en las que sustituyó a Recuenco. Viene de los videojuegos, donde «la meta» es la Most Effective Tactic Available, la táctica que todos usan porque ahora funciona. Cada nueva meta se propaga siguiendo una curva sigmoide hasta que deja de dar ventaja, así que ganar de forma consistente exige mirar más allá de la microoptimización.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "estrategia",
+        "sidestepping"
+      ],
+      "sources": [
+        {
+          "threadId": "1880543676876874203",
+          "tweetId": "1880543684871237882"
+        },
+        {
+          "threadId": "1890657339599999084",
+          "tweetId": "1890657339599999084"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Océanos azules",
+    "decision": "merge",
+    "mergeInto": "oceano-azul",
+    "reason": "Duplicado de «Blue ocean».",
+    "entry": null
+  },
+  {
+    "candidate": "PESTEL",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Técnica genérica de manual que no aparece en ninguna turra.",
+    "entry": null
+  },
+  {
+    "candidate": "SCAMPER",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Técnica genérica de manual que no aparece en ninguna turra.",
+    "entry": null
+  },
+  {
+    "candidate": "Sidestepping",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio con una serie de turras dedicada.",
+    "entry": {
+      "term": "Sidestepping",
+      "slug": "sidestepping",
+      "aliases": [
+        "sidestepping",
+        "sidestep"
+      ],
+      "short": "Esquivar la pelea frontal con un paso lateral que deja al rival descolocado y abre un espacio propio.",
+      "body": "Recuenco llegó al concepto por el Tekken 3, donde un personaje que no es el más fuerte gana esquivando y dejando al enemigo con el flanco abierto. Su ejemplo de empresa es la Wii: en vez de competir con PS3 y Xbox 360 en potencia, Nintendo apostó por el control por movimiento y por un público nuevo. Esquivar obliga a reajustar pesos y coordinar toda la organización, y dice que su propio CPS es un sidestepping frente a las empresas de servicios clásicas.",
+      "origin": "Javier G. Recuenco",
+      "group": "estrategia",
+      "related": [
+        "oceano-azul",
+        "estrategia",
+        "metajuego"
+      ],
+      "sources": [
+        {
+          "threadId": "1893203295725871217",
+          "tweetId": "1893203303535632712"
+        },
+        {
+          "threadId": "1903343437719670927",
+          "tweetId": "1903343471135457294"
+        },
+        {
+          "threadId": "1908407119902024001",
+          "tweetId": "1908407159999562009"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Skin in the game",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Aparece en 28 turras; Recuenco lo usa como remedio de los problemas de agencia.",
+    "entry": {
+      "term": "Skin in the game",
+      "slug": "skin-in-the-game",
+      "aliases": [
+        "skin in the game"
+      ],
+      "short": "Jugarse algo propio en el resultado de lo que decides o recomiendas, para que ganes o pierdas con él.",
+      "body": "Recuenco lo toma de Nassim Nicholas Taleb y lo considera la vacuna contra los problemas de agencia. Singular Solving trabaja así, con revenue share, equity o joint ventures, sobre todo con empresas familiares. Su consejo: desconfía de las decisiones en las que nadie se juega nada y de quien te venda estrategia sin incentivos alineados.",
+      "origin": "Nassim Nicholas Taleb, «Skin in the Game»",
+      "group": "estrategia",
+      "related": [
+        "huevos-de-serpiente",
+        "arquitectura-de-incentivos",
+        "singular-solving"
+      ],
+      "sources": [
+        {
+          "threadId": "1456867302494834690",
+          "tweetId": "1456870850938949633"
+        },
+        {
+          "threadId": "1469583058563121153",
+          "tweetId": "1469583151563481088"
+        },
+        {
+          "threadId": "1621752572087345152",
+          "tweetId": "1621752646322225156"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Technology Environment",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Es el pilar del CPS que Recuenco llama «ecosistemas tecnológicos»; se renombra así.",
+    "entry": {
+      "term": "Ecosistemas tecnológicos",
+      "slug": "ecosistemas-tecnologicos",
+      "aliases": [
+        "ecosistemas tecnológicos",
+        "ecosistema tecnológico",
+        "technology environment"
+      ],
+      "short": "Pilar del CPS: entender a fondo las megatendencias tecnológicas, como IA, big data, IoT o blockchain, y su efecto.",
+      "body": "Forma una de las cuatro macrodisciplinas del CPS, junto a las ciencias de la complejidad, el Factor X y el business acumen. Recuenco la describe como un mapeo de todo lo que puede hacer el megaatractor de las megatendencias tecnológicas: data science, big data, IoT, blockchain, IA. De Charlie Munger dice que la usa poco porque «es un boomer».",
+      "origin": "Javier G. Recuenco",
+      "group": "tecnologia",
+      "related": [
+        "business-acumen",
+        "factor-x",
+        "ciencias-de-la-complejidad",
+        "abrochador-liminal"
+      ],
+      "sources": [
+        {
+          "threadId": "1340160478316785666",
+          "tweetId": "1340176152967655424"
+        },
+        {
+          "threadId": "1340160478316785666",
+          "tweetId": "1340182738566037510"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Propuesta de valor caducada",
+    "decision": "merge",
+    "mergeInto": "hotel-de-hilbert",
+    "reason": "Es la idea que ilustra la metáfora del hotel de Hilbert.",
+    "entry": null
+  },
+  {
+    "candidate": "Hotel de Hilbert",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Metáfora propia que Recuenco usa en diez turras sobre la caducidad de los negocios.",
+    "entry": {
+      "term": "Hotel de Hilbert",
+      "slug": "hotel-de-hilbert",
+      "aliases": [
+        "hotel de Hilbert",
+        "Hotel de Hilbert",
+        "propuesta de valor caducada",
+        "propuestas de valor caducadas"
+      ],
+      "short": "Metáfora de Recuenco: los negocios son habitaciones cuyas puertas se abren un tiempo y luego se cierran para siempre.",
+      "body": "Recuenco adapta el hotel infinito de David Hilbert: las habitaciones son oportunidades de negocio, y cada puerta que se abre pone en marcha un contador de cierre inexorable. No habla de necesidades, que son eternas, sino de las propuestas para cubrirlas: lo que funcionó en el siglo XV hoy no sirve. Por eso las propuestas de valor caducan y hay que reformularlas de forma constante, también en el private equity.",
+      "origin": "Javier G. Recuenco, a partir del hotel infinito de David Hilbert",
+      "group": "estrategia",
+      "related": [
+        "cul-de-sac",
+        "private-equity",
+        "zugzwang"
+      ],
+      "sources": [
+        {
+          "threadId": "1294936782497361928",
+          "tweetId": "1294941996721803264"
+        },
+        {
+          "threadId": "1479732314791886850",
+          "tweetId": "1479732355665436672"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Abrochador liminal",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio con turra dedicada y citado en otras cuatro.",
+    "entry": {
+      "term": "Abrochador liminal",
+      "slug": "abrochador-liminal",
+      "aliases": [
+        "abrochador liminal",
+        "abrochadores liminales",
+        "abrochamiento liminal"
+      ],
+      "short": "Quien une un avance tecnológico con el espíritu de la época a través de una killer app.",
+      "body": "La imagen es la de un corchete de presión que se cierra con un *snap*. El abrochador liminal no se emociona con el potencial de una tecnología, sino que crea el producto que la hace imprescindible: VisiCalc para el Apple II, el Walkman de Akio Morita o el videojuego que vende la consola. Recuenco cree que la mayoría de los momentos ajá históricos salen de ahí, y que su enemigo es el chapuzas.",
+      "origin": "Javier G. Recuenco",
+      "group": "tecnologia",
+      "related": [
+        "liminalidad",
+        "zeitgeist",
+        "ecosistemas-tecnologicos"
+      ],
+      "sources": [
+        {
+          "threadId": "1411191931669987332",
+          "tweetId": "1411191939504955393"
+        },
+        {
+          "threadId": "1411191931669987332",
+          "tweetId": "1411191965295783938"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Moat",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "El recuento daba 0, pero sale en siete turras y una lo explica a fondo («la complejidad como moat»).",
+    "entry": {
+      "term": "Moat",
+      "slug": "moat",
+      "aliases": [
+        "moat",
+        "moat humano",
+        "foso económico"
+      ],
+      "short": "Foso económico: ventaja competitiva duradera que protege un negocio de la competencia, según Warren Buffett.",
+      "body": "Warren Buffett y Charlie Munger usan la imagen del foso que rodea un castillo económico. Recuenco sostiene que la complejidad es un moat natural: protege a quien sabe manejarla. Con la IA habla del «moat humano»: los negocios que piden cuantización serán apisonados, y tendrán foso los que piden toque humano y capacidad de hacer CPS.",
+      "origin": "Warren Buffett",
+      "group": "estrategia",
+      "related": [
+        "lujo-humano",
+        "centauro",
+        "ciencias-de-la-complejidad"
+      ],
+      "sources": [
+        {
+          "threadId": "1713075981328519678",
+          "tweetId": null
+        },
+        {
+          "threadId": "1725782327131885653",
+          "tweetId": null
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Centauro",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Pieza central de la serie sobre convergencia entre CPS e IA, con turra dedicada.",
+    "entry": {
+      "term": "Centauro",
+      "slug": "centauro",
+      "aliases": [
+        "centauro",
+        "centauros",
+        "híbrido centauro",
+        "híbridos centauro",
+        "dinámicas centauro",
+        "centauro inverso"
+      ],
+      "short": "Híbrido de humano e IA que rinde más que cada uno por separado, idea de Garry Kasparov tras Deep Blue.",
+      "body": "Kasparov acuñó el concepto en 1998, después de su enfrentamiento con Deep Blue. Recuenco lo usa para pensar la convergencia entre CPS e IA: la IA no hará CPS, pero el trabajo será de centauros. Le preocupa el «centauro inverso» de Cory Doctorow, el humano que solo asiente ante la decisión automatizada, y pide una teoría sobre cómo se delega la responsabilidad en los híbridos centauro.",
+      "origin": "Garry Kasparov",
+      "group": "tecnologia",
+      "related": [
+        "ia-chasm",
+        "moat",
+        "lujo-humano"
+      ],
+      "sources": [
+        {
+          "threadId": "1720721564465823881",
+          "tweetId": "1720721643725537473"
+        },
+        {
+          "threadId": "1837390467337490808",
+          "tweetId": "1837390498039820480"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "IA chasm",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio con un miniarco de turras dedicado.",
+    "entry": {
+      "term": "IA chasm",
+      "slug": "ia-chasm",
+      "aliases": [
+        "IA chasm",
+        "IA Chasm",
+        "brecha de la IA",
+        "dos relojes"
+      ],
+      "short": "Brecha entre los pilotos de IA y su adopción real a escala en las empresas.",
+      "body": "Recuenco adapta «Crossing the Chasm» de Geoffrey Moore, que describe el abismo entre los early adopters y la mayoría pragmática. Muchas empresas están en la fase de pruebas y experimentos, y la mayoría de esos pilotos nunca escala. Lo une a la tesis de los dos relojes: la capacidad de la IA avanza de forma exponencial y la absorción de las organizaciones, lenta y lineal. Cruzar el chasm exige acompasar ambos.",
+      "origin": "Javier G. Recuenco, a partir de Geoffrey Moore, «Crossing the Chasm»",
+      "group": "tecnologia",
+      "related": [
+        "centauro",
+        "personotecnia",
+        "ecosistemas-tecnologicos"
+      ],
+      "sources": [
+        {
+          "threadId": "2075812328566562908",
+          "tweetId": "2075812336456114279"
+        },
+        {
+          "threadId": "2075812328566562908",
+          "tweetId": "2075812328566562908"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Autosegmentación",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene turra dedicada sobre cómo vender conceptos complejos.",
+    "entry": {
+      "term": "Autosegmentación",
+      "slug": "autosegmentacion",
+      "aliases": [
+        "autosegmentación",
+        "autosegmentado",
+        "autosegmentarse",
+        "autosegmente"
+      ],
+      "short": "Cuando alguien, ante un mensaje no dirigido a él, se identifica solo como interesado mediante su comportamiento.",
+      "body": "Recuenco la ve como el mecanismo adecuado para lanzar ideas complejas o productos no mainstream. Él mismo emite mensajes que no son comerciales, pero que hacen que se autoseleccione la gente con la que podría hacer negocio. Si te presionas para llegar a más gente, le echas agua al vino; y un cliente que no se ha autosegmentado tiene pocas opciones de éxito, aunque necesite el CPS.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "personotecnia",
+        "tokens-de-confianza"
+      ],
+      "sources": [
+        {
+          "threadId": "1487312375351029760",
+          "tweetId": "1487312378903552000"
+        },
+        {
+          "threadId": "1771432938288107757",
+          "tweetId": "1771432967690187050"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Zugzwang",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene turra dedicada y Recuenco lo vuelve a usar para el deporte.",
+    "entry": {
+      "term": "Zugzwang",
+      "slug": "zugzwang",
+      "aliases": [
+        "zugzwang",
+        "Zugzwang"
+      ],
+      "short": "Posición de ajedrez en la que cualquier movimiento empeora tu posición, pero estás obligado a mover.",
+      "body": "Recuenco lo aplica al deporte: el entrenador que tiene que deshacerse del equipo que le llevó a la gloria sin que se le echen al cuello. Su tesis es que no hay zugzwang empresarial si usas bien el CPS: incluso con la empresa contra la pared o en suspensión de pagos, siempre hay movimientos en la dirección correcta.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "cul-de-sac",
+        "hotel-de-hilbert"
+      ],
+      "sources": [
+        {
+          "threadId": "1479732314791886850",
+          "tweetId": "1479732337751515137"
+        },
+        {
+          "threadId": "1479732314791886850",
+          "tweetId": "1479732316469706755"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Síndrome del Coronel Thompson",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio con turra dedicada.",
+    "entry": {
+      "term": "Síndrome del Coronel Thompson",
+      "slug": "sindrome-del-coronel-thompson",
+      "aliases": [
+        "síndrome del Coronel Thompson",
+        "Síndrome del Coronel Thompson",
+        "síndrome del coronel Thompson"
+      ],
+      "short": "Resolver un problema de forma brillante y fracasar igual por ignorar el contexto o llegar a destiempo.",
+      "body": "El nombre viene del coronel que inventó el subfusil Thompson, cuya historia Recuenco usa a menudo para recordar que «la gente está lista cuando está lista y ni un minuto antes». Produces algo que soluciona el problema limpia y elegantemente, incluso creas una industria nueva, y aun así te comes el fracaso. Pasa porque toda solución vale dentro de un contexto: cada par solución/contexto funciona como una llave y su cerradura.",
+      "origin": "Javier G. Recuenco",
+      "group": "estrategia",
+      "related": [
+        "contexto",
+        "abrochador-liminal",
+        "zeitgeist"
+      ],
+      "sources": [
+        {
+          "threadId": "1684876869949120512",
+          "tweetId": "1684876958897729536"
+        },
+        {
+          "threadId": "1684876869949120512",
+          "tweetId": "1684876960881618944"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Soluciones de mierda",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio con turra dedicada y citado en otras tres.",
+    "entry": {
+      "term": "Soluciones de mierda",
+      "slug": "soluciones-de-mierda",
+      "aliases": [
+        "soluciones de mierda",
+        "solución de mierda",
+        "soluciones de mierda a problemas complejos"
+      ],
+      "short": "Cierre en falso de un problema complejo que da la satisfacción de haberlo resuelto sin resolverlo.",
+      "body": "Los momentos ajá de verdad son raros y no se pueden invocar a voluntad. Su sucedáneo, como la metadona de la heroína, es cerrar en falso: da la mitad de serotonina, pero quita la sensación de que el problema te ha doblado el brazo. Recuenco culpa a esto del éxito del design thinking donde hacía falta estrategia de verdad.",
+      "origin": "Javier G. Recuenco",
+      "group": "oficio",
+      "related": [
+        "estrategia",
+        "sindrome-del-coronel-thompson"
+      ],
+      "sources": [
+        {
+          "threadId": "1342767594697191424",
+          "tweetId": "1342803642743742465"
+        },
+        {
+          "threadId": "1342767594697191424",
+          "tweetId": "1342788518603616256"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Juegos infinitos",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo desarrolla como tesis de una turra del arco post private equity.",
+    "entry": {
+      "term": "Juego infinito",
+      "slug": "juego-infinito",
+      "aliases": [
+        "juego infinito",
+        "juegos infinitos",
+        "juegos finitos",
+        "juego finito"
+      ],
+      "short": "Juego sin final cuyo objetivo es seguir jugando, frente al juego finito que busca ganar una partida.",
+      "body": "La distinción viene de «Finite and Infinite Games» de James Carse. Recuenco la aplica al private equity: tiene que pasar de juegos finitos, deals aislados con ganadores y perdedores, a un juego infinito centrado en la sostenibilidad, las relaciones con los inversores y la reputación. Lo presenta como lo contrario del blitzscaling.",
+      "origin": "James Carse, «Finite and Infinite Games»",
+      "group": "estrategia",
+      "related": [
+        "private-equity",
+        "blitzscaling"
+      ],
+      "sources": [
+        {
+          "threadId": "2030161085941039583",
+          "tweetId": "2030161984776212598"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Blue ocean",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Se explica en la serie de sidestepping con el caso de la Wii; absorbe «Océanos azules».",
+    "entry": {
+      "term": "Océano azul",
+      "slug": "oceano-azul",
+      "aliases": [
+        "océano azul",
+        "océanos azules",
+        "blue ocean",
+        "Blue Ocean Strategy",
+        "océano rojo",
+        "océanos rojos"
+      ],
+      "short": "Mercado nuevo donde no compites con nadie, frente al océano rojo saturado donde todos pelean por lo mismo.",
+      "body": "Recuenco lo cita con el caso de la Wii: Satoru Iwata evitó la guerra de potencia con Sony y Microsoft y buscó consumidores que ni se veían como jugadores. Para él, toda la estrategia del océano azul es un ejemplo de sidestepping. Avisa a las startups de que, para llegar a un océano azul, antes hay que pasar por los early adopters.",
+      "origin": "W. Chan Kim y Renée Mauborgne, «Blue Ocean Strategy»",
+      "group": "estrategia",
+      "related": [
+        "sidestepping",
+        "estrategia"
+      ],
+      "sources": [
+        {
+          "threadId": "1893203295725871217",
+          "tweetId": "1893203327090909523"
+        },
+        {
+          "threadId": "1893203295725871217",
+          "tweetId": "1893203381289644315"
+        },
+        {
+          "threadId": "1487312375351029760",
+          "tweetId": "1487312494435741697"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Private equity",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Aparece en 19 turras y tiene un arco entero, el del post private equity.",
+    "entry": {
+      "term": "Private equity",
+      "slug": "private-equity",
+      "aliases": [
+        "private equity",
+        "post Private Equity",
+        "post private equity"
+      ],
+      "short": "Fondos que compran empresas con deuda, las optimizan a fondo y las revenden para maximizar la salida.",
+      "body": "Recuenco resume su mecánica clásica en ocho pasos, entre ellos cargar la empresa con toda la deuda que aguante su caja, vender activos no esenciales, fichar gestores con sueldos ligados a resultados y controlar el gasto al máximo. Sostiene que el sector vive de hacer deals y no sabe sobrevivir en mercado abierto, así que necesita otra arquitectura de incentivos y otra propuesta de valor. Le dedicó el arco del post private equity.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "blitzscaling",
+        "juego-infinito",
+        "cul-de-sac",
+        "arquitectura-de-incentivos",
+        "hotel-de-hilbert"
+      ],
+      "sources": [
+        {
+          "threadId": "1494930305811111938",
+          "tweetId": "1494930308218638337"
+        },
+        {
+          "threadId": "1667419646671179776",
+          "tweetId": "1667419768305975296"
+        },
+        {
+          "threadId": "1989585041949622370",
+          "tweetId": "1989585063328018811"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Cul de sac",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene turra dedicada y da sentido a todo el arco del post private equity.",
+    "entry": {
+      "term": "Cul de sac",
+      "slug": "cul-de-sac",
+      "aliases": [
+        "cul de sac",
+        "cul de sac empresarial",
+        "cul de sacs"
+      ],
+      "short": "Callejón sin salida empresarial: hay que dar marcha atrás y cambiar de propuesta de valor, sin ganas ni energía.",
+      "body": "Recuenco lo describe como el momento de tomar una decisión que no apetece, en circunstancias desagradables y sin fuerzas. En la empresa familiar aparece cuando descubres que eres experto en un negocio que se vuelve irrelevante. Los seis hilos del arco del post private equity tratan de cómo gestionar estos callejones.",
+      "origin": null,
+      "group": "estrategia",
+      "related": [
+        "hotel-de-hilbert",
+        "private-equity",
+        "zugzwang"
+      ],
+      "sources": [
+        {
+          "threadId": "2009896595203018960",
+          "tweetId": "2009896605361549371"
+        },
+        {
+          "threadId": "2009896595203018960",
+          "tweetId": "2009896666405421406"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Zona de desarrollo próximo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la explica y la conecta con su teorema de Roca Salvatella.",
+    "entry": {
+      "term": "Zona de desarrollo próximo",
+      "slug": "zona-de-desarrollo-proximo",
+      "aliases": [
+        "zona de desarrollo próximo",
+        "ZDP",
+        "ZDPs"
+      ],
+      "short": "Distancia entre lo que una persona aprende por sí sola y lo que alcanza con la guía de un mentor.",
+      "body": "Recuenco toma el concepto de Lev Vygotski y lo enlaza con su teorema de Roca Salvatella: no hay conversación posible entre alguien que domina un tema a nivel 2 y otro a nivel 8. Lo vio pronto como un problema comercial grave al vender soluciones complejas. En la misma línea propuso la zona de confianza próxima (ZCP), el mayor salto en el vacío que puedes pedirle a una persona.",
+      "origin": "Lev Vygotski",
+      "group": "personas",
+      "related": [
+        "teorema-de-roca-salvatella",
+        "tokens-de-confianza"
+      ],
+      "sources": [
+        {
+          "threadId": "1352890795897061378",
+          "tweetId": "1352936764978188290"
+        }
+      ]
+    }
+  },
+  {
+    "candidate": "Tokens de confianza",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio explicado en la turra sobre psicología de la acción comercial.",
+    "entry": {
+      "term": "Tokens de confianza",
+      "slug": "tokens-de-confianza",
+      "aliases": [
+        "tokens de confianza",
+        "token de confianza",
+        "zona de confianza próxima",
+        "ZCP",
+        "tokens de justificación"
+      ],
+      "short": "Razones para contratar basadas en un acto de fe: crees en quien te ayuda sin tener garantías.",
+      "body": "Recuenco distingue tres tipos de tokens en las decisiones comerciales: de justificación (marca, encanto y seniority del socio, que protegen a quien decide), de capacitación (títulos y experiencia) y de confianza. Un CPS normalmente solo puede trabajar los de confianza. De ahí sale la zona de confianza próxima (ZCP): toda venta que pida un salto de fe mayor del que el cliente puede dar fracasará.",
+      "origin": "Javier G. Recuenco",
+      "group": "oficio",
+      "related": [
+        "zona-de-desarrollo-proximo",
+        "autosegmentacion",
+        "dr-house"
+      ],
+      "sources": [
+        {
+          "threadId": "1325000695897071616",
+          "tweetId": "1325052083872165892"
+        },
+        {
+          "threadId": "1325000695897071616",
+          "tweetId": "1325062027086327808"
+        }
+      ]
+    }
+  }
+]

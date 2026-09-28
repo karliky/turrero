@@ -1,21 +1,117 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Light theme. Every colour of the site comes from these tokens: the dark theme below redefines them,
+  so components use the same classes in both themes (bg-whiskey-50 is the page, text-whiskey-950 the text).
+  `white` is never redefined: it stays real white for photos, transparent images and /contacto.
+*/
+@theme {
+  --color-whiskey-50: #f9f6f3;
+  --color-whiskey-100: #f2eae2;
+  --color-whiskey-200: #e4d4c4;
+  --color-whiskey-300: #d2b79f;
+  --color-whiskey-400: #c39b7f;
+  --color-whiskey-500: #b27d5d;
+  --color-whiskey-600: #a56b51;
+  --color-whiskey-700: #895645;
+  --color-whiskey-800: #70473c;
+  --color-whiskey-900: #5b3b33;
+  --color-whiskey-950: #301e1a;
+
+  /* Cards and panels on top of the page */
+  --color-surface: #ffffff;
+
+  /* Brand: a soft garnet (was the red pixel of Recuenco's x.com profile, #a5050b) */
+  --color-brand: #9b2335;
+
+  /* Right and wrong answers of the exams */
+  --color-ok: #15803d;
+  --color-ok-soft: #f0fdf4;
+  --color-bad: #b91c1c;
+  --color-bad-soft: #fef2f2;
+}
+
+/*
+  Dark theme: the scale reversed into neutral graphite greys (no brown tint), with a clay red accent.
+  Applied when the reader chose it (data-theme, set by the script in app/layout.tsx) or, with no choice
+  and no JavaScript, when the system prefers it. Contrast pairs are checked by tests/theme.test.ts.
+*/
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-whiskey-50: #121212;
+  --color-whiskey-100: #242424;
+  --color-whiskey-200: #2e2e2e;
+  --color-whiskey-300: #444444;
+  --color-whiskey-400: #5c5c5c;
+  --color-whiskey-500: #808080;
+  --color-whiskey-600: #999999;
+  --color-whiskey-700: #a8a8a8;
+  --color-whiskey-800: #c2c2c2;
+  --color-whiskey-900: #d9d9d9;
+  --color-whiskey-950: #ececec;
+  --color-surface: #1c1c1c;
+  --color-brand: #db6a5e;
+  --color-ok: #6fcf8f;
+  --color-ok-soft: #14241a;
+  --color-bad: #f28b82;
+  --color-bad-soft: #2b1616;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-whiskey-50: #121212;
+    --color-whiskey-100: #242424;
+    --color-whiskey-200: #2e2e2e;
+    --color-whiskey-300: #444444;
+    --color-whiskey-400: #5c5c5c;
+    --color-whiskey-500: #808080;
+    --color-whiskey-600: #999999;
+    --color-whiskey-700: #a8a8a8;
+    --color-whiskey-800: #c2c2c2;
+    --color-whiskey-900: #d9d9d9;
+    --color-whiskey-950: #ececec;
+    --color-surface: #1c1c1c;
+    --color-brand: #db6a5e;
+    --color-ok: #6fcf8f;
+    --color-ok-soft: #14241a;
+    --color-bad: #f28b82;
+    --color-bad-soft: #2b1616;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  color-scheme: light;
+}
+
+/*
+  Tailwind v4 changed the default border color to currentColor and made
+  buttons use the default cursor. Keep the v3 behaviour so the UI is unchanged.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-whiskey-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/*
+  Kept inside @layer base: in Tailwind v4 utilities live in a cascade layer,
+  so unlayered rules here would override classes like bg-whiskey-50 on <body>.
+*/
+@layer base {
+  body {
+    color: var(--color-whiskey-950);
+    background: var(--color-whiskey-50);
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
 }

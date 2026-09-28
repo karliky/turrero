@@ -1,138 +1,133 @@
-'use client'
-import { useState, useEffect } from 'react';
-import { TweetExamProps } from '../../infrastructure/types';
+'use client';
+import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
+import type { ExamQuestion } from '@/lib/types';
 
-export function TurraExam({ exam, onComplete }: TweetExamProps): React.ReactElement {
-  const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const [showResults, setShowResults] = useState(false);
+const LETTERS = ['A', 'B', 'C', 'D'];
+
+type OptionState = 'idle' | 'selected' | 'correct' | 'wrong' | 'missed';
+
+const OPTION_STYLES: Record<OptionState, { box: string; badge: string }> = {
+  idle: { box: 'border-whiskey-200 bg-surface hover:border-whiskey-400', badge: 'border-whiskey-300 text-whiskey-800' },
+  selected: { box: 'border-whiskey-900 bg-whiskey-50', badge: 'border-whiskey-900 bg-whiskey-900 text-whiskey-50' },
+  correct: { box: 'border-ok bg-ok-soft', badge: 'border-ok bg-ok text-surface' },
+  wrong: { box: 'border-bad bg-bad-soft', badge: 'border-bad bg-bad text-surface' },
+  // The right answer, shown after a wrong one
+  missed: { box: 'border-ok border-dashed bg-surface', badge: 'border-ok text-ok' },
+};
+
+export function TurraExam({ questions }: { questions: ExamQuestion[] }): React.ReactElement {
+  const [answers, setAnswers] = useState<(number | undefined)[]>([]);
+  const [checked, setChecked] = useState(false);
+  const [confetti, setConfetti] = useState(false);
+  const [size, setSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    const updateWindowSize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-    updateWindowSize();
-    window.addEventListener('resize', updateWindowSize);
-    return () => window.removeEventListener('resize', updateWindowSize);
+    const update = () => setSize({ width: window.innerWidth, height: window.innerHeight });
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
   useEffect(() => {
-    if (showConfetti) {
-      const timer = setTimeout(() => {
-        setShowConfetti(false);
-      }, 10000);
-      return () => clearTimeout(timer);
-    }
-    return undefined;
-  }, [showConfetti]);
+    if (!confetti) return undefined;
+    const timer = setTimeout(() => setConfetti(false), 10000);
+    return () => clearTimeout(timer);
+  }, [confetti]);
 
-  const handleAnswerSelect = (questionIndex: number, answerIndex: number): void => {
-    const newAnswers = [...selectedAnswers];
-    newAnswers[questionIndex] = answerIndex;
-    setSelectedAnswers(newAnswers);
-    setShowResults(false);
-    setShowConfetti(false);
+  const answered = questions.filter((_, index) => answers[index] !== undefined).length;
+  const score = questions.filter((question, index) => answers[index] === question.answer).length;
+
+  const choose = (question: number, option: number) => {
+    const next = [...answers];
+    next[question] = option;
+    setAnswers(next);
+    setChecked(false);
+    setConfetti(false);
   };
 
-  const handleCheckResults = (): void => {
-    if (selectedAnswers.length !== exam.questions.length) {
-      alert('Por favor, responde todas las preguntas antes de comprobar los resultados');
-      return;
-    }
+  const check = () => {
+    setChecked(true);
+    if (score === questions.length) setConfetti(true);
+  };
 
-    const correctAnswers = exam.questions.reduce((count, q, idx) => 
-      selectedAnswers[idx] === (q.answer - 1) ? count + 1 : count, 0
-    );
-    
-    const allCorrect = correctAnswers === exam.questions.length;
-
-    if (allCorrect) {
-      setShowConfetti(true);
-    } else {
-      const firstWrongQuestionIndex = exam.questions.findIndex((q, idx) => 
-        selectedAnswers[idx] !== (q.answer - 1)
-      );
-      const questionElement = document.querySelector(`[data-question-index="${firstWrongQuestionIndex}"]`);
-      questionElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
-    setShowResults(true);
-    
-    // Call onComplete callback if provided
-    onComplete?.(correctAnswers, exam.questions.length);
+  const stateOf = (question: ExamQuestion, index: number, option: number): OptionState => {
+    const chosen = answers[index] === option;
+    if (!checked) return chosen ? 'selected' : 'idle';
+    if (chosen) return option === question.answer ? 'correct' : 'wrong';
+    return option === question.answer && answers[index] !== question.answer ? 'missed' : 'idle';
   };
 
   return (
-    <div>
-      {showConfetti && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 50 }}>
+    <section className="rounded-xl border border-whiskey-200 border-t-[3px] border-t-brand bg-surface p-5 shadow-sm">
+      {confetti && (
+        <div className="pointer-events-none fixed inset-0 z-50">
           <Confetti
-            width={windowSize.width}
-            height={windowSize.height}
+            width={size.width}
+            height={size.height}
             recycle={false}
             gravity={0.1}
             numberOfPieces={500}
             tweenDuration={8000}
-            confettiSource={{
-              x: 0,
-              y: 0,
-              w: windowSize.width,
-              h: 0
-            }}
+            confettiSource={{ x: 0, y: 0, w: size.width, h: 0 }}
           />
         </div>
       )}
-      
-      <div className="space-y-4 bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-whiskey-200 shadow-sm">
-        <h2 className="text-lg font-bold text-whiskey-900">¿Cuánto has aprendido?</h2>
-        <div className="space-y-4">
-          {exam.questions.map((question, qIndex) => (
-            <div 
-              key={qIndex} 
-              className="space-y-3"
-              data-question-index={qIndex}
-            >
-              <p className="font-medium text-base text-whiskey-800">{question.question}</p>
-              <div className="space-y-3">
-                {question.options.map((option, oIndex) => (
+
+      <h2 className="font-serif text-xl font-bold text-whiskey-950">¿Cuánto has aprendido?</h2>
+      <p className="mt-1 text-sm text-whiskey-800">
+        {questions.length} preguntas sobre esta turra.
+      </p>
+
+      <ol className="mt-5 space-y-6">
+        {questions.map((question, qIndex) => (
+          <li key={qIndex}>
+            <p className="flex gap-2 font-medium leading-snug text-whiskey-950">
+              <span className="font-serif font-bold text-brand">{qIndex + 1}.</span>
+              {question.question}
+            </p>
+            <div className="mt-3 space-y-2" role="radiogroup" aria-label={question.question}>
+              {question.options.map((option, oIndex) => {
+                const state = stateOf(question, qIndex, oIndex);
+                return (
                   <button
                     key={oIndex}
-                    onClick={() => handleAnswerSelect(qIndex, oIndex)}
-                    className={`w-full text-left p-2 rounded-lg transition-all duration-200 border ${
-                      selectedAnswers[qIndex] === oIndex
-                        ? showResults
-                          ? selectedAnswers[qIndex] === (question.answer - 1)
-                            ? 'bg-green-50 border-green-200 text-green-800'
-                            : 'bg-red-50 border-red-200 text-red-800'
-                          : 'bg-whiskey-50 border-whiskey-200 text-whiskey-800'
-                        : 'bg-white border-whiskey-100 text-whiskey-700 hover:bg-whiskey-50'
-                    }`}
+                    type="button"
+                    role="radio"
+                    aria-checked={answers[qIndex] === oIndex}
+                    onClick={() => choose(qIndex, oIndex)}
+                    className={`flex w-full items-start gap-3 rounded-lg border p-2.5 text-left text-sm leading-snug text-whiskey-950 transition-colors ${OPTION_STYLES[state].box}`}
                   >
-                    {option}
+                    <span
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${OPTION_STYLES[state].badge}`}
+                    >
+                      {LETTERS[oIndex]}
+                    </span>
+                    <span className="pt-0.5">{option}</span>
                   </button>
-                ))}
-              </div>
-              {showResults && selectedAnswers[qIndex] !== (question.answer - 1) && (
-                <p className="text-red-600 text-sm mt-2">
-                  Opción incorrecta.
-                </p>
-              )}
+                );
+              })}
             </div>
-          ))}
-        </div>
-        <button
-          onClick={handleCheckResults}
-          className={`w-full mt-6 py-3 px-4 rounded-lg transition-colors ${
-            showResults 
-              ? 'bg-whiskey-800 text-white hover:bg-whiskey-900'
-              : 'bg-whiskey-600 text-white hover:bg-whiskey-700'
-          }`}
-        >
-          Comprobar resultados
-        </button>
-      </div>
-    </div>
+          </li>
+        ))}
+      </ol>
+
+      {checked && (
+        <p className="mt-6 rounded-lg bg-whiskey-50 p-3 text-center text-sm font-medium text-whiskey-950" aria-live="polite">
+          {score === questions.length
+            ? `Has acertado las ${questions.length}.`
+            : `Has acertado ${score} de ${questions.length}. La correcta está marcada con borde verde.`}
+        </p>
+      )}
+
+      <button
+        type="button"
+        onClick={check}
+        disabled={answered < questions.length}
+        className="mt-4 w-full rounded-lg bg-whiskey-900 px-4 py-3 font-semibold text-whiskey-50 transition-colors hover:bg-brand disabled:cursor-not-allowed disabled:bg-whiskey-200 disabled:text-whiskey-800"
+      >
+        {answered < questions.length ? `Responde las ${questions.length} preguntas (${answered}/${questions.length})` : 'Comprobar respuestas'}
+      </button>
+    </section>
   );
-} 
+}

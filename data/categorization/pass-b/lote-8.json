@@ -1,0 +1,326 @@
+[
+  {
+    "id": "1312274974464499713",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [
+      "sociologia"
+    ],
+    "evidence": {
+      "psicologia-y-decisiones": "nuestro cerebro aúlla por un cierre del caso, aunque sea en falso",
+      "sociologia": "solamente a una mente juvenil e inmadura le pueden parecer real y apetecible los planteamientos maniqueos o extremistas"
+    },
+    "confidence": "media",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1319891330307338240",
+    "primary": "personotecnia",
+    "secondary": [],
+    "evidence": {
+      "personotecnia": "Como puedes realizar propuestas individualizadas a escala y sin que solo esté al acceso de las élites económicas??"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1385833074001432576",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "en tiempos de polarización y radicalización, y de negar la humanidad del que no piensa como tú"
+    },
+    "confidence": "baja",
+    "alternative": "reflexiones-personales"
+  },
+  {
+    "id": "1398571638170529792",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [
+      "metodo-cps"
+    ],
+    "evidence": {
+      "organizaciones-e-incentivos": "es casi imposible hacer CPS real en grandes corporaciones porque los incentivos están completamente desalineados",
+      "metodo-cps": "Obviamente, choca frontalmente con el planteamiento de la consultoría clásica."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1401066568034009088",
+    "primary": "politica-y-sector-publico",
+    "secondary": [],
+    "evidence": {
+      "politica-y-sector-publico": "España, a título institucional y cultural ha mostrado un desprecio olímpico por la innovación."
+    },
+    "confidence": "baja",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1413787729079545858",
+    "primary": "politica-y-sector-publico",
+    "secondary": [],
+    "evidence": {
+      "politica-y-sector-publico": "en la mayoría de las reconversiones ha habido componente político"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1459431132965924866",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "es el ejemplo perfecto de problema complejo. Hay 22 Bn€ en juego y NO SABEN QUE SE VAN A ENCONTRAR."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1469583058563121153",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "nos parece más adecuado denominarlo ¡Ajá! Soluciones."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1472134392361500672",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "todas estas razones no me impiden tener una opinión clara sobre la Web3. Y es favorable."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1484786680439746562",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "el liderazgo es una posición más de servidumbre y de ejemplaridad que de ejercitar el poder"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1492405460682657792",
+    "primary": "estrategia",
+    "secondary": [
+      "organizaciones-e-incentivos"
+    ],
+    "evidence": {
+      "estrategia": "El futbol español se enfrenta a los problemas que se enfrentan todas las propuestas de valor: Su propia caducidad",
+      "organizaciones-e-incentivos": "Las organizaciones son rancias y viejunas, y son puro status quo."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1497479266354794497",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "El liderazgo no va de imponerse, va de convencer."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1522830977088819203",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "La estrategia es Problem Solving. SI NO RESUELVE EL PROBLEMA NO ES ESTRATEGIA. ES MALA ESTRATEGIA."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1571042180965498881",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "La mayoría de los problemas del mundo son errores de casting."
+    },
+    "confidence": "baja",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1578640745979846662",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [
+      "metodo-cps"
+    ],
+    "evidence": {
+      "psicologia-y-decisiones": "desarrollando los hábitos mentales que nos obligan a cuestionar nuestras propias creencias",
+      "metodo-cps": "El CPS es por naturaleza exploratorio, hipotético, no ofrece certezas sino asunciones razonables"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1639529423274913794",
+    "primary": "metodo-cps",
+    "secondary": [
+      "ia-y-tecnologia"
+    ],
+    "evidence": {
+      "metodo-cps": "Cual es el rol del CPS dentro de todo este pandemonio? Absolutamente crítico.",
+      "ia-y-tecnologia": "que los trabajos white collar se ven amenazados por el auge de la AI"
+    },
+    "confidence": "media",
+    "alternative": "ia-y-tecnologia"
+  },
+  {
+    "id": "1647132462982524929",
+    "primary": "metodo-cps",
+    "secondary": [
+      "desarrollo-personal"
+    ],
+    "evidence": {
+      "metodo-cps": "El CPS hay que abordarlo desde la chutzpah, no desde el hubris.",
+      "desarrollo-personal": "las personas con síndrome del impostor se obsesionan con la creencia de que sus logros se deben únicamente"
+    },
+    "confidence": "media",
+    "alternative": "desarrollo-personal"
+  },
+  {
+    "id": "1741006814873821551",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "El CPS es un cienciarte. No es una skill, no es un framework"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1768900222581624896",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "El racional de la aparición de @unconvcps es el resultado de la obvia aplicación del CPS"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1796796569829687349",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "Entender y hacer sensemaking de problemas complejos es un proceso muy exigente."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1799313887285669975",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Lo que hay que obligarse es a cambiar periódicamente de rabbit hole."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1883055789553676359",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Sencillamente quería darme a mi mismo la oportunidad de intentar traer a la vida mi visión."
+    },
+    "confidence": "media",
+    "alternative": "reflexiones-personales"
+  },
+  {
+    "id": "1918555369426522309",
+    "primary": "estrategia",
+    "secondary": [
+      "cultura-popular"
+    ],
+    "evidence": {
+      "estrategia": "La decadencia empresarial siempre suele suceder por lo mismo.",
+      "cultura-popular": "Esta reflexión revela su enfoque artesanal y su resistencia a las presiones comerciales."
+    },
+    "confidence": "media",
+    "alternative": "cultura-popular"
+  },
+  {
+    "id": "1923622497406140517",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [
+      "estrategia"
+    ],
+    "evidence": {
+      "equipos-y-liderazgo": "Qué hacer con el equipo anterior? Cómo gestionar el cambio de guardia?",
+      "estrategia": "La reinvención es posible si el liderazgo (incluso el que permanece) acepta un cambio radical en la estrategia"
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1926142175105995150",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "hay empresas que han privotado satisfactoriamente y empresas que no han sido capaces de hacerlo"
+    },
+    "confidence": "media",
+    "alternative": "politica-y-sector-publico"
+  },
+  {
+    "id": "1976916522657628448",
+    "primary": "personotecnia",
+    "secondary": [],
+    "evidence": {
+      "personotecnia": "La Personotecnia es eso: una forma de traducir la complejidad humana en estructuras de coherencia funcional."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2017499037503541482",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [],
+    "evidence": {
+      "organizaciones-e-incentivos": "los actuales departamentos de RRHH no tienen ni herramientas, ni capacidad, ni enforcement"
+    },
+    "confidence": "media",
+    "alternative": "politica-y-sector-publico"
+  },
+  {
+    "id": "2027648364364312699",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "AACC intelectuales (doble excepcionalidad: autismo + CI elevado) emerge un perfil neurocognitivo"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2042857602841796852",
+    "primary": "cultura-popular",
+    "secondary": [],
+    "evidence": {
+      "cultura-popular": "como una alegoría gnóstica precisa y estructuralmente fiel a la cosmología gnóstica antigua"
+    },
+    "confidence": "baja",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "2058075392544539127",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "Eso básicamente implica reinventar la educación desde primaria."
+    },
+    "confidence": "alta",
+    "alternative": null
+  }
+]

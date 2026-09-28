@@ -1,0 +1,504 @@
+[
+  {
+    "candidate": "Acoplamiento suelto",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo explica al repasar los conceptos de Karl Weick en la turra sobre colapsos cognitivos.",
+    "entry": {
+      "term": "Acoplamiento suelto",
+      "slug": "acoplamiento-suelto",
+      "aliases": ["acoplamiento suelto", "loose coupling"],
+      "short": "Partes de una organización conectadas entre sí sin rigidez, de modo que pueden adaptarse cuando el entorno cambia.",
+      "body": "Concepto de Karl Weick que Recuenco recoge junto al sensemaking y la enactación. Describe organizaciones cuyas piezas están unidas, pero no atornilladas: cada una conserva margen para moverse. Esa holgura da flexibilidad en entornos cambiantes.",
+      "origin": "Karl E. Weick",
+      "group": "complejidad",
+      "related": ["sensemaking", "enactacion"],
+      "sources": [{ "threadId": "1852267188519854245", "tweetId": "1852302093949735212" }]
+    }
+  },
+  {
+    "candidate": "Antifrágil",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Solo aparece como título del libro de Taleb en una lista de lecturas y de pasada en un resumen; ninguna turra lo explica.",
+    "entry": null
+  },
+  {
+    "candidate": "Apoptosis sistémica",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Una sola mención metafórica («apoptosis sin control») en una turra invitada; no hay base para definirlo como término del CPS.",
+    "entry": null
+  },
+  {
+    "candidate": "Aporía",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene una turra entera dedicada a su gestión en el CPS.",
+    "entry": {
+      "term": "Aporía",
+      "slug": "aporia",
+      "aliases": ["aporía", "aporías", "desorden aporético"],
+      "short": "Callejón sin salida del razonamiento: argumentos igual de sólidos en ambos lados y ninguna respuesta clara.",
+      "body": "Viene del griego «sin camino». Recuenco se reconcilia con ella a través del dominio confuso de Cynefin, donde ni siquiera sabes qué tipo de problema tienes. En el sensemaking es el momento en que nada encaja y no hay más información con la que contrastar. La consultoría tapa esas grietas con lugares comunes; el CPS las trabaja como el kintsugi trabaja las roturas, y en eso ve la parte de arte del oficio.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["cynefin", "sensemaking", "incertidumbre", "cienciarte"],
+      "sources": [
+        { "threadId": "1865306644827029957", "tweetId": "1865306646248886705" },
+        { "threadId": "1865306644827029957", "tweetId": "1865306647159054832" }
+      ]
+    }
+  },
+  {
+    "candidate": "Atractores",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio y recurrente de Recuenco: las cinco grandes fuerzas que afectan a los cuatro pilares del CPS.",
+    "entry": {
+      "term": "Atractores",
+      "slug": "atractores",
+      "aliases": ["atractor", "atractores", "cinco atractores", "macroatractor", "macroatractores", "macro atractor"],
+      "short": "Las cinco grandes fuerzas de fondo que empujan mercados y sociedades y condicionan cualquier estrategia durante años.",
+      "body": "Recuenco los compara con la vida de una estrella: aparecen, se consolidan, alcanzan su máxima atracción y colapsan. No son modas: un hype pasa, un atractor arrastra decisiones de todo tipo durante una década. En la versión de 2026 son megatendencias tecnológicas, warp speed, relevance first, colapso de los acuerdos posteriores a la Segunda Guerra Mundial y reshuffling de la jerarquía intelectual. Insiste en que las tendencias entran cuando la gente está lista, no cuando la tecnología está disponible.",
+      "origin": "Javier G. Recuenco",
+      "group": "estrategia",
+      "related": ["zeitgeist", "ciencias-de-la-complejidad", "business-acumen", "factor-x"],
+      "sources": [
+        { "threadId": "2004624575837958361", "tweetId": "2004624581730996587" },
+        { "threadId": "1340160478316785666", "tweetId": "1340176152967655424" },
+        { "threadId": "1368127688343490560", "tweetId": "1368176299907428353" }
+      ]
+    }
+  },
+  {
+    "candidate": "Autopoiesis",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene una turra propia sobre la autopoiesis empresarial.",
+    "entry": {
+      "term": "Autopoiesis",
+      "slug": "autopoiesis",
+      "aliases": ["autopoiesis", "autopoiesis empresarial", "autopoiético", "autopoiéticos", "autorreferencialidad", "cierre operacional"],
+      "short": "Capacidad de un sistema para producirse y mantenerse a sí mismo, renovando sus piezas sin perder su identidad.",
+      "body": "Concepto de los biólogos Humberto Maturana y Francisco Varela, que Niklas Luhmann llevó a los sistemas sociales: se definen por sus propias comunicaciones (autorreferencialidad) y preservan su identidad aunque traten con el entorno (cierre operacional). Recuenco habla de autopoiesis empresarial para describir la tensión entre lo nuevo y lo bien operado. Cada bando de la empresa tira hacia un lado, y sobrevivir depende de reajustar a mano el equilibrio perdido.",
+      "origin": "Humberto Maturana y Francisco Varela; Niklas Luhmann para los sistemas sociales",
+      "group": "complejidad",
+      "related": ["homeostasis", "hormesis", "sistemas-complejos", "sweet-spot"],
+      "sources": [
+        { "threadId": "1834829754488221846", "tweetId": "1834829765645062448" },
+        { "threadId": "1834829754488221846", "tweetId": "1834829771613553033" },
+        { "threadId": "1834829754488221846", "tweetId": "1834829796460646689" }
+      ]
+    }
+  },
+  {
+    "candidate": "Autorreferencialidad",
+    "decision": "merge",
+    "mergeInto": "autopoiesis",
+    "reason": "Solo aparece como una de las características de los sistemas sociales autopoiéticos de Luhmann.",
+    "entry": null
+  },
+  {
+    "candidate": "Caótico (Cynefin)",
+    "decision": "merge",
+    "mergeInto": "cynefin",
+    "reason": "Dominio de Cynefin; se describe dentro de la entrada única del marco.",
+    "entry": null
+  },
+  {
+    "candidate": "Ciencias de la complejidad",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Uno de los cuatro pilares del CPS según Recuenco; absorbe «Complexity science».",
+    "entry": {
+      "term": "Ciencias de la complejidad",
+      "slug": "ciencias-de-la-complejidad",
+      "aliases": ["ciencias de la complejidad", "complexity science", "complejidad aplicada"],
+      "short": "Pilar del CPS que agrupa sistemas no lineales, pensamiento sistémico, emergencia y sensemaking para entender problemas enmarañados.",
+      "body": "Es una de las cuatro macrodisciplinas del CPS, junto a ecosistemas tecnológicos, Factor X y business acumen. Recuenco mete ahí las ciencias «clásicas» de la complejidad: sistemas no lineales, systems thinking, emergencia y sensemaking. Las considera fascinantes pero demasiado teóricas y ciegas al factor humano; por eso no le bastaron y tuvo que completarlas con los otros pilares.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["sistemas-complejos", "emergencia", "sensemaking", "pensamiento-sistemico", "factor-x", "business-acumen", "cynefin"],
+      "sources": [
+        { "threadId": "1340160478316785666", "tweetId": "1340176659291508736" },
+        { "threadId": "1332604415224770564", "tweetId": "1332611838719221761" },
+        { "threadId": "1332604415224770564", "tweetId": "1332615069864243200" }
+      ]
+    }
+  },
+  {
+    "candidate": "Cierre Operacional",
+    "decision": "merge",
+    "mergeInto": "autopoiesis",
+    "reason": "Solo aparece como una de las características de los sistemas sociales autopoiéticos de Luhmann.",
+    "entry": null
+  },
+  {
+    "candidate": "Complejidad (Cynefin)",
+    "decision": "merge",
+    "mergeInto": "cynefin",
+    "reason": "Duplica el dominio complejo de Cynefin; el sentido general de complejidad lo cubren «Ciencias de la complejidad» y «Sistemas complejos».",
+    "entry": null
+  },
+  {
+    "candidate": "Complejo (Cynefin)",
+    "decision": "merge",
+    "mergeInto": "cynefin",
+    "reason": "Dominio de Cynefin; se describe dentro de la entrada única del marco.",
+    "entry": null
+  },
+  {
+    "candidate": "Complexity science",
+    "decision": "merge",
+    "mergeInto": "ciencias-de-la-complejidad",
+    "reason": "Es el nombre en inglés del mismo pilar.",
+    "entry": null
+  },
+  {
+    "candidate": "Complicado (Cynefin)",
+    "decision": "merge",
+    "mergeInto": "cynefin",
+    "reason": "Dominio de Cynefin; se describe dentro de la entrada única del marco.",
+    "entry": null
+  },
+  {
+    "candidate": "Contexto",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Idea recurrente de Recuenco («context is king»): una solución solo vale para su contexto.",
+    "entry": {
+      "term": "Contexto",
+      "slug": "contexto",
+      "aliases": ["contexto", "context is king", "contexto über alles"],
+      "short": "Circunstancias concretas que rodean un problema y deciden si una solución funciona o fracasa. Para Recuenco, casi todo.",
+      "body": "Recuenco repite que el contexto es a veces más importante que la cosa en sí. En CPS cada par solución/contexto funciona como una llave y su cerradura: da igual que encajen seis dientes si el séptimo falla. Por eso desconfía de los heurísticos, que no entienden de contexto, y de las recetas copiadas de otro caso. Nos cuesta tenerlo en cuenta porque complica cualquier análisis.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["sistemas-complejos", "personotecnia", "sindrome-del-coronel-thompson"],
+      "sources": [
+        { "threadId": "1684876869949120512", "tweetId": "1684876934902104065" },
+        { "threadId": "1545639451765997568", "tweetId": "1545639454051897344" },
+        { "threadId": "1337670943276224513", "tweetId": "1337710832566857730" }
+      ]
+    }
+  },
+  {
+    "candidate": "Corrientes subterráneas",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco dedica una turra a las influencias subterráneas y las liga a las consecuencias de segundo orden.",
+    "entry": {
+      "term": "Corrientes subterráneas",
+      "slug": "corrientes-subterraneas",
+      "aliases": ["corrientes subterráneas", "influencias subterráneas", "undercurrents"],
+      "short": "Influencias poco visibles que moldean un sistema desde abajo y no se perciben a primera vista.",
+      "body": "Recuenco las llama también undercurrents y las conecta con las consecuencias de segundo orden y la lectura de señales. Lo ilustra con la música moderna, formada por subculturas y movimientos que nunca estuvieron en primera línea. En la turra las aplica a la acción desde la sociedad civil: hay que orquestar muchas cosas porque lo decisivo no suele estar en la superficie.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["sensemaking", "zeitgeist", "orquestacion-cognitiva"],
+      "sources": [{ "threadId": "1888123731865702418", "tweetId": "1888123731865702418" }]
+    }
+  },
+  {
+    "candidate": "Cynefin",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Marco de referencia de Recuenco para distinguir problemas complicados de complejos; reúne todos los dominios.",
+    "entry": {
+      "term": "Cynefin",
+      "slug": "cynefin",
+      "aliases": ["Cynefin", "dominio complejo", "dominio caótico", "cuadrante caótico", "cuadrantes complejos", "dominio confuso"],
+      "short": "Marco de Dave Snowden que clasifica los problemas en cinco dominios según cómo se relacionan causa y efecto.",
+      "body": "En el dominio claro (antes «simple») causa y efecto son evidentes y basta con aplicar la práctica conocida. En el complicado la relación existe, pero hace falta análisis o un experto para verla. En el complejo causa y efecto solo se entienden a posteriori, así que hay que probar, observar y ajustar. En el caótico no se percibe relación alguna y primero hay que actuar para estabilizar. En el confuso no sabes en cuál de los otros estás; Recuenco lo conecta con la aporía. Para él, un problema complicado es cosa de un buen consultor y uno complejo pide un CPS, aunque avisa de que no todo lo desconocido es caótico. Lo considera revelador para entender la complejidad, pero una simplificación de la realidad.",
+      "domains": [
+        { "name": "Claro", "text": "Causa y efecto son evidentes para cualquiera; se resuelve aplicando la práctica conocida. Antes se llamaba «simple»." },
+        { "name": "Complicado", "text": "Hay relación entre causa y efecto, pero hace falta análisis o un experto para verla. Terreno del buen consultor." },
+        { "name": "Complejo", "text": "Causa y efecto solo se entienden a posteriori; hay que experimentar, observar y ajustar. Terreno del CPS." },
+        { "name": "Caótico", "text": "No se percibe relación entre causa y efecto; primero se actúa para estabilizar y luego se intenta entender." },
+        { "name": "Confuso", "text": "No se sabe en qué dominio está el problema; la primera tarea es averiguarlo. Recuenco lo liga a la aporía." }
+      ],
+      "origin": "Dave Snowden, marco Cynefin",
+      "group": "complejidad",
+      "related": ["ciencias-de-la-complejidad", "sistemas-complejos", "aporia", "dr-house", "consultoria", "sensemaking"],
+      "sources": [
+        { "threadId": "1543107844043673600", "tweetId": "1543107865132556290" },
+        { "threadId": "1591345649848487936", "tweetId": "1591345726109679617" },
+        { "threadId": "1966774475191435728", "tweetId": "1966774480358834401" }
+      ]
+    }
+  },
+  {
+    "candidate": "Emergencia",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la define y la usa para explicar por qué la cultura de una empresa no se cambia por decreto.",
+    "entry": {
+      "term": "Emergencia",
+      "slug": "emergencia",
+      "aliases": ["emergencia", "propiedad emergente", "fenómeno emergente", "emergente"],
+      "short": "Comportamientos colectivos de un sistema que no pueden deducirse del comportamiento de cada una de sus partes.",
+      "body": "Recuenco la resume así: comportamientos colectivos que no podemos extrapolar de los individuales. Su ejemplo favorito es la cultura de una organización, que emana de su arquitectura dinámica de incentivos. Por eso no se puede «cambiar la cultura» directamente: habría que cambiar todo lo que la provoca, y en un sistema complejo eso es una contradicción en los términos.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["sistemas-complejos", "ciencias-de-la-complejidad", "arquitectura-de-incentivos"],
+      "sources": [
+        { "threadId": "1352890795897061378", "tweetId": "1352916544796446723" },
+        { "threadId": "1649673649866113024", "tweetId": "1649678637283639297" }
+      ]
+    }
+  },
+  {
+    "candidate": "Enactación",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo explica al presentar a Karl Weick y cierra la turra con «follow the enactment».",
+    "entry": {
+      "term": "Enactación",
+      "slug": "enactacion",
+      "aliases": ["enactación", "enactment"],
+      "short": "Idea de Karl Weick: las organizaciones se crean y se definen por lo que hacen e interactúan sus miembros.",
+      "body": "Recuenco la recoge al presentar a Weick, al que llama santo patrón nunca del todo admitido de muchos pilares del CPS. Una organización no es su organigrama sino lo que sus miembros hacen en la práctica. De ahí su consejo final: para entender lo que pasa, sigue las acciones de cada uno según su skin in the game.",
+      "origin": "Karl E. Weick",
+      "group": "complejidad",
+      "related": ["sensemaking", "acoplamiento-suelto", "skin-in-the-game"],
+      "sources": [{ "threadId": "1852267188519854245", "tweetId": "1852302213244190829" }]
+    }
+  },
+  {
+    "candidate": "Homeostasis",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la explica y habla a menudo de homeostasis empresarial; tiene además una turra invitada propia.",
+    "entry": {
+      "term": "Homeostasis",
+      "slug": "homeostasis",
+      "aliases": ["homeostasis", "homeóstasis", "homeostasis empresarial", "homeóstasis empresarial", "homeostático"],
+      "short": "Capacidad de un organismo, o de una empresa, para mantenerse estable por dentro compensando los cambios de fuera.",
+      "body": "En biología es el equilibrio dinámico que regula temperatura, fluidos o azúcar mediante mecanismos realimentados. Recuenco lo traslada a la empresa: una compañía mezcla dinámicas biológicas, sociales y de sistemas, y su equilibrio interno puede romperse y volverse patológico. Recuperarlo exige ajustar a mano el sweet spot entre fuerzas opuestas, como innovación y optimización. A veces de ese ajuste depende que la compañía sobreviva.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["hormesis", "autopoiesis", "sweet-spot", "sistemas-complejos"],
+      "sources": [
+        { "threadId": "1543107844043673600", "tweetId": "1543107880664055808" },
+        { "threadId": "1834829754488221846", "tweetId": "1834829796460646689" },
+        { "threadId": "1741006814873821551", "tweetId": "1741006843009180028" }
+      ]
+    }
+  },
+  {
+    "candidate": "Hormesis",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la usa en varias turras como el dolor necesario para aprender y adaptarse.",
+    "entry": {
+      "term": "Hormesis",
+      "slug": "hormesis",
+      "aliases": ["hormesis", "hormésis"],
+      "short": "Dosis de estrés o dolor que, en lugar de destruir, fortalece y enseña. Recuenco la llama «dolor necesario para aprender».",
+      "body": "Viene de la biología: una exposición pequeña a algo dañino provoca una adaptación beneficiosa. Recuenco la aplica a personas y empresas. Al talento junior le falta hormesis porque la IA está eliminando los puestos de entrada donde se aprendía a golpes. Y en las empresas familiares, los herederos que no pasaron las penalidades de los fundadores sufren el relajamiento de la hormesis.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["homeostasis", "autopoiesis"],
+      "sources": [
+        { "threadId": "1943924463415820480", "tweetId": null },
+        { "threadId": "1832301234105061777", "tweetId": "1832301273397211435" },
+        { "threadId": "1834829754488221846", "tweetId": "1834829763627688307" }
+      ]
+    }
+  },
+  {
+    "candidate": "Incertidumbre",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco define el CPS en buena parte como gestión de la incertidumbre.",
+    "entry": {
+      "term": "Incertidumbre",
+      "slug": "incertidumbre",
+      "aliases": ["incertidumbre", "incertidumbres", "reductores de incertidumbre", "gestión de la incertidumbre"],
+      "short": "Falta de certezas sobre lo que va a pasar. El CPS la asume y gestiona; el cerebro la soporta fatal.",
+      "body": "Para Recuenco el CPS es en cierta manera la gestión de la incertidumbre. El cerebro humano se bloquea ante ella, y por eso siempre hay dinero para los «reductores de incertidumbre»: profetas, chamanes, adivinos o consultores estratégicos que venden certezas ficticias. Critica que ninguna asignatura escolar enseñe a gestionarla, cuando los entornos de máxima incertidumbre ya son lo normal.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["niebla-de-guerra", "aporia", "cynefin", "consultoria"],
+      "sources": [
+        { "threadId": "1363049095003316224", "tweetId": "1363073604745900032" },
+        { "threadId": "1434087755198386177", "tweetId": "1434087818490523650" },
+        { "threadId": "1520307318931570688", "tweetId": "1520307344734834688" }
+      ]
+    }
+  },
+  {
+    "candidate": "Liminalidad",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo presenta como concepto crítico del CPS y lo usa en muchas turras sobre innovación.",
+    "entry": {
+      "term": "Liminalidad",
+      "slug": "liminalidad",
+      "aliases": ["liminalidad", "liminal", "fricción liminar"],
+      "short": "Lo que ocurre en la frontera entre disciplinas. Para Recuenco, ahí es donde nace la innovación.",
+      "body": "Recuenco la define como todo lo que sucede al acercarse a una frontera, y la aplica sobre todo a la innovación: surge cuando artes maduras entran en fricción en sus zonas limítrofes. Pone como ejemplo a Jobs, que unió diseño y tecnología, o a Van Halen, que mezcló heavy y sensualidad. Poca gente crea valor ahí, porque casi todos son expertos atrincherados en un solo campo.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["pensamiento-liminal", "abrochador-liminal", "rabbit-hole", "orquestacion-cognitiva"],
+      "sources": [
+        { "threadId": "1297462657503694848", "tweetId": "1297481954993070080" },
+        { "threadId": "1297462657503694848", "tweetId": "1297482652115709953" },
+        { "threadId": "1317382505880866816", "tweetId": "1317401015235321856" }
+      ]
+    }
+  },
+  {
+    "candidate": "Mapa y territorio",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Las turras solo usan la expresión de pasada («el mapa no es el territorio») y ninguna la explica.",
+    "entry": null
+  },
+  {
+    "candidate": "Niebla de guerra",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la usa a menudo («fog of war is part of the war») y la reformula como niebla de Silent Hill.",
+    "entry": {
+      "term": "Niebla de guerra",
+      "slug": "niebla-de-guerra",
+      "aliases": ["niebla de guerra", "fog of war", "niebla de Silent Hill", "niebla rollo Silent Hill"],
+      "short": "Incertidumbre que rodea cualquier problema complejo: se ve poco, se avanza con cautela y hay que actuar igualmente.",
+      "body": "Recuenco toma el concepto de Clausewitz y repite que la niebla forma parte de la guerra. Su versión nerd es la niebla de Silent Hill, que reduce la visión a unos metros y convierte un paseo en tensión constante. Según su corolario al teorema de Roca Salvatella, abordar una disciplina más compleja que tu cualificación te mete en una niebla que no impide actuar, pero reduce las posibilidades de éxito.",
+      "origin": "Carl von Clausewitz, De la guerra",
+      "group": "complejidad",
+      "related": ["incertidumbre", "teorema-de-roca-salvatella", "cynefin"],
+      "sources": [
+        { "threadId": "1784107483444687237", "tweetId": "1784107498678452370" },
+        { "threadId": "1784107483444687237", "tweetId": "1784107509952692683" },
+        { "threadId": "1971825115165028522", "tweetId": "1971826555484557423" }
+      ]
+    }
+  },
+  {
+    "candidate": "Sensemaking",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco le dedica una serie de turras y lo considera parte crítica del proceso CPS.",
+    "entry": {
+      "term": "Sensemaking",
+      "slug": "sensemaking",
+      "aliases": ["sensemaking", "sense-making", "construcción de sentido"],
+      "short": "Proceso de dar sentido a una situación ambigua o confusa antes de decidir qué hacer con ella.",
+      "body": "Recuenco lo toma sobre todo de Karl Weick y lo considera crítico en el CPS: antes de resolver hay que entender qué está pasando. Es un proceso exigente y subjetivo, cargado de identidad, que a menudo provoca pánico y vacío. Por eso sostiene que no se discute sobre sensemaking: negar el relato de alguien es negar a la persona. Para él, Dave Snowden es el sensemaker definitivo.",
+      "origin": "Karl E. Weick, Sensemaking in Organizations",
+      "group": "complejidad",
+      "related": ["cynefin", "aporia", "diagnostico", "enactacion", "ciencias-de-la-complejidad", "rabbit-hole"],
+      "sources": [
+        { "threadId": "1596391703774367744", "tweetId": "1596391706290581504" },
+        { "threadId": "1806938762129101276", "tweetId": "1806938763257405819" },
+        { "threadId": "1804386948938699148", "tweetId": "1804386950561898529" }
+      ]
+    }
+  },
+  {
+    "candidate": "Simple (Cynefin)",
+    "decision": "merge",
+    "mergeInto": "cynefin",
+    "reason": "Dominio de Cynefin, hoy llamado «claro»; se describe dentro de la entrada única del marco.",
+    "entry": null
+  },
+  {
+    "candidate": "Sistemas Complejos",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Objeto de estudio del CPS, distinto de la disciplina (ciencias de la complejidad) y del dominio de Cynefin.",
+    "entry": {
+      "term": "Sistemas complejos",
+      "slug": "sistemas-complejos",
+      "aliases": ["sistemas complejos", "sistema complejo"],
+      "short": "Conjuntos de piezas tan entrelazadas que sus problemas se alimentan entre sí y no se pueden tratar por separado.",
+      "body": "Recuenco cita la metáfora de Snowden de las zarzas en un matorral: no sabes dónde empieza una y termina otra. En una empresa en apuros los problemas se realimentan y no son factorizables; arreglas uno y aparecen tres. Por eso considera al ser humano el sistema complejo por excelencia, y a los psicólogos entre los padres del CPS. Su ley general dice que todo proceso complejo acaba volviéndose complicado y, al final, sentido común.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["ciencias-de-la-complejidad", "cynefin", "emergencia", "pensamiento-sistemico", "factor-x"],
+      "sources": [
+        { "threadId": "1352890795897061378", "tweetId": "1352899563703701504" },
+        { "threadId": "1340160478316785666", "tweetId": "1340179902482493440" },
+        { "threadId": "1966774475191435728", "tweetId": "1966774478353875121" }
+      ]
+    }
+  },
+  {
+    "candidate": "Tendencias (macro-)",
+    "decision": "merge",
+    "mergeInto": "atractores",
+    "reason": "Recuenco reduce las macrotendencias a sus atractores; «tendencias» a secas es palabra común.",
+    "entry": null
+  },
+  {
+    "candidate": "Vaca esférica",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Metáfora que Recuenco usa en varias turras contra los modelos que ignoran la realidad y el Factor X.",
+    "entry": {
+      "term": "Vaca esférica",
+      "slug": "vaca-esferica",
+      "aliases": ["vaca esférica", "vacas esféricas"],
+      "short": "Modelo tan simplificado que funciona en el papel y no sirve en la realidad. Viene del chiste del físico.",
+      "body": "Procede del chiste del físico que resuelve la baja producción de leche de una granja, pero solo para vacas esféricas en el vacío. Recuenco lo aplica al determinismo que le enseñaron en la facultad, que resultó ser una simplificación, y a enfoques de manual como el de Watanabe, «CPS para niños y vacas esféricas». Según el test de Astudillo, cualquier vaca esférica que ignore el Factor X acaba aterrizando de morros.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["factor-x", "test-astudillo", "sistemas-complejos", "procesos-de-alta-variabilidad"],
+      "sources": [
+        { "threadId": "1527905242376962054", "tweetId": "1527905254230171649" },
+        { "threadId": "1763816753929347384", "tweetId": "1763816756261327224" }
+      ]
+    }
+  },
+  {
+    "candidate": "Zeitgeist",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo usa constantemente: ir contra el espíritu de la época es la ruina de un negocio.",
+    "entry": {
+      "term": "Zeitgeist",
+      "slug": "zeitgeist",
+      "aliases": ["zeitgeist"],
+      "short": "Espíritu de la época: lo que la sociedad está dispuesta a aceptar, desear o rechazar en un momento dado.",
+      "body": "Recuenco insiste en que no hay peor negocio que ir contra el zeitgeist: le atribuye la caída de Danone y el declive de Facebook. Frente a Christensen, sostiene que las disrupciones nacen de rupturas en la continuidad del zeitgeist más que de avances técnicos. El abrochador liminal triunfa porque conecta un estímulo tecnológico con el zeitgeist mediante una killer app.",
+      "origin": null,
+      "group": "sociedad",
+      "related": ["atractores", "abrochador-liminal", "corrientes-subterraneas"],
+      "sources": [
+        { "threadId": "1375697328561078276", "tweetId": "1375697427706089474" },
+        { "threadId": "1586258861190676482", "tweetId": "1586258955935907842" },
+        { "threadId": "1411191931669987332", "tweetId": "1411191939504955393" }
+      ]
+    }
+  },
+  {
+    "candidate": "Niebla de Silent Hill",
+    "decision": "merge",
+    "mergeInto": "niebla-de-guerra",
+    "reason": "Es la reformulación nerd que hace Recuenco de la niebla de guerra de Clausewitz.",
+    "entry": null
+  },
+  {
+    "candidate": "Elefante negro",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo define con precisión en la turra sobre la pandemia.",
+    "entry": {
+      "term": "Elefante negro",
+      "slug": "elefante-negro",
+      "aliases": ["elefante negro", "elefantes negros"],
+      "short": "Riesgo muy probable que decidimos ignorar y que, cuando estalla, fingimos que nadie podía prever.",
+      "body": "Recuenco lo toma de la respuesta de Taleb a quienes llamaban «cisne negro» a la pandemia: no era inesperada, solo la habíamos ignorado a conciencia. Lo emparenta con el «elefante en el ascensor» de Rumelt, eso que no vemos porque no nos interesa admitirlo. Cualquier estratega con experiencia ha visto a una compañía no ver lo que tiene delante.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["incertidumbre", "sesgo", "truth-coping"],
+      "sources": [
+        { "threadId": "1257237030062510080", "tweetId": "1257239173460897792" },
+        { "threadId": "1257237030062510080", "tweetId": "1257237690485026816" }
+      ]
+    }
+  }
+]

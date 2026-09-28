@@ -1,42 +1,43 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import PrelineScript from "./components/PrelineScript";
+import { Geist } from "next/font/google";
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import "./globals.css";
-import { AUTHORS } from '../infrastructure/constants';
+import { SITE } from '@/lib/site';
+import { THEME_SCRIPT } from '@/lib/theme';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://turrero.vercel.app'
-  ),
-  title: AUTHORS.MAIN,
-  description: `Biblioteca de hilos de ${AUTHORS.MAIN}`,
+  metadataBase: new URL(process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : SITE.url),
+  title: SITE.byline,
+  description: `Biblioteca de hilos de ${SITE.byline}`,
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: { url: '/android-chrome-192x192.png', sizes: '192x192' },
+  },
+  // Every page is its own canonical, without query strings: /turras?orden=… counts as /turras
+  alternates: { canonical: './' },
   openGraph: {
-    title: `El Turrero Post - Las turras de ${AUTHORS.MAIN}`,
-    description: `Colección de turras de ${AUTHORS.MAIN} sobre resolución de problemas complejos, estrategia y más.`,
-    url: 'https://turrero.vercel.app',
-    siteName: 'El Turrero Post',
+    title: `${SITE.name} - Las turras de ${SITE.byline}`,
+    description: SITE.description,
+    url: './',
+    siteName: SITE.name,
     locale: 'es_ES',
     type: 'website',
-    images: ['/promo.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `El Turrero Post - Las turras de ${AUTHORS.MAIN}`,
-    description: `Colección de turras de ${AUTHORS.MAIN} sobre resolución de problemas complejos, estrategia y más.`,
-    site: '@recuenco',
-    images: ['/promo.png'],
+    title: `${SITE.name} - Las turras de ${SITE.byline}`,
+    description: SITE.description,
+    site: SITE.xHandle,
   },
   robots: {
     index: true,
@@ -46,7 +47,12 @@ export const metadata: Metadata = {
 
 export const viewport = {
   width: 'device-width',
-  initialScale: 1
+  initialScale: 1,
+  // Browser chrome on mobile follows the page background of each theme (--color-whiskey-50)
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f9f6f3' },
+    { media: '(prefers-color-scheme: dark)', color: '#121212' },
+  ],
 };
 
 export default function RootLayout({
@@ -55,21 +61,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      
+    // The theme script sets data-theme before React hydrates, hence suppressHydrationWarning
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whiskey-50`}
+        className={`${geistSans.variable} antialiased bg-whiskey-50`}
         suppressHydrationWarning
       >
         <main className="min-h-screen flex flex-col">
           <Header />
-          <div className="flex-grow">
+          <div className="grow">
             {children}
           </div>
           <Footer />
         </main>
       </body>
-      <PrelineScript />
     </html>
   );
 }

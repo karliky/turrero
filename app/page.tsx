@@ -1,108 +1,63 @@
-import React from 'react';
-import { TweetFacade } from "../infrastructure";
 import { CategoryCard } from './components/CategoryCard';
-import { AdvertisementCard } from './components/AdvertisementCard';
-import { HeaderDescription } from './components/HeaderDescription';
-import { AUTHORS } from '@/infrastructure/constants';
+import { Masthead } from './components/Masthead';
+import { pickUnique } from '@/lib/archive';
+import {
+  getSiteStats,
+  getThread,
+  listCategories,
+  listNewest,
+  listThreadsByCategory,
+  listTopByEngagement,
+} from '@/lib/queries';
 
-async function getData() {
-  const tweetFacade = new TweetFacade();
-  const allTweets = await tweetFacade.tweetProvider.getAllTweets();
-  const tweets = allTweets.flat();
-  const categories = tweetFacade.getCategories();
-  const tweetsPerCategory = await Promise.all(categories.map(async category => {
-    if (category === 'top-25-turras') {
-      return tweetFacade.tweetProvider.getTop25Tweets()
-        .map(tweet => ({
-          ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-          engagement: 0
-        }));
-    }
-    if (category === 'las-más-nuevas') {
-      return tweetFacade.tweetProvider.get25newestTweets()
-        .map(tweet => ({
-          ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-          engagement: 0
-        }));
-    }
-    if (category === 'otros-autores') {
-      return tweetFacade.tweetProvider.filterAvoidTweetsByAuthor(AUTHORS.RECUENCO)
-        .map(tweet => ({
-          ...tweet,
-          summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-          engagement: 0
-        }));
-    }
-    
-    const categoryTweets = await tweetFacade.tweetProvider.getTweetsByCategory(category);
-    return categoryTweets.length > 0 
-      ? categoryTweets
-          .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
-          .slice(0, 10)
-          .map(tweet => ({
-            ...tweet,
-            summary: tweetFacade.tweetProvider.getSummaryById(tweet.id),
-            engagement: 0
-          }))
-      : [];
+const THREADS_PER_LIST_CARD = 10;
+const THREADS_PER_CATEGORY_CARD = 10;
+
+export default function Home() {
+  const stats = getSiteStats();
+  const newestThreads = listNewest(100);
+  const latest = getThread(newestThreads[0]!.id)!;
+  // Categories with most turras first (ties keep the editorial order of listCategories)
+  const categories = listCategories()
+    .map((category) => ({ category, threads: listThreadsByCategory(category.slug) }))
+    .sort((a, b) => b.threads.length - a.threads.length);
+
+  // Each turra is shown once when possible: Top first, then the newest, then categories in that order
+  const categoryThreads = categories.map(({ threads }) => threads);
+  // The latest turra leads the masthead, so the lists below skip it
+  const [, top = [], newest = [], ...byCategory] = pickUnique([
+    { threads: newestThreads.slice(0, 1), limit: 1 },
+    { threads: listTopByEngagement(100), limit: THREADS_PER_LIST_CARD },
+    { threads: newestThreads, limit: THREADS_PER_LIST_CARD },
+    // Small categories are topped up with turras shown above so every card lists the same number
+    ...categoryThreads.map((threads) => ({ threads, limit: THREADS_PER_CATEGORY_CARD, fill: true })),
+  ]);
+
+  const categoryCards = categories.map(({ category }, index) => ({
+    key: category.slug,
+    title: category.name,
+    threads: byCategory[index] ?? [],
+    href: `/${category.slug}`,
+    linkLabel: `Ver las ${categoryThreads[index]?.length ?? 0} turras`,
   }));
-  const newestTweets = tweetFacade.tweetProvider.get25newestTweets();
-  const lastUpdateDate = newestTweets[0] ? new Date(newestTweets[0].time).toLocaleDateString('es-ES', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  }) : 'No hay datos';
-  return { categories, tweets, tweetsPerCategory, totalTweets: allTweets.length, lastUpdateDate };
-}
 
-function formatCategoryTitle(category: string): string {
-  return category
-    .replace(/-/g, ' ')
-    .split(' ')
-    .map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.toLowerCase())
-    .join(' ');
-}
-
-export default async function Home() {
-  const data = await getData();
-  const { categories, totalTweets, tweetsPerCategory } = data;
   return (
     <div className="container mx-auto px-4 py-8">
-      <HeaderDescription 
-        totalTweets={totalTweets}
-        lastUpdateDate={data.lastUpdateDate}
+      <Masthead
+        totalThreads={stats.threads}
+        latest={latest}
       />
-      
+
+      {/* The two lists get their own row so the 15 categories fill complete rows of three */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <CategoryCard title="Top 10 turras" threads={top} href="/turras?orden=interaccion" linkLabel="Ver por interacción" showStats />
+        <CategoryCard title="Las más nuevas" threads={newest} href="/turras" linkLabel="Ver todas las turras" />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {categories.map((category, index) => {
-          const categoryTweets = tweetsPerCategory[index];
-          if (index === 5) {
-            return (
-              <React.Fragment key={`group-${index}-${category}`}>
-                <CategoryCard 
-                  key={`category-${index}-${category}`}
-                  category={category}
-                  tweets={categoryTweets || []}
-                  formatCategoryTitle={formatCategoryTitle}
-                />
-                <AdvertisementCard key={`ad-${category}`} />
-              </React.Fragment>
-            );
-          }
-          
-          return (
-            <React.Fragment key={`group-${index}-${category}`}>
-              <CategoryCard 
-                key={`category-${index}-${category}`}
-                category={category}
-                tweets={categoryTweets || []}
-                formatCategoryTitle={formatCategoryTitle}
-              />
-            </React.Fragment>
-          );
-        })}
+        {categoryCards.map(({ key, ...card }) => (
+          <CategoryCard key={key} {...card} />
+        ))}
       </div>
     </div>
   );

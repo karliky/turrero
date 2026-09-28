@@ -1,0 +1,288 @@
+[
+  {
+    "id": "1257924003068555269",
+    "primary": "cultura-popular",
+    "secondary": [],
+    "evidence": {
+      "cultura-popular": "voy a intentar hablar de cánones, de cómo se forman y de cómo nos alteran el pensamiento"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1332604415224770564",
+    "primary": "metodo-cps",
+    "secondary": ["marketing"],
+    "evidence": {
+      "metodo-cps": "Entonces cuando pude trazar los orígenes de la disciplina",
+      "marketing": "Pocas disciplinas hay ahora mismo más necesitadas de CPS que el Marketing."
+    },
+    "confidence": "media",
+    "alternative": "marketing"
+  },
+  {
+    "id": "1439130053267316738",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "tu ventaja competitiva y tu propuesta de valor, por más exitosa que haya sido, se va a agotar"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1451786307403927553",
+    "primary": "sociologia",
+    "secondary": ["politica-y-sector-publico"],
+    "evidence": {
+      "sociologia": "Estamos rodeados de narrativas interesadas, a título global y a título particular.",
+      "politica-y-sector-publico": "El planteamiento del mercado marginal de energía, que es una normativa europea"
+    },
+    "confidence": "baja",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1464529976540241923",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "El Marketing actual demanda estrategas de primer nivel"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1467051970422878210",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "La gente con AACC socializa con gente semejante."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1487312375351029760",
+    "primary": "marketing",
+    "secondary": ["metodo-cps"],
+    "evidence": {
+      "marketing": "La autosegmentación es un mecanismo crítico a la hora de lanzar ideas complejas al mercado.",
+      "metodo-cps": "Hablé también en su momento del proceso comercial asociado al CPS"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1527905242376962054",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "Los procesos de alta variabilidad (PAV) son un subconjunto de procesos que lidian con aspectos críticos"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1535521789585117185",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "las dinámicas de creación y sustentación de opinión"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1604019306349592577",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "No hay CPS sin gestión del Factor X."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1616684654269980673",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "Donde entra una narrativa afectiva, el Einstein más Einstein se convierte en masa lanar."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1710564695336247487",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "La confianza es un elemento fundamental en nuestra sociedad y en nuestras relaciones interpersonales."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1713075981328519678",
+    "primary": "estrategia",
+    "secondary": ["sistemas-complejos"],
+    "evidence": {
+      "estrategia": "la complejidad, lejos de ser un inconveniente a la hora de abordar un problema, es un moat natural.",
+      "sistemas-complejos": "El CPS es básicamente la búsqueda de ese sweet spot entre simplicidad y complejidad."
+    },
+    "confidence": "baja",
+    "alternative": "sistemas-complejos"
+  },
+  {
+    "id": "1728306256585101618",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "la tetralogía sobre la convergencia de la IA y el CPS"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1733397009418096842",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "La tesis de sir Ken Robinson sobre por qué las escuelas matan la creatividad"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1761287914493796842",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "no encontrar el sweet spot con respecto a nuestras pasiones"
+    },
+    "confidence": "baja",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1781573444485697867",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "el hueco abierto que planteo debería llenar el CPS Hispano"
+    },
+    "confidence": "media",
+    "alternative": "cultura-popular"
+  },
+  {
+    "id": "1791716794312318984",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Hay peligro de que la comunidad CPS y la propia disciplina se deteriore?"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1865306644827029957",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "Las aporías y las inconsistencias son parte del sensemaking"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1870373349282484488",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "Todas las compañías tienen un tamaño a partir del cual dejan de tener sentido"
+    },
+    "confidence": "media",
+    "alternative": "finanzas-e-inversion"
+  },
+  {
+    "id": "1903343437719670927",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "La Wii fue el resultado de un cambio radical de enfoque, y un sidestepping de libro"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1997212613571117548",
+    "primary": "finanzas-e-inversion",
+    "secondary": ["cultura-popular"],
+    "evidence": {
+      "finanzas-e-inversion": "El PE se ha visto obligado a entrar en negocios que dependen de humanos",
+      "cultura-popular": "EA se obsesionó con \"live services\": microtransacciones, loot boxes"
+    },
+    "confidence": "media",
+    "alternative": "cultura-popular"
+  },
+  {
+    "id": "2004624575837958361",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "Los cinco atractores versión 2026."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2045382646054674761",
+    "primary": "finanzas-e-inversion",
+    "secondary": ["psicologia-y-decisiones"],
+    "evidence": {
+      "finanzas-e-inversion": "Mi punto era que el problema subyacente del Private Equity sigue ahí",
+      "psicologia-y-decisiones": "No hay cosa más sobrevalorada en la vida que tener razón."
+    },
+    "confidence": "baja",
+    "alternative": "desarrollo-personal"
+  },
+  {
+    "id": "2050469219544752257",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "como metáfora de dos aproximaciones antagónicas a la neurodivergencia contemporánea"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2053002707628142991",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "el sistema tritura el mayor activo de este país: las Altas Capacidades (AACC) y la neurodivergencia"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2060639447427727568",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "la reacción química IA/Universidad"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2073294311634973165",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "cerrando el arco de educación"
+    },
+    "confidence": "alta",
+    "alternative": null
+  }
+]

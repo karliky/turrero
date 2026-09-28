@@ -1,0 +1,320 @@
+[
+  {
+    "id": "1014799133553647616",
+    "primary": "marketing",
+    "secondary": [
+      "estrategia"
+    ],
+    "evidence": {
+      "marketing": "El patrocinio actual necesita una sacudida monumental.",
+      "estrategia": "La mayor parte de las compañías para las que trabajo o he trabajado carecen de estrategia"
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1259054408983289856",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "la correlación entre la superdotación y la prosperidad de un país"
+    },
+    "confidence": "media",
+    "alternative": "politica-y-sector-publico"
+  },
+  {
+    "id": "1270594048617824257",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "hay muy pocos sobre orquestación cognitiva y gestión de egos en equipos transdisciplinares"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1302148427791253507",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Hoy voy a hablar de como se convierte uno en Complex Problem Solver."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1317382505880866816",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "El punto principal es que los equipos CPS sin orquestación cognitiva tienden a la autodestrucción."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1370628575775367168",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "Lo que quiero recalcar es que los datos dejan mucho espacio de actuación a la intuición"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1383300151763103751",
+    "primary": "marketing",
+    "secondary": [
+      "personotecnia"
+    ],
+    "evidence": {
+      "marketing": "Facebook es la metáfora perfecta sobre todo lo que ha estado mal en la industria publicitaria",
+      "personotecnia": "en abierta violación de los principios más elementales de la personotecnia"
+    },
+    "confidence": "media",
+    "alternative": "personotecnia"
+  },
+  {
+    "id": "1449265748019453954",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "En el momento en que dejamos al cerebro realizar la valoración de algo, entran los sesgos a caballo."
+    },
+    "confidence": "baja",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1515034112725241860",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Todo lo que es útil para prolongar tu existencia cuando eres consultor se volverá en tu contra cuando eres CPSer."
+    },
+    "confidence": "media",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1545639451765997568",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "El problema fundamental, es que la realidad es un proceso contextual."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1586258861190676482",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "Otra opción era la opción Vasile: La vaca se ordeña siempre de la misma manera hasta que revienta."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1596391703774367744",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "La serendipia existe, pero un sistema lo suficientemente complejo es indistinguible de uno aleatorio"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1664860434845913089",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Latitud: El framework CPS que he popularizado se caracteriza por dos aspectos que hacen que cubra mucho territorio"
+    },
+    "confidence": "baja",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1677573783018696704",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "El CPS requiere del poder de la diversidad cognitiva"
+    },
+    "confidence": "media",
+    "alternative": "organizaciones-e-incentivos"
+  },
+  {
+    "id": "1700404761428738437",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "Mi fascinación con el fenómeno tiene que ver con el mecanismo psicológico, no moral"
+    },
+    "confidence": "media",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1725782327131885653",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "Los negocios que piden cuantización serán apisonados por la IA, lo que demanden toque humano, tendrán un moat."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1763816753929347384",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [
+      "metodo-cps"
+    ],
+    "evidence": {
+      "psicologia-y-decisiones": "Querer tener razón es una tendencia humana que puede tener varias explicaciones psicológicas.",
+      "metodo-cps": "El CPS como metadisciplina, en contextos como el empresarial o el político, entrega al Factor X el mismo peso específico"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1766352097409134910",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Vamos a reflexionar sobre qué es el CPS, que no es, y una metáfora sobre ello."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1786636941607260240",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "La estrategia es fundamentalmente un ejercicio de pensamiento independiente, creativo, fuera del beaten path."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1804386948938699148",
+    "primary": "sistemas-complejos",
+    "secondary": [
+      "psicologia-y-decisiones"
+    ],
+    "evidence": {
+      "sistemas-complejos": "Sin embargo, en el aspecto laboral/organizacional yo prefiero la aproximación de “Sensemaking in organizations” por Karl Weick.",
+      "psicologia-y-decisiones": "entra automáticamente en modo Knut Hamsun"
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1845017839423369267",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "Spinae, acompañamiento estratégico para marcas que importan."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1860224907386273949",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "Tener razón está completamente sobrevalorado fundamentalmente porque hay enormes recompensas cognitivas inmediatas asociadas."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1867841781313769674",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Nadie en su sano juicio puede considerar que convertirse en emprendedor, especialmente en España, sea una decisión juiciosa."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1890657339599999084",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "Desarrollar una estrategia nueva que derrote la meta, requiere de observar el entorno y comprender los puntos fuertes y débiles."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1900814275511210417",
+    "primary": "reflexiones-personales",
+    "secondary": [
+      "metodo-cps"
+    ],
+    "evidence": {
+      "reflexiones-personales": "Gracias a la comunidad. Sois lo más grande que hay.",
+      "metodo-cps": "Gracias a @paumugarra y a los organizadores de la comunidad CPS."
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1966774475191435728",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "Todo lo que no sea CPS terminará siendo sistematizado y ejecutado por la IA."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1989585041949622370",
+    "primary": "finanzas-e-inversion",
+    "secondary": [],
+    "evidence": {
+      "finanzas-e-inversion": "Todos los paradigmas financieros vigentes lo han sido porque alguien leyó la nueva situación"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2012420052809892175",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [
+      "organizaciones-e-incentivos"
+    ],
+    "evidence": {
+      "equipos-y-liderazgo": "no tiene ni puta idea de orquestación cognitiva. Piensa que lo suyo es entrenar.",
+      "organizaciones-e-incentivos": "Xabi no entiende que Florentino es un Ingeniero de Caminos de los sesenta."
+    },
+    "confidence": "media",
+    "alternative": "sistemas-complejos"
+  },
+  {
+    "id": "2080919569976185336",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "No hay adopción real de la IA en una compañía sin atravesar un desierto tremendo"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2103744346142966174",
+    "primary": "personotecnia",
+    "secondary": [],
+    "evidence": {
+      "personotecnia": "estamos a las puertas de un cambio brutal basado en la Personotecnia"
+    },
+    "confidence": "alta",
+    "alternative": null
+  }
+]

@@ -1,320 +1,99 @@
 # El Turrero Post
 
-Welcome to the El Turrero Post project! This website is designed to showcase the
-x.com threads of Javier G. Recuenco who specializes in complexity science. The
-goal of the website is to present his tweets in a visually pleasing and
-easy-to-navigate format.
+[![Web](https://img.shields.io/website?url=https%3A%2F%2Fturrero.vercel.app&label=turrero.vercel.app)](https://turrero.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![SQLite](https://img.shields.io/badge/SQLite-node%3Asqlite-003B57?logo=sqlite&logoColor=white)](https://nodejs.org/api/sqlite.html)
+[![Node.js](https://img.shields.io/badge/Node.js-24.x-5FA04E?logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![Vercel](https://img.shields.io/badge/Vercel-deploy-000000?logo=vercel&logoColor=white)](https://vercel.com)
+[![Licencia: Unlicense](https://img.shields.io/badge/licencia-Unlicense-blue)](LICENSE.md)
+[![Último commit](https://img.shields.io/github/last-commit/karliky/turrero)](https://github.com/karliky/turrero/commits)
 
-## Features
+Archivo de las turras (hilos de X) de Javier G. Recuenco y la Comunidad CPS sobre resolución de problemas complejos.
 
-- **Clean, minimalist design** focused on thread readability
-- **Automatic embedding** of images, cards, animated GIFs and quoted tweets from X.com (embedded tweet IDs resolved from text when scraping misses them)
-- **Advanced search** with Algolia-powered indexing
-- **Category-based navigation** for organized thread discovery
-- **Interactive quizzes** for educational threads
-- **Book recommendations** extracted from thread content
-- **Local AI enrichment** via Ollama for automated summary, categorization, and exam generation
-- **Standardized ID system** for consistent data handling
-- **Real-time validation** pipeline for data integrity
-- **Responsive design** optimized for all devices
+**Qué hay en la web:**
+- **Las turras:** 268, con buscador y filtros por año, categoría y autor.
+- **`/empieza-aqui`:** por dónde empezar, los cuatro pilares del CPS y las series que se leen seguidas.
+- **`/glosario`:** 90 conceptos, enlazados dentro de las turras.
+- **`/mapa-de-ideas`:** qué conceptos aparecen cada año y qué turras citan a cuáles.
+- **`/biblioteca`:** los 327 libros citados.
+- **`/ebook`:** todo el archivo en EPUB.
+- **Modo claro y oscuro:** sigue al sistema, con interruptor, y con contraste AA comprobado por tests.
 
-## Known bugs or improvements
+## Cómo funciona
 
-- Add blocks: #preguntaalrecu y latest 25 cronologic turras
-- Show cards with card design (for those with url)
-- Some dates are incorrectly scraped, example
-  https://x.com/Recuenco/status/1614168029876600833
-- Add copy link to every tweet so we can share it, like lexical.dev does on the
-  left of every block
-
-## Recent Architecture Improvements (v2.0)
-
-### ID Standardization System
-- **Unified ID Format**: Standardized to `threadId#tweetId` format across all systems
-- **Type Safety**: Full TypeScript support with proper ID type definitions
-- **Backward Compatibility**: Automatic migration from legacy formats
-- **Validation Pipeline**: Comprehensive data integrity checks
-
-### Hybrid Runtime Architecture
-- **Frontend**: Next.js 15 with React 19 for optimal user experience
-- **Scripts**: Deno for data processing with modern JavaScript features
-- **Database**: JSON-based with strict schema validation
-- **Pipeline**: Automated validation and build processes
-
-### Development Pipeline
-```bash
-npm run pipeline:validate    # Validate both Node.js and Deno environments
-npm run pipeline:build      # Build complete project
-npm run pipeline:test       # Run all tests
-npm run pipeline:full       # Complete validation → build → test
+```
+X API ──► lib/x.ts ──► lib/ingest.ts ──► data/turrero.db ──► lib/queries.ts ──► Next.js (estático)
+                           ▲
+               OpenAI ──► lib/ai.ts
 ```
 
-## More resources
+- **Una sola fuente de verdad:** `data/turrero.db`, un SQLite versionado en git. El esquema y cada cambio de datos van en `data/migrations/`, y nunca se edita a mano.
+- **Build estático:** la web se genera entera en el build. En runtime solo se ejecutan:
+  - la búsqueda, `/api/search`, con FTS5;
+  - el proxy de vídeos de X, `/api/tweet-video`;
+  - la redirección de las URLs antiguas de tweets a su turra.
+- **Añadir una turra:** se descarga de la API de X (solo la cadena en la que el autor se responde a sí mismo) y OpenAI le pone título, categorías y examen.
+- **Llamadas de pago:** las respuestas de X y OpenAI se guardan completas en `.cache/api/`, así que la misma petición nunca se paga dos veces.
 
-- [Javier G. Recuenco](https://x.com/Recuenco)
-- [Comunidad CPS](https://x.com/CPSComunidad)
-- [Comunidad CPS (Youtube)](https://youtube.com/@cpsspain)
-- [Polymatas: Sabiduría = Conocimiento + Razón + Aprendizaje](https://www.polymatas.com/)
-- [CPS Notebook](https://cps.tonidorta.com)
+## Puesta en marcha
 
-## Technology Used
-
-The website is built using:
-
-- **Next.js 15** with App Router for the frontend
-- **React 19** with TypeScript for components  
-- **Node.js 22+** for frontend and legacy scripts
-- **Deno 1.41+** for primary data processing scripts
-- **Python 3.8+** for graph generation
-- **Puppeteer** for web scraping X.com threads
-- **Ollama** for local AI enrichment (summary, categories, exam generation)
-- **Hybrid Architecture**: Node.js frontend + Deno scripts for optimal performance
-
-You can handle node.js versions by using nvm, for example:
+Requiere **Node.js 24**.
 
 ```bash
-nvm use v23.3.0
-nvm alias default 23.3.0 # now should be forever default
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-### Setting up Deno
-
-Slowly nodejs for the scrapping tools will be replaced fot deno.
-
-1. Install Deno:
-   - Using Shell (Mac, Linux):
-     ```bash
-     curl -fsSL https://deno.land/install.sh | sh
-     ```
-   - Using Homebrew (Mac):
-     ```bash
-     brew install deno
-     ```
-   - Other methods available at https://deno.com
-
-2. Verify installation: `deno --version` (should be 1.41 or higher)
-
-3. Configure environment:
-   - Add Deno to your path (if not done automatically)
-   - Set environment variables if needed:
-     ```bash
-     # Optional: Set custom cache directory
-     export DENO_DIR="$HOME/.cache/deno"
-     # Optional: Disable auto package.json resolution
-     export DENO_NO_PACKAGE_JSON=1
-     ```
-
-4. Install Deno VS Code extension for better development experience
-
-5. The scraping script requires these permissions:
-   ```bash
-   deno run --allow-read --allow-write --allow-env --allow-net --allow-sys --allow-run scripts/recorder.ts
-   ```
-   Or use `--allow-all` for convenience during development
-
-6. Useful Deno commands:
-   - `deno fmt` - Format your code
-   - `deno lint` - Lint your code
-   - `deno test` - Run tests
-   - `deno task` - Run tasks defined in config
-
-## Getting Started
-
-The front-end is located at the root of the project folder and the scraping
-logic is located under the `scripts` folder.
-
-To get started with the project, you will need to clone the repository and
-install the dependencies. Here are the steps:
-
-1. Clone the repository: `git clone git@github.com:karliky/turrero.git`
-2. Install Node.js dependencies: `npm install`
-3. Install Puppeteer and its browser dependencies:
+La web no necesita variables de entorno. Solo hacen falta para añadir o refrescar turras:
 
 ```bash
-npm install puppeteer-core @puppeteer/browsers
-npx @puppeteer/browsers install chrome
+cp .env.example .env.local
 ```
 
-4. Create a `.env` file with your X/Twitter credentials (see `.env.example` for
-   required fields) and optionally set `OLLAMA_MODEL` (default: `llama3.2`)
-5. Install Ollama from https://ollama.com and pull your model: `ollama pull llama3.2`
-6. Start the development server: `npm run dev`
-7. Open the website in your browser: `http://localhost:3000`
+| Variable | Para qué |
+|---|---|
+| `X_API_KEY`, `X_API_KEY_SECRET` (o `X_API_BEARER_TOKEN`) | Descargar turras de X |
+| `OPENAI_API_KEY`, `OPENAI_MODEL` (opcional) | Título, categorías y examen |
 
-## Adding new threads
+## Comandos
 
-### Automated Method (Recommended)
+| Comando | Qué hace |
+|---|---|
+| `npm run turra:add -- <url o id>` | Importa una turra y la enriquece con IA |
+| `npm run turra:discover -- [--add]` | Busca (e importa) las turras de los sábados posteriores a la última archivada |
+| `npm run turra:sync -- <id> [--delete-missing]` | Vuelve a descargar una turra conservando título, categorías y examen |
+| `npm run turra:enrich -- <id> [--refresh]` | Regenera título, categorías y examen |
+| `npm run turra:export-obsidian -- --out <carpeta>` | Exporta las turras como notas de Obsidian |
+| `npm run books:metadata` | Completa autor y portada de los libros (Goodreads, Open Library, Google Books) |
+| `npm run db:migrate` | Aplica las migraciones pendientes |
+| `npm run ebook` | Genera `public/ebook/el-turrero-post.epub` (también lo hace `npm run build`) |
+| `npm run check` | Typecheck, lint y tests. Tiene que pasar antes de cualquier cambio |
 
-**Using Claude Code Hook (Fully Automated):**
+Los tests no llaman a X ni a OpenAI: usan `tests/fixtures/`.
 
-If you have the Claude Code hook configured, simply type:
-```
-add thread 1234567890123456789 This is the first tweet text
-```
+## Contenido editorial
 
-Claude will automatically detect this pattern and execute the complete workflow including AI processing.
+Todo es reproducible y está versionado:
+- **Categorías** (15 temas de turras y 11 de libros), en `data/categorization/`:
+  - notas por turra;
+  - taxonomía con criterios;
+  - dos clasificaciones independientes y sus desacuerdos resueltos.
 
-**Using the Script (Semi-Automated):**
+  Los scripts `scripts/categorize-*.ts` generan la migración. Las URLs de categorías retiradas redirigen con 301 (`LEGACY_CATEGORY_URLS` en `lib/site.ts`).
+- **Glosario**, en `data/glossary/glossary.json`. Para cambiarlo, edita ese fichero, ejecuta `npx tsx scripts/glossary-migration.ts NNNN_nombre` y después `npm run db:migrate`. Los tests comprueban que las citas sean literales.
+- **Guía de lectura y pilares**, en `app/empieza-aqui/guia.ts`, también con citas literales comprobadas por tests.
 
-You could use the script: `$ ./scripts/add_thread.sh $id $first_tweet_line`
-where `id` is the first tweet id (thread id) and `first_tweet_line` is the first
-tweet text.
+## Despliegue
 
-Alternatively you could use the following steps:
+En Vercel, sin configuración extra: `npm run build` genera el EPUB y la web.
 
-1. `deno run --allow-all scripts/add-new-tweet.ts $id "$first_tweet_line"` to add the first
-   tweet id (thread id) and the first tweet text to the top of `infrastructure/db/turras.csv`
-2. `deno task scrape` — scrapes the thread and appends it to `infrastructure/db/tweets.json`
-3. `deno task enrich` — enriches tweets (cards, media, embedded tweets; resolves unknown embed IDs and normalizes card fields)
-4. Generate metadata images (e.g. `node scripts/image-card-generator.js` if available), then move `scripts/metadata/*` to `public/metadata/`
-5. `deno task algolia` — updates `infrastructure/db/tweets-db.json`; then update the Algolia index (clear and upload the file)
-6. `deno task books` — updates `infrastructure/db/books-not-enriched.json`
-7. `deno task book-enrich` — book enrichment
-8. `deno task ai-local $id` — generates summary, categories, and exam via local Ollama
-9. Regenerate graph data: `python3 scripts/create_graph.py`
-10. Verify with `npm run dev`
+- **Funciones:** en ellas solo va lo necesario (base de datos y código); el resto queda fuera con `outputFileTracingExcludes` en `next.config.ts`.
+- **`public/`:** lo sirve la CDN.
+- **`design/`:** los ficheros fuente de logos y promo, que no se publican.
 
-The “last update” date in the header is derived automatically from the most recent tweet in the data.
+## Licencia
 
-The data source that contains the x.com threads and metadata is located under
-`/infrastructure`.
-
-The files `db/tweets.json, db/tweets-db.json, db/tweets_enriched.json` are
-automatically generated and should not be manually edited. The files
-`db/tweets_map.json, db/tweets_summary.json`, `db/tweets_exam.json` should be
-manually edited.
-
-## Debug
-
-To test scraping a single tweet in isolation (no changes to `tweets.json`):
-
-```bash
-deno task scrape -- --test $tweet_id
-```
-
-### Backfill Card Metadata
-
-Use this when a link card has wrong/missing title or domain, or when legacy `caption`
-data needs to be migrated.
-
-```bash
-deno task fix-tweet <tweet_id_1> <tweet_id_2> ...
-deno task enrich
-```
-
-Card field contract:
-- `domain`: real hostname (for grouping and icon/category logic)
-- `title`: visible card label (from X card text or fetched page title)
-- `description`: page summary/preview text
-- `caption`: deprecated legacy field; should not be used going forward
-
-Check the script and logs for more debugging options.
-
-## Exporting to Obsidian
-
-Export a turra as an Obsidian-friendly `atom` note:
-
-```bash
-deno task export-obsidian --id <thread_or_tweet_id> --out "/path/to/obsidian/folder" --overwrite
-```
-
-Notes:
-- Output filename format: `<thread_id>-<summary_slug>.md`
-- Title is sourced from `infrastructure/db/tweets_summary.json` when available
-- Categories are sourced from `infrastructure/db/tweets_map.json` and converted to snake_case tags
-- Link cards are sourced from `infrastructure/db/tweets_enriched.json`
-
-Optional AI key ideas (local model):
-
-```bash
-deno task export-obsidian --id <thread_or_tweet_id> --with-key-ideas-ai --key-ideas-count 5 --out "/path/to/obsidian/folder" --overwrite
-```
-
-AI configuration is read from `.env`:
-- `OLLAMA_MODEL` (example: `gpt-oss:20b`)
-- `OLLAMA_BASE_URL` (default: `http://localhost:11434`)
-
-### Batch export all turras
-
-Export all threads to markdown (AI key ideas enabled by default):
-
-```bash
-deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --overwrite
-```
-
-If there are failures, the script writes:
-- `<out>/_export_obsidian_failed_ids.txt` (IDs to retry)
-- `<out>/_export_obsidian_report.json` (full execution report)
-
-Retry only failed exports:
-
-```bash
-deno task export-obsidian-all --out "/Users/ajramos/Documents/obsidian/chronicles/02-Atoms/CPS/Turras" --only-failed --overwrite
-```
-
-Useful flags:
-- `--without-ai` disables local AI key ideas generation
-- `--key-ideas-count <n>` controls how many key ideas to request
-- `--key-ideas-model <model>` overrides `OLLAMA_MODEL`
-- `--ollama-url <url>` overrides `OLLAMA_BASE_URL`
-- `--limit <n>` test mode for first N turras
-- `--delay-ms <n>` adds delay between exports
-
-## Claude Code Hook Setup
-
-To enable the automated thread processing feature with Claude Code:
-
-### 1. Install the Hook Configuration
-
-Copy the hook configuration to your Claude Code settings:
-
-**Hook Already Configured:**
-The hook is already configured in `.claude/settings.json` in this project.
-
-**For Global Configuration (Optional):**
-To use this hook in other projects, add to your `~/.claude/settings.json`:
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": "add.*thread|new.*thread|thread.*[0-9]{15,20}",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "scripts/auto_thread_hook.sh"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-### 2. Verify Hook Installation
-
-Test the hook by typing in Claude Code:
-```
-add thread 1234567890123456789 Test thread content
-```
-
-### 3. Hook Features
-
-- **Automatic Detection**: Recognizes thread addition patterns
-- **Complete Workflow**: Executes all steps automatically
-- **AI Processing**: Uses local Ollama for summary, categories, and exam generation
-- **Error Handling**: Provides feedback and logs issues
-- **Safe Execution**: Always exits successfully to avoid blocking Claude
-
-### 4. Hook Logs
-
-Check hook activity:
-```bash
-tail -f ~/.claude/thread_hook.log
-```
-
-## Contribution
-
-We welcome contributions to this project. If you find any bugs or have any
-suggestions for new features, please open an issue or a pull request on the
-GitHub repository.
+[Unlicense](LICENSE.md): dominio público. Las turras son de sus autores.

@@ -1,0 +1,62 @@
+{
+  "https://www.goodreads.com/es/book/show/36520721-the-gaslight-effect": {
+    "primary": "Psicología y comportamiento",
+    "secondary": ["Desarrollo personal"],
+    "reason": "Explica un mecanismo psicológico (la manipulación del gaslighting) antes que dar pautas de autoayuda; las pautas quedan como secundaria."
+  },
+  "https://www.goodreads.com/book/show/7724243-the-stress-effect": {
+    "primary": "Psicología y comportamiento",
+    "secondary": ["Estrategia y empresa"],
+    "reason": "El tema es cómo el estrés deteriora las decisiones; los directivos son el caso de aplicación."
+  },
+  "https://www.goodreads.com/book/show/113934.The_Goal": {
+    "primary": "Estrategia y empresa",
+    "secondary": ["Ficción, cómic y juegos"],
+    "reason": "Novela didáctica escrita para enseñar la teoría de las restricciones (regla «didactic» de la taxonomía)."
+  },
+  "https://www.goodreads.com/book/show/97752.The_Freud_Jung_Letters": {
+    "primary": "Historia y biografías",
+    "secondary": ["Psicología y comportamiento"],
+    "reason": "Es una correspondencia, un documento histórico sobre la relación entre Freud y Jung, no un ensayo de psicología."
+  },
+  "https://www.goodreads.com/book/show/49198606-how-not-to-be-wrong": {
+    "primary": "Psicología y comportamiento",
+    "secondary": ["Desarrollo personal"],
+    "reason": "Trata de por qué nos cuesta cambiar de opinión (sesgos y creencias); la invitación a hacerlo es la parte práctica."
+  },
+  "https://www.goodreads.com/book/show/33585396-side-hustle": {
+    "primary": "Estrategia y empresa",
+    "secondary": ["Desarrollo personal"],
+    "reason": "Es un método para lanzar un pequeño negocio, es decir, emprendimiento, que los criterios sitúan en Estrategia y empresa."
+  },
+  "https://www.goodreads.com/book/show/123070558-la-realidad-no-existe": {
+    "primary": "Ciencia y complejidad",
+    "secondary": ["Psicología y comportamiento"],
+    "reason": "Divulgación sobre los límites del conocimiento y la percepción de la realidad; la parte perceptiva queda como secundaria."
+  },
+  "https://www.goodreads.com/book/show/548887.Counselling_for_Toads": {
+    "primary": "Psicología y comportamiento",
+    "secondary": ["Ficción, cómic y juegos"],
+    "reason": "Novela didáctica escrita para enseñar psicoterapia (análisis transaccional); regla «didactic» de la taxonomía."
+  },
+  "https://www.goodreads.com/book/show/25827122-the-end-of-jobs": {
+    "primary": "Desarrollo personal",
+    "secondary": ["Estrategia y empresa"],
+    "reason": "Es un libro de carrera profesional: cómo dejar el empleo asalariado por el emprendimiento, dirigido al lector individual."
+  },
+  "https://www.goodreads.com/book/show/52908942-how-to-avoid-a-climate-disaster": {
+    "primary": "Ciencia y complejidad",
+    "secondary": ["Tecnología e IA"],
+    "reason": "El tema es el cambio climático como problema científico; las tecnologías de solución son la segunda parte."
+  },
+  "https://www.goodreads.com/book/show/2763998-incredible-coincidence": {
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "La sincronicidad es un concepto de la psicología junguiana y el libro recopila experiencias personales; no es divulgación científica."
+  },
+  "https://www.goodreads.com/book/show/131885.Fearful_Symmetry": {
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Es un estudio sobre la obra de un autor (Blake), tratado igual que MetaMaus o Alan Moore: magia y precisión."
+  }
+}

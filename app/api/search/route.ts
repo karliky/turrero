@@ -1,16 +1,12 @@
 import { NextResponse } from 'next/server';
-import { TweetProvider } from '../../../infrastructure/TweetProvider';
+import { search } from '@/lib/queries';
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get('q');
+export const runtime = 'nodejs';
 
-  if (!query) {
-    return NextResponse.json({ hits: [] });
-  }
-
-  const tweetProvider = new TweetProvider();
-  const summary = tweetProvider.getSummaryById(query);
-
-  return NextResponse.json({ summary });
-} 
+export function GET(request: Request) {
+  const query = new URL(request.url).searchParams.get('q')?.slice(0, 200) ?? '';
+  return NextResponse.json(
+    { results: search(query) },
+    { headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' } },
+  );
+}

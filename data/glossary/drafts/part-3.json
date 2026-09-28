@@ -1,0 +1,658 @@
+[
+  {
+    "candidate": "Asertividad",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco le dedica una turra entera y la vuelve a usar al hablar de estrategia y de venta de CPS.",
+    "entry": {
+      "term": "asertividad",
+      "slug": "asertividad",
+      "aliases": ["asertividad", "asertivo", "asertiva", "asertivos"],
+      "short": "Capacidad de defender tu criterio con firmeza y franqueza, sin agresividad y sin dejar de respetar al otro.",
+      "body": "Recuenco la considera imprescindible en el CPS, porque quien diagnostica tiene que decir verdades incómodas a la dirección, venga quien venga del MIT o del INSEAD. Como la asertividad genera conflicto y casi todo el mundo lo evita, a menudo se sustituye por adulación, y así se degrada la estrategia. Solo funciona acompañada de un autocontrol casi obsesivo que evite la «pirotecnia abrasiva».",
+      "origin": null,
+      "group": "personas",
+      "related": ["truth-coping", "factor-x", "zelotes"],
+      "sources": [
+        { "threadId": "1517738336210894850", "tweetId": "1517738344574296069" },
+        { "threadId": "1522830977088819203", "tweetId": "1522831048169635840" },
+        { "threadId": "1647132462982524929", "tweetId": "1647132498638393344" }
+      ]
+    }
+  },
+  {
+    "candidate": "DISC",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Ninguna turra menciona el modelo DISC; es un test de manual ajeno al corpus.",
+    "entry": null
+  },
+  {
+    "candidate": "Disonancia cognitiva",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Aparece en 26 turras y se explica a fondo en la de Festinger y la secta de Los Buscadores.",
+    "entry": {
+      "term": "disonancia cognitiva",
+      "slug": "disonancia-cognitiva",
+      "aliases": ["disonancia cognitiva", "disonancia"],
+      "short": "Malestar que aparece cuando la realidad contradice lo que creemos, y que solemos aliviar reforzando la creencia.",
+      "body": "Leon Festinger la estudió observando desde dentro una secta que anunciaba el fin del mundo para el 21 de diciembre de 1954: cuando la profecía falló, la mayoría no abandonó su fe, sino que la racionalizó. Recuenco la usa para explicar por qué un grupo se coaliga contra quien trae la realidad a la sala. Sostiene además que vivimos en la era de la pantomima y la disonancia cognitiva colectiva, y la conecta con lo que él llama truth coping.",
+      "origin": "Leon Festinger, teoría de la disonancia cognitiva («When Prophecy Fails»)",
+      "group": "personas",
+      "related": ["truth-coping", "pantomima", "sesgo"],
+      "sources": [
+        { "threadId": "1933784125086769389", "tweetId": "1933784154350469300" },
+        { "threadId": "1981980820278591851", "tweetId": "1981980868794081523" }
+      ]
+    }
+  },
+  {
+    "candidate": "Dolor referido",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "La expresión no aparece en ninguna turra, así que no hay base para definirla como la usa Recuenco.",
+    "entry": null
+  },
+  {
+    "candidate": "Factor X",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Es uno de los cuatro pilares del CPS y aparece en 58 turras, con una definición formal en la de 2022.",
+    "entry": {
+      "term": "Factor X",
+      "slug": "factor-x",
+      "aliases": ["Factor X", "factor X"],
+      "short": "Pilar del CPS que estudia la conducta humana en entornos complejos, asumiendo que se puede modelar aunque nunca del todo.",
+      "body": "Es una de las cuatro macrodisciplinas del framework CPS de Recuenco y reúne la psicología y otras ciencias de la conducta. Se diferencia del «factor humano» en que no da por caótico e incontrolable el comportamiento de las personas: intenta modelarlo y gestionarlo como parte de la solución, sabiendo que todo modelo es incorrecto. Parte de que el ser humano es el sistema complejo primigenio, y de ahí su máxima «no hay CPS sin gestión del Factor X», que casi siempre obliga a tener «la conversación» difícil que nadie quiere tener. Ignorarlo, dice, es garantía de catástrofe, por brillante que sea la estrategia.",
+      "origin": "Javier G. Recuenco",
+      "group": "personas",
+      "related": ["personotecnia", "test-astudillo", "truth-coping", "cps"],
+      "sources": [
+        { "threadId": "1604019306349592577", "tweetId": null },
+        { "threadId": "1669966506208161793", "tweetId": null },
+        { "threadId": "1446745515501264896", "tweetId": "1446745531645153280" }
+      ]
+    }
+  },
+  {
+    "candidate": "Falacia lógica",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Término genérico de lógica; solo sale de pasada en una turra, sin explicación propia.",
+    "entry": null
+  },
+  {
+    "candidate": "Man on a mission",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo declara una de sus obsesiones y lo desarrolla en la tercera parte del pompismo.",
+    "entry": {
+      "term": "man on a mission",
+      "slug": "man-on-a-mission",
+      "aliases": ["man on a mission", "Man on a Mission"],
+      "short": "Persona entregada a una misión que la impulsa con enorme energía, pero con riesgo de visión de túnel.",
+      "body": "Recuenco se reconoce a sí mismo como man on a mission en varios frentes. Las ventajas: vas dopado, tu honestidad desarma y arrasas a la competencia. Los riesgos: visión de túnel, implicación emocional y falta de objetividad y de visión periférica. El peligro serio aparece cuando coinciden tres cosas: tener una misión, no haber encontrado el sweet spot y tener acceso a algún tipo de poder.",
+      "origin": null,
+      "group": "personas",
+      "related": ["sweet-spot", "pompismo", "man-out-of-time"],
+      "sources": [
+        { "threadId": "1753677668996837620", "tweetId": "1753677670091538708" },
+        { "threadId": "1753677668996837620", "tweetId": "1753677679373521184" }
+      ]
+    }
+  },
+  {
+    "candidate": "Pensamiento critico",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Uso genérico y de pasada; las turras no tratan los tipos de pensamiento como familia.",
+    "entry": null
+  },
+  {
+    "candidate": "Pensamiento lateral",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Aunque la familia de tipos de pensamiento no aparece junta, Recuenco da su propia definición de pensamiento lateral y lo usa en 13 turras.",
+    "entry": {
+      "term": "pensamiento lateral",
+      "slug": "pensamiento-lateral",
+      "aliases": ["pensamiento lateral"],
+      "short": "Para Recuenco, tomar una decisión correcta ante datos erróneos que no se pueden verificar.",
+      "body": "Recuenco rechaza la versión de seminario, la del golpe ingenioso: le irrita que se ponga como ejemplo a Alejandro cortando el nudo gordiano. Su definición es otra: «tomar una decisión correcta ante datos erróneos no verificables», algo que según él la IA todavía no sabe hacer. Lo ve como herramienta diaria del CPSer, que se atreve a dudar y a probar ángulos distintos en un mundo empresarial que adora certidumbres inexistentes.",
+      "origin": "Edward de Bono, «The Use of Lateral Thinking» (el término); la definición citada es de Javier G. Recuenco",
+      "group": "oficio",
+      "related": ["cps", "liminalidad"],
+      "sources": [
+        { "threadId": "1675028035836182528", "tweetId": "1675028110192910336" },
+        { "threadId": "1510161914772471813", "tweetId": "1510162006078337026" },
+        { "threadId": "1342767594697191424", "tweetId": "1342772614570323972" }
+      ]
+    }
+  },
+  {
+    "candidate": "Pensamiento liminal",
+    "decision": "merge",
+    "mergeInto": "liminalidad",
+    "reason": "Recuenco lo usa como aplicación de la liminalidad (conexiones entre rabbit holes distintos), no como un tipo de pensamiento aparte.",
+    "entry": null
+  },
+  {
+    "candidate": "Pensamiento sistémico",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Solo se menciona de pasada (Meadows) y Recuenco lo presenta como algo más limitado que el CPS; las turras no tratan los tipos de pensamiento como familia.",
+    "entry": null
+  },
+  {
+    "candidate": "Pensamiento vertical",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "No aparece en ninguna turra.",
+    "entry": null
+  },
+  {
+    "candidate": "Personotécnia",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Disciplina creada por Recuenco, presente en más de 50 turras y con un megaarco propio en 2026.",
+    "entry": {
+      "term": "personotecnia",
+      "slug": "personotecnia",
+      "aliases": ["personotecnia", "Personotecnia", "personotécnia", "personotécnico", "personotécnica", "personotécnicos"],
+      "short": "Disciplina que construye mensajes y propuestas relevantes para una persona concreta en un contexto concreto, también a escala.",
+      "body": "Recuenco la formuló en su libro «Personalización» (2004) como respuesta a la personalización fake del marketing: el modelo es la frutera del barrio, que sabe lo que te gusta, y el reto es lograrlo a escala. La define como el conjunto de metodologías y saberes para construir mensajes relevantes para un receptor y un contexto concretos, con tres reglas: todo atajo al perfilar se paga en precisión; cuanto más íntimo el dato, más recíproca debe ser la relación; y el contexto es singular, porque las personas no son segmentos estables. Es horizontal y toca toda la cadena de valor, no solo marketing o ventas; algunos de sus seguidores la describen como «el CPS del Factor X».",
+      "origin": "Javier G. Recuenco",
+      "group": "personas",
+      "related": ["factor-x", "procesos-de-alta-variabilidad", "autosegmentacion", "cps"],
+      "sources": [
+        { "threadId": "2101155734700405039", "tweetId": "2101155743286133040" },
+        { "threadId": "2101155734700405039", "tweetId": "2101155747304251596" },
+        { "threadId": "1319891330307338240", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Pompismo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio de Recuenco con una serie de cinco turras dedicada.",
+    "entry": {
+      "term": "pompismo",
+      "slug": "pompismo",
+      "aliases": ["pompismo", "pompista", "pompistas", "pompi"],
+      "short": "Idealismo que niega la realidad elemental para sostener una idea abstracta y bella; sus defensores crean «pompitas de realidad».",
+      "body": "Recuenco llama pompistas a quienes creen firmemente en un constructo abstracto que, para cumplirse, exige negar la realidad más básica. Se puede ser experto sólido en un campo y pompista en otro, como le pasaba a Bertrand Russell. El problema es siempre el mismo: visión de túnel y, en cuanto la idea toca tierra, el desastre; su ejemplo extremo es la utopía agraria de Pol Pot. De ahí su frase: «el pragmatismo cae mal porque no es empático; el pompismo cae bien pero no funciona».",
+      "origin": "Javier G. Recuenco",
+      "group": "sociedad",
+      "related": ["man-on-a-mission", "chavesnogalismo", "sweet-spot", "game-awareness"],
+      "sources": [
+        { "threadId": "1748598237563412826", "tweetId": null },
+        { "threadId": "1753677668996837620", "tweetId": "1753677709375308119" },
+        { "threadId": "1758760266068590698", "tweetId": "1758760289875419367" }
+      ]
+    }
+  },
+  {
+    "candidate": "Sesgo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Aparece en 38 turras y tiene una dedicada a los sesgos en la evaluación de riesgos.",
+    "entry": {
+      "term": "sesgo cognitivo",
+      "slug": "sesgo",
+      "aliases": ["sesgo", "sesgos", "sesgo cognitivo", "sesgos cognitivos"],
+      "short": "Desviación sistemática del juicio que el cerebro produce para ahorrar energía y que distorsiona nuestras decisiones.",
+      "body": "Recuenco se apoya en Kahneman y Tversky para sostener que los humanos somos malos evaluando riesgos: evitamos riesgos ante posibles pérdidas y asumimos otros innecesarios para no perder. Explica los sesgos como atajos del cerebro para ahorrar energía, útiles en la evolución pero que a la larga nublan el juicio. Aparecen en todas partes: en la fijación de precios, en los datos de una empresa «data driven» o en la tendencia a rodearnos de gente parecida a nosotros.",
+      "origin": "Daniel Kahneman y Amos Tversky",
+      "group": "personas",
+      "related": ["disonancia-cognitiva", "transicion-obligada", "factor-x"],
+      "sources": [
+        { "threadId": "1862770042686845320", "tweetId": "1862772004761317517" },
+        { "threadId": "1449265748019453954", "tweetId": "1449265812506828801" }
+      ]
+    }
+  },
+  {
+    "candidate": "Suerte buscada",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Ninguna turra clasifica tipos de suerte; buscado sin acentos ni mayúsculas en el corpus, no aparece.",
+    "entry": null
+  },
+  {
+    "candidate": "Suerte ciega",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Ninguna turra clasifica tipos de suerte; buscado sin acentos ni mayúsculas en el corpus, no aparece.",
+    "entry": null
+  },
+  {
+    "candidate": "Suerte por circunstancia",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Ninguna turra clasifica tipos de suerte; buscado sin acentos ni mayúsculas en el corpus, no aparece.",
+    "entry": null
+  },
+  {
+    "candidate": "Suerte preparada",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Ninguna turra clasifica tipos de suerte; buscado sin acentos ni mayúsculas en el corpus, no aparece.",
+    "entry": null
+  },
+  {
+    "candidate": "Tecnocenizo",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "La palabra no aparece en ninguna turra (solo «cenizo» en sentido coloquial).",
+    "entry": null
+  },
+  {
+    "candidate": "Zelotes",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco da una definición propia y le dedica parte de dos turras.",
+    "entry": {
+      "term": "zelote",
+      "slug": "zelotes",
+      "aliases": ["zelote", "zelotes"],
+      "short": "Fanático que ha puesto ciertas ideas en un altar y, si se tocan, reacciona con la amígdala.",
+      "body": "Así lo define Recuenco: da igual su capacidad intelectual, porque ante lo sagrado reacciona desde la emoción. En ausencia de liderazgo fuerte, los zelotes ocupan el hueco y arrastran a la gente con una convicción contra la que es muy difícil defender una postura matizada. También aparecen alrededor de cada herramienta nueva, proclamándola la única verdadera. En otra turra usa el término en positivo: el Private Equity necesita «zelotes del modelo operativo» que no negocien lo innegociable.",
+      "origin": null,
+      "group": "sociedad",
+      "related": ["facciones-lanares", "pompismo", "asertividad"],
+      "sources": [
+        { "threadId": "1616684654269980673", "tweetId": "1616684773006516225" },
+        { "threadId": "1535521789585117185", "tweetId": "1535521826557898755" },
+        { "threadId": "1337670943276224513", "tweetId": "1337715863923937280" }
+      ]
+    }
+  },
+  {
+    "candidate": "Sweet spot",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo usa en 11 turras y lo explica a fondo en la última del pompismo.",
+    "entry": {
+      "term": "sweet spot",
+      "slug": "sweet-spot",
+      "aliases": ["sweet spot", "sweet spots", "punto dulce"],
+      "short": "Punto óptimo de equilibrio entre varias dimensiones que compiten; cuantas más dimensiones, más difícil es encontrarlo.",
+      "body": "Para Recuenco la gracia del sweet spot es que puede ser multidimensional, y ahí nos perdemos: nuestro cerebro y nuestra educación nos empujan a pensar de forma lineal. Lo usa para casi todo: el equilibrio entre calidad y accesibilidad, el grado de asertividad con un cliente o cuánta misión es sana en una persona. Muchas de sus tesis, como el colapso del modelo de Private Equity, las describe como un sweet spot que se desplaza.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["man-on-a-mission", "pompismo", "bothism"],
+      "sources": [
+        { "threadId": "1761287914493796842", "tweetId": "1761287917824053528" },
+        { "threadId": "1753677668996837620", "tweetId": "1753677679373521184" },
+        { "threadId": "1834829754488221846", "tweetId": "1834829809316249986" }
+      ]
+    }
+  },
+  {
+    "candidate": "Bothism",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene turra propia y Recuenco lo reivindica en varias más.",
+    "entry": {
+      "term": "bothism",
+      "slug": "bothism",
+      "aliases": ["bothism", "#bothism"],
+      "short": "Ante dos planteamientos enfrentados, buscar que convivan las fortalezas de ambos en lugar de elegir uno solo.",
+      "body": "Recuenco toma el término de Mark Ritson, que lo usó para la vieja pelea del marketing entre creatividad y estrategia. No es un término medio ingenuo: prescindir de uno de los dos lados es desaprovechar la solución, y eso casa con la complejidad. Recuenco lo aplica a sí mismo, por ejemplo al confiar a la vez en los datos y en la intuición, y avisa de que quien se acoge al bothism recibe golpes de todos los bandos.",
+      "origin": "Mark Ritson, columna en Marketing Week (2020)",
+      "group": "oficio",
+      "related": ["sweet-spot", "chavesnogalismo"],
+      "sources": [
+        { "threadId": "1365564279232028681", "tweetId": "1365564280649568260" },
+        { "threadId": "1370628575775367168", "tweetId": "1370628602392424450" },
+        { "threadId": "1796796569829687349", "tweetId": "1796796686578151829" }
+      ]
+    }
+  },
+  {
+    "candidate": "Pantomima",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco le da un sentido propio y le dedica una turra.",
+    "entry": {
+      "term": "pantomima",
+      "slug": "pantomima",
+      "aliases": ["pantomima", "pantomimas"],
+      "short": "Esfuerzo consciente por mantener vivo un relato que se sabe falso, porque conviene a todas las partes.",
+      "body": "Recuenco la separa de la disonancia cognitiva y de las fake news: en la pantomima todos saben qué es real y qué es teatro. Su ejemplo es la política, donde dos partidos pactan en privado lo sensato y en público escenifican lo contrario para sus bases; otro, el presupuesto anual, que llama «pantomima cósmica». Uno de sus motores es que mucha gente quiere ser engañada para conservar su paz mental, y de ahí su tesis: vivimos en la era de la misdirection, donde nunca es la realidad, siempre es el relato.",
+      "origin": "Javier G. Recuenco",
+      "group": "sociedad",
+      "related": ["disonancia-cognitiva", "truth-coping", "espiral-del-pa-que"],
+      "sources": [
+        { "threadId": "1730843036983120174", "tweetId": null },
+        { "threadId": "1746066280782631368", "tweetId": "1746066323589709898" }
+      ]
+    }
+  },
+  {
+    "candidate": "Espiral del «pa qué»",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tesis propia de Recuenco, explicada en una turra dedicada.",
+    "entry": {
+      "term": "espiral del pa qué",
+      "slug": "espiral-del-pa-que",
+      "aliases": ["espiral del pa qué", "espiral del pa que", "espiral del pa quien"],
+      "short": "Retirada de quien concluye que confrontar la realidad cuesta más de lo que aporta: «¿pa qué?».",
+      "body": "Recuenco la contrapone a la espiral del silencio: allí uno calla por miedo al aislamiento, aquí se retira porque el coste cognitivo, reputacional y de tiempo de pelear supera cualquier beneficio. No es pereza, sino una ecuación de valor que se ha vuelto delirante o, peor, realista. Cuando el sistema premia el juego social y no el resultado, la gente abandona el problema real y se refugia en el tablero: el bando, el KPI o quién gana la conversación.",
+      "origin": "Javier G. Recuenco",
+      "group": "sociedad",
+      "related": ["espiral-del-silencio", "pantomima", "truth-coping"],
+      "sources": [
+        { "threadId": "2096125175175512394", "tweetId": "2096125226803147018" },
+        { "threadId": "2096125175175512394", "tweetId": "2096125216850161932" }
+      ]
+    }
+  },
+  {
+    "candidate": "Truth coping",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto que Recuenco define él mismo, con turra propia y varias continuaciones.",
+    "entry": {
+      "term": "truth coping",
+      "slug": "truth-coping",
+      "aliases": ["truth coping", "Truth Coping"],
+      "short": "Mecanismos psicológicos, emocionales o cognitivos con los que las personas encajan, procesan o esquivan una verdad incómoda.",
+      "body": "Recuenco reconoce que el término no está establecido en la literatura y lo define él. El CPS es «una máquina de poner a gente en situaciones de truth coping»: «¿cómo que no tenemos marca?», «¿cómo que mi empresa vale cero?». Por eso gestionar la reacción emocional de quien se enfrenta a la realidad es parte del trabajo del CPSer. Lo ilustra con la secta que estudió Festinger, cuyos miembros racionalizaron el fracaso de su profecía en vez de abandonar la fe.",
+      "origin": "Javier G. Recuenco",
+      "group": "personas",
+      "related": ["disonancia-cognitiva", "factor-x", "asertividad"],
+      "sources": [
+        { "threadId": "1928694865052741791", "tweetId": "1928694867523190811" },
+        { "threadId": "1928694865052741791", "tweetId": "1928694869301616658" },
+        { "threadId": "2045382646054674761", "tweetId": "2045382735888310475" }
+      ]
+    }
+  },
+  {
+    "candidate": "Test Astudillo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto bautizado por Recuenco, explicado en su propia turra y reutilizado después.",
+    "entry": {
+      "term": "test Astudillo",
+      "slug": "test-astudillo",
+      "aliases": ["test Astudillo", "Test Astudillo", "test de Astudillo"],
+      "short": "Comprueba si una propuesta de negocio tiene en cuenta el Factor X o solo cuadra en el Excel.",
+      "body": "Recuenco lo bautiza con una frase de César Astudillo sobre modelos de negocio y propuestas de valor: «Eso no aprueba primero de sociología». Una propuesta que satisface a la hoja de cálculo pero no entiende la psicología ni el Zeitgeist acaba estrellándose: ninguna vaca esférica que ignore el Factor X aterriza bien. Recuenco lo pone a la altura del test de Bechdel.",
+      "origin": "Javier G. Recuenco, a partir de una frase de César Astudillo",
+      "group": "personas",
+      "related": ["factor-x", "vaca-esferica", "zeitgeist"],
+      "sources": [
+        { "threadId": "1581161865035407360", "tweetId": "1581162005914091522" },
+        { "threadId": "1763816753929347384", "tweetId": "1763816756261327224" }
+      ]
+    }
+  },
+  {
+    "candidate": "Facciones lanares",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio con turra dedicada, citado de nuevo después.",
+    "entry": {
+      "term": "facciones lanares",
+      "slug": "facciones-lanares",
+      "aliases": ["facciones lanares", "facción lanar", "lanar", "lanares", "lanaridad", "masa lanar"],
+      "short": "Parte de un grupo que sigue a su tribu como un rebaño, sin crítica, arrastrada por una narrativa afectiva.",
+      "body": "Recuenco insiste en que nadie se ve a sí mismo como borrego, pero todos hemos sido lanares alguna vez, y la inteligencia no protege: «donde entra una narrativa afectiva, el Einstein más Einstein se convierte en masa lanar». Lo ilustra con las aficiones de fútbol, desglosando la «lanaridad» por identidad grupal, necesidad de integración o señalamiento del enemigo. Cuando la facción lanar se vuelve zelote, sus actos te afectan aunque mires desde la barrera.",
+      "origin": "Javier G. Recuenco",
+      "group": "sociedad",
+      "related": ["zelotes", "pompismo", "espiral-del-silencio"],
+      "sources": [
+        { "threadId": "1616684654269980673", "tweetId": "1616684687107162114" },
+        { "threadId": "1616684654269980673", "tweetId": "1616684690198380544" }
+      ]
+    }
+  },
+  {
+    "candidate": "Game awareness",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Se explica con detalle en la segunda parte del pompismo.",
+    "entry": {
+      "term": "game awareness",
+      "slug": "game-awareness",
+      "aliases": ["game awareness"],
+      "short": "Capacidad de percibir, entender y anticipar cómo cambia el juego, y adaptar tus decisiones en consecuencia.",
+      "body": "Recuenco toma el término del deporte y lo resume con Wayne Gretzky: patina hacia donde va a estar el puck, no hacia donde está. Lo aplica a la carrera profesional: no puedes salir de la facultad creyendo que sigue en pie el trato que les funcionó a tus padres. Para él es otra forma de su idea de siempre: sin un diagnóstico adecuado y una estrategia acorde no se llega a ninguna parte.",
+      "origin": null,
+      "group": "estrategia",
+      "related": ["niebla-de-guerra", "fatiga-de-materiales", "metajuego"],
+      "sources": [
+        { "threadId": "1751154901659381958", "tweetId": "1751154966180295033" },
+        { "threadId": "1751154901659381958", "tweetId": "1751154964611686547" }
+      ]
+    }
+  },
+  {
+    "candidate": "Fatiga de materiales",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la aplica expresamente a modelos de negocio y personas en la segunda parte del pompismo.",
+    "entry": {
+      "term": "fatiga de materiales",
+      "slug": "fatiga-de-materiales",
+      "aliases": ["fatiga de materiales"],
+      "short": "Desgaste acumulado que acaba rompiendo un modelo de negocio o una trayectoria que antes funcionaba.",
+      "body": "Recuenco toma la expresión de la ingeniería: la acumulación de pequeñas estupideces parece no tener efecto, pero termina alcanzándote. La aplicó en 2019 a los modelos de negocio de las grandes plataformas y la ve confirmada en los problemas de Meta y en el deterioro de las búsquedas de Google. También la usa con personas: los has been, lo que una vez fue y ya no es.",
+      "origin": null,
+      "group": "estrategia",
+      "related": ["game-awareness", "transicion-obligada"],
+      "sources": [
+        { "threadId": "1751154901659381958", "tweetId": "1751154908051480828" }
+      ]
+    }
+  },
+  {
+    "candidate": "Transición obligada",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo presenta como un concepto que necesita explicación y lo explica.",
+    "entry": {
+      "term": "transición obligada",
+      "slug": "transicion-obligada",
+      "aliases": ["transición obligada", "transiciones obligadas"],
+      "short": "Nadie cambia por iniciativa propia: se cambia cuando el entorno obliga, y aun así cabe negarse.",
+      "body": "«Nadie, nadie, nadie cambia de motu proprio», escribe Recuenco: el entorno sugiere el cambio y siempre queda la opción de no hacerlo. La razón es que el cerebro busca ahorrar energía y prefiere repetir lo que ya tiene automatizado. Lo ilustra comparando cómo gestionaron el Madrid y el Barcelona el relevo generacional de sus plantillas.",
+      "origin": "Javier G. Recuenco",
+      "group": "personas",
+      "related": ["sesgo", "fatiga-de-materiales"],
+      "sources": [
+        { "threadId": "1299619999200485377", "tweetId": "1299621242555846659" }
+      ]
+    }
+  },
+  {
+    "candidate": "Espiral del silencio",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Se explica en la turra sobre creación de opinión y sirve de contraste a la espiral del pa qué.",
+    "entry": {
+      "term": "espiral del silencio",
+      "slug": "espiral-del-silencio",
+      "aliases": ["espiral del silencio", "Espiral del Silencio"],
+      "short": "Tendencia a callar cuando creemos que nuestra opinión va contra la mayoría, por miedo al aislamiento.",
+      "body": "Recuenco la usa para explicar cómo se crea y se sostiene la opinión pública: mientras la mayoría matizada calla, una minoría ruidosa parece inmune al efecto y ocupa el espacio. Más tarde la contrapone a su espiral del pa qué: en la de Noelle-Neumann se calla por miedo, en la suya uno se retira porque no compensa.",
+      "origin": "Elisabeth Noelle-Neumann, teoría de la espiral del silencio",
+      "group": "sociedad",
+      "related": ["espiral-del-pa-que", "zelotes", "facciones-lanares"],
+      "sources": [
+        { "threadId": "1535521789585117185", "tweetId": "1535521799185760257" },
+        { "threadId": "1535521789585117185", "tweetId": "1535521809789075459" },
+        { "threadId": "2096125175175512394", "tweetId": "2096125224450138499" }
+      ]
+    }
+  },
+  {
+    "candidate": "Chutzpah",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Una sola mención («desde la chutzpah, no desde el hubris») sin explicación en ninguna turra.",
+    "entry": null
+  },
+  {
+    "candidate": "Recoger cable",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Da título a una turra que explica el concepto con el ejemplo de Escohotado.",
+    "entry": {
+      "term": "recoger cable",
+      "slug": "recoger-cable",
+      "aliases": ["recoger cable", "recalibrado", "recalibrar"],
+      "short": "Reconocer un error, procesarlo y cambiar de idea sin aferrarse al ego; imprescindible en un trabajo exploratorio como el CPS.",
+      "body": "Recuenco pone como modelo a Antonio Escohotado, que abandonó el comunismo por la evidencia y no por presión: decepción, asimilación, interiorización y, al final, asunción de responsabilidad. Como el CPS es exploratorio y trabaja con hipótesis, equivocarse y rectificar forma parte del método, aunque el cliente lo perciba como impericia. Lo resume con una frase de Singular Solving: «todas las cagadas están bien mientras sean nuevas».",
+      "origin": null,
+      "group": "personas",
+      "related": ["truth-coping", "cps", "sesgo"],
+      "sources": [
+        { "threadId": "1578640745979846662", "tweetId": "1578640747783389187" },
+        { "threadId": "1578640745979846662", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Rabbit hole",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tiene turra propia dentro de la serie de sensemaking.",
+    "entry": {
+      "term": "rabbit hole",
+      "slug": "rabbit-hole",
+      "aliases": ["rabbit hole", "rabbit holes", "madriguera de conejo", "agujero de conejo"],
+      "short": "Tema que parece sencillo y en el que acabas hundiéndote, cada vez más profundo y difícil de abandonar.",
+      "body": "La imagen viene de la caída de Alicia en el cuento de Lewis Carroll. Recuenco defiende bajar por ellos, pero cambiando de madriguera de vez en cuando: varios rabbit holes distintos generan conexiones inesperadas, alimentan el pensamiento liminal y evitan el monocultivo obsesivo del friki que se queda en uno solo. Para él, mucha gente que hace sensemaking falla porque le falta calle y le faltan rabbit holes.",
+      "origin": "Lewis Carroll, «Alicia en el país de las maravillas» (origen de la metáfora)",
+      "group": "complejidad",
+      "related": ["sensemaking", "liminalidad"],
+      "sources": [
+        { "threadId": "1799313887285669975", "tweetId": "1799313900019626328" },
+        { "threadId": "1799313887285669975", "tweetId": "1799313938577760512" }
+      ]
+    }
+  },
+  {
+    "candidate": "Efecto Gell-Mann",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco le dedica una turra temprana y explica el efecto.",
+    "entry": {
+      "term": "efecto Gell-Mann",
+      "slug": "efecto-gell-mann",
+      "aliases": ["efecto Gell-Mann", "amnesia de Gell-Mann", "Murray Gellmann", "Gell-Mann"],
+      "short": "Detectas los errores de la prensa en lo que dominas, pero te crees el resto del periódico.",
+      "body": "Lees un artículo sobre algo que conoces bien, ves que el periodista no sabe de qué habla, y al pasar de sección vuelves a confiar como si nada. Recuenco lo cuenta a raíz de un periodista culto que despreciaba a los adultos que juegan a videojuegos, y saca una conclusión: ningún saber está a salvo y hay que verificar todo con espíritu crítico. De ahí su defensa del «no tengo ni idea sobre esto y no pasa nada».",
+      "origin": "Michael Crichton, que le dio nombre en su charla «Why Speculate?»",
+      "group": "sociedad",
+      "related": ["sesgo", "pantomima"],
+      "sources": [
+        { "threadId": "1056485929186144256", "tweetId": "1056487302837559296" },
+        { "threadId": "1056485929186144256", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Hijoputismo",
+    "decision": "merge",
+    "mergeInto": "chavesnogalismo",
+    "reason": "Solo aparece dentro de la contraposición chavesnogalismo/pompismo y se entiende mejor allí.",
+    "entry": null
+  },
+  {
+    "candidate": "Chavesnogalismo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio, contrapuesto al pompismo, que resume una postura que Recuenco reivindica en varias turras.",
+    "entry": {
+      "term": "chavesnogalismo",
+      "slug": "chavesnogalismo",
+      "aliases": ["chavesnogalismo", "Chavesnogalismo", "hijoputismo"],
+      "short": "Postura de saber que la maldad no tiene bando: el hijoputismo cruza todas las ideologías.",
+      "body": "Recuenco lo contrapone al pompismo, que coloca a los malos en el eje ideológico y da a «los otros» el monopolio del hijoputismo. El chavesnogalismo sabe que el hijoputismo es patrimonio de la humanidad y opera en un eje perpendicular a las ideologías. Toma el nombre de Manuel Chaves Nogales, el periodista al que en la Guerra Civil unos llamaban rojo y otros franquista; Recuenco asume su destino: negarse a elegir trinchera y que todos te quieran muerto.",
+      "origin": "Javier G. Recuenco",
+      "group": "sociedad",
+      "related": ["pompismo", "bothism", "facciones-lanares"],
+      "sources": [
+        { "threadId": "1758760266068590698", "tweetId": "1758760296443707439" },
+        { "threadId": "1758760266068590698", "tweetId": "1758760288000639340" }
+      ]
+    }
+  },
+  {
+    "candidate": "Madriguera de conejo",
+    "decision": "merge",
+    "mergeInto": "rabbit-hole",
+    "reason": "Es la traducción de rabbit hole y Recuenco usa ambas indistintamente.",
+    "entry": null
+  },
+  {
+    "candidate": "Altas capacidades (AACC)",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tema recurrente con varias turras dedicadas a su convergencia con el CPS.",
+    "entry": {
+      "term": "altas capacidades (AACC)",
+      "slug": "altas-capacidades",
+      "aliases": ["altas capacidades", "Altas Capacidades", "AACC", "altas capacidades intelectuales"],
+      "short": "Capacidad intelectual muy superior a la media; Recuenco la considera muy valiosa en el CPS y desaprovechada por el sistema.",
+      "body": "Recuenco defiende que conviene incorporar gente con AACC a los procesos CPS, sobre todo al sensemaking, por su facilidad para ver conexiones novedosas. Aclara que AACC no garantiza nada («AACC ≠ the right stuff») y que las personas con AACC son igual de falibles que las demás. También denuncia que en España ese talento se desaprovecha y que sufren mucho más acoso escolar que la media.",
+      "origin": null,
+      "group": "personas",
+      "related": ["neurodivergencia", "sensemaking", "cps"],
+      "sources": [
+        { "threadId": "1969289174655045782", "tweetId": "1969289174655045782" },
+        { "threadId": "2022575861296230582", "tweetId": "2022575861296230582" },
+        { "threadId": "1467051970422878210", "tweetId": "1467052018925805568" }
+      ]
+    }
+  },
+  {
+    "candidate": "Neurodivergencia",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Varias turras recientes la tratan como eje del arco educativo de Recuenco.",
+    "entry": {
+      "term": "neurodivergencia",
+      "slug": "neurodivergencia",
+      "aliases": ["neurodivergencia", "neurodivergente", "neurodivergentes"],
+      "short": "Funcionamiento cerebral distinto del típico (autismo, TDAH, dislexia, altas capacidades) que el sistema educativo y laboral suele no saber gestionar.",
+      "body": "Recuenco usa la metáfora de los X-Men: frente a la postura «magnetiana» de Peter Thiel y Alex Karp, que ven la neurodivergencia como ventaja para dominar el futuro, él se sitúa en la «xavieriana» de reforma educativa y convivencia. Critica que las empresas exijan un «culture fit» que obliga al neurodivergente a amputar partes de su identidad. De ahí sus proyectos educativos para detectarla pronto y darle cauce.",
+      "origin": null,
+      "group": "personas",
+      "related": ["altas-capacidades"],
+      "sources": [
+        { "threadId": "2050469219544752257", "tweetId": "2050469226100457736" },
+        { "threadId": "2050469219544752257", "tweetId": "2050469239597813924" },
+        { "threadId": "2053002707628142991", "tweetId": "2053002721867772334" }
+      ]
+    }
+  },
+  {
+    "candidate": "Men out of time",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Figura recurrente en tres turras, con explicación y ejemplos.",
+    "entry": {
+      "term": "man out of time",
+      "slug": "man-out-of-time",
+      "aliases": ["man out of time", "men out of time", "Man out of time", "MOOT"],
+      "short": "Visionario adelantado a su época, cuyo talento solo se reconoce y aprovecha cuando ya ha muerto.",
+      "body": "Recuenco los describe como «OOPArts de carne y hueso» y admira sobre todo su valentía. Sus ejemplos favoritos son Nikola Tesla, mucho menos adaptado a su tiempo que Edison, y el publicitario Howard Gossage, que tenía talento para ser un icono del siglo XX y cuyas ideas disfrutaron generaciones posteriores. El nombre viene de «Tesla: Man Out of Time», la biografía de 1981.",
+      "origin": null,
+      "group": "personas",
+      "related": ["man-on-a-mission"],
+      "sources": [
+        { "threadId": "1593870067128627200", "tweetId": "1593870090990063616" },
+        { "threadId": "1576087451524907008", "tweetId": "1576090417656832000" },
+        { "threadId": "1877979196271550821", "tweetId": "1877979284083535993" }
+      ]
+    }
+  }
+]

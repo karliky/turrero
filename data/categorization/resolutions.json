@@ -1,0 +1,32 @@
+{
+  "1014799133553647616": {
+    "primary": "marketing",
+    "secondary": ["estrategia"],
+    "reason": "El asunto es el patrocinio deportivo (Nadal, Gasol, el caso Merhi), que es una actividad de marketing; la falta de estrategia es la causa con la que se explica su fracaso, por eso queda como secundaria."
+  },
+  "1299619999200485377": {
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "reason": "Hilo breve e incompleto: la mitad del texto es la resistencia al cambio por ahorro de energía del cerebro, un mecanismo mental individual; el ciclo de vida de los sistemas ocupa menos del 20 % útil para una secundaria."
+  },
+  "1581161865035407360": {
+    "primary": "finanzas-e-inversion",
+    "secondary": ["metodo-cps"],
+    "reason": "La mitad del texto critica la mentalidad financiera y del private equity; según los criterios, cuando el private equity es el sujeto la turra es de Finanzas e inversión. La defensa del Factor X como parte de la disciplina queda como secundaria."
+  },
+  "1332604415224770564": {
+    "primary": "metodo-cps",
+    "secondary": ["marketing"],
+    "reason": "Más de la mitad cuenta el origen del CPS y su base en la psicología, es decir, la propia disciplina; la decadencia del marketing es la segunda parte."
+  },
+  "1647132462982524929": {
+    "primary": "desarrollo-personal",
+    "secondary": ["metodo-cps"],
+    "reason": "El tema es la actitud personal entre síndrome del impostor y arrogancia, que los criterios de Desarrollo personal nombran expresamente; que se aplique a quien practica CPS la hace secundaria de Método CPS."
+  },
+  "1852267188519854245": {
+    "primary": "sociologia",
+    "secondary": ["sistemas-complejos"],
+    "reason": "La tesis es el sensemaking partisano y la polarización de la sociedad ante la DANA, un fenómeno colectivo; la presentación de Karl Weick y el sensemaking como marco ocupa la otra gran parte y queda como secundaria."
+  }
+}

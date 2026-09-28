@@ -1,63 +1,39 @@
-import { TweetFacade } from "../../infrastructure";
+import type { Metadata } from 'next';
 import BookGrid from './components/BookGrid';
-import { Metadata } from 'next';
-import { AUTHORS } from '@/infrastructure/constants';
+import { realCover } from '@/lib/books';
+import { listBooks } from '@/lib/queries';
+import { BOOK_CATEGORIES, SITE } from '@/lib/site';
 
-const categories = [
-  "Nonfiction", "Psychology", "History", "Business", "Self Help",
-  "Personal Development", "Technology", "Science", "Biography",
-  "Health", "Economics", "Education", "Artificial Intelligence",
-  "Games", "Fiction"
-];
-
-const categoriesMap: { [key: string]: string } = {
-  "Nonfiction": "No ficción",
-  "Psychology": "Psicología",
-  "History": "Historia",
-  "Business": "Negocios y empresa",
-  "Self Help": "Autoayuda",
-  "Personal Development": "Desarrollo personal",
-  "Technology": "Tecnología",
-  "Science": "Ciencia",
-  "Biography": "Biografía",
-  "Health": "Salud",
-  "Economics": "Economía",
-  "Education": "Educación",
-  "Artificial Intelligence": "Inteligencia artificial",
-  "Games": "Juegos",
-  "Fiction": "Ficción"
-};
+const description = `Colección de libros mencionados en las turras de ${SITE.byline}`;
 
 export const metadata: Metadata = {
   title: 'Biblioteca',
-  description: `Colección de libros mencionados en las turras de ${AUTHORS.MAIN}`,
+  description,
   openGraph: {
-    title: 'Biblioteca - El Turrero Post',
-    description: `Colección de libros mencionados en las turras de ${AUTHORS.MAIN}`,
-    images: ['/promo.png'],
-  }
+    title: `Biblioteca - ${SITE.name}`,
+    description,
+    images: ['/opengraph-image'],
+  },
 };
 
-export default async function LibrosPage() {
-  const tweetFacade = new TweetFacade();
-  const books = tweetFacade.getBooks();
+/** A few books were stored with their Goodreads URL as title: show the slug as words instead. */
+function readableTitle(title: string): string {
+  if (!/^https?:\/\//.test(title)) return title;
+  const slug = new URL(title).pathname.split('/').at(-1) ?? '';
+  return decodeURIComponent(slug).replace(/^\d+[.-]/, '').replace(/[_-]+/g, ' ').trim() || title;
+}
+
+export default function LibrosPage() {
+  const books = listBooks().map((book) => ({ ...book, title: readableTitle(book.title), imageUrl: realCover(book.imageUrl) }));
 
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-whiskey-900 mb-4">
-          La biblioteca.
-        </h1>
-        <p className="text-lg text-whiskey-700 mb-6">
-          Un total de {books.length} libros mencionados en las turras.
-        </p>
+        <h1 className="text-3xl font-bold text-whiskey-900 mb-4">La biblioteca.</h1>
+        <p className="text-lg text-whiskey-700 mb-6">Un total de {books.length} libros mencionados en las turras.</p>
       </div>
-      
-      <BookGrid 
-        books={books} 
-        categories={categories} 
-        categoriesMap={categoriesMap} 
-      />
+
+      <BookGrid books={books} categories={BOOK_CATEGORIES} />
     </main>
   );
-} 
+}
