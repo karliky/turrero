@@ -28,5 +28,5 @@ When the user writes "add thread <id or url> …" or "añade la turra …", run 
 - `node:sqlite` is used directly (no ORM). IDs are TEXT (X snowflakes exceed JS safe integers).
 - Client components must not import `lib/queries.ts`, `lib/db.ts` or anything that imports `node:sqlite`; share types via `lib/types.ts`.
 - Strict TypeScript (`exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`): prefer `| null` over optional fields in domain types.
-- Categories come from a reviewed process in `data/categorization/` (see README "Categorías"). Do not add, rename or reassign categories ad hoc: update `taxonomy.json`/`assignments.json`, generate a migration with `scripts/categorize-migration.ts`, and add retired slugs to `LEGACY_CATEGORY_URLS` in `lib/site.ts`.
+- Categories come from a reviewed process in `data/categorization/` (see README "Contenido editorial"). Do not add, rename or reassign categories ad hoc: update `taxonomy.json`/`assignments.json`, generate a migration with `scripts/categorize-migration.ts`, and add retired slugs to `LEGACY_CATEGORY_URLS` in `lib/site.ts`.
 - Never commit or push; the user makes all commits.
