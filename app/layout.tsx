@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import "./globals.css";
 import { SITE } from '@/lib/site';
+import { THEME_SCRIPT } from '@/lib/theme';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -19,21 +15,21 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : SITE.url),
   title: SITE.byline,
   description: `Biblioteca de hilos de ${SITE.byline}`,
+  // Every page is its own canonical, without query strings: /turras?orden=… counts as /turras
+  alternates: { canonical: './' },
   openGraph: {
     title: `${SITE.name} - Las turras de ${SITE.byline}`,
     description: SITE.description,
-    url: SITE.url,
+    url: './',
     siteName: SITE.name,
     locale: 'es_ES',
     type: 'website',
-    images: ['/promo.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${SITE.name} - Las turras de ${SITE.byline}`,
     description: SITE.description,
     site: SITE.xHandle,
-    images: ['/promo.png'],
   },
   robots: {
     index: true,
@@ -43,7 +39,12 @@ export const metadata: Metadata = {
 
 export const viewport = {
   width: 'device-width',
-  initialScale: 1
+  initialScale: 1,
+  // Browser chrome on mobile follows the page background of each theme (--color-whiskey-50)
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f9f6f3' },
+    { media: '(prefers-color-scheme: dark)', color: '#14100e' },
+  ],
 };
 
 export default function RootLayout({
@@ -52,9 +53,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // The theme script sets data-theme before React hydrates, hence suppressHydrationWarning
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whiskey-50`}
+        className={`${geistSans.variable} antialiased bg-whiskey-50`}
         suppressHydrationWarning
       >
         <main className="min-h-screen flex flex-col">

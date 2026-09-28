@@ -1,0 +1,227 @@
+{
+  "rules": {
+    "primary": "La categoría principal es el tema al que se dedica la mayor parte del texto de la turra, no el ejemplo o la metáfora que usa para explicarlo (fútbol, cómics, series o videojuegos son casi siempre vehículo, no tema).",
+    "secondary": "Hasta 2 secundarias, solo si ese tema ocupa una parte sustancial (al menos un 20 % del texto) y es distinto de la principal. Una mención de pasada no cuenta.",
+    "cps": "Casi todas las turras hablan de CPS o usan su jerga. Eso no las hace de «Método CPS»: esa categoría es solo para turras cuyo tema es la propia disciplina.",
+    "min_primary": 8,
+    "c_suite": "Un rol de la alta dirección va a la categoría de su función (CMO → Marketing y publicidad, CFO → Finanzas e inversión, CTO → IA y tecnología); solo va a Organizaciones e incentivos si la turra trata del reparto de poder entre roles.",
+    "initiatives": "La presentación de una empresa o iniciativa va al sector que ataca (fraude publicitario → Marketing y publicidad, marcas lifestyle → Marketing y publicidad) salvo que su propuesta sea la propia práctica o formación del CPS (→ Método CPS).",
+    "works": "Una reseña de obra (serie, cómic, película, videojuego) va a Cómic, cine y videojuegos solo si la tesis final trata de la obra, su autor o su industria; si la tesis es sobre empresa, personas o CPS, va a ese tema aunque la obra ocupe la mayor parte del texto."
+  },
+  "categories": [
+    {
+      "slug": "estrategia",
+      "name": "Estrategia",
+      "description": "Turras sobre estrategia empresarial: qué es y qué no es estrategia, propuestas de valor que caducan, declive, reinvención y cómo esquivar la competencia.",
+      "intro": "Estrategia en el sentido de Richard Rumelt: diagnosticar el problema decisivo y actuar de forma coherente, no fijar objetivos ni hacer planes a cinco años. Aquí están las turras sobre propuestas de valor que caducan, empresas y sectores en declive, reinvención, sidestepping y lectura del tablero competitivo.",
+      "criteria": "Entra: qué es (y qué no es) estrategia; propuesta de valor y su caducidad; declive y reinvención de empresas, clubes o sectores; posicionamiento y movimientos competitivos (sidestepping, océano azul, metajuego); pricing como decisión estratégica; anticipar cambios de juego. No entra: cómo se organiza la empresa por dentro, incentivos o cultura (→ Organizaciones e incentivos); finanzas, private equity o inversión (→ Finanzas e inversión); marketing o publicidad (→ Marketing y publicidad). Desempate: si trata de hacia dónde va la empresa en su mercado → Estrategia; si trata de por qué la gente dentro de la empresa se comporta como lo hace → Organizaciones e incentivos.",
+      "examples": [
+        "1908407119902024001",
+        "1522830977088819203",
+        "1903343437719670927"
+      ],
+      "position": 0
+    },
+    {
+      "slug": "metodo-cps",
+      "name": "Método CPS",
+      "description": "Qué es la resolución de problemas complejos (CPS) como disciplina: cómo se practica, en qué se diferencia de la consultoría, cómo se aprende y cómo se vende.",
+      "intro": "CPS (Complex Problem Solving) es la disciplina de la que parte todo este archivo. Esta categoría reúne solo las turras cuyo tema es la propia disciplina: qué es y qué no es, en qué se diferencia de la consultoría, cómo se forma a un CPSer, cómo se vende y qué iniciativas la llevan a la práctica.",
+      "criteria": "Entra: definición y naturaleza del CPS (cienciarte, no skill ni framework); CPS frente a consultoría; cómo se vende y se contrata; formación y libros para CPSers; iniciativas y empresas que lo aplican (Singular Solving, ¡Ajá!, UnconventionalCPS, Solvers Academy); la organización de la comunidad CPS; el Factor X solo cuando la turra lo define o lo defiende como parte de la disciplina; la tesis del CPS Hispano frente a la cultura «luterana» de la medición y la optimización. No entra: turras que solo aplican el CPS a otro tema (van al tema); teoría de la complejidad o sensemaking (→ Sistemas complejos y sensemaking). Desempate: si la pregunta es «qué es y cómo se ejerce el CPS» → Método CPS; si es «cómo se comporta un sistema complejo» → Sistemas complejos y sensemaking.",
+      "examples": [
+        "1741006814873821551",
+        "1766352097409134910",
+        "1302148427791253507"
+      ],
+      "position": 1
+    },
+    {
+      "slug": "sistemas-complejos",
+      "name": "Sistemas complejos y sensemaking",
+      "description": "Turras sobre complejidad: por qué los sistemas complejos no se descomponen, el peso del contexto, la incertidumbre, las señales débiles y el sensemaking.",
+      "intro": "Un sistema complejo produce comportamientos que no se deducen de sus partes. Estas turras tratan la complejidad en sí: la diferencia entre complicado y complejo, el contexto que manda, la incertidumbre y la suerte, las señales débiles y el sensemaking de Karl Weick para darle sentido a lo que pasa.",
+      "criteria": "Entra: complejidad frente a complicación o aleatoriedad; problemas irresolubles; el contexto como determinante (no hay soluciones context-free); incertidumbre, suerte y serendipia; lectura de señales débiles; sensemaking como marco o disciplina (Weick, aporía); procesos de alta variabilidad; casos presentados como ejemplo de problema complejo (ITER). No entra: la disciplina CPS como oficio (→ Método CPS); sesgos y psicología individual (→ Psicología y decisiones). Desempate: si explica cómo es la realidad compleja → aquí; si explica por qué las personas la perciben mal → Psicología y decisiones. La incertidumbre como propiedad del sistema (cisnes y elefantes negros) → aquí; cómo percibimos el riesgo → Psicología y decisiones.",
+      "examples": [
+        "1543107844043673600",
+        "1545639451765997568",
+        "1459431132965924866"
+      ],
+      "position": 2
+    },
+    {
+      "slug": "equipos-y-liderazgo",
+      "name": "Equipos y liderazgo",
+      "description": "Turras sobre equipos de talento y liderazgo: cómo se orquestan perfiles extremos, por qué fallan los equipos de estrellas y qué hace a un líder.",
+      "intro": "Los problemas complejos los resuelven equipos de talentos muy distintos, y eso exige orquestarlos: la «orquestación cognitiva». Aquí están las turras sobre equipos, talento y liderazgo, a menudo explicadas con deporte o música, pero siempre sobre cómo funciona un grupo de personas brillantes.",
+      "criteria": "Entra: orquestación cognitiva; equipos de talento (síndrome de Apolo, emulsificadores, relato compartido); diversidad cognitiva; liderazgo y figura del líder; selección y encaje del talento; errores de casting. No entra: incentivos y cultura de toda la organización (→ Organizaciones e incentivos); desarrollo de una persona concreta (→ Desarrollo personal). Desempate: si el sujeto es el equipo o quien lo dirige → aquí; si es la empresa como sistema → Organizaciones e incentivos.",
+      "examples": [
+        "1307211330349420545",
+        "1530425616423690244",
+        "1270594048617824257"
+      ],
+      "position": 3
+    },
+    {
+      "slug": "organizaciones-e-incentivos",
+      "name": "Organizaciones e incentivos",
+      "description": "Turras sobre cómo funcionan las empresas por dentro: incentivos, cultura, problemas de agencia, grandes corporaciones, empresa familiar y resistencia al cambio.",
+      "intro": "La cultura de una empresa no se diseña: emerge de sus incentivos. Estas turras explican cómo funcionan las organizaciones por dentro, desde los problemas de agencia y el juego corporativo hasta la empresa familiar, la homeostasis y quienes bloquean el cambio.",
+      "criteria": "Entra: arquitecturas de incentivos y problemas de agencia; cultura organizativa; juego corporativo y política interna; grandes corporaciones frente a startups; empresa familiar; homeostasis y resistencia interna al cambio; reparto de poder entre roles de la alta dirección; tecnología o metodologías de gestión (Agile, OKR, taylorismo) aplicadas a la organización. No entra: posicionamiento en el mercado (→ Estrategia); equipos concretos (→ Equipos y liderazgo); finanzas (→ Finanzas e inversión). Desempate: ver Estrategia y Equipos y liderazgo. Un rol concreto de la alta dirección va a la categoría de su función (CMO → Marketing y publicidad, CFO → Finanzas e inversión, CTO → IA y tecnología).",
+      "examples": [
+        "1649673649866113024",
+        "1931229690779283581",
+        "1398571638170529792"
+      ],
+      "position": 4
+    },
+    {
+      "slug": "finanzas-e-inversion",
+      "name": "Finanzas e inversión",
+      "description": "Turras sobre private equity, capital riesgo, M&A y el poder de los financieros en la empresa: sus ciclos, sus límites y por qué necesitan otra mirada.",
+      "intro": "Del apalancamiento de los 80 a la crisis de liquidez actual: estas turras analizan el private equity, el capital riesgo, las fusiones y adquisiciones y el ascenso de los financieros al poder corporativo, y por qué la ingeniería financiera ya no basta para crear valor.",
+      "criteria": "Entra: private equity, venture capital, M&A, fondos distress; historia de los paradigmas financieros; el CFO y el presupuesto; financiación de startups; crisis de liquidez; capital frente a creación de valor. No entra: estrategia de una empresa aunque la compre un fondo, salvo que el tema sea el fondo (→ Estrategia). Desempate: si el protagonista es el dinero o quien lo gestiona → aquí. Si la turra propone una alternativa estratégica u operativa al private equity (CFU, post-PE) y el private equity es el sujeto, sigue siendo Finanzas e inversión.",
+      "examples": [
+        "1989585041949622370",
+        "1494930305811111938",
+        "2030161085941039583"
+      ],
+      "position": 5
+    },
+    {
+      "slug": "marketing",
+      "name": "Marketing y publicidad",
+      "description": "Turras sobre la crisis del marketing y la publicidad: Facebook y Google, fraude publicitario, agencias, atención, marca, patrocinio y ventas.",
+      "intro": "El marketing basado en comprar audiencia barata está agotado. Estas turras analizan la industria publicitaria, el fraude digital, el papel del CMO, la atención y la relevancia de marca, el patrocinio y la función comercial.",
+      "criteria": "Entra: industria publicitaria y agencias; Facebook/Google Ads y adtech; fraude publicitario; el rol del CMO; iniciativas o empresas que atacan problemas de marketing (fraude publicitario, marcas lifestyle, Insight Lab); atención, marca y relevancia; patrocinio; ventas y generación de demanda; influencia y persuasión comercial. No entra: personalización a escala y el método de la personotecnia (→ Personotecnia). Desempate: si trata del sector o de sus prácticas → Marketing y publicidad; si trata de adaptar el mensaje o el producto a cada persona → Personotecnia.",
+      "examples": [
+        "1052828473729961984",
+        "989041980549287936",
+        "1938855177471021516"
+      ],
+      "position": 6
+    },
+    {
+      "slug": "personotecnia",
+      "name": "Personotecnia",
+      "description": "Turras sobre personotecnia: personalizar a escala sin big data ni engaño, relevancia frente a atención y cómo tratar a cada cliente como persona.",
+      "intro": "La personotecnia es la disciplina de tratar a cada persona como individuo a escala, como hace la frutera de barrio, sin disfrazar de personalización el big data. Estas turras explican qué es, por qué la falsa personalización inmuniza a la gente y cómo se aplica a marcas, productos y ventas.",
+      "criteria": "Entra: qué es la personotecnia; humanización y personalización a escala; romper el tradeoff escala/precisión; D2C y personalización de producto; personotecnia aplicada a ventas o a narrativas; economía de la atención leída desde la personotecnia. No entra: crítica a la industria publicitaria (→ Marketing y publicidad). Desempate: ver Marketing y publicidad. No entra: pricing (→ Estrategia).",
+      "examples": [
+        "1146056421072441344",
+        "1642053681766883330",
+        "2101155734700405039"
+      ],
+      "position": 7
+    },
+    {
+      "slug": "psicologia-y-decisiones",
+      "name": "Psicología y decisiones",
+      "description": "Turras sobre cómo decidimos: sesgos, emociones, autoengaño, por qué no cambiamos de opinión, el riesgo y el factor humano en los problemas.",
+      "intro": "Los problemas complejos los deciden personas, y las personas no son racionales. Estas turras tratan los sesgos, la emoción que secuestra decisiones, el autoengaño, la dificultad de cambiar de opinión y el Factor X: la parte humana que los modelos racionales ignoran.",
+      "criteria": "Entra: sesgos cognitivos y heurísticos; percepción del riesgo; emoción en la toma de decisiones; autoengaño, mentira y truth coping; cambiar de opinión y querer tener razón; datos frente a intuición; el factor humano como causa de que fallen los planes (si analiza un mecanismo humano concreto; si define el concepto Factor X → Método CPS); por qué alguien no cambia su marco de sentido; percepción del riesgo. No entra: conducta de grupos o de la sociedad (→ Sociedad y política); crecimiento personal y carrera (→ Desarrollo personal). Desempate: mecanismo mental de un individuo → aquí; fenómeno colectivo → Sociedad y política; qué debería hacer una persona con su vida → Desarrollo personal. Desempate con Sociedad y política: si el mecanismo solo existe en la interacción social (espiral del silencio, groupthink, confianza, conformidad) → Sociedad y política, aunque se explique con experimentos individuales.",
+      "examples": [
+        "1862770042686845320",
+        "1801852274232218084",
+        "1928694865052741791"
+      ],
+      "position": 8
+    },
+    {
+      "slug": "desarrollo-personal",
+      "name": "Desarrollo personal",
+      "description": "Turras sobre crecer como profesional: asertividad, resiliencia, carrera, emprender, perseverar o abandonar, obsesión, fracaso y síndrome del impostor.",
+      "intro": "Consejos que no caben en un libro de autoayuda: estas turras tratan la asertividad, la resiliencia, la carrera profesional y la «shadow career», emprender, cuándo perseverar y cuándo abandonar, la obsesión, el fracaso como dato y el síndrome del impostor.",
+      "criteria": "Entra: habilidades personales (asertividad, resiliencia, gestión del estrés); carrera profesional y empleabilidad individual; emprender como decisión vital; perseverar o abandonar; pasión, obsesión y equilibrio; fracaso y responsabilidad; síndrome del impostor; hábitos como la escritura. No entra: mecanismos psicológicos generales (→ Psicología y decisiones); relatos íntimos del autor (→ Reflexiones personales). Desempate: si da criterio para actuar en la propia vida profesional → aquí.",
+      "examples": [
+        "1403645471596453888",
+        "1743547711897342313",
+        "1350359247209553920"
+      ],
+      "position": 9
+    },
+    {
+      "slug": "sociologia",
+      "name": "Sociedad y política",
+      "description": "Turras sobre sociedad y política: polarización, pensamiento de grupo, opinión pública, relato frente a dato y una Administración incapaz de reformarse.",
+      "intro": "Cómo piensan y se comportan los grupos y las instituciones: polarización y pensamiento en blanco y negro, conformidad, espiral del silencio, confianza y engaño, el relato que vence al dato, y por qué la Administración y los partidos no saben gestionar la complejidad.",
+      "criteria": "Entra: polarización, bothism y maniqueísmo; conformidad y groupthink; opinión pública y espiral del silencio; confianza y engaño social; relato frente a dato; privilegio, moral y valor como construcciones sociales; ideas controvertidas y cancelación; hipocresía social; pompismo e idealismo; Administración pública y burocracia; partidos, políticos e incentivos políticos; demografía y estrategia de país; reconversiones industriales y subvenciones; innovación y sector público; acción civil. No entra: sesgos individuales (→ Psicología y decisiones). Desempate: ver Psicología y decisiones.",
+      "examples": [
+        "1535521789585117185",
+        "1390935441591967746",
+        "1598965646620086272"
+      ],
+      "position": 10
+    },
+    {
+      "slug": "ia-y-tecnologia",
+      "name": "IA y tecnología",
+      "description": "Turras sobre inteligencia artificial y tecnología: la IA frente al trabajo intelectual, su adopción real en empresas, hype, Web3 y el papel del CTO.",
+      "intro": "La IA encapsulará todo trabajo intelectual que se pueda modelar de forma determinista. Estas turras analizan qué queda para las personas, cómo adoptan la IA las empresas de verdad, cómo distinguir una tendencia de un hype y qué papel tiene la tecnología en los problemas de negocio.",
+      "criteria": "Entra: IA y su impacto en el trabajo y en el CPS; adopción de IA en empresas (IA chasm, centauros); tecnología subordinada a la estrategia; tendencias frente a hype; grandes fuerzas de cambio y atractores de futuro; Web3 y nuevos paradigmas; redes sociales como plataformas tecnológicas; killer apps. No entra: IA en la educación (→ Educación y altas capacidades); publicidad en plataformas (→ Marketing y publicidad). Desempate: si el tema es la tecnología en sí o su adopción → aquí.",
+      "examples": [
+        "1966774475191435728",
+        "2075812328566562908",
+        "1368127688343490560"
+      ],
+      "position": 11
+    },
+    {
+      "slug": "educacion-y-altas-capacidades",
+      "name": "Educación y altas capacidades",
+      "description": "Turras sobre educación, altas capacidades y neurodivergencia: el sistema educativo, la IA en el aula, el MBA, Mensa y la empleabilidad de las AACC.",
+      "intro": "El sistema educativo enseña a seguir el surco, no a gestionar la incertidumbre, y tritura a quien no encaja. Estas turras tratan la educación de la infancia a la tercera edad, las altas capacidades y la neurodivergencia, la IA en el aula y el futuro de universidades y escuelas de negocio.",
+      "criteria": "Entra: sistema educativo y escuela; universidades, MBA y escuelas de negocio; IA en educación; altas capacidades y neurodivergencia (educación, socialización, empleabilidad, Mensa); formación a lo largo de la vida. No entra: programas formativos cuyo contenido es el CPS, como másteres o academias CPS (→ Método CPS). Desempate: si el sujeto son alumnos, escuelas o personas con altas capacidades → aquí.",
+      "examples": [
+        "1520307318931570688",
+        "2053002707628142991",
+        "2022575861296230582"
+      ],
+      "position": 12
+    },
+    {
+      "slug": "cultura-popular",
+      "name": "Cómic, cine y videojuegos",
+      "description": "Turras sobre cultura popular como tema: la industria del videojuego, el cómic, la música, el cine y la creación artística, y lo que enseñan de talento y éxito.",
+      "intro": "Cómics, videojuegos, música y cine aparecen en casi todas las turras como ejemplo. Aquí están las que los tratan como tema: la industria del videojuego y su monetización, cómo se forman los cánones culturales, el talento que no triunfa y cómo un artista construye su público.",
+      "criteria": "Entra: la industria cultural (videojuegos, cómic, música, cine) y sus modelos de negocio; creación artística y talento artístico; mitos y cánones culturales; reseñas de obras cuando la tesis final trata de la obra, su autor o su industria. No entra: turras que usan una obra como metáfora de otro tema (van al tema). Desempate: si quitando la obra la turra sigue en pie, la obra es vehículo y la categoría es otra.",
+      "examples": [
+        "1461944993900380165",
+        "1257924003068555269",
+        "1406126552463470593"
+      ],
+      "position": 13
+    },
+    {
+      "slug": "reflexiones-personales",
+      "name": "Reflexiones personales",
+      "description": "Turras personales de Javier G. Recuenco: duelos, elegías, la muerte, cierres de etapa, la historia de las turras y la comunidad que las lee.",
+      "intro": "No todo es empresa y complejidad. Estas son las turras más personales: elegías por su madre y por amigos, reflexiones sobre la muerte, cierres de etapa, la historia de las propias turras y el agradecimiento a la comunidad que se ha formado alrededor.",
+      "criteria": "Entra: elegías y duelos; la muerte; cierres de etapas vitales; la historia de las turras; homenajes, celebraciones y agradecimientos a la comunidad; aficiones personales del autor contadas en primera persona. No entra: consejos de carrera o habilidades (→ Desarrollo personal). Desempate: si el centro es la vida del autor y no una tesis → aquí.",
+      "examples": [
+        "1921092901930484128",
+        "1718136430130520294",
+        "1421353440224104449"
+      ],
+      "position": 14
+    }
+  ],
+  "retired": {
+    "resolucion-de-problemas-complejos": "/metodo-cps",
+    "factor-x": "/psicologia-y-decisiones",
+    "gestion-del-talento": "/equipos-y-liderazgo",
+    "leyes-y-sesgos": "/psicologia-y-decisiones",
+    "trabajo-en-equipo": "/equipos-y-liderazgo",
+    "libros": "/biblioteca",
+    "futurismo-de-frontera": "/ia-y-tecnologia",
+    "orquestacion-cognitiva": "/equipos-y-liderazgo",
+    "gaming": "/cultura-popular",
+    "lectura-de-senales": "/sistemas-complejos",
+    "el-contexto-manda": "/sistemas-complejos",
+    "desarrollo-de-habilidades": "/desarrollo-personal",
+    "otras-turras-del-querer": "/reflexiones-personales"
+  },
+  "merged": {
+    "politica-y-sector-publico": "sociologia"
+  },
+  "merged_reason": "Política y sector público quedó con 7 turras como principal (mínimo 8): se fusiona con su vecina más cercana, que pasa a llamarse Sociedad y política."
+}

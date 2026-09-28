@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ThreadList } from "../components/ThreadList";
-import { getCategory, listCategories, listThreadsByCategory } from "@/lib/queries";
+import { getCategory, listCategories, listThreadsForArchive } from "@/lib/queries";
 import { SITE } from "@/lib/site";
 
 interface Params {
@@ -18,8 +18,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const category = getCategory((await params).category);
   if (!category) return {};
   return {
-    title: `${category.name} - ${SITE.name}`,
+    title: `Turras sobre ${category.name} | ${SITE.name}`,
     description: category.description,
+    alternates: { canonical: `/${category.slug}` },
+    openGraph: { title: `Turras sobre ${category.name}`, description: category.description },
   };
 }
 
@@ -30,8 +32,8 @@ export default async function CategoryPage({ params }: Params) {
   return (
     <ThreadList
       title={category.name}
-      description={category.description}
-      threads={listThreadsByCategory(category.slug)}
+      description={category.intro || category.description}
+      threads={listThreadsForArchive().filter((thread) => thread.categories.includes(category.slug))}
       showAuthor
     />
   );

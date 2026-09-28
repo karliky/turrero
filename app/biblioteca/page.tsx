@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import BookGrid from './components/BookGrid';
+import { realCover } from '@/lib/books';
 import { listBooks } from '@/lib/queries';
 import { BOOK_CATEGORIES, SITE } from '@/lib/site';
 
@@ -11,12 +12,19 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Biblioteca - ${SITE.name}`,
     description,
-    images: ['/promo.png'],
+    images: ['/opengraph-image'],
   },
 };
 
+/** A few books were stored with their Goodreads URL as title: show the slug as words instead. */
+function readableTitle(title: string): string {
+  if (!/^https?:\/\//.test(title)) return title;
+  const slug = new URL(title).pathname.split('/').at(-1) ?? '';
+  return decodeURIComponent(slug).replace(/^\d+[.-]/, '').replace(/[_-]+/g, ' ').trim() || title;
+}
+
 export default function LibrosPage() {
-  const books = listBooks();
+  const books = listBooks().map((book) => ({ ...book, title: readableTitle(book.title), imageUrl: realCover(book.imageUrl) }));
 
   return (
     <main className="container mx-auto px-4 py-8">

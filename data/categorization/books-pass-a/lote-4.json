@@ -1,0 +1,718 @@
+[
+  {
+    "url": "https://www.goodreads.com/book/show/5943609-asymmetries-in-dialogue",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Estudio académico de las asimetrías de poder y conocimiento en el diálogo interpersonal.",
+    "confidence": "media",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/ru/book/show/12240758-dublin-s",
+    "primary": "Ficción, cómic y juegos",
+    "secondary": [
+      "Historia y biografías"
+    ],
+    "reason": "Cómic biográfico sobre James Joyce; por regla el cómic va a Ficción.",
+    "confidence": "media",
+    "alternative": "Historia y biografías"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/50489392-virtual-cities",
+    "primary": "Ficción, cómic y juegos",
+    "secondary": [],
+    "reason": "Atlas-guía de ciudades de videojuegos escrito como viaje por mundos ficticios.",
+    "confidence": "media",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/147887.Hard_Sell",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Memorias de un visitador farmacéutico sobre la venta de Viagra.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/28007903-american-heiress",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Relato histórico del secuestro, crímenes y juicio de Patty Hearst.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/57693494-losing-our-minds",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Psicóloga analiza cómo definir la enfermedad mental frente al malestar normal.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/19148220-a-team-of-leaders",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Liderazgo de equipos y empoderamiento en organizaciones.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/2741559-tribal-leadership",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Culturas organizativas y liderazgo a partir de las tribus naturales de la empresa.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/55338982-cultish",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Análisis del lenguaje de sectas y fanatismo como fenómeno social.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/13588356-daring-greatly",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Autoayuda sobre vulnerabilidad aplicada a la vida, crianza y liderazgo.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/48613493-confess",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Autobiografía del cantante de Judas Priest.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/69799.Boo_Hoo",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Memorias del auge y caída de la startup boo.com.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/1416864.Ingenuity_in_Mathematics",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Divulgación matemática: problemas y demostraciones ingeniosas.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/397238.Aha_Insight",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Clásico de Gardner sobre acertijos y paradojas matemáticas.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/17126891-gunpei-yokoi",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Biografía y filosofía de diseño del creador de juguetes de Nintendo.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/339584.Game_Over_Press_Start_to_Continue",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Historia de Nintendo y su conquista del mercado del videojuego.",
+    "confidence": "alta",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/2530177.The_Theory_of_Incentives",
+    "primary": "Economía y finanzas",
+    "secondary": [],
+    "reason": "Manual de teoría económica de incentivos y modelo principal-agente.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/866222.Winning",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Desarrollo personal"
+    ],
+    "reason": "Consejos de management del ex-CEO de GE, también sobre carrera.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/7796938-denial",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Por qué los líderes empresariales niegan la realidad, con casos.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/25147.F_d_Companies",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Historia y biografías"
+    ],
+    "reason": "Recopilación satírica de fracasos de empresas punto com.",
+    "confidence": "media",
+    "alternative": "Historia y biografías"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/113576.The_Smartest_Guys_in_the_Room",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Relato del ascenso y caída de Enron.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/50086786-lights-out",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Relato histórico de la caída de General Electric.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/44526017-narrative-economics",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Cómo las narrativas virales mueven los acontecimientos económicos.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/12698060-superfuel",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Divulgación sobre el torio como tecnología energética de futuro.",
+    "confidence": "media",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/11721966-good-strategy-bad-strategy",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Clásico sobre qué distingue una buena estrategia de una mala.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/23398748-doing-good-better",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [],
+    "reason": "Ética del altruismo eficaz: cómo hacer el mayor bien posible.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/816102.Black_Potatoes",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Historia de la Gran Hambruna irlandesa.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/29938018-furious-george",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Memorias de un entrenador de la NBA.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/97905.The_No_Asshole_Rule",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Cultura laboral y cómo lidiar con personas tóxicas en la empresa.",
+    "confidence": "alta",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/6100832-the-management-myth",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Crítica filosófica e histórica de la consultoría y el management.",
+    "confidence": "alta",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/68560.Videogames",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Memorias del inventor de la primera consola de videojuegos.",
+    "confidence": "alta",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/18222694-proof",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Divulgación científica sobre la química y biología del alcohol.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/53317882-son-of-a-milkman",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Memorias del bajista del grupo Tesla.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/14546626-total-recall",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Autobiografía de Arnold Schwarzenegger.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/198363.Managing_With_Power",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Poder, política e influencia dentro de las organizaciones.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/21289882-climbing-the-corporate-ladder?ac=1&from_search=true&qid=Tics7EtVrf&rank=4",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Guía de carrera profesional para ascender en la empresa.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/1319.The_War_of_Art",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Oficio creativo y lucha contra la resistencia interior.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/832398.Migrating_Legacy_Systems",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Manual técnico de migración incremental de sistemas legados.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/28820444-the-elephant-in-the-brain",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Motivos ocultos del comportamiento humano y sus efectos sociales.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/42277392-in-defense-of-nuance",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [],
+    "reason": "Ensayo sobre pensamiento matizado frente al pensamiento simplista.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/11324722-the-righteous-mind",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Psicología moral que explica la división política y religiosa.",
+    "confidence": "media",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/53359432-black-and-white-thinking",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Psicología del pensamiento binario y la categorización.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/8733371",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Psicología evolutiva de la hipocresía y la mente modular.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/13539039-the-wisdom-of-psychopaths",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Psicología de los rasgos psicopáticos y su utilidad.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/50736252-la-traici-n-en-la-historia-de-espa-a",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Ensayo histórico sobre traiciones en la historia de España.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/16156024-xito-para-perdedores",
+    "primary": "Ficción, cómic y juegos",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Cómic humorístico sobre emprendimiento y negocios.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/9206187-everything-is-obvious",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Ciencia y complejidad"
+    ],
+    "reason": "Sociólogo sobre los límites del sentido común y la predicción social.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/55575206-libra-shrugged/",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Crónica del intento de Facebook de crear la moneda Libra.",
+    "confidence": "media",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/52745048-mission-economy",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Propuesta económica de Mazzucato de un Estado orientado a misiones.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/17987621-the-entrepreneurial-state",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Papel del Estado en la innovación y la economía.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/117031.On_War",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Tratado clásico de teoría de la estrategia militar.",
+    "confidence": "media",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/379352.On_Strategy",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Análisis histórico de la estrategia de EEUU en Vietnam.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/50345546-what-we-need-to-do-now",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Tecnologías y medidas para una economía de cero emisiones.",
+    "confidence": "media",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/31850765-energy-and-civilization",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Ciencia y complejidad"
+    ],
+    "reason": "Historia de la civilización a través de la energía.",
+    "confidence": "media",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/42091151-decisive-intuition",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Uso de la intuición en decisiones empresariales.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/7783191-the-invisible-gorilla",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Ilusiones cognitivas y cómo nos engaña la intuición.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/55767523-the-myth-of-the-entrepreneurial-state",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Réplica liberal a Mazzucato sobre el Estado y la innovación.",
+    "confidence": "media",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/457393.The_Strategy_Paradox_Why_committing_to_success_leads_to_failure__and_what_to_do_about_it_",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Estrategia empresarial ante la incertidumbre: comprometerse con una estrategia puede llevar al fracaso.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/30103610-epiphany-z",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Visiones futuristas sobre tecnología y transformación del futuro.",
+    "confidence": "media",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/36356274-the-pattern-future",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Predicción del futuro tecnológico mediante detección de patrones.",
+    "confidence": "baja",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/29502380-the-signals-are-talking",
+    "primary": "Tecnología e IA",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Método para detectar señales de tendencias tecnológicas.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/6589670-the-chaos-scenario",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Colapso del modelo de medios y publicidad por internet.",
+    "confidence": "media",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/55749716-utop-a",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Ensayos colectivos sobre tecnofuturos.",
+    "confidence": "baja",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/37585564",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Demografía: el declive de la población mundial y sus consecuencias.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/18371363",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Previsión económica basada en ciclos demográficos.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/17859574-how-to-fail-at-almost-everything-and-still-win-big",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Autoayuda de Scott Adams sobre sistemas y éxito personal.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/9463339-no-regrets",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Memorias del guitarrista de Kiss.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/9589792-red",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Autobiografía de Sammy Hagar.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/hr/book/show/29429893-blitzed",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Historia del uso de drogas en la Alemania nazi.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/53052177",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Filosofía y pensamiento"
+    ],
+    "reason": "Crítica de las teorías académicas de identidad.",
+    "confidence": "alta",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/16350431-models-behaving-badly",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Ciencia y complejidad"
+    ],
+    "reason": "Límites de los modelos financieros frente a la física.",
+    "confidence": "media",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/28815",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Clásico sobre la psicología de la persuasión.",
+    "confidence": "alta",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/18624642",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Filosofía y pensamiento"
+    ],
+    "reason": "Ensayo sobre la construcción de mitos y relatos históricos.",
+    "confidence": "media",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/26195941-the-age-of-surveillance-capitalism",
+    "primary": "Tecnología e IA",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Capitalismo de vigilancia de las plataformas tecnológicas.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/4191136-business-adventures",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Economía y finanzas"
+    ],
+    "reason": "Casos clásicos de empresas y Wall Street.",
+    "confidence": "alta",
+    "alternative": "Historia y biografías"
+  },
+  {
+    "url": "https://www.goodreads.com/en/book/show/4509587-business-anthropology",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Antropología aplicada a organizaciones y empresas.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/2615",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Innovación disruptiva y fracaso de empresas líderes.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/1911",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Globalización impulsada por la tecnología en el siglo XXI.",
+    "confidence": "media",
+    "alternative": "Economía y finanzas"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/11722275",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Liderazgo lean y desarrollo de líderes en Toyota.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/3828902",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Introducción al pensamiento sistémico.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/32726815",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Memorias del manager de Van Halen.",
+    "confidence": "alta",
+    "alternative": null
+  }
+]

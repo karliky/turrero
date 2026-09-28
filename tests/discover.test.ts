@@ -78,7 +78,7 @@ describe('findTurras', () => {
     db = openDb(':memory:');
     migrate(db);
     upsertAuthor(db, author);
-    insertThread(db, { id: '100', authorHandle: 'Recuenco', title: 'Última', publishedAt: '2026-02-14T07:37:17.000Z', exam: null, podcastUrl: null, syncedAt: null });
+    insertThread(db, { id: '100', authorHandle: 'Recuenco', title: 'Última', publishedAt: '2026-02-14T07:37:17.000Z', exam: null, syncedAt: null });
     replaceTweets(db, '100', [tweet('100')]);
   });
 

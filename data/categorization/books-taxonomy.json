@@ -1,0 +1,56 @@
+{
+  "rules": {
+    "primary": "La categoría principal es el tema del libro (de qué trata), no su formato ni el motivo por el que se cita en la turra.",
+    "secondary": "Como mucho 1 secundaria, solo si el libro trata ese segundo tema de forma sustancial (no por un capítulo o una mención).",
+    "fiction": "Novela, cómic y videojuegos van a «Ficción, cómic y juegos» aunque traten temas serios; la biografía o memoria de un autor de ficción va a «Historia y biografías».",
+    "knowledge": "Clasifica por lo que sabes del libro (título, autor, edición); si no lo conoces, usa el título, el subtítulo y el contexto de la turra que lo cita, y marca confianza baja.",
+    "min_primary": 8,
+    "didactic": "Excepción a la regla de ficción: una novela didáctica escrita para enseñar una disciplina (p. ej. The Goal de Goldratt, gestión; Counselling for Toads, psicoterapia) va a la categoría de esa disciplina, con «Ficción, cómic y juegos» como secundaria."
+  },
+  "categories": [
+    {
+      "name": "Estrategia y empresa",
+      "criteria": "Entra: estrategia, dirección y management, organizaciones e incentivos, marketing, publicidad y ventas, emprendimiento y startups, innovación empresarial, casos de empresa. No entra: economía y mercados como sistema (→ Economía y finanzas); psicología de la decisión sin foco empresarial (→ Psicología y comportamiento)."
+    },
+    {
+      "name": "Economía y finanzas",
+      "criteria": "Entra: economía, mercados, inversión, private equity, banca, historia financiera, precios e incentivos económicos. No entra: gestión de una empresa (→ Estrategia y empresa)."
+    },
+    {
+      "name": "Psicología y comportamiento",
+      "criteria": "Entra: sesgos y toma de decisiones, persuasión e influencia, cambio de conducta, emociones, personalidad, neurociencia de la mente, psicología social del individuo. No entra: autoayuda práctica para la propia vida (→ Desarrollo personal); fenómenos de grupos y sociedad (→ Sociedad y política)."
+    },
+    {
+      "name": "Sociedad y política",
+      "criteria": "Entra: sociología, política e ideologías, polarización, moral y cultura como fenómeno social, antropología, demografía, sector público. No entra: historia de un periodo (→ Historia y biografías)."
+    },
+    {
+      "name": "Ciencia y complejidad",
+      "criteria": "Entra: sistemas complejos y teoría de la complejidad, incertidumbre y riesgo como fenómeno, divulgación científica (física, biología, medicina, matemáticas), método científico, filosofía de la ciencia. No entra: tecnología aplicada o IA (→ Tecnología e IA)."
+    },
+    {
+      "name": "Tecnología e IA",
+      "criteria": "Entra: inteligencia artificial, tecnología e internet, transformación digital, futuro del trabajo por la tecnología, predicción de tendencias tecnológicas. No entra: negocio de una empresa tecnológica contado como caso (→ Estrategia y empresa)."
+    },
+    {
+      "name": "Historia y biografías",
+      "criteria": "Entra: historia, biografías, memorias y autobiografías, historia de una empresa o de una industria contada como relato histórico. No entra: libros de tesis que usan ejemplos históricos (van a su tema)."
+    },
+    {
+      "name": "Filosofía y pensamiento",
+      "criteria": "Entra: filosofía, ética, epistemología, retórica y argumentación, pensamiento crítico. No entra: filosofía de la ciencia (→ Ciencia y complejidad); ideología política (→ Sociedad y política)."
+    },
+    {
+      "name": "Educación y aprendizaje",
+      "criteria": "Entra: sistema educativo, aprendizaje, altas capacidades y neurodivergencia, formación y universidades. No entra: técnicas de estudio para uno mismo (→ Desarrollo personal)."
+    },
+    {
+      "name": "Desarrollo personal",
+      "criteria": "Entra: autoayuda, hábitos, productividad, carrera profesional, creatividad personal, escritura y oficio creativo, salud y bienestar personal. No entra: psicología explicada como ciencia (→ Psicología y comportamiento)."
+    },
+    {
+      "name": "Ficción, cómic y juegos",
+      "criteria": "Entra: novela, relato, cómic y novela gráfica, videojuegos y juegos. No entra: ensayos sobre cómic o juegos (van a su tema, p. ej. Historia y biografías)."
+    }
+  ]
+}

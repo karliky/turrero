@@ -1,0 +1,2571 @@
+[
+  {
+    "slug": "abrochador-liminal",
+    "term": "Abrochador liminal",
+    "short": "Quien une un avance tecnológico con el espíritu de la época a través de una killer app.",
+    "body": "La imagen es la de un corchete de presión que se cierra con un «snap». El abrochador liminal no se emociona con el potencial de una tecnología, sino que crea el producto que la hace imprescindible: VisiCalc para el Apple II, el Walkman de Akio Morita o el videojuego que vende la consola. Recuenco cree que la mayoría de los momentos ajá históricos salen de ahí, y que su enemigo es el chapuzas.",
+    "origin": "Javier G. Recuenco",
+    "group": "tecnologia",
+    "aliases": [
+      "abrochador liminal",
+      "abrochadores liminales",
+      "abrochamiento liminal"
+    ],
+    "related": [
+      "liminalidad",
+      "zeitgeist",
+      "ecosistemas-tecnologicos"
+    ],
+    "sources": [
+      {
+        "threadId": "1411191931669987332",
+        "tweetId": "1411191939504955393"
+      }
+    ]
+  },
+  {
+    "slug": "acoplamiento-suelto",
+    "term": "Acoplamiento suelto",
+    "short": "Partes de una organización conectadas entre sí sin rigidez, de modo que pueden adaptarse cuando el entorno cambia.",
+    "body": "Concepto de Karl Weick que Recuenco recoge junto al sensemaking y la enactación. Describe organizaciones cuyas piezas están unidas, pero no atornilladas: cada una conserva margen para moverse. Esa holgura da flexibilidad en entornos cambiantes.",
+    "origin": "Karl E. Weick",
+    "group": "complejidad",
+    "aliases": [
+      "acoplamiento suelto",
+      "loose coupling"
+    ],
+    "related": [
+      "sensemaking",
+      "enactacion"
+    ],
+    "sources": [
+      {
+        "threadId": "1852267188519854245",
+        "tweetId": "1852302093949735212"
+      }
+    ]
+  },
+  {
+    "slug": "altas-capacidades",
+    "term": "Altas capacidades (AACC)",
+    "short": "Capacidad intelectual muy superior a la media. Recuenco la considera muy valiosa en el CPS y desaprovechada por el sistema.",
+    "body": "Recuenco defiende que conviene incorporar gente con AACC a los procesos CPS, sobre todo al sensemaking, por su facilidad para ver conexiones novedosas. Aclara que AACC no garantiza nada («AACC ≠ the right stuff») y que las personas con AACC son igual de falibles que las demás. También denuncia que en España ese talento se desaprovecha y que sufren mucho más acoso escolar que la media.",
+    "origin": null,
+    "group": "personas",
+    "aliases": [
+      "altas capacidades",
+      "Altas Capacidades",
+      "AACC",
+      "altas capacidades intelectuales"
+    ],
+    "related": [
+      "neurodivergencia",
+      "sensemaking",
+      "cps"
+    ],
+    "sources": [
+      {
+        "threadId": "1969289174655045782",
+        "tweetId": "1969289174655045782"
+      },
+      {
+        "threadId": "2022575861296230582",
+        "tweetId": "2022575861296230582"
+      },
+      {
+        "threadId": "1467051970422878210",
+        "tweetId": "1467052018925805568"
+      }
+    ]
+  },
+  {
+    "slug": "aporia",
+    "term": "Aporía",
+    "short": "Callejón sin salida del razonamiento: argumentos igual de sólidos en ambos lados y ninguna respuesta clara.",
+    "body": "Viene del griego «sin camino». Recuenco se reconcilia con ella a través del dominio confuso de Cynefin, donde ni siquiera sabes qué tipo de problema tienes. En el sensemaking es el momento en que nada encaja y no hay más información con la que contrastar. La consultoría tapa esas grietas con lugares comunes. El CPS las trabaja como el kintsugi trabaja las roturas, y en eso ve la parte de arte del oficio.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "aporía",
+      "aporías",
+      "desorden aporético"
+    ],
+    "related": [
+      "cynefin",
+      "sensemaking",
+      "incertidumbre",
+      "cienciarte"
+    ],
+    "sources": [
+      {
+        "threadId": "1865306644827029957",
+        "tweetId": "1865306646248886705"
+      }
+    ]
+  },
+  {
+    "slug": "arquitectura-de-incentivos",
+    "term": "Arquitectura de incentivos",
+    "short": "Conjunto de premios y castigos, explícitos o implícitos, que moldea lo que hacen las personas de una organización.",
+    "body": "Según Recuenco, una arquitectura de incentivos sirve para una cosa: modificar el comportamiento de un individuo o de un colectivo. Conductas económicas que parecen absurdas se vuelven lógicas cuando descubres los incentivos que hay debajo. Le dedicó una trilogía, donde avisa de que diseñar incentivos corporativos es «como subir al Everest sin oxígeno», porque mezcla la complejidad de la organización con la de la motivación humana.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "arquitectura de incentivos",
+      "arquitecturas de incentivos",
+      "arquitecturas dinámicas de incentivos",
+      "incentivo",
+      "incentivos"
+    ],
+    "related": [
+      "incentivo-perverso",
+      "skin-in-the-game",
+      "huevos-de-serpiente",
+      "business-acumen",
+      "factor-x"
+    ],
+    "sources": [
+      {
+        "threadId": "1662345754642378753",
+        "tweetId": "1662345755758145538"
+      },
+      {
+        "threadId": "1357937382318886913",
+        "tweetId": "1357966224039108609"
+      },
+      {
+        "threadId": "1654727164086960130",
+        "tweetId": "1654727177089212417"
+      }
+    ]
+  },
+  {
+    "slug": "asertividad",
+    "term": "Asertividad",
+    "short": "Capacidad de defender tu criterio con firmeza y franqueza, sin agresividad y sin dejar de respetar al otro.",
+    "body": "Recuenco la considera imprescindible en el CPS, porque quien diagnostica tiene que decir verdades incómodas a la dirección, venga quien venga del MIT o del INSEAD. Como la asertividad genera conflicto y casi todo el mundo lo evita, a menudo se sustituye por adulación, y así se degrada la estrategia. Solo funciona acompañada de un autocontrol casi obsesivo que evite la «pirotecnia abrasiva».",
+    "origin": null,
+    "group": "personas",
+    "aliases": [
+      "asertividad",
+      "asertivo",
+      "asertiva",
+      "asertivos"
+    ],
+    "related": [
+      "truth-coping",
+      "factor-x",
+      "zelotes"
+    ],
+    "sources": [
+      {
+        "threadId": "1517738336210894850",
+        "tweetId": "1517738344574296069"
+      },
+      {
+        "threadId": "1522830977088819203",
+        "tweetId": "1522831048169635840"
+      },
+      {
+        "threadId": "1647132462982524929",
+        "tweetId": "1647132498638393344"
+      }
+    ]
+  },
+  {
+    "slug": "atractores",
+    "term": "Atractores",
+    "short": "Las cinco grandes fuerzas de fondo que empujan mercados y sociedades y condicionan cualquier estrategia durante años.",
+    "body": "Recuenco los compara con la vida de una estrella: aparecen, se consolidan, alcanzan su máxima atracción y colapsan. No son modas: un hype pasa, un atractor arrastra decisiones de todo tipo durante una década. Por eso los reformula cuando cambia el contexto. La versión original, de 2016, eran megatendencias tecnológicas, crunching business models, espacios hiperpersonales, customer centricity o personotecnia y la Agenda 2030 (ODS, ethical challengers y consumidor coherente). En la versión de 2026 solo siguen igual las megatendencias tecnológicas. Crunching business models pasa a ser warp speed, los espacios hiperpersonales y la personotecnia se funden en relevance first, el colapso de los acuerdos posteriores a la Segunda Guerra Mundial ocupa el sitio de la Agenda 2030, como su reverso, y se suma el reshuffling de la jerarquía intelectual. Insiste en que las tendencias entran cuando la gente está lista, no cuando la tecnología está disponible.",
+    "origin": "Javier G. Recuenco",
+    "group": "estrategia",
+    "aliases": [
+      "atractor",
+      "atractores",
+      "cinco atractores",
+      "macroatractor",
+      "macroatractores",
+      "macro atractor"
+    ],
+    "related": [
+      "zeitgeist",
+      "ciencias-de-la-complejidad",
+      "business-acumen",
+      "factor-x"
+    ],
+    "sources": [
+      {
+        "threadId": "2004624575837958361",
+        "tweetId": "2004624581730996587"
+      },
+      {
+        "threadId": "1373170914226008064",
+        "tweetId": "1373171087266226176"
+      },
+      {
+        "threadId": "1454341690022670339",
+        "tweetId": "1454341740043833350"
+      },
+      {
+        "threadId": "1368127688343490560",
+        "tweetId": "1368176299907428353"
+      }
+    ]
+  },
+  {
+    "slug": "autopoiesis",
+    "term": "Autopoiesis",
+    "short": "Capacidad de un sistema para producirse y mantenerse a sí mismo, renovando sus piezas sin perder su identidad.",
+    "body": "Concepto de los biólogos Humberto Maturana y Francisco Varela, que Niklas Luhmann llevó a los sistemas sociales: se definen por sus propias comunicaciones (autorreferencialidad) y preservan su identidad aunque traten con el entorno (cierre operacional). Recuenco habla de autopoiesis empresarial para describir la tensión entre lo nuevo y lo bien operado. Cada bando de la empresa tira hacia un lado, y sobrevivir depende de reajustar a mano el equilibrio perdido.",
+    "origin": "Humberto Maturana y Francisco Varela, y Niklas Luhmann para los sistemas sociales",
+    "group": "complejidad",
+    "aliases": [
+      "autopoiesis",
+      "autopoiesis empresarial",
+      "autopoiético",
+      "autopoiéticos",
+      "autorreferencialidad",
+      "cierre operacional"
+    ],
+    "related": [
+      "homeostasis",
+      "hormesis",
+      "sistemas-complejos",
+      "sweet-spot"
+    ],
+    "sources": [
+      {
+        "threadId": "1834829754488221846",
+        "tweetId": "1834829765645062448"
+      }
+    ]
+  },
+  {
+    "slug": "autosegmentacion",
+    "term": "Autosegmentación",
+    "short": "Cuando alguien, ante un mensaje no dirigido a él, se identifica solo como interesado mediante su comportamiento.",
+    "body": "Recuenco la ve como el mecanismo adecuado para lanzar ideas complejas o productos no mainstream. Él mismo emite mensajes que no son comerciales, pero que hacen que se autoseleccione la gente con la que podría hacer negocio. Si te presionas para llegar a más gente, le echas agua al vino. Y un cliente que no se ha autosegmentado tiene pocas opciones de éxito, aunque necesite el CPS.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "autosegmentación",
+      "autosegmentado",
+      "autosegmentarse",
+      "autosegmente"
+    ],
+    "related": [
+      "personotecnia",
+      "tokens-de-confianza"
+    ],
+    "sources": [
+      {
+        "threadId": "1487312375351029760",
+        "tweetId": "1487312378903552000"
+      },
+      {
+        "threadId": "1771432938288107757",
+        "tweetId": "1771432967690187050"
+      }
+    ]
+  },
+  {
+    "slug": "blitzscaling",
+    "term": "Blitzscaling",
+    "short": "Crecimiento relámpago que prima la velocidad sobre la eficiencia para engordar una empresa y venderla cuanto antes.",
+    "body": "Reid Hoffman y Chris Yeh acuñaron el término para el crecimiento rápido y agresivo de las startups. Recuenco habla de la «mirada blitzscaler»: llevar la lógica del private equity a cualquier negocio, sin compromiso con el largo plazo ni con el sentido de la compañía, solo engorde rápido y venta de la carcasa. Hay mucho dinero en ello, dice, pero no hay épica ni alma.",
+    "origin": "Reid Hoffman y Chris Yeh, «Blitzscaling»",
+    "group": "estrategia",
+    "aliases": [
+      "blitzscaling",
+      "blitzscaler",
+      "mirada blitzscaler"
+    ],
+    "related": [
+      "private-equity",
+      "lujo-humano",
+      "juego-infinito"
+    ],
+    "sources": [
+      {
+        "threadId": "1870373349282484488",
+        "tweetId": "1870373446464536752"
+      }
+    ]
+  },
+  {
+    "slug": "bothism",
+    "term": "Bothism",
+    "short": "Ante dos planteamientos enfrentados, buscar que convivan las fortalezas de ambos en lugar de elegir uno solo.",
+    "body": "Recuenco toma el término de Mark Ritson, que lo usó para la vieja pelea del marketing entre creatividad y estrategia. No es un término medio ingenuo: prescindir de uno de los dos lados es desaprovechar la solución, y eso casa con la complejidad. Recuenco lo aplica a sí mismo, por ejemplo al confiar a la vez en los datos y en la intuición, y avisa de que quien se acoge al bothism recibe golpes de todos los bandos.",
+    "origin": "Mark Ritson, columna en Marketing Week (2020)",
+    "group": "personas",
+    "aliases": [
+      "bothism",
+      "#bothism"
+    ],
+    "related": [
+      "sweet-spot",
+      "chavesnogalismo"
+    ],
+    "sources": [
+      {
+        "threadId": "1365564279232028681",
+        "tweetId": "1365564280649568260"
+      },
+      {
+        "threadId": "1370628575775367168",
+        "tweetId": "1370628602392424450"
+      },
+      {
+        "threadId": "1796796569829687349",
+        "tweetId": "1796796686578151829"
+      }
+    ]
+  },
+  {
+    "slug": "business-acumen",
+    "term": "Business acumen",
+    "short": "Olfato para los negocios: estrategia, propuesta de valor y lectura de señales. Uno de los cuatro pilares del CPS.",
+    "body": "Recuenco divide el CPS en cuatro macrodisciplinas: ciencias de la complejidad, ecosistemas tecnológicos, Factor X y business acumen. Este último cubre todo lo relativo a contextos empresariales y comerciales. En su trilogía sobre incentivos lo resume como la forma de llevar la arquitectura de incentivos al kernel de la estrategia. Pone de ejemplo a Charlie Munger, que invierte apoyándose sobre todo en business acumen y Factor X.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "business acumen"
+    ],
+    "related": [
+      "estrategia",
+      "factor-x",
+      "ecosistemas-tecnologicos",
+      "ciencias-de-la-complejidad",
+      "arquitectura-de-incentivos"
+    ],
+    "sources": [
+      {
+        "threadId": "1340160478316785666",
+        "tweetId": "1340180316611350529"
+      },
+      {
+        "threadId": "1649673649866113024",
+        "tweetId": "1649678429082583041"
+      }
+    ]
+  },
+  {
+    "slug": "centauro",
+    "term": "Centauro",
+    "short": "Híbrido de humano e IA que rinde más que cada uno por separado, idea de Garry Kasparov tras Deep Blue.",
+    "body": "Kasparov acuñó el concepto en 1998, después de su enfrentamiento con Deep Blue. Recuenco lo usa para pensar la convergencia entre CPS e IA: la IA no hará CPS, pero el trabajo será de centauros. Le preocupa el «centauro inverso» de Cory Doctorow, el humano que solo asiente ante la decisión automatizada, y pide una teoría sobre cómo se delega la responsabilidad en los híbridos centauro.",
+    "origin": "Garry Kasparov",
+    "group": "tecnologia",
+    "aliases": [
+      "centauro",
+      "centauros",
+      "híbrido centauro",
+      "híbridos centauro",
+      "dinámicas centauro",
+      "centauro inverso"
+    ],
+    "related": [
+      "ia-chasm",
+      "moat",
+      "lujo-humano"
+    ],
+    "sources": [
+      {
+        "threadId": "1720721564465823881",
+        "tweetId": "1720721643725537473"
+      },
+      {
+        "threadId": "1837390467337490808",
+        "tweetId": "1837390498039820480"
+      }
+    ]
+  },
+  {
+    "slug": "chavesnogalismo",
+    "term": "Chavesnogalismo",
+    "short": "Postura de saber que la maldad no tiene bando: el hijoputismo cruza todas las ideologías.",
+    "body": "Recuenco lo contrapone al pompismo, que coloca a los malos en el eje ideológico y da a «los otros» el monopolio del hijoputismo. El chavesnogalismo sabe que el hijoputismo es patrimonio de la humanidad y opera en un eje perpendicular a las ideologías. Toma el nombre de Manuel Chaves Nogales, el periodista al que en la Guerra Civil unos llamaban rojo y otros franquista. Recuenco asume su mismo destino: negarse a elegir trinchera y que todos te quieran muerto.",
+    "origin": "Javier G. Recuenco",
+    "group": "sociedad",
+    "aliases": [
+      "chavesnogalismo",
+      "Chavesnogalismo",
+      "hijoputismo"
+    ],
+    "related": [
+      "pompismo",
+      "bothism",
+      "facciones-lanares"
+    ],
+    "sources": [
+      {
+        "threadId": "1758760266068590698",
+        "tweetId": "1758760296443707439"
+      }
+    ]
+  },
+  {
+    "slug": "cienciarte",
+    "term": "Cienciarte",
+    "short": "Disciplina que vive entre la ciencia y el arte, con mucho determinismo científico y mucha inspiración artística a la vez.",
+    "body": "Recuenco pone como ejemplos la programación, la arquitectura de sistemas, la cocina y el propio CPS. Su equilibrio es frágil: si se rompe hacia el determinismo aparecen la ilusión de control y el cientifismo. Si se rompe hacia el arte, el acientifismo y la relatocracia. Por eso el CPS no es una skill ni un framework, sino una serie de módulos que cada cual combina según su propósito, como un guitarrista que se monta su pedalera.",
+    "origin": "Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "cienciarte",
+      "cienciartes",
+      "CienciArtes"
+    ],
+    "related": [
+      "cps",
+      "factor-x",
+      "liminalidad",
+      "sweet-spot"
+    ],
+    "sources": [
+      {
+        "threadId": "1741006814873821551",
+        "tweetId": "1741006842090717363"
+      },
+      {
+        "threadId": "1784107483444687237",
+        "tweetId": "1784107527677812950"
+      }
+    ]
+  },
+  {
+    "slug": "ciencias-de-la-complejidad",
+    "term": "Ciencias de la complejidad",
+    "short": "Pilar del CPS que agrupa sistemas no lineales, pensamiento sistémico, emergencia y sensemaking para entender problemas enmarañados.",
+    "body": "Es una de las cuatro macrodisciplinas del CPS, junto a ecosistemas tecnológicos, Factor X y business acumen. Recuenco mete ahí las ciencias «clásicas» de la complejidad: sistemas no lineales, systems thinking, emergencia y sensemaking. Las considera fascinantes pero demasiado teóricas y ciegas al factor humano, y por eso no le bastaron y tuvo que completarlas con los otros pilares.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "ciencias de la complejidad",
+      "complexity science",
+      "complejidad aplicada"
+    ],
+    "related": [
+      "sistemas-complejos",
+      "emergencia",
+      "sensemaking",
+      "factor-x",
+      "business-acumen",
+      "cynefin"
+    ],
+    "sources": [
+      {
+        "threadId": "1340160478316785666",
+        "tweetId": "1340176659291508736"
+      },
+      {
+        "threadId": "1332604415224770564",
+        "tweetId": "1332611838719221761"
+      }
+    ]
+  },
+  {
+    "slug": "consultoria",
+    "term": "Consultoría",
+    "short": "Servicio que asesora y define soluciones para empresas. Recuenco critica que se venda para problemas que no sabe resolver.",
+    "body": "Recuenco distingue los servicios profesionales, que implantan soluciones, de la consultoría, que las define, y dentro de esta la estratégica. No la considera inútil: la llama disciplina «violín», que borda los proyectos canon, los que ya se han hecho antes. Su crítica va a los problemas de casting (gente joven sin experiencia donde haría falta mucha) y a la doble asimetría: el cliente no sabe juzgar al experto y a menudo no hay un repertorio claro que pedirle. Para cubrir esa incertidumbre se venden success stories y tokens de justificación.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "consultoría",
+      "consultoría estratégica",
+      "consultoras"
+    ],
+    "related": [
+      "cps",
+      "tokens-de-confianza",
+      "incentivo-perverso",
+      "skin-in-the-game"
+    ],
+    "sources": [
+      {
+        "threadId": "1325000695897071616",
+        "tweetId": "1325002998607654913"
+      },
+      {
+        "threadId": "1723236412487553316",
+        "tweetId": "1723236446138437995"
+      }
+    ]
+  },
+  {
+    "slug": "contexto",
+    "term": "Contexto",
+    "short": "Circunstancias concretas que rodean un problema y deciden si una solución funciona o fracasa. Para Recuenco, casi todo.",
+    "body": "Recuenco repite que el contexto es a veces más importante que la cosa en sí. En CPS cada par solución/contexto funciona como una llave y su cerradura: da igual que encajen seis dientes si el séptimo falla. Por eso desconfía de los heurísticos, que no entienden de contexto, y de las recetas copiadas de otro caso. Nos cuesta tenerlo en cuenta porque complica cualquier análisis.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "contexto",
+      "context is king",
+      "contexto über alles"
+    ],
+    "related": [
+      "sistemas-complejos",
+      "personotecnia",
+      "sindrome-del-coronel-thompson"
+    ],
+    "sources": [
+      {
+        "threadId": "1684876869949120512",
+        "tweetId": "1684876934902104065"
+      },
+      {
+        "threadId": "1545639451765997568",
+        "tweetId": "1545639454051897344"
+      },
+      {
+        "threadId": "1337670943276224513",
+        "tweetId": "1337710832566857730"
+      }
+    ]
+  },
+  {
+    "slug": "corrientes-subterraneas",
+    "term": "Corrientes subterráneas",
+    "short": "Influencias poco visibles que moldean un sistema desde abajo y no se perciben a primera vista.",
+    "body": "Recuenco las llama también undercurrents y las conecta con las consecuencias de segundo orden y la lectura de señales. Lo ilustra con la música moderna, formada por subculturas y movimientos que nunca estuvieron en primera línea. En la turra las aplica a la acción desde la sociedad civil: hay que orquestar muchas cosas porque lo decisivo no suele estar en la superficie.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "corrientes subterráneas",
+      "influencias subterráneas",
+      "undercurrents"
+    ],
+    "related": [
+      "sensemaking",
+      "zeitgeist",
+      "orquestacion-cognitiva"
+    ],
+    "sources": [
+      {
+        "threadId": "1888123731865702418",
+        "tweetId": "1888123731865702418"
+      }
+    ]
+  },
+  {
+    "slug": "cps",
+    "term": "CPS",
+    "short": "Resolución de problemas complejos: diseñar soluciones para problemas sin precedente, en los que los expertos se declaran incompetentes.",
+    "body": "Recuenco lo define como el diseño sistemático de soluciones para problemas de los que no existe precedente. Lo separa de lo complicado: instalar un ERP en 300 sedes es difícil, pero tiene referencias. Un problema complejo no las tiene. Exige compromiso con el problema y no con una verdad propia, trabajar con hipótesis que se tiran en cuanto aparece un dato mejor y un equipo de talentos diversos orquestado. No lo considera una skill ni un framework, sino un cienciarte.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "CPS",
+      "Complex Problem Solving",
+      "resolución de problemas complejos",
+      "CPSer"
+    ],
+    "related": [
+      "cienciarte",
+      "orquestacion-cognitiva",
+      "factor-x",
+      "cynefin",
+      "diagnostico",
+      "dr-house"
+    ],
+    "sources": [
+      {
+        "threadId": "1964221678713438241",
+        "tweetId": "1964221689337639056"
+      },
+      {
+        "threadId": "1302148427791253507",
+        "tweetId": null
+      },
+      {
+        "threadId": "1675028035836182528",
+        "tweetId": "1675028046305280000"
+      }
+    ]
+  },
+  {
+    "slug": "cps-hispano",
+    "term": "CPS hispano",
+    "short": "Forma hispana de afrontar la incertidumbre, con improvisación, creatividad y rebeldía, frente a la obsesión luterana por medir y optimizar.",
+    "body": "Recuenco sostiene que en tiempos de incertidumbre, cuando se agota el manual, la mirada hispana manda: el riesgo, la improvisación dirigida, el «echao palante» y las esencias que no se pueden medir ni pesar. No lo plantea contra lo luterano sino como síntesis: el luterano construye el producto básico mejor que nadie y lo hispano aporta la capa de personalidad, de sentido y de propósito. Lo ilustra con Gracita Morales, que resuelve lo cotidiano con lo poco que tiene, frente a la luterana Bettye de «The Offer».",
+    "origin": "Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "CPS Hispano",
+      "CPS hispano"
+    ],
+    "related": [
+      "cultura-luterana",
+      "cps",
+      "pensamiento-lateral",
+      "personotecnia",
+      "incertidumbre"
+    ],
+    "sources": [
+      {
+        "threadId": "1971825115165028522",
+        "tweetId": "1971825115165028522"
+      },
+      {
+        "threadId": "1964221678713438241",
+        "tweetId": "1964221768056357372"
+      },
+      {
+        "threadId": "2014969801395814716",
+        "tweetId": "2014969861554794498"
+      }
+    ]
+  },
+  {
+    "slug": "cul-de-sac",
+    "term": "Cul de sac",
+    "short": "Callejón sin salida empresarial: hay que dar marcha atrás y cambiar de propuesta de valor, sin ganas ni energía.",
+    "body": "Recuenco lo describe como el momento de tomar una decisión que no apetece, en circunstancias desagradables y sin fuerzas. En la empresa familiar aparece cuando descubres que eres experto en un negocio que se vuelve irrelevante. Los seis hilos del arco del post private equity tratan de cómo gestionar estos callejones.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "cul de sac",
+      "cul de sac empresarial",
+      "cul de sacs"
+    ],
+    "related": [
+      "hotel-de-hilbert",
+      "private-equity",
+      "zugzwang"
+    ],
+    "sources": [
+      {
+        "threadId": "2009896595203018960",
+        "tweetId": "2009896605361549371"
+      }
+    ]
+  },
+  {
+    "slug": "cultura-luterana",
+    "term": "Cultura luterana",
+    "short": "Mentalidad de medir, pesar y optimizarlo todo. Sirve para lo predecible y se queda corta cuando manda la incertidumbre.",
+    "body": "Recuenco llama luterana a la aproximación fordiana y taylorista: productividad máxima, best practices, todo en un Excel, sin hueco para la pausa. No la considera mala, sino insuficiente cuando no hay nada tangible que medir. Aplicada a un cienciarte como la publicidad, lo prostituye. Pone como ejemplos el private equity y la IA, «culminación del sueño luterano», y anuncia una era postluterana de escenarios desconocidos.",
+    "origin": "Javier G. Recuenco",
+    "group": "sociedad",
+    "aliases": [
+      "luterano",
+      "luterana",
+      "luteranos",
+      "era postluterana",
+      "era post luterana",
+      "postluterana"
+    ],
+    "related": [
+      "cps-hispano",
+      "private-equity",
+      "cienciarte",
+      "incertidumbre"
+    ],
+    "sources": [
+      {
+        "threadId": "1781573444485697867",
+        "tweetId": "1781573530485657608"
+      },
+      {
+        "threadId": "1964221678713438241",
+        "tweetId": "1964221745751117983"
+      },
+      {
+        "threadId": "2025116934572843338",
+        "tweetId": null
+      }
+    ]
+  },
+  {
+    "slug": "cynefin",
+    "term": "Cynefin",
+    "short": "Marco de Dave Snowden que clasifica los problemas en cinco dominios según cómo se relacionan causa y efecto.",
+    "body": "Dave Snowden lo creó para decidir cómo actuar según la naturaleza del problema, porque cada dominio pide una forma distinta de trabajar. Para Recuenco, un problema complicado es cosa de un buen consultor y uno complejo pide un CPS, aunque avisa de que no todo lo desconocido es caótico. Lo considera revelador para entender la complejidad, pero una simplificación de la realidad.",
+    "origin": "Dave Snowden, marco Cynefin",
+    "group": "complejidad",
+    "aliases": [
+      "Cynefin",
+      "dominio complejo",
+      "dominio caótico",
+      "cuadrante caótico",
+      "cuadrantes complejos",
+      "dominio confuso"
+    ],
+    "related": [
+      "ciencias-de-la-complejidad",
+      "sistemas-complejos",
+      "aporia",
+      "dr-house",
+      "consultoria",
+      "sensemaking"
+    ],
+    "sources": [
+      {
+        "threadId": "1543107844043673600",
+        "tweetId": "1543107865132556290"
+      },
+      {
+        "threadId": "1591345649848487936",
+        "tweetId": "1591345726109679617"
+      },
+      {
+        "threadId": "1966774475191435728",
+        "tweetId": "1966774480358834401"
+      }
+    ],
+    "domains": [
+      {
+        "name": "Claro",
+        "text": "Causa y efecto son evidentes para cualquiera; se resuelve aplicando la práctica conocida. Antes se llamaba «simple»."
+      },
+      {
+        "name": "Complicado",
+        "text": "Hay relación entre causa y efecto, pero hace falta análisis o un experto para verla. Terreno del buen consultor."
+      },
+      {
+        "name": "Complejo",
+        "text": "Causa y efecto solo se entienden a posteriori; hay que experimentar, observar y ajustar. Terreno del CPS."
+      },
+      {
+        "name": "Caótico",
+        "text": "No se percibe relación entre causa y efecto; primero se actúa para estabilizar y luego se intenta entender."
+      },
+      {
+        "name": "Confuso",
+        "text": "No se sabe en qué dominio está el problema; la primera tarea es averiguarlo. Recuenco lo liga a la aporía."
+      }
+    ]
+  },
+  {
+    "slug": "decision-makers",
+    "term": "Decision makers",
+    "short": "Quienes de verdad toman las decisiones en una empresa, tengan o no el cargo que lo aparenta.",
+    "body": "Recuenco insiste en que el CPS es una disciplina de CEOs y decision makers: no se puede hacer desde la sombra, sino alineado con quien decide y con los recursos necesarios. A veces el acceso llega por el middle management, que conoce mejor el pulso de la compañía. Uno de sus diagnósticos habituales es la distancia entre los decision makers y los tecnólogos, que frena la transformación real.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "decision makers",
+      "decision maker"
+    ],
+    "related": [
+      "estrategia",
+      "ecosistemas-tecnologicos"
+    ],
+    "sources": [
+      {
+        "threadId": "1738462543344005507",
+        "tweetId": "1738462545411723563"
+      },
+      {
+        "threadId": "1639529423274913794",
+        "tweetId": "1639529446372962306"
+      },
+      {
+        "threadId": "1847550414226411917",
+        "tweetId": "1847550494882910580"
+      }
+    ]
+  },
+  {
+    "slug": "diagnostico",
+    "term": "Diagnóstico",
+    "short": "Fase del CPS en la que se entiende qué pasa de verdad, separando problema y consecuencias, antes de formular hipótesis.",
+    "body": "Para Recuenco, la calidad del diagnóstico depende de lo fino que sea el sensemaking, y de ella depende la calidad de la hipótesis: ahí sitúa el corazón del CPS. Un mal diagnóstico confunde el problema con sus consecuencias o lo encierra en un solo departamento, cuando lo normal es que haya varias causas raíz simultáneas. En Singular Solving incorporan perfiles creativos a este proceso.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "diagnóstico",
+      "proceso de diagnóstico"
+    ],
+    "related": [
+      "sensemaking",
+      "cps",
+      "singular-solving"
+    ],
+    "sources": [
+      {
+        "threadId": "1763816753929347384",
+        "tweetId": null
+      },
+      {
+        "threadId": "1543107844043673600",
+        "tweetId": null
+      },
+      {
+        "threadId": "1766352097409134910",
+        "tweetId": null
+      }
+    ]
+  },
+  {
+    "slug": "disonancia-cognitiva",
+    "term": "Disonancia cognitiva",
+    "short": "Malestar que aparece cuando la realidad contradice lo que creemos, y que solemos aliviar reforzando la creencia.",
+    "body": "Leon Festinger la estudió observando desde dentro una secta que anunciaba el fin del mundo para el 21 de diciembre de 1954: cuando la profecía falló, la mayoría no abandonó su fe, sino que la racionalizó. Recuenco la usa para explicar por qué un grupo se coaliga contra quien trae la realidad a la sala. Sostiene además que vivimos en la era de la pantomima y la disonancia cognitiva colectiva, y la conecta con lo que él llama truth coping.",
+    "origin": "Leon Festinger, teoría de la disonancia cognitiva («When Prophecy Fails»)",
+    "group": "personas",
+    "aliases": [
+      "disonancia cognitiva",
+      "disonancia"
+    ],
+    "related": [
+      "truth-coping",
+      "pantomima",
+      "sesgo"
+    ],
+    "sources": [
+      {
+        "threadId": "1933784125086769389",
+        "tweetId": "1933784154350469300"
+      },
+      {
+        "threadId": "1981980820278591851",
+        "tweetId": "1981980868794081523"
+      }
+    ]
+  },
+  {
+    "slug": "dr-house",
+    "term": "Dr. House",
+    "short": "Arquetipo favorito de Recuenco para el CPSer: funciona justo cuando el resto de expertos deja de funcionar.",
+    "body": "Frente al señor Lobo de «Pulp Fiction», fiable en el 99 % de los casos porque ya los ha visto antes, House es fiable en el 1 % que nadie sabe resolver. Sus soluciones son aproximativas: prueba, falla y vuelve a probar, porque en lo complejo hay que experimentar. Recuenco advierte de lo menos realista del personaje: que resuelve solo, cuando el CPS real exige un equipo de talentos diversos orquestado.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "doctor House",
+      "Dr. House",
+      "Gregory House"
+    ],
+    "related": [
+      "cps",
+      "orquestacion-cognitiva",
+      "cynefin"
+    ],
+    "sources": [
+      {
+        "threadId": "1302148427791253507",
+        "tweetId": null
+      },
+      {
+        "threadId": "1307211330349420545",
+        "tweetId": "1307214145264246784"
+      },
+      {
+        "threadId": "1309767345875890177",
+        "tweetId": "1309767345875890177"
+      }
+    ]
+  },
+  {
+    "slug": "ecosistemas-tecnologicos",
+    "term": "Ecosistemas tecnológicos",
+    "short": "Pilar del CPS: entender a fondo las megatendencias tecnológicas, como IA, big data, IoT o blockchain, y su efecto.",
+    "body": "Forma una de las cuatro macrodisciplinas del CPS, junto a las ciencias de la complejidad, el Factor X y el business acumen. Recuenco la describe como un mapeo de todo lo que puede hacer el megaatractor de las megatendencias tecnológicas: data science, big data, IoT, blockchain, IA. De Charlie Munger dice que la usa poco porque «es un boomer».",
+    "origin": "Javier G. Recuenco",
+    "group": "tecnologia",
+    "aliases": [
+      "ecosistemas tecnológicos",
+      "ecosistema tecnológico",
+      "technology environment"
+    ],
+    "related": [
+      "business-acumen",
+      "factor-x",
+      "ciencias-de-la-complejidad",
+      "abrochador-liminal"
+    ],
+    "sources": [
+      {
+        "threadId": "1340160478316785666",
+        "tweetId": "1340176152967655424"
+      }
+    ]
+  },
+  {
+    "slug": "efecto-gell-mann",
+    "term": "Efecto Gell-Mann",
+    "short": "Detectas los errores de la prensa en lo que dominas, pero te crees el resto del periódico.",
+    "body": "Lees un artículo sobre algo que conoces bien, ves que el periodista no sabe de qué habla, y al pasar de sección vuelves a confiar como si nada. Recuenco lo cuenta a raíz de un periodista culto que despreciaba a los adultos que juegan a videojuegos, y saca una conclusión: ningún saber está a salvo y hay que verificar todo con espíritu crítico. De ahí su defensa del «no tengo ni p*** idea sobre esto y no pasa nada».",
+    "origin": "Michael Crichton, que le dio nombre en su charla «Why Speculate?»",
+    "group": "sociedad",
+    "aliases": [
+      "efecto Gell-Mann",
+      "amnesia de Gell-Mann",
+      "Gell-Mann"
+    ],
+    "related": [
+      "sesgo",
+      "pantomima"
+    ],
+    "sources": [
+      {
+        "threadId": "1056485929186144256",
+        "tweetId": "1056487302837559296"
+      }
+    ]
+  },
+  {
+    "slug": "elefante-negro",
+    "term": "Elefante negro",
+    "short": "Riesgo muy probable que decidimos ignorar y que, cuando estalla, fingimos que nadie podía prever.",
+    "body": "Recuenco lo toma de la respuesta de Taleb a quienes llamaban «cisne negro» a la pandemia: no era inesperada, solo la habíamos ignorado a conciencia. Lo emparenta con el «elefante en el ascensor» de Rumelt, eso que no vemos porque no nos interesa admitirlo. Cualquier estratega con experiencia ha visto a una compañía no ver lo que tiene delante.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "elefante negro",
+      "elefantes negros"
+    ],
+    "related": [
+      "incertidumbre",
+      "sesgo",
+      "truth-coping"
+    ],
+    "sources": [
+      {
+        "threadId": "1257237030062510080",
+        "tweetId": "1257239173460897792"
+      }
+    ]
+  },
+  {
+    "slug": "emergencia",
+    "term": "Emergencia",
+    "short": "Comportamientos colectivos de un sistema que no pueden deducirse del comportamiento de cada una de sus partes.",
+    "body": "Recuenco la resume así: comportamientos colectivos que no podemos extrapolar de los individuales. Su ejemplo favorito es la cultura de una organización, que emana de su arquitectura dinámica de incentivos. Por eso no se puede «cambiar la cultura» directamente: habría que cambiar todo lo que la provoca, y en un sistema complejo eso es una contradicción en los términos.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "emergencia",
+      "propiedad emergente",
+      "fenómeno emergente"
+    ],
+    "related": [
+      "sistemas-complejos",
+      "ciencias-de-la-complejidad",
+      "arquitectura-de-incentivos"
+    ],
+    "sources": [
+      {
+        "threadId": "1352890795897061378",
+        "tweetId": "1352916544796446723"
+      },
+      {
+        "threadId": "1649673649866113024",
+        "tweetId": "1649678637283639297"
+      }
+    ]
+  },
+  {
+    "slug": "emulsificador-de-equipo",
+    "term": "Emulsificador de equipo",
+    "short": "Persona que consigue que gente incompatible trabaje junta, dando sentido y propósito a una mezcla inestable.",
+    "body": "Como el emulsionante que une agua y aceite, su labor muchas veces solo se nota cuando desaparece: se le saca del tablero y la mayonesa se corta. No es un mediador, que conecta partes enfrentadas sin necesariamente expandirlas, sino alguien que logra un estado nuevo del grupo. El ejemplo de Recuenco es Andy Fletcher, que sin gran talento musical mantuvo unido a Depeche Mode.",
+    "origin": "Javier G. Recuenco",
+    "group": "personas",
+    "aliases": [
+      "emulsificador de equipo",
+      "emulsificadores de equipo",
+      "emulsionador",
+      "emulsionantes colectivos"
+    ],
+    "related": [
+      "orquestacion-cognitiva",
+      "equipo-apolo"
+    ],
+    "sources": [
+      {
+        "threadId": "1530425616423690244",
+        "tweetId": "1530425638628298753"
+      }
+    ]
+  },
+  {
+    "slug": "enactacion",
+    "term": "Enactación",
+    "short": "Idea de Karl Weick: las organizaciones se crean y se definen por lo que hacen e interactúan sus miembros.",
+    "body": "Recuenco la recoge al presentar a Weick, al que llama santo patrón nunca del todo admitido de muchos pilares del CPS. Una organización no es su organigrama sino lo que sus miembros hacen en la práctica. De ahí su consejo final: para entender lo que pasa, sigue las acciones de cada uno según su skin in the game.",
+    "origin": "Karl E. Weick",
+    "group": "complejidad",
+    "aliases": [
+      "enactación",
+      "enactment"
+    ],
+    "related": [
+      "sensemaking",
+      "acoplamiento-suelto",
+      "skin-in-the-game"
+    ],
+    "sources": [
+      {
+        "threadId": "1852267188519854245",
+        "tweetId": "1852302213244190829"
+      }
+    ]
+  },
+  {
+    "slug": "equipo-apolo",
+    "term": "Equipo Apolo",
+    "short": "Equipo lleno de gente muy talentosa que rinde muy por debajo de lo esperado.",
+    "body": "El talento trae egos enormes, gente que prefiere hacer las cosas a su manera y discusiones hasta la extenuación. Por eso Recuenco los llama bombas de relojería: sin un orquestador cognitivo acaban colapsando, como Van Halen. Conoció el concepto por Elena Sanz, expresidenta de Mensa.",
+    "origin": "Meredith Belbin, «Management Teams» (síndrome de Apolo)",
+    "group": "personas",
+    "aliases": [
+      "equipos Apolo",
+      "equipo Apolo",
+      "síndrome de Apolo"
+    ],
+    "related": [
+      "orquestacion-cognitiva",
+      "emulsificador-de-equipo",
+      "altas-capacidades"
+    ],
+    "sources": [
+      {
+        "threadId": "1307211330349420545",
+        "tweetId": "1307222844884037633"
+      },
+      {
+        "threadId": "1317382505880866816",
+        "tweetId": "1317404016096194561"
+      }
+    ]
+  },
+  {
+    "slug": "espiral-del-pa-que",
+    "term": "Espiral del pa qué",
+    "short": "Retirada de quien concluye que confrontar la realidad cuesta más de lo que aporta: «¿pa qué?».",
+    "body": "Recuenco la contrapone a la espiral del silencio: allí uno calla por miedo al aislamiento, aquí se retira porque el coste cognitivo, reputacional y de tiempo de pelear supera cualquier beneficio. No es pereza, sino una ecuación de valor que se ha vuelto delirante o, peor, realista. Cuando el sistema premia el juego social y no el resultado, la gente abandona el problema real y se refugia en el tablero: el bando, el KPI o quién gana la conversación.",
+    "origin": "Javier G. Recuenco",
+    "group": "sociedad",
+    "aliases": [
+      "espiral del pa qué",
+      "espiral del pa que",
+      "espiral del pa quien"
+    ],
+    "related": [
+      "espiral-del-silencio",
+      "pantomima",
+      "truth-coping"
+    ],
+    "sources": [
+      {
+        "threadId": "2096125175175512394",
+        "tweetId": "2096125226803147018"
+      }
+    ]
+  },
+  {
+    "slug": "espiral-del-silencio",
+    "term": "Espiral del silencio",
+    "short": "Tendencia a callar cuando creemos que nuestra opinión va contra la mayoría, por miedo al aislamiento.",
+    "body": "Recuenco la usa para explicar cómo se crea y se sostiene la opinión pública: mientras la mayoría matizada calla, una minoría ruidosa parece inmune al efecto y ocupa el espacio. Más tarde la contrapone a su espiral del pa qué: en la de Noelle-Neumann se calla por miedo, en la suya uno se retira porque no compensa.",
+    "origin": "Elisabeth Noelle-Neumann, teoría de la espiral del silencio",
+    "group": "sociedad",
+    "aliases": [
+      "espiral del silencio",
+      "Espiral del Silencio"
+    ],
+    "related": [
+      "espiral-del-pa-que",
+      "zelotes",
+      "facciones-lanares"
+    ],
+    "sources": [
+      {
+        "threadId": "1535521789585117185",
+        "tweetId": "1535521799185760257"
+      },
+      {
+        "threadId": "2096125175175512394",
+        "tweetId": "2096125224450138499"
+      }
+    ]
+  },
+  {
+    "slug": "estrategia",
+    "term": "Estrategia",
+    "short": "Resolver problemas: diagnóstico, política guía y acciones coherentes, en ese orden. Si no resuelve el problema, es mala estrategia.",
+    "body": "Recuenco viene de la estrategia empresarial y la define con Richard Rumelt: «la estrategia es problem solving». Sigue el kernel de Rumelt: primero el diagnóstico, luego las políticas guía y después las acciones coherentes, sin atajos. Se queja de que se llame estrategia a cualquier plan vistoso que no toca el problema real.",
+    "origin": "Richard Rumelt, «Good Strategy, Bad Strategy»",
+    "group": "estrategia",
+    "aliases": [
+      "estrategia",
+      "kernel de estrategia",
+      "kernel de la estrategia"
+    ],
+    "related": [
+      "business-acumen",
+      "sidestepping",
+      "metajuego"
+    ],
+    "sources": [
+      {
+        "threadId": "1522830977088819203",
+        "tweetId": "1522830981182504962"
+      },
+      {
+        "threadId": "1786636941607260240",
+        "tweetId": "1786636944849428623"
+      },
+      {
+        "threadId": "1794224768574476545",
+        "tweetId": "1794224771359498312"
+      }
+    ]
+  },
+  {
+    "slug": "facciones-lanares",
+    "term": "Facciones lanares",
+    "short": "Parte de un grupo que sigue a su tribu como un rebaño, sin crítica, arrastrada por una narrativa afectiva.",
+    "body": "Recuenco insiste en que nadie se ve a sí mismo como borrego, pero todos hemos sido lanares alguna vez, y la inteligencia no protege: «donde entra una narrativa afectiva, el Einstein más Einstein se convierte en masa lanar». Lo ilustra con las aficiones de fútbol, desglosando la «lanaridad» por identidad grupal, necesidad de integración o señalamiento del enemigo. Cuando la facción lanar se vuelve zelote, sus actos te afectan aunque mires desde la barrera.",
+    "origin": "Javier G. Recuenco",
+    "group": "sociedad",
+    "aliases": [
+      "facciones lanares",
+      "facción lanar",
+      "lanar",
+      "lanares",
+      "lanaridad",
+      "masa lanar"
+    ],
+    "related": [
+      "zelotes",
+      "pompismo",
+      "espiral-del-silencio"
+    ],
+    "sources": [
+      {
+        "threadId": "1616684654269980673",
+        "tweetId": "1616684687107162114"
+      }
+    ]
+  },
+  {
+    "slug": "factor-x",
+    "term": "Factor X",
+    "short": "Pilar del CPS que estudia la conducta humana en entornos complejos, asumiendo que se puede modelar aunque nunca del todo.",
+    "body": "Es una de las cuatro macrodisciplinas del framework CPS de Recuenco y reúne la psicología y otras ciencias de la conducta. Se diferencia del «factor humano» en que no da por caótico e incontrolable el comportamiento de las personas: intenta modelarlo y gestionarlo como parte de la solución, sabiendo que todo modelo es incorrecto. Parte de que el ser humano es el sistema complejo primigenio, y de ahí su máxima «no hay CPS sin gestión del Factor X», que casi siempre obliga a tener «la conversación» difícil que nadie quiere tener. Ignorarlo, dice, es garantía de catástrofe, por brillante que sea la estrategia.",
+    "origin": "Javier G. Recuenco",
+    "group": "personas",
+    "aliases": [
+      "Factor X",
+      "factor X"
+    ],
+    "related": [
+      "personotecnia",
+      "test-astudillo",
+      "truth-coping",
+      "cps"
+    ],
+    "sources": [
+      {
+        "threadId": "1604019306349592577",
+        "tweetId": null
+      },
+      {
+        "threadId": "1669966506208161793",
+        "tweetId": null
+      },
+      {
+        "threadId": "1446745515501264896",
+        "tweetId": "1446745531645153280"
+      }
+    ]
+  },
+  {
+    "slug": "fatiga-de-materiales",
+    "term": "Fatiga de materiales",
+    "short": "Desgaste acumulado que acaba rompiendo un modelo de negocio o una trayectoria que antes funcionaba.",
+    "body": "Recuenco toma la expresión de la ingeniería: la acumulación de pequeñas estupideces parece no tener efecto, pero termina alcanzándote. La aplicó en 2019 a los modelos de negocio de las grandes plataformas y la ve confirmada en los problemas de Meta y en el deterioro de las búsquedas de Google. También la usa con personas: los has been, lo que una vez fue y ya no es.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "fatiga de materiales"
+    ],
+    "related": [
+      "game-awareness",
+      "transicion-obligada"
+    ],
+    "sources": [
+      {
+        "threadId": "1751154901659381958",
+        "tweetId": "1751154908051480828"
+      }
+    ]
+  },
+  {
+    "slug": "game-awareness",
+    "term": "Game awareness",
+    "short": "Capacidad de percibir, entender y anticipar cómo cambia el juego, y adaptar tus decisiones en consecuencia.",
+    "body": "Recuenco toma el término del deporte y lo resume con Wayne Gretzky: patina hacia donde va a estar el puck, no hacia donde está. Lo aplica a la carrera profesional: no puedes salir de la facultad creyendo que sigue en pie el trato que les funcionó a tus padres. Para él es otra forma de su idea de siempre: sin un diagnóstico adecuado y una estrategia acorde no se llega a ninguna parte.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "game awareness"
+    ],
+    "related": [
+      "niebla-de-guerra",
+      "fatiga-de-materiales",
+      "metajuego"
+    ],
+    "sources": [
+      {
+        "threadId": "1751154901659381958",
+        "tweetId": "1751154966180295033"
+      }
+    ]
+  },
+  {
+    "slug": "homeostasis",
+    "term": "Homeostasis",
+    "short": "Capacidad de un organismo, o de una empresa, para mantenerse estable por dentro compensando los cambios de fuera.",
+    "body": "En biología es el equilibrio dinámico que regula temperatura, fluidos o azúcar mediante mecanismos realimentados. Recuenco lo traslada a la empresa: una compañía mezcla dinámicas biológicas, sociales y de sistemas, y su equilibrio interno puede romperse y volverse patológico. Recuperarlo exige ajustar a mano el sweet spot entre fuerzas opuestas, como innovación y optimización. A veces de ese ajuste depende que la compañía sobreviva.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "homeostasis",
+      "homeóstasis",
+      "homeostasis empresarial",
+      "homeóstasis empresarial",
+      "homeostático"
+    ],
+    "related": [
+      "hormesis",
+      "autopoiesis",
+      "sweet-spot",
+      "sistemas-complejos"
+    ],
+    "sources": [
+      {
+        "threadId": "1543107844043673600",
+        "tweetId": "1543107880664055808"
+      },
+      {
+        "threadId": "1834829754488221846",
+        "tweetId": "1834829796460646689"
+      },
+      {
+        "threadId": "1741006814873821551",
+        "tweetId": "1741006843009180028"
+      }
+    ]
+  },
+  {
+    "slug": "hormesis",
+    "term": "Hormesis",
+    "short": "Dosis de estrés o dolor que, en lugar de destruir, fortalece y enseña. Recuenco la llama «dolor necesario para aprender».",
+    "body": "Viene de la biología: una exposición pequeña a algo dañino provoca una adaptación beneficiosa. Recuenco la aplica a personas y empresas. Al talento junior le falta hormesis porque la IA está eliminando los puestos de entrada donde se aprendía a golpes. Y en las empresas familiares, los herederos que no pasaron las penalidades de los fundadores sufren el relajamiento de la hormesis.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "hormesis",
+      "hormésis"
+    ],
+    "related": [
+      "homeostasis",
+      "autopoiesis"
+    ],
+    "sources": [
+      {
+        "threadId": "1943924463415820480",
+        "tweetId": null
+      },
+      {
+        "threadId": "1832301234105061777",
+        "tweetId": "1832301273397211435"
+      },
+      {
+        "threadId": "1834829754488221846",
+        "tweetId": "1834829763627688307"
+      }
+    ]
+  },
+  {
+    "slug": "hotel-de-hilbert",
+    "term": "Hotel de Hilbert",
+    "short": "Metáfora de Recuenco: los negocios son habitaciones cuyas puertas se abren un tiempo y luego se cierran para siempre.",
+    "body": "Recuenco adapta el hotel infinito de David Hilbert: las habitaciones son oportunidades de negocio, y cada puerta que se abre pone en marcha un contador de cierre inexorable. No habla de necesidades, que son eternas, sino de las propuestas para cubrirlas: lo que funcionó en el siglo XV hoy no sirve. Por eso las propuestas de valor caducan y hay que reformularlas de forma constante, también en el private equity.",
+    "origin": "Javier G. Recuenco, a partir del hotel infinito de David Hilbert",
+    "group": "estrategia",
+    "aliases": [
+      "hotel de Hilbert",
+      "Hotel de Hilbert",
+      "propuesta de valor caducada",
+      "propuestas de valor caducadas"
+    ],
+    "related": [
+      "cul-de-sac",
+      "private-equity",
+      "zugzwang"
+    ],
+    "sources": [
+      {
+        "threadId": "1294936782497361928",
+        "tweetId": "1294941996721803264"
+      },
+      {
+        "threadId": "1479732314791886850",
+        "tweetId": "1479732355665436672"
+      }
+    ]
+  },
+  {
+    "slug": "huevos-de-serpiente",
+    "term": "Huevos de serpiente",
+    "short": "Problema latente que un máximo directivo deja a su sucesor y que estalla cuando él ya se ha ido.",
+    "body": "Recuenco saca la idea del libro «Lights Out», sobre la caída de General Electric: Jack Welch dejó a Jeff Immelt el marrón de desmontar GE Capital en plena época post-Lehman Brothers. Las variantes van desde calcular que la empresa aguante justo hasta tu jubilación hasta vender activos para maquillar las cuentas antes de irte. En el origen suele haber un problema de agencia, y la vacuna es el skin in the game.",
+    "origin": "Javier G. Recuenco",
+    "group": "estrategia",
+    "aliases": [
+      "huevos de serpiente",
+      "huevo de serpiente"
+    ],
+    "related": [
+      "skin-in-the-game",
+      "arquitectura-de-incentivos",
+      "incentivo-perverso"
+    ],
+    "sources": [
+      {
+        "threadId": "1456867302494834690",
+        "tweetId": "1456867302494834690"
+      },
+      {
+        "threadId": "1649673649866113024",
+        "tweetId": "1649675913636749314"
+      }
+    ]
+  },
+  {
+    "slug": "ia-chasm",
+    "term": "IA chasm",
+    "short": "Brecha entre los pilotos de IA y su adopción real a escala en las empresas.",
+    "body": "Recuenco adapta «Crossing the Chasm» de Geoffrey Moore, que describe el abismo entre los early adopters y la mayoría pragmática. Muchas empresas están en la fase de pruebas y experimentos, y la mayoría de esos pilotos nunca escala. Lo une a la tesis de los dos relojes: la capacidad de la IA avanza de forma exponencial y la absorción de las organizaciones, lenta y lineal. Cruzar el chasm exige acompasar ambos.",
+    "origin": "Javier G. Recuenco, a partir de Geoffrey Moore, «Crossing the Chasm»",
+    "group": "tecnologia",
+    "aliases": [
+      "IA chasm",
+      "IA Chasm",
+      "brecha de la IA",
+      "dos relojes"
+    ],
+    "related": [
+      "centauro",
+      "personotecnia",
+      "ecosistemas-tecnologicos"
+    ],
+    "sources": [
+      {
+        "threadId": "2075812328566562908",
+        "tweetId": "2075812336456114279"
+      }
+    ]
+  },
+  {
+    "slug": "incentivo-perverso",
+    "term": "Incentivo perverso",
+    "short": "Incentivo que empuja a hacer justo lo contrario de lo que buscaba quien lo diseñó.",
+    "body": "Recuenco lo asocia al efecto cobra, las consecuencias imprevistas de un incentivo. En la empresa pone ejemplos concretos: premiar solo los ingresos empuja a engañar a los clientes, y premiar la velocidad baja la calidad. Avisa de que toda solución parcial genera problemas no previstos e incentivos perversos, y los ve también en los consejos de administración, junto a los huevos de serpiente.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "incentivo perverso",
+      "incentivos perversos",
+      "efecto cobra"
+    ],
+    "related": [
+      "arquitectura-de-incentivos",
+      "huevos-de-serpiente"
+    ],
+    "sources": [
+      {
+        "threadId": "1654727164086960130",
+        "tweetId": "1654727192029323264"
+      }
+    ]
+  },
+  {
+    "slug": "incertidumbre",
+    "term": "Incertidumbre",
+    "short": "Falta de certezas sobre lo que va a pasar. El CPS la asume y la gestiona, pero el cerebro la soporta fatal.",
+    "body": "Para Recuenco el CPS es en cierta manera la gestión de la incertidumbre. El cerebro humano se bloquea ante ella, y por eso siempre hay dinero para los «reductores de incertidumbre»: profetas, chamanes, adivinos o consultores estratégicos que venden certezas ficticias. Critica que ninguna asignatura escolar enseñe a gestionarla, cuando los entornos de máxima incertidumbre ya son lo normal.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "incertidumbre",
+      "incertidumbres",
+      "reductores de incertidumbre",
+      "gestión de la incertidumbre"
+    ],
+    "related": [
+      "niebla-de-guerra",
+      "aporia",
+      "cynefin",
+      "consultoria"
+    ],
+    "sources": [
+      {
+        "threadId": "1363049095003316224",
+        "tweetId": "1363073604745900032"
+      },
+      {
+        "threadId": "1434087755198386177",
+        "tweetId": "1434087818490523650"
+      },
+      {
+        "threadId": "1520307318931570688",
+        "tweetId": "1520307344734834688"
+      }
+    ]
+  },
+  {
+    "slug": "javier-g-recuenco",
+    "term": "Javier G. Recuenco",
+    "short": "Autor de las turras: ingeniero informático, divulgador del CPS en España y fundador de Singular Solving.",
+    "body": "Publica sus hilos turras en X, casi siempre los sábados, sobre resolución de problemas complejos y lo que la rodea. Llegó al CPS en 2016 a través de los informes del Foro Económico Mundial y construyó su propio marco, que desde el principio incluía el Factor X. Ha presidido Mensa España y otros autores le llaman padre de la Personotecnia.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "Recuenco",
+      "Javier G. Recuenco",
+      "el Recu"
+    ],
+    "related": [
+      "cps",
+      "singular-solving",
+      "factor-x",
+      "personotecnia",
+      "turra"
+    ],
+    "sources": [
+      {
+        "threadId": "1976916522657628448",
+        "tweetId": "1976916530823938278"
+      },
+      {
+        "threadId": "2103744346142966174",
+        "tweetId": "2103744355181731974"
+      },
+      {
+        "threadId": "1741006814873821551",
+        "tweetId": null
+      }
+    ]
+  },
+  {
+    "slug": "juego-infinito",
+    "term": "Juego infinito",
+    "short": "Juego sin final cuyo objetivo es seguir jugando, frente al juego finito que busca ganar una partida.",
+    "body": "La distinción viene de «Finite and Infinite Games» de James Carse. Recuenco la aplica al private equity: tiene que pasar de juegos finitos, deals aislados con ganadores y perdedores, a un juego infinito centrado en la sostenibilidad, las relaciones con los inversores y la reputación. Lo presenta como lo contrario del blitzscaling.",
+    "origin": "James Carse, «Finite and Infinite Games»",
+    "group": "estrategia",
+    "aliases": [
+      "juego infinito",
+      "juegos infinitos",
+      "juegos finitos",
+      "juego finito"
+    ],
+    "related": [
+      "private-equity",
+      "blitzscaling"
+    ],
+    "sources": [
+      {
+        "threadId": "2030161085941039583",
+        "tweetId": "2030161984776212598"
+      }
+    ]
+  },
+  {
+    "slug": "liminalidad",
+    "term": "Liminalidad",
+    "short": "Lo que ocurre en la frontera entre disciplinas. Para Recuenco, ahí es donde nace la innovación.",
+    "body": "Recuenco la define como todo lo que sucede al acercarse a una frontera, y la aplica sobre todo a la innovación: surge cuando artes maduras entran en fricción en sus zonas limítrofes. Pone como ejemplo a Jobs, que unió diseño y tecnología, o a Van Halen, que mezcló heavy y sensualidad. Poca gente crea valor ahí, porque casi todos son expertos atrincherados en un solo campo.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "liminalidad",
+      "liminal",
+      "fricción liminar",
+      "Pensamiento liminal"
+    ],
+    "related": [
+      "abrochador-liminal",
+      "rabbit-hole",
+      "orquestacion-cognitiva"
+    ],
+    "sources": [
+      {
+        "threadId": "1297462657503694848",
+        "tweetId": "1297481954993070080"
+      },
+      {
+        "threadId": "1317382505880866816",
+        "tweetId": "1317401015235321856"
+      }
+    ]
+  },
+  {
+    "slug": "lujo-humano",
+    "term": "Lujo humano",
+    "short": "Lo humano y no escalable como bien escaso y caro cuando la IA abarata todo lo demás.",
+    "body": "Recuenco prevé que muchas empresas usarán la IA para multiplicar su producción, lo que subirá la calidad media pero disparará el coste diferencial del trabajo humano. La IA escalará productos que antes eran de lujo solo porque el acceso a la información era limitado. En cambio, el CPS y el pensamiento lateral humano se volverán un lujo. Para los demás quedarán las «slides de McKinsey hechas en el avión por ChatGPT».",
+    "origin": "Javier G. Recuenco",
+    "group": "tecnologia",
+    "aliases": [
+      "lujo humano"
+    ],
+    "related": [
+      "blitzscaling",
+      "moat",
+      "centauro"
+    ],
+    "sources": [
+      {
+        "threadId": "1870373349282484488",
+        "tweetId": "1870373349282484488"
+      }
+    ]
+  },
+  {
+    "slug": "man-on-a-mission",
+    "term": "Man on a mission",
+    "short": "Persona entregada a una misión que la impulsa con enorme energía, pero con riesgo de visión de túnel.",
+    "body": "Recuenco se reconoce a sí mismo como man on a mission en varios frentes. Las ventajas: vas dopado, tu honestidad desarma y arrasas a la competencia. Los riesgos: visión de túnel, implicación emocional y falta de objetividad y de visión periférica. El peligro serio aparece cuando coinciden tres cosas: tener una misión, no haber encontrado el sweet spot y tener acceso a algún tipo de poder.",
+    "origin": null,
+    "group": "personas",
+    "aliases": [
+      "man on a mission",
+      "Man on a Mission"
+    ],
+    "related": [
+      "sweet-spot",
+      "pompismo",
+      "man-out-of-time"
+    ],
+    "sources": [
+      {
+        "threadId": "1753677668996837620",
+        "tweetId": "1753677670091538708"
+      }
+    ]
+  },
+  {
+    "slug": "man-out-of-time",
+    "term": "Man out of time",
+    "short": "Visionario adelantado a su época, cuyo talento solo se reconoce y aprovecha cuando ya ha muerto.",
+    "body": "Recuenco los describe como «OOPArts de carne y hueso» y admira sobre todo su valentía. Sus ejemplos favoritos son Nikola Tesla, mucho menos adaptado a su tiempo que Edison, y el publicitario Howard Gossage, que tenía talento para ser un icono del siglo XX y cuyas ideas disfrutaron generaciones posteriores. El nombre viene de «Tesla: Man Out of Time», la biografía de 1981.",
+    "origin": null,
+    "group": "personas",
+    "aliases": [
+      "man out of time",
+      "men out of time",
+      "Man out of time",
+      "MOOT"
+    ],
+    "related": [
+      "man-on-a-mission"
+    ],
+    "sources": [
+      {
+        "threadId": "1593870067128627200",
+        "tweetId": "1593870090990063616"
+      },
+      {
+        "threadId": "1576087451524907008",
+        "tweetId": "1576090417656832000"
+      },
+      {
+        "threadId": "1877979196271550821",
+        "tweetId": "1877979284083535993"
+      }
+    ]
+  },
+  {
+    "slug": "metajuego",
+    "term": "Metajuego",
+    "short": "El juego más allá del juego: leer qué táctica domina el entorno y anticipar cuándo dejará de hacerlo.",
+    "body": "Lo explicó @nudpiedo en dos turras en las que sustituyó a Recuenco. Viene de los videojuegos, donde «la meta» es la Most Effective Tactic Available, la táctica que todos usan porque ahora funciona. Cada nueva meta se propaga siguiendo una curva sigmoide hasta que deja de dar ventaja, así que ganar de forma consistente exige mirar más allá de la microoptimización.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "metajuego",
+      "metagame",
+      "M.E.T.A.",
+      "META permanente"
+    ],
+    "related": [
+      "estrategia",
+      "sidestepping"
+    ],
+    "sources": [
+      {
+        "threadId": "1880543676876874203",
+        "tweetId": "1880543684871237882"
+      },
+      {
+        "threadId": "1890657339599999084",
+        "tweetId": "1890657339599999084"
+      }
+    ]
+  },
+  {
+    "slug": "moat",
+    "term": "Moat",
+    "short": "Foso económico: ventaja competitiva duradera que protege un negocio de la competencia, según Warren Buffett.",
+    "body": "Warren Buffett y Charlie Munger usan la imagen del foso que rodea un castillo económico. Recuenco sostiene que la complejidad es un moat natural: protege a quien sabe manejarla. Con la IA habla del «moat humano»: los negocios que piden cuantización serán apisonados, y tendrán foso los que piden toque humano y capacidad de hacer CPS.",
+    "origin": "Warren Buffett",
+    "group": "estrategia",
+    "aliases": [
+      "moat",
+      "moat humano",
+      "foso económico"
+    ],
+    "related": [
+      "lujo-humano",
+      "centauro",
+      "ciencias-de-la-complejidad"
+    ],
+    "sources": [
+      {
+        "threadId": "1713075981328519678",
+        "tweetId": null
+      },
+      {
+        "threadId": "1725782327131885653",
+        "tweetId": null
+      }
+    ]
+  },
+  {
+    "slug": "neurodivergencia",
+    "term": "Neurodivergencia",
+    "short": "Funcionamiento cerebral distinto del típico (autismo, TDAH, dislexia, altas capacidades) que el sistema educativo y laboral suele no saber gestionar.",
+    "body": "Recuenco usa la metáfora de los X-Men: frente a la postura «magnetiana» de Peter Thiel y Alex Karp, que ven la neurodivergencia como ventaja para dominar el futuro, él se sitúa en la «xavieriana» de reforma educativa y convivencia. Critica que las empresas exijan un «culture fit» que obliga al neurodivergente a amputar partes de su identidad. De ahí sus proyectos educativos para detectarla pronto y darle cauce.",
+    "origin": null,
+    "group": "personas",
+    "aliases": [
+      "neurodivergencia",
+      "neurodivergente",
+      "neurodivergentes"
+    ],
+    "related": [
+      "altas-capacidades"
+    ],
+    "sources": [
+      {
+        "threadId": "2050469219544752257",
+        "tweetId": "2050469226100457736"
+      },
+      {
+        "threadId": "2053002707628142991",
+        "tweetId": "2053002721867772334"
+      }
+    ]
+  },
+  {
+    "slug": "niebla-de-guerra",
+    "term": "Niebla de guerra",
+    "short": "Incertidumbre que rodea cualquier problema complejo: se ve poco, se avanza con cautela y hay que actuar igualmente.",
+    "body": "Recuenco toma el concepto de Clausewitz y repite que la niebla forma parte de la guerra. Su versión nerd es la niebla de Silent Hill, que reduce la visión a unos metros y convierte un paseo en tensión constante. Según su corolario al teorema de Roca Salvatella, abordar una disciplina más compleja que tu cualificación te mete en una niebla que no impide actuar, pero reduce las posibilidades de éxito.",
+    "origin": "Carl von Clausewitz, De la guerra",
+    "group": "complejidad",
+    "aliases": [
+      "niebla de guerra",
+      "fog of war",
+      "niebla de Silent Hill",
+      "niebla rollo Silent Hill"
+    ],
+    "related": [
+      "incertidumbre",
+      "teorema-de-roca-salvatella",
+      "cynefin"
+    ],
+    "sources": [
+      {
+        "threadId": "1784107483444687237",
+        "tweetId": "1784107498678452370"
+      },
+      {
+        "threadId": "1971825115165028522",
+        "tweetId": "1971826555484557423"
+      }
+    ]
+  },
+  {
+    "slug": "oceano-azul",
+    "term": "Océano azul",
+    "short": "Mercado nuevo donde no compites con nadie, frente al océano rojo saturado donde todos pelean por lo mismo.",
+    "body": "Recuenco lo cita con el caso de la Wii: Satoru Iwata evitó la guerra de potencia con Sony y Microsoft y buscó consumidores que ni se veían como jugadores. Para él, toda la estrategia del océano azul es un ejemplo de sidestepping. Avisa a las startups de que, para llegar a un océano azul, antes hay que pasar por los early adopters.",
+    "origin": "W. Chan Kim y Renée Mauborgne, «Blue Ocean Strategy»",
+    "group": "estrategia",
+    "aliases": [
+      "océano azul",
+      "océanos azules",
+      "blue ocean",
+      "Blue Ocean Strategy",
+      "océano rojo",
+      "océanos rojos"
+    ],
+    "related": [
+      "sidestepping",
+      "estrategia"
+    ],
+    "sources": [
+      {
+        "threadId": "1893203295725871217",
+        "tweetId": "1893203327090909523"
+      },
+      {
+        "threadId": "1487312375351029760",
+        "tweetId": "1487312494435741697"
+      }
+    ]
+  },
+  {
+    "slug": "orquestacion-cognitiva",
+    "term": "Orquestación cognitiva",
+    "short": "Hacer trabajar juntos a talentos muy distintos gestionando egos, emociones y agendas, no solo plazos y presupuestos.",
+    "body": "Recuenco la distingue del project management: llevar tiempos y presupuestos se aprende pronto, mientras que dirigir una orquesta cuesta una vida. Orquestar es armonizar a gente de negocio y gente intelectual, tender puentes entre agendas incompatibles y gestionar a las personas a nivel cognitivo y emocional, a veces como un confesor. Sin ella los equipos de mucho talento colapsan, como Van Halen cuando perdió a su mánager Noel Monk.",
+    "origin": "Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "orquestación cognitiva",
+      "orquestación",
+      "orquestador cognitivo"
+    ],
+    "related": [
+      "equipo-apolo",
+      "emulsificador-de-equipo",
+      "cps"
+    ],
+    "sources": [
+      {
+        "threadId": "1307211330349420545",
+        "tweetId": "1307226025508704259"
+      },
+      {
+        "threadId": "1270594048617824257",
+        "tweetId": "1270597432561328128"
+      },
+      {
+        "threadId": "1317382505880866816",
+        "tweetId": "1317382505880866816"
+      }
+    ]
+  },
+  {
+    "slug": "pantomima",
+    "term": "Pantomima",
+    "short": "Esfuerzo consciente por mantener vivo un relato que se sabe falso, porque conviene a todas las partes.",
+    "body": "Recuenco la separa de la disonancia cognitiva y de las fake news: en la pantomima todos saben qué es real y qué es teatro. Su ejemplo es la política, donde dos partidos pactan en privado lo sensato y en público escenifican lo contrario para sus bases. Otro es el presupuesto anual, que llama «pantomima cósmica». Uno de sus motores es que mucha gente quiere ser engañada para conservar su paz mental, y de ahí su tesis: vivimos en la era de la misdirection, donde nunca es la realidad, siempre es el relato.",
+    "origin": "Javier G. Recuenco",
+    "group": "sociedad",
+    "aliases": [
+      "pantomima",
+      "pantomimas"
+    ],
+    "related": [
+      "disonancia-cognitiva",
+      "truth-coping",
+      "espiral-del-pa-que"
+    ],
+    "sources": [
+      {
+        "threadId": "1730843036983120174",
+        "tweetId": null
+      },
+      {
+        "threadId": "1746066280782631368",
+        "tweetId": "1746066323589709898"
+      }
+    ]
+  },
+  {
+    "slug": "pensamiento-lateral",
+    "term": "Pensamiento lateral",
+    "short": "Para Recuenco, tomar una decisión correcta ante datos erróneos que no se pueden verificar.",
+    "body": "Recuenco rechaza la versión de seminario, la del golpe ingenioso: le irrita que se ponga como ejemplo a Alejandro cortando el nudo gordiano. Su definición es otra: «tomar una decisión correcta ante datos erróneos no verificables», algo que según él la IA todavía no sabe hacer. Lo ve como herramienta diaria del CPSer, que se atreve a dudar y a probar ángulos distintos en un mundo empresarial que adora certidumbres inexistentes.",
+    "origin": "Edward de Bono, «The Use of Lateral Thinking» (el término). La definición citada es de Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "pensamiento lateral"
+    ],
+    "related": [
+      "cps",
+      "liminalidad"
+    ],
+    "sources": [
+      {
+        "threadId": "1675028035836182528",
+        "tweetId": "1675028110192910336"
+      },
+      {
+        "threadId": "1510161914772471813",
+        "tweetId": "1510162006078337026"
+      },
+      {
+        "threadId": "1342767594697191424",
+        "tweetId": "1342772614570323972"
+      }
+    ]
+  },
+  {
+    "slug": "personotecnia",
+    "term": "Personotecnia",
+    "short": "Disciplina que construye mensajes y propuestas relevantes para una persona concreta en un contexto concreto, también a escala.",
+    "body": "Recuenco la formuló en su libro «Personalización» (2004) como respuesta a la personalización fake del marketing: el modelo es la frutera del barrio, que sabe lo que te gusta, y el reto es lograrlo a escala. La define como el conjunto de metodologías y saberes para construir mensajes relevantes para un receptor y un contexto concretos, con tres reglas. Todo atajo al perfilar se paga en precisión. Cuanto más íntimo es el dato, más recíproca debe ser la relación. Y el contexto es singular, porque las personas no son segmentos estables. Es horizontal y toca toda la cadena de valor, no solo marketing o ventas, y algunos de sus seguidores la describen como «el CPS del Factor X».",
+    "origin": "Javier G. Recuenco",
+    "group": "personas",
+    "aliases": [
+      "personotecnia",
+      "Personotecnia",
+      "personotécnia",
+      "personotécnico",
+      "personotécnica",
+      "personotécnicos"
+    ],
+    "related": [
+      "factor-x",
+      "procesos-de-alta-variabilidad",
+      "autosegmentacion",
+      "cps"
+    ],
+    "sources": [
+      {
+        "threadId": "2101155734700405039",
+        "tweetId": "2101155743286133040"
+      },
+      {
+        "threadId": "1319891330307338240",
+        "tweetId": null
+      }
+    ]
+  },
+  {
+    "slug": "pompismo",
+    "term": "Pompismo",
+    "short": "Idealismo que niega la realidad elemental para sostener una idea abstracta y bella. Sus defensores viven en «pompitas de realidad».",
+    "body": "Recuenco llama pompistas a quienes creen firmemente en un constructo abstracto que, para cumplirse, exige negar la realidad más básica. Se puede ser experto sólido en un campo y pompista en otro, como le pasaba a Bertrand Russell. El problema es siempre el mismo: visión de túnel y, en cuanto la idea toca tierra, el desastre. Su ejemplo extremo es la utopía agraria de Pol Pot. De ahí su frase: «El pragmatismo cae mal porque no es empático. El pompismo cae bien pero no funciona».",
+    "origin": "Javier G. Recuenco",
+    "group": "sociedad",
+    "aliases": [
+      "pompismo",
+      "pompista",
+      "pompistas",
+      "pompi"
+    ],
+    "related": [
+      "man-on-a-mission",
+      "chavesnogalismo",
+      "sweet-spot",
+      "game-awareness"
+    ],
+    "sources": [
+      {
+        "threadId": "1748598237563412826",
+        "tweetId": null
+      },
+      {
+        "threadId": "1753677668996837620",
+        "tweetId": "1753677709375308119"
+      },
+      {
+        "threadId": "1758760266068590698",
+        "tweetId": "1758760289875419367"
+      }
+    ]
+  },
+  {
+    "slug": "private-equity",
+    "term": "Private equity",
+    "short": "Fondos que compran empresas con deuda, las optimizan a fondo y las revenden para maximizar la salida.",
+    "body": "Recuenco resume su mecánica clásica en ocho pasos, entre ellos cargar la empresa con toda la deuda que aguante su caja, vender activos no esenciales, fichar gestores con sueldos ligados a resultados y controlar el gasto al máximo. Sostiene que el sector vive de hacer deals y no sabe sobrevivir en mercado abierto, así que necesita otra arquitectura de incentivos y otra propuesta de valor. Le dedicó el arco del post private equity.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "private equity",
+      "post Private Equity",
+      "post private equity"
+    ],
+    "related": [
+      "blitzscaling",
+      "juego-infinito",
+      "cul-de-sac",
+      "arquitectura-de-incentivos",
+      "hotel-de-hilbert"
+    ],
+    "sources": [
+      {
+        "threadId": "1494930305811111938",
+        "tweetId": "1494930308218638337"
+      },
+      {
+        "threadId": "1667419646671179776",
+        "tweetId": "1667419768305975296"
+      },
+      {
+        "threadId": "1989585041949622370",
+        "tweetId": "1989585063328018811"
+      }
+    ]
+  },
+  {
+    "slug": "procesos-de-alta-variabilidad",
+    "term": "Procesos de alta variabilidad (PAV)",
+    "short": "Procesos con máxima granularidad y dependencia del contexto, casi siempre con personas, que no caben en un procedimiento estándar.",
+    "body": "Los que interactúan con humanos suelen ser PAV, porque el humano es el sistema complejo primigenio. Tratarlos con una plataforma procedural, como un CRM para la relación cliente-marca, es meter una pieza redonda en un agujero cuadrado, y en atención al cliente produce los «procesos Golem». Recuenco sostiene que elegir entre gestionar el contexto o escalar es una falsa dicotomía, y que diseñarlos pide Personotecnia y un equipo orquestado. Pone como ejemplos los incentivos y el cambio cultural.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "procesos de alta variabilidad",
+      "alta variabilidad",
+      "PAV",
+      "PAVs"
+    ],
+    "related": [
+      "personotecnia",
+      "sistemas-complejos",
+      "arquitectura-de-incentivos",
+      "orquestacion-cognitiva"
+    ],
+    "sources": [
+      {
+        "threadId": "1527905242376962054",
+        "tweetId": null
+      },
+      {
+        "threadId": "1642053681766883330",
+        "tweetId": "1642053773328621570"
+      },
+      {
+        "threadId": "1649673649866113024",
+        "tweetId": "1649676319955795968"
+      }
+    ]
+  },
+  {
+    "slug": "rabbit-hole",
+    "term": "Rabbit hole",
+    "short": "Tema que parece sencillo y en el que acabas hundiéndote, cada vez más profundo y difícil de abandonar.",
+    "body": "La imagen viene de la caída de Alicia en el cuento de Lewis Carroll. Recuenco defiende bajar por ellos, pero cambiando de madriguera de vez en cuando: varios rabbit holes distintos generan conexiones inesperadas, alimentan el pensamiento liminal y evitan el monocultivo obsesivo del friki que se queda en uno solo. Para él, mucha gente que hace sensemaking falla porque le falta calle y le faltan rabbit holes.",
+    "origin": "Lewis Carroll, «Alicia en el país de las maravillas» (origen de la metáfora)",
+    "group": "complejidad",
+    "aliases": [
+      "rabbit hole",
+      "rabbit holes",
+      "madriguera de conejo",
+      "agujero de conejo"
+    ],
+    "related": [
+      "sensemaking",
+      "liminalidad"
+    ],
+    "sources": [
+      {
+        "threadId": "1799313887285669975",
+        "tweetId": "1799313900019626328"
+      }
+    ]
+  },
+  {
+    "slug": "recoger-cable",
+    "term": "Recoger cable",
+    "short": "Reconocer un error, procesarlo y cambiar de idea sin aferrarse al ego. En un trabajo exploratorio como el CPS es imprescindible.",
+    "body": "Recuenco pone como modelo a Antonio Escohotado, que abandonó el comunismo por la evidencia y no por presión: decepción, asimilación, interiorización y, al final, asunción de responsabilidad. Como el CPS es exploratorio y trabaja con hipótesis, equivocarse y rectificar forma parte del método, aunque el cliente lo perciba como impericia. Lo resume con una frase de Singular Solving: «todas las cagadas están bien mientras sean nuevas».",
+    "origin": null,
+    "group": "personas",
+    "aliases": [
+      "recoger cable"
+    ],
+    "related": [
+      "truth-coping",
+      "cps",
+      "sesgo"
+    ],
+    "sources": [
+      {
+        "threadId": "1578640745979846662",
+        "tweetId": "1578640747783389187"
+      }
+    ]
+  },
+  {
+    "slug": "sensemaking",
+    "term": "Sensemaking",
+    "short": "Proceso de dar sentido a una situación ambigua o confusa antes de decidir qué hacer con ella.",
+    "body": "Recuenco lo toma sobre todo de Karl Weick y lo considera crítico en el CPS: antes de resolver hay que entender qué está pasando. Es un proceso exigente y subjetivo, cargado de identidad, que a menudo provoca pánico y vacío. Por eso sostiene que no se discute sobre sensemaking: negar el relato de alguien es negar a la persona. Para él, Dave Snowden es el sensemaker definitivo.",
+    "origin": "Karl E. Weick, Sensemaking in Organizations",
+    "group": "complejidad",
+    "aliases": [
+      "sensemaking",
+      "sense-making",
+      "construcción de sentido"
+    ],
+    "related": [
+      "cynefin",
+      "aporia",
+      "diagnostico",
+      "enactacion",
+      "ciencias-de-la-complejidad",
+      "rabbit-hole"
+    ],
+    "sources": [
+      {
+        "threadId": "1596391703774367744",
+        "tweetId": "1596391706290581504"
+      },
+      {
+        "threadId": "1806938762129101276",
+        "tweetId": "1806938763257405819"
+      },
+      {
+        "threadId": "1804386948938699148",
+        "tweetId": "1804386950561898529"
+      }
+    ]
+  },
+  {
+    "slug": "sesgo",
+    "term": "Sesgo cognitivo",
+    "short": "Desviación sistemática del juicio que el cerebro produce para ahorrar energía y que distorsiona nuestras decisiones.",
+    "body": "Recuenco se apoya en Kahneman y Tversky para sostener que los humanos somos malos evaluando riesgos: evitamos riesgos ante posibles pérdidas y asumimos otros innecesarios para no perder. Explica los sesgos como atajos del cerebro para ahorrar energía, útiles en la evolución pero que a la larga nublan el juicio. Aparecen en todas partes: en la fijación de precios, en los datos de una empresa «data driven» o en la tendencia a rodearnos de gente parecida a nosotros.",
+    "origin": "Daniel Kahneman y Amos Tversky",
+    "group": "personas",
+    "aliases": [
+      "sesgo",
+      "sesgos",
+      "sesgo cognitivo",
+      "sesgos cognitivos"
+    ],
+    "related": [
+      "disonancia-cognitiva",
+      "transicion-obligada",
+      "factor-x"
+    ],
+    "sources": [
+      {
+        "threadId": "1862770042686845320",
+        "tweetId": "1862772004761317517"
+      },
+      {
+        "threadId": "1449265748019453954",
+        "tweetId": "1449265812506828801"
+      }
+    ]
+  },
+  {
+    "slug": "sidestepping",
+    "term": "Sidestepping",
+    "short": "Esquivar la pelea frontal con un paso lateral que deja al rival descolocado y abre un espacio propio.",
+    "body": "Recuenco llegó al concepto por el Tekken 3, donde un personaje que no es el más fuerte gana esquivando y dejando al enemigo con el flanco abierto. Su ejemplo de empresa es la Wii: en vez de competir con PS3 y Xbox 360 en potencia, Nintendo apostó por el control por movimiento y por un público nuevo. Esquivar obliga a reajustar pesos y coordinar toda la organización, y dice que su propio CPS es un sidestepping frente a las empresas de servicios clásicas.",
+    "origin": "Javier G. Recuenco",
+    "group": "estrategia",
+    "aliases": [
+      "sidestepping",
+      "sidestep"
+    ],
+    "related": [
+      "oceano-azul",
+      "estrategia",
+      "metajuego"
+    ],
+    "sources": [
+      {
+        "threadId": "1893203295725871217",
+        "tweetId": "1893203303535632712"
+      },
+      {
+        "threadId": "1903343437719670927",
+        "tweetId": "1903343471135457294"
+      },
+      {
+        "threadId": "1908407119902024001",
+        "tweetId": "1908407159999562009"
+      }
+    ]
+  },
+  {
+    "slug": "sindrome-del-coronel-thompson",
+    "term": "Síndrome del Coronel Thompson",
+    "short": "Resolver un problema de forma brillante y fracasar igual por ignorar el contexto o llegar a destiempo.",
+    "body": "El nombre viene del coronel que inventó el subfusil Thompson, cuya historia Recuenco usa a menudo para recordar que «la gente está lista cuando está lista y ni un minuto antes». Produces algo que soluciona el problema limpia y elegantemente, incluso creas una industria nueva, y aun así te comes el fracaso. Pasa porque toda solución vale dentro de un contexto: cada par solución/contexto funciona como una llave y su cerradura.",
+    "origin": "Javier G. Recuenco",
+    "group": "estrategia",
+    "aliases": [
+      "síndrome del Coronel Thompson",
+      "Síndrome del Coronel Thompson",
+      "síndrome del coronel Thompson"
+    ],
+    "related": [
+      "contexto",
+      "abrochador-liminal",
+      "zeitgeist"
+    ],
+    "sources": [
+      {
+        "threadId": "1684876869949120512",
+        "tweetId": "1684876958897729536"
+      }
+    ]
+  },
+  {
+    "slug": "singular-solving",
+    "term": "Singular Solving",
+    "short": "Compañía de Recuenco que resuelve problemas complejos de empresa, basada en el skin in the game.",
+    "body": "Exige tres condiciones para trabajar con un cliente: acceso directo a quien toma las decisiones, disposición a dar saltos al vacío y que al máximo decisor le importe más la empresa que su propio interés. Por eso suele trabajar con empresas familiares medianas, cobrando con revenue share, equity o joint ventures, casi como un venture builder. Sus primeros proyectos de CPS fueron fracasos, algo que Recuenco cuenta abiertamente. Alrededor ha crecido un ecosistema de compañías e iniciativas como Solvers Academy.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "Singular Solving",
+      "@SingularSolving"
+    ],
+    "related": [
+      "cps",
+      "skin-in-the-game",
+      "solvers-academy",
+      "javier-g-recuenco"
+    ],
+    "sources": [
+      {
+        "threadId": "1469583058563121153",
+        "tweetId": "1469583135524458497"
+      },
+      {
+        "threadId": "1636989624567443457",
+        "tweetId": "1636989665608622087"
+      }
+    ]
+  },
+  {
+    "slug": "sistemas-complejos",
+    "term": "Sistemas complejos",
+    "short": "Conjuntos de piezas tan entrelazadas que sus problemas se alimentan entre sí y no se pueden tratar por separado.",
+    "body": "Recuenco cita la metáfora de Snowden de las zarzas en un matorral: no sabes dónde empieza una y termina otra. En una empresa en apuros los problemas se realimentan y no son factorizables: arreglas uno y aparecen tres. Por eso considera al ser humano el sistema complejo por excelencia, y a los psicólogos entre los padres del CPS. Su ley general dice que todo proceso complejo acaba volviéndose complicado y, al final, sentido común.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "sistemas complejos",
+      "sistema complejo"
+    ],
+    "related": [
+      "ciencias-de-la-complejidad",
+      "cynefin",
+      "emergencia",
+      "factor-x"
+    ],
+    "sources": [
+      {
+        "threadId": "1352890795897061378",
+        "tweetId": "1352899563703701504"
+      },
+      {
+        "threadId": "1340160478316785666",
+        "tweetId": "1340179902482493440"
+      },
+      {
+        "threadId": "1966774475191435728",
+        "tweetId": "1966774478353875121"
+      }
+    ]
+  },
+  {
+    "slug": "skin-in-the-game",
+    "term": "Skin in the game",
+    "short": "Jugarse algo propio en el resultado de lo que decides o recomiendas, para que ganes o pierdas con él.",
+    "body": "Recuenco lo toma de Nassim Nicholas Taleb y lo considera la vacuna contra los problemas de agencia. Singular Solving trabaja así, con revenue share, equity o joint ventures, sobre todo con empresas familiares. Su consejo: desconfía de las decisiones en las que nadie se juega nada y de quien te venda estrategia sin incentivos alineados.",
+    "origin": "Nassim Nicholas Taleb, «Skin in the Game»",
+    "group": "estrategia",
+    "aliases": [
+      "skin in the game"
+    ],
+    "related": [
+      "huevos-de-serpiente",
+      "arquitectura-de-incentivos",
+      "singular-solving"
+    ],
+    "sources": [
+      {
+        "threadId": "1456867302494834690",
+        "tweetId": "1456870850938949633"
+      },
+      {
+        "threadId": "1469583058563121153",
+        "tweetId": "1469583151563481088"
+      },
+      {
+        "threadId": "1621752572087345152",
+        "tweetId": "1621752646322225156"
+      }
+    ]
+  },
+  {
+    "slug": "soluciones-de-mierda",
+    "term": "Soluciones de mierda",
+    "short": "Cierre en falso de un problema complejo que da la satisfacción de haberlo resuelto sin resolverlo.",
+    "body": "Los momentos ajá de verdad son raros y no se pueden invocar a voluntad. Su sucedáneo, como la metadona de la heroína, es cerrar en falso: da la mitad de serotonina, pero quita la sensación de que el problema te ha doblado el brazo. Recuenco culpa a esto del éxito del design thinking donde hacía falta estrategia de verdad.",
+    "origin": "Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "soluciones de mierda",
+      "solución de mierda",
+      "soluciones de mierda a problemas complejos"
+    ],
+    "related": [
+      "estrategia",
+      "sindrome-del-coronel-thompson"
+    ],
+    "sources": [
+      {
+        "threadId": "1342767594697191424",
+        "tweetId": "1342803642743742465"
+      }
+    ]
+  },
+  {
+    "slug": "solvers-academy",
+    "term": "Solvers Academy",
+    "short": "Iniciativa de formación en CPS del ecosistema de Recuenco, con programas en varias instituciones académicas.",
+    "body": "Recuenco la define como la propuesta de reunir las aplicaciones del CPS en una formación coherente y personalizada, con socios académicos como UNIR, donde crearon el Máster en CPS. Trabaja con varias instituciones a la vez, con material propio y programas que no compiten entre sí, y funciona como empresa con su propia cuenta de resultados. Recuenco atribuye buena parte del proyecto a Toni Dorta.",
+    "origin": null,
+    "group": "oficio",
+    "aliases": [
+      "Solvers Academy",
+      "@solvers_academy"
+    ],
+    "related": [
+      "cps",
+      "singular-solving"
+    ],
+    "sources": [
+      {
+        "threadId": "1850051280107983315",
+        "tweetId": null
+      }
+    ]
+  },
+  {
+    "slug": "sweet-spot",
+    "term": "Sweet spot",
+    "short": "Punto óptimo de equilibrio entre varias dimensiones que compiten. Cuantas más dimensiones, más difícil es encontrarlo.",
+    "body": "Para Recuenco la gracia del sweet spot es que puede ser multidimensional, y ahí nos perdemos: nuestro cerebro y nuestra educación nos empujan a pensar de forma lineal. Lo usa para casi todo: el equilibrio entre calidad y accesibilidad, el grado de asertividad con un cliente o cuánta misión es sana en una persona. Muchas de sus tesis, como el colapso del modelo de Private Equity, las describe como un sweet spot que se desplaza.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "sweet spot",
+      "sweet spots",
+      "punto dulce"
+    ],
+    "related": [
+      "man-on-a-mission",
+      "pompismo",
+      "bothism"
+    ],
+    "sources": [
+      {
+        "threadId": "1761287914493796842",
+        "tweetId": "1761287917824053528"
+      },
+      {
+        "threadId": "1753677668996837620",
+        "tweetId": "1753677679373521184"
+      },
+      {
+        "threadId": "1834829754488221846",
+        "tweetId": "1834829809316249986"
+      }
+    ]
+  },
+  {
+    "slug": "teorema-de-roca-salvatella",
+    "term": "Teorema de Roca Salvatella",
+    "short": "No hay conversación posible entre quien domina un tema a nivel 2 y quien lo domina a nivel 8.",
+    "body": "La distancia cognitiva impide cualquier comunicación significativa. Recuenco lo formuló hacia 2015 al ver que era un problema comercial grave para vender soluciones complejas. Su corolario: quien afronta una disciplina de complejidad n con una cualificación menor que n entra en una niebla que no le impide actuar, pero sí reduce sus opciones de éxito. Lo relaciona con la zona de desarrollo próximo de Vygotski.",
+    "origin": "Javier G. Recuenco",
+    "group": "complejidad",
+    "aliases": [
+      "teorema de Roca Salvatella",
+      "teorema Roca Salvatella",
+      "Corolario Recuenco"
+    ],
+    "related": [
+      "zona-de-desarrollo-proximo",
+      "niebla-de-guerra"
+    ],
+    "sources": [
+      {
+        "threadId": "1352890795897061378",
+        "tweetId": "1352938598631436288"
+      },
+      {
+        "threadId": "1784107483444687237",
+        "tweetId": "1784107497457909804"
+      }
+    ]
+  },
+  {
+    "slug": "test-astudillo",
+    "term": "Test Astudillo",
+    "short": "Comprueba si una propuesta de negocio tiene en cuenta el Factor X o solo cuadra en el Excel.",
+    "body": "Recuenco lo bautiza con una frase de César Astudillo sobre modelos de negocio y propuestas de valor: «Eso no aprueba primero de sociología». Una propuesta que satisface a la hoja de cálculo pero no entiende la psicología ni el Zeitgeist acaba estrellándose: ninguna vaca esférica que ignore el Factor X aterriza bien. Recuenco lo pone a la altura del test de Bechdel.",
+    "origin": "Javier G. Recuenco, a partir de una frase de César Astudillo",
+    "group": "personas",
+    "aliases": [
+      "test Astudillo",
+      "Test Astudillo",
+      "test de Astudillo"
+    ],
+    "related": [
+      "factor-x",
+      "vaca-esferica",
+      "zeitgeist"
+    ],
+    "sources": [
+      {
+        "threadId": "1581161865035407360",
+        "tweetId": "1581162005914091522"
+      },
+      {
+        "threadId": "1763816753929347384",
+        "tweetId": "1763816756261327224"
+      }
+    ]
+  },
+  {
+    "slug": "tokens-de-confianza",
+    "term": "Tokens de confianza",
+    "short": "Razones para contratar basadas en un acto de fe: crees en quien te ayuda sin tener garantías.",
+    "body": "Recuenco distingue tres tipos de tokens en las decisiones comerciales: de justificación (marca, encanto y seniority del socio, que protegen a quien decide), de capacitación (títulos y experiencia) y de confianza. Un CPS normalmente solo puede trabajar los de confianza. De ahí sale la zona de confianza próxima (ZCP): toda venta que pida un salto de fe mayor del que el cliente puede dar fracasará.",
+    "origin": "Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "tokens de confianza",
+      "token de confianza",
+      "zona de confianza próxima",
+      "ZCP",
+      "tokens de justificación"
+    ],
+    "related": [
+      "zona-de-desarrollo-proximo",
+      "autosegmentacion",
+      "dr-house"
+    ],
+    "sources": [
+      {
+        "threadId": "1325000695897071616",
+        "tweetId": "1325052083872165892"
+      }
+    ]
+  },
+  {
+    "slug": "transicion-obligada",
+    "term": "Transición obligada",
+    "short": "Nadie cambia por iniciativa propia: se cambia cuando el entorno obliga, y aun así cabe negarse.",
+    "body": "«Nadie, nadie, nadie cambia de motu proprio», escribe Recuenco: el entorno sugiere el cambio y siempre queda la opción de no hacerlo. La razón es que el cerebro busca ahorrar energía y prefiere repetir lo que ya tiene automatizado. Lo ilustra comparando cómo gestionaron el Madrid y el Barcelona el relevo generacional de sus plantillas.",
+    "origin": "Javier G. Recuenco",
+    "group": "personas",
+    "aliases": [
+      "transición obligada",
+      "transiciones obligadas"
+    ],
+    "related": [
+      "sesgo",
+      "fatiga-de-materiales"
+    ],
+    "sources": [
+      {
+        "threadId": "1299619999200485377",
+        "tweetId": "1299621242555846659"
+      }
+    ]
+  },
+  {
+    "slug": "truth-coping",
+    "term": "Truth coping",
+    "short": "Mecanismos psicológicos, emocionales o cognitivos con los que las personas encajan, procesan o esquivan una verdad incómoda.",
+    "body": "Recuenco reconoce que el término no está establecido en la literatura y lo define él. El CPS es «una máquina de poner a gente en situaciones de truth coping»: «¿cómo que no tenemos marca?», «¿cómo que mi empresa vale cero?». Por eso gestionar la reacción emocional de quien se enfrenta a la realidad es parte del trabajo del CPSer. Lo ilustra con la secta que estudió Festinger, cuyos miembros racionalizaron el fracaso de su profecía en vez de abandonar la fe.",
+    "origin": "Javier G. Recuenco",
+    "group": "personas",
+    "aliases": [
+      "truth coping",
+      "Truth Coping"
+    ],
+    "related": [
+      "disonancia-cognitiva",
+      "factor-x",
+      "asertividad"
+    ],
+    "sources": [
+      {
+        "threadId": "1928694865052741791",
+        "tweetId": "1928694867523190811"
+      },
+      {
+        "threadId": "2045382646054674761",
+        "tweetId": "2045382735888310475"
+      }
+    ]
+  },
+  {
+    "slug": "turra",
+    "term": "Turra",
+    "short": "Hilo largo que Recuenco publica en X cada semana, casi siempre en sábado, sobre CPS y temas afines.",
+    "body": "Recuenco las abre con «En el hilo turras de hoy» y las usa como un bloc de notas público: escribe sobre algo cuando cree que le será útil en el futuro y es difícil de articular, para poder citarlo después. Cuando el hilo se alarga declara el «turra limit» y resume, porque es mejor dejar a la gente con ganas de más. De la comunidad que se formó alrededor salieron secciones como #preguntaalrecu.",
+    "origin": "Javier G. Recuenco",
+    "group": "oficio",
+    "aliases": [
+      "turra",
+      "turras",
+      "hilo turras",
+      "hilos turras",
+      "turra limit"
+    ],
+    "related": [
+      "javier-g-recuenco",
+      "cps"
+    ],
+    "sources": [
+      {
+        "threadId": "1421353440224104449",
+        "tweetId": "1421353440224104449"
+      }
+    ]
+  },
+  {
+    "slug": "vaca-esferica",
+    "term": "Vaca esférica",
+    "short": "Modelo tan simplificado que funciona en el papel y no sirve en la realidad. Viene del chiste del físico.",
+    "body": "Procede del chiste del físico que resuelve la baja producción de leche de una granja, pero solo para vacas esféricas en el vacío. Recuenco lo aplica al determinismo que le enseñaron en la facultad, que resultó ser una simplificación, y a enfoques de manual como el de Watanabe, «CPS para niños y vacas esféricas». Según el test de Astudillo, cualquier vaca esférica que ignore el Factor X acaba aterrizando de morros.",
+    "origin": null,
+    "group": "complejidad",
+    "aliases": [
+      "vaca esférica",
+      "vacas esféricas"
+    ],
+    "related": [
+      "factor-x",
+      "test-astudillo",
+      "sistemas-complejos",
+      "procesos-de-alta-variabilidad"
+    ],
+    "sources": [
+      {
+        "threadId": "1527905242376962054",
+        "tweetId": "1527905254230171649"
+      },
+      {
+        "threadId": "1763816753929347384",
+        "tweetId": "1763816756261327224"
+      }
+    ]
+  },
+  {
+    "slug": "zeitgeist",
+    "term": "Zeitgeist",
+    "short": "Espíritu de la época: lo que la sociedad está dispuesta a aceptar, desear o rechazar en un momento dado.",
+    "body": "Recuenco insiste en que no hay peor negocio que ir contra el zeitgeist: le atribuye la caída de Danone y el declive de Facebook. Frente a Christensen, sostiene que las disrupciones nacen de rupturas en la continuidad del zeitgeist más que de avances técnicos. El abrochador liminal triunfa porque conecta un estímulo tecnológico con el zeitgeist mediante una killer app.",
+    "origin": null,
+    "group": "sociedad",
+    "aliases": [
+      "zeitgeist"
+    ],
+    "related": [
+      "atractores",
+      "abrochador-liminal",
+      "corrientes-subterraneas"
+    ],
+    "sources": [
+      {
+        "threadId": "1375697328561078276",
+        "tweetId": "1375697427706089474"
+      },
+      {
+        "threadId": "1586258861190676482",
+        "tweetId": "1586258955935907842"
+      },
+      {
+        "threadId": "1411191931669987332",
+        "tweetId": "1411191939504955393"
+      }
+    ]
+  },
+  {
+    "slug": "zelotes",
+    "term": "Zelote",
+    "short": "Fanático que ha puesto ciertas ideas en un altar y, si se tocan, reacciona con la amígdala.",
+    "body": "Así lo define Recuenco: da igual su capacidad intelectual, porque ante lo sagrado reacciona desde la emoción. En ausencia de liderazgo fuerte, los zelotes ocupan el hueco y arrastran a la gente con una convicción contra la que es muy difícil defender una postura matizada. También aparecen alrededor de cada herramienta nueva, proclamándola la única verdadera. En otra turra usa el término en positivo: el Private Equity necesita «zelotes del modelo operativo» que no negocien lo innegociable.",
+    "origin": null,
+    "group": "sociedad",
+    "aliases": [
+      "zelote",
+      "zelotes"
+    ],
+    "related": [
+      "facciones-lanares",
+      "pompismo",
+      "asertividad"
+    ],
+    "sources": [
+      {
+        "threadId": "1616684654269980673",
+        "tweetId": "1616684773006516225"
+      },
+      {
+        "threadId": "1535521789585117185",
+        "tweetId": "1535521826557898755"
+      },
+      {
+        "threadId": "1337670943276224513",
+        "tweetId": "1337715863923937280"
+      }
+    ]
+  },
+  {
+    "slug": "zona-de-desarrollo-proximo",
+    "term": "Zona de desarrollo próximo",
+    "short": "Distancia entre lo que una persona aprende por sí sola y lo que alcanza con la guía de un mentor.",
+    "body": "Recuenco toma el concepto de Lev Vygotski y lo enlaza con su teorema de Roca Salvatella: no hay conversación posible entre alguien que domina un tema a nivel 2 y otro a nivel 8. Lo vio pronto como un problema comercial grave al vender soluciones complejas. En la misma línea propuso la zona de confianza próxima (ZCP), el mayor salto en el vacío que puedes pedirle a una persona.",
+    "origin": "Lev Vygotski",
+    "group": "personas",
+    "aliases": [
+      "zona de desarrollo próximo",
+      "ZDP",
+      "ZDPs"
+    ],
+    "related": [
+      "teorema-de-roca-salvatella",
+      "tokens-de-confianza"
+    ],
+    "sources": [
+      {
+        "threadId": "1352890795897061378",
+        "tweetId": "1352936764978188290"
+      }
+    ]
+  },
+  {
+    "slug": "zugzwang",
+    "term": "Zugzwang",
+    "short": "Posición de ajedrez en la que cualquier movimiento empeora tu posición, pero estás obligado a mover.",
+    "body": "Recuenco lo aplica al deporte: el entrenador que tiene que deshacerse del equipo que le llevó a la gloria sin que se le echen al cuello. Su tesis es que no hay zugzwang empresarial si usas bien el CPS: incluso con la empresa contra la pared o en suspensión de pagos, siempre hay movimientos en la dirección correcta.",
+    "origin": null,
+    "group": "estrategia",
+    "aliases": [
+      "zugzwang",
+      "Zugzwang"
+    ],
+    "related": [
+      "cul-de-sac",
+      "hotel-de-hilbert"
+    ],
+    "sources": [
+      {
+        "threadId": "1479732314791886850",
+        "tweetId": "1479732337751515137"
+      }
+    ]
+  }
+]

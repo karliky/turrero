@@ -36,3 +36,11 @@ export function tweetIdFromInput(input: string): string {
   if (!match) throw new Error(`Not a tweet id or X status URL: ${input}`);
   return match[1]!;
 }
+
+const WORDS_PER_MINUTE = 200;
+
+/** Reading time of a thread in minutes (at least 1). */
+export function readingMinutes(texts: string[]): number {
+  const words = texts.reduce((total, text) => total + text.split(/\s+/).filter(Boolean).length, 0);
+  return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
+}

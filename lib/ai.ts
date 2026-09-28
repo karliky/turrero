@@ -1,7 +1,15 @@
 // AI enrichment of a turra with OpenAI: title, categories, exam and categories of the linked books.
 import OpenAI from 'openai';
 import type { ResponseCache } from './cache';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { BOOK_CATEGORIES } from './site';
+
+// Reviewed book categories with their rules and criteria (see README "Categorías")
+const BOOK_TAXONOMY = JSON.parse(readFileSync(join(process.cwd(), 'data', 'categorization', 'books-taxonomy.json'), 'utf8')) as {
+  rules: Record<string, string | number>;
+  categories: { name: string; criteria: string }[];
+};
 import type { Category, ExamQuestion, Thread } from './types';
 
 const DEFAULT_OPENAI_MODEL = 'gpt-5.4-mini';
@@ -61,14 +69,20 @@ function systemPrompt(categories: Category[]): string {
     'Eres editor de El Turrero Post, un archivo de hilos de X ("turras") sobre resolución de problemas complejos.',
     'Dada una turra, devuelve en español:',
     '- title: un titular breve e informativo (máximo 90 caracteres, sin comillas ni emojis).',
-    '- categories: entre 1 y 3 categorías de la lista, la más relevante primero.',
+    '- categories: entre 1 y 3 categorías de la lista. La primera es la principal: el tema al que se dedica la mayor parte',
+    '  del texto. Añade una secundaria solo si ocupa una parte sustancial (al menos un 20 % del texto).',
+    '  Aplica los criterios de cada categoría, incluidos los de desempate; no elijas por palabras sueltas.',
     '- exam: 3 preguntas de comprensión sobre la turra, cada una con 3 opciones y el índice (0-2) de la correcta.',
-    '- books: para cada URL de Goodreads indicada, sus categorías de la lista de categorías de libros.',
+    '- books: para cada URL de Goodreads indicada, 1 categoría de libros principal (el tema del libro) y como mucho',
+    '  1 secundaria, la principal primero, aplicando las reglas y criterios de las categorías de libros.',
     '',
     'Categorías:',
-    ...categories.map((c) => `- ${c.slug}: ${c.description}`),
+    ...categories.map((c) => `- ${c.slug} (${c.name}): ${c.criteria || c.description}`),
     '',
-    `Categorías de libros: ${BOOK_CATEGORIES.join(', ')}`,
+    'Reglas de las categorías de libros:',
+    ...Object.values(BOOK_TAXONOMY.rules).filter((rule) => typeof rule === 'string').map((rule) => `- ${rule}`),
+    'Categorías de libros:',
+    ...BOOK_TAXONOMY.categories.map((c) => `- ${c.name}: ${c.criteria}`),
   ].join('\n');
 }
 
@@ -138,7 +152,7 @@ export function validateEnrichment(value: unknown, categories: Category[], bookU
   const bookCategories = new Set<string>(BOOK_CATEGORIES);
   const books = (data.books ?? [])
     .filter((book) => bookUrls.includes(book.url))
-    .map((book) => ({ url: book.url, categories: book.categories.filter((c) => bookCategories.has(c)) }));
+    .map((book) => ({ url: book.url, categories: [...new Set(book.categories.filter((c) => bookCategories.has(c)))].slice(0, 2) }));
 
   return { title, categories: slugs, exam, books };
 }

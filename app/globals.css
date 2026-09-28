@@ -1,10 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/*
+  Light theme. Every colour of the site comes from these tokens: the dark theme below redefines them,
+  so components use the same classes in both themes (bg-whiskey-50 is the page, text-whiskey-950 the text).
+  `white` is never redefined: it stays real white for photos, transparent images and /contacto.
+*/
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
   --color-whiskey-50: #f9f6f3;
   --color-whiskey-100: #f2eae2;
   --color-whiskey-200: #e4d4c4;
@@ -17,8 +19,70 @@
   --color-whiskey-900: #5b3b33;
   --color-whiskey-950: #301e1a;
 
-  /* Red pixel from Recuenco's x.com profile */
-  --color-brand: #a5050b;
+  /* Cards and panels on top of the page */
+  --color-surface: #ffffff;
+
+  /* Brand: a soft garnet (was the red pixel of Recuenco's x.com profile, #a5050b) */
+  --color-brand: #9b2335;
+
+  /* Right and wrong answers of the exams */
+  --color-ok: #15803d;
+  --color-ok-soft: #f0fdf4;
+  --color-bad: #b91c1c;
+  --color-bad-soft: #fef2f2;
+}
+
+/*
+  Dark theme: the whiskey scale reversed, warm browns instead of pure black, and a clay red that reads on it.
+  Applied when the reader chose it (data-theme, set by the script in app/layout.tsx) or, with no choice
+  and no JavaScript, when the system prefers it. Contrast pairs are checked by tests/theme.test.ts.
+*/
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-whiskey-50: #14100e;
+  --color-whiskey-100: #2a211d;
+  --color-whiskey-200: #3b2f29;
+  --color-whiskey-300: #56463d;
+  --color-whiskey-400: #7a6558;
+  --color-whiskey-500: #a08473;
+  --color-whiskey-600: #b8a090;
+  --color-whiskey-700: #cbb6a6;
+  --color-whiskey-800: #dccbbd;
+  --color-whiskey-900: #eadfd4;
+  --color-whiskey-950: #f6efe8;
+  --color-surface: #1d1714;
+  --color-brand: #db6a5e;
+  --color-ok: #6fcf8f;
+  --color-ok-soft: #13261a;
+  --color-bad: #f28b82;
+  --color-bad-soft: #2e1413;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-whiskey-50: #14100e;
+    --color-whiskey-100: #2a211d;
+    --color-whiskey-200: #3b2f29;
+    --color-whiskey-300: #56463d;
+    --color-whiskey-400: #7a6558;
+    --color-whiskey-500: #a08473;
+    --color-whiskey-600: #b8a090;
+    --color-whiskey-700: #cbb6a6;
+    --color-whiskey-800: #dccbbd;
+    --color-whiskey-900: #eadfd4;
+    --color-whiskey-950: #f6efe8;
+    --color-surface: #1d1714;
+    --color-brand: #db6a5e;
+    --color-ok: #6fcf8f;
+    --color-ok-soft: #13261a;
+    --color-bad: #f28b82;
+    --color-bad-soft: #2e1413;
+  }
+}
+
+:root {
+  color-scheme: light;
 }
 
 /*
@@ -31,7 +95,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-whiskey-200, currentColor);
   }
 
   button:not(:disabled),
@@ -45,21 +109,9 @@
   so unlayered rules here would override classes like bg-whiskey-50 on <body>.
 */
 @layer base {
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #0a0a0a;
-      --foreground: #ededed;
-    }
-  }
-
   body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--color-whiskey-950);
+    background: var(--color-whiskey-50);
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   }
 }

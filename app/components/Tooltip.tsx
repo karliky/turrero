@@ -12,7 +12,7 @@ interface TooltipPosition {
   left: number;
 }
 
-// Fixed positioning so the tooltip is not clipped by scrollable card containers
+// Fixed positioning so the tooltip is not clipped by overflow-hidden ancestors
 export default function Tooltip({ label, content }: TooltipProps): React.ReactElement {
   const tooltipId = useId();
   const [position, setPosition] = useState<TooltipPosition | null>(null);
@@ -31,14 +31,14 @@ export default function Tooltip({ label, content }: TooltipProps): React.ReactEl
       onMouseLeave={hide}
       onFocus={show}
       onBlur={hide}
-      className="text-whiskey-500 text-xs whitespace-nowrap border-b border-dotted border-whiskey-300 cursor-help hover:text-whiskey-600 transition-colors"
+      className="text-whiskey-700 text-xs whitespace-nowrap border-b border-dotted border-whiskey-300 cursor-help hover:text-whiskey-900 transition-colors"
     >
       {label}
       <span
         id={tooltipId}
         role="tooltip"
         style={position ? { top: position.top, left: position.left } : undefined}
-        className={`fixed z-50 -translate-y-full py-2 px-3 bg-gray-900 text-xs font-medium text-white rounded-md shadow-lg max-w-xs whitespace-normal pointer-events-none transition-opacity ${
+        className={`fixed z-50 -translate-y-full py-2 px-3 bg-whiskey-950 text-xs font-medium text-whiskey-50 rounded-md shadow-lg max-w-xs whitespace-normal pointer-events-none transition-opacity ${
           position ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >

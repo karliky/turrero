@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 /**
  * Proxy video URL through Next.js API route to avoid Twitter CDN 403 (Referer check).
@@ -25,42 +25,52 @@ function isUploadedVideo(url: string): boolean {
  * - GIFs (tweet_video/): autoplay, loop, muted, no controls
  * - Uploaded videos (ext_tw_video/): autoplay muted, controls visible, no loop
  *
- * All videos are proxied through /api/tweet-video/ to bypass Twitter CDN Referer checks.
+ * Nothing is requested (neither the poster nor the video) until the video enters the viewport,
+ * and it pauses when it leaves: every video request goes through the /api/tweet-video/ proxy.
  */
 export function GifVideo({ src, poster, alt }: { src: string; poster: string; alt?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const proxiedSrc = proxyVideoUrl(src);
+  const inView = useRef(false);
+  const [visible, setVisible] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const uploaded = isUploadedVideo(src);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-
+    if (!video) return undefined;
     video.muted = true;
 
-    const tryPlay = () => {
-      video.play().catch(() => {});
-    };
-
-    tryPlay();
-    video.addEventListener("loadeddata", tryPlay, { once: true });
-
-    return () => {
-      video.removeEventListener("loadeddata", tryPlay);
-    };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry) return;
+      inView.current = entry.isIntersecting;
+      if (entry.isIntersecting) {
+        setVisible(true);
+        video.play().catch(() => {});
+      } else if (!video.paused) {
+        video.pause();
+      }
+    });
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <video
       ref={videoRef}
-      autoPlay
+      autoPlay={visible}
       loop={!uploaded}
       muted
       playsInline
+      preload="none"
       controls={uploaded}
-      poster={poster}
-      src={proxiedSrc}
-      className="h-auto w-full rounded-lg"
+      poster={visible && poster ? poster : undefined}
+      src={visible ? proxyVideoUrl(src) : undefined}
+      onLoadedData={(e) => {
+        if (inView.current) e.currentTarget.play().catch(() => {});
+      }}
+      onLoadedMetadata={() => setLoaded(true)}
+      // Holds the space until the real size is known, so the text below does not jump
+      className={`h-auto w-full rounded-lg ${loaded ? "" : "aspect-video bg-whiskey-100"}`}
       aria-label={alt || (uploaded ? "Video" : "GIF")}
     />
   );

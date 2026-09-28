@@ -1,280 +1,165 @@
-import { SITE, authorUrl } from '@/lib/site';
-import Image from 'next/image';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { getSiteStats, listAuthors, listBooks, listGlossary } from "@/lib/queries";
+import { SITE, authorUrl } from "@/lib/site";
+
+const description = `Qué es ${SITE.name} y quién está detrás: el archivo de las turras de Javier G. Recuenco y la Comunidad CPS.`;
+
+export const metadata: Metadata = {
+  title: `Sobre esta web | ${SITE.name}`,
+  description,
+  openGraph: { title: `Sobre esta web - ${SITE.name}`, description, images: ["/opengraph-image"] },
+};
+
+interface Person {
+  name: string;
+  handle: string;
+  photo: string;
+  role: string;
+  bio: string;
+  /** Author page in the archive, for people who have written turras. */
+  author?: string;
+}
+
+// Bios written from what each person says about themselves; same register for everyone
+const PEOPLE: Person[] = [
+  {
+    name: "Javier G. Recuenco",
+    handle: "Recuenco",
+    photo: "/people/recuenco.jpg",
+    role: "Escribe las turras",
+    bio: "Ingeniero informático. Divulga la resolución de problemas complejos en España y la aplica a empresas desde Singular Solving. Ha presidido Mensa España. Publica una turra cada sábado desde 2018.",
+    author: "Recuenco",
+  },
+  {
+    name: "Carlos Hernández Gómez",
+    handle: "k4rliky",
+    photo: "https://avatars.githubusercontent.com/u/881069?v=4",
+    role: "Hace la web",
+    bio: "Creció entrando en las zonas secretas de los videojuegos y conserva esa curiosidad por lo que hay fuera de su mundo. Se formó en resolución de problemas complejos en el curso de la UNIR, con Recuenco como profesor.",
+  },
+  {
+    name: "Toni Dorta",
+    handle: "ToniDorta",
+    photo: "/people/toni-dorta.jpg",
+    role: "CPS Notebook",
+    bio: "Ingeniero informático, con certificación PMP y un MBA. Ha dirigido proyectos y equipos y ha trabajado como consultor de innovación. Creó el CPS Notebook, el cuaderno de la comunidad que complementa este archivo.",
+  },
+  {
+    name: "Víctor R. Escobar",
+    handle: "nudpiedo",
+    photo: "/people/victor-escobar.jpg",
+    role: "Turras invitadas",
+    bio: "Escribe las turras de los sábados en que Recuenco le cede la cuenta: sobre el metajuego, el fraude publicitario o el CTO como estratega. Habla seis idiomas.",
+    author: "nudpiedo",
+  },
+  {
+    name: "Alejandra Arri",
+    handle: "ladycircus",
+    photo: "/people/alejandra-arri.jpg",
+    role: "Colabora",
+    bio: "Desarrolladora full stack. Le interesa el punto donde se cruzan el análisis y el diseño, y trabaja sobre todo en la parte visible de las aplicaciones.",
+  },
+  {
+    name: "Ángel",
+    handle: "4jr4m0s",
+    photo: "/people/angel.jpg",
+    role: "Colabora",
+    bio: "Venture manager y arquitecto cloud. Ha trabajado en estrategia, producto y equipos ágiles. Corre, resuelve cubos de Rubik y estudia japonés.",
+  },
+];
+
+const link = "underline decoration-whiskey-300 underline-offset-4 hover:text-brand hover:decoration-brand";
+const heading = "mt-14 border-b-2 border-whiskey-900 pb-2 font-serif text-2xl font-bold text-whiskey-950";
 
 export default function SobreEstaWeb() {
+  const stats = getSiteStats();
+  const firstYear = stats.firstPublishedAt?.slice(0, 4) ?? "";
+  const authors = listAuthors().filter((author) => author.handle !== SITE.featuredAuthor);
+
   return (
-    <div className="bg-whiskey-50 min-h-screen">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-whiskey-900 mb-8 text-center">
-            Sobre el proyecto de El Turrero Post
-          </h1>
-
-          <div className="bg-white rounded-xl shadow-md p-6 mb-12">
-            <div className="prose max-w-none mb-6">
-              <p className="text-gray-600 leading-relaxed mb-6">
-                El Turrero Post es un proyecto personal de aprendizaje. Las
-                turras de Javier G. Recuenco contienen destellos de la
-                genialidad sobre los que reflexionar. Este lugar está
-                especialmente enfocado en ayudarte a entender la resolución de
-                problemas complejos.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Como dijo el gran John Lasseter de Pixar: &ldquo;No podemos cambiar el
-                mundo a menos que entendamos primero cómo funciona&rdquo;.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                El objetivo es ayudarte a comprender mejor el mundo a través de
-                las turras, enlaces y charlas de temas relacionados con la
-                complejidad. La mejor forma de ayudarnos es compartiéndolo con
-                tus amigos y conocidos.
-              </p>
-            </div>
-            <blockquote className="border-l-4 border-whiskey-600 pl-4 py-2 bg-whiskey-50 rounded-r-lg italic text-whiskey-800">
-              &ldquo;Study the greats and become greater.&rdquo;
-              <strong className="block mt-2 text-whiskey-900">
-                - Michael Jackson
-              </strong>
-            </blockquote>
-          </div>
-
-          <div className="space-y-12">
-            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
-              <div className="flex flex-col md:flex-row gap-8 mb-4">
-                <div className="md:w-2/3">
-                  <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
-                    Javier G. Recuenco
-                    <a
-                      href={authorUrl(SITE.featuredAuthor)}
-                      className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @recuenco
-                    </a>
-                  </h2>
-                  <h3 className="text-lg text-whiskey-700 mb-3">
-                    El gran autor y pensador
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Cuando era joven, su objetivo era convertise en ingeniero
-                    informático y trabajó en varios puestos relacionados con la
-                    tecnología. Ahora busca transformar industrias y trabajar en
-                    escenarios nunca antes vistos. Aprendí que siempre habrá
-                    desafíos que superan a cualquier persona, independientemente
-                    de su tamaño y éxito, y hay que estar preparados para lo
-                    desconocido. Javier escribe semanalmente una disertación
-                    llamada &ldquo;turra&rdquo; sobre las ciencias de la complejidad.
-                  </p>
-                </div>
-                <div className="md:w-1/3">
-                  <Image
-                    src="https://gurulibros.com/wp-content/uploads/2021/09/javier_g_recuenco.jpg"
-                    alt="Javier G. Recuenco"
-                    className="rounded-lg shadow-md w-full"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
-              <div className="flex flex-col md:flex-row gap-8 mb-4">
-                <div className="md:w-1/3">
-                  <Image
-                    src="https://avatars.githubusercontent.com/u/881069?v=4"
-                    alt="Carlos Hernández Gómez (Karliky)"
-                    className="rounded-lg shadow-md w-full"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-                <div className="md:w-2/3">
-                  <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
-                    Carlos Hernández Gómez (Karliky)
-                    <a
-                      href="https://x.com/k4rliky"
-                      className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @k4rliky
-                    </a>
-                  </h2>
-                  <h3 className="text-lg text-whiskey-700 mb-3">
-                    Orquestador turrero
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Crecí entrando en zonas secretas de videojuegos. Siempre he
-                    sentido curiosidad por saber más sobre el mundo fuera del
-                    mío. Sigo los pasos de mi profesor del curso de resolución
-                    de problema complejos de la UNIR para reflexionar cada vez
-                    más y mejor.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <h2 className="text-3xl font-bold text-whiskey-900 mb-8 text-center">
-              Colaboran con El Turrero Post
-            </h2>
-
-            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
-              <div className="flex flex-col md:flex-row gap-8 mb-4">
-                <div className="md:w-2/3">
-                  <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
-                    Toni Dorta
-                    <a
-                      href="https://x.com/ToniDorta"
-                      className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @ToniDorta
-                    </a>
-                  </h2>
-                  <h3 className="text-lg text-whiskey-700 mb-3">
-                    Directivo especializado en el sector tecnológico
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Ingeniero informático con certificación PMP®, MBA y
-                    experiencia en dirección de proyectos y gestión de equipos.
-                    Ha trabajado como consultor en proyectos de innovación
-                    tecnológica. Me enfoco en mejorar la productividad de las
-                    empresas a través de la innovación de procesos y
-                    herramientas. Toni ha creado el{" "}
-                    <a
-                      href="https://cps.tonidorta.com/"
-                      className="text-whiskey-600 hover:text-whiskey-800"
-                    >
-                      CPS Notebook
-                    </a>
-                    . No se puede entender El Turrero Post sin la conexión
-                    directa con el CPS Notebook.
-                  </p>
-                </div>
-                <div className="md:w-1/3">
-                  <Image
-                    src="https://www.tonidorta.com/wp-content/uploads/tonidorta_240x285.jpg"
-                    alt="Toni Dorta"
-                    className="rounded-lg shadow-md w-full"
-                    width={240}
-                    height={285}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
-              <div className="flex flex-col md:flex-row gap-8 mb-4">
-                <div className="md:w-1/3">
-                  <Image
-                    src="/alejandra.jpeg"
-                    alt="Alejandra Arri"
-                    className="rounded-lg shadow-md w-full"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-                <div className="md:w-2/3">
-                  <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
-                    Alejandra Arri
-                    <a
-                      href="https://x.com/ladycircus"
-                      className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @ladycircus
-                    </a>
-                  </h2>
-                  <h3 className="text-lg text-whiskey-700 mb-3">
-                    La intersección entre el diseño y la creatividad
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Alejandra Arri es desarrolladora Full Stack que disfruta
-                    tanto de la creatividad como del análisis. Descubrió que la
-                    parte del Front-End le permite expresarse creativamente
-                    mientras codifica y resuelve problemas. Es positiva,
-                    organizada y le encanta trabajar en equipo.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
-              <div className="flex flex-col md:flex-row gap-8 mb-4">
-                <div className="md:w-1/3">
-                  <Image
-                    src="/victor.jpeg"
-                    alt="Víctor R. Escobar"
-                    className="rounded-lg shadow-md w-full"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-                <div className="md:w-2/3">
-                  <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
-                    Víctor R. Escobar
-                    <a
-                      href="https://x.com/nudpiedo"
-                      className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @nudpiedo
-                    </a>
-                  </h2>
-                  <h3 className="text-lg text-whiskey-700 mb-3">
-                    Políglota y buscador de la verdad
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Busco la verdad, aunque de vez en cuando doy palos de ciego por twitter. 
-                    Disculpas si te di bastonazo. Los ideales nos hacen más mal que bien ⌘ 
-                    Hablo 6 idiomas.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
-              <div className="flex flex-col md:flex-row gap-8 mb-4">
-                <div className="md:w-1/3">
-                  <Image
-                    src="/angel.jpg"
-                    alt="Ángel"
-                    className="rounded-lg shadow-md w-full"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-                <div className="md:w-2/3">
-                  <h2 className="text-2xl font-semibold text-whiskey-900 mb-2">
-                    Ángel - アンヘル
-                    <a
-                      href="https://x.com/4jr4m0s"
-                      className="ml-2 text-whiskey-600 hover:text-whiskey-800 text-lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @4jr4m0s
-                    </a>
-                  </h2>
-                  <h3 className="text-lg text-whiskey-700 mb-3">
-                    Venture Manager y arquitecto cloud
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Venture manager, emba, strategy, product manager, coach/mentor, agilist, 
-                    cloud architect, tech passionate, engineer, gopher, runner, rubik fan, 
-                    日本語の学生！Do&apos;er
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <main className="mx-auto max-w-3xl px-4 py-12">
+      <h1 className="font-serif text-4xl font-bold text-whiskey-950 sm:text-5xl">Sobre esta web</h1>
+      <div className="mt-5 space-y-4 text-lg leading-relaxed text-whiskey-900">
+        <p>
+          {SITE.name} archiva las turras de Javier G. Recuenco: los hilos largos que publica en X cada sábado desde {firstYear}{" "}
+          sobre resolución de problemas complejos. Están las {stats.threads}, ordenadas por tema y por año, con un buscador, un{" "}
+          <Link href="/glosario" className={link}>
+            glosario de {listGlossary().length} conceptos
+          </Link>
+          , los{" "}
+          <Link href="/biblioteca" className={link}>
+            {listBooks().length} libros que citan
+          </Link>{" "}
+          y una{" "}
+          <Link href="/ebook" className={link}>
+            edición en EPUB
+          </Link>{" "}
+          para leerlas sin conexión.
+        </p>
+        <p>
+          Lo hace la Comunidad CPS, gente que aprendió con las turras y quería tenerlas a mano, sin depender del timeline de X. Si
+          llegas nuevo, empieza por{" "}
+          <Link href="/empieza-aqui" className={link}>
+            estas ocho
+          </Link>
+          .
+        </p>
       </div>
-    </div>
+
+      <h2 className={heading}>Quién está detrás</h2>
+      <ul className="divide-y divide-whiskey-200">
+        {PEOPLE.map((person) => (
+          <li key={person.handle} className="flex gap-5 py-6">
+            <Image
+              src={person.photo}
+              alt={person.name}
+              width={80}
+              height={80}
+              className="h-16 w-16 shrink-0 rounded-full object-cover sm:h-20 sm:w-20"
+            />
+            <div>
+              <p className="font-semibold text-whiskey-950">
+                {person.name}{" "}
+                <a href={authorUrl(person.handle)} target="_blank" rel="noopener noreferrer" className={`font-normal text-whiskey-800 ${link}`}>
+                  @{person.handle}
+                </a>
+              </p>
+              <p className="text-sm text-whiskey-800">{person.role}</p>
+              <p className="mt-2 leading-relaxed text-whiskey-900">{person.bio}</p>
+              {person.author && (
+                <Link href={`/autor/${person.author}`} className={`mt-2 inline-block text-sm font-medium text-whiskey-900 ${link}`}>
+                  Sus turras
+                </Link>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className={heading}>Otras firmas</h2>
+      <p className="mt-4 leading-relaxed text-whiskey-900">
+        Algunos sábados la turra la escribe otra persona. Estas son las firmas invitadas del archivo:{" "}
+        {authors.map((author, index) => (
+          <span key={author.handle}>
+            <Link href={`/autor/${author.handle}`} className={link}>
+              {author.name}
+            </Link>
+            {index < authors.length - 2 ? ", " : index === authors.length - 2 ? " y " : ""}
+          </span>
+        ))}
+        .
+      </p>
+
+      <h2 className={heading}>Cómo ayudar</h2>
+      <p className="mt-4 leading-relaxed text-whiskey-900">
+        ¿Falta una turra, has visto un error o echas en falta un concepto del glosario?{" "}
+        <a href={`${SITE.repository}/issues/new`} target="_blank" rel="noopener noreferrer" className={link}>
+          Cuéntalo en GitHub
+        </a>
+        . Y si una turra te ha servido, pásasela a alguien a quien también le pueda servir.
+      </p>
+    </main>
   );
 }

@@ -8,10 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages = [
     { path: '', priority: 1 },
+    { path: '/turras', priority: 0.9 },
     { path: '/glosario', priority: 0.8 },
     { path: '/biblioteca', priority: 0.8 },
-    { path: '/hall-of-fame', priority: 0.8 },
-    { path: '/grafo-de-turras', priority: 0.7 },
+    { path: '/mapa-de-ideas', priority: 0.7 },
+    { path: '/empieza-aqui', priority: 0.9 },
+    { path: '/ebook', priority: 0.7 },
     { path: '/sobre-esta-web', priority: 0.5 },
     { path: '/contacto', priority: 0.5 },
   ].map(({ path, priority }) => ({ url: `${SITE.url}${path}`, lastModified, priority }));

@@ -1,0 +1,365 @@
+[
+  {
+    "candidate": "Cienciarte",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto propio de Recuenco, definido en una turra entera y usado en varias más para describir el CPS y los negocios de Factor X.",
+    "entry": {
+      "term": "Cienciarte",
+      "slug": "cienciarte",
+      "aliases": ["cienciarte", "cienciartes", "CienciArtes"],
+      "short": "Disciplina que vive entre la ciencia y el arte, con mucho determinismo científico y mucha inspiración artística a la vez.",
+      "body": "Recuenco pone como ejemplos la programación, la arquitectura de sistemas, la cocina y el propio CPS. Su equilibrio es frágil: si se rompe hacia el determinismo aparecen la ilusión de control y el cientifismo; si se rompe hacia el arte, el acientifismo y la relatocracia. Por eso el CPS no es una skill ni un framework, sino una serie de módulos que cada cual combina según su propósito, como un guitarrista que se monta su pedalera.",
+      "origin": "Javier G. Recuenco",
+      "group": "oficio",
+      "related": ["cps", "factor-x", "liminalidad", "sweet-spot"],
+      "sources": [
+        { "threadId": "1741006814873821551", "tweetId": "1741006842090717363" },
+        { "threadId": "1784107483444687237", "tweetId": "1784107527677812950" }
+      ]
+    }
+  },
+  {
+    "candidate": "Consultoría",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco la analiza a fondo en varias turras (taxonomía, doble asimetría, proyectos canon) como contrapunto al CPS.",
+    "entry": {
+      "term": "Consultoría",
+      "slug": "consultoria",
+      "aliases": ["consultoría", "consultoría estratégica", "consultoras"],
+      "short": "Servicio que asesora y define soluciones para empresas; Recuenco critica que se venda para problemas que no sabe resolver.",
+      "body": "Recuenco distingue los servicios profesionales, que implantan soluciones, de la consultoría, que las define, y dentro de esta la estratégica. No la considera inútil: la llama disciplina «violín», que borda los proyectos canon, los que ya se han hecho antes. Su crítica va a los problemas de casting (gente joven sin experiencia donde haría falta mucha) y a la doble asimetría: el cliente no sabe juzgar al experto y a menudo no hay un repertorio claro que pedirle. Para cubrir esa incertidumbre se venden success stories y tokens de justificación.",
+      "origin": null,
+      "group": "estrategia",
+      "related": ["cps", "tokens-de-confianza", "incentivo-perverso", "skin-in-the-game"],
+      "sources": [
+        { "threadId": "1325000695897071616", "tweetId": "1325002998607654913" },
+        { "threadId": "1325000695897071616", "tweetId": "1325005973812076545" },
+        { "threadId": "1723236412487553316", "tweetId": "1723236446138437995" }
+      ]
+    }
+  },
+  {
+    "candidate": "Diagnóstico",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo usa como la fase del CPS que depende del sensemaking y precede a la hipótesis, aunque la mayoría de menciones sean genéricas.",
+    "entry": {
+      "term": "Diagnóstico",
+      "slug": "diagnostico",
+      "aliases": ["diagnóstico", "proceso de diagnóstico"],
+      "short": "Fase del CPS en la que se entiende qué pasa de verdad, separando problema y consecuencias, antes de formular hipótesis.",
+      "body": "Para Recuenco, la calidad del diagnóstico depende de lo fino que sea el sensemaking, y de ella depende la calidad de la hipótesis: ahí sitúa el corazón del CPS. Un mal diagnóstico confunde el problema con sus consecuencias o lo encierra en un solo departamento, cuando lo normal es que haya varias causas raíz simultáneas. En Singular Solving incorporan perfiles creativos a este proceso.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["sensemaking", "cps", "singular-solving"],
+      "sources": [
+        { "threadId": "1763816753929347384", "tweetId": null },
+        { "threadId": "1543107844043673600", "tweetId": null },
+        { "threadId": "1766352097409134910", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Diagrama ishikawa",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Técnica de manual de calidad que ninguna turra menciona.",
+    "entry": null
+  },
+  {
+    "candidate": "Enriquecimiento de metadatos",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Describe un proceso técnico de la web, no un concepto del CPS, y no aparece en las turras.",
+    "entry": null
+  },
+  {
+    "candidate": "Grafo de turras",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Es una función de la web, no un concepto del CPS, y no aparece en las turras.",
+    "entry": null
+  },
+  {
+    "candidate": "Recuenco",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Autor de las turras y referencia constante en ellas; la definición actual le atribuye con error la fundación del CPS hispano como si fuera una organización.",
+    "entry": {
+      "term": "Javier G. Recuenco",
+      "slug": "javier-g-recuenco",
+      "aliases": ["Recuenco", "Javier G. Recuenco", "el Recu"],
+      "short": "Autor de las turras: ingeniero informático, divulgador del CPS en España y fundador de Singular Solving.",
+      "body": "Publica sus hilos turras en X, casi siempre los sábados, sobre resolución de problemas complejos y lo que la rodea. Llegó al CPS en 2016 a través de los informes del Foro Económico Mundial y construyó su propio marco, que desde el principio incluía el Factor X. Ha presidido Mensa España y otros autores le llaman padre de la Personotecnia.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["cps", "singular-solving", "factor-x", "personotecnia", "turra"],
+      "sources": [
+        { "threadId": "1976916522657628448", "tweetId": "1976916530823938278" },
+        { "threadId": "2103744346142966174", "tweetId": "2103744355181731974" },
+        { "threadId": "1741006814873821551", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Scraping de hilos",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Describe cómo se construye la web, no un concepto del CPS, y no aparece en las turras.",
+    "entry": null
+  },
+  {
+    "candidate": "Turra (hilos -)",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Es el nombre que Recuenco da a su formato de hilo semanal y lo explica en una turra dedicada a ello.",
+    "entry": {
+      "term": "Turra",
+      "slug": "turra",
+      "aliases": ["turra", "turras", "hilo turras", "hilos turras", "turra limit"],
+      "short": "Hilo largo que Recuenco publica en X cada semana, casi siempre en sábado, sobre CPS y temas afines.",
+      "body": "Recuenco las abre con «En el hilo turras de hoy» y las usa como un bloc de notas público: escribe sobre algo cuando cree que le será útil en el futuro y es difícil de articular, para poder citarlo después. Cuando el hilo se alarga declara el «turra limit» y resume, porque es mejor dejar a la gente con ganas de más. De la comunidad que se formó alrededor salieron secciones como #preguntaalrecu.",
+      "origin": "Javier G. Recuenco",
+      "group": "oficio",
+      "related": ["javier-g-recuenco", "cps"],
+      "sources": [
+        { "threadId": "1421353440224104449", "tweetId": "1421353440224104449" },
+        { "threadId": "1421353440224104449", "tweetId": "1421363484302917634" }
+      ]
+    }
+  },
+  {
+    "candidate": "Turrero Post",
+    "decision": "delete",
+    "mergeInto": null,
+    "reason": "Es la propia web; Recuenco solo la cita como archivo de referencias, no es un concepto del CPS.",
+    "entry": null
+  },
+  {
+    "candidate": "CPS",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Es la disciplina central de todas las turras.",
+    "entry": {
+      "term": "CPS",
+      "slug": "cps",
+      "aliases": ["CPS", "Complex Problem Solving", "resolución de problemas complejos", "CPSer"],
+      "short": "Resolución de problemas complejos: diseñar soluciones para problemas sin precedente, en los que los expertos se declaran incompetentes.",
+      "body": "Recuenco lo define como el diseño sistemático de soluciones para problemas de los que no existe precedente. Lo separa de lo complicado: instalar un ERP en 300 sedes es difícil, pero tiene referencias; un problema complejo no las tiene. Exige compromiso con el problema y no con una verdad propia, trabajar con hipótesis que se tiran en cuanto aparece un dato mejor y un equipo de talentos diversos orquestado. No lo considera una skill ni un framework, sino un cienciarte.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["cienciarte", "orquestacion-cognitiva", "factor-x", "cynefin", "diagnostico", "dr-house"],
+      "sources": [
+        { "threadId": "1964221678713438241", "tweetId": "1964221689337639056" },
+        { "threadId": "1302148427791253507", "tweetId": null },
+        { "threadId": "1675028035836182528", "tweetId": "1675028046305280000" }
+      ]
+    }
+  },
+  {
+    "candidate": "CPS hispano",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Tesis propia de Recuenco, pilar estratégico de la temporada 25/26 con turra dedicada.",
+    "entry": {
+      "term": "CPS hispano",
+      "slug": "cps-hispano",
+      "aliases": ["CPS Hispano", "CPS hispano"],
+      "short": "Forma hispana de afrontar la incertidumbre, con improvisación, creatividad y rebeldía, frente a la obsesión luterana por medir y optimizar.",
+      "body": "Recuenco sostiene que en tiempos de incertidumbre, cuando se agota el manual, la mirada hispana manda: el riesgo, la improvisación dirigida, el «echao palante» y las esencias que no se pueden medir ni pesar. No lo plantea contra lo luterano sino como síntesis: el luterano construye el producto básico mejor que nadie y lo hispano aporta la capa de personalidad, de sentido y de propósito. Lo ilustra con Gracita Morales, que resuelve lo cotidiano con lo poco que tiene, frente a la luterana Bettye de «The Offer».",
+      "origin": "Javier G. Recuenco",
+      "group": "oficio",
+      "related": ["cultura-luterana", "cps", "pensamiento-lateral", "personotecnia", "incertidumbre"],
+      "sources": [
+        { "threadId": "1971825115165028522", "tweetId": "1971825115165028522" },
+        { "threadId": "1964221678713438241", "tweetId": "1964221768056357372" },
+        { "threadId": "2014969801395814716", "tweetId": "2014969861554794498" }
+      ]
+    }
+  },
+  {
+    "candidate": "Cultura luterana",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco usa «luterano» y «era postluterana» como categoría recurrente, contrapunto del CPS hispano.",
+    "entry": {
+      "term": "Cultura luterana",
+      "slug": "cultura-luterana",
+      "aliases": ["luterano", "luterana", "luteranos", "era postluterana", "era post luterana", "postluterana"],
+      "short": "Mentalidad de medir, pesar y optimizarlo todo; útil para lo predecible, insuficiente cuando manda la incertidumbre.",
+      "body": "Recuenco llama luterana a la aproximación fordiana y taylorista: productividad máxima, best practices, todo en un Excel, sin hueco para la pausa. No la considera mala, sino insuficiente cuando no hay nada tangible que medir; aplicada a un cienciarte como la publicidad, lo prostituye. Pone como ejemplos el private equity y la IA, «culminación del sueño luterano», y anuncia una era postluterana de escenarios desconocidos.",
+      "origin": "Javier G. Recuenco",
+      "group": "sociedad",
+      "related": ["cps-hispano", "private-equity", "cienciarte", "incertidumbre"],
+      "sources": [
+        { "threadId": "1781573444485697867", "tweetId": "1781573530485657608" },
+        { "threadId": "1964221678713438241", "tweetId": "1964221745751117983" },
+        { "threadId": "2025116934572843338", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Orquestación cognitiva",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Concepto central del trabajo en equipos CPS, con varias turras dedicadas.",
+    "entry": {
+      "term": "Orquestación cognitiva",
+      "slug": "orquestacion-cognitiva",
+      "aliases": ["orquestación cognitiva", "orquestación", "orquestador cognitivo", "orquestar"],
+      "short": "Hacer trabajar juntos a talentos muy distintos gestionando egos, emociones y agendas, no solo plazos y presupuestos.",
+      "body": "Recuenco la distingue del project management: llevar tiempos y presupuestos se aprende pronto, mientras que dirigir una orquesta cuesta una vida. Orquestar es armonizar a gente de negocio y gente intelectual, tender puentes entre agendas incompatibles y gestionar a las personas a nivel cognitivo y emocional, a veces como un confesor. Sin ella los equipos de mucho talento colapsan, como Van Halen cuando perdió a su mánager Noel Monk.",
+      "origin": "Javier G. Recuenco",
+      "group": "oficio",
+      "related": ["equipo-apolo", "emulsificador-de-equipo", "cps"],
+      "sources": [
+        { "threadId": "1307211330349420545", "tweetId": "1307226025508704259" },
+        { "threadId": "1270594048617824257", "tweetId": "1270597432561328128" },
+        { "threadId": "1317382505880866816", "tweetId": "1317382505880866816" }
+      ]
+    }
+  },
+  {
+    "candidate": "Procesos de alta variabilidad (PAV)",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco les dedica una turra y los usa como categoría en otras (incentivos, cambio cultural).",
+    "entry": {
+      "term": "Procesos de alta variabilidad (PAV)",
+      "slug": "procesos-de-alta-variabilidad",
+      "aliases": ["procesos de alta variabilidad", "alta variabilidad", "PAV", "PAVs"],
+      "short": "Procesos con máxima granularidad y dependencia del contexto, casi siempre con personas, que no caben en un procedimiento estándar.",
+      "body": "Los que interactúan con humanos suelen ser PAV, porque el humano es el sistema complejo primigenio. Tratarlos con una plataforma procedural, como un CRM para la relación cliente-marca, es meter una pieza redonda en un agujero cuadrado, y en atención al cliente produce los «procesos Golem». Recuenco sostiene que elegir entre gestionar el contexto o escalar es una falsa dicotomía, y que diseñarlos pide Personotecnia y un equipo orquestado. Pone como ejemplos los incentivos y el cambio cultural.",
+      "origin": null,
+      "group": "complejidad",
+      "related": ["personotecnia", "sistemas-complejos", "arquitectura-de-incentivos", "orquestacion-cognitiva"],
+      "sources": [
+        { "threadId": "1527905242376962054", "tweetId": null },
+        { "threadId": "1642053681766883330", "tweetId": "1642053773328621570" },
+        { "threadId": "1649673649866113024", "tweetId": "1649676319955795968" }
+      ]
+    }
+  },
+  {
+    "candidate": "Teorema de Roca Salvatella",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Formulación propia de Recuenco, citada en varias turras con su corolario.",
+    "entry": {
+      "term": "Teorema de Roca Salvatella",
+      "slug": "teorema-de-roca-salvatella",
+      "aliases": ["teorema de Roca Salvatella", "teorema Roca Salvatella", "Corolario Recuenco"],
+      "short": "No hay conversación posible entre quien domina un tema a nivel 2 y quien lo domina a nivel 8.",
+      "body": "La distancia cognitiva impide cualquier comunicación significativa. Recuenco lo formuló hacia 2015 al ver que era un problema comercial grave para vender soluciones complejas. Su corolario: quien afronta una disciplina de complejidad n con una cualificación menor que n entra en una niebla que no le impide actuar, pero sí reduce sus opciones de éxito. Lo relaciona con la zona de desarrollo próximo de Vygotski.",
+      "origin": "Javier G. Recuenco",
+      "group": "complejidad",
+      "related": ["zona-de-desarrollo-proximo", "niebla-de-silent-hill"],
+      "sources": [
+        { "threadId": "1352890795897061378", "tweetId": "1352938598631436288" },
+        { "threadId": "1784107483444687237", "tweetId": "1784107497457909804" }
+      ]
+    }
+  },
+  {
+    "candidate": "Emulsificador de equipo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Figura definida por Recuenco en una turra dedicada, dentro de la serie sobre equipos CPS.",
+    "entry": {
+      "term": "Emulsificador de equipo",
+      "slug": "emulsificador-de-equipo",
+      "aliases": ["emulsificador de equipo", "emulsificadores de equipo", "emulsionador", "emulsionantes colectivos"],
+      "short": "Persona que consigue que gente incompatible trabaje junta, dando sentido y propósito a una mezcla inestable.",
+      "body": "Como el emulsionante que une agua y aceite, su labor muchas veces solo se nota cuando desaparece: se le saca del tablero y la mayonesa se corta. No es un mediador, que conecta partes enfrentadas sin necesariamente expandirlas, sino alguien que logra un estado nuevo del grupo. El ejemplo de Recuenco es Andy Fletcher, que sin gran talento musical mantuvo unido a Depeche Mode.",
+      "origin": "Javier G. Recuenco",
+      "group": "personas",
+      "related": ["orquestacion-cognitiva", "equipo-apolo"],
+      "sources": [
+        { "threadId": "1530425616423690244", "tweetId": "1530425638628298753" },
+        { "threadId": "1530425616423690244", "tweetId": "1530425706735345664" }
+      ]
+    }
+  },
+  {
+    "candidate": "Equipo Apolo",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Recuenco lo usa en varias turras sobre equipos CPS; las menciones mitológicas de Apolo son ajenas y no cuentan.",
+    "entry": {
+      "term": "Equipo Apolo",
+      "slug": "equipo-apolo",
+      "aliases": ["equipos Apolo", "equipo Apolo", "síndrome de Apolo"],
+      "short": "Equipo lleno de gente muy talentosa que rinde muy por debajo de lo esperado.",
+      "body": "El talento trae egos enormes, gente que prefiere hacer las cosas a su manera y discusiones hasta la extenuación. Por eso Recuenco los llama bombas de relojería: sin un orquestador cognitivo acaban colapsando, como Van Halen. Conoció el concepto por Elena Sanz, expresidenta de Mensa.",
+      "origin": "Meredith Belbin, «Management Teams» (síndrome de Apolo)",
+      "group": "personas",
+      "related": ["orquestacion-cognitiva", "emulsificador-de-equipo", "altas-capacidades"],
+      "sources": [
+        { "threadId": "1307211330349420545", "tweetId": "1307222844884037633" },
+        { "threadId": "1317382505880866816", "tweetId": "1317404016096194561" }
+      ]
+    }
+  },
+  {
+    "candidate": "Dr. House",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Arquetipo que Recuenco usa de forma explicativa y repetida para definir al CPSer.",
+    "entry": {
+      "term": "Dr. House",
+      "slug": "dr-house",
+      "aliases": ["doctor House", "Dr. House", "Gregory House"],
+      "short": "Arquetipo favorito de Recuenco para el CPSer: funciona justo cuando el resto de expertos deja de funcionar.",
+      "body": "Frente al señor Lobo de «Pulp Fiction», fiable en el 99 % de los casos porque ya los ha visto antes, House es fiable en el 1 % que nadie sabe resolver. Sus soluciones son aproximativas: prueba, falla y vuelve a probar, porque en lo complejo hay que experimentar. Recuenco advierte de lo menos realista del personaje: que resuelve solo, cuando el CPS real exige un equipo de talentos diversos orquestado.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["cps", "orquestacion-cognitiva", "cynefin"],
+      "sources": [
+        { "threadId": "1302148427791253507", "tweetId": null },
+        { "threadId": "1307211330349420545", "tweetId": "1307214145264246784" },
+        { "threadId": "1309767345875890177", "tweetId": "1309767345875890177" }
+      ]
+    }
+  },
+  {
+    "candidate": "Solvers Academy",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Iniciativa formativa del ecosistema CPS de Recuenco, con una turra dedicada.",
+    "entry": {
+      "term": "Solvers Academy",
+      "slug": "solvers-academy",
+      "aliases": ["Solvers Academy", "@solvers_academy"],
+      "short": "Iniciativa de formación en CPS del ecosistema de Recuenco, con programas en varias instituciones académicas.",
+      "body": "Recuenco la define como la propuesta de reunir las aplicaciones del CPS en una formación coherente y personalizada, con socios académicos como UNIR, donde crearon el Máster en CPS. Trabaja con varias instituciones a la vez, con material propio y programas que no compiten entre sí, y funciona como empresa con su propia cuenta de resultados. Recuenco atribuye buena parte del proyecto a Toni Dorta.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["cps", "singular-solving"],
+      "sources": [
+        { "threadId": "1850051280107983315", "tweetId": null }
+      ]
+    }
+  },
+  {
+    "candidate": "Singular Solving",
+    "decision": "keep",
+    "mergeInto": null,
+    "reason": "Compañía de CPS de Recuenco, citada en decenas de turras como caso práctico del oficio.",
+    "entry": {
+      "term": "Singular Solving",
+      "slug": "singular-solving",
+      "aliases": ["Singular Solving", "@SingularSolving"],
+      "short": "Compañía de Recuenco que resuelve problemas complejos de empresa, basada en el skin in the game.",
+      "body": "Exige tres condiciones para trabajar con un cliente: acceso directo a quien toma las decisiones, disposición a dar saltos al vacío y que al máximo decisor le importe más la empresa que su propio interés. Por eso suele trabajar con empresas familiares medianas, cobrando con revenue share, equity o joint ventures, casi como un venture builder. Sus primeros proyectos de CPS fueron fracasos, algo que Recuenco cuenta abiertamente. Alrededor ha crecido un ecosistema de compañías e iniciativas como Solvers Academy.",
+      "origin": null,
+      "group": "oficio",
+      "related": ["cps", "skin-in-the-game", "solvers-academy", "javier-g-recuenco"],
+      "sources": [
+        { "threadId": "1469583058563121153", "tweetId": "1469583135524458497" },
+        { "threadId": "1636989624567443457", "tweetId": "1636989665608622087" }
+      ]
+    }
+  }
+]

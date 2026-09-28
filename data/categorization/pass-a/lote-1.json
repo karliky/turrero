@@ -1,0 +1,320 @@
+[
+  {
+    "id": "1052828473729961984",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "Y todo esto es así porque sencillamente, Facebook como plataforma publicitaria, es un fiasco."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1157653953716396036",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "Que no es otro que la pérdida de efectividad de los mecanismos tradicionales de generación de la demanda."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1274228378451824640",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "el progreso real no solamente está construido por gente que tiene visión y trascendencia, sino por insensatos"
+    },
+    "confidence": "baja",
+    "alternative": "organizaciones-e-incentivos"
+  },
+  {
+    "id": "1330075571116777474",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "La segunda parte de los libros que más me han influido a la hora de convertirme en CPSer."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1352890795897061378",
+    "primary": "sistemas-complejos",
+    "secondary": [
+      "psicologia-y-decisiones"
+    ],
+    "evidence": {
+      "sistemas-complejos": "Hay problemas complejos irresolubles? No tengo la menor duda.",
+      "psicologia-y-decisiones": "la necesidad de luchar contra el cerebro creyendo que un tema es irresoluble o proporcionando una solución cómoda"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1403645471596453888",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Lo que haces para mantenerte empleable, lo que haces para progresar en la corporate ladder"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1416256929526161408",
+    "primary": "cultura-popular",
+    "secondary": [],
+    "evidence": {
+      "cultura-popular": "Una cantidad indecente de talento se desperdicia todos los días yendo a sumideros donde es ignorado"
+    },
+    "confidence": "media",
+    "alternative": "desarrollo-personal"
+  },
+  {
+    "id": "1421353440224104449",
+    "primary": "reflexiones-personales",
+    "secondary": [],
+    "evidence": {
+      "reflexiones-personales": "voy sencillamente a hablar de anécdotas sobre los hilos turras."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1444195816248385539",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [
+      "reflexiones-personales"
+    ],
+    "evidence": {
+      "equipos-y-liderazgo": "Asume rápidamente quien eres y rodéate de gente que te complemente.",
+      "reflexiones-personales": "Así me siento yo con respecto a Irlanda, y en general a mi relación con la gente puramente emocional."
+    },
+    "confidence": "media",
+    "alternative": "reflexiones-personales"
+  },
+  {
+    "id": "1507611365288161280",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "La función comercial está siendo reventada por una convergencia de varios factores simultáneos"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1510161914772471813",
+    "primary": "reflexiones-personales",
+    "secondary": [],
+    "evidence": {
+      "reflexiones-personales": "voy a dar salida a una obsesión personal, y de alguna manera a conectarlo con el CPS"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1517738336210894850",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "vamos a hablar de una disciplina necesaria en la vida y particularmente en el CPS: La asertividad."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1550748648845238272",
+    "primary": "finanzas-e-inversion",
+    "secondary": [
+      "estrategia"
+    ],
+    "evidence": {
+      "finanzas-e-inversion": "En realidad el problema del Private Equity se podría resumir en que tiene un equipo lleno de defensas",
+      "estrategia": "necesitas del talento y la creatividad necesarias para generar nuevos revenue streams."
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1634418954511822848",
+    "primary": "estrategia",
+    "secondary": [
+      "equipos-y-liderazgo"
+    ],
+    "evidence": {
+      "estrategia": "La problemática con la construcción de negocio alrededor de la ESG es que es un concepto que tiene dos fuerzas",
+      "equipos-y-liderazgo": "Hacen falta jardineros, como hemos visto, que sean capaces de poner de acuerdo a dos colectivos"
+    },
+    "confidence": "baja",
+    "alternative": "equipos-y-liderazgo"
+  },
+  {
+    "id": "1649673649866113024",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [],
+    "evidence": {
+      "organizaciones-e-incentivos": "Aspectos tan críticos como la cultura de una organización emanan como fenómeno emergente de su arquitectura dinámica de incentivos."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1657283004727738368",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "En reiteradas ocasiones he trazado el actual desacoplamiento entre la realidad y las percepciones, el dato y el relato."
+    },
+    "confidence": "media",
+    "alternative": "politica-y-sector-publico"
+  },
+  {
+    "id": "1723236412487553316",
+    "primary": "ia-y-tecnologia",
+    "secondary": [
+      "metodo-cps"
+    ],
+    "evidence": {
+      "ia-y-tecnologia": "si quiero plantear mi tesis de como la IA va a alterar un sector por completo",
+      "metodo-cps": "Necesitas a gente mucho más senior en skills antitéticas con respecto a las históricas (ergo, en CPS)"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1743547711897342313",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "La resiliencia es la capacidad que tienen las personas para afrontar y superar las situaciones adversas o traumáticas"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1784107483444687237",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "Al afrontar una disciplina de un grado de complejidad n con una cualificación menor que n, hay una zona"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1842453861094609097",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "MPFG es el resultado de aplicar nuestra mirada al mundo del Marketing y sus dolores actuales."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1847550414226411917",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "@unconvcps nace por una razón sencilla: Hay demasiada distancia actual entre la Tecnología y los Decision Makers"
+    },
+    "confidence": "media",
+    "alternative": "ia-y-tecnologia"
+  },
+  {
+    "id": "1862770042686845320",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "hablaremos en general de lo muy paquetes que somos evaluando riesgos."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1905877658904183080",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "Bienvenidos a esta turra sobre altas capacidades, sistemas e incentivos."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1908407119902024001",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "Cuando una empresa, como sistema complejo que es, decide hacer sidestepping"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1921092901930484128",
+    "primary": "reflexiones-personales",
+    "secondary": [],
+    "evidence": {
+      "reflexiones-personales": "voy a convertir el hilo turras en una elegía. En este caso dedicado a mi madre"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1971825115165028522",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "el tercer pilar estratégico de nuestra aproximación: El CPS Hispano."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1984528930691236007",
+    "primary": "sociologia",
+    "secondary": [
+      "cultura-popular"
+    ],
+    "evidence": {
+      "sociologia": "No podemos esperar vencer un relato sentimental nunca con los fríos datos.",
+      "cultura-popular": "Hollywood ha actuado como un amplificador masivo de este fenómeno mitopoético"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1994665880878186846",
+    "primary": "finanzas-e-inversion",
+    "secondary": [],
+    "evidence": {
+      "finanzas-e-inversion": "vamos a hablar del charco en el que se está metiendo el PE en su loca huida hacia delante"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2068230765683360029",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "siguiendo con el arco sobre el futuro de la educación, vamos a seguir hablando de nuestro plan para con @colegiobalder"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2096125175175512394",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "Plantear un juego social es, entonces, una tecnología de sentido de bajo coste."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  }
+]

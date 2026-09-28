@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ThreadList } from "../../components/ThreadList";
-import { getAuthor, listAuthors, listThreadsByAuthor } from "@/lib/queries";
+import { getAuthor, listAuthors, listThreadsForArchive } from "@/lib/queries";
 import { SITE, authorUrl } from "@/lib/site";
 
 interface Params {
@@ -28,7 +28,10 @@ export default async function AuthorPage({ params }: Params) {
   if (!author) notFound();
 
   return (
-    <ThreadList title={`Turras de ${author.name}`} threads={listThreadsByAuthor(author.handle)}>
+    <ThreadList
+      title={`Turras de ${author.name}`}
+      threads={listThreadsForArchive().filter((thread) => thread.authorHandle === author.handle)}
+    >
       <a
         href={authorUrl(author.handle)}
         target="_blank"

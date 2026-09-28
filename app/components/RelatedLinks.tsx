@@ -13,11 +13,11 @@ function groupName(domain: string): string {
 }
 
 function icon(domain: string): React.ReactElement {
-  if (/youtube\.com|youtu\.be/.test(domain)) return <FaYoutube className="text-xl" />;
-  if (domain.includes('goodreads.com')) return <FaBook className="text-xl" />;
-  if (domain.includes('wikipedia.org')) return <FaWikipediaW className="text-xl" />;
-  if (domain.includes('linkedin.com')) return <FaLinkedin className="text-xl" />;
-  return <FaLink className="text-xl" />;
+  if (/youtube\.com|youtu\.be/.test(domain)) return <FaYoutube className="text-sm" />;
+  if (domain.includes('goodreads.com')) return <FaBook className="text-sm" />;
+  if (domain.includes('wikipedia.org')) return <FaWikipediaW className="text-sm" />;
+  if (domain.includes('linkedin.com')) return <FaLinkedin className="text-sm" />;
+  return <FaLink className="text-sm" />;
 }
 
 function label(url: string): string {
@@ -38,19 +38,21 @@ interface RelatedLink {
 
 function LinkList({ links }: { links: RelatedLink[] }) {
   return (
-    <ul className="space-y-2">
+    <ul className="-mx-2 space-y-0.5">
       {links.map((link) => (
         <li key={link.url}>
           <a
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full text-left p-3 rounded-md transition-all duration-200 hover:bg-whiskey-50 text-whiskey-700"
+            className="group flex items-start gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-whiskey-50"
           >
-            <div className="flex items-start gap-3">
-              <div className="shrink-0 mt-1">{icon(link.domain)}</div>
-              <span className="line-clamp-2">{link.label}</span>
-            </div>
+            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-whiskey-100 text-whiskey-800 transition-colors group-hover:bg-brand group-hover:text-whiskey-50">
+              {icon(link.domain)}
+            </span>
+            <span className="min-w-0 leading-snug text-whiskey-950 line-clamp-2 [overflow-wrap:anywhere] group-hover:underline decoration-whiskey-300 underline-offset-2">
+              {link.label}
+            </span>
           </a>
         </li>
       ))}
@@ -79,22 +81,22 @@ export function RelatedLinks({ tweets }: { tweets: Tweet[] }) {
   if (groups.size === 0 && textLinks.length === 0) return null;
 
   return (
-    <div className="space-y-4 bg-white/50 backdrop-blur-xs p-4 rounded-lg border border-whiskey-200 shadow-xs">
-      <h2 className="text-lg font-bold text-whiskey-900">Enlaces relacionados</h2>
-      <div className="space-y-4">
+    <section className="rounded-xl border border-whiskey-200 border-t-[3px] border-t-brand bg-surface p-5 shadow-sm">
+      <h2 className="font-serif text-xl font-bold text-whiskey-950">Enlaces de esta turra</h2>
+      <div className="mt-4 space-y-5">
         {[...groups].map(([name, links]) => (
-          <div key={name} className="space-y-2">
-            <h3 className="text-sm font-semibold text-whiskey-800">{name}</h3>
+          <div key={name} className="space-y-1">
+            <h3 className="text-sm font-semibold text-whiskey-800 [overflow-wrap:anywhere]">{name}</h3>
             <LinkList links={links} />
           </div>
         ))}
         {textLinks.length > 0 && (
-          <div className="space-y-2">
+          <div className="space-y-1">
             <h3 className="text-sm font-semibold text-whiskey-800">Otros enlaces</h3>
             <LinkList links={textLinks} />
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

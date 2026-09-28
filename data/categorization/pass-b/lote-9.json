@@ -1,0 +1,326 @@
+[
+  {
+    "id": "1257237030062510080",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "No tenemos ni idea de como gestionar la complejidad como sociedad."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1260101741904834560",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "Si la sociedad se transforma en algo diferente, los emprendedores se adaptarán a ello."
+    },
+    "confidence": "baja",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1309767345875890177",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Nosotros solemos decir que los clientes de una compañía que se dedique al CPS son los moribundos y los visionarios."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1314815631229935617",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Hablaremos sobre excelencia y obsesión."
+    },
+    "confidence": "media",
+    "alternative": "equipos-y-liderazgo"
+  },
+  {
+    "id": "1327534186140487680",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "qué libros crees que te han ayudado más a ti en avanzar en convertirte en un buen CPSer?"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1335136099258294273",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [
+      "ia-y-tecnologia"
+    ],
+    "evidence": {
+      "psicologia-y-decisiones": "El pañocalentismo, como toda cosa que es ampliamente adoptada, hunde sus raíces en un montón de mecanismos psicológicos.",
+      "ia-y-tecnologia": "Con todos ustedes: La plataforma tecnológica mágica."
+    },
+    "confidence": "media",
+    "alternative": "ia-y-tecnologia"
+  },
+  {
+    "id": "1337670943276224513",
+    "primary": "sistemas-complejos",
+    "secondary": [],
+    "evidence": {
+      "sistemas-complejos": "el contexto, es casi más importante en ocasiones que la cosa en esencia"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1342767594697191424",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [
+      "marketing"
+    ],
+    "evidence": {
+      "psicologia-y-decisiones": "Nos mola más que a un tonto un gorrocóptero cerrar en falso un problema complicado con una solución de mierda.",
+      "marketing": "La mayor parte de los planes de fidelización son triviales, inefectivos, o completamente absurdos."
+    },
+    "confidence": "media",
+    "alternative": "sistemas-complejos"
+  },
+  {
+    "id": "1380770207384408065",
+    "primary": "politica-y-sector-publico",
+    "secondary": [],
+    "evidence": {
+      "politica-y-sector-publico": "soy de natural desconfiado al respecto del valor que traen la Administración y los políticos al ecosistema."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1388377995233071106",
+    "primary": "sociologia",
+    "secondary": [
+      "psicologia-y-decisiones"
+    ],
+    "evidence": {
+      "sociologia": "Últimamente el cinismo y la hipocresía es un comportamiento social que se recompensa.",
+      "psicologia-y-decisiones": "las representaciones erróneas de los acontecimientos pasados que hacen que aprendamos de la historia menos de lo que creemos."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1406126552463470593",
+    "primary": "cultura-popular",
+    "secondary": [
+      "desarrollo-personal"
+    ],
+    "evidence": {
+      "cultura-popular": "Es lo que ocurre cuando ignoras las leyes fundamentales del éxito en la música, que son bastante anti intuitivas.",
+      "desarrollo-personal": "Así que mantente firme, stick to your guns"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1446745515501264896",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "Ignora el factor X bajo tu responsabilidad."
+    },
+    "confidence": "media",
+    "alternative": "desarrollo-personal"
+  },
+  {
+    "id": "1505081147595833345",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [
+      "marketing"
+    ],
+    "evidence": {
+      "organizaciones-e-incentivos": "Una compañía está en manos de un secuestrador cuando a pesar de que los decision makers",
+      "marketing": "Por ejemplo, los profesionales del Marketing llevan mucho tiempo sufriendo el FOFO."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1525356646448381952",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "Estamos en una crisis del Marketing y la generación de demanda sin precedentes."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1532990633580929025",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Vamos a hablar de como escribir todas las semanas sobre algo, estés muerto o no."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1642053681766883330",
+    "primary": "personotecnia",
+    "secondary": [],
+    "evidence": {
+      "personotecnia": "La personotecnia suficientemente desarrollada es indistinguible de la magia."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1684876869949120512",
+    "primary": "sistemas-complejos",
+    "secondary": [
+      "metodo-cps"
+    ],
+    "evidence": {
+      "sistemas-complejos": "cuando resuelves un problema, lo haces dentro de un contexto determinado.",
+      "metodo-cps": "En CPS no hay soluciones generales por definición. En Consultoría las hay"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1718136430130520294",
+    "primary": "reflexiones-personales",
+    "secondary": [],
+    "evidence": {
+      "reflexiones-personales": "vamos a hablar de la muerte, y sobre todo, de lo que deja detrás"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1720721564465823881",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "El siguiente nivel es que la IA es en realidad un exoesqueleto."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1746066280782631368",
+    "primary": "finanzas-e-inversion",
+    "secondary": [],
+    "evidence": {
+      "finanzas-e-inversion": "El presupuesto anual es una pantomima cósmica."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1756234748685373544",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "CPS empresarial con fuerte componente tech que solo quiera un diagnóstico"
+    },
+    "confidence": "baja",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1771432938288107757",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "hablando sobre nuestra estrategia de formación CPS."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1850051280107983315",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Solvers Academy es nuestra propuesta de aglutinar todos las aplicaciones poliédricas del CPS en una formación coherente"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1852267188519854245",
+    "primary": "sociologia",
+    "secondary": [
+      "sistemas-complejos"
+    ],
+    "evidence": {
+      "sociologia": "No somos capaces de dejar de empujar nuestro sensemaking partisano ni ante el equivalente del calamar de Watchmen?",
+      "sistemas-complejos": "Lo tenía reservado porque nunca le había dedicado un hilo al padre del Sensemaking"
+    },
+    "confidence": "baja",
+    "alternative": "sistemas-complejos"
+  },
+  {
+    "id": "1936303239193878741",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [
+      "psicologia-y-decisiones"
+    ],
+    "evidence": {
+      "organizaciones-e-incentivos": "la razón de que las empresas familiares tengan sus días contados a partir de la tercera generación",
+      "psicologia-y-decisiones": "Somos penosos evaluando el riesgo."
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1941416464168181821",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "El fraude publicitario es un síntoma. El problema es estructural."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2020049464229028201",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "el mero dinero no puede fabricar influencia real, ya que deviene en propaganda detectable y efímera"
+    },
+    "confidence": "media",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "2022575861296230582",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "vamos a hablar de AACC y empleabilidad."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2030161085941039583",
+    "primary": "finanzas-e-inversion",
+    "secondary": [],
+    "evidence": {
+      "finanzas-e-inversion": "el enfoque actual del PE, predominantemente mecánico y orientado a transacciones rápidas y apalancadas"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2065676893144134027",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "el blueprint definitivo de como debería ser el colegio del futuro, donde puedan coexistir alumnos de AACC y neurotípicos"
+    },
+    "confidence": "alta",
+    "alternative": null
+  }
+]

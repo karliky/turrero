@@ -8,7 +8,6 @@ export interface ThreadRecord {
   title: string;
   publishedAt: string;
   exam: ExamQuestion[] | null;
-  podcastUrl: string | null;
   syncedAt: string | null;
 }
 
@@ -32,15 +31,14 @@ export function upsertAuthor(db: Db, author: Author): void {
 
 export function insertThread(db: Db, thread: ThreadRecord): void {
   db.prepare(
-    `INSERT INTO threads (id, author_handle, title, published_at, exam_json, podcast_url, synced_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO threads (id, author_handle, title, published_at, exam_json, synced_at)
+     VALUES (?, ?, ?, ?, ?, ?)`,
   ).run(
     thread.id,
     thread.authorHandle,
     thread.title,
     thread.publishedAt,
     thread.exam ? JSON.stringify(thread.exam) : null,
-    thread.podcastUrl,
     thread.syncedAt,
   );
 }
@@ -97,6 +95,15 @@ export function updateThreadEnrichment(db: Db, threadId: string, title: string, 
     title,
     exam ? JSON.stringify(exam) : null,
     threadId,
+  );
+}
+
+/** Author and cover found in a public catalogue; a null leaves the stored value untouched. */
+export function updateBookMetadata(db: Db, url: string, metadata: { author: string | null; imageUrl: string | null }): void {
+  db.prepare('UPDATE books SET author = coalesce(?, author), image_url = coalesce(?, image_url) WHERE url = ?').run(
+    metadata.author,
+    metadata.imageUrl,
+    url,
   );
 }
 

@@ -6,14 +6,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { TweetContent } from "../../components/TweetContent";
 import { TurraSidebar } from '../../components/TurraSidebar';
-import { getThread, getThreadIdOfTweet, listThreadIds } from "@/lib/queries";
+import { createLinker } from "@/lib/glossary-links";
+import { getAdjacentThreads, getThread, getThreadCitations, getThreadIdOfTweet, listGlossary, listThreadIds } from "@/lib/queries";
 import { SITE, tweetUrl } from "@/lib/site";
+import { readingMinutes } from "@/lib/text";
 
 interface Params {
   params: Promise<{ id: string }>;
 }
-
-const WORDS_PER_MINUTE = 200;
 
 export function generateStaticParams() {
   return listThreadIds().map((id) => ({ id }));
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   // og:image and twitter:image come from the colocated opengraph-image.tsx
   return {
-    title: `${thread.title} — ${thread.author.name} | ${SITE.name}`,
+    title: `${thread.title}, por ${thread.author.name} | ${SITE.name}`,
     description: thread.title,
     openGraph: {
       title: thread.title,
@@ -52,8 +52,19 @@ export default async function TurraPage({ params }: Params) {
   const words = thread.title.split(' ');
   const highlightedWords = words.slice(0, 2).join(' ');
   const remainingWords = words.slice(2).join(' ');
-  const wordCount = thread.tweets.reduce((total, tweet) => total + tweet.text.split(/\s+/).length, 0);
-  const readingMinutes = Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
+  const minutes = readingMinutes(thread.tweets.map((tweet) => tweet.text));
+  const { previous, next } = getAdjacentThreads(thread.id);
+
+  // Glossary terms are linked once per turra, at their first appearance
+  const glossary = listGlossary();
+  const bySlug = new Map(glossary.map((entry) => [entry.slug, entry]));
+  const linker = createLinker(glossary.map((entry) => ({ slug: entry.slug, names: [entry.term, ...entry.aliases] })));
+  const termsByTweet = new Map(
+    thread.tweets.map((tweet) => [
+      tweet.id,
+      linker.find(tweet.text).map((match) => ({ ...match, term: bySlug.get(match.slug)!.term, short: bySlug.get(match.slug)!.short })),
+    ]),
+  );
 
   return (
     <main className="min-h-screen">
@@ -75,7 +86,7 @@ export default async function TurraPage({ params }: Params) {
             <span className="text-brand">{highlightedWords}</span>{' '}
             {remainingWords}
           </h1>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-whiskey-600 mb-3">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-whiskey-700 mb-3">
             <span>
               Por{" "}
               <Link href={`/autor/${thread.author.handle}`} className="text-whiskey-700 hover:text-whiskey-900 font-medium">
@@ -88,7 +99,7 @@ export default async function TurraPage({ params }: Params) {
               {format(new Date(thread.publishedAt), "d 'de' MMMM, yyyy", { locale: es })}
             </time>
             <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
-            <span>{readingMinutes} min de lectura</span>
+            <span>{minutes} min de lectura</span>
             <span className="w-1.5 h-1.5 rounded-full bg-whiskey-300" />
             <a
               href={tweetUrl(thread.author.handle, thread.id)}
@@ -101,7 +112,7 @@ export default async function TurraPage({ params }: Params) {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm text-whiskey-600">Categoría(s) de esta turra:</span>
+            <span className="text-sm text-whiskey-700">Categoría(s) de esta turra:</span>
             {thread.categories.map((category) => (
               <Link
                 key={category.slug}
@@ -115,15 +126,32 @@ export default async function TurraPage({ params }: Params) {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8">
-          <article className="lg:col-span-8 prose prose-whiskey max-w-none">
-            <div className="space-y-6">
-              {thread.tweets.map((tweet) => (
-                <TweetContent key={tweet.id} tweet={tweet} />
-              ))}
-            </div>
-          </article>
+          <div className="lg:col-span-8">
+            <article className="max-w-[62ch]">
+              <div className="space-y-6">
+                {thread.tweets.map((tweet) => (
+                  <TweetContent key={tweet.id} tweet={tweet} terms={termsByTweet.get(tweet.id) ?? []} />
+                ))}
+              </div>
+            </article>
 
-          <TurraSidebar thread={thread} />
+            <nav aria-label="Otras turras" className="mt-12 grid max-w-[62ch] gap-4 border-t border-whiskey-200 pt-6 sm:grid-cols-2">
+              {previous && (
+                <Link href={`/turra/${previous.id}`} className="group block">
+                  <span className="text-sm text-whiskey-700">← Turra anterior</span>
+                  <span className="mt-1 block font-medium text-whiskey-900 group-hover:underline">{previous.title}</span>
+                </Link>
+              )}
+              {next && (
+                <Link href={`/turra/${next.id}`} className="group block sm:col-start-2 sm:text-right">
+                  <span className="text-sm text-whiskey-700">Turra siguiente →</span>
+                  <span className="mt-1 block font-medium text-whiskey-900 group-hover:underline">{next.title}</span>
+                </Link>
+              )}
+            </nav>
+          </div>
+
+          <TurraSidebar thread={thread} citations={getThreadCitations(thread.id)} />
         </div>
       </div>
     </main>

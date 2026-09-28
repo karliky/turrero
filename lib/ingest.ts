@@ -46,7 +46,6 @@ export async function addTurra(
       title: provisionalTitle(root.text),
       publishedAt: root.createdAt,
       exam: null,
-      podcastUrl: null,
       syncedAt: new Date().toISOString(),
     });
     replaceTweets(db, root.id, images.tweets);

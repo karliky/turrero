@@ -1,0 +1,732 @@
+[
+  {
+    "url": "https://www.goodreads.com/book/show/168787.Liquid_Modernity",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Ensayo sociológico de Bauman sobre la modernidad líquida y la fragilidad de los vínculos sociales.",
+    "confidence": "alta",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/36064445-skin-in-the-game",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [
+      "Ciencia y complejidad"
+    ],
+    "reason": "Ética de las asimetrías de riesgo: quien decide debe asumir las consecuencias; parte del Incerto.",
+    "confidence": "media",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/541132.Punished_by_Rewards",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Educación y aprendizaje"
+    ],
+    "reason": "Crítica a recompensas e incentivos extrínsecos basada en psicología de la motivación, con foco en escuela.",
+    "confidence": "alta",
+    "alternative": "Educación y aprendizaje"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/1713426.Predictably_Irrational",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Economía conductual: sesgos sistemáticos e irracionalidad predecible en las decisiones.",
+    "confidence": "alta",
+    "alternative": "Economía y finanzas"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/21343.The_Five_Dysfunctions_of_a_Team",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Fábula de liderazgo sobre las disfunciones de los equipos directivos.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/9149676-willful-blindness",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Por qué individuos y organizaciones ignoran lo evidente; psicología de la negación.",
+    "confidence": "alta",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/23450895-scaling-up",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Metodología de gestión para escalar empresas en crecimiento.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/43261127-tiny-habits",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Método práctico de Fogg para crear hábitos mediante pequeños cambios de conducta.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/888511.Behavior_Modification",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Manual clásico de modificación de conducta basado en principios conductistas.",
+    "confidence": "alta",
+    "alternative": "Educación y aprendizaje"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/1202.Freakonomics",
+    "primary": "Economía y finanzas",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Economía aplicada a incentivos ocultos en fenómenos cotidianos y sociales.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/53019828-the-imposter-cure?ref=nav_sb_ss_3_21",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Guía de autoayuda para superar el síndrome del impostor.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/10878510-the-secret-thoughts-of-successful-women?ref=nav_sb_noss_l_23",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Autoayuda sobre el síndrome del impostor en mujeres profesionales.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/en/book/show/8212.The_Impostor_Phenomenon",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Desarrollo personal"
+    ],
+    "reason": "Obra seminal de Clance que describe psicológicamente el fenómeno del impostor.",
+    "confidence": "media",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/12503753-alan-moore",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Ensayo sobre la figura y obra de Alan Moore, autor de cómic; se trata como semblanza.",
+    "confidence": "media",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/6708475-nacha-pop",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Libro sobre la trayectoria del grupo musical Nacha Pop; historia de una banda.",
+    "confidence": "media",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/8779896-the-monkey-s-paw",
+    "primary": "Ficción, cómic y juegos",
+    "secondary": [],
+    "reason": "Relato clásico de terror de W.W. Jacobs.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/6664826-trade-off",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Marketing y propuesta de valor: el trade-off entre calidad y conveniencia.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/34466958-bullshit-jobs",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Economía y finanzas"
+    ],
+    "reason": "Teoría antropológica sobre trabajos sin sentido y su función social.",
+    "confidence": "alta",
+    "alternative": "Economía y finanzas"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/25827122-the-end-of-jobs",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Desarrollo personal"
+    ],
+    "reason": "Defiende el emprendimiento como alternativa al empleo tradicional.",
+    "confidence": "media",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/864008.Rebels_Against_the_Future",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Historia del movimiento ludita y su lectura para la era de la computación.",
+    "confidence": "alta",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/17859574-how-to-fail-at-almost-everything-and-still-win-big/",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Memoria de autoayuda de Scott Adams sobre sistemas frente a metas.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/58090463-net-positive",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Empresas sostenibles y propósito corporativo según el ex CEO de Unilever.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/52908942-how-to-avoid-a-climate-disaster",
+    "primary": "Tecnología e IA",
+    "secondary": [
+      "Ciencia y complejidad"
+    ],
+    "reason": "Tecnologías e innovaciones necesarias para llegar a cero emisiones.",
+    "confidence": "media",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/39863447-loonshots",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Cómo organizaciones cultivan ideas radicales, usando transiciones de fase como metáfora.",
+    "confidence": "alta",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/26784759-confessions-of-the-pricing-man",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Economía y finanzas"
+    ],
+    "reason": "Estrategia de pricing empresarial contada por el experto Hermann Simon.",
+    "confidence": "media",
+    "alternative": "Economía y finanzas"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/43382084-the-creativity-code",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "IA y creatividad: si las máquinas pueden crear arte, música y matemáticas.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/24612233-the-master-algorithm",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Divulgación sobre aprendizaje automático y la búsqueda del algoritmo maestro.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/24072897-deep-learning",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Manual de referencia técnico sobre deep learning.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/27543.Artificial_Intelligence",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Manual de referencia clásico de inteligencia artificial.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/427475.How_Starbucks_Saved_My_Life",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Memoria de un ejecutivo privilegiado que acaba trabajando en Starbucks.",
+    "confidence": "alta",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/50726976-entitled",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Filosofía y pensamiento"
+    ],
+    "reason": "Filósofa analiza la misoginia y el privilegio masculino como fenómeno social.",
+    "confidence": "alta",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/33559198-black-privilege",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Historia y biografías"
+    ],
+    "reason": "Autoayuda con tintes autobiográficos sobre crear oportunidades propias.",
+    "confidence": "media",
+    "alternative": "Historia y biografías"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/29939159-the-perils-of-privilege",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Crítica al discurso del privilegio en la política y cultura actuales.",
+    "confidence": "alta",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/21269468-decoding-leadership-bullshit",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Crítica satírica de los tópicos y la palabrería del liderazgo empresarial.",
+    "confidence": "media",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/es/book/show/55749716",
+    "primary": "Tecnología e IA",
+    "secondary": [],
+    "reason": "Obra colectiva sobre futuros tecnológicos para 2020.",
+    "confidence": "media",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/42832291-conformity",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Influencia social y conformidad de grupos, con implicaciones políticas y jurídicas.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/7023600-teaming",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Trabajo en equipo y aprendizaje organizacional; Edmondson y seguridad psicológica.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/51873030-mediocracia",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Ensayo sobre cómo la mediocridad domina instituciones y poder.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/43885240-how-to-have-impossible-conversations",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [
+      "Desarrollo personal"
+    ],
+    "reason": "Guía práctica de argumentación y conversación sobre creencias opuestas.",
+    "confidence": "media",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/15014.Crucial_Conversations",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Herramientas de comunicación para conversaciones difíciles de alto riesgo.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/56829.Hackers",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Historia de los hackers y los pioneros de la revolución informática.",
+    "confidence": "alta",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/233221.Homo_Ludens",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Filosofía y pensamiento"
+    ],
+    "reason": "Estudio clásico del juego como elemento de la cultura humana.",
+    "confidence": "media",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/239985.Hello_I_m_Special",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Paradoja del individualismo como nueva forma de conformidad cultural.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/58340695-collective-illusions",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Ilusiones colectivas: falsas percepciones de la opinión mayoritaria y conformidad.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/34858587-kill-all-normies",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Guerras culturales online, de 4chan y Tumblr a la alt-right.",
+    "confidence": "alta",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/52668196-do-nothing",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Autoayuda contra el exceso de trabajo y la productividad compulsiva.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/2763998-incredible-coincidence",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Recopilación sobre coincidencias y sincronicidad; clasificado por título y contexto.",
+    "confidence": "baja",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/44245196-the-great-mental-models",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [
+      "Desarrollo personal"
+    ],
+    "reason": "Modelos mentales generales para pensar mejor y decidir.",
+    "confidence": "media",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/818258.Managing_the_Unexpected",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Ciencia y complejidad"
+    ],
+    "reason": "Organizaciones de alta fiabilidad y gestión de lo inesperado.",
+    "confidence": "alta",
+    "alternative": "Ciencia y complejidad"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/1312918.The_Social_Psychology_of_Organizations",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Tratado clásico de psicología social aplicada a las organizaciones.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/131885.Fearful_Symmetry",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Estudio crítico clásico de la obra de William Blake; ensayo sobre autor literario.",
+    "confidence": "media",
+    "alternative": "Filosofía y pensamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/724622.The_One_to_One_Future",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Marketing uno a uno y personalización de la relación con clientes.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/67720.Blake",
+    "primary": "Historia y biografías",
+    "secondary": [],
+    "reason": "Biografía de William Blake por Peter Ackroyd.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/683539.Why_We_Do_What_We_Do",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Psicología de la motivación intrínseca y autodeterminación.",
+    "confidence": "alta",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/24611735-black-box-thinking",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Aprender de los errores comparando aviación y medicina; cultura del fallo.",
+    "confidence": "media",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/664534.The_Innovator_s_Dilemma",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Teoría de la innovación disruptiva y por qué fracasan grandes empresas.",
+    "confidence": "alta",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/18050134-trying-not-to-try",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Filosofía china del wu-wei unida a ciencia cognitiva de la espontaneidad.",
+    "confidence": "media",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/56898249-good-anxiety",
+    "primary": "Psicología y comportamiento",
+    "secondary": [
+      "Desarrollo personal"
+    ],
+    "reason": "Neurociencia de la ansiedad y cómo aprovecharla.",
+    "confidence": "media",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/522525.Mistakes_Were_Made_But_Not_by_Me_",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Disonancia cognitiva y autojustificación de errores.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/13819354-changing-the-world-is-the-only-fit-work-for-a-grown-man",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Biografía del publicista Howard Gossage.",
+    "confidence": "alta",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/126274.Understanding_Media",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Tecnología e IA"
+    ],
+    "reason": "Teoría de los medios como extensiones del ser humano y su efecto cultural.",
+    "confidence": "media",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/43535.Wooden_on_Leadership",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Liderazgo y construcción de equipos ganadores según John Wooden.",
+    "confidence": "alta",
+    "alternative": "Desarrollo personal"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/14828812-metaphysics",
+    "primary": "Filosofía y pensamiento",
+    "secondary": [],
+    "reason": "Introducción breve a la metafísica.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/32281.Demonic_Males",
+    "primary": "Ciencia y complejidad",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Primatología y evolución de la violencia masculina humana.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/16002028-primates",
+    "primary": "Ficción, cómic y juegos",
+    "secondary": [
+      "Historia y biografías"
+    ],
+    "reason": "Novela gráfica sobre Goodall, Fossey y Galdikas; el cómic va a ficción.",
+    "confidence": "alta",
+    "alternative": "Historia y biografías"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/7179010-i-may-be-wrong-but-i-doubt-it",
+    "primary": "Estrategia y empresa",
+    "secondary": [
+      "Economía y finanzas"
+    ],
+    "reason": "Crítica a la contabilidad tradicional como herramienta de gestión empresarial.",
+    "confidence": "media",
+    "alternative": "Economía y finanzas"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/11361213-situations-matter",
+    "primary": "Psicología y comportamiento",
+    "secondary": [],
+    "reason": "Psicología social: cómo el contexto determina la conducta.",
+    "confidence": "alta",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/es/book/show/32610460-the-sorites-principle",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Autoayuda sobre la perseverancia mediante el principio sorites.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/16130157-the-firm",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Estrategia y empresa"
+    ],
+    "reason": "Historia de McKinsey y su influencia en la empresa estadounidense.",
+    "confidence": "alta",
+    "alternative": "Estrategia y empresa"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/31951505-the-great-leveler",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Economía y finanzas"
+    ],
+    "reason": "Historia de la desigualdad y la violencia como gran nivelador.",
+    "confidence": "alta",
+    "alternative": "Economía y finanzas"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/20758028-fields-of-blood",
+    "primary": "Historia y biografías",
+    "secondary": [
+      "Sociedad y política"
+    ],
+    "reason": "Historia de la relación entre religión y violencia.",
+    "confidence": "media",
+    "alternative": "Sociedad y política"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/72252.Outsiders",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Sociología de la desviación y teoría del etiquetado.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/19596066-social-pathology",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Teoría sociológica de la patología social y la desviación.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/3143551-the-spiral-of-silence",
+    "primary": "Sociedad y política",
+    "secondary": [],
+    "reason": "Teoría de la espiral del silencio en la opinión pública.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/10569.On_Writing",
+    "primary": "Desarrollo personal",
+    "secondary": [
+      "Historia y biografías"
+    ],
+    "reason": "Oficio de escribir, mitad memoria de Stephen King y mitad consejos.",
+    "confidence": "media",
+    "alternative": "Historia y biografías"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/25069687-a-chef-s-guide-to-gelling-thickening-and-emulsifying-agents",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Ciencia culinaria técnica sobre gelificantes, espesantes y emulsionantes.",
+    "confidence": "media",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/18202508-the-human-brand",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Marketing y marcas vistas a través de la percepción de calidez y competencia.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/es/book/show/17875545-personalizacion",
+    "primary": "Estrategia y empresa",
+    "secondary": [],
+    "reason": "Personalización aplicada a marketing y relación con clientes.",
+    "confidence": "media",
+    "alternative": "Tecnología e IA"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/379779.The_Elephant_in_the_Room",
+    "primary": "Sociedad y política",
+    "secondary": [
+      "Psicología y comportamiento"
+    ],
+    "reason": "Sociología del silencio y la negación colectiva.",
+    "confidence": "alta",
+    "alternative": "Psicología y comportamiento"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/41392893-bayesian-statistics-the-fun-way",
+    "primary": "Ciencia y complejidad",
+    "secondary": [],
+    "reason": "Introducción divulgativa a la estadística bayesiana.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/27214316-the-assertiveness-guide-for-women?ac=1&from_search=true&qid=fBqUtoageL&rank=1",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Guía de autoayuda sobre asertividad y límites para mujeres.",
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/37786303-the-art-of-everyday-assertiveness",
+    "primary": "Desarrollo personal",
+    "secondary": [],
+    "reason": "Autoayuda práctica sobre asertividad cotidiana.",
+    "confidence": "alta",
+    "alternative": null
+  }
+]

@@ -1,0 +1,308 @@
+[
+  {
+    "id": "1056485929186144256",
+    "primary": "psicologia-y-decisiones",
+    "secondary": [],
+    "evidence": {
+      "psicologia-y-decisiones": "cuanto menos p*** idea se tiene de un tema concreto, más rotundas son las opiniones vertidas al respecto."
+    },
+    "confidence": "media",
+    "alternative": "sociologia"
+  },
+  {
+    "id": "1294936782497361928",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "en cada negocio exitoso está sembrada la semilla de su propia destrucción, y yo estoy entrenado para verla."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1325000695897071616",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "Un CPS no puede centrarse en la venta dura de la solución final, no es un consultor."
+    },
+    "confidence": "media",
+    "alternative": "marketing"
+  },
+  {
+    "id": "1357937382318886913",
+    "primary": "politica-y-sector-publico",
+    "secondary": [],
+    "evidence": {
+      "politica-y-sector-publico": "los incentivos necesarios para mejorar un país y los incentivos necesarios para mantenerte en el poder político están profundamente desalineados."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1360494110092713986",
+    "primary": "politica-y-sector-publico",
+    "secondary": [],
+    "evidence": {
+      "politica-y-sector-publico": "Una partitocracia como la que tenemos, impide de raíz esperar soluciones por ese flanco."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1411191931669987332",
+    "primary": "ia-y-tecnologia",
+    "secondary": [],
+    "evidence": {
+      "ia-y-tecnologia": "Un abrochador liminal abrocha un estímulo tecnológico con el zeitgeist por medio de una killer app."
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1418850632396677122",
+    "primary": "cultura-popular",
+    "secondary": [],
+    "evidence": {
+      "cultura-popular": "El gaming/gambling tiene que refundarse en base a premisas nobles y no extractivas."
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1436601048978890753",
+    "primary": "desarrollo-personal",
+    "secondary": ["equipos-y-liderazgo"],
+    "evidence": {
+      "desarrollo-personal": "procesos que hacen que una persona entre de una manera y salga de otra muy distinta.",
+      "equipos-y-liderazgo": "Tan importante es tener talento como ser un jugador de equipo."
+    },
+    "confidence": "media",
+    "alternative": "equipos-y-liderazgo"
+  },
+  {
+    "id": "1479732314791886850",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "La propuesta de valor hay que sustituirla sin piedad pero sin saña."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1573548479888105473",
+    "primary": "equipos-y-liderazgo",
+    "secondary": [],
+    "evidence": {
+      "equipos-y-liderazgo": "España ganó porque a diferencias leves de talento, mostraron un mayor grado de inteligencia colectiva que los demás."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1576087451524907008",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "No solo Gossage crea la primera compañía que vende CPS (Todavía lo llama consultoría, nadie es perfecto)"
+    },
+    "confidence": "media",
+    "alternative": "marketing"
+  },
+  {
+    "id": "1583704982129643520",
+    "primary": "desarrollo-personal",
+    "secondary": [],
+    "evidence": {
+      "desarrollo-personal": "Entrena tu cuerpo y tu cerebro."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1588784557284794368",
+    "primary": "ia-y-tecnologia",
+    "secondary": ["marketing"],
+    "evidence": {
+      "ia-y-tecnologia": "Twitter es que ha generado desde el principio mucho más valor del que ha sido capaz de capturar.",
+      "marketing": "La publicidad funciona en entornos como Instagram por  varias razones"
+    },
+    "confidence": "media",
+    "alternative": "marketing"
+  },
+  {
+    "id": "1591345649848487936",
+    "primary": "metodo-cps",
+    "secondary": [],
+    "evidence": {
+      "metodo-cps": "No pensar cuando haces CPS es un pecado mortal."
+    },
+    "confidence": "media",
+    "alternative": "sistemas-complejos"
+  },
+  {
+    "id": "1593870067128627200",
+    "primary": "estrategia",
+    "secondary": ["cultura-popular"],
+    "evidence": {
+      "estrategia": "El problema de las visiones oceánicas es que usualmente colapsan a la hora de darles cuerpo.",
+      "cultura-popular": "William Blake fue pintor y poeta, como Miguel Ángel."
+    },
+    "confidence": "baja",
+    "alternative": "cultura-popular"
+  },
+  {
+    "id": "1598965646620086272",
+    "primary": "sociologia",
+    "secondary": [],
+    "evidence": {
+      "sociologia": "La clave para entender la vida en este mundo fracturado reside en comprender la idea de conformidad"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1614168029876600833",
+    "primary": "reflexiones-personales",
+    "secondary": [],
+    "evidence": {
+      "reflexiones-personales": "Cuando alguien hace una locura como la que ha lanzado ahora @tonidorta no puedes por menos que agradecer"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1629367962103586817",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "Un esfuerzo en la construcción de una arquitectura de pricing power es una via de diferenciación real de una compañía"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1667419646671179776",
+    "primary": "finanzas-e-inversion",
+    "secondary": [],
+    "evidence": {
+      "finanzas-e-inversion": "La cura para el Private Equity es una reformulación de la arquitectura de incentivos de los directivos"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1730843036983120174",
+    "primary": "sociologia",
+    "secondary": ["psicologia-y-decisiones"],
+    "evidence": {
+      "sociologia": "Nunca es la realidad, siempre es el relato.",
+      "psicologia-y-decisiones": "Uno de los motores fundamentales de la pantomima es un mecanismo psicológico fascinante. La gente que quiere ser engañada."
+    },
+    "confidence": "media",
+    "alternative": "psicologia-y-decisiones"
+  },
+  {
+    "id": "1738462543344005507",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": ["metodo-cps"],
+    "evidence": {
+      "organizaciones-e-incentivos": "Las agendas particulares de cada miembro del consejo y decision maker.",
+      "metodo-cps": "Cualquier practitioner del CPS ha de esperar poder hablar a un board"
+    },
+    "confidence": "media",
+    "alternative": "metodo-cps"
+  },
+  {
+    "id": "1751154901659381958",
+    "primary": "desarrollo-personal",
+    "secondary": ["estrategia"],
+    "evidence": {
+      "desarrollo-personal": "si quiere estar empleable (Que no empleado) toda su vida no entender cuando el juego ha cambiado.",
+      "estrategia": "concepto de fatiga de materiales aplicado a los modelos de negocio"
+    },
+    "confidence": "media",
+    "alternative": "estrategia"
+  },
+  {
+    "id": "1832301234105061777",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [],
+    "evidence": {
+      "organizaciones-e-incentivos": "Las empresas familiares son problemática CPS de primer orden, Champions League"
+    },
+    "confidence": "media",
+    "alternative": "cultura-popular"
+  },
+  {
+    "id": "1893203295725871217",
+    "primary": "estrategia",
+    "secondary": [],
+    "evidence": {
+      "estrategia": "el desarrollo de la Wii puede interpretarse como un ejemplo perfecto de \"sidestepping\" estratégico."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1943924463415820480",
+    "primary": "marketing",
+    "secondary": [],
+    "evidence": {
+      "marketing": "hacer operable el CPS en el contexto empresarial donde hay problemas de estructura o ADN, como en el Marketing."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "1992135396793200730",
+    "primary": "finanzas-e-inversion",
+    "secondary": [],
+    "evidence": {
+      "finanzas-e-inversion": "la cultura del Private Equity, alimentada por los éxitos de un cierto tiempo, ha sido una cultura de ego desbocado."
+    },
+    "confidence": "media",
+    "alternative": "organizaciones-e-incentivos"
+  },
+  {
+    "id": "2070755210973077957",
+    "primary": "educacion-y-altas-capacidades",
+    "secondary": [],
+    "evidence": {
+      "educacion-y-altas-capacidades": "la educación en la tercera edad constituye una expresión plena del aprendizaje perpetuo"
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2078375621047042415",
+    "primary": "organizaciones-e-incentivos",
+    "secondary": [],
+    "evidence": {
+      "organizaciones-e-incentivos": "El proyecto fracasó principalmente por falta de consenso interno en una estructura de partnership compleja"
+    },
+    "confidence": "media",
+    "alternative": "ia-y-tecnologia"
+  },
+  {
+    "id": "2098670392902557988",
+    "primary": "personotecnia",
+    "secondary": [],
+    "evidence": {
+      "personotecnia": "Aquí la teoría de la relevancia se encuentra con la personotecnia."
+    },
+    "confidence": "alta",
+    "alternative": null
+  },
+  {
+    "id": "2101155734700405039",
+    "primary": "personotecnia",
+    "secondary": [],
+    "evidence": {
+      "personotecnia": "Es el reverso necesario de la economía de la atención."
+    },
+    "confidence": "alta",
+    "alternative": null
+  }
+]

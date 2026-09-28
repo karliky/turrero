@@ -44,7 +44,7 @@ let db: Db;
 beforeEach(() => {
   db = openDb(':memory:');
   migrate(db);
-  db.prepare("INSERT INTO categories VALUES ('estrategia', 'Estrategia', 'desc', 0), ('libros', 'Libros', 'desc', 1)").run();
+  db.prepare("INSERT INTO categories (slug, name, description, position) VALUES ('estrategia', 'Estrategia', 'desc', 0), ('libros', 'Libros', 'desc', 1)").run();
 });
 
 describe('addTurra', () => {
@@ -134,8 +134,8 @@ describe('syncTurra', () => {
 
 describe('OpenAI enricher', () => {
   const categories = [
-    { slug: 'estrategia', name: 'Estrategia', description: 'd' },
-    { slug: 'libros', name: 'Libros', description: 'd' },
+    { slug: 'estrategia', name: 'Estrategia', description: 'd', intro: '', criteria: 'c' },
+    { slug: 'libros', name: 'Libros', description: 'd', intro: '', criteria: 'c' },
   ];
 
   test('sends a strict JSON schema and validates the answer', async () => {
@@ -191,8 +191,8 @@ describe('OpenAI enricher', () => {
           { question: 'fuera', options: ['a', 'b', 'c'], answer: 3 },
         ],
         books: [
-          { url: 'https://www.goodreads.com/book/show/1', categories: ['Historia', 'Cocina'] },
-          { url: 'https://otro.com', categories: ['Historia'] },
+          { url: 'https://www.goodreads.com/book/show/1', categories: ['Historia y biografías', 'Cocina'] },
+          { url: 'https://otro.com', categories: ['Historia y biografías'] },
         ],
       },
       categories,
@@ -202,7 +202,7 @@ describe('OpenAI enricher', () => {
       title: 'Título',
       categories: ['estrategia'],
       exam: [{ question: 'ok', options: ['a', 'b', 'c'], answer: 2 }],
-      books: [{ url: 'https://www.goodreads.com/book/show/1', categories: ['Historia'] }],
+      books: [{ url: 'https://www.goodreads.com/book/show/1', categories: ['Historia y biografías'] }],
     });
     expect(() => validateEnrichment({ title: 'x', categories: ['inventada'] }, categories, [])).toThrow(/category/);
   });
@@ -229,6 +229,5 @@ function fixtureThreadForAi() {
     categories: [],
     tweets: fixtureThread.tweets,
     exam: null,
-    podcastUrl: null,
   };
 }
