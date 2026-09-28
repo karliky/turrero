@@ -51,7 +51,7 @@ export const viewport = {
   // Browser chrome on mobile follows the page background of each theme (--color-whiskey-50)
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#f9f6f3' },
-    { media: '(prefers-color-scheme: dark)', color: '#14100e' },
+    { media: '(prefers-color-scheme: dark)', color: '#121212' },
   ],
 };
 

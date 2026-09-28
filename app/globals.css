@@ -33,51 +33,51 @@
 }
 
 /*
-  Dark theme: the whiskey scale reversed, warm browns instead of pure black, and a clay red that reads on it.
+  Dark theme: the scale reversed into neutral graphite greys (no brown tint), with a clay red accent.
   Applied when the reader chose it (data-theme, set by the script in app/layout.tsx) or, with no choice
   and no JavaScript, when the system prefers it. Contrast pairs are checked by tests/theme.test.ts.
 */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-whiskey-50: #14100e;
-  --color-whiskey-100: #2a211d;
-  --color-whiskey-200: #3b2f29;
-  --color-whiskey-300: #56463d;
-  --color-whiskey-400: #7a6558;
-  --color-whiskey-500: #a08473;
-  --color-whiskey-600: #b8a090;
-  --color-whiskey-700: #cbb6a6;
-  --color-whiskey-800: #dccbbd;
-  --color-whiskey-900: #eadfd4;
-  --color-whiskey-950: #f6efe8;
-  --color-surface: #1d1714;
+  --color-whiskey-50: #121212;
+  --color-whiskey-100: #242424;
+  --color-whiskey-200: #2e2e2e;
+  --color-whiskey-300: #444444;
+  --color-whiskey-400: #5c5c5c;
+  --color-whiskey-500: #808080;
+  --color-whiskey-600: #999999;
+  --color-whiskey-700: #a8a8a8;
+  --color-whiskey-800: #c2c2c2;
+  --color-whiskey-900: #d9d9d9;
+  --color-whiskey-950: #ececec;
+  --color-surface: #1c1c1c;
   --color-brand: #db6a5e;
   --color-ok: #6fcf8f;
-  --color-ok-soft: #13261a;
+  --color-ok-soft: #14241a;
   --color-bad: #f28b82;
-  --color-bad-soft: #2e1413;
+  --color-bad-soft: #2b1616;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --color-whiskey-50: #14100e;
-    --color-whiskey-100: #2a211d;
-    --color-whiskey-200: #3b2f29;
-    --color-whiskey-300: #56463d;
-    --color-whiskey-400: #7a6558;
-    --color-whiskey-500: #a08473;
-    --color-whiskey-600: #b8a090;
-    --color-whiskey-700: #cbb6a6;
-    --color-whiskey-800: #dccbbd;
-    --color-whiskey-900: #eadfd4;
-    --color-whiskey-950: #f6efe8;
-    --color-surface: #1d1714;
+    --color-whiskey-50: #121212;
+    --color-whiskey-100: #242424;
+    --color-whiskey-200: #2e2e2e;
+    --color-whiskey-300: #444444;
+    --color-whiskey-400: #5c5c5c;
+    --color-whiskey-500: #808080;
+    --color-whiskey-600: #999999;
+    --color-whiskey-700: #a8a8a8;
+    --color-whiskey-800: #c2c2c2;
+    --color-whiskey-900: #d9d9d9;
+    --color-whiskey-950: #ececec;
+    --color-surface: #1c1c1c;
     --color-brand: #db6a5e;
     --color-ok: #6fcf8f;
-    --color-ok-soft: #13261a;
+    --color-ok-soft: #14241a;
     --color-bad: #f28b82;
-    --color-bad-soft: #2e1413;
+    --color-bad-soft: #2b1616;
   }
 }
 
