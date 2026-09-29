@@ -3,17 +3,14 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { mostCited } from "@/lib/concepts";
 import { listCitations, listConceptMap } from "@/lib/queries";
-import { SITE } from "@/lib/site";
 import { IdeaMatrix } from "./IdeaMatrix";
+import { pageMetadata } from "@/lib/seo";
 
 const description =
   "Qué conceptos aparecen en las turras de Javier G. Recuenco, cuándo aparecen y en qué turras se apoyan las demás.";
 
-export const metadata: Metadata = {
-  title: `Mapa de ideas | ${SITE.name}`,
-  description,
-  openGraph: { title: `Mapa de ideas - ${SITE.name}`, description },
-};
+// The share card is the colocated opengraph-image.tsx
+export const metadata: Metadata = pageMetadata({ title: "Mapa de ideas", description, path: "/mapa-de-ideas", ownImage: true });
 
 /** Concepts in fewer turras are noise in the matrix; they stay in the glossary. */
 const MIN_THREADS = 3;

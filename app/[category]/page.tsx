@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ThreadList } from "../components/ThreadList";
 import { getCategory, listCategories, listThreadsForArchive } from "@/lib/queries";
-import { SITE } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 interface Params {
   params: Promise<{ category: string }>;
@@ -17,12 +17,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const category = getCategory((await params).category);
   if (!category) return {};
-  return {
-    title: `Turras sobre ${category.name} | ${SITE.name}`,
-    description: category.description,
-    alternates: { canonical: `/${category.slug}` },
-    openGraph: { title: `Turras sobre ${category.name}`, description: category.description },
-  };
+  // The share card is the colocated opengraph-image.tsx
+  return pageMetadata({ title: `Turras sobre ${category.name}`, description: category.description, path: `/${category.slug}`, ownImage: true });
 }
 
 export default async function CategoryPage({ params }: Params) {

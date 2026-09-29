@@ -2,71 +2,73 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getSiteStats, listAuthors, listBooks, listGlossary } from "@/lib/queries";
-import { SITE, authorUrl } from "@/lib/site";
+import { IMAGE_CREDITS, SITE, authorUrl } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 const description = `Qué es ${SITE.name} y quién está detrás: el archivo de las turras de Javier G. Recuenco y la Comunidad CPS.`;
 
-export const metadata: Metadata = {
-  title: `Sobre esta web | ${SITE.name}`,
-  description,
-  openGraph: { title: `Sobre esta web - ${SITE.name}`, description, images: ["/opengraph-image"] },
-};
+export const metadata: Metadata = pageMetadata({ title: "Sobre esta web", description, path: "/sobre-esta-web" });
 
 interface Person {
   name: string;
   handle: string;
+  /** Served from public/people, never from a third party (it would get the reader's IP). */
   photo: string;
   role: string;
   bio: string;
   /** Author page in the archive, for people who have written turras. */
   author?: string;
+  /** Their own project, when it matters for who they are. */
+  site?: { label: string; url: string };
 }
 
-// Bios written from what each person says about themselves; same register for everyone
+// Bios written from what each person says about themselves, each in its own words: no shared template
 const PEOPLE: Person[] = [
   {
     name: "Javier G. Recuenco",
     handle: "Recuenco",
     photo: "/people/recuenco.jpg",
     role: "Escribe las turras",
-    bio: "Ingeniero informático. Divulga la resolución de problemas complejos en España y la aplica a empresas desde Singular Solving. Ha presidido Mensa España. Publica una turra cada sábado desde 2018.",
+    bio: "Lleva desde 2018 publicando una turra cada sábado, y este archivo existe porque alguien tenía que ordenarlas. Divulga la resolución de problemas complejos en España y la aplica a empresas desde Singular Solving. Es ingeniero informático y presidió Mensa España.",
     author: "Recuenco",
   },
   {
     name: "Carlos Hernández Gómez",
     handle: "k4rliky",
-    photo: "https://avatars.githubusercontent.com/u/881069?v=4",
-    role: "Hace la web",
-    bio: "Creció entrando en las zonas secretas de los videojuegos y conserva esa curiosidad por lo que hay fuera de su mundo. Se formó en resolución de problemas complejos en el curso de la UNIR, con Recuenco como profesor.",
-  },
-  {
-    name: "Toni Dorta",
-    handle: "ToniDorta",
-    photo: "/people/toni-dorta.jpg",
-    role: "CPS Notebook",
-    bio: "Ingeniero informático, con certificación PMP y un MBA. Ha dirigido proyectos y equipos y ha trabajado como consultor de innovación. Creó el CPS Notebook, el cuaderno de la comunidad que complementa este archivo.",
+    photo: "/people/carlos-hernandez.jpg",
+    role: "Hizo la web y la mantiene",
+    bio: "De pequeño se pasaba los videojuegos buscando las zonas secretas, y sigue igual con todo lo que no conoce. Aprendió resolución de problemas complejos en el curso de la UNIR, con Recuenco de profesor, y de ahí salió la idea de tener las turras en un sitio donde se pudieran releer.",
   },
   {
     name: "Víctor R. Escobar",
     handle: "nudpiedo",
     photo: "/people/victor-escobar.jpg",
-    role: "Turras invitadas",
-    bio: "Escribe las turras de los sábados en que Recuenco le cede la cuenta: sobre el metajuego, el fraude publicitario o el CTO como estratega. Habla seis idiomas.",
+    role: "Mantiene la web y firma algunas turras",
+    bio: "«Trabajo con problemas que empeoran cuando intentas arreglarlos», dice de sí mismo. Fundó Quixotic Strategy Lab para hacer estrategia en entornos de complejidad, y los sábados que firma la turra habla del metajuego, del fraude publicitario o del CTO como estratega. Ingeniero informático, y habla varios idiomas.",
     author: "nudpiedo",
-  },
-  {
-    name: "Alejandra Arri",
-    handle: "ladycircus",
-    photo: "/people/alejandra-arri.jpg",
-    role: "Colabora",
-    bio: "Desarrolladora full stack. Le interesa el punto donde se cruzan el análisis y el diseño, y trabaja sobre todo en la parte visible de las aplicaciones.",
+    site: { label: "Quixotic Strategy Lab", url: "https://quixoticstrategylab.com" },
   },
   {
     name: "Ángel",
     handle: "4jr4m0s",
     photo: "/people/angel.jpg",
-    role: "Colabora",
-    bio: "Venture manager y arquitecto cloud. Ha trabajado en estrategia, producto y equipos ágiles. Corre, resuelve cubos de Rubik y estudia japonés.",
+    role: "Mantiene la web",
+    bio: "Ha sido venture manager, estratega, product manager, coach y arquitecto cloud, y se define como un «Do'er». Ingeniero y agilista. Es fácil encontrárselo en el #CPSLive, y cuando no, corriendo, con un cubo de Rubik o estudiando japonés.",
+  },
+  {
+    name: "Toni Dorta",
+    handle: "ToniDorta",
+    photo: "/people/toni-dorta.jpg",
+    role: "Hace el CPS Notebook",
+    bio: "Creó el CPS Notebook, el cuaderno de la comunidad que acompaña a este archivo. Antes dirigió proyectos y equipos, con un MBA y la certificación PMP de por medio, y trabajó como consultor de innovación.",
+  },
+  {
+    name: "Alejandra Arri",
+    handle: "ladycircus",
+    photo: "/people/alejandra-arri.jpg",
+    role: "Colabora con la web",
+    bio: "Desarrolladora frontend desde hace más de una década, de las que no dan una interfaz por terminada hasta que está exacta al píxel. Le importan el diseño y la experiencia de quien usa lo que construye, y cada problema lo ve como una ocasión de aprender. Fuera del trabajo: moda, decoración, cupcakes recién hechos y comedias románticas.",
+    site: { label: "alejandraarri.com", url: "https://www.alejandraarri.com" },
   },
 ];
 
@@ -83,8 +85,9 @@ export default function SobreEstaWeb() {
       <h1 className="font-serif text-4xl font-bold text-whiskey-950 sm:text-5xl">Sobre esta web</h1>
       <div className="mt-5 space-y-4 text-lg leading-relaxed text-whiskey-900">
         <p>
-          {SITE.name} archiva las turras de Javier G. Recuenco: los hilos largos que publica en X cada sábado desde {firstYear}{" "}
-          sobre resolución de problemas complejos. Están las {stats.threads}, ordenadas por tema y por año, con un buscador, un{" "}
+          Recuenco publica una turra cada sábado desde {firstYear}. Son hilos largos en X sobre resolución de problemas
+          complejos, y en X se pierden: el timeline no está pensado para releer. Aquí están las {stats.threads}, ordenadas por
+          tema y por año, con buscador, un{" "}
           <Link href="/glosario" className={link}>
             glosario de {listGlossary().length} conceptos
           </Link>
@@ -99,8 +102,8 @@ export default function SobreEstaWeb() {
           para leerlas sin conexión.
         </p>
         <p>
-          Lo hace la Comunidad CPS, gente que aprendió con las turras y quería tenerlas a mano, sin depender del timeline de X. Si
-          llegas nuevo, empieza por{" "}
+          La mantiene un grupo pequeño de la Comunidad CPS, gente que aprendió con las turras y quería tenerlas a mano. Si llegas
+          nuevo, no empieces por la última: empieza por{" "}
           <Link href="/empieza-aqui" className={link}>
             estas ocho
           </Link>
@@ -128,10 +131,19 @@ export default function SobreEstaWeb() {
               </p>
               <p className="text-sm text-whiskey-800">{person.role}</p>
               <p className="mt-2 leading-relaxed text-whiskey-900">{person.bio}</p>
-              {person.author && (
-                <Link href={`/autor/${person.author}`} className={`mt-2 inline-block text-sm font-medium text-whiskey-900 ${link}`}>
-                  Sus turras
-                </Link>
+              {(person.author || person.site) && (
+                <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm font-medium text-whiskey-900">
+                  {person.author && (
+                    <Link href={`/autor/${person.author}`} className={link}>
+                      Sus turras
+                    </Link>
+                  )}
+                  {person.site && (
+                    <a href={person.site.url} target="_blank" rel="noopener noreferrer" className={link}>
+                      {person.site.label}
+                    </a>
+                  )}
+                </p>
               )}
             </div>
           </li>
@@ -140,7 +152,7 @@ export default function SobreEstaWeb() {
 
       <h2 className={heading}>Otras firmas</h2>
       <p className="mt-4 leading-relaxed text-whiskey-900">
-        Algunos sábados la turra la escribe otra persona. Estas son las firmas invitadas del archivo:{" "}
+        Algunos sábados la turra la firma otra persona:{" "}
         {authors.map((author, index) => (
           <span key={author.handle}>
             <Link href={`/autor/${author.handle}`} className={link}>
@@ -160,6 +172,19 @@ export default function SobreEstaWeb() {
         </a>
         . Y si una turra te ha servido, pásasela a alguien a quien también le pueda servir.
       </p>
+
+      <h2 className={heading}>Imágenes</h2>
+      <ul className="mt-4 space-y-2 leading-relaxed text-whiskey-900">
+        {IMAGE_CREDITS.map((credit) => (
+          <li key={credit.url}>
+            {credit.where}:{" "}
+            <a href={credit.url} target="_blank" rel="noopener noreferrer" className={link}>
+              {credit.title}
+            </a>
+            , de {credit.author}, vía {credit.source}.
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }

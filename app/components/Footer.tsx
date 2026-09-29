@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getSiteStats, listCategories } from '@/lib/queries';
 import { SITE } from '@/lib/site';
+import { LazyImage } from './LazyImage';
 
 const READ = [
   { href: '/empieza-aqui', label: 'Empieza aquí' },
@@ -29,8 +30,24 @@ const Footer = () => {
   const categories = listCategories();
 
   return (
-    <footer className="mt-16 border-t border-whiskey-200 bg-whiskey-100 text-sm text-whiskey-800">
-      <div className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-[1.3fr_1fr_2fr]">
+    <footer className="relative isolate mt-16 overflow-hidden border-t border-whiskey-200 bg-whiskey-100 text-sm text-whiskey-800">
+      {/* The map is the background of the whole footer: visible at the top edge, a texture behind the text below */}
+      <div aria-hidden className="absolute inset-0 -z-10">
+        {/* The island covers the whole footer, zoomed as needed, and the veil leaves it barely there */}
+        <div className="footer-map-edges absolute inset-0">
+          <LazyImage
+            src="/images/footer-map.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-[50%_75%] blur-[1.5px] saturate-50"
+            placeholderClassName="absolute inset-0"
+          />
+        </div>
+        <div className="footer-veil absolute inset-0" />
+      </div>
+
+      <div className="container mx-auto grid gap-10 px-4 pb-12 pt-28 md:grid-cols-[1.3fr_1fr_2fr]">
         <div>
           <p className={heading}>{SITE.name}</p>
           <p className="mt-3 leading-relaxed">

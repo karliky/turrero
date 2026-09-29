@@ -4,18 +4,11 @@ import { SITE } from '@/lib/site';
 import { GlossaryList } from './GlossaryList';
 // Old anchors (merged or renamed terms) → current slug
 import redirects from '../../data/glossary/redirects.json';
+import { pageMetadata } from "@/lib/seo";
 
 const description = `Glosario de los conceptos que usan las turras de ${SITE.byline}: qué significan, de dónde vienen y en qué turra se explican.`;
 
-export const metadata: Metadata = {
-  title: `Glosario CPS | ${SITE.name}`,
-  description,
-  openGraph: {
-    title: `Glosario CPS - ${SITE.name}`,
-    description,
-    images: ['/opengraph-image'],
-  },
-};
+export const metadata: Metadata = pageMetadata({ title: "Glosario CPS", description, path: "/glosario" });
 
 export default function GlosarioPage() {
   const terms = listGlossary();

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ThreadList } from "../../components/ThreadList";
 import { getAuthor, listAuthors, listThreadsForArchive } from "@/lib/queries";
 import { SITE, authorUrl } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 interface Params {
   params: Promise<{ handle: string }>;
@@ -17,10 +18,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const author = getAuthor((await params).handle);
   if (!author) return {};
-  return {
-    title: `Turras de ${author.name} - ${SITE.name}`,
+  return pageMetadata({
+    title: `Turras de ${author.name}`,
     description: `Todas las turras de ${author.name} (@${author.handle}) archivadas en ${SITE.name}.`,
-  };
+    path: `/autor/${author.handle}`,
+  });
 }
 
 export default async function AuthorPage({ params }: Params) {

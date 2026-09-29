@@ -113,7 +113,7 @@ export function IdeaMatrix({ concepts, threads, years }: IdeaMatrixProps) {
                             title={`${concept.term} en ${years[index]}: ${count} ${count === 1 ? "turra" : "turras"}`}
                             style={cellStyle(count)}
                             className={`block h-8 w-full rounded text-xs tabular-nums transition-shadow ${
-                              count === 0 ? "bg-whiskey-50" : ""
+                              count === 0 ? "bg-whiskey-100/50" : ""
                             } ${active ? "ring-2 ring-brand" : "group-hover:ring-1 group-hover:ring-whiskey-400"}`}
                           >
                             {count > 0 ? count : ""}

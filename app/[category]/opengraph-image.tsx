@@ -3,7 +3,7 @@ import { OG_SIZE, renderShareCard } from '@/lib/og';
 import { getCategory, listCategories, listThreadsByCategory } from '@/lib/queries';
 import { SITE } from '@/lib/site';
 
-export const alt = `${SITE.name} - Las turras de ${SITE.byline}`;
+export const alt = `Tarjeta de ${SITE.name} con la categoría y su número de turras`;
 export const size = OG_SIZE;
 export const contentType = 'image/png';
 

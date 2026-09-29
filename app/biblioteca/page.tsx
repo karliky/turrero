@@ -3,18 +3,11 @@ import BookGrid from './components/BookGrid';
 import { realCover } from '@/lib/books';
 import { listBooks } from '@/lib/queries';
 import { BOOK_CATEGORIES, SITE } from '@/lib/site';
+import { pageMetadata } from "@/lib/seo";
 
 const description = `Colección de libros mencionados en las turras de ${SITE.byline}`;
 
-export const metadata: Metadata = {
-  title: 'Biblioteca',
-  description,
-  openGraph: {
-    title: `Biblioteca - ${SITE.name}`,
-    description,
-    images: ['/opengraph-image'],
-  },
-};
+export const metadata: Metadata = pageMetadata({ title: "Biblioteca", description, path: "/biblioteca" });
 
 /** A few books were stored with their Goodreads URL as title: show the slug as words instead. */
 function readableTitle(title: string): string {

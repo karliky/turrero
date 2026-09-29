@@ -3,18 +3,14 @@ import Link from "next/link";
 import { attractors, guide, pillars } from "./guia";
 import { PillarsDiagram } from "./PillarsDiagram";
 import { getSiteStats, getThread, listGlossary } from "@/lib/queries";
-import { SITE } from "@/lib/site";
 import { readingMinutes } from "@/lib/text";
 import type { Thread } from "@/lib/types";
+import { pageMetadata } from "@/lib/seo";
 
 const description =
   "Por dónde empezar a leer las turras de Javier G. Recuenco: ocho turras en orden, las series que se leen seguidas y las ideas con nombre propio.";
 
-export const metadata: Metadata = {
-  title: `Por dónde empezar a leer las turras | ${SITE.name}`,
-  description,
-  openGraph: { title: `Por dónde empezar a leer las turras - ${SITE.name}`, description, images: ["/opengraph-image"] },
-};
+export const metadata: Metadata = pageMetadata({ title: "Por dónde empezar a leer las turras", description, path: "/empieza-aqui" });
 
 const minutesOf = (thread: Thread) => readingMinutes(thread.tweets.map((tweet) => tweet.text));
 const yearOf = (thread: Thread) => thread.publishedAt.slice(0, 4);

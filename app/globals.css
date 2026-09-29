@@ -33,51 +33,52 @@
 }
 
 /*
-  Dark theme: the scale reversed into neutral graphite greys (no brown tint), with a clay red accent.
+  Dark theme: the site at night. Deep night-blue surfaces (echoing the celestial chart of the home hero)
+  instead of neutral black, off-white text, and a warm coral accent that stands out against the blue.
   Applied when the reader chose it (data-theme, set by the script in app/layout.tsx) or, with no choice
   and no JavaScript, when the system prefers it. Contrast pairs are checked by tests/theme.test.ts.
 */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-whiskey-50: #121212;
-  --color-whiskey-100: #242424;
-  --color-whiskey-200: #2e2e2e;
-  --color-whiskey-300: #444444;
-  --color-whiskey-400: #5c5c5c;
-  --color-whiskey-500: #808080;
-  --color-whiskey-600: #999999;
-  --color-whiskey-700: #a8a8a8;
-  --color-whiskey-800: #c2c2c2;
-  --color-whiskey-900: #d9d9d9;
-  --color-whiskey-950: #ececec;
-  --color-surface: #1c1c1c;
-  --color-brand: #db6a5e;
-  --color-ok: #6fcf8f;
-  --color-ok-soft: #14241a;
-  --color-bad: #f28b82;
-  --color-bad-soft: #2b1616;
+  --color-whiskey-50: #0d1117;
+  --color-whiskey-100: #1c2531;
+  --color-whiskey-200: #27323f;
+  --color-whiskey-300: #374454;
+  --color-whiskey-400: #4f5d6f;
+  --color-whiskey-500: #728096;
+  --color-whiskey-600: #8e9bb0;
+  --color-whiskey-700: #a3afc2;
+  --color-whiskey-800: #c5cedb;
+  --color-whiskey-900: #dde3ec;
+  --color-whiskey-950: #eef2f7;
+  --color-surface: #151c26;
+  --color-brand: #ff7b72;
+  --color-ok: #3fb950;
+  --color-ok-soft: #0f2a1a;
+  --color-bad: #ff7b72;
+  --color-bad-soft: #3a1a1c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --color-whiskey-50: #121212;
-    --color-whiskey-100: #242424;
-    --color-whiskey-200: #2e2e2e;
-    --color-whiskey-300: #444444;
-    --color-whiskey-400: #5c5c5c;
-    --color-whiskey-500: #808080;
-    --color-whiskey-600: #999999;
-    --color-whiskey-700: #a8a8a8;
-    --color-whiskey-800: #c2c2c2;
-    --color-whiskey-900: #d9d9d9;
-    --color-whiskey-950: #ececec;
-    --color-surface: #1c1c1c;
-    --color-brand: #db6a5e;
-    --color-ok: #6fcf8f;
-    --color-ok-soft: #14241a;
-    --color-bad: #f28b82;
-    --color-bad-soft: #2b1616;
+    --color-whiskey-50: #0d1117;
+    --color-whiskey-100: #1c2531;
+    --color-whiskey-200: #27323f;
+    --color-whiskey-300: #374454;
+    --color-whiskey-400: #4f5d6f;
+    --color-whiskey-500: #728096;
+    --color-whiskey-600: #8e9bb0;
+    --color-whiskey-700: #a3afc2;
+    --color-whiskey-800: #c5cedb;
+    --color-whiskey-900: #dde3ec;
+    --color-whiskey-950: #eef2f7;
+    --color-surface: #151c26;
+    --color-brand: #ff7b72;
+    --color-ok: #3fb950;
+    --color-ok-soft: #0f2a1a;
+    --color-bad: #ff7b72;
+    --color-bad-soft: #3a1a1c;
   }
 }
 
@@ -115,3 +116,161 @@
     font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   }
 }
+
+/*
+  Background of the home hero: the lines of an 18th-century celestial chart (public/hero/carta-celeste.webp,
+  an alpha mask) painted with a palette colour, so it follows the light and dark themes without a second image.
+  The radial gradient fades the edges into the page; the opacity keeps it behind the text.
+*/
+@layer components {
+  .hero-sky {
+    background-color: var(--color-whiskey-900);
+    opacity: 0.24;
+    -webkit-mask-image: url("/hero/carta-celeste.webp"), radial-gradient(ellipse 55% 95% at 50% 45%, #000 40%, transparent 96%);
+    mask-image: url("/hero/carta-celeste.webp"), radial-gradient(ellipse 55% 95% at 50% 45%, #000 40%, transparent 96%);
+    -webkit-mask-size: cover, 100% 100%;
+    mask-size: cover, 100% 100%;
+    -webkit-mask-position: 50% 35%, center;
+    mask-position: 50% 30%, center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  :root[data-theme="dark"] .hero-sky {
+    opacity: 0.28;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .hero-sky {
+      opacity: 0.28;
+    }
+  }
+}
+
+/*
+  Footer background: the map of GM Island covers the whole footer, desaturated and slightly blurred, and a veil
+  of the footer colour leaves it barely visible: glimpsed rather than seen. The veil keeps every text at 4.5:1 or more over its brightest parts.
+*/
+@layer components {
+  /* The parchment map is close to the light footer colour, so the light theme needs a thinner veil to show it */
+  .footer-veil {
+    background-color: color-mix(in srgb, var(--color-whiskey-100) 80%, transparent);
+  }
+
+  :root[data-theme="dark"] .footer-veil {
+    background-color: color-mix(in srgb, var(--color-whiskey-100) 92%, transparent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .footer-veil {
+      background-color: color-mix(in srgb, var(--color-whiskey-100) 92%, transparent);
+    }
+  }
+
+  /* The edges of the map fade into the footer colour, so it has no visible border */
+  .footer-map-edges {
+    -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 40%, transparent 100%);
+  }
+}
+
+/*
+  EPUB download button (/ebook): on hover, a quick sequence of screenshots plays behind the text, after the
+  "Download for Mac" button of robbietilton.com/compositor. Images served from public/images/epub-hover.
+  Only with a real pointer and without reduced motion; otherwise it stays the plain button.
+*/
+@layer components {
+  .epub-download {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .epub-download {
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .epub-download::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0;
+      background-repeat: no-repeat;
+    }
+
+    /* Dark layer between the images and the text, so the label stays readable over any frame */
+    .epub-download::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: rgb(0 0 0 / 0.45);
+      opacity: 0;
+    }
+
+    /* White over the images in both themes; !important because the button's text-* utility layer wins otherwise */
+    .epub-download:hover {
+      transform: scale(1.03);
+      color: #fff !important;
+      text-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+    }
+
+    .epub-download:hover::before {
+      opacity: 1;
+      animation: epub-frames 0.8s step-end infinite;
+    }
+
+    .epub-download:hover::after {
+      opacity: 1;
+    }
+  }
+
+  /* Eight frames: the four images, then each again with a closer crop */
+  @keyframes epub-frames {
+    0% {
+      background-image: url("/images/epub-hover/gm-island.webp");
+      background-size: cover;
+      background-position: center;
+    }
+    12.5% {
+      background-image: url("/images/epub-hover/santa-fe-institute.webp");
+      background-size: cover;
+      background-position: center;
+    }
+    25% {
+      background-image: url("/images/epub-hover/diablo-2-resurrected.webp");
+      background-size: cover;
+      background-position: center;
+    }
+    37.5% {
+      background-image: url("/images/epub-hover/atractor-de-lorenz.webp");
+      background-size: cover;
+      background-position: center;
+    }
+    50% {
+      background-image: url("/images/epub-hover/gm-island.webp");
+      background-size: 180%;
+      background-position: 40% 45%;
+    }
+    62.5% {
+      background-image: url("/images/epub-hover/santa-fe-institute.webp");
+      background-size: 170%;
+      background-position: 30% 40%;
+    }
+    75% {
+      background-image: url("/images/epub-hover/diablo-2-resurrected.webp");
+      background-size: 160%;
+      background-position: 50% 30%;
+    }
+    87.5% {
+      background-image: url("/images/epub-hover/atractor-de-lorenz.webp");
+      background-size: 190%;
+      background-position: 55% 50%;
+    }
+  }
+}
+

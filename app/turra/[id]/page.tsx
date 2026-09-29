@@ -8,8 +8,9 @@ import { TweetContent } from "../../components/TweetContent";
 import { TurraSidebar } from '../../components/TurraSidebar';
 import { createLinker } from "@/lib/glossary-links";
 import { getAdjacentThreads, getThread, getThreadCitations, getThreadIdOfTweet, listGlossary, listThreadIds } from "@/lib/queries";
-import { SITE, tweetUrl } from "@/lib/site";
+import { tweetUrl } from "@/lib/site";
 import { readingMinutes } from "@/lib/text";
+import { excerpt, pageMetadata } from "@/lib/seo";
 
 interface Params {
   params: Promise<{ id: string }>;
@@ -23,20 +24,20 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const thread = getThread((await params).id);
   if (!thread) return { title: 'Not Found' };
 
-  // og:image and twitter:image come from the colocated opengraph-image.tsx
-  return {
-    title: `${thread.title}, por ${thread.author.name} | ${SITE.name}`,
-    description: thread.title,
-    openGraph: {
-      title: thread.title,
-      description: thread.title,
+  // Shared as an article; og:image and twitter:image come from the colocated opengraph-image.tsx
+  return pageMetadata({
+    title: `${thread.title}, por ${thread.author.name}`,
+    // The opening of the turra says more than repeating its title
+    description: excerpt(thread.tweets[0]?.text ?? thread.title),
+    path: `/turra/${thread.id}`,
+    ownImage: true,
+    article: {
+      publishedTime: thread.publishedAt,
+      author: thread.author.name,
+      authorHandle: thread.author.handle,
+      section: thread.categories[0]?.name ?? null,
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: thread.title,
-      description: thread.title,
-    },
-  };
+  });
 }
 
 export default async function TurraPage({ params }: Params) {

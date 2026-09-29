@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { ThreadList } from "../components/ThreadList";
-import { listAuthors, listCategories, listThreadsForArchive } from "@/lib/queries";
+import { getSiteStats, listAuthors, listCategories, listThreadsForArchive } from "@/lib/queries";
 import { SITE } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Todas las turras - ${SITE.name}`,
-  description: `Archivo completo de ${SITE.name}, filtrable por año, categoría y autor.`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Todas las turras",
+  description: `Las ${getSiteStats().threads} turras de ${SITE.byline}, filtrables por año, categoría y autor.`,
+  path: "/turras",
+});
 
 export default function ArchivePage() {
   return (

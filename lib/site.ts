@@ -18,6 +18,45 @@ export const SITE = {
   repository: 'https://github.com/karliky/turrero',
 } as const;
 
+/** Images by other authors used on the site (Unsplash and the like), credited in /sobre-esta-web. */
+export const IMAGE_CREDITS: { where: string; title: string; author: string; source: string; url: string }[] = [
+  {
+    where: 'Fondo de la portada',
+    title: 'Le bouvier, les levriers, la chevelure de Bérénice, carta celeste de 1795',
+    author: 'The New York Public Library',
+    source: 'Unsplash',
+    url: 'https://unsplash.com/photos/4NeXilhxc3o',
+  },
+  {
+    where: 'Fondo del pie de página',
+    title: 'GM Island',
+    author: 'Cameron Holt',
+    source: 'ArtStation',
+    url: 'https://cdnb.artstation.com/p/assets/images/images/079/964/729/large/cameron-holt-gm-island.jpg',
+  },
+  {
+    where: 'Botón del ebook',
+    title: 'Santa Fe Institute, entrada principal',
+    author: 'Go2placitas (CC BY-SA 3.0)',
+    source: 'Wikimedia Commons',
+    url: 'https://commons.wikimedia.org/wiki/File:Santa_Fe_Institute.jpg',
+  },
+  {
+    where: 'Botón del ebook',
+    title: 'Atractor de Lorenz',
+    author: 'Wikimol y Dschwen (CC BY-SA 3.0)',
+    source: 'Wikimedia Commons',
+    url: 'https://commons.wikimedia.org/wiki/File:Lorenz_attractor_yb.svg',
+  },
+  {
+    where: 'Botón del ebook',
+    title: 'Diablo II: Resurrected, portada',
+    author: 'Blizzard Entertainment',
+    source: 'Wikipedia',
+    url: 'https://en.wikipedia.org/wiki/File:Diablo_2_Resurrected_cover_art.jpg',
+  },
+];
+
 /**
  * Old URLs → current page (301): categories retired in the 2026 recategorization (data/categorization/)
  * and the accented slugs of the original site. Destinations are final, so there are no redirect chains.

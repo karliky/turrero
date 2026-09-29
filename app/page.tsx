@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { CategoryCard } from './components/CategoryCard';
 import { Masthead } from './components/Masthead';
 import { pickUnique } from '@/lib/archive';
@@ -9,6 +10,16 @@ import {
   listThreadsByCategory,
   listTopByEngagement,
 } from '@/lib/queries';
+import { pageMetadata } from '@/lib/seo';
+import { SITE } from '@/lib/site';
+
+// The share card is app/opengraph-image.tsx
+export const metadata: Metadata = pageMetadata({
+  title: `Las turras de ${SITE.byline}`,
+  description: SITE.description,
+  path: '/',
+  ownImage: true,
+});
 
 const THREADS_PER_LIST_CARD = 10;
 const THREADS_PER_CATEGORY_CARD = 10;

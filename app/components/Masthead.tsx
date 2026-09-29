@@ -32,7 +32,9 @@ const link = "underline decoration-whiskey-300 underline-offset-4 hover:text-bra
 export function Masthead({ totalThreads, latest }: MastheadProps) {
   return (
     <section aria-labelledby="latest-title" className="mb-12">
-      <div className="border-b border-whiskey-300 pb-6 pt-2 text-center">
+      <div className="relative isolate border-b border-whiskey-300 pb-10 pt-8 text-center sm:pb-14 sm:pt-12">
+        {/* An 18th-century celestial chart, barely visible behind the name (credited in /sobre-esta-web) */}
+        <div aria-hidden className="hero-sky pointer-events-none absolute inset-x-0 -top-8 bottom-0 -z-10" />
         <h1 className="font-serif text-5xl font-bold tracking-tight text-whiskey-950 sm:text-6xl">
           El <span className="text-brand">Turrero Post</span>
         </h1>

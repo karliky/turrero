@@ -142,6 +142,7 @@ export const attractors: { threadId: string; intro: GuideStep; changes: Attracto
 };
 
 export const guide: { path: GuideStep[]; series: GuideSeries[]; ideas: { slug: string; label: string }[] } = {
+  // Chosen with the archive's own signal: the turras Recuenco cites most in later turras (see /mapa-de-ideas)
   path: [
     {
       id: "1302148427791253507",
@@ -154,6 +155,11 @@ export const guide: { path: GuideStep[]; series: GuideSeries[]; ideas: { slug: s
       quote: "El CPS es un cienciarte. No es una skill, no es un framework, es una serie de elementos base que se combinan de manera específica para un propósito determinado."
     },
     {
+      id: "1297462657503694848",
+      tweetId: "1297485455047495681",
+      quote: "Mi problema histórico con el Design Thinking es que algunos practitioners no han entendido que solo tiene sentido en un entorno de liminalidad y cuando viene acompañado de otra serie de disciplinas."
+    },
+    {
       id: "1522830977088819203",
       tweetId: "1522830983036383233",
       quote: "La estrategia es Problem Solving. SI NO RESUELVE EL PROBLEMA NO ES ESTRATEGIA. ES MALA ESTRATEGIA."
@@ -164,24 +170,19 @@ export const guide: { path: GuideStep[]; series: GuideSeries[]; ideas: { slug: s
       quote: "El Factor X se diferencia del factor humano en que no acepta como absolutamente caótico el comportamiento humano e intenta en la medida de lo posible modelar el comportamiento esperado y gestionarlo."
     },
     {
-      id: "1270594048617824257",
-      tweetId: "1270600273170399233",
-      quote: "Si no entendemos que para solucionar problemas complejos tenemos que orquestar un montón de talento disperso por la organización o en varias compañías, orquestar agendas aparentemente incompatibles, y tejerlas estratégicamente en un tapiz común, estamos fritos."
+      id: "1307211330349420545",
+      tweetId: "1307218236031856640",
+      quote: "El gran secreto del CPS y en general de la aproximación a los problemas complejos es que son irresolubles sin la participación orquestada cognitivamente de un equipo de talentos extremos diversos."
     },
     {
-      id: "1294936782497361928",
-      tweetId: "1294945222233935872",
-      quote: "Cuando una propuesta deja de ser válida, esa puerta se cierra y sanseacabó. El hecho de haber sido válida durante mucho tiempo no impide que cuando se cierra, se cierra para siempre."
+      id: "1494930305811111938",
+      tweetId: "1494930414791708674",
+      quote: "El Private Equity, los M&As... se creyeron inmunes al mal que afecta a todas las compañías: La obsolescencia de su propia propuesta de valor."
     },
     {
-      id: "1928694865052741791",
-      tweetId: "1928694869301616658",
-      quote: "No hace falta que os explique que el CPS es una máquina de poner a gente en situaciones de Truth Coping."
-    },
-    {
-      id: "2101155734700405039",
-      tweetId: "2101155852971356232",
-      quote: "No hemos perdido la atención como facultad. Hemos construido un mundo que la solicita mal, la paga barato y la agota pronto."
+      id: "1335136099258294273",
+      tweetId: "1335171491600756736",
+      quote: "Hay multitud de variantes, pero todas se reducen a un único tema: La racionalización del hecho de no querer asumir las consecuencias reales de implementar la estrategia debida."
     }
   ],
   series: [

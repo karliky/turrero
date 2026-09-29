@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import type { Metadata } from 'next';
 import { FaBookOpen, FaDownload } from 'react-icons/fa';
 import { SITE } from '@/lib/site';
+import { pageMetadata } from "@/lib/seo";
 
 interface EbookInfo {
   file: string;
@@ -15,10 +16,11 @@ interface EbookInfo {
 
 export const dynamic = 'force-static';
 
-export const metadata: Metadata = {
-  title: `Ebook - ${SITE.name}`,
+export const metadata: Metadata = pageMetadata({
+  title: "Ebook",
   description: `Todas las turras de ${SITE.byline} en un ebook (EPUB) para leer en Kindle, Kobo, Apple Books o Google Play Libros.`,
-};
+  path: "/ebook",
+});
 
 /** Written by `npm run ebook`, which runs before `next build`. */
 function readInfo(): EbookInfo | null {
@@ -59,7 +61,7 @@ export default function EbookPage() {
               <a
                 href={info.file}
                 download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-whiskey-800 text-whiskey-50 font-medium hover:bg-whiskey-900 transition-colors"
+                className="epub-download inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-whiskey-800 text-whiskey-50 font-medium hover:bg-whiskey-900 transition-colors"
               >
                 <FaDownload aria-hidden="true" />
                 Descargar EPUB ({(info.bytes / 1024 / 1024).toFixed(0)} MB)

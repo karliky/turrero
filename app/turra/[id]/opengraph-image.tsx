@@ -5,7 +5,7 @@ import { getThread, listThreadIds } from '@/lib/queries';
 import { SITE } from '@/lib/site';
 import { readingMinutes } from '@/lib/text';
 
-export const alt = `${SITE.name} - Las turras de ${SITE.byline}`;
+export const alt = `Tarjeta de ${SITE.name} con el título, el autor y la fecha de la turra`;
 export const size = OG_SIZE;
 export const contentType = 'image/png';
 

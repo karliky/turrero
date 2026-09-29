@@ -14,7 +14,8 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : SITE.url),
   title: SITE.byline,
-  description: `Biblioteca de hilos de ${SITE.byline}`,
+  // Defaults for the few pages without their own metadata (lib/seo.ts builds the rest)
+  description: SITE.description,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -51,7 +52,7 @@ export const viewport = {
   // Browser chrome on mobile follows the page background of each theme (--color-whiskey-50)
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#f9f6f3' },
-    { media: '(prefers-color-scheme: dark)', color: '#121212' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d1117' },
   ],
 };
 
