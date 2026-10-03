@@ -11,6 +11,8 @@ import {
   listTopByEngagement,
 } from '@/lib/queries';
 import { pageMetadata } from '@/lib/seo';
+import { websiteLd } from '@/lib/structured-data';
+import { JsonLd } from './components/JsonLd';
 import { SITE } from '@/lib/site';
 
 // The share card is app/opengraph-image.tsx
@@ -54,6 +56,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <JsonLd data={websiteLd()} />
       <Masthead
         totalThreads={stats.threads}
         latest={latest}

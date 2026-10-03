@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import BookGrid from './components/BookGrid';
 import { realCover } from '@/lib/books';
 import { listBooks } from '@/lib/queries';
-import { BOOK_CATEGORIES, SITE } from '@/lib/site';
+import { BOOK_CATEGORIES } from '@/lib/site';
 import { pageMetadata } from "@/lib/seo";
 
-const description = `Colección de libros mencionados en las turras de ${SITE.byline}`;
+// What people search: «javier recuenco libros», «libros recomendados»
+const description = `Los ${listBooks().length} libros que Javier G. Recuenco recomienda y cita en sus turras, ordenados por tema: estrategia, complejidad, psicología, empresa y más.`;
 
-export const metadata: Metadata = pageMetadata({ title: "Biblioteca", description, path: "/biblioteca" });
+export const metadata: Metadata = pageMetadata({ title: "Libros recomendados por Javier G. Recuenco", description, path: "/biblioteca" });
 
 /** A few books were stored with their Goodreads URL as title: show the slug as words instead. */
 function readableTitle(title: string): string {

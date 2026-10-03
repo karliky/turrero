@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { listAuthors, listCategories, listNewest } from '@/lib/queries';
+import { listAuthors, listCategories, listGlossary, listNewest } from '@/lib/queries';
 import { SITE } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...listCategories().map((category) => ({ url: `${SITE.url}/${category.slug}`, lastModified, priority: 0.9 })),
     ...listAuthors().map((author) => ({ url: `${SITE.url}/autor/${author.handle}`, lastModified, priority: 0.7 })),
+    ...listGlossary().map((term) => ({ url: `${SITE.url}/glosario/${term.slug}`, lastModified, priority: 0.7 })),
     ...threads.map((thread) => ({
       url: `${SITE.url}/turra/${thread.id}`,
       lastModified: new Date(thread.publishedAt),

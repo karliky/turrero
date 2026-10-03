@@ -16,7 +16,7 @@ Archivo de las turras (hilos de X) de Javier G. Recuenco y la Comunidad CPS sobr
 **Qué hay en la web:**
 - **Las turras:** 268, con buscador y filtros por año, categoría y autor.
 - **`/empieza-aqui`:** por dónde empezar, los cuatro pilares del CPS y las series que se leen seguidas.
-- **`/glosario`:** 90 conceptos, enlazados dentro de las turras.
+- **`/glosario`:** 90 conceptos, enlazados dentro de las turras. Cada uno tiene su página (`/glosario/<slug>`) con la definición y las turras donde aparece.
 - **`/mapa-de-ideas`:** qué conceptos aparecen cada año y qué turras citan a cuáles.
 - **`/biblioteca`:** los 327 libros citados.
 - **`/ebook`:** todo el archivo en EPUB.

@@ -22,7 +22,7 @@ export function GlossaryTerm({ slug, term, short, children }: GlossaryTermProps)
 
   return (
     <a
-      href={`/glosario#${slug}`}
+      href={`/glosario/${slug}`}
       aria-describedby={id}
       onMouseEnter={show}
       onMouseLeave={hide}

@@ -40,7 +40,7 @@ export function ConceptDetail({ concept, concepts, threads, years: allYears, onS
       <p className="mt-2 text-sm text-whiskey-800">
         En {own.length} {own.length === 1 ? "turra" : "turras"}
         {first && last && first !== last ? `, de ${first} a ${last}` : first ? `, en ${first}` : ""}.{" "}
-        <Link href={`/glosario#${concept.slug}`} className={link}>
+        <Link href={`/glosario/${concept.slug}`} className={link}>
           Ver en el glosario
         </Link>
       </p>

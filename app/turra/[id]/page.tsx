@@ -10,7 +10,10 @@ import { createLinker } from "@/lib/glossary-links";
 import { getAdjacentThreads, getThread, getThreadCitations, getThreadIdOfTweet, listGlossary, listThreadIds } from "@/lib/queries";
 import { tweetUrl } from "@/lib/site";
 import { readingMinutes } from "@/lib/text";
-import { excerpt, pageMetadata } from "@/lib/seo";
+import { articleLd, breadcrumbLd } from "@/lib/structured-data";
+import type { Thread } from "@/lib/types";
+import { JsonLd } from "../../components/JsonLd";
+import { pageMetadata, turraDescription } from "@/lib/seo";
 
 interface Params {
   params: Promise<{ id: string }>;
@@ -18,6 +21,16 @@ interface Params {
 
 export function generateStaticParams() {
   return listThreadIds().map((id) => ({ id }));
+}
+
+/** Search description; also used by the Article structured data. */
+function describe(thread: Thread): string {
+  return turraDescription({
+    title: thread.title,
+    opening: thread.tweets[0]?.text ?? '',
+    // The glossary term this turra is the main source of, if any
+    term: listGlossary().find((entry) => entry.sources[0]?.threadId === thread.id) ?? null,
+  });
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -28,7 +41,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return pageMetadata({
     title: `${thread.title}, por ${thread.author.name}`,
     // The opening of the turra says more than repeating its title
-    description: excerpt(thread.tweets[0]?.text ?? thread.title),
+    description: describe(thread),
     path: `/turra/${thread.id}`,
     ownImage: true,
     article: {
@@ -67,8 +80,25 @@ export default async function TurraPage({ params }: Params) {
     ]),
   );
 
+  const section = thread.categories[0] ?? null;
   return (
     <main className="min-h-screen">
+      <JsonLd
+        data={[
+          articleLd({
+            id: thread.id,
+            title: thread.title,
+            description: describe(thread),
+            publishedAt: thread.publishedAt,
+            author: { name: thread.author.name, handle: thread.author.handle },
+            section: section?.name ?? null,
+          }),
+          breadcrumbLd([
+            ...(section ? [[section.name, `/${section.slug}`] as [string, string]] : []),
+            [thread.title, `/turra/${thread.id}`],
+          ]),
+        ]}
+      />
       <nav className="border-whiskey-200">
         <div className="container mx-auto px-4 py-3">
           <Link

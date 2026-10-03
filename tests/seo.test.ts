@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { excerpt, pageMetadata } from '../lib/seo';
+import { excerpt, pageMetadata, stripTurraOpening, turraDescription } from '../lib/seo';
 import { SITE } from '../lib/site';
 
 describe('page metadata', () => {
@@ -48,5 +48,37 @@ describe('page metadata', () => {
     const long = excerpt('palabra '.repeat(40), 30);
     expect(long.length).toBeLessThanOrEqual(31);
     expect(long.endsWith('palabra…')).toBe(true);
+  });
+});
+
+describe('turra descriptions', () => {
+  test('the ritual opening goes, the rest of the sentence stays', () => {
+    expect(stripTurraOpening('En el hilo turras de hoy, vamos a hablar de rabbit holes y de pensamiento liminal inducido.')).toBe(
+      'Rabbit holes y de pensamiento liminal inducido.',
+    );
+    expect(stripTurraOpening('En el hilo coñazo de hoy hablaremos de Rudy Fernández, de Kobe Bryant y de Van Halen.')).toBe(
+      'Rudy Fernández, de Kobe Bryant y de Van Halen.',
+    );
+    expect(stripTurraOpening('En el hilo del sábado de hoy vamos a hablar de cuándo una compañía emite señales de caducidad.')).toBe(
+      'Cuándo una compañía emite señales de caducidad.',
+    );
+    // Openings without the formula are left alone
+    expect(stripTurraOpening('Abro hilo con mi opinión descarnada sobre este tema.')).toBe('Abro hilo con mi opinión descarnada sobre este tema.');
+  });
+
+  test('a turra that explains a glossary term opens with its definition', () => {
+    const description = turraDescription({
+      title: 'Exploración de los rabbit holes',
+      opening: 'En el hilo turras de hoy, vamos a hablar de rabbit holes https://t.co/x',
+      term: { term: 'Rabbit hole', short: 'Tema que parece sencillo y en el que acabas hundiéndote.' },
+    });
+    expect(description.startsWith('Rabbit hole: Tema que parece sencillo')).toBe(true);
+    expect(description).not.toContain('https://');
+  });
+
+  test('a thin opening is led by the title', () => {
+    expect(turraDescription({ title: 'La división en el marketing', opening: 'En el hilo turras de hoy, una pregunta que nos llega:', term: null })).toBe(
+      'La división en el marketing. Una pregunta que nos llega:',
+    );
   });
 });

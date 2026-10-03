@@ -5,6 +5,8 @@ import { GlossaryList } from './GlossaryList';
 // Old anchors (merged or renamed terms) → current slug
 import redirects from '../../data/glossary/redirects.json';
 import { pageMetadata } from "@/lib/seo";
+import { definedTermSetLd } from "@/lib/structured-data";
+import { JsonLd } from "../components/JsonLd";
 
 const description = `Glosario de los conceptos que usan las turras de ${SITE.byline}: qué significan, de dónde vienen y en qué turra se explican.`;
 
@@ -15,6 +17,7 @@ export default function GlosarioPage() {
 
   return (
     <main className="container mx-auto max-w-5xl px-4 py-8">
+      <JsonLd data={definedTermSetLd(terms)} />
       <header className="mb-6 max-w-3xl">
         <h1 className="font-serif text-4xl font-bold text-whiskey-950">Glosario CPS</h1>
         <p className="mt-3 text-lg leading-relaxed text-whiskey-900">

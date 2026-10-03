@@ -8,9 +8,9 @@ import type { Thread } from "@/lib/types";
 import { pageMetadata } from "@/lib/seo";
 
 const description =
-  "Por dónde empezar a leer las turras de Javier G. Recuenco: ocho turras en orden, las series que se leen seguidas y las ideas con nombre propio.";
+  "Qué es la resolución de problemas complejos (CPS) y por dónde empezar a leer las turras de Javier G. Recuenco: los cuatro pilares, ocho turras en orden y las series que se leen seguidas.";
 
-export const metadata: Metadata = pageMetadata({ title: "Por dónde empezar a leer las turras", description, path: "/empieza-aqui" });
+export const metadata: Metadata = pageMetadata({ title: "Por dónde empezar: resolución de problemas complejos en ocho turras", description, path: "/empieza-aqui" });
 
 const minutesOf = (thread: Thread) => readingMinutes(thread.tweets.map((tweet) => tweet.text));
 const yearOf = (thread: Thread) => thread.publishedAt.slice(0, 4);
@@ -86,7 +86,7 @@ export default function StartHere() {
           {pillars.items.map((pillar) => (
             <div key={pillar.slug} id={`pilar-${pillar.slug}`} className="scroll-mt-6">
               <dt className="font-serif text-lg font-bold text-whiskey-950">
-                <Link href={`/glosario#${pillar.slug}`} className="hover:text-brand">
+                <Link href={`/glosario/${pillar.slug}`} className="hover:text-brand">
                   {pillar.name}
                 </Link>
               </dt>
@@ -111,7 +111,7 @@ export default function StartHere() {
         <h3 className="font-serif text-xl font-bold text-whiskey-950">En el centro, los cinco atractores</h3>
         <p className="mt-3 leading-relaxed text-whiskey-900">
           Son las{" "}
-          <Link href="/glosario#atractores" className={link}>
+          <Link href="/glosario/atractores" className={link}>
             fuerzas de fondo
           </Link>{" "}
           que empujan mercados y sociedades durante años y afectan a los cuatro pilares. No son fijos: la primera versión es de
@@ -201,7 +201,7 @@ export default function StartHere() {
         Algunas ideas de las turras acabaron teniendo nombre y hoy son vocabulario de la comunidad:{" "}
         {ideas.map((idea, index) => (
           <span key={idea.slug}>
-            <Link href={`/glosario#${idea.slug}`} className={`${link} text-whiskey-950`}>
+            <Link href={`/glosario/${idea.slug}`} className={`${link} text-whiskey-950`}>
               {idea.label}
             </Link>
             {index < ideas.length - 2 ? ", " : index === ideas.length - 2 ? " y " : ""}

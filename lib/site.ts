@@ -18,6 +18,16 @@ export const SITE = {
   repository: 'https://github.com/karliky/turrero',
 } as const;
 
+/**
+ * Who the featured author is, for the people who search his name (shown in /autor/Recuenco, with Person data).
+ * Only facts the archive itself documents: the turras, the glossary and «Sobre esta web».
+ */
+export const FEATURED_AUTHOR_BIO = [
+  'Javier G. Recuenco es ingeniero informático y el principal divulgador en España de la resolución de problemas complejos (Complex Problem Solving, CPS). Fundó Singular Solving, una compañía que aplica el CPS a problemas de empresa que nadie ha sabido resolver, y ha presidido Mensa España.',
+  'Llegó al CPS en 2016 a través de los informes del Foro Económico Mundial y construyó su propio marco, que desde el principio incluía el Factor X, el estudio de la conducta humana en entornos complejos. En 2004 publicó «Personalización», el libro en el que formuló la personotecnia, y con la UNIR creó el Máster en CPS.',
+  'Desde 2018 publica cada sábado en X una «turra», un hilo largo sobre problemas complejos, estrategia, personas y organizaciones. Este archivo las reúne todas.',
+] as const;
+
 /** Images by other authors used on the site (Unsplash and the like), credited in /sobre-esta-web. */
 export const IMAGE_CREDITS: { where: string; title: string; author: string; source: string; url: string }[] = [
   {

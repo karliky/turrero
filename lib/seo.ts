@@ -29,6 +29,41 @@ const DEFAULT_IMAGE = {
   alt: `${SITE.name}: las turras de ${SITE.byline}`,
 };
 
+/**
+ * Opening of a turra without the ritual formula it starts with («En el hilo turras de hoy, vamos a hablar de…»),
+ * which says nothing in a search result. The rest of the sentence keeps its words, with a capital letter.
+ */
+export function stripTurraOpening(text: string): string {
+  const stripped = text
+    // «En el hilo turras de hoy,» «En nuestro hilo coñazo de hoy» «En el hilo del sábado de hoy»
+    .replace(/^\s*en\s+(?:el|este|nuestro)\s+hilo(?:\s+[\wáéíóúñ]+)?\s+(?:del\s+sábado\s+)?de\s+hoy\s*,?\s*/i, '')
+    // «vamos a hablar de…» «hablaré sobre…»
+    .replace(/^(?:vamos a hablar|voy a hablar|hablaremos|hablaré)\s+(?:de|sobre)\s+/i, '')
+    .trim();
+  if (!stripped) return text.trim();
+  return stripped.charAt(0).toUpperCase() + stripped.slice(1);
+}
+
+/**
+ * Search description of a turra. When the turra is where a glossary term is explained, it opens with the term's
+ * definition (people search «qué es un rabbit hole», not the first tweet). Otherwise, its opening without the
+ * ritual formula, led by the title when that opening says too little on its own.
+ */
+export function turraDescription({
+  title,
+  opening,
+  term,
+}: {
+  title: string;
+  opening: string;
+  term: { term: string; short: string } | null;
+}): string {
+  const body = stripTurraOpening(opening.replace(/https?:\/\/\S+/g, '').replace(/\s+/g, ' ').trim());
+  if (term) return excerpt(`${term.term}: ${term.short} ${body}`);
+  const thin = body.length < 80 || /[:…]$/.test(body);
+  return excerpt(thin ? `${title}. ${body}` : body);
+}
+
 /** Longest description social networks and search engines show without cutting mid-word. */
 export function excerpt(text: string, max = 160): string {
   const clean = text.replace(/https?:\/\/\S+/g, '').replace(/\s+/g, ' ').trim();

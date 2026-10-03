@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE, authorUrl } from "@/lib/site";
+import { SITE } from "@/lib/site";
 import { readingMinutes } from "@/lib/text";
 import type { Thread } from "@/lib/types";
 
@@ -40,9 +40,9 @@ export function Masthead({ totalThreads, latest }: MastheadProps) {
         </h1>
         <p className="mx-auto mt-3 max-w-2xl font-serif text-lg italic text-whiskey-800">
           Un punto de encuentro para la comunidad de resolución de problemas complejos. Incluye la colección curada y ordenada de las turras de{" "}
-          <a href={authorUrl("Recuenco")} target="_blank" rel="noopener noreferrer" className={link}>
+          <Link href={`/autor/${SITE.featuredAuthor}`} className={link}>
             Javier G. Recuenco
-          </a>{" "}
+          </Link>{" "}
           y la{" "}
           <a href={SITE.community.youtube} target="_blank" rel="noopener noreferrer" className={link}>
             Comunidad CPS
