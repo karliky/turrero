@@ -1422,5 +1422,13 @@
     "id": "2065676893144134027",
     "primary": "educacion-y-altas-capacidades",
     "secondary": []
+  },
+  {
+    "id": "2106277152895189177",
+    "primary": "personotecnia",
+    "secondary": [
+      "ia-y-tecnologia",
+      "marketing"
+    ]
   }
 ]

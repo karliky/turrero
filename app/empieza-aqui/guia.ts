@@ -472,6 +472,10 @@ export const guide: { path: GuideStep[]; series: GuideSeries[]; ideas: { slug: s
         {
           id: "2103744346142966174",
           label: "@uriondo: vender con IA sin engañar"
+        },
+        {
+          id: "2106277152895189177",
+          label: "Capitalismo de vigilancia: los años perdidos de la personalización"
         }
       ]
     }
