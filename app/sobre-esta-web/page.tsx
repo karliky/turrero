@@ -103,7 +103,7 @@ export default function SobreEstaWeb() {
         </p>
         <p>
           La mantiene un grupo pequeño de la Comunidad CPS, gente que aprendió con las turras y quería tenerlas a mano. Si llegas
-          nuevo, no empieces por la última: empieza por{" "}
+          nuevo, no empieces por la última turra: empieza por{" "}
           <Link href="/empieza-aqui" className={link}>
             estas ocho
           </Link>

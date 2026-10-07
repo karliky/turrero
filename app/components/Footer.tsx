@@ -55,7 +55,7 @@ const Footer = () => {
           </p>
           {stats.lastPublishedAt && (
             <p className="mt-3 leading-relaxed">
-              {stats.threads} turras. La última, del {longDate(stats.lastPublishedAt)}.
+              {stats.threads} turras. La última turra, del {longDate(stats.lastPublishedAt)}.
             </p>
           )}
           <p className="mt-3">

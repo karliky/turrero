@@ -53,7 +53,7 @@ export function Masthead({ totalThreads, latest }: MastheadProps) {
 
       <div className="mx-auto max-w-3xl pt-8">
         <p className="text-sm text-whiskey-800">
-          La última, del <time dateTime={latest.publishedAt}>{longDate(latest.publishedAt)}</time>:
+          La última turra, del <time dateTime={latest.publishedAt}>{longDate(latest.publishedAt)}</time>:
         </p>
         <h2 id="latest-title" className="mt-1 font-serif text-3xl font-bold leading-tight text-whiskey-950 sm:text-4xl">
           <Link href={`/turra/${latest.id}`} className="hover:text-brand">
@@ -76,7 +76,7 @@ export function Masthead({ totalThreads, latest }: MastheadProps) {
         </p>
 
         <p className="mt-8 border-t border-whiskey-200 pt-5 text-whiskey-900">
-          ¿Es tu primera vez? No empieces por la última:{" "}
+          ¿Es tu primera vez? No empieces por la última turra:{" "}
           <Link href="/empieza-aqui" className={link}>
             estas ocho turras, en orden
           </Link>
