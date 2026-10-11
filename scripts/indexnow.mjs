@@ -11,11 +11,18 @@ const decodeXml = (value) => value
   .replaceAll("&quot;", "\"")
   .replaceAll("&apos;", "'");
 
-const sitemapResponse = await fetch(sitemapUrl);
-if (!sitemapResponse.ok) throw new Error(`Could not fetch ${sitemapUrl}: ${sitemapResponse.status}`);
-const sitemap = await sitemapResponse.text();
-const urlList = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/gs)].map((match) => decodeXml(match[1].trim()));
-if (urlList.length === 0) throw new Error(`No URLs found in ${sitemapUrl}`);
+const requestedUrls = process.argv.slice(2).filter((value) => !value.startsWith("--"));
+let urlList;
+if (requestedUrls.length > 0) {
+  urlList = [...new Set(requestedUrls.map((value) => new URL(value, origin).href))];
+} else {
+  const sitemapResponse = await fetch(sitemapUrl);
+  if (!sitemapResponse.ok) throw new Error(`Could not fetch ${sitemapUrl}: ${sitemapResponse.status}`);
+  const sitemap = await sitemapResponse.text();
+  urlList = [...new Set([...sitemap.matchAll(/<loc>(.*?)<\/loc>/gs)].map((match) => decodeXml(match[1].trim())))];
+}
+if (urlList.length === 0) throw new Error("No URLs supplied to IndexNow");
+if (urlList.length > 10_000) throw new Error(`IndexNow accepts at most 10000 URLs, received ${urlList.length}`);
 for (const url of urlList) {
   if (new URL(url).hostname !== host) throw new Error(`Sitemap URL belongs to another host: ${url}`);
 }
