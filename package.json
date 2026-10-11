@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "check": "npm run typecheck && npm run lint && npm test",
+    "indexnow": "node scripts/indexnow.mjs",
     "db:migrate": "tsx scripts/db-migrate.ts",
     "turra:add": "tsx scripts/turra-add.ts",
     "turra:sync": "tsx scripts/turra-sync.ts",
