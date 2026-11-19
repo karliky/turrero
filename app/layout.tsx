@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import "./globals.css";
@@ -78,6 +79,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </main>
+        <Analytics />
       </body>
     </html>
   );
