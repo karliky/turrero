@@ -273,14 +273,20 @@ export async function fetchBearerToken(apiKey: string, apiSecret: string, fetchF
   return body.access_token;
 }
 
-/** X client configured from X_API_BEARER_TOKEN, or from X_API_KEY + X_API_KEY_SECRET. */
+/** X client configured from a bearer token, or from an API key + secret. */
 export async function createXClientFromEnv(cache?: ResponseCache, env: Record<string, string | undefined> = process.env): Promise<XClient> {
   const options = cache ? { cache } : {};
-  if (env.X_API_BEARER_TOKEN) return createXClient({ bearerToken: env.X_API_BEARER_TOKEN, ...options });
-  if (env.X_API_KEY && env.X_API_KEY_SECRET) {
-    return createXClient({ bearerToken: await fetchBearerToken(env.X_API_KEY, env.X_API_KEY_SECRET), ...options });
+  const bearerToken = env.X_API_BEARER_TOKEN ?? env.X_BEARER_TOKEN;
+  const apiKey = env.X_API_KEY ?? env.X_CONSUMER_KEY;
+  const apiKeySecret = env.X_API_KEY_SECRET ?? env.X_SECRET_KEY;
+  if (bearerToken) return createXClient({ bearerToken, ...options });
+  if (apiKey && apiKeySecret) {
+    return createXClient({ bearerToken: await fetchBearerToken(apiKey, apiKeySecret), ...options });
   }
-  throw new Error('Missing X API credentials: set X_API_BEARER_TOKEN, or X_API_KEY and X_API_KEY_SECRET (see .env.example)');
+  throw new Error(
+    'Missing X API credentials: set X_API_BEARER_TOKEN (or X_BEARER_TOKEN), or X_API_KEY and X_API_KEY_SECRET ' +
+      '(aliases X_CONSUMER_KEY and X_SECRET_KEY are also supported; see .env.example)',
+  );
 }
 
 function defaultSleep(ms: number): Promise<void> {

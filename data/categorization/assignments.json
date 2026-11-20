@@ -1438,5 +1438,28 @@
       "ia-y-tecnologia",
       "marketing"
     ]
+  },
+  {
+    "id": "2113880928653119826",
+    "primary": "personotecnia",
+    "secondary": [
+      "ia-y-tecnologia",
+      "marketing"
+    ]
+  },
+  {
+    "id": "2116425062186160569",
+    "primary": "sociologia",
+    "secondary": [
+      "estrategia"
+    ]
+  },
+  {
+    "id": "2118979141928104262",
+    "primary": "metodo-cps",
+    "secondary": [
+      "sistemas-complejos",
+      "ia-y-tecnologia"
+    ]
   }
 ]
